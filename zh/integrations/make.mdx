@@ -1,0 +1,363 @@
+---
+title: "Make 集成"
+description: "了解如何将 Make 集成到你的 Lovable 应用中"
+icon: "wand-sparkles"
+---
+
+<div id="what-is-make">
+  ## 什么是 Make？
+</div>
+
+![Make 网站](/images/make-hero.png)
+
+[Make](https://www.make.com) 是一款强大的无代码自动化平台，让你可以在可视化界面中构建跨应用、API 和数据源的工作流。
+
+你无需编写后端逻辑，而是可以在流程图风格的画布上拖拽并连接模块。它非常适合：
+
+- **非开发者** —— 想要实现自动化，但不想写代码
+- **开发者** —— 需要快速搭建原型，或通过 API 扩展功能
+- **团队** —— 想要连接 Slack、Airtable、Notion、Calendly、Supabase 等各类工具
+
+使用 Make，你可以：
+
+- **从你的 Lovable 应用中触发操作**（例如，当按钮被点击时）
+- **通过 Webhook 和 API 发送与接收数据**
+- **连接 1,500\+ 个工具** 或自定义 API
+- **自动化** 邮件发送、AI 外呼、数据补全与丰富以及提醒等任务
+
+<div id="why-use-make-with-lovable">
+  ## 为什么要将 Make 和 Lovable 搭配使用？
+</div>
+
+在本教程中，Make 作为你的**AI 驱动后端**，而 Lovable 负责前端。最终效果是：几分钟内搭建出一个定制 CRM，并实现全自动化。
+
+这种方案非常适合：
+
+- 需要高级逻辑的非开发者
+- 工作流不断演进的销售团队
+- 需要快速迭代、又不想承担后端负担的团队
+- 基于 API 的自动化，并需要实时 UI 响应的场景
+
+<div id="step-by-step-tutorial">
+  ## 分步教程
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/zv4vcR7VCAk?si=BgJHeEuti27cbgYt" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<div id="what-well-build">
+  ### 我们要构建什么
+</div>
+
+你将创建一个包含三个核心数据模型的 CRM：
+
+- **Deals（交易）**（支持按阶段跟踪）
+- **Contacts（联系人）**（支持行内编辑）
+- **Companies（公司）**（支持数据补全和丰富）
+
+每个实体都会与 Make 自动化流程交互。完成后，你将能够：
+
+- 移动一笔交易并触发一封电子邮件
+- 点击一个联系人并发起一通 AI 销售电话
+- 点击一家公司并获取实时数据
+- 通过 Supabase 边缘函数保护所有内容
+
+<div id="how-are-we-going-to-build-it">
+  ### 我们要怎么构建它？
+</div>
+
+自己从零开始搭建一套 CRM 可能需要几个月。借助 **Lovable** 和 **Make**，你可以在一小时内交付一套 CRM——并且在完全不写后端代码的情况下，实现整个销售工作流的自动化。在本分步指南中，你将学会如何构建一个**可实际使用的 AI 驱动型 CRM**，包括：
+
+- 可视化交易流水线（拖放操作）
+- 可编辑的联系人和公司信息弹窗
+- 使用 [Vapi](https://vapi.ai/) 的 AI 电话坐席
+- 通过 [Apollo.io](http://Apollo.io) 丰富公司数据
+- 使用 Supabase 实现邮件工作流和安全性
+- 使用 [Make](https://www.make.com) 搭建实时自动化流程
+
+<Steps>
+  <Step title="在 Lovable 中设置 CRM">
+    <Info>
+      你需要搭建一个 CRM 系统，其中包括：商机、联系人和公司。将其设置为浅色主题。
+    </Info>
+
+    <Steps>
+      <Step title="Step 1">
+        新建一个 Lovable 项目。选择项目类型：**CRM**。
+      </Step>
+
+      <Step title="Step 2">
+        定义 3 个实体：**Deals**（商机）、**Contacts**（联系人）和 **Companies**（公司）。
+      </Step>
+
+      <Step title="Step 3">
+        如有需要，选择 **Light Theme**（浅色主题），然后点击 **Generate**（生成）。
+
+        ![CRM with Make](/images/crm-make.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="添加交易阶段（看板视图）">
+    ![Crm 看板 Make ](/images/crm-kanban-make.png)
+
+    <Steps>
+      <Step title="步骤 1">
+        在 Lovable 中打开 **Deals（交易）** 区域。
+      </Step>
+
+      <Step title="步骤 2">
+        点击 **Edit（编辑）**，并添加以下五个阶段：
+
+        * **Lead（线索）**
+        * **Qualification（资格评估）**
+        * **Proposal Sent（已发送方案）**
+        * **Negotiation（谈判）**
+        * **Closed - Won/Lost（已关闭 - 赢单/丢单）**
+      </Step>
+
+      <Step title="步骤 3">
+        启用用于在不同阶段之间拖动交易的 **Drag-and-Drop（拖放）** 功能。
+
+        <Info>
+          拖放功能可让你根据交易所处阶段自动化相关操作。
+        </Info>
+      </Step>
+    </Steps>
+
+    <Info>
+      **为什么？** 这可以让用户在可视化工作流中跟踪交易进展。
+    </Info>
+  </Step>
+
+  <Step title="构建联系人管理系统">
+    ![Contact Form Crm Make](/images/contact-form-crm-make.png)
+
+    <Steps>
+      <Step title="步骤 1">
+        在 **Contacts** 中，启用**可点击的模态视图**。
+      </Step>
+
+      <Step title="步骤 2">
+        让模态框中的所有字段都支持**行内编辑**。
+
+        * 模态框展示**联系人详情**。
+        * 字段**可编辑**，方便快速更新。
+
+        <Info>
+          这样就不需要在不同视图之间来回切换——比传统 CRM 更高效。
+        </Info>
+      </Step>
+    </Steps>
+
+    <Info>
+      **为什么？** 传统 CRM 会把用户重定向到新页面，从而拖慢工作流程。模态框可以让一切都保持在当前界面。
+    </Info>
+  </Step>
+
+  <Step title="使用 Make 与 Vapi 实现 AI 驱动通话">
+    <Steps>
+      <Step title="在 Make 中创建 Webhook">
+        ![Webhook Lovable Make](/images/webhook-lovable-make.png)
+
+        * 打开 [Make](https://www.make.com/)，并创建一个**新场景**。
+        * 点击 **Webhooks &gt; Custom Webhook**，并将其命名为 **Call Contact**。
+        * 复制该 webhook URL。
+      </Step>
+
+      <Step title="从 Lovable 触发呼叫">
+        ![Ai Assistant Make](/images/ai-assistant-make.png)
+
+        * 在 **Contacts** 弹窗中，添加一个 **Call Contact** 按钮。
+        * 将该按钮的操作修改为向 Make 的 webhook **发送 JSON 数据**（姓名、电话号码、公司和通话目标）。
+        * 点击 **Call Contact** 测试连接。
+      </Step>
+
+      <Step title="使用 Vapi 实现 AI 驱动的呼叫">
+        ![Vapi Make](/images/vapi-make.png)
+
+        ![Vapi Make Automation Pn](/images/vapi-make-automation.png)
+
+        * 在 Make 中添加一个 **API Call 模块**。
+        * 向 [Vapi](https://vapi.ai/) 发送包含通话详细信息的请求。
+        * 你的自定义 Vapi agent 将会：
+          * 发起呼叫
+          * 根据该交易的动态提示进行对话
+          * 将结果记录回 Lovable
+
+        <Info>
+          这会创建一个自动化的 AI 外呼流程，并可从你的 CRM 界面即时触发。
+        </Info>
+
+        ![Call Customer Make Pn](/images/call-customer-make.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="使用 Apollo 添加公司数据富集">
+    <Steps>
+      <Step title="在 Make 中创建 Enrich Webhook">
+        * 在 Make 中添加第二个名为 `Enrich Company` 的 **Custom Webhook**。
+        * 复制该 webhook URL。
+
+        ![Make Enrich Pn](/images/make-enrich.png)
+      </Step>
+
+      <Step title="从 Lovable 发送请求">
+        * 在 **Companies** 中，添加一个 **Enrich Company** 按钮。
+        * 点击时，将公司的域名作为 JSON 负载发送。
+
+        <Info>
+          当点击 enrich 按钮时，执行以下操作：
+
+          1. 移除打开的 modal（已经不再需要）
+          2. 新的实际步骤：将该域名作为 JSON 发送到以下 webhook：[Link]
+          3. 你将收到一个 webhook 的 JSON 响应，需要将其动态解析到 modal 视图中，因此要创建动态字段。
+        </Info>
+      </Step>
+
+      <Step title="调用 Apollo.io API">
+        ![Apollo Make Lovable Pn](/images/apollo-make-lovable.png)
+
+        * 使用 Apollo 的 [Organization Enrichment API.](https://apollo.io/docs)
+        * 获取：
+          * 行业
+          * 员工数量
+          * 地址
+          * 网站
+          * 融资情况
+        * 将丰富后的数据返回给 Lovable。
+      </Step>
+
+      <Step title="将响应解析到 Modal 视图">
+        ![Webhook Apollo Webhook Make Pn](/images/webhook-apollo-webhook-make.png)
+
+        * 从 JSON 中在 Lovable 的 modal 中动态生成字段。
+        * 以可读的 UI 展示数据（而不是原始 JSON）。
+
+        <Info>
+          Apollo enrichment 会添加关键洞察，帮助你更快评估公司是否符合条件。
+        </Info>
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="通过 Supabase Edge Functions 隐藏 API 调用">
+    ![Make Supabase Automation Pn](/images/make-supabase-automation.png)
+
+    要保护 Webhook：
+
+    * 在项目设置中启用 **Supabase 集成（Supabase Integration）**。
+    * 创建一个将请求代理到 Make 的 **边缘函数**。
+    * 更新 Lovable，让它调用你的 Supabase 函数，而不是直接调用 Webhook。
+
+    <Info>
+      这会在浏览器中隐藏你的 Webhook URL——对公开应用来说至关重要。
+    </Info>
+
+    <Info>
+      点击 **Enrich** 按钮时，请使用 Supabase 边缘函数来发起到 Webhook 地址的 API 调用，从而在前端隐藏这次调用。你需要相应修改功能实现，确保真正隐藏这次 API 调用。
+    </Info>
+  </Step>
+
+  <Step title="自动化跟进和工作流程" stepNumber="7">
+    要根据 Deal 阶段自动化电子邮件营销活动：
+
+    * 在 Make 中添加逻辑以触发事件：
+      * 当某个 Deal 进入 **Proposal Sent** 阶段时发送电子邮件
+      * 当某个 Deal 进入 **Negotiation** 阶段时通过 Slack 通知团队
+      * 将联系人加入新闻通讯或营销活动流程
+
+    <Info>
+      即使你不在线，这也能让你的销售流程持续运转。
+    </Info>
+  </Step>
+
+  <Step title="最终测试与部署" stepNumber="8">
+    <Steps>
+      <Step title="运行端到端测试">
+        * 创建测试商机和联系人。
+        * 触发 AI 呼叫流程。
+        * 完善公司数据并验证结果。
+      </Step>
+
+      <Step title="部署、分享并上线">
+        * 使用 **自定义域名** 个性化你的 CRM。
+        * 与团队分享你的应用。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="🎉 你成功了！" stepNumber="9">
+    你已经构建了一个功能完备、由 AI 驱动的 CRM——无需自建后端。
+
+    **下一步**
+
+    * 添加集成：Slack、Notion、HubSpot、Calendly
+    * 使用 Supabase 保障整体安全性，并添加审计日志
+  </Step>
+</Steps>
+
+<div id="pro-tips-from-the-live-session">
+  ## 直播中的实战技巧
+</div>
+
+- 在 Lovable 中使用 **select \+ prompt** 做精细化编辑
+- 使用 **Make 的 Visual Canvas** 在连接之前梳理流程
+- 将未知 JSON 字段动态解析到模态框中，提升用户体验（UX）
+- 将 Vapi \+ Apollo \+ Make 组合起来，构建实时 AI 工作流
+- 使用 Supabase Edge Functions 对所有公开 API/webhook 调用进行统一封装
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="Make 是什么？">
+    Make 是一个可视化自动化平台，你可以使用拖放式模块连接各种工具并构建工作流。可以把它理解为更灵活、更适合开发者使用的 Zapier。
+  </Accordion>
+  <Accordion title="为什么要在 Lovable 中使用 Make？">
+    - 无需编写后端代码
+    - 可以从你的 UI 触发工作流（按钮、表单、模态框）
+    - 以可视化方式构建自动化流程（调用智能体、数据增强、邮件流程）
+    - 连接 1,500\+ 个应用（Slack、Notion、Calendly、Airtable 等）
+  </Accordion>
+  <Accordion title="Make 是如何与 Lovable 通信的？">
+    Lovable 通过 **HTTP Webhook** 将数据（通常为 JSON）发送到 Make 场景。Make 接收这些数据，进行处理（例如调用 API），然后再响应回 Lovable。
+  </Accordion>
+  <Accordion title="Make 中的 Scenarios 是什么？">
+    Scenarios（场景）是自动化工作流。你需要定义：
+
+    - 触发器（例如 Webhook）
+    - 动作（例如 API 调用、发送邮件）
+    - 逻辑（路由器、过滤器、迭代）
+  </Accordion>
+  <Accordion title="我可以保护我的 Make Webhook 吗？">
+    可以。你可以使用：
+
+    - **IP 限制**（限制谁可以调用该 Webhook）
+    - **Supabase Edge Functions** 来做代理并隐藏敏感 URL
+    - 在请求头中使用 **API 密钥认证**
+  </Accordion>
+  <Accordion title="Make 和 Supabase Edge Functions 有什么区别？">
+    - **Make** 是一个可视化自动化工具（非常适合工作流、API 集成、AI 触发等）。
+    - **Supabase Edge Functions** 是无服务器后端代码（非常适合处理业务逻辑、认证和安全）。
+
+    将它们**一起使用**可以获得最佳效果。
+  </Accordion>
+  <Accordion title="如果超出了我的 Make 套餐中的操作次数会怎样？">
+    你的场景会被暂停。Make 会发送提醒，你可以升级套餐或优化流程。对于本指南中在网络研讨会里提供的 **免费 Pro 计划**，包含 **20,000 次操作**——足够用于原型开发。
+  </Accordion>
+  <Accordion title="我可以在没有 Lovable 的情况下测试我的 Make Scenarios 吗？">
+    可以\！在 Webhook 中使用 **手动数据输入**，或者通过 Postman 或 curl 触发场景。这样非常适合在连接到 Lovable 之前进行调试。
+  </Accordion>
+</AccordionGroup>
+
+<div id="resources">
+  ## 资源
+</div>
+
+- [Make](https://www.make.com)
+- [Vapi AI](https://vapi.ai/)
+- [Apollo.io Enrichment API](https://apollo.io/docs)
+- [Supabase Edge Functions](https://supabase.com/docs/guides/functions)
+- 探索 **Make Academy**：[academy.make.com](https://academy.make.com)

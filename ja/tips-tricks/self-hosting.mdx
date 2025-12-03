@@ -1,0 +1,211 @@
+---
+title: "セルフホスティング：Lovable Cloud プロジェクトをどこでも実行する"
+sidebarTitle: "セルフホスティング"
+description: "Lovable Cloud プロジェクトを自前のインフラにデプロイして管理する"
+icon: "door-open"
+---
+
+[Lovable Cloud](https://docs.lovable.dev/features/cloud) は、最も簡単で高速、そして楽しく開発できる場所として設計されています。私たちは、必要に迫られてではなく、自分の意思で選んで使い続けてほしいと考えているため、移行できるようになっています。
+
+このガイドでは、セルフホスティングを行い、Lovable Cloud プロジェクトを [Supabase](http://supabase.com/) などの他のプロバイダーへ移行する方法を説明します。
+
+<div id="key-principles">
+  ## 重要な原則
+</div>
+
+- **コードの所有権はあなたにあります**。 \
+  [GitHub連携](https://docs.lovable.dev/integrations/github) を使えば、いつでもコードをエクスポートできます。制限なくクローン、エクスポート、セルフホスティングが可能です。
+- **データの所有権はあなたにあります**。 \
+  データベース、ストレージ、各種設定は、他のプロバイダーへエクスポートまたは移行できます。
+- **Lovableはオープンソース技術の上に構築されています**。 \
+  すべてはオープンスタンダードとオープンソース技術の上で動作しています。プロプライエタリなフレームワークも、隠れた依存関係もありません。
+- **Lovableは、コントロールではなく品質によって信頼を獲得します**。
+
+  Lovable Cloudは、高速性、シンプルさ、信頼性を重視して設計されています。必要になればいつでもプロジェクトを持ち出せると分かっているからこそ、安心してアプリを構築し、ホスティングし、スケールさせることができます。
+
+<div id="migration-overview">
+  ## 移行の概要
+</div>
+
+| **アプリコンポーネント**         | **移行方法**               | **注意事項**                                                                                                                                                                    |
+| :-------------------------------- | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| データベーススキーマ             | SQLマイグレーションで自動 | テーブル、カラム、インデックス、RLSポリシー、関数、トリガーを含みます                                                                                                          |
+| ストレージバケット               | SQLマイグレーションで自動 | アクセスポリシーを含みます                                                                                                                                                      |
+| 認証プロバイダー                 | 手動                       | 新しいホスティング環境で認証を再設定します（例: Google OAuth、GitHub）                                                                                                          |
+| 環境変数とシークレット           | 手動                       | 新しいホスティング環境で、外部サービス向けの APIキー、トークン、資格情報を再設定します（例: Stripe）                                                                           |
+| データ（テーブルの内容）         | 手動                       | CSVとしてエクスポート/インポートします                                                                                                                                          |
+| ストレージファイル               | 手動                       | 手動でダウンロード/アップロードします                                                                                                                                            |
+| ユーザーアカウント               | 手動（一部）               | データベースからユーザーデータはエクスポートできますが、ユーザーパスワードはエクスポートできないため、パスワードリセットフローをトリガーする必要があります。実ユーザーをオンボーディングする前に、事前に移行計画を立てておくことをおすすめします。 |
+
+<div id="example-move-your-lovable-cloud-project-to-supabase">
+  ## 例：Lovable Cloud のプロジェクトを Supabase に移行する
+</div>
+
+ある程度の技術的な知識があれば、任意のバックエンドソリューションに接続できます。以下の手順では、Lovable Cloud のプロジェクトを Supabase に移行する方法を案内します。Supabase 固有の手順の詳細は、[Supabase のドキュメント](https://supabase.com/docs) を参照してください。
+
+<Warning>
+  プロジェクトを自分の Supabase インスタンスに移行した後は、ローカル環境またはお好みの IDE で開発を続ける必要があります。Lovable 上のプロジェクトは元の Lovable Cloud データベースに接続されたままのため、移行後に Lovable 上で行った変更は新しい Supabase セットアップとは **同期されません**。
+</Warning>
+
+<div id="1-create-a-new-supabase-project">
+  ### 1. 新しい Supabase プロジェクトを作成する
+</div>
+
+以下の手順に従って、新しい Supabase プロジェクトを作成します。
+
+1. [supabase.com](https://supabase.com) にアクセスし、**New project** をクリックします。
+2. 組織を選択し、次を入力します:
+   - **Project name:** 任意の名前
+   - **Database password:** 強固なパスワード
+   - **Region:** ユーザーに最も近いリージョン
+3. **Create new project** をクリックし、プロジェクトが初期化されるまで約 2 分待ちます。
+4. 新しい Supabase プロジェクトの設定から、**次の値を保存します**:
+   - `Project ID`
+   - `Public API Key` (anon key)
+   - `Project URL`: `https://[your-project-id].supabase.co`
+
+<div id="2-update-environment-variables">
+  ### 2. 環境変数を更新する
+</div>
+
+`.env` ファイル内の Lovable Cloud の値を、新しい Supabase の認証情報に置き換えます。
+
+1. Lovable のプロジェクトで **Code** タブに移動します。
+2. `.env` ファイルを探します。
+3. Lovable Cloud の値を新しい Supabase の認証情報に更新します。
+
+```
+VITE_SUPABASE_PROJECT_ID="your-new-project-id"
+VITE_SUPABASE_PUBLISHABLE_KEY="your-new-anon-key"
+VITE_SUPABASE_URL="https://your-new-project-id.supabase.co"
+```
+
+4. 変更を保存します。
+
+
+<div id="3-update-supabase-configuration">
+  ### 3. Supabase の設定を更新する
+</div>
+
+`supabase/config.toml` ファイル内の Lovable Cloud プロジェクト ID を、新しい Supabase プロジェクト ID に置き換えます。
+
+1. Lovable のプロジェクトで **Code** に移動します。
+2. `supabase/config.toml` ファイルを見つけます。
+3. Lovable Cloud プロジェクト ID を新しい Supabase プロジェクト ID に更新します。
+
+```
+project_id = "your-new-project-id"
+```
+
+4. 変更を保存します。
+
+
+<div id="4-run-database-migrations">
+  ### 4. データベースマイグレーションを実行する
+</div>
+
+各 Lovable Cloud プロジェクトには、`supabase/migrations/` フォルダ内に SQL マイグレーションファイルが格納されています。
+
+ファイル名のタイムスタンプに基づいて、**時系列順** に実行してください。古いものから新しいものの順に並んでいます。たとえば：
+
+```
+20251008155159_[hash].sql   # 最初 - 最も早い
+20251008155215_[hash].sql   # 2番目
+```
+
+Lovable Cloud プロジェクト内の各マイグレーションファイルについて、次の手順に従ってください。
+
+1. 各マイグレーションファイルから、SQL の内容をすべてコピーします。
+2. 新しい Supabase プロジェクトの **SQL エディタ** に貼り付けます。
+3. クエリを実行し、成功メッセージが表示されるまで待ちます。
+
+<Tip>
+  マイグレーションが失敗した場合は、マイグレーションの実行順序、テーブルの依存関係、SQL の構文エラーを確認してください。
+</Tip>
+
+
+<div id="5-export-and-import-your-data">
+  ### 5. データをエクスポートおよびインポートする
+</div>
+
+Lovable Cloud プロジェクトからデータをエクスポートし、新しい Supabase プロジェクトに手動でインポートします。
+
+**Lovable Cloud プロジェクトから、データを含む各テーブルをエクスポートします：**
+
+1. **Cloud → Database → Table** に移動します。
+2. **Export CSV** をクリックします。
+3. ファイルを保存します。
+
+**CSV ファイルを、新しい Supabase プロジェクト内の対応するテーブルにインポートします：**
+
+1. **Table Editor** を開きます。
+2. 各テーブルで **Insert → Import data from CSV** をクリックします。
+3. 列の対応関係を正しく設定します。
+4. **Import data** をクリックします。
+
+<div id="6-reconfigure-authentication">
+  ### 6. 認証を再設定する
+</div>
+
+Lovable Cloud のプロジェクトで認証が必要な場合は、新しい Supabase プロジェクトで認証プロバイダーを手動で再設定する必要があります。
+
+1. 新しい Supabase プロジェクトで、**Authentication → Sign In / Providers** ページに移動します。
+2. 各プロバイダーを有効化して設定します。
+3. OAuth アプリの設定（例: Google Console、GitHub）で、\
+   新しい Supabase プロジェクトの URL を使用するように **redirect URLs** を更新します。
+
+<div id="7-migrate-storage-files">
+  ### 7. ストレージファイルを移行する
+</div>
+
+Lovable Cloud プロジェクト内のストレージバケットからファイルをダウンロードし、新しい Supabase プロジェクトにアップロードします。
+
+1. Lovable プロジェクトで **Cloud → Storage** にアクセスします。
+1. ストレージバケットからファイルをダウンロードします。
+2. Supabase で **Storage** にアクセスし、対応するバケットにファイルをアップロードします。
+
+<div id="8-set-up-environment-variables-and-secrets">
+  ### 8. 環境変数とシークレットを設定する
+</div>
+
+Lovable Cloud プロジェクトで外部サービス（たとえば Stripe）を使用している場合は、新しい Supabase プロジェクトで APIキー、トークン、認証情報を手動で再設定する必要があります。
+
+- 新しい Supabase プロジェクトで、**Edge Functions → Manage Secrets** にアクセスします。
+- 使用している外部サービスの APIキーや認証情報を追加します。
+- 変更を保存します。
+
+<div id="9-verify-everything-works">
+  ### 9. すべてが動作することを確認する
+</div>
+
+すべての手順が完了すると、アプリは完全に Supabase のバックエンド上で動作します。次のような点を確認して、すべてが正しく動作していることを確かめましょう:
+
+- アプリがエラーなく読み込まれる
+- データベースレコードの作成と参照ができる
+- 認証が正常に機能している
+- ストレージへのアップロード／ダウンロードが成功する
+
+<div id="advanced-cli-migration-option">
+  ### 上級者向け: CLI を使った移行オプション
+</div>
+
+次の方法は、コマンドラインの操作に慣れている開発者向けです。
+
+```
+# 1. Supabase CLIをインストールする
+npm install -g @supabase/cli
+# または
+brew install supabase/tap/supabase
+
+# 2. 設定ファイルを更新する (.env + supabase/config.toml)
+
+# 3. 新しいSupabaseプロジェクトにリンクする
+supabase login
+supabase link --project-ref your-new-project-id
+
+# 4. すべてのマイグレーションをプッシュする
+supabase db push
+
+# 5. スキーマを検証する
+supabase db diff
+```

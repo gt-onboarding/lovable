@@ -1,0 +1,180 @@
+---
+title: "AI 連携"
+description: "Lovable プロジェクトに AI サービスを連携する方法"
+icon: "wand-magic-sparkles"
+seo:
+  indexing: false
+---
+
+Lovable を使うと、Web アプリケーションに AI サービスを簡単に連携できます。AI を活用したランディングページ、テキスト生成ツール、あるいは本格的な SaaS アプリを構築したい場合でも、[**OpenAI**](https://platform.openai.com/)、[**Groq**](https://console.groq.com/keys)、[**Claude**](https://www.anthropic.com/api)、[**Deepseek**](https://api-docs.deepseek.com/)、[**Mistral**](https://docs.mistral.ai/api/) などのサービスとの Lovable の組み込み連携機能を使えば、バックエンドのコードを書くことなく実現できます。ここでは、その方法を説明します。 
+
+<Steps>
+  <Step title="必要なAI機能を選ぶ">
+    作り始める前に、AIに何をさせたいかを定義しましょう：
+
+    - テキストを生成・改善する（例：メール作成ツール、ツイート生成ツール）
+    - コンテンツを分類または要約する
+    - 画像を解析する
+    - 応答をパーソナライズする
+    - 特定のLLM APIと連携する
+  </Step>
+  <Step title="まずプロンプトで設計する">
+    Lovable のチャットインターフェースを使って、作りたい機能をシンプルな言葉で説明してください。例：
+
+    ```
+    Build an email enhancement tool. The user should write an email, then click buttons to make it more professional, concise, or friendly using Groq API.
+    ```
+
+    Lovable が UI のひな型を作成し、コンポーネントを提案してくれるので、アプリをすばやくプレビューできます。
+  </Step>
+  <Step title="Supabaseでバックエンドに接続する">
+    AI機能にはバックエンドロジックが必要になることがよくあります。Supabase は次を提供します：
+
+    - ユーザーデータ用のデータベース
+    - ログイン/サインアップのための認証
+    - 外部APIを安全に呼び出すための Edge Functions
+
+    <Tip>
+      UIとバックエンドの不整合を避けるために、プロジェクトの早い段階で Supabase をセットアップしてください。
+    </Tip>
+  </Step>
+  <Step title="AI呼び出しにはエッジ関数を使う">
+    AI API を安全に呼び出すには、Lovable 内にエッジ関数を作成します：
+
+    - Supabase のシークレットフォーム経由で APIキー を追加する
+    - Lovable にエッジ関数のコードを生成させる
+    - API が構造化データ（例：カロリー、マクロ栄養素、ツイートスレッド）を返す場合は、function calling を必ず利用する
+
+    **プロンプト例：**
+
+    ```
+    Use GPT-4 and function calling to extract nutrition info from a meal description. Save the results to the backend.
+    ```
+
+    <Tip>
+      OpenAI の function calling 用スキーマは、次のようにフィールドを定義して構造化しましょう：
+
+      ```
+      {
+        "name": "extract_nutrition",
+        "parameters": {
+          "calories": "number",
+          "protein": "number",
+          "carbs": "number",
+          "fat": "number"
+        }
+      }
+      ```
+    </Tip>
+  </Step>
+  <Step title="インタラクティブにする">
+    次のようなボタンやフォームアクションを追加します：
+
+    - テキストをAIに送信する
+    - 画像をアップロードする
+    - モードを切り替える（簡潔な文体 vs フレンドリーなトーン）
+
+    Lovable では次のことができます：
+
+    - ボタンに関数を紐づける
+    - インタラクションにアニメーションを付ける
+    - 最小限のプロンプトでリアルタイムの結果を表示する
+
+    <Tip>
+      スクリーンショットや「これをもっとスムーズにして」などのフレーズを使って、デザインへの指示にしましょう。
+    </Tip>
+    <Tip>
+      **上級UXヒント：** AIのレスポンスを並べてライブプレビューできるように実装しましょう。左右のレイアウトブロックやタブを使って、ユーザーが出力を比較できるようにします。
+    </Tip>
+  </Step>
+  <Step title="外部サービスを使う（任意）">
+    AIワークフローでよく使われる外部サービス：
+
+    - **Resend** – フォーム送信後にメールを送信
+    - **Groq API** – 非常に高速なLLM推論
+    - **Stripe** – AIツールへのアクセスをペイウォールで制限
+    - **Replicate** – 画像を生成または変換
+
+    **プロンプト例：**
+
+    ```
+    When a user submits the contact form, send an email using Resend and store the message in Supabase.
+    ```
+
+    <Tip>
+      **支払いに関するヒント：** 高度なAI機能は Stripe のサブスクリプションで保護しましょう。次のような条件付きフローを使います：
+
+      ```
+      if (user.isPaid) { showAIFeature(); } else { redirectToCheckout(); }
+      ```
+    </Tip>
+  </Step>
+  <Step title="テストと反復改善を行う">
+    - プレビューリンクを使ってモバイルでの表示をテストする
+    - 複数のAPI呼び出しでパフォーマンスを確認する
+    - フィードバックを得るためにプロジェクトを共有する
+    - チャット履歴を使って変更を元に戻したりリファクタリングしたりする
+  </Step>
+  <Step title="公開してプロモーションする">
+    準備ができたら：
+
+    - ワンクリックでデプロイする
+    - [Lovable Launch](https://docs.lovable.dev/features/launched) を使って認知度を高める
+    - メタパネルで OG タグと SEO タイトル／ディスクリプションを追加する
+    - アプリを Product Hunt、コミュニティ、ソーシャルメディアに投稿する
+  </Step>
+</Steps>
+
+<div id="debug-and-improve-prompts">
+  ## **プロンプトのデバッグと改善**
+</div>
+
+* システムメッセージは具体的に書く: &quot;You are a helpful nutritionist.&quot;
+* 入力をモックして function calling をテストする。
+* ロジックを追跡するために、エッジ関数内で `console.log()` を使う。
+* レイアウトのデバッグを Lovable に依頼するときは、スクリーンショットを添付する。
+
+**プロンプトのコツ:** AI がコンテキスト（例: ユーザーの食事情報）をうまく使えていない場合は、次のように伝えてください:
+
+```
+ユーザーのすべての食事がGPT-4へのプロンプトに含まれていることを確認してください。
+```
+
+
+<div id="troubleshooting">
+  ### トラブルシューティング
+</div>
+
+<AccordionGroup>
+  <Accordion title="AI プロンプトにデータが含まれていない？">
+    ユーザー履歴や過去の入力内容などのコンテキストを必ず含めてください。
+  </Accordion>
+  <Accordion title="UI が更新されない？">
+    チャットのみモードを使って、1 ステップずつデバッグしてください。
+  </Accordion>
+  <Accordion title="Groq/OpenAI でストリーミングに問題がある？">
+    `stream: true` がサポートされていることを確認してください。
+  </Accordion>
+  <Accordion title="画像アップロードがうまくいかない？">
+    ファイル入力を使い、base64 に変換するか、Supabase Storage 経由でアップロードしてください。
+  </Accordion>
+  <Accordion title="エッジ関数が何も表示されずに失敗する？">
+    Lovable の function editor または Supabase ダッシュボードでエッジ関数のログを確認してください。
+  </Accordion>
+</AccordionGroup>
+
+<div id="example-projects-built-with-ai-integration">
+  ## AI 連携で構築されたサンプルプロジェクト
+</div>
+
+- [**Nexus Smart Email** ](https://smart-email-nexus.lovable.app/)– リアルタイムの Groq 強化メールプレビューを備えたランディングページ
+- [**TweetMixer Pro**](https://www.youtube.com/watch?v=fT_dq_hyQAA&vl=de) – ブログ記事を貼り付けて、GPT-4 でツイートスレッドを生成
+- [**AI Calorie Tracker**](https://www.youtube.com/watch?v=c0zhLzcVJRI&ab_channel=Lovable) – 画像をアップロードして、GPT-4 で食事内容を分析
+- [**Robot Arena Shooter** ](https://www.youtube.com/watch?v=zmK36lkAb6I)– Claude を活用した、AI で強化されたロジックを備えたゲーム
+- [**Reindeer Quiz**](https://www.youtube.com/watch?v=XdZtpP3QpzQ) – Claude とカスタムスコアリングロジックによるパーソナライズされた結果を生成
+
+<div id="final-thoughts">
+  ## まとめ
+</div>
+
+Lovable は、AI 搭載のフロントエンド、データベース、バックエンド、デプロイパイプラインがすべてそろったオールインワンのプラットフォームです。AI 連携は、プロンプト＋コンテキスト＋テストだけで成り立ちます。一歩ずつ進めていきましょう。AI を使ってアプリを構築するのに、バックエンドエンジニアである必要はありません。

@@ -1,0 +1,174 @@
+---
+title: "Conecte seu projeto ao GitHub"
+sidebarTitle: "Integração com GitHub"
+description: "Aprenda a conectar, sincronizar e desconectar seu projeto Lovable ao GitHub para backup de código, colaboração e publicação."
+icon: "github"
+keywords: ["Conectar Lovable ao GitHub","Exportar projeto Lovable para GitHub","Integração com GitHub","Sincronização com GitHub","Desconectar GitHub","Backup do código Lovable","Sincronizar Lovable e GitHub","Configuração de repositório no GitHub","sincronização bidirecional","Exportação de código Lovable","Guia de integração com GitHub","Publicar projeto Lovable a partir do GitHub"]
+---
+
+Quando você cria no Lovable, seu código fica dentro da plataforma Lovable — perfeito para a maioria dos criadores.
+
+Se você quiser ter sua própria cópia, planejar colaborar com desenvolvedores ou mover seu projeto para outro lugar, pode exportar e sincronizar tudo com o GitHub em apenas alguns cliques.
+
+<div id="about-github">
+  ## Sobre o GitHub
+</div>
+
+GitHub é uma plataforma baseada em nuvem para armazenar, gerenciar e compartilhar código. Ele registra todas as alterações, oferece recursos de colaboração e se integra a ferramentas populares de publicação como Vercel e Netlify. Pense nele como um **Google Drive para código**, criado para desenvolvedores.
+
+<div id="why-connect-lovable-to-github">
+  ## Por que conectar o Lovable ao GitHub
+</div>
+
+Conectar seu projeto Lovable ao GitHub permite que você:
+
+* **Faça backup do seu código:** Armazene seu projeto com segurança fora do Lovable.
+* **Colabore com facilidade:** Convide desenvolvedores, use pull requests, branches e revisões de código.
+* **Sincronize automaticamente:** Edições no Lovable aparecem no GitHub e alterações no GitHub são sincronizadas de volta para o branch padrão (`main`).
+* **Trabalhe localmente:** Clone, edite e faça commit na sua IDE mantendo seu projeto sincronizado.
+* **Publique em qualquer lugar:** Faça self-host ou publique em plataformas alternativas, veja [Self-hosting: execute seu projeto Lovable Cloud em qualquer lugar](/pt-BR/tips-tricks/self-hosting).
+* **Teste com segurança:** Ative o recurso experimental **GitHub branch switching** em **Settings → Account → Labs** para desenvolver funcionalidades antes de mesclar alterações no seu projeto em produção. Veja [Labs](/pt-BR/features/labs) para mais informações.
+
+<Note>
+  Você não precisa do GitHub para usar o Lovable — muitos usuários criam e lançam seus projetos inteiramente no Lovable.
+</Note>
+
+<div id="before-you-connect">
+  ## Antes de conectar
+</div>
+
+Certifique-se de entender como a integração funciona:
+
+* **Conta no GitHub obrigatória:** Crie uma gratuitamente em [github.com](http://github.com).
+* **Fonte única da verdade:** Quando a integração estiver ativa, seu código fica no GitHub, e não separadamente no Lovable.
+* **Sincronização bidirecional:** Edições no Lovable aparecem no GitHub e vice-versa.
+* **Caminho estável do repositório:** A conexão depende exatamente do nome, da localização, da organização e da conta do repositório GitHub.
+
+<Warning>
+  Não renomeie, mova ou exclua seu repositório GitHub depois de conectar. Fazer isso vai interromper a sincronização, e o Lovable não poderá atualizar seu projeto.
+</Warning>
+
+<div id="set-up-the-github-integration">
+  ## Configurar a integração com GitHub
+</div>
+
+Somente **admins e owners** da área de trabalho podem gerenciar a integração com GitHub — adicionando contas e organizações e conectando ou desconectando projetos.
+
+A conexão com o GitHub acontece em três etapas:
+
+1. **Vincule sua conta do GitHub** (autorização OAuth)
+2. **Instale o aplicativo Lovable GitHub** em uma conta ou organização
+3. **Conecte projetos individuais** a repositórios
+
+<div id="step-1-connect-your-github-account">
+  ### Etapa 1: Conecte sua conta do GitHub
+</div>
+
+Esta etapa vincula sua identidade do GitHub ao Lovable por meio de autorização OAuth.
+
+1. Vá para **Settings → Integrations → GitHub.**
+2. Clique em **Connect GitHub**.
+3. Faça login na sua conta do GitHub ou **autorize lovable.dev** para verificar sua identidade do GitHub.\
+   Em seguida, você verá uma opção para conectar um projeto.
+
+<div id="step-2-install-the-lovable-github-app">
+  ### Etapa 2: Instalar o app Lovable GitHub
+</div>
+
+Nesta etapa, você instala o **Lovable GitHub App** na sua conta ou organização do GitHub e concede permissão para o Lovable criar e atualizar repositórios lá.
+
+Você pode instalar o app na sua conta pessoal do GitHub ou em qualquer organização na qual tenha acesso de administrador.
+
+1. Acesse **Settings → Integrations → GitHub.**
+2. Clique em **Connect project.**
+3. Clique em **Add organizations** e escolha onde **instalar e autorizar lovable.dev** — sua conta pessoal ou uma das suas organizações.
+4. Selecione se deseja conceder acesso a **All repositories** ou **Only selected ones**.
+5. Clique em **Install &amp; Authorize** para conceder ao Lovable permissão para criar e atualizar repositórios na conta ou organização escolhida.
+
+<div id="step-3-connect-a-project-to-github">
+  ### Etapa 3: Conectar um projeto ao GitHub
+</div>
+
+Esta etapa vincula um projeto específico do Lovable a um repositório do GitHub. Cada projeto do Lovable pode ter **um repositório vinculado**.
+
+1. Vá para **Settings → Integrations → GitHub** e clique em **Connect project**, ou clique no ícone do GitHub no canto superior direito do seu projeto e clique em **Connect GitHub**.
+2. Escolha a organização ou conta do GitHub onde o seu código deve ser armazenado.
+3. Clique em **Transfer anyway** para confirmar a transferência e configurar uma sincronização bidirecional.\
+   Um novo repositório do GitHub é criado para o seu projeto, e a sincronização começa automaticamente.
+
+<div id="disconnect-your-project-from-github">
+  ## Desconectar seu projeto do GitHub
+</div>
+
+Admins e proprietários da área de trabalho podem desconectar projetos do GitHub a qualquer momento nas configurações do GitHub do projeto.
+
+Quando você desconecta:
+
+* **A sincronização é interrompida:** A conexão bidirecional entre Lovable e GitHub é encerrada.
+* **Seu repositório continua no GitHub:** Ele permanece intacto, com todo o histórico e arquivos.
+* **Seu código permanece no Lovable:** Alterações futuras são armazenadas apenas dentro do Lovable.
+
+Se você reconectar depois:
+
+* Um **novo repositório no GitHub** é criado usando seu código mais recente do Lovable.
+* Seu **repositório original** continua no GitHub, mas não está mais vinculado ao Lovable.
+
+<Note>
+  Você não pode desconectar um projeto se o Lovable não conseguir acessar o repositório no GitHub (por exemplo, se ele tiver sido renomeado, movido ou excluído).
+</Note>
+
+<div id="faq">
+  ## Perguntas frequentes
+</div>
+
+<AccordionGroup>
+  <Accordion title="Preciso saber usar o GitHub para usar este recurso?">
+    Não. Basta conectar e autorizar — o GitHub armazenará seu código com segurança. 
+
+    Você só precisa aprender os recursos do GitHub se quiser fazer coisas mais avançadas, como criar branches ou colaborar com outros desenvolvedores.
+  </Accordion>
+
+  <Accordion title="Clicar em &#x22;Connect GitHub&#x22; não faz nada — o que está errado?">
+    Seu navegador provavelmente bloqueou a janela pop-up de login do GitHub. Permita pop-ups para o Lovable e tente novamente.
+  </Accordion>
+
+  <Accordion title="O que acontece se eu renomear, mover ou excluir meu repositório do GitHub?">
+    A conexão será interrompida. Seu projeto vai parar de sincronizar e você não poderá mais editá-lo no Lovable.
+
+    Para corrigir isso, restaure o repositório para o local original com o nome original. Se tiver sido excluído, você pode [restaurá-lo no GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository).
+  </Accordion>
+
+  <Accordion title="O que acontece se eu renomear meu usuário ou organização no GitHub?">
+    A conexão será interrompida. Seu projeto vai parar de sincronizar e você não poderá mais editá-lo no Lovable.
+
+    Para corrigir isso, reverta para o nome original de usuário ou organização do GitHub.
+  </Accordion>
+
+  <Accordion title="Como posso alternar para outra conta do GitHub?">
+    Não é possível alterar a conta do GitHub vinculada depois de conectar.
+  </Accordion>
+
+  <Accordion title="O repositório foi parar na organização errada — posso movê-lo?">
+    Não diretamente. Tente esta solução alternativa:
+
+    1. **Remixe seu projeto** para criar uma nova cópia.
+    2. **Conecte o novo projeto** ao GitHub.
+    3. Escolha a organização correta durante a configuração.
+  </Accordion>
+
+  <Accordion title="O Lovable não consegue acessar meu repositório — o que devo fazer?">
+    É provável que você tenha renomeado, movido ou excluído o repositório. Restaure ou reverta quaisquer alterações no nome, caminho ou proprietário do repositório, ou [restaure](https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository) o repositório se ele tiver sido excluído, e o projeto deverá voltar a funcionar.
+  </Accordion>
+
+  <Accordion title="Posso desconectar do GitHub?">
+    Sim. Administradores e proprietários podem desconectar projetos do GitHub a qualquer momento nas configurações de GitHub do seu projeto. O repositório permanece no GitHub, mas a sincronização é interrompida. Se você reconectar depois, um novo repositório será criado.
+  </Accordion>
+
+  <Accordion title="Posso importar um repositório GitHub existente para o Lovable?">
+    Não. Você só pode exportar do Lovable para o GitHub, não o contrário.
+  </Accordion>
+
+  <Accordion title="Por que meus commits não aparecem no Lovable?">
+    O Lovable só sincroniza o **branch padrão** (geralmente `main`). Faça o merge do seu branch em `main` ou [troque de branch](/pt-BR/features/labs) dentro do Lovable.
+  </Accordion>
+</AccordionGroup>

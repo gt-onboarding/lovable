@@ -1,0 +1,226 @@
+---
+title: "21st.dev 集成"
+description: "使用 Lovable 构建高转化率 AI 落地页"
+icon: "ruler-combined"
+---
+
+大多数由 AI 生成的落地页看起来都千篇一律——内容空泛、配色不符合品牌调性、毫无个性。但完全不必如此。
+
+我们将分享一个使用 Lovable 和 21stdev 的结构化工作流，帮助你创建客户 _真正_ 喜欢的落地页（比如[这个](https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727)）。
+
+![落地页首屏区域](/images/hero-section.png)
+
+<div id="step-by-step-guide">
+  ## 分步指南
+</div>
+
+从设计灵感到最终润色，以下是一份他用来在保证质量前提下快速构建的分步指南：
+
+<Steps>
+  <Step title="先从设计灵感入手，而不是从提示开始">
+    在写下任何提示词之前，先浏览一下 [Dribbble](https://dribbble.com/) 或 [Behance](https://www.behance.net/)。寻找具备以下特点的设计：
+
+    * 排版和留白干净
+    * CTA（号召性用语）清晰，整体布局简洁
+    * 细腻的交互动效（不过度设计）
+
+    <Tip>
+      选择你实际能够复刻的设计。如果不打算重现它们，避免选择过于复杂的 3D 设计。
+    </Tip>
+
+    <Info>
+      有个真实客户曾要求一套「现代且极简」的设计，这就成为了视觉设计的起点。避免选择你无法真正实现的设计。
+    </Info>
+  </Step>
+
+  <Step title="从一个空白项目开始">
+    通过编写提示来创建你的 Lovable 项目：
+
+    <Note>
+      从一个全新的空白项目开始。我们稍后会补充具体细节。
+    </Note>
+  </Step>
+
+  <Step title="将 WebP 转换为 PNG，并处理你的设计截图 ">
+    找到参考设计后，将其下载。如果文件保存为 WebP 格式，请使用在线转换工具将其转换为 PNG，便于在 Lovable 或 GPT 的工作流中使用。
+
+    <Note>
+      我们推荐的工具：[https://cloudconvert.com/webp-to-png](https://cloudconvert.com/webp-to-png)
+    </Note>
+  </Step>
+
+  <Step title="使用 Chat Mode 将灵感变成详细的提示">
+    使用 Lovable 的 [Chat Mode](https://docs.lovable.dev/features/labs#chat-mode) 来提取：
+
+    * 页面区块（hero 区、功能区、FAQ 等）
+    * 布局结构、间距和内容顺序
+    * 字体系列、配色方案和渐变
+    * 动画类型、悬停效果和过渡
+
+    <Info>
+      Lovable [Chat mode](https://docs.lovable.dev/features/labs#chat-mode)（或 customGPT）还经过训练，可以为博客缩略图和插图推荐 Unsplash 图片。
+    </Info>
+
+    <Warning>
+      Lovable 有时会标注错误（例如，&quot;Space Grotesque&quot; 字体被拼错）。在将输出内容粘贴回 Lovable 之前，请务必先检查并修正提示的输出结果。
+    </Warning>
+
+    你甚至可以让 Lovable Chat mode 详细说明某些区块，或在提示中给出更好的 UX 建议并重写内容。
+  </Step>
+
+  <Step title=" 使用 Lovable 生成第一份初稿">
+    将详细提示粘贴到 Lovable 的编辑模式中。然后：
+
+    * 上传你的 PNG 截图作为参考
+    * 添加备注，例如「*Use Space Grotesque font*」或「Use Unsplash for blog thumbnails」
+
+    这种组合相比那种含糊的单句提示词，能得到准确得多的设计结果。
+
+    <Info>
+      请注意，与一年前还需要手动配置 Tailwind 或 Bootstrap 相比，在 Lovable 中完成这一切要顺畅且快捷得多。
+    </Info>
+  </Step>
+
+  <Step title="实时编辑：视觉 + 文本提示">
+    使用 Lovable 的[可视化编辑工具](https://docs.lovable.dev/features/visual-edit)来：
+
+    * 调整图像大小（例如，&quot;make this image 800px wide&quot;）
+    * 设置首屏主图的位置（例如，&quot;place this image on the right side&quot;）
+    * 将设计区域与参考图像对齐
+
+    将其与自然语言编辑结合使用，以获得更精确的控制。
+  </Step>
+
+  <Step title="使用 21stdev 组件优化设计">
+    使用 [21stdev](https://21st.dev/) 的预制 UI 组件来提升：
+
+    ![21stdev custom component ](/images/21stdev.png)
+
+    * Hero 首屏区块
+    * 带悬停效果的导航栏
+    * 用户评价布局
+    * 行动号召（CTA）和功能网格
+
+    找到你喜欢的组件，复制对应的提示词，并将其粘贴到 Lovable 中。请确保视觉风格与站点的其他部分保持一致。
+  </Step>
+
+  <Step title="修正 AI 的误解">
+    AI 可以帮你节省时间，但要预留出整理的工作：
+
+    ![在落地页中添加 spec 组件](/images/component.png)
+
+    * 调整品牌风格（Lovable 默认使用蓝色）
+    * 手动优化间距和内边距
+    * 整体保持一致的排版
+    * 添加渐变或层次感，让视觉效果不那么扁平
+
+    让设计看起来是*有意为之*，而不是 &quot;默认&quot;。
+  </Step>
+
+  <Step title="移动端优化（必不可少）">
+    不要跳过这一步。请确保：
+
+    ![移动端自适应网站](/images/mobile-responsive.png)
+
+    * 输入框在横向上占满可用空间
+    * 字体大小适配小屏幕
+    * 按钮适合手指点击
+    * 各区块堆叠合理，滚动顺畅
+
+    移动端用户体验（UX）对转化率至关重要。
+  </Step>
+
+  <Step title="添加轻量动效和微交互">
+    为了让页面更具现代感：
+
+    * 在 hero 区块中使用淡入效果
+    * 为按钮添加悬停效果
+    * 在滚动时为各个区块添加动画
+    * 使用细微的背景动态效果
+
+    如果给出合适的提示，Lovable 可以开箱即用地集成 [Framer Motion](https://motion.dev/)。
+
+    ![添加动画的落地页](/images/animation.png)
+  </Step>
+
+  <Step title="使用 AI 生成自定义视觉内容（可选）">
+    根据参考设计中你最喜欢的元素，为 ChatGPT、Midjourney 或 Ideogram 编写提示词。
+
+    **步骤：**
+
+    <Steps>
+      <Step title="为想要的画面区域截屏" />
+
+      <Step title="让 ChatGPT 编写一个匹配的提示词词" />
+
+      <Step title="在你的 AI 工具中生成图像" />
+
+      <Step title="移除背景，然后重新插入到 Lovable 中" />
+    </Steps>
+
+    <Note>
+      最新的 ChatGPT 4o 很值得一试。
+    </Note>
+
+    这对 3D 视觉效果或主题插画尤其有用。
+  </Step>
+
+  <Step title="一键部署">
+    当你对结果满意后：
+
+    * 在 Lovable 中点击“部署”
+    * 在 Netlify 中连接自定义域名
+
+    你的网站将在几分钟内上线，无需任何手动设置。
+  </Step>
+
+  <Step title="与客户分享并迭代优化">
+    复制公开链接并分享给你的客户。他们可以：
+
+    * 实时查看
+    * 提出微调建议
+    * 快速确认
+
+    你可以继续使用 Lovable 的可视化编辑器或基于提示的编辑器来完善各个部分，从而实现非常快速的迭代。
+  </Step>
+</Steps>
+
+<div id="why-this-approach-works">
+  ## 为什么这种方法行之有效？
+</div>
+
+AI 不是魔法。但一旦有了结构，它就会变成你的超级能力。与无结构的提示相比：
+
+- 初稿的完成度提升了 10 倍
+- 你花在修正错误上的时间更少
+- 每个部分都有明确的作用
+- 最终成品更像是定制，而不是千篇一律的模板
+
+这是自动化 **\+** 匠心的结合。
+
+<div id="key-takeaways">
+  ## 关键要点
+</div>
+
+- 从扎实的视觉参考开始
+- 在 Lovable Chat Mode 中使用结构化提示
+- 添加截图并明确预期效果
+- 使用 21stdev 组件升级页面各个版块
+- 修复设计瑕疵并为移动端优化
+- 在关键位置添加动效
+- 快速部署，更快迭代
+
+这是 [Prajwal](https://x.com/PrajwalTomar_/status/1902371273147064772) 每天为客户使用的工作流程——我们也在内部实践过——用于构建快速、美观、高转化的着陆页，由 Lovable AI 驱动，但始终由清晰的意图引导。
+
+尽情构建吧\!
+
+<div id="more-resources">
+  ## 更多资源
+</div>
+
+- [Brock Mesarich 的教程](https://www.youtube.com/watch?v=v48gJFQvE1Y&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- Lukas Margerie 的教程（[1](https://www.youtube.com/watch?v=-GiBI0leMHU&t=30s&pp=ygUPbG92YWJsZSAyMXN0ZGV2) - [2](https://www.youtube.com/watch?v=uqdFobvoRQQ&pp=ygUPbG92YWJsZSAyMXN0ZGV20gcJCb0Ag7Wk3p_U)）
+- [AI Jason 的教程](https://www.youtube.com/watch?v=8MPElOdNjtk&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Mark Kashef 的教程](https://www.youtube.com/watch?v=Zv7N0SxfpRM&t=269s&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Alejavi Rivera 的教程](https://www.youtube.com/watch?v=mMBp0uGZOWw&pp=ygUPbG92YWJsZSAyMXN0ZGV2)（西班牙语）
+- [Fazt Code 的教程](https://www.youtube.com/watch?v=RGZeP1_oMoY&pp=ygUPbG92YWJsZSAyMXN0ZGV2)

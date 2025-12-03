@@ -1,0 +1,184 @@
+---
+title: "Créer une boutique e-commerce avec Shopify"
+sidebarTitle: "Intégration Shopify"
+description: "Utilisez Lovable + Shopify pour créer et lancer facilement de nouvelles boutiques en ligne à partir de zéro"
+icon: "shopify"
+keywords: ["Shopify","Intégration Shopify","Boutique Shopify","plateforme e-commerce","e-commerce","créateur de boutique IA","configuration de boutique en ligne","intégration shopify\"","bac à sable shopify","gérer la boutique","revendiquer la boutique","lancer la boutique"]
+---
+
+![Shopify Jp](/images/shopify.jpg)
+
+Des produits physiques aux téléchargements numériques, Lovable vous permet de créer, personnaliser et faire évoluer votre nouvelle boutique en langage naturel, tandis que Shopify gère les paiements, les stocks et la logistique lorsque vous mettez votre boutique en ligne.
+
+<div id="use-cases">
+  ## Cas d’utilisation
+</div>
+
+Avec Lovable + Shopify, tu peux créer et lancer de vraies boutiques en ligne pour&nbsp;:
+
+- **Produits physiques** : vendre des vêtements, des gadgets, des accessoires ou des articles pour la maison
+- **Produits numériques** : proposer des ebooks, des cours, de la musique ou des téléchargements de logiciels
+- **Marques de niche** : lancer rapidement des boutiques pour du merchandising en édition limitée, des produits locaux, du dropshipping ou des projets parallèles
+- **Petites entreprises** : mettre en valeur des boulangeries, des cafés ou des entreprises artisanales et accepter des commandes en ligne
+- **Tester de nouvelles idées de produit** : ajouter quelques produits et évaluer leurs performances avant de passer à la production à grande échelle
+- **Développement de ton activité** : lancer de nouvelles collections, des campagnes saisonnières ou des bundles avec un simple Prompt
+
+<div id="before-you-begin">
+  ## Avant de commencer
+</div>
+
+Avant de commencer à créer votre boutique e‑commerce avec **Lovable + Shopify**, voici quelques points importants à connaître :
+
+- **Uniquement pour les nouvelles boutiques Shopify**\
+  L’intégration Lovable + Shopify est conçue pour créer et lancer **uniquement de nouvelles boutiques Shopify**. Les boutiques existantes ne peuvent pas être connectées ni gérées via cette intégration.
+- **Boutique sandbox – aucun coût Shopify**\
+  Lovable crée automatiquement une boutique sandbox pour que vous puissiez créer et expérimenter en toute sécurité, sans **aucun coût Shopify**. Cet environnement est idéal pour la configuration et les tests, mais il **ne traitera pas de paiements réels**.
+- **Revendiquer votre boutique**\
+  Lorsque vous êtes prêt à lancer votre boutique, vous devrez **revendiquer votre boutique**. Elle est alors migrée vers votre compte Shopify et un **essai gratuit de 30 jours de Shopify** démarre. Dans Shopify, vous devez activer les paiements et finaliser la configuration de votre boutique pour commencer à accepter de vrais paiements de vos clients.
+- **Abonnement Shopify requis**\
+  Après la période d’essai gratuit, vous aurez besoin d’un **abonnement payant à Shopify** pour continuer à vendre des produits en ligne. Cet abonnement est géré **directement via Shopify** et est **séparé de la tarification Lovable**.
+- **Conformité à la politique de Shopify sur les avis**\
+  Avant de publier votre boutique, assurez-vous que tous les avis sont **authentiques, impartiaux et conformes à** la [**politique de Shopify sur les avis**](https://help.shopify.com/en/partners/help-support/faq/reviews).
+
+<div id="enabling-the-shopify-integration">
+  ## Activation de l’intégration Shopify
+</div>
+
+Par défaut, l’intégration Shopify est activée pour votre espace de travail. Vous pouvez gérer le comportement de l’intégration Shopify et les paramètres Shopify associés pour vos projets dans vos préférences utilisateur : **Settings → Integrations → Shopify → User preferences.**
+
+<div id="user-preferences">
+  ### Préférences utilisateur
+</div>
+
+Le paramètre par défaut pour l’intégration Shopify est **Demander à chaque fois**, ce qui signifie que vous choisissez d’activer ou de désactiver l’intégration Shopify pour chaque projet. Vous pouvez modifier votre préférence à tout moment depuis **Settings → Integrations → Shopify → User preferences.**
+
+Lovable vous invite à faire un choix lorsqu’une intégration Shopify est nécessaire. Vous avez trois options :
+
+- **Autoriser** : activer l’intégration pour le projet en cours.
+- **Refuser** : refuser l’intégration pour cette demande (vous pourrez à nouveau être sollicité plus tard).
+- **Ajuster les préférences** : modifier le comportement par défaut pour les futurs projets (n’affecte pas le projet en cours).
+
+<div id="shopify-integration-flow">
+  ## Flux d'intégration Shopify
+</div>
+
+Vous pouvez commencer par :
+
+- Créer un nouveau projet.
+- Remixer un projet existant, en consultant les [modèles Lovable + Shopify](https://lovable.dev/shopify).
+
+<div id="1-create-your-store">
+  ### 1. Créer votre boutique
+</div>
+
+**Lors de la création d’un nouveau projet à partir de zéro**, indiquez à Lovable quel type de boutique vous voulez créer et **spécifiez Shopify**.
+
+> Créer une boutique e-commerce **avec Shopify** pour vendre des bougies parfumées faites main.
+
+**Lors du remixage d’un projet existant**, utilisez un Prompt pour demander à Lovable d’intégrer Shopify et de supprimer les données factices. Il est important d’utiliser un Prompt clair et détaillé. Par exemple :
+
+> Je souhaite remplacer les produits de cette boutique par mes propres produits et créer ma boutique Shopify. Merci de :
+>
+> 1. Vous connecter à Shopify.
+> 2. Supprimer toutes les données de produits factices de la boutique et créer X nouveaux produits avec des images de produit.
+> 3. Mettre à jour les cartes produit et la page de détails du produit pour utiliser les nouvelles informations produit.
+> 4. Mettre à jour l’URL de la page de détails du produit pour qu’elle corresponde au nouveau produit.
+> 5. Mettre à jour le composant d’ajout à la liste de souhaits et la logique associée pour refléter ce changement.
+> 6. Mettre à jour mon panier, le CTA « acheter maintenant » et toutes les actions de finalisation d’achat associées, sur n’importe quelle page, pour refléter l’intégration de la boutique Shopify.
+
+Lovable vous demandera **d’activer la connexion Shopify** — cliquez simplement sur **Allow**. Votre boutique sandbox est prête pour la configuration.
+
+<div id="2-add-products-and-product-images">
+  ### 2. Ajouter des produits et des images de produits
+</div>
+
+Commence par ajouter des produits avec un **nom, une description et un prix**. Par exemple :
+
+> Ajoute un produit nommé _Lavender Breeze Candle_, avec la description : « A calming handmade soy candle infused with lavender essential oils » et le prix : 25 $.
+
+Tu pourras modifier ces détails plus tard. Si ton produit n'apparaît pas, utilise le Prompt suivant :
+
+> Display the products on the website.
+
+Ensuite, améliore tes fiches produits avec des visuels en utilisant l'une des options ci-dessous. Utilise toujours des images représentatives.
+
+**Générer des images avec l’IA**
+
+> Add an AI-generated image to the product _Lavender Breeze Candle_.
+
+**Téléverser ou joindre ta propre image**
+
+> Add the attached image to the product _Lavender Breeze Candle_.
+
+**Ajouter une image depuis une URL**
+
+> Add image from URL to the product _Lavender Breeze Candle_.
+
+<div id="3-manage-your-store">
+  ### 3. Gérer votre boutique
+</div>
+
+Gérez vos produits et peaufinez votre boutique sans quitter Lovable. Par exemple, vous pouvez demander à Lovable de :
+
+- Mettre à jour les noms, descriptions ou prix des produits
+- Supprimer des produits
+- Afficher tous les produits
+- Ajouter une fonctionnalité de filtrage des produits et créer des collections par catégorie
+- Ajouter une fonctionnalité d’avis sur les produits et n’autoriser les avis que pour les achats vérifiés
+- Ajouter des codes de réduction en pourcentage ou d’un montant fixe (USD) et préciser la période de validité
+- Ajouter une fonctionnalité de liste de souhaits et la possibilité de partager la liste de souhaits
+
+> Mets à jour le prix de _Lavender Breeze Candle_ à _\$28_.\
+> Modifie la description de _Vanilla Bean Candle_ pour mettre en avant la mèche en bois. \
+> Supprime le produit _Cinnamon Spice Candle_.\
+> Affiche tous les produits.\
+> Crée un système d’avis sur les produits et n’autorise les avis que pour les achats vérifiés.\
+> Crée un code de réduction de 15 % pour le produit _Lavender Breeze Candle_. Le code doit être LAVANDER15 et valide jusqu’à la fin novembre 2025. \
+> Permets-moi d’ajouter des produits à la liste de souhaits et de la partager.
+
+<div id="4-claim-your-store">
+  ### 4. Revendiquer votre boutique
+</div>
+
+Lorsque vous êtes prêt à revendiquer et à lancer votre boutique, préparez-vous à déverrouiller votre boutique, puis à configurer et activer les paiements en suivant le processus KYC (Know Your Customer). Cela peut prendre un certain temps.
+
+1. Saisissez « Claim the store ». Lovable vous invite alors à revendiquer la boutique. Cliquez sur **Claim**. Cela ouvre Shopify dans un nouvel onglet où vous pouvez vous connecter, puis terminer le processus de revendication. Vous pouvez également recevoir une invitation par e-mail pour revendiquer votre boutique.
+2. Acceptez le lien **Claim store** depuis Shopify. Vous êtes alors redirigé vers votre projet Lovable.
+4. Allez dans l’admin Shopify pour terminer la configuration de votre boutique et activer les paiements afin de pouvoir commencer à vendre. Consultez [Shopify payments](https://help.shopify.com/en/manual/payments/shopify-payments/onboarding) pour plus d'informations.
+
+Lorsque vous revendiquez votre boutique, Shopify attribue un domaine permanent à votre boutique – ne vous inquiétez pas, ce n'est que votre backend. **L'URL réelle de votre boutique sera votre lovable.app ou votre domaine personnalisé.**
+
+<Warning>
+  Ne revendiquez votre boutique que lorsque vous êtes pleinement prêt à la lancer, car vous aurez besoin d'un abonnement Shopify payant après l'essai gratuit de 30 jours pour continuer à vendre des produits en ligne.
+</Warning>
+
+<div id="5-launch-your-store">
+  ### 5. Lancez votre boutique
+</div>
+
+Une fois votre boutique validée et votre configuration terminée, publiez votre projet Lovable et partagez votre boutique avec le monde entier&nbsp;!
+
+À tout moment, directement dans Lovable, vous pouvez&nbsp;:
+
+- Créer, mettre à jour et supprimer des produits
+- Gérer les prix et les descriptions
+- Lancer de nouvelles collections, promotions ou offres groupées
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="J’ai ajouté mes produits à un projet remixé, mais le lien vers la page produit ne fonctionne pas. Comment puis-je corriger ça ?">
+    Pas d’inquiétude – notre agent est encore en train d’apprendre à connaître ta nouvelle boutique et tu n’as besoin de lui envoyer un Prompt qu’une seule fois pour corriger ça définitivement ! Envoie à l’agent le Prompt suivant :
+
+    > Please update the product URL logic to ensure that all new and future products in the store correctly display their respective product detail pages.
+
+    Cela devrait faire en sorte que tu ne rencontres plus de problèmes à l’avenir. Pour tous les autres problèmes, cliquer sur le bouton « Try to Fix » enverra un Prompt à l’agent pour qu’il le prenne en charge et le résolve. 
+  </Accordion>
+  <Accordion title="Je vois encore des produits de démonstration dans mon projet remixé, comment puis-je les supprimer ?">
+    Envoie un Prompt à l’agent pour mettre à jour les pages où tu as vu ces produits, par exemple :
+
+    > Clear the store from any existing products across all pages except for those that I added to my Shopify store.
+  </Accordion>
+</AccordionGroup>

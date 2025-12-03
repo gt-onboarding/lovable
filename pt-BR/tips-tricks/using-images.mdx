@@ -1,0 +1,117 @@
+---
+title: "Usando imagens no Lovable"
+description: "Aprenda a adicionar imagens aos seus projetos no Lovable"
+icon: "frame"
+---
+
+Para adicionar imagens, você pode fazer uma destas quatro coisas:
+
+<AccordionGroup>
+  <Accordion title="Envie a imagem para o chat do Prompt de IA">
+    Basta enviá-los no chat e explicar ao Agent da Lovable onde e como você quer que eles apareçam no seu projeto. Por exemplo:
+
+    > Substitua o logotipo na navbar por esta imagem
+  </Accordion>
+
+  <Accordion title="Substitua no editor visual">
+    Você pode substituir uma imagem existente diretamente usando a funcionalidade do [editor visual](https://docs.lovable.dev/features/precision-edit#visual-edits):
+
+    <Steps>
+      <Step title="Etapa 1">
+        Clique na ferramenta &quot;Edit&quot;.
+      </Step>
+
+      <Step title="Etapa 2">
+        Selecione o elemento de imagem que você quer alterar.
+
+        ![images/visual-edit-replace.png](/images/visual-edit-replace.png)
+      </Step>
+
+      <Step title="Etapa 3">
+        Altere a imagem.
+
+        ![images/visual-edit-image.png](/images/visual-edit-image.png)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Usando uma URL de imagem externa">
+    Uma maneira de adicionar imagens ao seu Projeto é referenciando uma imagem a partir de uma URL externa. Esse método permite usar imagens hospedadas em plataformas como Unsplash, Imgur ou qualquer outro serviço de hospedagem de imagens. Fique atento aos direitos autorais!
+
+    Veja como criar um Prompt de IA para o Lovable usar uma imagem externa:
+
+    <Steps>
+      <Step title="Passo 1">
+        Encontre a imagem que você quer usar.
+
+        Por exemplo, você pode acessar um site como o Unsplash, selecionar uma imagem e copiar a URL dela.
+      </Step>
+
+      <Step title="Passo 2">
+        No Prompt de IA do seu Projeto, simplesmente peça para o Lovable usar essa imagem, informando a URL. Por exemplo:
+
+        ```
+        Use a imagem deste URL
+        https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/442px-Pale_Blue_Dot.png
+        como a imagem da hero section.
+        ```
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Usar imagens do diretório público do seu repositório no GitHub">
+    Outra forma de adicionar imagens ao seu Projeto Lovable é usando imagens enviadas para o diretório `public` do seu repositório GitHub conectado. Veja como fazer:
+
+    <Steps>
+      <Step title="Conecte seu repositório GitHub">
+        Certifique-se de que seu projeto está conectado ao seu repositório GitHub. [Veja como conectar seu repositório](https://docs.lovable.dev/integrations/git-integration).
+      </Step>
+
+      <Step title="Localize a pasta public">
+        Dentro do seu repositório GitHub, navegue até o diretório `public`. Essa pasta é normalmente usada para hospedar recursos (assets), como imagens, que podem ser referenciados no seu projeto.
+      </Step>
+
+      <Step title="Adicionar arquivo">
+        Clique em **Add file** e, no menu suspenso, selecione a opção **Upload files**. <img src="/assets/using-images-github-upload.png" alt="Selecionando arquivos para upload" />
+      </Step>
+
+      <Step title="Fazer upload de uma imagem">
+        A próxima etapa é enviar sua imagem para o repositório:
+
+        * Arraste e solte a imagem na pasta `public`, ou
+        * Clique no link **&quot;choose your files&quot;** para procurar e selecionar o arquivo de imagem. <img src="/assets/using-images-github-commiting.png" alt="Selecionando arquivos para upload" />
+      </Step>
+
+      <Step title="Fazer commit das alterações">
+        Depois de selecionar sua imagem, escreva uma mensagem de commit simples (por exemplo, &quot;Adding image files to be used in the app&quot;) e clique em **&quot;Commit changes&quot;** para salvar o arquivo no seu repositório.
+      </Step>
+
+      <Step title="Obter o caminho da imagem">
+        Quando o arquivo for enviado, selecione-o e clique no ícone de cópia ao lado do nome do arquivo para copiar o caminho da imagem. Esse caminho será usado no seu Prompt de IA do Lovable. <img src="/assets/using-images-github-selecting.png" alt="Selecionando arquivos para upload" />
+      </Step>
+
+      <Step title="Usar a imagem no Lovable">
+        Agora você pode referenciar essa imagem no seu projeto usando um Prompt de IA como o seguinte:
+
+        ```
+        Add an additional image to the hero section. 
+        This time, use this one from my local repo: public/c-64-close-up.jpg.jpeg
+        ```
+
+        Certifique-se de usar o nome da sua imagem e o caminho que você copiou na etapa anterior.
+
+        <Warning>
+          Fazer upload de imagens muito grandes para o seu repositório GitHub pode fazer com que ele aumente de tamanho, o que pode afetar o desempenho do Lovable (tempos maiores de clonagem do repositório, inicialização mais lenta de pré-visualizações/sandbox).
+
+          Tente otimizar suas imagens antes de enviá-las para a pasta `public`, comprimindo-as e usando dimensões relevantes para o seu caso de uso. Por exemplo, não use uma imagem em tamanho Full HD se ela for exibida apenas como um pequeno ícone.
+        </Warning>
+      </Step>
+    </Steps>
+
+    Para ajudar você a entender melhor como integrar imagens usando os métodos descritos acima, temos um projeto que você pode explorar: [Exemplo de Projeto Lovable](https://lovable.dev/projects/e823fedf-238d-4313-86a8-1fd4bfc2a9ba). Nesse projeto, você pode ver os Prompts de IA reais e como cada método funciona na prática.
+
+    Além disso, aqui está um repositório GitHub público que inclui os commits, as imagens enviadas e todos os detalhes da implementação. Você pode visualizar o repositório aqui: [GitHub: Adding Images Example](https://github.com/viborc/adding-images-example).
+
+    Sinta-se à vontade para explorar o projeto e o repositório para aprofundar seu entendimento e aprimorar suas habilidades de implementação.
+  </Accordion>
+</AccordionGroup>

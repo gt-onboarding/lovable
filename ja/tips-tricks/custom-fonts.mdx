@@ -1,0 +1,76 @@
+---
+title: "カスタム（Google）フォントの使用"
+description: "Lovable プロジェクトでウェブセーフフォントと Google Fonts を使う方法を学びましょう"
+icon: "font"
+---
+
+現在、Lovable はカスタムフォントの直接アップロードには対応していません。
+
+ただし、ウェブセーフフォントを使ったり、カスタムフォントをプロジェクトに組み込んだりする簡単な方法がいくつかあります。以下では、**ウェブセーフフォントの使用**と**Google フォントの使用**に関する利用可能な方法について説明します。
+
+<AccordionGroup>
+  <Accordion title="ウェブセーフフォントを使う">
+    <Info>
+      **ウェブセーフフォントとは？**
+
+      ウェブセーフフォントとは、ほとんどのオペレーティングシステム（Windows、macOS、Linux など）に一般的にインストールされており、ほぼすべてのデバイスで表示できるフォントのことです。
+
+      これらのフォントを使うことで、外部リソースを読み込む必要なく、異なるブラウザやプラットフォーム間でテキストの見た目を一貫させることができます。一般的なウェブセーフフォントには次のようなものがあります：
+
+      - Arial/Helvetica
+      - Times New Roman
+      - Georgia
+      - Courier New
+      - Verdana
+      - Tahoma
+      - Trebuchet MS
+      - Lucida Sans Unicode
+    </Info>
+    プロジェクトでウェブセーフフォントを使いたい場合は、プロンプト内でフォントを直接指定できます。たとえば、ヒーローセクションの見出しやタイトルに **Courier New** を使いたい場合、プロンプト内でフォント名を指定してください。
+
+    ```text
+    Use Courier New as the heading font in the hero section for the main title.
+    ```
+
+    Courier New のようなウェブセーフフォントを使うことで、フォントを読み込むための外部リソースを必要とせず、すべてのプラットフォームで一貫したタイポグラフィを実現できます。ただし、クリエイティブな表現が制限されてしまうこともあります。幸い、Google Fonts を利用できるなど、他の選択肢もあります。
+  </Accordion>
+  <Accordion title="Google Fonts を使う">
+    カスタムフォントを使いたい場合、Lovable は **Google Fonts** とスムーズに連携できます。これにより、プロジェクトで幅広いフォントを簡単に利用できます。Google フォントを名前で指定するか、フォントリソースへのリンクを直接指定するかのどちらかが可能です。
+
+    ### 名前で指定する
+
+    プロンプト内で Google フォントの名前を指定すると、Lovable がそのフォントをプロジェクトに含めます。例：
+
+    ```text
+    Use Playfair Display as the first subtitle title font in the hero section. 
+    
+    Make sure to use the useEffect React hook to apply the font properly.
+    ```
+
+    ### リンクで指定する
+
+    あるいは、Google フォントへの直接リンクを指定し、Lovable にそのフォントをプロジェクトで使わせることもできます。目的のフォントを選択し、リンクをコピーすることで [Google Fonts](https://fonts.google.com) からリンクを取得できます。
+
+    Lovable にリンク経由で Google フォントを使わせるプロンプトの例は次のとおりです：
+
+    ```text
+    Add this Google font link https://fonts.google.com/specimen/Dancing+Script 
+    and use this font for the third subtitle.
+    
+    Make sure to load the font using the useEffect React hook.
+    ```
+
+    これらの方法に従うことで、ウェブセーフフォントまたは Google Fonts を使用して、Lovable プロジェクトのタイポグラフィをカスタマイズできます。
+
+    ## さらに学ぶ・サンプル
+
+    これらのフォント統合方法を実際に確認するには、こちらのサンプルプロジェクトをチェックしてください：[Lovable using fonts example project](https://lovable.dev/projects/3a826f38-d9cb-4d60-b4da-30a9b00149c8)。
+
+    このプロジェクトでは、Courier New のようなウェブセーフフォントや Google Fonts のカスタムフォントなど、さまざまなフォントスタイルをどのように適用したかを示す実際のプロンプトを見ることができます。
+
+    <Frame>
+      ![Lovable プロジェクトで使用されているさまざまなフォント](/assets/using-custom-fonts-example.png)
+    </Frame>
+    また、フォントをどのように統合したかをより技術的に確認したい場合は、この公開リポジトリも参照してください：[GitHub: adding-fonts-example](https://github.com/viborc/adding-fonts-example)。ここには、さまざまなフォントをプロジェクトで読み込み、適用するための実装の詳細がすべて含まれています。
+  </Accordion>
+</AccordionGroup>

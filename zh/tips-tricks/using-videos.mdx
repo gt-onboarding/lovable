@@ -1,0 +1,69 @@
+---
+title: "使用视频"
+description: "了解如何通过外部链接或从 GitHub 上传在你的项目中嵌入视频"
+icon: "film"
+---
+
+Lovable 提供两种在项目中嵌入视频的方法。下面我们会一步步介绍这两种方式：
+
+<AccordionGroup>
+  <Accordion title="链接到外部视频">
+    <Tip>
+      最简单且推荐的方式是链接到外部托管的视频，例如 YouTube 上的视频。
+    </Tip>
+    <CodeGroup>
+
+    ```txt Example prompt
+    Embed this video
+    https://www.youtube.com/watch?v=dQw4w9WgXcQ 
+    in the hero content section.
+    ```
+
+    </CodeGroup>
+  </Accordion>
+  <Accordion title="使用来自 GitHub public 文件夹的视频">
+    <Warning>
+      将大型视频上传到你的 GitHub 仓库可能会导致仓库体积变大，从而影响 Lovable 的性能（例如更长的仓库克隆时间、更慢的预览/沙盒启动速度）。
+
+      更好的做法是使用托管服务（如 YouTube）或 S3 之类的文件存储选项，本质上是获取一个可以引用的 URL，就像前面步骤中所描述的那样。
+    </Warning>
+    你可以将视频上传到项目的 GitHub 仓库并直接引用它们。操作步骤如下：
+
+    <Steps>
+      <Step title="连接你的 GitHub 仓库 ">
+        首先，确保你的项目已链接到一个 GitHub 仓库。[了解如何设置仓库](https://docs.lovable.dev/integrations/git-integration)。
+      </Step>
+      <Step title="访问 public 文件夹">
+        在已连接的仓库中，导航到 `public` 目录。这个文件夹专门用于托管项目资源，例如图片、视频和其他媒体。
+      </Step>
+      <Step title="上传视频">
+        现在你可以将视频添加到 public 文件夹中，可以通过拖放视频文件，或者点击 **"choose your files"** 从本地电脑中浏览并上传文件。
+      </Step>
+      <Step title="提交文件">
+        选择视频文件后，输入一个简短的提交信息（例如："Adds a Mars video to be used in the app"），然后点击 **"Commit changes"**。
+        ![提交视频文件](/assets/using-videos-github-commiting.png)
+      </Step>
+      <Step title="获取视频路径">
+        上传完成后，点击该视频文件，并使用复制图标 :octicons-copy-16: 来复制它的路径。你将在下一步中用到这个路径。
+        ![复制视频文件路径](/assets/using-videos-github-selecting.png)
+      </Step>
+      <Step title="在 Lovable 中引用该视频">
+        现在，你可以在提示中指定该文件路径来嵌入视频。例如，你可以使用如下提示：
+
+        <CodeGroup>
+
+        ```bash Example prompt
+        Insert an additional video into the introduction section using this file: 
+        public/mars-video-nasa.mp4
+        ```
+
+        </CodeGroup>
+
+        请确保使用的是你之前复制的那个精确文件路径。
+      </Step>
+    </Steps>
+    想要看到这些方法的实际效果，可以查看以下示例项目：[Lovable 使用视频示例项目](https://lovable.dev/projects/380835ab-c8d7-4f45-9b0d-51ec04294457)。你会看到真实的提示词示例，展示如何通过这两种方式集成视频。
+
+    此外，如果你想从更技术的角度了解添加视频的过程，可以查看这个公开仓库：[GitHub: Video Upload Example](https://github.com/viborc/adding-videos-example)。其中包含了视频上传以及在项目中使用的视频实现细节。
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,76 @@
+---
+title: "Uso de fuentes personalizadas (Google)"
+description: "Aprende cómo usar fuentes seguras para la web y Google Fonts en tus proyectos de Lovable"
+icon: "font"
+---
+
+Actualmente, Lovable no admite la carga directa de fuentes personalizadas. 
+
+Sin embargo, hay varias formas sencillas de usar fuentes seguras para la web o incorporar fuentes personalizadas en tus proyectos. A continuación, te guiaremos por los métodos disponibles para **usar fuentes seguras para la web** y **Google Fonts**:
+
+<AccordionGroup>
+  <Accordion title="Usar una fuente segura para la web">
+    <Info>
+      **¿Qué son las fuentes seguras para la web?**
+
+      Las fuentes seguras para la web son fuentes que suelen estar instaladas en la mayoría de los sistemas operativos (Windows, macOS, Linux, etc.) y son visibles en todos los dispositivos.
+
+      Estas fuentes garantizan que tu texto se vea de forma consistente en distintos navegadores y plataformas sin necesidad de cargar recursos externos. Algunas de las fuentes seguras para la web más comunes son:
+
+      - Arial/Helvetica
+      - Times New Roman
+      - Georgia
+      - Courier New
+      - Verdana
+      - Tahoma
+      - Trebuchet MS
+      - Lucida Sans Unicode
+    </Info>
+    Si quieres usar una fuente segura para la web en tu proyecto, puedes especificarla directamente en tu instrucción. Por ejemplo, si quieres usar **Courier New** para un encabezado o título en la sección hero, simplemente haz referencia a la fuente por su nombre en tu instrucción.
+
+    ```text
+    Usa Courier New como la fuente de encabezado en la sección hero para el título principal.
+    ```
+
+    Las fuentes seguras para la web como Courier New garantizan que tu proyecto tenga una tipografía consistente en todas las plataformas sin requerir recursos externos para cargar la fuente. Sin embargo, pueden limitar tu creatividad. Por suerte, existen opciones como la posibilidad de usar Google Fonts.
+  </Accordion>
+  <Accordion title="Usar Google Fonts">
+    Si prefieres usar fuentes personalizadas, Lovable funciona muy bien con **Google Fonts**. Esto te permite usar fácilmente una amplia variedad de fuentes en tu proyecto. Puedes hacer referencia a una fuente de Google por su nombre o enlazando directamente al recurso de la fuente.
+
+    ### Usar por nombre
+
+    En tu instrucción, puedes especificar el nombre de una fuente de Google y Lovable la incluirá en tu proyecto. Por ejemplo:
+
+    ```text
+    Usa Playfair Display como la fuente del primer subtítulo en la sección hero. 
+    
+    Asegúrate de usar el hook de React useEffect para aplicar la fuente correctamente.
+    ```
+
+    ### Usar por enlace
+
+    De forma alternativa, puedes proporcionar un enlace directo a la fuente de Google, y Lovable usará esa fuente en tu proyecto. Puedes obtener el enlace desde [Google Fonts](https://fonts.google.com) seleccionando la fuente deseada y copiando el enlace.
+
+    Así puedes indicar a Lovable que use una fuente de Google mediante un enlace:
+
+    ```text
+    Agrega este enlace de fuente de Google https://fonts.google.com/specimen/Dancing+Script 
+    y usa esta fuente para el tercer subtítulo.
+    
+    Asegúrate de cargar la fuente usando el hook de React useEffect.
+    ```
+
+    Siguiendo estos métodos, puedes personalizar la tipografía de tu proyecto de Lovable usando fuentes seguras para la web o Google Fonts.
+
+    ## Más información y ejemplos
+
+    Para ver estos métodos de integración de fuentes en acción, puedes explorar uno de nuestros proyectos de ejemplo: [Proyecto de ejemplo de Lovable usando fuentes](https://lovable.dev/projects/3a826f38-d9cb-4d60-b4da-30a9b00149c8).
+
+    En este proyecto encontrarás indicaciones reales que muestran cómo aplicamos distintos estilos tipográficos, incluidas fuentes seguras para la web como Courier New y fuentes personalizadas de Google Fonts.
+
+    <Frame>
+      ![Diferentes fuentes usadas en un proyecto de Lovable](/assets/using-custom-fonts-example.png)
+    </Frame>
+    Además, para una visión más técnica de cómo se integraron las fuentes, consulta este repositorio público: [GitHub: adding-fonts-example](https://github.com/viborc/adding-fonts-example). Incluye todos los detalles de implementación y muestra cómo se cargaron y aplicaron varias fuentes en el proyecto.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,432 @@
+---
+title: "Clerk 集成"
+description: "了解如何将 Clerk 集成到你的 Lovable 应用中"
+icon: "people-arrows"
+---
+
+<div id="why-clerk">
+  ## 为什么选择 Clerk？
+</div>
+
+![What Is Clerk Pn](/images/what-is-clerk.png)
+
+[Clerk](https://clerk.com) 负责身份验证和用户管理，你无需从零开始开发。只需几个提示词和配置步骤，你就可以获得：
+
+- 安全的登录和注册（社交账号、密码、多因素认证）
+- 预构建 UI 组件：用户资料、组织管理、模拟登录
+- 支持 B2B 应用（团队、角色、邀请）
+- 与 Supabase、Stripe（即将支持）等集成
+- 等候名单模式，用于管理早期访问
+- 宽松的免费套餐：每月最多 1 万活跃用户（10K MAUs）
+
+<div id="step-by-step-integration-guide">
+  ## 分步集成指南
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/tyAsNwu_xCI?si=VHCGf2IlFRQzVLeD" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+以下是分步指南：
+
+<Steps>
+  <Step title="设置你的 Clerk 应用" stepNumber="1">
+    <Steps>
+      <Step title="步骤 1">
+        创建 Clerk 账号 → [Clerk.com](https://clerk.com)
+      </Step>
+
+      <Step title="步骤 2">
+        在 Clerk 控制面板中创建一个新应用
+
+        <Steps>
+          <Step title="步骤 1">
+            登录 Clerk 并创建一个新应用
+
+            ![创建 Clerk 应用截图](/images/create-clerk-application.png)
+          </Step>
+
+          <Step title="步骤 2">
+            启用所需的身份验证提供商（例如 Google、GitHub）
+          </Step>
+
+          <Step title="步骤 3">
+            在 **Configure &gt; Restrictions** 下启用“Waitlist”
+
+            ![Clerk 等候名单设置截图](/images/clerk-waitlist.png)
+          </Step>
+
+          <Step title="步骤 4">
+            复制你的 **Public API Key**
+
+            ![Clerk API 密钥截图](/images/clerk-api-key.png)
+          </Step>
+        </Steps>
+      </Step>
+
+      <Step title="步骤 3">
+        **将 Clerk 添加到你的 Lovable 应用中**
+
+        <Steps>
+          <Step title="步骤 1">
+            在 **Lovable** 中，将 Clerk 添加为你的身份验证提供商。
+
+            在 Lovable 中输入以下提示：
+
+            <Info>
+              让我们构建一个风格类似 Asana 的精美项目与任务管理应用。用户应该能够使用 Clerk 进行登录和注册，用于身份验证和用户管理。我们先从构建一个漂亮的首页开始，并使用 Clerk 的等候名单组件，让用户在我们构建应用其余部分时就可以加入。
+            </Info>
+
+            ![Asana 克隆 Lovable 截图](/images/asana-clone-lovable.png)
+          </Step>
+
+          <Step title="步骤 2">
+            按提示粘贴你的 **Public API Key**
+          </Step>
+
+          <Step title="步骤 3">
+            Lovable 会为你生成登录和注册页面
+
+            ![Waitlist 组件 Clerk 截图](/images/waitlist-component-clerk.png)
+          </Step>
+
+          <Step title="步骤 4">
+            部署并测试——你现在已经在使用 Clerk Auth 了
+          </Step>
+        </Steps>
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="启用等候名单模式（可选）" stepNumber="2">
+    <Note>
+      **为什么要使用候补名单？** – 在应用正式上线前先积累早期用户！
+    </Note>
+
+    使用 Clerk 内置的候补名单功能，在上线前先收集用户。
+
+    <Steps>
+      <Step title="Step 1">
+        在 Clerk 仪表板中：**Configure &gt; Restrictions &gt; Waitlist**
+      </Step>
+
+      <Step title="Step 2">
+        新注册的用户会显示为 **pending（待处理）**
+      </Step>
+
+      <Step title="Step 3">
+        * 现在注册的用户都会处于 **pending approval（待审核）** 状态
+        * 管理员可以在 Clerk 仪表板中审核并通过用户
+
+        ![Clerk Waitlist Pending Pn](/images/clerk-waitlist-pending.png)
+      </Step>
+
+      <Step title="Step 4 (Bonus)">
+        自定义候补名单相关邮件（品牌样式与内容）
+
+        ![Clerk Email Templates Pn](/images/clerk-email-templates.png)
+
+        ![Sms Code Verification Pn](/images/sms-code-verification.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="在 Clerk 中管理用户和团队" stepNumber="3">
+    在你的应用中设置基于团队的访问权限。
+
+    <Steps>
+      <Step title="Step 1">
+        在 Clerk 仪表盘中启用 **Organizations**
+
+        ![Organization Management Clerk Pn](/images/organization-management-clerk.png)
+      </Step>
+
+      <Step title="Step 2">
+        定义角色（Admin、Member、Viewer 等）
+      </Step>
+
+      <Step title="Step 3">
+        通过电子邮件邀请用户加入你的组织
+      </Step>
+
+      <Step title="Step 4">
+        通过仪表盘分配角色和权限
+      </Step>
+
+      <Step title="Step 5">
+        在 Lovable 中编写提示，让其执行以下操作：
+
+        <Info>
+          在用户注册完成后，引导他们创建或加入组织
+        </Info>
+
+        ![Clerk Organization Create Pn](/images/clerk-organization-create.png)
+      </Step>
+    </Steps>
+
+    <Note>
+      **使用 Clerk 的 User Profile 组件**
+
+      * 提供预构建的用户管理仪表盘
+      * 支持社交登录和密码认证
+      * 用户可以自行管理账号和两步验证（2FA）
+
+      ![Clerk Organization Members Pn](/images/clerk-organization-members.png)
+    </Note>
+  </Step>
+
+  <Step title="用户模拟模式（仅限管理员）" stepNumber="4">
+    <Tip>
+      **什么是 Impersonation 模式？**
+
+      管理员可以以任何用户的身份登录，以排查问题
+    </Tip>
+
+    像特定用户一样对你的应用进行故障排查。
+
+    <Steps>
+      <Step title="步骤 1">
+        在 Clerk 仪表盘 &gt; Users 中，点击某个用户
+      </Step>
+
+      <Step title="步骤 2">
+        点击 **Impersonate**
+      </Step>
+
+      <Step title="步骤 3">
+        以该用户的视角查看你的应用
+      </Step>
+
+      <Step title="步骤 4">
+        安全性：以模拟身份登录的管理员无法执行敏感操作（例如更改密码）
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="集成 Supabase（高级）" stepNumber="5">
+    将 Clerk Auth 与 Supabase 后端集成。
+
+    ![Supabase Clerk 截图](/images/supabase-clerk.png)
+
+    <Note>
+      **为什么要集成 Supabase？**
+
+      * 在数据库中存储用户数据
+      * 使用 JWT 令牌进行安全身份验证
+      * 将身份验证与应用功能连接起来
+    </Note>
+
+    **如何集成：**
+
+    <Steps>
+      <Step title="步骤 1">
+        在 Supabase 中，前往 **Settings &gt; API &gt; JWT Secret (**[**documentation**](https://clerk.com/docs/integrations/databases/supabase)**)**
+
+        ![Supabase Clerk 集成文档截图](/images/supabase-clerk-integration-doc.png)
+
+        ![Supabase SQL 编辑器截图](/images/sql-editor-supabase.png)
+      </Step>
+
+      <Step title="步骤 2">
+        在 Clerk 中：进入 **JWT Templates &gt; Add Supabase**，粘贴 JWT 密钥
+
+        ![Supabase API 密钥 Clerk 截图](/images/Supabase-api-key-clerk.png)
+
+        ![JWT 模板 Clerk 截图](/images/jwt-template-clerk.png)
+
+        ![JWT 模板 Clerk 配置截图](/images/jwt-template-clerk-configuration.png)
+      </Step>
+
+      <Step title="步骤 3">
+        启用 **Clerk 作为身份验证提供方**
+
+        更新 RLS 策略以使用来自 Clerk 的 `auth.uid()`
+
+        在 Lovable 中输入以下提示：
+
+        <Info>
+          让我们配置 Supabase 以集成 Clerk。Clerk 已使用 Supabase 密钥完成配置。下面是一个使用 Clerk 实现 Supabase 客户端的示例。请将其作为参考。
+
+          *[Supabase 客户端配置导入]*
+        </Info>
+      </Step>
+
+      <Step title="步骤 4">
+        确认 Supabase 能接受由 Clerk 签发的令牌
+
+        ![Supabase Tasks 表截图](/images/supabase-tasks-table.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="添加自定义域名（可选）" stepNumber="6">
+    <Note>
+      **为什么要使用自定义域名？**
+
+      提升品牌知名度和信任度
+
+      [点击此处了解更多信息](https://docs.lovable.dev/tips-tricks/custom-domain)。
+    </Note>
+
+    <Steps>
+      <Step title="步骤 1">
+        在 Lovable 中：**Project &gt; Settings &gt; Custom Domain**
+      </Step>
+
+      <Step title="步骤 2">
+        输入你购买的域名（例如 `app.yourcompany.com`）。
+      </Step>
+
+      <Step title="步骤 3">
+        Lovable 会自动完成 DNS 配置（无需离开 Lovable）。
+      </Step>
+
+      <Step title="步骤 4">
+        部署你的应用，并使用新域名进行测试。
+      </Step>
+
+      <Step title="步骤 5">
+        完成 ✅ — 你的应用现在已经白标化了。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="总结与下一步" stepNumber="7">
+    **你的应用现在已经具备：**
+
+    * 使用 Clerk 的安全身份验证
+    * 用于收集早期用户的候补名单
+    * 用户和团队管理功能
+    * Supabase 数据库集成
+    * 专业的自定义域名
+  </Step>
+</Steps>
+
+<div id="bonus-build-b2b-features-in-minutes">
+  ## 加分项：几分钟就能构建 B2B 功能
+</div>
+
+Clerk 支持：
+
+- 面向组织的基于角色的访问控制
+- 邀请流程（基于邮箱，预构建 UI）
+- 组织信息自定义（Logo、名称）
+- 多组织切换（类似 Slack）
+
+**让 Lovable 帮你：**
+
+<Info>
+  添加组织切换 UI
+</Info>
+
+<Info>
+  让用户邀请队友
+</Info>
+
+<div id="tips-troubleshooting">
+  ## 提示与故障排除
+</div>
+
+- **已经在使用 Supabase Auth？** 你可以在不重写应用逻辑的情况下切换到 Clerk。只需正确配置 JWT 并切换身份验证提供商即可。
+- **邮件自定义：** Clerk 允许你编辑所有事务类邮件模板（候补名单、邀请、批准等）。
+- **移动端登录：** Clerk 支持 passkeys、OTP 和短信，在开发模式（Dev Mode）中无需额外配置。
+- **合规性：** Clerk 已通过 SOC2、HIPAA 和 GDPR 合规认证。
+
+<div id="frequently-asked-questions-faq">
+  ## 常见问题 (FAQ)
+</div>
+
+<AccordionGroup>
+  <Accordion title="我可以轻松从 Supabase Auth 切换到 Clerk 吗？">
+    可以。Clerk 和 Supabase 配合得很好。你只需要：
+
+    - 设置 Clerk 以签发 JWT
+    - 在 Clerk 中添加 Supabase 的 JWT 密钥
+    - 更新 Supabase 的 RLS 策略以使用 Clerk 的 `auth.uid()`
+
+    这样你就可以在几乎不改动代码的情况下，将 Clerk 接入现有的 Supabase 驱动应用。
+  </Accordion>
+  <Accordion title="我需要配置 Google 或 GitHub 之类的 OAuth 提供商吗？">
+    只在生产环境需要。在开发模式下，Clerk 会提供用于测试的共享凭证。在生产环境中：
+
+    - 配置你自己的 Google/GitHub 等凭证
+    - 在 Clerk 中的 **OAuth settings** 下添加它们
+  </Accordion>
+  <Accordion title="Organizations 和 Users 有什么区别？">
+    - **Users**：可以登录你应用的个人用户
+    - **Organizations**：用户组（团队、公司）
+
+    当你需要以下功能时，可以使用 Organizations：
+
+    - 基于角色的访问控制（Admin、Member 等）
+    - 允许用户邀请团队成员
+    - B2B SaaS 风格的使用流程
+  </Accordion>
+  <Accordion title="什么是“Impersonation Mode”？">
+    它允许管理员以任意用户身份登录——在以下情况非常有用：
+
+    - 调试用户问题
+    - 理解用户的实际体验
+    - 提供实时支持
+
+    <Note>
+      Clerk 会限制模拟登录者能做的事情（例如，不能修改密码）。
+    </Note>
+  </Accordion>
+  <Accordion title="我可以自定义 Clerk 的 UI 组件吗？">
+    可以。Clerk 提供：
+
+    - 通过 `appearance` props 进行完整的 CSS 定制
+    - 使用 Clerk React hooks 构建完全自定义 UI 的选项
+
+    你既可以保留开箱即用的样式，也可以完全匹配你应用的品牌风格。
+  </Accordion>
+  <Accordion title="我可以使用 Clerk 给候补名单上的用户发邮件吗？">
+    目前：
+
+    - 当用户从候补名单中被批准时，会自动收到通知
+    - 群发邮件功能 **即将上线**
+
+    现在你可以先导出邮箱地址，然后使用你偏好的邮件工具发送邮件。
+  </Accordion>
+  <Accordion title="Clerk 是免费的吗？">
+    是的！Clerk 提供了非常宽松的免费套餐：
+
+    - 最多支持 **10,000 月活跃用户 (MAU)**
+    - 付费方案从 **\$25/月** 起，之后按使用量计费
+
+    你可以在生产环境中使用，直到规模扩大前都无需付费。
+  </Accordion>
+  <Accordion title="Clerk 是否支持合规要求（SOC2、HIPAA、GDPR）？">
+    是的。Clerk：
+
+    - **通过 SOC 2 认证**
+    - **符合 HIPAA 要求**
+    - **符合 GDPR 要求**
+
+    非常适合在受监管行业中构建产品的团队使用。
+  </Accordion>
+  <Accordion title="我可以将 Clerk 和 Stripe 一起用于计费吗？">
+    即将推出。很快你就可以：
+
+    - 定义套餐（例如 Free、Pro、Enterprise）
+    - 让用户/组织在 Clerk 的 UI 中管理订阅
+    - 自动将数据同步到 Stripe
+
+    在 X 上关注 [@clerkdev](https://x.com/clerkdev?lang=en) 获取最新动态。
+  </Accordion>
+</AccordionGroup>
+
+想在此 FAQ 中新增问题？[欢迎在 Discord 上告诉我们](https://discord.gg/lovable-dev)！
+
+<div id="final-thoughts">
+  ## 最后总结
+</div>
+
+Clerk 把身份验证变成了一条提示词，你无需再自己搭建。
+
+**只需点几下鼠标并输入少量提示词，你的应用现在就具备了：**
+
+- 安全、可扩展的身份验证
+- 团队和组织管理
+- 用于调试的模拟用户工具
+- 基于 Supabase 的数据和访问控制
+- 自定义域名支持，带来更精致的用户体验

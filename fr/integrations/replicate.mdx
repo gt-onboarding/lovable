@@ -1,0 +1,226 @@
+---
+title: "Intégration de Replicate"
+description: "Apprenez à intégrer Replicate à votre application Lovable"
+icon: "robot"
+---
+
+<div id="what-is-replicate">
+  ## Qu’est-ce que Replicate ?
+</div>
+
+[Replicate](https://replicate.com/) vous permet d’exécuter des modèles de machine learning open source avec seulement quelques lignes de code — sans expertise en ML.
+
+C’est une plateforme d’API qui permet aux développeurs de générer des images, des vidéos, de l’audio et plus encore en utilisant des modèles d’IA créés par la communauté ou personnalisés. Que vous développiez un MVP, que vous prototypiez des fonctionnalités créatives ou que vous ajoutiez de l’IA prête pour la production à votre application, Replicate vous donne un accès rapide et flexible à des modèles de pointe.
+
+<div id="why-use-replicate-with-lovable">
+  ## Pourquoi utiliser Replicate avec Lovable ?
+</div>
+
+Replicate s’intègre naturellement au flux de travail de création d’applications centrées sur l’IA de Lovable. Vous pouvez :
+
+- Générer des visuels dynamiques (par exemple des bannières de cours, des avatars, des scènes)
+- Utiliser une IA multimodale (image, vidéo, voix, synthèse vocale)
+- Ajouter de la génération de contenu en temps réel sans gérer votre propre infrastructure de modèles
+
+Grâce à la prise en charge native par Lovable de l’API et des modèles de Replicate, l’intégration ne prend que quelques minutes — pas des jours. Décrivez simplement ce que vous souhaitez, et Lovable s’occupe du reste.
+
+<div id="step-by-step-tutorial">
+  ## Tutoriel étape par étape
+</div>
+
+Dans ce tutoriel, nous expliquons comment intégrer Replicate dans une application Lovable pour générer dynamiquement des images de bannière de cours, en ajoutant une nouvelle couche d’interactivité et de finition à votre produit. Vous verrez aussi comment Replicate s’intègre dans le flux de travail IA plus large de Lovable — y compris comment l’associer à OpenAI pour le contenu des cours, à Supabase pour la logique backend et à des conversations IA en temps réel à l’aide de [l’API WebRTC d’OpenAI](https://platform.openai.com/docs/guides/realtime#connect-with-webrtc).
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/eSDhk4VkVLE?si=9SNZ4G-ApyU-gsOg" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Steps>
+  <Step title="Étape 1 – Créer une application de tutorat linguistique">
+    Nous commençons par créer avec Lovable une application web pour apprendre l’espagnol. Elle inclut :
+
+    - Un parcours de connexion utilisateur
+    - Un chat IA pour le tutorat en espagnol
+    - L’enregistrement et la lecture audio
+    - Des fonctionnalités de traduction
+
+    Cela offre aux utilisateurs un tuteur IA personnalisé avec lequel ils peuvent parler, écrire et apprendre.
+
+    ![Course Dashboard Pn](/images/course-dashboard.png)
+  </Step>
+  <Step title="Étape 2 – Générer des cours avec l’IA">
+    Nous améliorons l’application avec des cours générés par l’IA :
+
+    ![Course Creation Ai Pn](/images/course-creation-ai.png)
+
+    - Les utilisateurs définissent un sujet (par exemple, _Questions à poser à un barbecue_).
+    - Une fonction propulsée par OpenAI crée 10 questions à choix multiple en espagnol.
+    - Les cours sont enregistrés dans le compte de l’utilisateur avec Supabase et peuvent être consultés à tout moment.
+      ![Course Creation Ai 2 Pn](/images/course-creation-ai-2.png)
+    - Les utilisateurs reçoivent un retour sur chaque question avec des explications.
+    - Nous générons automatiquement une **image de bannière de cours** qui correspond au sujet. Replicate utilise le modèle **Flux Schnell** pour une génération d’images rapide et injecte dynamiquement l’image dans la page du cours.
+
+    <Info>
+      **Fonctionnement :**
+
+      1. Nous appelons l’API Replicate lorsqu’un nouveau cours est créé.
+      2. Le prompt est généré dynamiquement en fonction du sujet du cours.
+      3. Replicate renvoie une URL d’image, utilisée comme bannière pour le cours.
+    </Info>
+    ![Replicate Real Time Pn](/images/replicate-real-time.png)
+  </Step>
+  <Step title="Étape 3 – Ajouter des visuels avec Replicate">
+    Maintenant, ajoutons des éléments visuels avec Replicate.
+
+    ![Replicate Image Pn](/images/replicate-image.png)
+
+    **Exemple de prompt :**
+
+    <Note>
+      A beautiful, educational, and engaging scene about topic in digital art style. Vibrant colors. No text on image.
+    </Note>
+    **Exemple de gestion de réponse :**
+
+    Certains modèles Replicate renvoient une seule URL d’image, d’autres renvoient un tableau. Assurez-vous que votre fonction Lovable extrait correctement la sortie, par exemple :
+
+    ```
+    const imageUrl = response.output[0]
+    ```
+  </Step>
+  <Step title="Étape 4 – Utiliser Replicate Playground pour affiner les réglages">
+    Le Playground de Replicate facilite les tests d’invites et la récupération d’extraits de code :
+
+    - Ajuster les invites jusqu’à ce que le résultat vous convienne
+    - Utiliser le générateur d’extraits d’API pour Node.js, Python, etc.
+    - Copier-coller directement dans les fonctions backend de Lovable
+
+    <Tip>
+      Utilisez Playground Beta pour comparer plusieurs résultats en même temps.
+    </Tip>
+    ![Replicate Playground Pn](/images/replicate-playground.png)
+  </Step>
+  <Step title="Étape 5 – Conversations en temps réel avec OpenAI">
+    Pour simuler des conversations humaines, nous avons ajouté une fonctionnalité de conversation en espagnol en temps réel à l’aide de l’API WebRTC d’OpenAI :
+
+    - Les utilisateurs peuvent parler directement à leur tuteur IA.
+    - L’IA comprend, répond et corrige la prononciation en temps réel.
+    - Cela rend l’apprentissage des langues bien plus immersif et pratique.
+
+    Cette fonctionnalité s’intègre parfaitement avec la saisie vocale de Lovable, la gestion WebRTC et l’interface de chat front-end.
+
+    ![Course Voice Ai Pn](/images/course-voice-ai.png)
+  </Step>
+</Steps>
+
+<div id="tips-gotchas">
+  ## Astuces et points d'attention
+</div>
+
+- **Variabilité des résultats de modèle** : Les modèles Replicate diffèrent dans la façon dont ils renvoient leurs résultats. Vérifiez toujours le JSON réel renvoyé depuis le playground.
+- **L'itération sur les prompts est essentielle** : De petits changements de prompt peuvent fortement affecter la qualité de l'image. Utilisez le playground pour expérimenter.
+- **Journaux backend** : Utilisez les journaux Edge de Supabase pour déboguer vos appels d'API. Lovable prend en charge la récupération des journaux directement dans l'application.
+- **Contrôle de version dans Lovable** : Chaque modification de prompt est automatiquement commit, mais vous pouvez suivre manuellement des points de contrôle en utilisant la fonctionnalité « Déployer » pour les états prêts pour la production.
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="Qu’est-ce que Replicate, en termes simples ?">
+    Replicate est une plateforme qui te permet d’exécuter des modèles de machine learning puissants (comme la génération d’images ou de vidéos) via une simple API — sans avoir besoin d’entraîner ou d’héberger toi‑même les modèles.
+  </Accordion>
+
+  <Accordion title="Qui utilise généralement Replicate ?">
+    Replicate est populaire aussi bien auprès des indie hackers, des créateurs de start-up que des grandes entreprises. Que tu sois en train de prototyper une fonctionnalité IA ou de déployer à grande échelle, Replicate gère aussi bien les petits hacks rapides que les déploiements robustes.
+  </Accordion>
+
+  <Accordion title="Ai-je besoin de ma propre clé API Replicate ?">
+    Oui. Lovable stocke tes clés de façon sécurisée et gère les appels d’API pour toi une fois qu’elles sont ajoutées.
+  </Accordion>
+
+  <Accordion title="Quels modèles puis-je utiliser sur Replicate ?">
+    Replicate prend en charge de nombreuses modalités, notamment :
+
+    * Génération d’images (par ex. Flux Schnell)
+    * Génération de vidéos
+    * Audio et text-to-speech
+    * Modèles de langage (même si ce n’est pas le principal focus de Replicate)
+    * Modèles Cog personnalisés (modèles open source dockerisés que tu peux déployer)
+
+    Découvre-les tous sur [replicate.com/explore](https://replicate.com/explore).
+  </Accordion>
+
+  <Accordion title="Comment savoir quel modèle convient à mon cas d’usage ?">
+    Utilise le **Playground** de Replicate pour tester différents modèles avant de les intégrer. Le Playground te permet d’ajuster les invites, de comparer les résultats et de copier des extraits de code fonctionnels pour ton application.
+  </Accordion>
+
+  <Accordion title="Quelle est la différence entre les anciens et les nouveaux endpoints API de Replicate ?">
+    Replicate propose deux formats d’API :
+
+    * L’endpoint original (`/predictions`) : le plus connu et le plus utilisé.
+    * Le nouvel endpoint `/models/{owner}/{model}/versions/{id}/predictions` : plus efficace et plus flexible.
+
+    Lovable s’intègre avec les deux selon les besoins du modèle.
+  </Accordion>
+
+  <Accordion title="Que faire si un modèle renvoie une structure JSON différente de celle attendue ?">
+    Les sorties des modèles varient. Certains renvoient une URL sous forme de chaîne, d’autres renvoient un tableau. Utilise le Replicate Playground pour inspecter la réponse réelle et mets à jour ta logique d’analyse en conséquence.
+
+    Exemple de correction :
+
+    ```
+    const imageUrl = Array.isArray(output) ? output[0] : output;
+    ```
+  </Accordion>
+
+  <Accordion title="Puis-je déclencher la génération d’images Replicate une seule fois, ou à chaque vue de cours ?">
+    Tu peux choisir :
+
+    * **Génération unique lors de la création du cours** : réduit les coûts de calcul et crée une identité visuelle cohérente.
+    * **Génération dynamique par session** : si tu veux des visuels renouvelés à chaque fois.
+
+    Dans le tutoriel, nous avons choisi de générer l’image une seule fois, au moment où le cours est créé pour la première fois.
+  </Accordion>
+
+  <Accordion title="Lovable sait-il travailler avec Replicate dès le départ ?">
+    Oui ! Lovable possède une connaissance intégrée de Replicate et de nombreux modèles populaires. Il peut générer automatiquement le code d’intégration pour toi en utilisant les bons packages et la bonne structure de Prompt.
+  </Accordion>
+
+  <Accordion title="Comment Lovable gère-t-il l’installation de packages comme replicate pour Node.js ?">
+    Lovable installe et configure automatiquement les packages nécessaires en fonction de ton Prompt et du contexte d’intégration. Tu n’as pas besoin de faire un `npm install` manuellement, sauf pour du débogage en local.
+  </Accordion>
+
+  <Accordion title="Quel est le flux de travail pour déboguer les erreurs Replicate dans Lovable ?">
+    * Utilise les **journaux de Fonction Edge Supabase** de Lovable pour tracer les problèmes.
+    * S’il y a un écart entre la réponse Replicate attendue et la réponse réelle, mets à jour ton traitement JSON.
+    * Utilise le bouton **“Fix this”** dans Lovable pour réessayer ou refactorer la logique de la fonction.
+  </Accordion>
+
+  <Accordion title="Puis-je créer un checkpoint de l’état fonctionnel de mon application dans Lovable ?">
+    Actuellement, chaque modification de Prompt crée un commit. Tu peux :
+
+    * Utiliser l’onglet **History** pour naviguer entre les commits (y compris marquer certains commits comme favoris)
+    * **Déployer** une version pour en faire un checkpoint de production
+    * Utiliser la synchronisation GitHub pour une gestion de versions personnalisée
+  </Accordion>
+
+  <Accordion title="Comment fonctionne l’intégration GitHub avec Lovable ?">
+    Tu peux exporter ton projet Lovable vers GitHub avec une **synchronisation bidirectionnelle** :
+
+    * Lovable pousse les changements vers GitHub
+    * Toi (ou ton équipe) pouvez faire des modifications dans un IDE et les renvoyer
+    * Très pratique pour un frontend dans Lovable + un backend dans ton propre éditeur
+  </Accordion>
+
+  <Accordion title="Que sont les fichiers .lm.txt ou .lm.md adaptés aux LLM ?">
+    Ce sont des documents simplifiés basés sur le markdown, optimisés pour les modèles de langage. Replicate travaille activement à en ajouter pour aider Lovable (et d’autres outils) à mieux comprendre automatiquement ses modèles.
+  </Accordion>
+
+  <Accordion title="Dois-je gérer moi-même le réglage des Prompts ?">
+    Oui, la création de Prompts est essentielle. Lovable t’aide avec l’auto-prompting et la création de modèles, mais tu dois toujours tester dans le Replicate Playground pour affiner les entrées et obtenir les meilleurs résultats.
+  </Accordion>
+</AccordionGroup>
+
+<div id="resources">
+  ## Ressources
+</div>
+
+- Explorez la [documentation de l’API Replicate](https://replicate.com/docs) et le [catalogue de modèles de Replicate](https://replicate.com/)
+- Pour en savoir plus, consultez [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling) et [OpenAI WebRTC](https://platform.openai.com/docs/guides/speech/real-time-speech)

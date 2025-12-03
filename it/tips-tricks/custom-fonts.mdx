@@ -1,0 +1,76 @@
+---
+title: "Uso di font personalizzati (Google)"
+description: "Scopri come utilizzare font web-safe e Google Fonts nei tuoi progetti Lovable"
+icon: "font"
+---
+
+Attualmente, Lovable non supporta il caricamento diretto di font personalizzati. 
+
+Tuttavia, ci sono diversi modi semplici per utilizzare font web-safe o integrare font personalizzati nei tuoi progetti. Di seguito ti guidiamo attraverso i metodi disponibili per **utilizzare font web-safe** e **Google Fonts**:
+
+<AccordionGroup>
+  <Accordion title="Utilizzare un font web-safe">
+    <Info>
+      **Cosa sono i font web-safe?**
+
+      I font web-safe sono font comunemente installati sulla maggior parte dei sistemi operativi (Windows, macOS, Linux, ecc.) e sono visibili su tutti i dispositivi.
+
+      Questi font garantiscono che il tuo testo abbia un aspetto coerente tra diversi browser e piattaforme senza dover caricare risorse esterne. Alcuni dei font web-safe più comuni sono:
+
+      - Arial/Helvetica
+      - Times New Roman
+      - Georgia
+      - Courier New
+      - Verdana
+      - Tahoma
+      - Trebuchet MS
+      - Lucida Sans Unicode
+    </Info>
+    Se vuoi utilizzare un font web-safe nel tuo progetto, puoi specificare il font direttamente nella tua Istruzione. Ad esempio, se vuoi usare **Courier New** per un'intestazione o un titolo nella sezione hero, ti basta indicare il font per nome nella tua Istruzione.
+
+    ```text
+    Use Courier New as the heading font in the hero section for the main title.
+    ```
+
+    I font web-safe come Courier New assicurano che il tuo progetto abbia una tipografia coerente su tutte le piattaforme senza richiedere risorse esterne per caricare il font. Tuttavia, possono limitare la tua creatività. Fortunatamente, ci sono opzioni come la possibilità di utilizzare Google Fonts.
+  </Accordion>
+  <Accordion title="Utilizzare Google Fonts">
+    Se preferisci usare font personalizzati, Lovable funziona molto bene con **Google Fonts**. Questo ti permette di utilizzare facilmente un'ampia gamma di font nel tuo progetto. Puoi fare riferimento a un font di Google Fonts per nome oppure collegarti direttamente alla risorsa del font.
+
+    ### Utilizzo per nome
+
+    Nella tua Istruzione, puoi specificare il nome di un font di Google Fonts e Lovable lo includerà nel tuo progetto. Ad esempio:
+
+    ```text
+    Use Playfair Display as the first subtitle title font in the hero section. 
+    
+    Make sure to use the useEffect React hook to apply the font properly.
+    ```
+
+    ### Utilizzo tramite link
+
+    In alternativa, puoi fornire un link diretto al font di Google Fonts e Lovable utilizzerà quel font nel tuo progetto. Puoi ottenere il link da [Google Fonts](https://fonts.google.com) selezionando il font desiderato e copiando il link.
+
+    Ecco come dare l'Istruzione a Lovable di usare un font di Google Fonts tramite link:
+
+    ```text
+    Add this Google font link https://fonts.google.com/specimen/Dancing+Script 
+    and use this font for the third subtitle.
+    
+    Make sure to load the font using the useEffect React hook.
+    ```
+
+    Seguendo questi metodi, puoi personalizzare la tipografia del tuo progetto Lovable utilizzando sia font web-safe che Google Fonts.
+
+    ## Approfondimenti ed esempi
+
+    Per vedere questi metodi di integrazione dei font in azione, puoi esplorare uno dei nostri progetti di esempio: [Lovable using fonts example project](https://lovable.dev/projects/3a826f38-d9cb-4d60-b4da-30a9b00149c8).
+
+    In questo progetto troverai prompt reali che mostrano come abbiamo applicato diversi stili di font, inclusi font web-safe come Courier New e font personalizzati da Google Fonts.
+
+    <Frame>
+      ![Diversi font utilizzati in un progetto Lovable](/assets/using-custom-fonts-example.png)
+    </Frame>
+    Inoltre, per una panoramica più tecnica su come sono stati integrati i font, consulta questo repository pubblico: [GitHub: adding-fonts-example](https://github.com/viborc/adding-fonts-example). Include tutti i dettagli di implementazione, mostrando come vari font sono stati caricati e applicati nel progetto.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,226 @@
+---
+title: "21st.dev 連携"
+description: "Lovable で高コンバージョンな AI ランディングページを構築する"
+icon: "ruler-combined"
+---
+
+ほとんどの AI 生成のランディングページは、どれも同じように見えます――内容はあいまいで、ブランドから外れた配色で、個性もありません。でも、必ずしもそうとは限りません。
+
+ここでは、Lovable と 21stdev を使って、クライアントが _本当に_ 気に入るランディングページ（[この例](https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727)のような）を作成するための、体系的なワークフローを紹介します。
+
+![ヒーローセクションのランディングページ](/images/hero-section.png)
+
+<div id="step-by-step-guide">
+  ## ステップバイステップガイド
+</div>
+
+デザインのインスピレーションから最終的な仕上げまで、品質を落とさずに素早く構築するための彼のステップバイステップな進め方は次のとおりです。
+
+<Steps>
+  <Step title="プロンプトではなく、デザインのインスピレーションから始めよう">
+    プロンプトを一文字でも書き始める前に、[Dribbble](https://dribbble.com/) や [Behance](https://www.behance.net/) を眺めてみましょう。次のようなデザインを探します：
+
+    * 余白とタイポグラフィが整っているもの
+    * 明確なCTAがあり、レイアウトがミニマルなもの
+    * 過度ではない、さりげないインタラクションがあるもの
+
+    <Tip>
+      現実的に再現できそうなものを選びましょう。自分で再現するつもりがないなら、過度に複雑な3Dデザインは避けてください。
+    </Tip>
+
+    <Info>
+      実際のクライアントからは「モダンでミニマル」なデザインがほしいと依頼されました。それがビジュアル面での出発点になりました。自分が実現できないものは最初から選ばないようにしましょう。
+    </Info>
+  </Step>
+
+  <Step title="空のプロジェクトで始める">
+    プロンプトを入力して Lovable プロジェクトを開始しましょう：
+
+    <Note>
+      まずは空のプロジェクトから始めましょう。詳細は後から追加していきます。
+    </Note>
+  </Step>
+
+  <Step title="WebP を PNG に変換してデザイン用スクリーンショットを用意する ">
+    参照したいデザインが見つかったら、ダウンロードしましょう。WebP 形式で保存されていた場合は、オンラインコンバーターを使って PNG に変換すると、Lovable や GPT のワークフローで簡単に利用できるようになります。
+
+    <Note>
+      おすすめのツール: [https://cloudconvert.com/webp-to-png](https://cloudconvert.com/webp-to-png)
+    </Note>
+  </Step>
+
+  <Step title="Chat Mode でアイデアを詳細なプロンプトに落とし込む">
+    Lovable の [Chat Mode](https://docs.lovable.dev/features/labs#chat-mode) を使って、次の情報を抽出できます：
+
+    * ページセクション（ヒーロー、機能一覧、FAQ など）
+    * レイアウト構造、余白、コンテンツの並び順
+    * フォントファミリー、カラーパレット、グラデーション
+    * アニメーションの種類、ホバーエフェクト、トランジション
+
+    <Info>
+      Lovable の [Chat mode](https://docs.lovable.dev/features/labs#chat-mode)（または customGPT）は、ブログのサムネイルやイラスト用の Unsplash 画像をおすすめできるようにも学習されています。
+    </Info>
+
+    <Warning>
+      Lovable が内容に誤ったラベルを付けてしまうことがあります（例: &quot;Space Grotesque&quot; フォントのスペルミスなど）。Lovable に貼り付ける前に、必ず Chat mode の出力内容を確認し、必要に応じて修正してください。
+    </Warning>
+
+    Lovable の Chat mode に、各セクションの詳しい説明を依頼したり、より良い UX の提案が入るようにプロンプトを書き直してもらうこともできます。
+  </Step>
+
+  <Step title=" Lovable で最初の下書きを作成する">
+    詳細なプロンプトを Lovable の編集モードに貼り付けてください。次に:
+
+    * 参照用として PNG スクリーンショットをアップロードしてください
+    * 「*Space Grotesque フォントを使う*」や「ブログのサムネイルには Unsplash を使う」のようなメモを追加してください
+
+    この組み合わせにより、あいまいな一文だけのプロンプトと比べて、はるかに精度の高いデザインになります。
+
+    <Info>
+      わずか 1 年前に Tailwind や Bootstrap を手動でセットアップしていたときと比べて、Lovable がどれだけ高速に感じられるかを意識してみてください。
+    </Info>
+  </Step>
+
+  <Step title="リアルタイム編集：ビジュアルプロンプト＋テキストプロンプト">
+    Lovable の [visual editing tool](https://docs.lovable.dev/features/visual-edit) を使うと、次のことができます：
+
+    * 画像のサイズを変更する（例：「make this image 800px wide」）
+    * ヒーロー画像の位置を調整する（例：「place this image on the right side」）
+    * デザインセクションの配置を参照画像と揃える
+
+    これらに自然言語での編集を組み合わせると、より精密に調整できます。
+  </Step>
+
+  <Step title="21stdev コンポーネントでデザインを仕上げよう">
+    [21stdev](https://21st.dev/) の事前構築済み UI コンポーネントを使って、次の要素をアップグレードしましょう:
+
+    ![21stdev custom component ](/images/21stdev.png)
+
+    * ヒーローセクション
+    * ホバー効果付きナビゲーションバー
+    * テスティモニアルレイアウト
+    * CTA や機能グリッド
+
+    気に入ったコンポーネントを見つけたら、そのプロンプトをコピーして Lovable に貼り付けてください。サイト全体のビジュアルトーンと合うように調整しましょう。
+  </Step>
+
+  <Step title="AI の誤解を修正する">
+    AI で作業時間は短縮できますが、仕上げ作業は必要です：
+
+    ![ランディングページにスペックコンポーネントを追加](/images/component.png)
+
+    * ブランディングを調整する（Lovable のデフォルトカラーは青）
+    * 余白やパディングを手動で整える
+    * 全体で一貫したタイポグラフィを使う
+    * フラットに見えないようにグラデーションや奥行きを追加する
+
+    デザインが「デフォルト」ではなく、*意図的* に作られたと感じられるようにしましょう。
+  </Step>
+
+  <Step title="モバイル向けに最適化する（絶対条件）">
+    ここは飛ばさないでください。必ず確認しましょう：
+
+    ![モバイル対応ウェブサイト](/images/mobile-responsive.png)
+
+    * 入力フィールドが横幅いっぱいに広がっている
+    * 小さな画面に合わせてフォントサイズが調整される
+    * ボタンがタップしやすい
+    * セクションが縦にきれいに並び、スムーズにスクロールできる
+
+    モバイルでのUXはコンバージョンにとって非常に重要です。
+  </Step>
+
+  <Step title="さりげないアニメーションやマイクロインタラクションを追加する">
+    モダンな印象にするには、次のようにします。
+
+    * ヒーローセクションにフェードイン効果を使う
+    * ボタンにホバー時のアニメーション効果を追加する
+    * スクロールに合わせてセクションをアニメーションさせる
+    * さりげない背景の動きを付ける
+
+    Lovable では、適切にプロンプトすれば [Framer Motion](https://motion.dev/) を標準で統合できます。
+
+    ![Add animation landing page](/images/animation.png)
+  </Step>
+
+  <Step title="AI でカスタムビジュアルを生成する（オプション）">
+    参照デザインの中で気に入った要素をもとに、ChatGPT、Midjourney、Ideogram 用のプロンプトを作成します。
+
+    **手順:**
+
+    <Steps>
+      <Step title="使いたいビジュアルの部分をスクリーンショットする" />
+
+      <Step title="ChatGPT に、合うプロンプトを書いてもらう" />
+
+      <Step title="AI ツールで画像を生成する" />
+
+      <Step title="背景を削除し、Lovable に挿入し直す" />
+    </Steps>
+
+    <Note>
+      最新の ChatGPT 4o は、試してみる価値がありそうです。
+    </Note>
+
+    これは、3D ビジュアルやテーマ性のあるイラストに特に有効です。
+  </Step>
+
+  <Step title="ワンクリックでデプロイ">
+    結果に満足できたら、次の操作を行いましょう。
+
+    * Lovable で「デプロイ」をクリックする
+    * Netlify で独自ドメインを接続する
+
+    数分でサイトが公開されます。手動でのセットアップは不要です。
+  </Step>
+
+  <Step title="クライアントと共有して改善を重ねる">
+    公開リンクをコピーしてクライアントと共有します。クライアントは次のことができます：
+
+    * 実際の画面を見ながらレビューする
+    * 調整案を提案する
+    * すばやく承認する
+
+    Lovable のビジュアルエディタまたはプロンプトベースのエディタを使って、各セクションを引き続きブラッシュアップできます。高速にイテレーションできるワークフローです。
+  </Step>
+</Steps>
+
+<div id="why-this-approach-works">
+  ## なぜこの手法はうまくいくのか？
+</div>
+
+AI は魔法ではありません。しかし、きちんと構造化すれば、強力な武器になります。構造化されていないプロンプトと比べると、次のような違いがあります。
+
+- 最初のドラフトの時点で、完成形に 10 倍近づいている
+- エラー修正にかける時間が少なくて済む
+- すべてのセクションに明確な目的がある
+- 最終成果物が画一的ではなく、本当にカスタムなものとして感じられる
+
+これは、自動化 **\+** 職人技のブレンドです。
+
+<div id="key-takeaways">
+  ## 重要なポイント
+</div>
+
+- 良いビジュアルのインスピレーションから始める
+- Lovable Chat Mode で構造化したプロンプトを使う
+- スクリーンショットを追加して期待する成果を明確にする
+- 21stdev コンポーネントで各セクションをアップグレードする
+- デザインの違和感を直し、モバイル向けに最適化する
+- 重要な箇所だけアニメーションさせる
+- すばやくデプロイし、さらに速く改善サイクルを回す
+
+これは [Prajwal](https://x.com/PrajwalTomar_/status/1902371273147064772) がクライアントワークで毎日使っていて、私たちも社内で試したワークフローです。Lovable AI の力を活かしつつ、意図をしっかりと反映させて、速く・美しく・高コンバージョンなランディングページを作るための方法です。
+
+楽しくビルドしていきましょう\!
+
+<div id="more-resources">
+  ## その他のリソース
+</div>
+
+- [Brock Mesarich のチュートリアル](https://www.youtube.com/watch?v=v48gJFQvE1Y&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- Lukas Margerie のチュートリアル ([1](https://www.youtube.com/watch?v=-GiBI0leMHU&t=30s&pp=ygUPbG92YWJsZSAyMXN0ZGV2) - [2](https://www.youtube.com/watch?v=uqdFobvoRQQ&pp=ygUPbG92YWJsZSAyMXN0ZGV20gcJCb0Ag7Wk3p_U))
+- [AI Jason のチュートリアル](https://www.youtube.com/watch?v=8MPElOdNjtk&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Mark Kashef のチュートリアル](https://www.youtube.com/watch?v=Zv7N0SxfpRM&t=269s&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Alejavi Rivera のチュートリアル](https://www.youtube.com/watch?v=mMBp0uGZOWw&pp=ygUPbG92YWJsZSAyMXN0ZGV2)（スペイン語）
+- [Fazt Code のチュートリアル](https://www.youtube.com/watch?v=RGZeP1_oMoY&pp=ygUPbG92YWJsZSAyMXN0ZGV2)

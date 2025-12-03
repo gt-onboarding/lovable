@@ -1,0 +1,215 @@
+---
+title: "最佳实践"
+description: "充分利用 Lovable"
+icon: "dumbbell"
+---
+
+本指南将帮助所有用户——无论是新手还是有经验的用户——快速上手，并在 Lovable 上构建应用时避免常见问题和坑。
+
+<div id="1-set-your-foundation-use-the-knowledge-file">
+  ## 1. 打好基础：使用 Knowledge 文件
+</div>
+
+**为什么重要：** [Knowledge](/zh/features/knowledge) 文件是你项目的“大脑”。它会随每次提示一同发送给 AI，帮助它理解完整上下文。
+
+**建议包含：**
+
+* 产品愿景（可以把它当作 PRD）
+* 用户旅程和角色画像
+* 关键功能和特性
+* 设计系统和 UI 指南
+* 不同角色的行为（如 Admin、User、Investor）
+
+<Tip>
+  你可以通过 Chat mode 自动生成一个 Knowledge 文件：
+
+  ```
+  Generate knowledge for my project at T=0 based on the features I’ve already implemented.
+  ```
+</Tip>
+
+<div id="2-prompting-best-practices">
+  ## 2. [提示](/zh/prompting/prompting-one) 最佳实践
+</div>
+
+**提示越清晰、越详细，输出效果就越好。** 把 AI 当作你的工程师伙伴——它只知道你告诉它的信息。
+
+**提示技巧：**
+
+* 要具体：说明确切的页面（例如 `/dashboard`）以及预期行为。
+* 使用自然语言
+
+  ```
+  我希望具有 Investor 角色的用户可以访问这个组件，但 Admin 不可以。
+  ```
+* 添加截图：在描述 bug 或 UX 问题时尤其有用。
+* 添加约束条件：告诉 AI **不要** 修改哪些内容。例如：
+
+  ```
+  不要编辑 /shared/Layout.tsx。
+  ```
+* 在多个提示中重复重要指令。AI 的上下文记忆是有限的。
+* 避免一次性尝试实现 5 件事情。将工作拆分为更小、可测试的模块。在每个模块之间使用 Chat Mode 验证后再继续。
+
+  ```
+  **功能拆解模板：**
+  创建新页面
+  添加 UI 布局
+  连接数据
+  添加逻辑和边界情况
+  按角色测试
+  ```
+* 如果你的应用有多个角色（例如 Admin、Investor、Startup），一定要明确说明提示是针对**哪个角色**的。这有助于避免由共享逻辑或组件导致的 bug。
+
+  ```
+  作为一名 Investor，我希望查看公司 dashboard，但我不应该能编辑它。请将这个功能仅限定在 Investor 角色。
+  ```
+
+<div id="3-use-chat-mode-early-and-often">
+  ## 3. 尽早且频繁地使用 Chat mode
+</div>
+
+[**Chat mode**](https://docs.lovable.dev/features/labs#chat-mode) = 你的 AI 副驾驶。它可以帮助你调试、头脑风暴和规划实现方案——在你真正准备好之前，都不会直接修改你的代码。
+
+**什么时候切换到 Chat Mode：**
+
+* 连续 2–3 次 “Try to Fix” 都失败之后
+* 在调试复杂逻辑或数据库问题时
+* 在规划新功能时
+
+  ```
+  Suggest 3 ways to implement X
+  ```
+
+<Tip>
+  **工作流小技巧：**
+
+  有些用户会有 60–70% 的时间都在用 Chat Mode。只有在你完全满意之后，再点击 “Implement the plan”。
+</Tip>
+
+<Tip>
+  如果你经常忘记使用 Chat mode，可以用下面这种格式来提高输出的一致性，并避免产生连带修改：
+
+  ```
+  On page /settings, implement [feature]. The expected behavior is [XYZ]. Please don’t touch component A, layout B, or shared logic unless necessary. Follow best practices from Tailwind / Supabase / X.
+  ```
+</Tip>
+
+<Tip>
+  为了避免不必要的代码执行：
+
+  ```
+  Investigate but don’t write code yet.
+  ```
+
+  ```
+  Suggest 3 ways to solve this without changing anything.
+  ```
+
+  这样可以让控制权始终掌握在你手中。
+</Tip>
+
+<Tip>
+  当 AI 进入「循环」时，使用下面的步骤来避免无休止地修补损坏的代码：
+
+  1. 切换到 Chat mode
+  2. 粘贴错误截图
+  3. 这样说：
+
+     ```
+     Please investigate this without breaking other features. If needed, revert to the last working version and fix from there.
+     ```
+</Tip>
+
+<div id="4-avoid-common-pitfalls-with-supabase">
+  ## 4. 避免在 Supabase 中常见的陷阱
+</div>
+
+**注意：** [Supabase](https://docs.lovable.dev/integrations/supabase) 无法进行干净的回滚。如果你回滚到某个版本，你的数据库 schema 可能会被破坏。
+
+**最佳实践：**
+
+* 在前端稳定 **之后** 再连接 Supabase
+* 如果必须回滚，向 AI 发送如下提示（prompt）：
+
+  ```
+  Please validate the SQL schema at T=0 and ensure no breaking changes have occurred.
+  ```
+* 在发布前务必测试所有与数据库关联的功能
+
+<div id="5-use-visual-edit-for-quick-ui-fixes">
+  ## 5. 使用 Visual Edit 快速修复 UI
+</div>
+
+[**Visual Edit 工具**](https://docs.lovable.dev/features/visual-edit) 免费且快速。你可以用它来代替提示词完成以下操作：
+
+* 更改文本、颜色、字体，以及进行布局微调
+* 一次性编辑多个小元素
+* 安全且不消耗额度的提交（可撤销）
+
+<div id="6-use-github-version-control-wisely">
+  ## 6. 明智地使用 [GitHub](https://docs.lovable.dev/integrations/git-integration) 和版本控制
+</div>
+
+* 每次编辑都会生成一次提交。使用 **pinning** 来标记稳定版本。每完成一个可用功能后：**Pin it**
+* 每出现一个 bug 时：**直观对比各个版本。** 你可以这样向 AI 提示：
+
+  ```
+  Compare version at T–1 to T–0. What changed? What might be breaking?
+  ```
+* 如果你觉得 AI 的改动导致问题太多，可以回退到某个稳定版本。
+* 使用 **GitHub 分支** 时需自行承担风险。在 Lovable 中切回 `main` 分支之前，请避免删除分支，以防出现项目同步问题。
+
+<div id="7-when-all-else-fails-remix">
+  ## 7. 当其他办法都不奏效时，复刻
+</div>
+
+很多用户会发现：第二次从头来过反而更省时间。
+
+* [复刻](https://docs.lovable.dev/user-guides/quickstart#remix-an-existing-project:~:text=you%20to%20reuse-,the,-current%20state%20of) 会在 T=0 创建你项目的一个干净副本。
+* 基于更好的提示和更清晰的理解重新构建
+* 仅将旧项目作为参考
+
+**适用场景：**
+
+* 你陷入了一个反复出现的 bug 循环里
+* 你想在保留历史的前提下重新开始
+* 你需要断开 Supabase 并尝试一条新路径
+
+<Tip>
+  复刻前需要先断开 Supabase。
+</Tip>
+
+<div id="8-stay-patient-stay-calm">
+  ## 8. 保持耐心，保持冷静
+</div>
+
+你并不孤单。AI 有时像魔法一样好用，下一刻又可能让人感到沮丧。任何搭建过程中最后的 5% 往往是最慢的——但也是最重要的。
+
+<Tip>
+  **黄金法则：**
+
+  花时间打磨你的提示。把每一项都重新检查一遍。把工作拆分成小而可测试的模块。你的输入越精确，输出就会越好。
+</Tip>
+
+<div id="9-use-the-docs-and-ask-for-help">
+  ## 9. 使用文档并寻求帮助
+</div>
+
+* [Documentation](https://docs.lovable.dev) 包含操作指南、模板、SEO 优化建议、集成文档等内容。你可以直接向文档中的 AI 助手提问。
+* 加入 [Discord 社区](https://discord.gg/lovable-dev)，获得来自其他用户的支持与交流。
+* 准备就绪后，将你的项目提交到 [Lovable Launch](https://docs.lovable.dev/features/launched)。
+
+<div id="10-bonus-tips">
+  ## 10. 额外技巧
+</div>
+
+* 对于较长的提示，可以通过语音输入添加语音备注提示（例如在 Mac 上，使用麦克风口述长提示）。你可以更快地构思出更优质的输入——在你感到挫败或疲惫时尤其有用。
+* 使用 “`I am frustrated…`” 这种提示模式，让 AI 更聚焦于你的问题
+* 在进行重大编辑之后，一定要重新检查多个角色及其行为（尤其是在包含条件逻辑时）
+* 将稳定版本保存为回退方案，方便快速调试
+* 如果你遇到意外的副作用，这有助于避免由过于泛化的逻辑引发的 bug。
+
+  ```
+  专门为 [role X] 创建一个组件，除非作用域非常清晰，否则不要复用共享组件。
+  ```

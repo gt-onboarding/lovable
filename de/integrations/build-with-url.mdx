@@ -1,0 +1,124 @@
+---
+title: "Lovable API: Build with URL "
+description: "Die Lovable-API-Funktion „Build with URL“ ist jetzt in der offenen Beta verfügbar und ermöglicht dir, Lovable-Apps mit einfachen, teilbaren URLs zu erstellen und zu teilen."
+icon: "window-restore"
+keywords: ['Lovable API', 'API', 'Build with URL API', 'Create apps from URL', 'build with lovable']
+---
+
+Die Lovable-API-Funktion **Build with URL** ermöglicht es dir, Apps programmatisch zu erstellen, indem du Eingabeaufforderungen und Bilder über URL-Parameter übergibst. So kannst du Lovable nahtlos in Websites, interne Tools oder Automatisierungs-Workflows integrieren und Nutzer mit einem einzigen Klick Lovable-Apps generieren lassen.
+
+Jeder Link gibt Lovable vor, *was* gebaut werden soll und optional *welche Bilder verwendet werden sollen* – und Lovable erledigt den Rest.
+
+Beispiel:
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+Wenn du auf diesen Link klickst, öffnet sich Lovable automatisch und beginnt, eine To-do-App zu erstellen.
+
+
+<div id="use-cases">
+  ## Anwendungsfälle
+</div>
+
+Mit der Build with URL API kannst du Folgendes tun:
+
+- Einen **Build with Lovable**‑Button auf deiner Website oder in deiner Anwendung einbinden. Wenn jemand auf den Button klickt, wird die Person zu Lovable weitergeleitet und die App automatisch erstellt.
+- Vordefinierte Eingabeaufforderungen per URL mit Freunden, Kolleg:innen oder in sozialen Medien teilen.
+- Die App‑Generierung als Teil interner Workflows automatisieren.
+- Mithilfe von URLs mit Eingabeaufforderungen und Referenzbildern schnell Prototypen von Apps erstellen.
+
+Du kannst die URL selbst zusammenstellen oder den [Lovable Link Generator](https://lovable.dev/links) verwenden. Unten findest du weitere Informationen.
+
+<div id="base-url">
+  ## Basis-URL
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#
+```
+
+`autosubmit` (boolean): Muss auf `true` gesetzt werden, um die Anfrage automatisch zu verarbeiten
+
+
+<div id="url-with-parameters">
+  ## URL mit Parametern
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#prompt=YOUR_PROMPT_HERE&images=IMAGE_URL_1&images=IMAGE_URL_2
+```
+
+
+<div id="parameters">
+  ### Parameter
+</div>
+
+| Parameter | Typ   | Beschreibung                                                                                                                                                                         | Erforderlich/Optional |
+| --------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- |
+| `prompt`  | string | Text, der die zu erstellende Anwendung beschreibt. Maximal 50.000 Zeichen. Verwende URL-Encoding (zum Beispiel `%20` für Leerzeichen). Sehr lange URLs können aufgrund von Browser- oder Parsing-Einschränkungen fehlschlagen. | Erforderlich          |
+| `images`  | string | Bis zu 10 URL-codierte Bild-URLs als Referenzen. Bild-URLs müssen öffentlich zugänglich sein. Unterstützte Formate: JPEG, PNG, WebP.                                               | Optional              |
+
+<div id="lovable-link-generator">
+  ## Lovable Link Generator
+</div>
+
+Verwende den [Lovable Link Generator](https://lovable.dev/links), um ganz einfach teilbare URLs zu erstellen, die Apps mit deiner gewählten Eingabeaufforderung und deinen Bildern erzeugen.
+
+1. Gib deine Eingabeaufforderung ein, die die zu erstellende Anwendung beschreibt (bis zu 50.000 Zeichen).
+2. Lade bis zu 10 öffentliche Bild-URLs hoch (JPEG, PNG oder WebP).
+3. Kopiere die generierte Lovable-URL und teile sie.
+
+Dieses Tool hilft, URL-Codierungsfehler zu vermeiden und stellt sicher, dass Links korrekt formatiert sind.
+
+<div id="build-with-url-examples">
+  ## Mit URL-Beispielen entwickeln
+</div>
+
+**Grundlegende App-Erstellung**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+**Einzelnes Referenzbild**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg
+```
+
+**Mehrere Referenzbilder**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg&images=https://img.com/2.jpg​
+```
+
+
+<div id="best-practices">
+  ## Best Practices
+</div>
+
+- Halte Eingabeaufforderungen prägnant und auf zentrale Funktionen konzentriert.
+- Verwende klare, beschreibende Sprache für optimale Ergebnisse bei der Generierung.
+- Füge relevante Referenzbilder hinzu, wenn dies hilfreich ist, um den Generierungsprozess zu steuern.
+- Stelle sicher, dass Sonderzeichen in Eingabeaufforderungen und Bild-URLs URL-kodiert sind, um Parsing-Probleme zu vermeiden.
+
+<div id="app-creation-and-authentication-flow-for-shared-urls">
+  ## App-Erstellung und Authentifizierungsablauf für freigegebene URLs
+</div>
+
+Wenn ein Nutzer auf einen **Build with URL**-Link klickt:
+
+- **Angemeldete Nutzer**: wählen den Arbeitsbereich für die Erstellung des Projekts aus, dann startet die App-Erstellung automatisch.
+- **Nicht angemeldete Nutzer**: werden zur Registrierungs-/Anmeldeseite weitergeleitet. Nach erfolgreicher Authentifizierung wählen sie den Arbeitsbereich für die Erstellung des Projekts aus, und dann startet die App-Erstellung automatisch, wobei die ursprüngliche Eingabeaufforderung und die Bilder erhalten bleiben.
+
+<div id="error-handling">
+  ## Fehlerbehandlung
+</div>
+
+Wenn die URL zu lang oder fehlerhaft formatiert ist, kannst du auf Folgendes stoßen:
+
+- Browserfehler „URL zu lang“
+- Unvollständige Auswertung der Parameter
+- Fehler bei der automatischen Übermittlung

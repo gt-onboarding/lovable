@@ -1,0 +1,743 @@
+---
+title: "Journal des modifications"
+description: "Restez au courant des nouvelles fonctionnalités, des améliorations et des corrections de bogues déployées sur Lovable."
+icon: "clock-rotate-left"
+rss: true
+---
+
+<Update label="26 novembre 2025">
+  **Serveurs MCP**
+
+  ![Changelog Connectors 11 18 25 Pn](/images/changelog-connectors-11-18-25.png)
+
+  Connectez Lovable à vos outils de travail : Atlassian (Jira, Confluence), Notion, Linear et n8n. Intégrez directement des PRD, des tickets et des maquettes dans vos projets. Les workflows n8n vous permettent de vous connecter à plus de 400 applications comme Salesforce, Slack et Google Sheets. Les forfaits Business et Enterprise permettent d&#39;ajouter des MCP personnalisés et de contrôler les serveurs disponibles.
+
+  [En savoir plus](https://docs.lovable.dev/integrations/mcp-servers)
+
+  **Vue Design**
+
+  ![Changelog Design View 11 26 25 Pn](/images/changelog-design-view-11-26-25.png)
+
+  La nouvelle vue Design offre un panneau dédié où vous pouvez basculer facilement entre les outils de conception de votre projet. Cela inclut des mises à jour de l&#39;édition visuelle, ainsi que de nouvelles fonctionnalités telles que les thèmes et la génération d&#39;images par IA.
+
+  [En savoir plus](https://docs.lovable.dev/features/design)
+
+  **Thèmes**
+
+  ![Changelog Themes 11 18 25 Pn](/images/changelog-themes-11-18-25.png)
+
+  Définissez vos standards de marque une seule fois : couleurs, typographie, espacement. Appliquez-les à n&#39;importe quel projet. Affichez un aperçu des thèmes avant de les appliquer pour voir leur rendu.
+
+  **Toutes les nouvelles modifications visuelles**
+
+  ![Changelog Visual Edits 18 11 25 Pn](/images/changelog-visual-edits-11-18-25.png)
+
+  Accédez aux modifications visuelles depuis la vue Design ou utilisez le raccourci Modifications visuelles dans la zone de prompt (anciennement Éditions), et effectuez vos modifications directement dans le panneau de gauche. Vous pouvez désormais modifier le texte dans les éléments à contenu mixte, comme les boutons contenant à la fois du texte et des icônes. Sélectionnez et modifiez plusieurs éléments simultanément. Modifiez le texte directement sur la page. Ajustez les marges, l&#39;espacement interne, les bordures, les ombres, les couleurs et les icônes. Mettez à jour les images ou générez-en avec l&#39;IA.
+
+  **Génération d&#39;images par IA dans l&#39;éditeur visuel**
+
+  ![Changelog AI Image Gen 18 11 25 Pn](/images/changelog-AI-image-gen-11-18-25.png)
+
+  Générez des images personnalisées en décrivant ce que vous voulez. Créez des visuels originaux pour vos projets sans quitter Lovable. La génération d&#39;images par IA ne consomme pas de crédits Lovable.
+
+  **Projets privés pour tous**
+
+  Tous les forfaits incluent désormais des projets réservés à l&#39;espace de travail (activés par défaut). Modifiez votre paramètre par défaut dans Paramètres → Confidentialité et sécurité.
+
+  [En savoir plus](https://docs.lovable.dev/features/private-projects)
+
+  **Améliorations de l&#39;intégration Shopify**
+
+  Vous pouvez désormais **connecter votre boutique Shopify existante** à Lovable. Pour des raisons de sécurité, l&#39;adresse e-mail de l&#39;utilisateur Lovable doit correspondre à celle du propriétaire de la boutique Shopify.
+
+  Lors de la création d&#39;une **nouvelle boutique**, vous sélectionnez désormais l&#39;emplacement de la boutique pendant la configuration, et le flux de réclamation a été amélioré avec des états plus clairs. Lorsque la boutique est réclamée, l&#39;utilisateur Lovable qui la réclame devient le propriétaire de la boutique Shopify.
+
+  Mises à jour d&#39;autorisation
+
+  * Seul l’utilisateur qui a connecté une boutique existante ou revendiqué une nouvelle boutique dispose de droits en écriture (création, mise à jour, suppression de produits, variantes et codes de réduction).
+  * Les collaborateurs conservent un accès en lecture seule aux données Shopify (recherche et récupération de produits, variantes et codes de réduction), mais peuvent malgré tout construire entièrement la boutique en ligne.
+
+  **Prise en charge de Gemini 3 Pro et de la génération d&#39;images**
+
+  Lovable AI prend désormais en charge les derniers modèles de Google, notamment Gemini 3 Pro et Nano Banana Pro. Activez Lovable Cloud &amp; AI pour accéder à ces modèles dans vos applications.
+
+  **Expérience de partage et d&#39;invitation améliorée**
+
+  La boîte de dialogue de partage a été repensée pour clarifier qui peut faire quoi dans votre projet. Visibilité améliorée des permissions, aperçu de partage plus visible et concepts de collaboration plus clairs.
+
+  **Améliorations du stockage cloud**
+
+  Gérez votre stockage directement depuis la vue Cloud. Créez des buckets privés ou publics, organisez vos dossiers et importez, renommez, supprimez ou téléchargez des fichiers. Les fichiers des buckets privés sont désormais également visibles dans l&#39;interface.
+
+  **Questions**
+
+  Lorsque votre demande peut être interprétée de plusieurs manières, Lovable peut désormais poser des questions de clarification avant de commencer la construction. Choisissez parmi les options proposées ou ajoutez votre propre réponse pour aider Lovable à comprendre exactement ce que vous recherchez.
+
+  **Hub d&#39;intégrations**
+
+  Le nouvel onglet Intégrations dans les paramètres du projet regroupe Lovable Cloud, Lovable AI, les serveurs MCP, Supabase, Shopify et Stripe.
+
+  **Suggestions de discussion**
+
+  Des invites contextuelles apparaissent dans le chat pour suggérer quoi construire ensuite.
+
+  **Alerte de crédit faible**
+
+  Les utilisateurs des espaces de travail Pro et Business reçoivent désormais une alerte lorsqu&#39;il reste moins de 5 crédits de build, avec un raccourci pour mettre à niveau leur forfait et augmenter leurs crédits mensuels. L&#39;alerte s&#39;affiche au-dessus de la zone de prompt et dans les menus du projet et de l&#39;espace de travail, garantissant que vous ne tombiez jamais à court de crédits en cours de développement.
+
+  **Connexions temporaires pour l&#39;éducation**
+
+  Les enseignants peuvent créer des comptes temporaires pour leurs étudiants sur lovable.dev/login/temp pour une utilisation en classe.
+
+  **Expérience de remixage améliorée**
+
+  Suivez la progression étape par étape lors du remixage de projets. Recevez des messages d&#39;erreur clairs expliquant pourquoi les projets ne peuvent pas être remixés. Le remixage s&#39;exécute en arrière-plan avec une notification persistante, ce qui vous permet de continuer à travailler. Prend désormais en charge le remixage de projets avec des secrets personnalisés.
+
+  **Retours en arrière améliorés et possibilité de modifier et d&#39;annuler vos messages**
+
+  « Restaurer » devient « Revenir en arrière ». Revenez à n&#39;importe quel moment de votre historique de conversation, ou modifiez un message antérieur pour explorer une nouvelle piste. Votre travail d&#39;origine reste dans la conversation et peut être réappliqué à tout moment.
+
+  **URL du projet**
+
+  Les URL de projet ne sont plus générées automatiquement à la création du projet. Définissez votre propre URL de projet unique avant de publier ou laissez Lovable en générer une pour vous automatiquement.
+
+  **Nom d&#39;affichage du projet**
+
+  Lovable génère désormais automatiquement un nom d&#39;affichage plus explicite pour votre projet. Ce nom d&#39;affichage n&#39;est visible que par vous et les membres de votre espace de travail, pas par les visiteurs de votre application publiée. Les noms d&#39;affichage sont uniquement uniques au sein d&#39;un espace de travail, ce qui réduit les problèmes de noms déjà réservés. Vous pouvez toujours renommer votre projet en accédant aux paramètres du projet.
+
+  **Meilleurs messages de commit**
+
+  Les messages de commit décrivent désormais les modifications réellement apportées à votre projet, et non plus seulement ce que vous avez demandé, facilitant ainsi la consultation de l&#39;historique de votre projet.
+
+  **Mise à jour de la navigation**
+
+  Les paramètres de confidentialité et de sécurité ont été déplacés dans un onglet dédié pour en faciliter l&#39;accès.
+
+  **Corrections de bugs :**
+
+  * Correction des erreurs de rechargement de l’Aperçu qui auparavant restaient bloquées sur &quot;Try to fix&quot; jusqu’au rafraîchissement de la page. Le système détecte désormais les erreurs transitoires et les réessaie automatiquement.
+  * La fonction d’import Figma a été retirée en raison de problèmes de qualité. Nous travaillons sur quelque chose de nouveau et d’excitant — restez à l’écoute.
+</Update>
+
+<Update label="Nov 5, 2025">
+  **Intégration Lovable × Shopify**
+
+  ![image](/images/changelog_shopifyxlovable.png)
+
+  Crée une boutique en ligne en discutant avec l’IA. Lovable configure les produits, le panier et le paiement ; quand tu es prêt, récupère la boutique dans Shopify et publie-la. Idéal pour tout, des boutiques de loisirs aux grands catalogues.
+
+  Découvre-la en action avec notre boutique de merch : lovable.dev/merch.
+
+  Bonus : essai Shopify de 30 jours lorsque tu t’inscris via Lovable.
+
+  **Montre à l’agent ce que tu veux dire**
+
+  ![image](/images/changelog_screenshot_capture.png)
+
+  L’agent Lovable comprend désormais mieux ton contexte. Il sait quel onglet tu consultes dans Lovable – que ce soit le Code Editor, le SEO, Analytics, les paramètres Cloud ou les Secrets – afin de te donner des réponses plus pertinentes. Tu peux demander à l’agent de faire une capture d’écran de ton application, ou prendre des captures d’écran de n’importe où sur ton ordinateur directement depuis l’interface de chat.
+
+  **Aie toujours suffisamment de crédits Cloud & IA**\
+  Recharge automatiquement lorsque ton solde passe en dessous de 10 $, tout en gardant le contrôle de tes frais mensuels grâce à un plafond mensuel. Tu peux désormais aussi suivre l’utilisation Cloud & IA pour chaque projet.
+
+  **Meilleure gestion des domaines personnalisés**\
+  Définis un domaine principal pour ton projet, avec les autres domaines personnalisés automatiquement redirigés vers celui-ci. L’ajout d’un nouveau domaine est maintenant plus simple grâce à un parcours plus clair et un accompagnement étape par étape. Nous avons également ajouté une validation de domaine pour vérifier la propriété avant que ton domaine ne soit mis en ligne.
+
+  **Demander l’accès aux projets privés**\
+  En accédant à un projet privé, tu peux demander l’accès au propriétaire du projet. Cela garde le travail privé sécurisé tout en facilitant la collaboration.
+
+  **Publication limitée au workspace (offres Business & Enterprise)**\
+  Les projets publiés peuvent désormais être configurés en accès "workspace-only", ce qui impose une authentification et limite l’accès aux membres de ton espace de travail. Parfait pour créer des outils et applications internes.
+
+  **Notifications de bureau**\
+  Active les notifications de bureau pour savoir quand les builds de longue durée sont terminés. Plus besoin de vérifier constamment si c’est fini.
+
+  **Dissocier un projet de GitHub**\
+  Tu peux désormais dissocier ton projet de GitHub si nécessaire. Utile si tu dois le transférer vers une autre organisation GitHub.
+
+  **Corrections de bogues**
+
+  - Correction d’un problème où les réponses de l’agent apparaissaient d’un seul coup au lieu d’être saisies progressivement.
+  - Réduction du nombre de fenêtres contextuelles que tu vois juste après ton inscription.
+  - Les messages d’erreur apparaissent désormais de manière plus cohérente lorsqu’un problème survient.
+  - Correction des problèmes d’espacement et d’alignement dans l’interface de chat.
+</Update>
+
+<Update label="6 oct. 2025">
+  **Lovable Cloud**
+
+  ![image](/images/lvbl-cloud-logo.png)
+
+  Crée des apps full‑stack sans aucune configuration manuelle de Supabase. Lovable Cloud te fournit des bases de données à la demande, l’authentification des utilisateurs et un stockage qui adapte automatiquement sa capacité à la croissance de ton app.
+
+  Lovable Cloud est disponible pour tous les nouveaux projets, ainsi que pour les projets existants qui ne sont pas intégrés à Supabase. En savoir plus [ici](https://docs.lovable.dev/features/cloud).
+
+  **Lovable AI**
+
+  ![image](/images/lvbl-ai-logo.png)
+
+  Tu peux désormais créer des apps natives en IA dans Lovable, simplement en utilisant des prompts. Nous gérons l’accès aux fournisseurs et les API pour que tu puisses te concentrer sur la construction de ton produit. Jusqu’au 13 octobre, nous proposons gratuitement des fonctionnalités d’IA intégrée, propulsées par Google Gemini.
+
+  Tu peux désormais créer, par exemple :
+
+  - **Clones de ChatGPT spécialisés** — assistants conversationnels adaptés pour le support client, les ventes ou le travail intellectuel.
+  - **Générateurs d’avatars et d’images** — laisse les utilisateurs créer, modifier et personnaliser du contenu visuel.
+  - **Apps de coaching** — accompagnement personnalisé, coaches d’onboarding, apps pour créer de nouvelles habitudes, et bien plus.
+
+  Chaque offre inclut des crédits mensuels gratuits à utiliser pour les fonctionnalités d’IA intégrée. Oui, même les offres gratuites ! Tu trouveras la grille tarifaire complète [ici](https://docs.lovable.dev/features/cloud#usage-based-cloud-and-ai-pricing).
+
+  **Mode vocal**
+
+  Tu peux maintenant parler à Lovable. Nous te proposons une façon plus intuitive et conversationnelle de construire : décris tes idées et tes modifications à voix haute et Lovable les réalise.
+
+  **Transforme tes fichiers en apps**
+
+  ![image](https://lovable.dev/_next/image?url=%2Fcontent%2Fnews%2Fcovers%2Fiboxasset.png&w=1920&q=75)
+
+  Dépose n’importe quel type de fichier dans Lovable pour le transformer en app.
+
+  Par exemple :
+
+  - Sheets → tableaux de bord interactifs
+  - CV → portfolios
+  - Présentations (slides) → présentations personnalisées
+
+  **Sonnet 4.5**
+
+  Le dernier modèle d’Anthropic contribue désormais à propulser tes créations sur Lovable. Attends‑toi à un raisonnement plus solide, des résultats plus cohérents et de meilleures performances sur les modifications en plusieurs étapes et les données structurées.
+
+  **Une expérience de création plus fluide**
+
+  Créer sur Lovable est encore plus fluide : accès plus rapide au Visual Editor, meilleure UX pour les sessions longues, et prise en charge des images dans le Code Editor.
+
+  **Publier et dépublier en toute confiance**
+
+  Mets en ligne en toute confiance. Le processus de publication inclut désormais la modification de l’aperçu du lien avant la mise en production. Tu as fait une erreur ? Dépublie en un clic.
+
+  **Intégration Stripe**
+
+  Nous avons mis à jour notre intégration Stripe avec des parcours de facturation et de paiement plus clairs. Configure toute ta logique Stripe dans le chat en décrivant simplement ce que tu veux construire – aucune configuration manuelle requise.
+
+  **Ressources communautaires mises à jour**
+
+  Notre page Partner et la fonctionnalité Remixer ont toutes deux été améliorées pour te permettre d’étendre ce que tu construis via la communauté. Visite la page Partner pour trouver des agences spécialisées (ou postuler pour y être mis en avant), et utilise Remixer sur tes projets Lovable Cloud préférés pour démarrer plus vite.
+
+  **Meilleure gestion de l’espace de travail**
+
+  Une nouvelle vue unifiée des membres te permet de comprendre l’utilisation et d’agir à l’échelle de ton équipe. Les administrateurs peuvent désormais définir des limites de durée de session, activer le provisionnement juste‑à‑temps (SSO), désactiver la publication et appliquer les paramètres de confidentialité des projets.
+
+  **Corrections de bugs**
+
+  - Correction des problèmes de taille dans le chat qui provoquaient un défilement horizontal
+  - Réduction de 20 % des erreurs de build
+</Update>
+
+<Update label="1 sept. 2025">
+  **Réduction pour étudiants et enseignants disponible**
+
+  Nous facilitons la création pour les étudiants et les enseignants. Désormais, étudiants et enseignants peuvent économiser jusqu’à 50 % sur l’offre Pro, pendant un an maximum. La réduction s’applique si vous partez d’un espace de travail gratuit — vous pouvez donc débloquer toute la puissance de Lovable sans dépasser votre budget. [En savoir plus sur l’offre ici](https://lovable.dev/students).
+
+  **Améliorations de la sécurité**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734639962_security_01K42RPM40HYH5PH5QS40Z6FMY.png)
+
+  La sécurité est notre priorité. Nous avons étendu nos fonctionnalités, politiques et certifications de sécurité, notamment en ajoutant la conformité SOC 2 Type 2 et les certifications ISO 27001:2022. Nous avons aussi recruté un CISO exceptionnel, Igor Andriushchenko – vous pouvez donc nous confier vos idées, vos données et vos clients. Pour en savoir plus sur nos fonctionnalités de sécurité, rendez‑vous [ici](https://lovable.dev/security).
+
+  **Votre nouvelle boîte de réception Lovable**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734786651_inbox_01K42RV3BXGH7MP6MYJ1KHKQH8.png)
+
+  Votre nouvelle boîte de réception personnelle vous aide à suivre les invitations aux projets et aux espaces de travail, et vous pouvez aussi consulter les mises à jour que nous avons récemment déployées — pour rester toujours à jour.
+
+  **Un SEO plus intelligent pour les nouvelles apps** Lorsque vous créez une nouvelle application ou page web, Lovable inclut désormais des instructions SEO basées sur des agents qui respectent encore mieux les bonnes pratiques SEO. Cela aide vos projets à être mieux indexés par les moteurs de recherche et à atteindre les audiences pour lesquelles vous construisez.
+
+  **Rôle de Viewer pour l’espace de travail (Pro+)** Pour les membres Pro+, nous avons introduit un nouveau rôle de Viewer. Les Viewers peuvent voir les métadonnées de l’espace de travail, les projets et les membres, mais ne peuvent pas créer ou modifier des projets ni inviter d’autres personnes. C’est le rôle idéal pour les parties prenantes qui ont besoin de visibilité, sans avoir besoin de modifier les projets.
+
+  **Gestion de formule plus flexible**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734900964_Screenshot%202025-08-28%20at%205.05.18%20pm_01K42RYK0KYRNYETKVWAW22NFR.png)
+
+  Vous pouvez désormais mettre à niveau ou rétrograder votre formule en quelques clics seulement — que vous ayez besoin de plus de crédits ou que vous souhaitiez revenir à la version gratuite.
+
+  **Messages d’erreur plus clairs**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734470366_image%20\(4\)_01K42RHEPDYDCZT5NG96S3TEGY.png)
+
+  Si le LLM interprète mal votre demande, Lovable vous le signale désormais directement. Vous verrez ce qui n’a pas fonctionné pour pouvoir ajuster votre prompt et avancer plus rapidement.
+
+  **Suivez vos modifications et vos séries**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734477303_GyzkRM5bEAAz-_N_01K42RHN8S62MTE2T7KC65JCB3.jpeg)
+
+  Nous avons ajouté un tableau de bord personnel où vous pouvez voir combien de modifications vous avez effectuées dans Lovable et suivre vos séries d’activité. Un excellent moyen de rester motivé et de visualiser vos progrès dans le temps. Vous le trouverez dans vos paramètres de compte.
+</Update>
+
+<Update label="11 août 2025">
+  **Agent Mode est le nouveau mode par défaut**
+
+  Avec cette mise à jour, Lovable devient un véritable partenaire intelligent : il interprète vos demandes, comprend votre base de code, corrige les problèmes, exécute des modifications complexes en plusieurs étapes dans plusieurs fichiers, s’intègre à des outils externes et réduit les erreurs de 91 %, afin que vous puissiez créer des applications plus ambitieuses, plus rapidement et avec moins de friction.
+
+  L’ancien mode (sans agent) sera supprimé le 1er septembre 2025.
+
+  **Analyses en temps réel pour vos applications Lovable**
+
+  Vous vous demandez comment votre application se comporte dans le monde réel ? Vous pouvez maintenant suivre le trafic et l’engagement en direct directement dans Lovable, notamment :
+
+  - Visiteurs : combien de personnes utilisent votre app
+  - Pages vues : quelles pages reçoivent le plus d’attention
+  - Durée de visite : combien de temps les utilisateurs restent
+  - Taux de rebond : quel pourcentage part instantanément
+  - Vues par visite : à quel point les utilisateurs s’engagent en profondeur
+
+  Les données se mettent à jour quasi en temps réel, ce qui vous permet de repérer les tendances, de déboguer des problèmes ou simplement de célébrer vos premiers utilisateurs ! Disponible dès maintenant sous Project Settings → Analytics
+
+  **Changement de tarification à venir pour Chat mode**
+
+  La tarification pour Chat mode passe de 1 crédit par message à une tarification dynamique, qui correspond au modèle de tarification pour Agent Mode. Cela signifie que le coût de chaque message et de chaque réponse est basé sur la complexité du message ; ainsi, certains messages et réponses coûtent moins d’1 crédit, et d’autres, s’ils sont assez complexes, coûtent plus. Ce changement sera déployé pour tous les utilisateurs le 1er septembre 2025.
+
+  **Lovable Business Plan**
+
+  Présentation du Lovable Business Plan, conçu pour les équipes qui ont besoin de plus de contrôle, de confidentialité et de flexibilité. Il inclut tout ce qu’offre Pro, plus de puissantes améliorations :
+
+  - SSO (Single Sign‑On) pour une connexion sécurisée à l’échelle de l’organisation
+  - Projets personnels visibles uniquement par vous
+  - Modèles pour un style cohérent
+  - Formules annuelles désormais disponibles
+
+  Vous pouvez maintenant passer à un abonnement annuel pour n’importe quelle formule payante Lovable. Bénéficiez d’un tarif réduit, simplifiez la facturation et préoccupez‑vous moins des renouvellements mensuels.
+
+  **Visual edits v2**
+
+  Nous avons affiné l’expérience Visual edits après de nombreux retours. Plus réactive, plus précise et plus agréable à utiliser. Il est plus rapide que jamais d’ajuster votre UI, de corriger le texte ou de modifier la mise en page—sans quitter l’aperçu en direct.
+
+  Vous pouvez également accéder aux éléments sélectionnés dans le code lorsque vous utilisez Visual edits, ce qui resserre la boucle entre design et implémentation.
+
+  **Workflow d’invitation aux projets**
+
+  Les utilisateurs invités doivent maintenant accepter ou refuser formellement l’accès à un projet—depuis l’e‑mail comme depuis les liens magiques. Cela évite les membres « en attente » obsolètes et améliore le suivi des collaborateurs.
+
+  **Rechercher dans tous les fichiers de l’éditeur de code**
+
+  Utilisez la recherche de fichiers dans l’éditeur de code pour localiser rapidement du code et ajouter des chemins de fichiers directement dans le chat.
+
+  **Barre de crédits unifiée**
+
+  Nous avons déployé une nouvelle barre de crédits qui regroupe tous les types de crédits dans une vue unique, claire et unifiée—plus besoin de passer d’un affichage à l’autre pour suivre l’usage.
+
+  **Onglet People mis à niveau**
+
+  L’onglet People dans les paramètres de l’espace de travail a été repensé. Il inclut désormais une pagination (20 utilisateurs par page), une recherche et un filtrage par statut de membre—ce qui rend la gestion de grandes équipes beaucoup plus simple.
+
+  **S’adapte à de grands espaces de travail**
+
+  Grâce à des améliorations du backend, nous prenons maintenant en charge d’énormes espaces de travail avec des dizaines de milliers de membres sans problème de performance.
+
+  **Badge de projet publié**
+
+  Nous avons ajouté un petit détail utile : tous les projets publiés affichent désormais un badge « Published » afin qu’il soit plus facile de voir d’un coup d’œil ce qui est en ligne.
+
+  **Corrections de bugs**
+
+  - Correction d’un bug de chargement d’images qui faisait échouer \>1 % des premières générations si l’utilisateur n’était pas connecté.
+  - Empêche les mises à jour redondantes lorsqu’un projet est déjà à jour par rapport à la version déployée.
+  - Vous pouvez maintenant déconnecter un projet de l’ancienne intégration Supabase lors de la déconnexion de l’organisation.
+  - La reconnexion des organisations avec des tokens invalides est désormais fluide.
+</Update>
+
+<Update label="26 juin 2025">
+  **À la une**
+
+  Nous avons rendu la collaboration sur Lovable encore plus accessible en en faisant une fonctionnalité gratuite pour tous les utilisateurs.
+
+  Pour les utilisateurs Free et Pro :
+
+  - La collaboration au sein de l’espace de travail est désormais entièrement gratuite – invite ton équipe et commencez à créer ensemble sans coût supplémentaire.
+  - Débloque la collaboration dans l’espace de travail pour jusqu’à 20 membres sur les offres Free et Pro.
+  - Sur les offres Free, les membres supplémentaires rejoignent en tant qu’éditeurs ; les offres Pro proposent des rôles et permissions d’espace de travail plus granulaires.
+
+  Pour les utilisateurs de l’offre Teams :
+
+  - Nous avons simplifié notre structure tarifaire et t’avons transféré sur l’offre Pro avec des économies significatives :
+    - Tu as été automatiquement transféré de l’offre Teams à l’offre Pro.
+    - Tu paieras désormais 20 % de moins à partir de ton prochain renouvellement.
+    - Tu conserves l’accès à toutes les mêmes fonctionnalités et aux mêmes crédits qu’avant – simplement à un tarif inférieur.
+    - Tous les paramètres de tes projets et espaces de travail restent inchangés.
+
+  **Améliorations**
+
+  - Refonte de l’expérience mobile pour créer des apps et des sites web directement depuis ton téléphone.
+  - Déploiement d’une mise à jour de Visual Edits avec de nouveaux contrôles flottants de type menu combiné positionnés juste à côté des éléments que tu modifies.
+  - Ajout d’une fonctionnalité de recherche de projet avec correspondance approximative par nom – _astuce : renomme tes projets pour les rendre plus faciles à trouver_.
+  - Déploiement des générations initiales full‑stack pour tous les utilisateurs, afin de te permettre de connecter Supabase avant d’effectuer une génération initiale.
+  - Ajout d’une barre de Prompt flottante sur notre page d’accueil qui te permet de saisir un Prompt même lorsque tu as fait défiler la page vers le bas.
+  - Amélioration de la vue d’historique avec une chronologie plus claire mettant l’accent sur les dates, les versions restaurées désormais visibles et une navigation entre les versions simplifiée.
+  - Mise à jour de la page carrières avec les dernières informations. [Découvre-la ici](https://lovable.dev/careers).
+
+  **Corrections de bugs**
+
+  - Correction de l’accès administrateur aux paramètres d’intégration pour les projets des utilisateurs.
+  - Résolution d’un problème où les administrateurs ne pouvaient pas accéder correctement aux espaces de travail, ce qui causait des problèmes d’affichage et de fonctionnement pour les éditeurs lors de la visite de projets d’équipe.
+  - Correction d’un problème de redirection d’iframe qui provoquait des redirections indésirables dans l’app Lovable.
+</Update>
+
+<Update label="4 juin 2025">
+  **À la une**
+
+  - Meilleure découvrabilité des projets avec de nouvelles options de filtrage pour trouver et gérer facilement tes projets.
+  - Ajout d’une catégorisation des projets de la communauté pour faciliter la découverte des projets créés par la communauté.
+
+  **Améliorations**
+
+  - Chat mode affiche désormais les diagrammes Mermaid pour t’aider à visualiser la logique et la structure back‑end de ton app (demande‑lui de créer un schéma pour déclencher cette fonctionnalité).
+  - Configuration automatique des URL de redirection pour l’intégration Supabase Auth – plus besoin de configuration manuelle pour une mise en place de l’authentification plus fluide.
+  - Ajout d’un système de feedback directement dans le produit – clique sur le bouton pouce vers le bas lorsque des modifications causent des problèmes afin de nous aider à améliorer l’IA de Lovable pour tout le monde.
+  - Introduction de rappels intelligents pour te guider vers Chat Mode lors du débogage de problèmes qui nécessitent une aide conversationnelle.
+  - L’historique des modifications affiche désormais des aperçus sous forme de captures d’écran au survol, te permettant de voir rapidement à quoi ressemblait ton app à différentes étapes sans ouvrir chaque version.
+
+  **Sécurité**
+
+  - Ajout d’une détection de clé API dans le chat qui t’avertit avant de partager accidentellement des informations sensibles comme des Secrets.
+  - Déploiement d’une fonctionnalité de « Security review » alimentée par l’IA pour aider à identifier les vulnérabilités potentielles dans tes apps. Déclenche‑la avant de publier ton app via la fenêtre de publication.
+</Update>
+
+<Update label="24 mai 2025">
+  **À la une**
+
+  - Claude 4 est désormais utilisé dans Lovable ! Il alimente la plupart des Prompts, à la fois pour la création de projet et pour les modifications sur tous les projets (y compris les anciens projets). Cela devrait permettre à Lovable de réduire les erreurs de 25 % et d’être globalement 40 % plus rapide.
+
+  **Améliorations**
+
+  - Refonte du flux de configuration pour GitHub et Supabase, avec une simplification de l’onboarding en plusieurs étapes pour réduire la confusion.
+  - Ajout de labels visuels aux projets mis en avant sur la page d’accueil pour une meilleure découvrabilité.
+  - Ajout de la possibilité de supprimer des domaines personnalisés de ton app Lovable.
+  - Plusieurs améliorations de la gestion des collaborateurs :
+    - Ajout d’une validation au formulaire d’invitation par email dans l’onglet People
+    - Les info‑bulles expliquent désormais les permissions de chaque rôle (admin / owner / editor)
+    - Tu peux maintenant voir le rôle des invitations en attente
+    - De meilleurs messages d’erreur pour les cas limites comme l’invitation de quelqu’un déjà présent dans l’espace de travail
+  - Les messages de commit s’appuient désormais davantage sur l’historique de conversation pour un meilleur contexte.
+  - Amélioration de la qualité de la diffusion en continu : expérience plus fluide et plus de texte clignotant.
+  - Les utilisateurs peuvent désormais consulter les projets Lovable publics sans être connectés.
+  - Les cartes de modification actives sont maintenant mises en surbrillance pour qu’il soit plus facile de voir laquelle est active.
+  - Le bouton par défaut “Edit Code” ouvre désormais l’aperçu au lieu du code brut.
+
+  **Corrections de bugs**
+
+  - Correction de bugs qui faisaient parfois apparaître un mauvais aperçu en direct.
+  - Correction d’un bug où l’actualisation de l’aperçu pouvait modifier le chemin actuel.
+  - Correction d’un bug qui provoquait des boucles de redirection infinies lors du lancement d’un aperçu en direct après connexion.
+</Update>
+
+<Update label="May 9, 2025">
+  **À la une**
+
+  - Nous avons ajouté la prise en charge du transfert de projets entre espaces de travail !
+  - Lovable comprend désormais mieux les images — que vous téléchargiez une référence de design ou une véritable ressource de site, il fait la différence et les gère en conséquence
+
+  **Corrections de bugs**
+
+  - Correction de problèmes où les projets publiés et les liens d’aperçu déployés ne reflétaient pas la dernière version
+  - Les paramètres de visibilité des projets sont de retour dans les espaces de travail d’équipe, mais restent pour l’instant désactivés
+  - Correction de problèmes où les propriétaires d’espaces de travail ne pouvaient pas modifier les projets créés par des non‑propriétaires dans les espaces de travail d’équipe
+  - Correction d’un problème où le « bouton de rétrogradation » dans la page de facturation renvoyait vers la mauvaise page Stripe
+  - Correction d’un problème où certains utilisateurs ne voyaient pas leur formule après être passés à une formule supérieure
+</Update>
+
+<Update label="May 2, 2025">
+  **Améliorations**
+
+  - Amélioration du suivi des crédits en indiquant explicitement lorsque vous avez atteint le plafond mensuel de 30 crédits et en précisant clairement quand vos crédits quotidiens et mensuels seront renouvelés
+  - Il est désormais possible d’inviter des personnes qui ne sont pas encore utilisatrices à rejoindre les espaces de travail d’équipe
+  - Refonte des fenêtres modales d’erreur pour afficher des messages plus utiles (par exemple, problèmes de jeton Supabase), au lieu de simplement « Request failed »
+  - Mise à jour des onglets Paramètres (Projects, Knowledge, Domains) avec le nouveau design
+
+  **Corrections de bugs**
+
+  - Correction de problèmes où les crédits n’étaient pas actualisés, sauf lors de l’actualisation de la page
+  - Correction d’un problème où Lovable ne parvenait pas à récupérer les journaux de Fonctions Edge
+  - Correction d’un problème qui faisait échouer le changement de branche GitHub si vous aviez renommé le dépôt
+  - Correction d’un bug qui empêchait les utilisateurs d’appliquer certaines migrations SQL
+  - Correction d’un problème d’affichage sur la page de tarification mobile
+  - Correction d’un problème qui empêchait le renommage des projets
+  - Correction de problèmes où le compteur de projets sur la page d’accueil n’affichait pas le bon nombre
+  - Correction de problèmes entraînant une boucle de reconnexion à Supabase
+  - Correction de problèmes où les modifications effectuées en Dev Mode n’étaient pas enregistrées
+  - Correction de problèmes où l’indicateur « Working… » n’apparaissait pas pour les collaborateurs
+</Update>
+
+<Update label="Apr 25, 2025" description="Lovable 2.0">
+  Nous sommes très heureux de lancer **Lovable 2.0** ! Cette version est axée sur la collaboration, la sécurité et un meilleur contrôle pour vous.
+
+  ![Lovable Two Point Zero Pn](/images/lovable-two-point-zero.png)
+
+  - Nous avons changé d’identité visuelle ! Nouveau logo, couleurs plus vives et une interface bien plus épurée. Allez voir ça ci‑dessous — nous espérons que ça vous donnera l’impression d’un vrai « glow‑up ».
+  - [Teams](https://docs.lovable.dev/user-guides/teams) : la collaboration en temps réel est enfin là ! Invitez d’autres personnes à co‑éditer des apps ou à créer des espaces de travail d’équipe partagés.
+  - [**Tarification simplifiée**](https://docs.lovable.dev/user-guides/messaging-limits#free-vs-paid-plans-comparison) avec deux options claires : Pro à partir de 25 $/mois et Teams à partir de 30 $/mois.
+  - **Security Scan :** Lovable recherche désormais des vulnérabilités lorsque vous publiez (si vous êtes connecté à Supabase). Ce n’est que le début de notre travail pour rendre le « vibe coding » plus sûr par défaut.
+  - Lorsque vous essayez de revenir à une modification antérieure après laquelle vous avez exécuté une migration, Lovable vous indiquera que la base de données ne sera pas rétablie.
+  - Vous l’avez demandé, nous l’avons fait. [Chat mode](https://docs.lovable.dev/features/modes#2-chat-mode) est désormais _bien_ plus intelligent et **reste disponible** pour tout le monde. Il ne fait pas de modifications, mais il _peut_ vous aider à raisonner sur des problèmes, planifier des fonctionnalités, inspecter des journaux, interroger des bases de données, et plus encore. Considérez‑le comme votre binôme de programmation intelligent, mais qui ne touche pas au code.
+
+  C’est une grande avancée — et nous ne faisons que commencer.
+
+  Merci beaucoup de faire partie de cette aventure avec nous.
+</Update>
+
+<Update label="Apr 17, 2025">
+  - Nous avons déployé des améliorations de fiabilité pour GitHub. Nous devrions maintenant pouvoir synchroniser avec GitHub même lorsque le jeton utilisateur est invalide.
+  - Nous avons déployé quelques correctifs pour les aperçus obsolètes.
+  - Lors du transfert de dépôts, les organisations/utilisateurs suspendus seront signalés comme tels. En cliquant dessus, vous serez redirigé vers la page permettant de les réactiver.
+</Update>
+
+<Update label="11 avr. 2025">
+  - Vous pouvez désormais acheter un domaine directement depuis les paramètres de votre projet — cliquez simplement sur « Buy a domain », recherchez ce que vous voulez et finalisez le paiement en quelques clics. Nous nous sommes associés à IONOS pour rendre cela possible. En savoir plus [ici](http://email.lovable.dev/e/c/eyJlbWFpbF9pZCI6ImRnVG1qZ29EQUotUVZKNlFWQUdXRzVfR2VPdTVlSEVGMnU1Wk5hbz0iLCJocmVmIjoiaHR0cHM6Ly94LmNvbS9sb3ZhYmxlX2Rldi9zdGF0dXMvMTkwOTYzMzY1NjQ0MTc4NjYwOCIsImludGVybmFsIjoiZTY4ZTBhMmRhZWRkMDE5ZjkwNTQiLCJsaW5rX2lkIjoyMDk2fQ/de4d0c380fdfac4a4accea202b7884c14b49d33fc1c0ca808b5a4ebc9e6540fe).
+  - La mise à jour des favicons est désormais plus simple à configurer directement dans Lovable.
+  - Le chargement des projets plus volumineux devrait maintenant être beaucoup plus rapide, car tous les messages ne sont plus chargés à l’ouverture du projet. Les messages supplémentaires ne sont chargés que lorsqu’un utilisateur fait défiler vers le haut.
+  - Cliquer sur le bouton Supabase (affiché lors de la première génération) ouvre désormais le panneau de paramètres. Nous avons également ajouté un petit encart « What is Supabase? » pour les nouveaux utilisateurs, avec un lien vers notre documentation et nos tutoriels.
+</Update>
+
+<Update label="4 avr. 2025">
+  - **Nouvelle interface utilisateur :** Mise à jour de la barre de navigation de l’éditeur, qui déplace le menu déroulant des pages et les boutons associés de l’en-tête du panneau d’aperçu vers la barre de navigation.
+  - Refactorisation de la création de diff, qui gère désormais plusieurs modifications sur un même fichier.
+  - Mise à niveau de l’[intégration Stripe](https://docs.lovable.dev/tips-tricks/setting-up-payments).
+  - Nouveau défilement du chat : les nouveaux messages utilisateur sont déplacés en haut de la zone d’affichage au lieu de faire défiler automatiquement pendant que le texte est généré.
+  - Lovable dispose maintenant du Dev Mode. Activer le Dev Mode vous permet non seulement de lire le code de votre projet, mais aussi de l’éditer directement dans Lovable. En savoir plus à ce sujet [ici](http://email.lovable.dev/e/c/eyJlbWFpbF9pZCI6ImRnVG1qZ29EQUotUVZKNlFWQUdXRzVfR2VPdTVlSEVGMnU1Wk5hbz0iLCJocmVmIjoiaHR0cHM6Ly94LmNvbS9sb3ZhYmxlX2Rldi9zdGF0dXMvMTkwNzgxNjU2Nzk0NzA5NjM0MSIsImludGVybmFsIjoiZTY4ZTBhMmRhZWRkMDE5ZjkwNTQiLCJsaW5rX2lkIjoyMDk1fQ/c876becf4f48a97a1c3fd592a50e2bb9bcb03651afcb81988c68b031dc617425).
+  - Correction de l’intégration Supabase, où l’IA créait le fichier `config.toml` dans les mauvais dossiers.
+  - Correction permettant de fermer à nouveau les modifications visuelles avec le bouton `x`, et le raccourci clavier `alt+s` fonctionne de nouveau dans l’aperçu.
+</Update>
+
+<Update label="28 mars 2025">
+  - [Linkable.site](https://linkable.site/) : Transformez votre profil LinkedIn en site web personnalisé.
+  - Vous vous demandez si quelque chose est en panne ? Vous pouvez maintenant consulter notre page de statut pour des mises à jour en temps réel. Découvrez-la [ici](http://email.lovable.dev/e/c/eyJlbWFpbF9pZCI6ImRnVG1qZ29EQUotUVZKNlFWQUdXRzVfR2VPdTVlSEVGMnU1Wk5hbz0iLCJocmVmIjoiaHR0cHM6Ly9zdGF0dXMubG92YWJsZS5kZXYvIiwiaW50ZXJuYWwiOiJlNjhlMGEyZGFlZGQwMTlmOTA1NCIsImxpbmtfaWQiOjIwOTd9/727d92f8476ca681a08a3e2849ba1e6f28522466839aba17c98f79ab56a89035).
+  - Nous avons déployé un correctif pour que le bouton Try to Fix s’affiche lorsque l’écran devient blanc.
+  - Correction d’un bug où seul le premier journal de fonction Edge était récupéré.
+  - Correction d’un bug causant des requêtes infinies lors de la navigation vers la page de profil.
+  - Correction d’un panic causé par des écritures concurrentes dans une map dans le service d’expérimentation.
+  - Réduction par 4 des occurrences de messages où nous mélangeons `lov-sql` et `lov-code`.
+  - Correction d’un bug où les paramètres Labs n’étaient pas enregistrés.
+  - Les aperçus sont de nouveau en ligne. Merci de nous signaler si vos domaines ne fonctionnent pas.
+  - Correction d’un bug où seul le premier journal de fonction Edge était récupéré.
+  - Nous avons apporté quelques améliorations et corrections majeures à Supabase, en particulier sur la façon d’invoquer les fonctions Edge.
+  - Les fonctions Supabase sont maintenant déployées lorsqu’elles sont mises à jour dans l’éditeur de code. De plus, les fonctions Supabase sont mises à jour en direct dans l’éditeur de code lorsqu’elles sont modifiées par l’IA.
+</Update>
+
+<Update label="21 mars 2025">
+  Nous avons entendu les problèmes que vous avez partagés avec nous et nous travaillons dur pour tous les corriger. Voici ce que nous avons mis en production cette semaine pour améliorer la fiabilité du produit :
+
+  - Correction d’un bug où l’IA créait de nouvelles fonctions Edge au lieu de corriger celles existantes.
+  - Les paramètres des [Labs Features](https://docs.lovable.dev/features/labs) sont maintenant enregistrés dans votre compte utilisateur au lieu du stockage local, ce qui garantit qu’ils persistent entre les appareils.
+  - Le compteur de crédits mensuels se trouve désormais dans le menu des paramètres pour un accès rapide.
+  - Correction d’un bug qui faisait que la fenêtre d’aperçu en direct se désynchronisait après des modifications par l’IA.
+  - Correction de problèmes de persistance de session d’authentification Supabase.
+  - Réécriture complète des backends de domaines personnalisés. Le système devrait maintenant être plus stable, plus rapide, auto-réparateur et prendre en charge les domaines Unicode.
+  - _Connect custom domain_ comme action dans la boîte de dialogue de publication pour les utilisateurs qui n’ont pas encore connecté de domaines à leur projet.
+  - Chat mode est plus rapide que jamais, avec correction du bug où il s’arrêtait parfois.
+  - Ajout d’une icône Supabase pour les projets connectés dans la carte de projet, cliquable pour vos propres projets afin de vous amener au tableau de bord Supabase.
+  - Prise en charge complète du référencement (SEO) et des images Open Graph afin que les liens (par ex. sur X) affichent désormais des aperçus de carte corrects.
+  - Mise à jour de l’interface pour clarifier que les connexions Supabase se font au niveau de l’organisation.
+  - Mise en production de correctifs de fuite de mémoire pour empêcher les pannes du backend pendant les requêtes utilisateur, y compris lors de longues exécutions initiales.
+  - Mise en production d’extensions continues de verrouillage de projet et de pings de l’environnement sandbox pour prendre en charge les requêtes de longue durée sans interruption prématurée.
+</Update>
+
+<Update label="14 mars 2025">
+  - Nous avons apporté quelques améliororations à la disposition des paramètres de projet de Lovable pour une expérience plus intuitive. Vous pouvez désormais trouver les paramètres de projet dans le coin supérieur gauche de la page de votre projet pour un accès plus rapide et une meilleure navigation. [Voici les nouveautés](https://discord.com/channels/1119885301872070706/1120705825317593149/1350101727768084491).
+  - Présentation des [domaines personnalisés](https://docs.lovable.dev/tips-tricks/custom-domain) dans Lovable.
+  - Annonce du [Lovable Build Competition](https://build-launch-win.lovable.app/) doté de 10 000 \$ avec Lovable, Anthropic, Supabase et Sentri.
+  - Gagnant pour le meilleur design de site web : prix en espèces de 3 000 \$. [Tweet ici](https://x.com/lovable_dev/status/1900574280011731167).
+</Update>
+
+<Update label="7 mars 2025">
+  - [Présentation de Versioning 2.0](https://x.com/lovable_dev/status/1896637541618778574), qui permet d’ajouter des favoris, de restaurer plus facilement et d’améliorer la vue de l’historique.
+  - [Dev Mode :](https://x.com/lovable_dev/status/1897693825767768542) modifiez facilement n’importe quel code de votre projet directement dans Lovable. Tous les utilisateurs payants peuvent activer le Dev Mode dans les paramètres.
+  - Correction d’un **bogue de streaming de Chat Mode.**
+  - Résolution des **erreurs de serveur internes** en mode par défaut.
+  - Correction des **principales régressions** introduites avec [Sonnet 3.7](https://lovable.dev/blog/anthropic-sonnet-3-7-lovable-diff-viewer).
+  - Correction des **erreurs de syntaxe SQL.**
+  - Résolution des **problèmes liés au mélange des migrations et de la gestion des secrets** dans une seule modification.
+</Update>
+
+<Update label="28 février 2025" description="Visionneuse de code">
+  - Sonnet 3.7 nous a impressionnés par ses capacités en matière de code et de design. Tous les utilisateurs de Lovable utilisent désormais Sonnet 3.7 pour le flux de travail principal, ce qui signifie que Lovable est plus intelligent que jamais.
+  - [Présentation de la visionneuse de code dans Lovable](https://x.com/lovable_dev/status/1895500151889768596) : vous pouvez maintenant afficher le code de votre projet Lovable. Comme auparavant, vous pouvez également apporter des modifications au code des projets Lovable via GitHub.
+  - Plus besoin d’envoyer des demandes au support client en demandant « _Pourquoi mon projet est-il cassé_ ». Nous affichons maintenant les vrais messages d’erreur dans la boîte de dialogue d’erreur, afin de vous aider à corriger le problème vous‑même.
+  - Correction d’un bogue où des utilisateurs signalaient un retour en arrière de la version de leur projet en raison de la connexion à Supabase.
+  - Le mode « _Edit_ » se ferme automatiquement après la modification d’un élément.
+</Update>
+
+<Update label="21 février 2025">
+  - [Améliorations des modifications visuelles](https://x.com/lovable_dev/status/1892249059718484100), incluant la modification de l’épaisseur des polices, de l’alignement et le redimensionnement des images.
+  - Correction de problèmes de syntaxe Supabase pour une intégration plus fluide et moins d’erreurs lors du déploiement.
+  - Résolution d’un problème où certains utilisateurs étaient redirigés de façon inattendue vers la page d’accueil.
+  - Se connecter à des API et à des sources de données externes peut être délicat. Nous avons simplifié cela. Lovable lit désormais directement les journaux réseau et les utilise comme contexte pour déboguer et implémenter plus efficacement les intégrations tierces. Plus de fenêtres d’erreur intempestives : Lovable utilise maintenant des informations réseau en temps réel pour vous aider à corriger les problèmes plus rapidement et à continuer à développer.
+  - Correction de problèmes avec les derniers commits récupérés, garantissant une synchronisation de projet précise et à jour.
+  - Vous ne resterez plus bloqué sur `saving changes...` pour les messages qui produisent du code sans aboutir à un commit (par exemple lorsque l’IA essaie de modifier un fichier sans permission ou qu’aucun changement n’a été effectué).
+</Update>
+
+<Update label="12 février 2025" description="Modifications visuelles">
+  - [Présentation des modifications visuelles.](https://lovable.dev/blog/introducing-visual-edits)
+  - [Intégration Supabase 2.0.](https://lovable.dev/blog/lovable-supabase-integration-second-version)
+  - Le journal des modifications est maintenant publié ici dans la documentation plutôt qu’à des endroits dispersés.
+  - Documentation améliorée avec de nouvelles intégrations, un guide des Prompts et des guides utilisateur.
+  - Hackathon Lovable mondial. [Postulez ici](https://lu.ma/1dl5m906).
+  - Capacité accrue pour les appels LLM, réduisant le risque de dépassement de limites de débit en cours de traitement.
+  - Les déploiements d’aperçu et les déploiements de production des applications fonctionnent à nouveau.
+  - Résolution d’un problème où les utilisateurs étaient redirigés vers la page d’accueil en entrant dans un projet.
+  - Correction d’une incohérence lors de la récupération du dernier commit due à des dépôts mal configurés utilisant à la fois S3 et GitHub.
+  - Correction d’échecs lors des remixes et des transferts pour les projets avec un remplacement personnalisé de la branche principale.
+  - Résolution d’un conflit de nom de journalisation Python qui causait occasionnellement des erreurs.
+  - Correction du problème où l’outil de sélection et d’édition manquait pour les nouveaux projets.
+  - De magnifiques boutons de retour en arrière
+</Update>
+
+<Update label="7 févr. 2025" description="Migration vers Go">
+  - Chat mode devient plus intelligent et sera désormais pris en compte dans votre limite de messages.
+  - Découvrez [Hire a Lovable Partner](https://lovable.dev/blog/introducing-hire-a-lovable-partner).
+  - [From Python to Go](https://lovable.dev/blog/from-python-to-go) pour une meilleure stabilité, une plateforme plus réactive et des déploiements de fonctionnalités plus rapides.
+  - Lancement de [Lovable Launched](https://lovable.dev/blog/2025-01-30-how-to-launch-and-get-traffic-to-an-app-built-with-lovable), qui vous permet de publier votre application pour la présenter à des utilisateurs.
+  - [Cloudflare R2](https://www.cloudflarestatus.com/) a connu une panne, mais le service est de nouveau opérationnel.
+  - [Lovable support 2.0](https://lovable.dev/support) est disponible et pleinement opérationnel.
+</Update>
+
+<Update label="28 janv. 2025" description="Figma vers Lovable">
+  - Figma vers Lovable : transformez vos maquettes en code avec Builder.io.
+  - Meilleure visibilité des retours en arrière (reverts).
+  - Le support pour Replicate s’est amélioré.
+  - Le support pour Resend s’est amélioré avec la transition vers le SDK Node.
+  - Lors de la création de parcours d’inscription et de connexion, Lovable génère des interfaces d’authentification personnalisées adaptées à votre application.
+  - La gestion des rôles dans une application alimentée par Supabase est désormais plus fiable.
+  - Lovable prend désormais en charge la création d’applications s’appuyant sur Realtime OpenAI avec RTC.
+</Update>
+
+<Update label="18 janv. 2025">
+  - Problèmes DNS de lovable.app résolus.
+  - Les problèmes de Sandbox sont résolus et le service est à nouveau pleinement opérationnel.
+  - Problème de connexion à Supabase résolu, il vous suffit de cliquer sur « Add another organization ».
+</Update>
+
+<Update label="6 janv. 2025">
+  - [Panne de l’intégration GitHub](https://lovable.dev/news/github-incident-2025-01-02).
+  - Nouvelle section Labs, accessible via Paramètres -&gt; Paramètres du compte -&gt; Labs.
+  - Visitez [notre page de support](https://lovable.dev/support) pour obtenir de l’aide, signaler des problèmes ou en savoir plus sur l’utilisation de Lovable.
+  - Meilleure prise en charge du scraping et des graphes de nœuds avec Firecrawl et React Flow.
+  - Le badge « Edit with Lovable » est activé pour tous les utilisateurs.
+  - « Select-to-Edit » se trouve désormais directement dans le champ de composition du chat.
+  - Série en direct à venir en 5 parties pour créer et lancer un tuteur d’espagnol propulsé par l’IA.
+  - Week-end illimité !
+</Update>
+
+<Update label="11 déc. 2024">
+  - Limites de messages personnalisables sur l’offre Scale.
+  - « Ask the AI to fix » ne sera pas pris en compte dans vos limites d’utilisation. 
+  - Mettez en avant vos créations dans le « Hall of Fame ».
+  - Intégrez Stripe, Three.js, p5.js, Resend et Fabric.js.
+  - [Christmas Hackathon](https://hackathon.lovable.app/submit) pour gagner plus de 3 000 $ en prix.
+  - Problèmes avec notre fournisseur cloud résolus.
+</Update>
+
+<Update label="3 déc. 2024" description="Lovable 1.0">
+  - **Templates** : créez plus vite avec des modèles prédéfinis.
+  - Lancement de [feedback.lovable.dev](http://feedback.lovable.dev/) pour les demandes de fonctionnalités et d’intégrations.
+  - Ajout de la sidebar shadcn et prise en charge des applications 3D avec three.js. 
+  - Vous pouvez désormais suivre vos messages restants en visitant votre [page des paramètres](https://lovable.dev/settings).
+  - Lovable n’introduira plus de refactorisations automatiquement.
+  - Ajout de la prise en charge du nouveau [composant de sidebar shadcn](https://ui.shadcn.com/docs/components/sidebar).
+  - Amélioration de la stabilité de la liste déroulante des pages.
+  - Ajout d’une nouvelle [FAQ](https://docs.lovable.dev/faq) et d’un [tutoriel E2E](https://docs.lovable.dev/user-guides/quickstart) pour accompagner les utilisateurs.
+  - Problèmes avec notre fournisseur cloud résolus.
+  - Lorsque vous envoyez une requête de chat, nous vérifions que toutes les dépendances du projet sont à jour.
+</Update>
+
+<Update label="11 nov. 2024">
+  - Effectuez des modifications précises avec la fonctionnalité de sélection.
+  - Passez au full-stack avec notre intégration Supabase améliorée.
+  - 10× moins d’erreurs.
+  - Mises à jour de la tarification. Consultez notre page de tarification pour plus de détails.
+</Update>
+
+<Update label="2 oct. 2024">
+  - Meilleure gestion des versions.
+  - Performances multipliées par 12 sur les grands projets.
+  - Seuil abaissé à partir duquel nous nous appuyons sur le RAG.
+  - GPT Engineer est désormais moins enclin à générer du code immédiatement.
+  - Correction d’un bug où GPT Engineer n’arrivait pas à installer les dépendances.
+  - La documentation de GPT Engineer est désormais open source.
+</Update>
+
+<Update label="23 sept. 2024">
+  - Changement de branche pour plus de contrôle.
+  - Onglet Projets populaires pour l’inspiration.
+  - Amélioration de la détection des erreurs réseau.
+  - Meilleure gestion du contexte pour les grands projets.
+  - Meilleure prise en charge de la « paresse » de l’IA.
+</Update>
+
+<Update label="9 sept. 2024">
+  - Vous pouvez désormais partager l’URL de votre profil.
+  - Vous pouvez désormais ajouter des connaissances personnalisées à votre projet.
+  - Badge « Edit with GPT Engineer » supprimé pour les utilisateurs PRO.
+  - Le Prompt a été mis à jour pour réduire la « paresse » de l’IA.
+  - Résolution de problèmes où l’intégration Supabase pouvait se bloquer.
+</Update>
+
+<Update label="20 août 2024">
+  - Nous avons considérablement amélioré l’expérience d’édition.
+  - À chaque modification, un indicateur de chargement apparaît désormais dans le chat.
+  - Nous avons mis à jour notre tarification. Les utilisateurs gratuits disposent maintenant de 10 modifications gratuites par jour.
+  - Introduction des profils utilisateurs, qui permettent de définir votre nom d’utilisateur et votre localisation.
+  - Renommez votre projet en allant dans Settings -&gt; Rename Project.
+  - Tous les projets GitHub seront désormais privés par défaut.
+</Update>
+
+<Update label="17 juil. 2024">
+  - Refonte de la façon dont nous affichons les cartes pour unifier les indicateurs de progression.
+  - Vous pouvez maintenant stopper toute tâche active s’exécutant en arrière-plan.
+  - Shadcn est désormais le système de design par défaut pour les nouveaux projets.
+</Update>
+
+<Update label="5 juin 2024">
+  - Refonte complète du design de la page d’accueil et de l’éditeur.
+  - Mise en place et test d’un flux plus orienté agent.
+  - Nouveau menu déroulant de sélection de page.
+  - Joignez des images à vos invites.
+  - Installe automatiquement les packages NPM.
+</Update>
+
+<Update label="26 mars 2024">
+  - Créez un frontend qui fonctionnera avec des services backend existants.
+  - Introduction de la prise en charge de stacks techniques supplémentaires comme Tailwind, le simple HTML et Daisy UI.
+  - Nouvelle intégration du modèle Claude 3 Haiku.
+  - Ajout d’une page 404 personnalisée pour les instances.
+  - Plus de conseils de dépannage dans la fenêtre modale affichée en cas d’erreur.
+</Update>
+
+<Update label="13 mars 2024">
+  - Amélioration du style des cartes d’édition.
+  - Générez des projets avec le nouveau modèle de base Claude 3 Opus.
+  - Expérience utilisateur simplifiée lors du transfert de projets GitHub.
+  - Correction des projets pouvant être revendiqués afin qu’ils soient effectivement revendicables.
+</Update>
+
+<Update label="1 mars 2024">
+  - Les nouveaux projets incluent désormais un fichier de configuration gpt-engineer.toml.
+  - IA rendue plus stable lorsqu’elle doit effectuer de nombreux changements de code similaires.
+  - Réduction du nombre de commentaires dans le code généré, améliorant ainsi la fiabilité.
+  - Correction du bouton « Connect to GitHub ».
+  - GPT Engineer fonctionne désormais avec les projets privés GitHub.
+  - Correction d’un problème où les utilisateurs étaient parfois déconnectés inutilement.
+</Update>
+
+<Update label="13 févr. 2024">
+  - Transférez les projets vers votre propre compte GitHub !
+  - Ajout de .
+  - Correction d’un problème où la sortie de l’étape de correction de bug était affichée sous « Planning ».
+</Update>
+
+<Update label="18 janv. 2024">
+  - Ajout de l’action « Revert to this version » pour faciliter le retour à une modification antérieure.
+  - Correction d’un problème où l’IA remplaçait parfois le code par un commentaire.
+  - Lorsqu’un projet est supprimé, le dépôt GitLab correspondant est désormais également supprimé.
+</Update>
+
+<Update label="15 janv. 2024" description="GPT Engineer">
+  - Synchronisation des commits Git poussés par les développeurs avec l’éditeur.
+  - Réduction du nombre de commentaires dans le code généré, améliorant ainsi la fiabilité.
+  - Correction du problème où le plan/résumé était inaccessible depuis l’UI en cas d’erreur.
+</Update>

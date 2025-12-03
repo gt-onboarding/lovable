@@ -1,0 +1,76 @@
+---
+title: "Utiliser des polices personnalisées (Google)"
+description: "Découvrez comment utiliser des polices sûres pour le web et Google Fonts dans vos Projets Lovable"
+icon: "font"
+---
+
+Actuellement, Lovable ne prend pas en charge le téléversement direct de polices personnalisées. 
+
+Cependant, il existe plusieurs moyens simples d’utiliser des polices sûres pour le web ou d’incorporer des polices personnalisées dans vos Projets. Ci‑dessous, nous vous guidons à travers les méthodes disponibles pour **utiliser des polices sûres pour le web** et **Google Fonts** :
+
+<AccordionGroup>
+  <Accordion title="Utiliser une police sûre pour le web">
+    <Info>
+      **Que sont les polices sûres pour le web ?**
+
+      Les polices sûres pour le web sont des polices couramment installées sur la plupart des systèmes d’exploitation (Windows, macOS, Linux, etc.) et visibles sur tous les appareils.
+
+      Ces polices garantissent que votre texte a le même rendu sur différents navigateurs et plateformes sans avoir besoin de charger des ressources externes. Parmi les polices sûres pour le web les plus courantes, on trouve :
+
+      - Arial/Helvetica
+      - Times New Roman
+      - Georgia
+      - Courier New
+      - Verdana
+      - Tahoma
+      - Trebuchet MS
+      - Lucida Sans Unicode
+    </Info>
+    Si vous voulez utiliser une police sûre pour le web dans votre Projet, vous pouvez spécifier la police directement dans votre Prompt. Par exemple, si vous voulez utiliser **Courier New** pour un titre ou un en‑tête dans la section hero, faites simplement référence à la police par son nom dans votre Prompt.
+
+    ```text
+    Utilise Courier New comme police de titre dans la section hero pour le titre principal.
+    ```
+
+    Les polices sûres pour le web comme Courier New garantissent que votre Projet aura une typographie cohérente sur toutes les plateformes sans nécessiter de ressources externes pour charger la police. Cependant, elles peuvent limiter votre créativité. Heureusement, il existe des options comme la possibilité d’utiliser Google Fonts.
+  </Accordion>
+  <Accordion title="Utiliser Google Fonts">
+    Si vous préférez utiliser des polices personnalisées, Lovable fonctionne très bien avec **Google Fonts**. Cela vous permet d’utiliser facilement un large éventail de polices dans votre Projet. Vous pouvez soit référencer une police Google par son nom, soit ajouter un lien direct vers la ressource de la police.
+
+    ### Utilisation par nom
+
+    Dans votre Prompt, vous pouvez spécifier le nom d’une police Google, et Lovable l’inclura dans votre Projet. Par exemple :
+
+    ```text
+    Utilise Playfair Display comme première police de sous-titre dans la section hero. 
+    
+    Assure-toi d'utiliser le hook React useEffect pour appliquer correctement la police.
+    ```
+
+    ### Utilisation par lien
+
+    Vous pouvez également fournir un lien direct vers la police Google, et Lovable utilisera cette police dans votre Projet. Vous pouvez obtenir le lien depuis [Google Fonts](https://fonts.google.com) en sélectionnant la police souhaitée et en copiant le lien.
+
+    Voici comment créer un Prompt demandant à Lovable d’utiliser une police Google via un lien :
+
+    ```text
+    Ajoute ce lien de police Google https://fonts.google.com/specimen/Dancing+Script 
+    et utilise cette police pour le troisième sous-titre.
+    
+    Assure-toi de charger la police en utilisant le hook React useEffect.
+    ```
+
+    En suivant ces méthodes, vous pouvez personnaliser la typographie de votre Projet Lovable en utilisant soit des polices sûres pour le web, soit Google Fonts.
+
+    ## Pour aller plus loin et voir des exemples
+
+    Pour voir ces méthodes d’intégration de polices en action, vous pouvez explorer l’un de nos Projets d’exemple : [Lovable using fonts example project](https://lovable.dev/projects/3a826f38-d9cb-4d60-b4da-30a9b00149c8).
+
+    Dans ce Projet, vous trouverez de vraies invites montrant comment nous avons appliqué différents styles de polices, y compris des polices sûres pour le web comme Courier New et des polices personnalisées depuis Google Fonts.
+
+    <Frame>
+      ![Différentes polices utilisées dans un Projet Lovable](/assets/using-custom-fonts-example.png)
+    </Frame>
+    De plus, pour un aperçu plus technique de la façon dont les polices ont été intégrées, consultez ce dépôt public : [GitHub: adding-fonts-example](https://github.com/viborc/adding-fonts-example). Il inclut tous les détails d’implémentation, montrant comment diverses polices ont été chargées et appliquées dans le Projet.
+  </Accordion>
+</AccordionGroup>

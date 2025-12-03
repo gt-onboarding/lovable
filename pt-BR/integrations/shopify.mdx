@@ -1,0 +1,184 @@
+---
+title: "Crie uma loja de e-commerce com Shopify"
+sidebarTitle: "Integração com Shopify"
+description: "Use Lovable + Shopify para criar e lançar novas lojas online do zero, com facilidade"
+icon: "shopify"
+keywords: ["Shopify","integração com Shopify","loja Shopify","plataforma de e-commerce","ecommerce","construtor de lojas com IA","configuração de loja online","shopify integration\"","Shopify sandbox","gerenciar loja","reivindicar loja","lançar loja"]
+---
+
+![Shopify Jp](/images/shopify.jpg)
+
+De produtos físicos a downloads digitais, o Lovable ajuda você a criar, personalizar e iterar sua nova loja usando linguagem natural, enquanto o Shopify cuida de pagamentos, estoque e logística quando sua loja for ao ar.
+
+<div id="use-cases">
+  ## Casos de uso
+</div>
+
+Com Lovable + Shopify, você pode criar e lançar lojas virtuais de verdade para:
+
+- **Produtos físicos**: vender roupas, gadgets, acessórios ou itens para casa
+- **Produtos digitais**: oferecer e-books, cursos, músicas ou downloads de software
+- **Marcas de nicho**: criar rapidamente lojas para produtos de edição limitada, produtos locais, dropshipping ou projetos paralelos
+- **Pequenas empresas**: divulgar padarias, cafeterias ou negócios artesanais e aceitar pedidos online
+- **Testar novas ideias de produto**: adicionar alguns produtos e avaliar o desempenho antes da produção em larga escala
+- **Expansão de negócios**: introduzir novas coleções, campanhas sazonais ou pacotes usando apenas um Prompt de IA
+
+<div id="before-you-begin">
+  ## Antes de começar
+</div>
+
+Antes de começar a criar sua loja de e-commerce com **Lovable + Shopify**, aqui estão alguns pontos importantes que você precisa saber:
+
+- **Apenas para novas lojas Shopify**\
+  A integração Lovable + Shopify foi criada para que você possa criar e lançar **apenas novas lojas Shopify**. Lojas existentes não podem ser conectadas nem gerenciadas por meio dessa integração.
+- **Loja sandbox - sem custo Shopify**\
+  O Lovable cria automaticamente uma loja sandbox para que você possa criar e experimentar com segurança, sem **nenhum custo do Shopify**. Esse ambiente é ideal para configuração e testes, mas **não processará pagamentos reais**.
+- **Reivindicando sua loja**\
+  Quando você estiver pronto para lançar sua loja, será necessário **reivindicar sua loja**. Isso migra a loja para a sua conta Shopify e inicia um **período de teste gratuito de 30 dias do Shopify**. No Shopify, você precisa ativar os pagamentos e concluir a configuração da loja para começar a aceitar pagamentos reais dos seus clientes.
+- **Assinatura Shopify obrigatória**\
+  Após o período de teste gratuito, você precisará de um **plano pago do Shopify** para continuar vendendo produtos online. Essa assinatura é gerenciada **diretamente pelo Shopify** e é **separada dos preços do Lovable**.
+- **Conformidade com a política de avaliações do Shopify**\
+  Antes de publicar sua loja, verifique se todas as avaliações são **autênticas, imparciais e estão em conformidade com** a [**Política de Avaliações do Shopify**](https://help.shopify.com/en/partners/help-support/faq/reviews).
+
+<div id="enabling-the-shopify-integration">
+  ## Ativando a integração com o Shopify
+</div>
+
+Por padrão, a integração com o Shopify é ativada para a sua área de trabalho. Você pode gerenciar o comportamento da integração com o Shopify e as configurações do Shopify relacionadas aos seus projetos nas suas preferências de usuário: **Settings → Integrations → Shopify → User preferences.**
+
+<div id="user-preferences">
+  ### Preferências do usuário
+</div>
+
+A configuração padrão para a integração com Shopify é **Ask each time**, o que significa que você decide se deseja ativar ou desativar a integração com Shopify para cada Projeto. Você pode alterar sua preferência a qualquer momento em **Settings → Integrations → Shopify → User preferences.**
+
+Lovable notifica você quando uma integração com Shopify é necessária. Você tem três opções:
+
+- **Allow**: ativa a integração para o Projeto atual.
+- **Decline**: recusa a integração para esta solicitação (essa solicitação pode ser feita novamente mais tarde).
+- **Adjust preferences**: altera o comportamento padrão para Projetos futuros (não afeta o Projeto atual).
+
+<div id="shopify-integration-flow">
+  ## Fluxo de integração com Shopify
+</div>
+
+Você pode começar com:
+
+- Criar um novo projeto.
+- Remixar um projeto existente, consulte os [templates Lovable + Shopify](https://lovable.dev/shopify).
+
+<div id="1-create-your-store">
+  ### 1. Crie sua loja
+</div>
+
+**Ao criar um novo projeto do zero**, diga ao Lovable que tipo de loja você quer criar e **especifique Shopify**.
+
+> Crie uma loja de e-commerce **com Shopify** para vender velas aromáticas artesanais.
+
+**Ao remixar um projeto existente**, peça ao Lovable, com um Prompt de IA, para integrar o Shopify e remover os dados de exemplo (mock). É importante usar um Prompt de IA bom e abrangente. Por exemplo:
+
+> Eu gostaria de substituir os produtos desta loja pelos meus próprios produtos e criar minha loja Shopify. Por favor, faça o seguinte:
+>
+> 1. Conectar ao Shopify.
+> 2. Remover todos os dados de produtos de exemplo da loja e criar X novos produtos com imagens de produto.
+> 3. Atualizar os cards de produto e a página de detalhes do produto para usar as novas informações de produto.
+> 4. Atualizar a URL da página de detalhes do produto para corresponder ao novo produto.
+> 5. Atualizar o componente de adicionar à lista de desejos e sua lógica para refletir essa alteração.
+> 6. Atualizar meu carrinho, o CTA de comprar agora e quaisquer ações de checkout relacionadas em qualquer página para refletir a integração com a loja Shopify.
+
+Lovable solicitará que você **ative a conexão com o Shopify** — basta clicar em **Allow**. Sua loja sandbox estará pronta para configuração.
+
+<div id="2-add-products-and-product-images">
+  ### 2. Adicione produtos e imagens de produtos
+</div>
+
+Comece adicionando produtos com **nome, descrição e preço**. Por exemplo:
+
+> Adicione um produto chamado _Lavender Breeze Candle_, descrição: "Uma vela de soja artesanal e calmante, infundida com óleos essenciais de lavanda", preço: $25.
+
+Você pode editar os detalhes depois. Se o seu produto não aparecer, use o seguinte Prompt de IA:
+
+> Exiba os produtos no site.
+
+Em seguida, melhore as listagens com imagens usando qualquer uma das opções abaixo. Sempre use imagens representativas.
+
+**Gerar imagens com IA**
+
+> Adicione uma imagem gerada por IA ao produto _Lavender Breeze Candle_.
+
+**Fazer upload ou anexar sua própria imagem**
+
+> Adicione a imagem em anexo ao produto _Lavender Breeze Candle_.
+
+**Adicionar imagem a partir de URL**
+
+> Adicione a imagem a partir de uma URL ao produto _Lavender Breeze Candle_.
+
+<div id="3-manage-your-store">
+  ### 3. Gerencie sua loja
+</div>
+
+Gerencie seus produtos e aperfeiçoe sua loja sem sair do Lovable. Por exemplo, você pode pedir ao Lovable que:
+
+- Atualize nomes, descrições ou preços de produtos
+- Remova produtos
+- Exiba todos os produtos
+- Adicione um recurso de filtragem de produtos e crie coleções com base em diferentes categorias
+- Adicione um recurso de avaliação de produtos e permita avaliações apenas em compras verificadas
+- Adicione códigos de desconto percentuais ou de valor fixo (USD) e inclua o período de validade
+- Adicione um recurso de lista de desejos e a possibilidade de compartilhar a lista de desejos
+
+> Atualize o preço de _Lavender Breeze Candle_ para _\$28_.\
+> Altere a descrição de _Vanilla Bean Candle_ para destacar o pavio de madeira. \
+> Remova o produto _Cinnamon Spice Candle_.\
+> Exiba todos os produtos.\
+> Crie um sistema de avaliação de produtos e permita avaliações apenas em compras verificadas.\
+> Crie um código de desconto de 15% para o produto _Lavender Breeze Candle_. O código deve ser LAVANDER15 e válido até o final de novembro de 2025. \
+> Permita que eu adicione produtos à lista de desejos e que eu possa compartilhá-la.
+
+<div id="4-claim-your-store">
+  ### 4. Reivindique sua loja
+</div>
+
+Quando estiver pronto para reivindicar e lançar sua loja, prepare-se para desbloquear a loja e configurar e ativar os pagamentos, concluindo o processo de KYC (Know Your Customer). Isso pode levar algum tempo.
+
+1. Digite "Claim the store". O Lovable solicitará que você reivindique a loja. Clique em **Claim**. Isso abrirá o Shopify em uma nova guia, onde você poderá fazer login e concluir o processo de reivindicação. Você também pode receber um convite por e-mail para reivindicar sua loja.
+2. Aceite o link **Claim store** do Shopify. Isso leva você de volta ao seu Projeto no Lovable.
+4. Acesse o Shopify Admin para concluir a configuração da sua loja e ativar os pagamentos, para que você possa começar a vender. Consulte [Shopify payments](https://help.shopify.com/en/manual/payments/shopify-payments/onboarding) para mais informações.
+
+Quando você reivindica sua loja, o Shopify atribui um domínio permanente para ela — não se preocupe, esse é apenas o backend. **A URL real da sua loja será o seu lovable.app ou o seu domínio personalizado.**
+
+<Warning>
+  Só reivindique sua loja quando estiver totalmente pronto para o lançamento, pois você precisará de uma assinatura paga do Shopify após o período de teste gratuito de 30 dias para continuar vendendo produtos online.
+</Warning>
+
+<div id="5-launch-your-store">
+  ### 5. Lance sua loja
+</div>
+
+Depois de reivindicar sua loja e concluir a configuração, publique seu projeto Lovable e compartilhe sua loja com o mundo!
+
+A qualquer momento, diretamente do Lovable, você pode:
+
+- Criar, atualizar e excluir produtos
+- Gerenciar preços e descrições
+- Lançar novas coleções, promoções ou kits
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="Adicionei meus produtos a um projeto remixado, mas o link para a página do produto não está funcionando. Como faço para corrigir isso?">
+    Sem problemas – nosso agente ainda está aprendendo sobre sua nova loja e você só precisa enviar um Prompt de IA uma vez para resolver isso de vez! Envie um Prompt de IA pedindo para o agente fazer o seguinte:
+
+    > Please update the product URL logic to ensure that all new and future products in the store correctly display their respective product detail pages.
+
+    Isso deve garantir que você não tenha problemas no futuro. Para quaisquer outros problemas, clicar no botão “Try to Fix” enviará um Prompt de IA para o agente analisar e resolver. 
+  </Accordion>
+  <Accordion title="Ainda estou vendo alguns produtos fictícios no meu projeto remixado, como posso removê-los?">
+    Envie um Prompt de IA pedindo para o agente atualizar as páginas onde você viu esses produtos, por exemplo:
+
+    > Clear the store from any existing products across all pages except for those that I added to my Shopify store.
+  </Accordion>
+</AccordionGroup>

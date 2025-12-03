@@ -1,0 +1,229 @@
+---
+title: "Stripe 集成"
+description: "如何在你的应用中使用我们的 Stripe 集成来设置支付"
+icon: "credit-card"
+---
+
+![在 Lovable 中集成 Stripe](/images/lovable-stripe.webp)
+
+Lovable 现在支持你直接通过 **聊天** 完成 Stripe 的完整配置。
+
+**基于聊天的自动配置（推荐）**\
+在你连接好 **Supabase** 并通过 **Add API Key** 保存你的 **Stripe Secret Key** 之后，只需要用文字描述你的需求：
+
+- “Add three subscription tiers …”
+- “Create a one‑time checkout for my e‑book at \$29”\
+  Lovable 会自动生成结账/客户门户边缘函数、带有 RLS 的数据库表，以及 UI 按钮——除非你特别要求，否则无需手动编写代码或配置 webhooks。
+
+<Note>
+  - 对于**单次售卖**，请确保你的购物车或产品页面已经可以正常使用。
+  - 对于**订阅**，请确认已经启用 Supabase Auth，以便 Lovable 可以将 Stripe 顾客关联到每个用户的 **id**
+</Note>
+
+<div id="key-takeaways">
+  ### 关键要点
+</div>
+
+- 对订阅和一次性支付都使用**聊天驱动的流程**。
+- **切勿在聊天中粘贴你的 Stripe Secret Key 密钥。** 请通过聊天内的 **Add API Key** 表单进行配置。
+- **Webhooks 需主动启用。** 除非你请求 Webhooks，Lovable 会依赖通过边缘函数进行轮询。
+- 在 **Browser Console → Network/Errors**、**Supabase → Edge Functions → Logs** 和 **Stripe Dashboard → Logs** 中进行调试。
+- 始终在 **Stripe Test Mode** 中进行测试，然后再部署。
+
+<div id="requirements">
+  ## 前置条件
+</div>
+
+在集成 Stripe 之前，请确保已满足以下条件：
+
+- 项目**必须**已连接到 Supabase。[了解更多关于 Supabase](https://docs.lovable.dev/integrations/supabase)
+- 一个已正确配置好产品的 **Stripe 账户**。
+- 一个可正常工作的 **前端和后端**：
+  - 对于单个产品销售，请确保购物车和结账页面可正常使用。
+  - 对于订阅，请设置登录功能以及不同的价格方案。
+
+<Note>
+  **请注意**
+  Stripe 集成在预览环境中无法使用。要测试集成，请先部署项目。进行功能测试时，还要确保在 Stripe 中处于测试模式。测试支付时，可以使用卡号：4242 4242 4242 4242，任意 3 位数字作为 CVC，以及任意未来日期作为到期日，该卡即可用于测试支付。
+</Note>
+
+<div id="stripe-payment-setup-nocode-chat-flow">
+  ## Stripe 支付设置（无代码聊天流程）
+</div>
+
+Lovable 现在会为你生成所有 Stripe 相关逻辑。只要通过聊天中的 **Add API Key** 表单配置好你的 **Stripe Secret Key**，并让你的项目**连接到 Supabase**，然后直接在聊天里告诉 Lovable 你的需求即可——不再需要手动创建 Payment Links。
+
+<Steps>
+  <Step title="步骤 1">
+    **准备你的项目**
+
+    - 已连接 Supabase
+    - 已通过聊天中的 **Add API Key** 表单添加 Stripe Secret Key
+    - （可选）准备好价格或产品 ID
+  </Step>
+  <Step title="步骤 2">
+    示例：
+
+    - 为我的「Digital Course」创建一次性结账，价格为 \$29
+    - 设置一个每年 \$99 的 Premium 订阅方案，并与每个用户的 id 关联
+  </Step>
+  <Step title="步骤 3">
+    **检查并应用**
+    Lovable 会自动生成 Edge Functions、数据库表和 UI 组件（全部与 Supabase 中用户的 id 关联）。先检查预览，然后点击 **Apply** 进行部署。
+  </Step>
+</Steps>
+
+<Note>
+  - 为了实现安全的基于角色的访问控制，订阅应始终关联到 Supabase 中已认证用户的 `id`。
+</Note>
+
+<div id="advanced-integration-webhooks-supabase">
+  ## 高级集成：Webhooks 与 Supabase
+</div>
+
+对于 **订阅和基于角色的访问** 等复杂的支付结构，Lovable 建议使用 **Supabase** 来安全处理与 Stripe 的集成。这样可以基于不同的付费档位，正确处理 webhook、管理订阅并实现基于角色的访问控制。
+
+<Note>
+  处理用户账户所需更改的 Edge Function 会由 AI 自动为你完成设置。
+</Note>
+
+<Steps>
+  <Step title="将 Supabase 连接到你的项目">
+    入门非常简单。Lovable 通过内置原生集成，让你轻松连接 Supabase：
+
+    1. 点击 Lovable 右上角的 **Supabase 按钮**。
+    2. 按照指引将你的项目关联到 Supabase。
+    3. 连接完成后，Supabase 将支持安全支付处理、订阅管理、webhook 处理、客户数据存储以及错误处理。
+  </Step>
+  <Step title="安全支付处理">
+    首先通过向 Lovable 提示来启动流程：
+
+    <Note>
+      Let's connect Stripe to my project. We will begin with secure payment processing.
+    </Note>
+    Lovable 会生成用于处理支付的必要 SQL 模式（schema）。其中包括用于用户、订阅和支付的数据库表。你可以在应用更改前先审查并自定义这些表，以适配你特定的产品需求。
+  </Step>
+  <Step title="为 Webhooks 实现 Edge Functions">
+    Supabase 中的 **Edge Functions** 是运行在靠近用户位置上的小型高性能无服务器函数，可确保快速响应。它们用于处理 webhook 事件（例如支付确认），然后再更新数据库。
+
+    <Steps>
+      <Step title="Step 1">
+        从 Supabase 的 Edge Function 中**获取 Endpoint URL**。
+      </Step>
+      <Step title="Step 2">
+        **前往 Stripe Dashboard** \> Developers \> Webhooks \> Create an Event Destination。
+
+        ![Stripe API Key](https://lovable.dev/content/news/stripe-api.png)
+      </Step>
+      <Step title="Step 3">
+        **选择与你的项目需求相匹配的 Webhook 事件**：
+
+        - `payment_intent.succeeded`
+        - `payment_intent.payment_failed`
+        - `customer.subscription.created`
+        - `customer.subscription.updated`
+        - `customer.subscription.deleted`
+      </Step>
+      <Step title="Step 4">
+        **输入来自 Supabase 的 Endpoint URL**。
+      </Step>
+      <Step title="Step 5">
+        **复制 Webhook Secret**，并将其安全存储在 **Supabase → Edge Functions → Manage Secrets → Add New Secret** 中。
+
+        <Info>
+          如果不确定该如何命名该机密信息（secret），可以在 **chat mode** 中向 Lovable 咨询。
+        </Info>
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="安全添加 API 密钥">
+    为了安全地集成 Stripe，请避免在聊天中直接分享你的 API 密钥。请按以下步骤操作：
+
+    ![](/images/ConnectLovabletoStripe\(1\).png)
+
+    <Steps>
+      <Step title="Step 1">
+        **前往 Stripe Dashboard** \> Developers \> API Keys。
+      </Step>
+      <Step title="Step 2">
+        **复制 Secret Key**（不要直接粘贴到 Lovable 聊天中）。
+      </Step>
+      <Step title="Step 3">
+        **使用 Lovable 的 “Add API Key” 功能** 安全存储该密钥。
+
+        <Warning>
+          **重要安全警告**
+
+          切勿在 Lovable 聊天中直接粘贴你的 **Secret Key**。要像对待你家门钥匙一样对待它——一旦泄露，其他人可能会获得对你 Stripe 账户的未经授权访问。请改用 Lovable 的 API 密钥功能安全地存储它。
+        </Warning>
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="测试你的集成">
+    - **使用 Stripe 的 Test Mode** 来安全地测试支付。
+    - **测试卡信息**：
+      - 卡号：`4242 4242 4242 4242`
+      - 任意未来的有效期
+      - 任意 3 位数 CVC
+    - **部署你的应用**——Stripe 集成在预览模式下不起作用。
+  </Step>
+</Steps>
+
+<div id="debugging-troubleshooting">
+  ## 调试与故障排查
+</div>
+
+<AccordionGroup>
+  <Accordion title="检查控制台日志">
+    <Steps>
+      <Step title="步骤 1">
+        打开 **开发者工具**（在 Chrome 中右键 \> 检查 Inspect \> Console）。
+      </Step>
+      <Step title="步骤 2">
+        查找错误并查看 webhook 事件日志。
+      </Step>
+      <Step title="步骤 3">
+        复制错误信息，并向 Lovable 请求调试协助。
+      </Step>
+    </Steps>
+  </Accordion>
+  <Accordion title="查看 Supabase 日志">
+    <Steps>
+      <Step title="步骤 1">
+        前往 **Supabase Dashboard**
+      </Step>
+      <Step title="步骤 2">
+        打开 Edge Functions
+      </Step>
+      <Step title="步骤 3">
+        查看日志，检查是否存在 webhook 错误。
+      </Step>
+    </Steps>
+  </Accordion>
+  <Accordion title="在 Stripe 中验证 Webhook 事件">
+    <Steps>
+      <Step title="步骤 1">
+        进入 **Stripe Dashboard**
+      </Step>
+      <Step title="步骤 2">
+        打开 Webhook 日志
+      </Step>
+      <Step title="步骤 3">
+        确认 Stripe 是否正确发送数据。
+      </Step>
+    </Steps>
+  </Accordion>
+  <Accordion title="使用 Lovable Chat Mode">
+    <Steps>
+      <Step title="步骤 1">
+        切换到 **chat mode**，并向 Lovable 提问。
+      </Step>
+      <Step title="步骤 2">
+        持续向 Lovable 提出跟进问题。
+      </Step>
+      <Step title="步骤 3">
+        使用 **Rubber Duck Method（橡皮鸭调试法）**，一步一步讲述你的问题，以帮助厘清问题。
+      </Step>
+    </Steps>
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,383 @@
+---
+title: "Éviter les pièges de sécurité"
+description: "Lors de la création et de la publication d'applications avec Lovable"
+icon: "lock"
+---
+
+<Note>
+  **N&#39;oubliez pas de corriger les problèmes signalés par le Security Checker**
+
+  Assurez-vous de résoudre les problèmes relevés par le [Security Checker](#using-lovable-security-checker) intégré à Lovable avant de publier votre application en ligne. Le Security Checker analyse automatiquement votre application et fournit des recommandations précieuses pour améliorer la sécurité.
+</Note>
+
+Même si Lovable AI et des outils comme le Security Checker détectent et préviennent un large éventail de problèmes de sécurité, il n&#39;est pas toujours possible ni réaliste d&#39;identifier ou de résoudre automatiquement tous les problèmes susceptibles d&#39;apparaître une fois qu&#39;une application est mise en ligne sur Internet. Ce guide propose un aperçu plus approfondi du fonctionnement interne des applications Lovable, présente des pratiques de sécurité importantes pour aider les créateurs à protéger les données de leurs clients et explique comment éviter les erreurs courantes.
+
+## Comprendre l&#39;architecture de Lovable
+
+Sauf indication contraire, Lovable génère des applications avec l&#39;architecture suivante :
+
+* **Frontend** : application TypeScript/React
+* **Backend** : Supabase Edge Functions (fonctions serverless)
+* **Database** : Supabase (PostgreSQL avec fonctionnalités en temps réel)
+
+Cette séparation des responsabilités est fondamentale pour garantir la sécurité. Chaque couche a des responsabilités et des considérations de sécurité spécifiques.
+
+<div id="frontend-security-never-trust-client-side-code">
+  ## Sécurité du frontend : ne faites jamais confiance au code côté client
+</div>
+
+### La règle d&#39;or : le code frontend est public
+
+Tout le code React s&#39;exécute dans le navigateur de l&#39;utilisateur et est par nature public. Les utilisateurs peuvent inspecter, modifier ou contourner n&#39;importe quel code frontend. Par conséquent :
+
+* **Ne jamais stocker de Secrets dans le code frontend** - clés API, mots de passe ou configuration sensible
+* **Ne jamais effectuer de validation dans le code frontend** - la validation côté client peut être contournée
+* **Ne jamais faire confiance aux données du frontend** - toujours valider du côté des Edge Functions
+
+<div id="common-frontend-security-mistakes">
+  ### Erreurs de sécurité courantes côté front-end
+</div>
+
+```typescript
+// ❌ INCORRECT - Ne jamais faire ceci
+const API_KEY = "sk-1234567890abcdef"; // Exposé aux utilisateurs
+const validateUser = (userData) => {
+  // La validation côté client peut être contournée
+  return userData.email.includes('@');
+};
+```
+
+La bonne façon de procéder est de demander à Lovable d’ajouter une clé secrète : un formulaire s’ouvrira et la clé sera stockée en toute sécurité dans son propre backend.
+
+#### Exemples d&#39;invites pour valider et renforcer la sécurité du front-end
+
+```
+Ajouter une clé API pour les paiements Stripe de manière sécurisée sans l'exposer dans le code front-end
+```
+
+```
+Déplacez la logique de validation des composants React vers les fonctions Edge pour une meilleure sécurité
+```
+
+```
+Vérifiez le code frontend pour détecter les secrets exposés, les clés API ou les informations sensibles. J'ai une page de paramètres qui affiche les préférences utilisateur et je veux m'assurer qu'aucune donnée sensible n'est visible
+```
+
+```
+Identifier la validation côté client qui devrait être déplacée vers les fonctions Edge backend
+```
+
+Pour découvrir d&#39;autres invites, consultez la [Prompt Library](/fr/prompting/prompting-library) de Lovable.
+
+<div id="backend-security-move-business-logic-to-edge-functions">
+  ## Sécurité du backend : déplacer la logique métier vers les Edge Functions
+</div>
+
+<div id="treat-edge-functions-as-your-api-layer">
+  ### Considérez les Edge Functions comme votre couche d’API
+</div>
+
+Les Supabase Edge Functions doivent regrouper toute votre logique métier, vos validations et vos opérations sensibles :
+
+* **Authentification et autorisation**
+* **Validation et assainissement des données**
+* **Logique métier et workflows**
+* **Intégration avec des services tiers**
+* **Traitement des données sensibles**
+
+<div id="best-practices-for-edge-functions">
+  ### Meilleures pratiques pour les Edge Functions
+</div>
+
+Imaginez les Edge Functions comme les agents de sécurité et les responsables métier de votre application. Elles gèrent tout le travail important qui doit être effectué en toute sécurité, à l’écart des parties exposées au public de votre application.
+
+<div id="what-edge-functions-should-handle">
+  #### Ce que les Edge Functions doivent gérer
+</div>
+
+**Authentification et autorisation des utilisateurs**
+
+* Vérifie toujours que les utilisateurs sont bien ceux qu’ils prétendent être avant de leur permettre d’effectuer des actions
+* Vérifie si les utilisateurs ont les bonnes autorisations pour des opérations spécifiques
+* Ne fais jamais confiance au fait que quelqu’un soit connecté simplement parce qu’il l’affirme
+
+**Validation et nettoyage des données**
+
+* Vérifie toutes les données entrantes pour t’assurer qu’elles sont au bon format
+* Supprime tout contenu potentiellement dangereux des entrées utilisateur
+* Assure-toi que les données respectent tes règles métier avant de les traiter
+
+**Logique métier et workflows**
+
+* Gère des processus métier complexes comme le traitement des commandes, les calculs de paiements ou l’inscription des utilisateurs
+* Gère les relations entre différentes données
+* Coordonne plusieurs étapes dans une seule opération
+
+**Intégration de services externes**
+
+* Se connecte en toute sécurité à des services tiers comme les prestataires de paiement, les fournisseurs d’e-mails ou des API
+* Garde les clés API sensibles et les identifiants en sécurité
+* Gère correctement les erreurs et les délais d’attente
+
+**Traitement des données sensibles**
+
+* Traite des informations personnelles, des données financières ou d’autres contenus sensibles
+* Applique le chiffrement ou d’autres mesures de sécurité lorsque nécessaire
+* Journalise les événements importants pour l’audit de sécurité
+
+<div id="security-benefits-of-edge-functions">
+  #### Avantages en matière de sécurité des Edge Functions
+</div>
+
+**Isolation** : Les Edge Functions s&#39;exécutent dans un environnement sécurisé, séparé de votre front-end, ce qui rend beaucoup plus difficile pour des attaquants d&#39;accéder au code ou aux données sensibles.
+
+**Sécurité centralisée** : Toutes les vérifications de sécurité sont effectuées au même endroit, ce qui facilite la maintenance et la mise à jour des règles de sécurité.
+
+**Aucune exposition côté client** : La logique métier sensible n&#39;atteint jamais le navigateur de l&#39;utilisateur, où elle pourrait être consultée ou modifiée.
+
+**Validation cohérente** : Chaque requête passe par le même processus de validation, garantissant un niveau de sécurité cohérent dans l&#39;ensemble de votre application.
+
+#### Exemple d&#39;invites pour des Edge Functions sécurisées
+
+```
+Créez une fonction Edge pour l'inscription des utilisateurs avec une validation et des contrôles de sécurité appropriés. Les utilisateurs doivent fournir une adresse e-mail, un mot de passe et éventuellement une photo de profil lors de l'inscription
+```
+
+```
+Déplacez la logique de traitement des paiements du frontend vers une Fonction Edge sécurisée. J'ai un composant de checkout qui traite actuellement les paiements Stripe directement dans le navigateur
+```
+
+```
+Créez une fonction Edge pour le téléchargement de fichiers avec validation du type et de la taille. Les utilisateurs peuvent télécharger des photos de profil (max 5 Mo) et des documents (PDF uniquement, max 10 Mo)
+```
+
+```
+Configurez une fonction Edge pour envoyer des e-mails de bienvenue de manière sécurisée lors de l'inscription des utilisateurs. Utilisez l'API du fournisseur pour envoyer des e-mails de bienvenue personnalisés incluant le nom de l'utilisateur et les informations du compte
+```
+
+```
+Implémenter une fonction Edge pour traiter les événements webhook provenant de services externes. Gérer les confirmations de paiement Stripe et mettre à jour le statut des commandes dans la base de données
+```
+
+Pour plus d&#39;invites, consultez la [bibliothèque de Prompts](/fr/prompting/prompting-library) de Lovable.
+
+<div id="database-security-keep-rls-simple-and-start-early">
+  ## Sécurité de la base de données : gardez la RLS simple et mettez-la en place dès le départ
+</div>
+
+<div id="row-level-security-rls-in-lovable">
+  ### Sécurité au niveau des lignes (RLS) dans Lovable
+</div>
+
+Lovable configure automatiquement des politiques de RLS de base pour vos tables, mais vous devez les examiner et les personnaliser en fonction des besoins de sécurité de votre application. Considérez la RLS comme l’ensemble des règles qui déterminent quelles données chaque utilisateur peut consulter et modifier dans votre base de données.
+
+**Un examen précoce est essentiel** : il est beaucoup plus facile d’ajuster les politiques de RLS lorsque votre application est nouvelle que lorsque les utilisateurs ont déjà créé des données.
+
+**La simplicité, c’est la sécurité** : gardez les politiques de RLS simples et centrées sur l’accès aux données, et non sur une logique métier complexe. Les politiques par défaut de Lovable constituent généralement un bon point de départ.
+
+<div id="common-rls-patterns-in-lovable-apps">
+  #### Modèles RLS courants dans les applications Lovable
+</div>
+
+**Protection des données personnelles**
+
+* Les utilisateurs ne doivent voir que leur propre profil, leurs paramètres et leurs données personnelles
+* Modèle par défaut : « Les utilisateurs ne peuvent accéder qu’à leurs propres données »
+
+**Accès par équipe**
+
+* Les membres d’une équipe peuvent voir les données de projet partagées au sein de leur équipe
+* Modèle : « Les utilisateurs peuvent accéder aux données des équipes auxquelles ils appartiennent »
+
+**Contenu public avec propriétaire**
+
+* Contenu public que tout le monde peut lire, mais que seuls les propriétaires peuvent modifier
+* Modèle : « Tout le monde peut lire, seuls les propriétaires peuvent modifier »
+
+**Accès par organisation**
+
+* Les employés d’une entreprise peuvent accéder aux données de l’entreprise
+* Modèle : « Les utilisateurs peuvent accéder aux données de leur organisation »
+
+<div id="reviewing-rls-in-your-lovable-app">
+  #### Vérification de la RLS dans votre application Lovable
+</div>
+
+**Vérifiez vos tables**
+
+* Passez en revue les tables pour lesquelles la RLS est activée
+* Vérifiez que les tables contenant des données sensibles sont protégées
+* Assurez-vous que les tables de données publiques disposent de règles de lecture appropriées
+
+**Testez les modes d&#39;accès**
+
+* Vérifiez que les utilisateurs ne voient que leurs propres données
+* Testez que les données partagées sont accessibles aux bonnes personnes
+* Confirmez que les données publiques sont visibles par tout le monde
+
+**Problèmes courants à surveiller**
+
+* Tables sans RLS activée pour les données sensibles
+* Règles trop permissives qui exposent trop de données
+* Règles manquantes pour les nouvelles tables ou fonctionnalités
+
+<div id="prompt-examples-for-rls-review">
+  #### Exemples de Prompts pour la revue RLS
+</div>
+
+```
+Vérifiez les politiques RLS dans votre application Lovable pour vous assurer que les utilisateurs ne peuvent accéder qu'à leurs propres données et que les données partagées sont correctement protégées
+```
+
+```
+Vérifiez les politiques RLS pour les tables users et posts - les utilisateurs ne doivent voir que leur propre profil mais peuvent lire tous les posts publics
+```
+
+```
+Ajouter des politiques RLS à la table des paramètres pour que les utilisateurs ne puissent accéder qu'à leurs propres paramètres
+```
+
+```
+Corriger l'accès trop permissif - les utilisateurs voient actuellement toutes les publications de tous les utilisateurs, restreindre aux publications personnelles et aux publications publiques uniquement
+```
+
+```
+Configurez RLS pour les tables teams et projects afin que les membres de l'équipe ne voient que les projets de leur propre équipe
+```
+
+```
+Garantir que les utilisateurs n'accèdent qu'aux données de leur propre organisation dans votre application multi-tenant
+```
+
+```
+Auditez les politiques RLS pour détecter les failles de sécurité permettant aux utilisateurs d'accéder à des données non autorisées
+```
+
+```
+Simplifier les politiques RLS complexes tout en préservant la sécurité - les politiques actuelles sont trop compliquées
+```
+
+<div id="quick-rls-checklist">
+  #### Liste de contrôle RLS rapide
+</div>
+
+* Toutes les tables sensibles ont le RLS activé
+* Les utilisateurs ne peuvent accéder qu’à leurs propres données personnelles
+* Les données partagées disposent de contrôles d’accès appropriés
+* Les nouvelles tables se voient automatiquement appliquer des politiques RLS
+* Les politiques sont simples et faciles à comprendre
+
+<div id="authentication-security-keep-logic-server-side">
+  ## Sécurité de l’authentification : conservez la logique côté serveur
+</div>
+
+### La logique d&#39;authentification doit s&#39;exécuter côté serveur
+
+Toutes les décisions d&#39;authentification, la validation des jetons et la vérification des utilisateurs doivent avoir lieu côté serveur, et non dans le navigateur. L&#39;authentification côté client peut être facilement contournée ou manipulée.
+
+**Principes clés :**
+
+* **Ne faites jamais confiance aux vérifications d&#39;authentification côté client** - les utilisateurs peuvent modifier le code du navigateur
+* **Validez les jetons sur le serveur** - vérifiez toujours l&#39;authentification dans les Edge Functions
+* **Gardez la gestion de session côté serveur** - laissez Supabase gérer le stockage sécurisé des sessions
+* **N&#39;exposez jamais les Secrets d&#39;authentification** - les clés API et les jetons ne doivent jamais atteindre le front-end
+
+<div id="secure-authentication-flow">
+  ### Flux d’authentification sécurisé
+</div>
+
+```typescript
+// ❌ INCORRECT - Logique d'authentification côté client
+const isAuthenticated = localStorage.getItem('authToken') !== null;
+if (isAuthenticated) {
+  // Ceci peut être contourné par les utilisateurs
+  showAdminPanel();
+}
+
+// ✅ CORRECT - Validation de l'authentification côté serveur
+// Dans la Fonction Edge :
+const { user } = await supabase.auth.getUser();
+if (!user) {
+  return new Response('Unauthorized', { status: 401 });
+}
+// Poursuivre avec la logique authentifiée
+```
+
+<div id="authentication-best-practices">
+  ### Bonnes pratiques d’authentification
+</div>
+
+**Validation côté serveur :**
+
+* Vérifie toujours l’authentification de l’utilisateur dans les Edge Functions avant de traiter les requêtes
+* Contrôle les autorisations et les rôles utilisateur sur le serveur, pas dans les composants React
+* Valide les jetons de session en les comparant à la base de données ou au service d’authentification
+
+**Gestion côté client :**
+
+* Utilise la gestion de session intégrée de Supabase pour un stockage sécurisé des jetons
+* Affiche l’interface utilisateur en fonction de l’état d’authentification, mais ne prends jamais de décisions de sécurité côté client
+* Redirige vers la page de connexion lorsque les sessions expirent, mais valide d’abord sur le serveur
+
+## Protection de l&#39;espace de travail : sécurisez vos applications internes
+
+<div id="ensure-that-internal-apps-have-visibility-set-to-workspace">
+  ### Assurez-vous que les applications internes ont la visibilité définie sur « Workspace »
+</div>
+
+Pour les applications qui ne doivent pas être accessibles au public :
+
+* **Définissez la visibilité du projet des applications internes sur « Workspace » dans le tableau de bord du projet**
+* **Vérifiez qu&#39;elles ne sont pas publiées sur Internet**
+* **Utilisez une authentification appropriée pour tous les outils internes**
+* **Contrôlez régulièrement l&#39;accès aux applications privées**
+
+<div id="security-best-practices-summary">
+  ## Synthèse des bonnes pratiques de sécurité
+</div>
+
+<div id="development-workflow">
+  ### Flux de développement
+</div>
+
+1. **Commencez par la sécurité** - Mettez en place RLS et l’authentification dès le début
+2. **Utilisez l’outil de contrôle de sécurité** - Exécutez régulièrement l’outil de vérification de sécurité de Lovable
+3. **Suivez les recommandations** - Mettez en œuvre toutes les suggestions de sécurité
+4. **Testez de manière approfondie** - Vérifiez que les mesures de sécurité fonctionnent comme prévu
+5. **Documentez les décisions de sécurité** - Gardez une trace des choix de sécurité et de leur justification
+
+<div id="regular-security-audits">
+  ### Audits de sécurité réguliers
+</div>
+
+* **Examiner les autorisations des fonctions Edge**
+* **Auditer les règles RLS**
+* **Vérifier l’éventuelle exposition de Secrets**
+* **Vérifier les flux d’authentification**
+* **Tester les contrôles d’accès**
+
+<div id="common-security-checklist">
+  ### Liste de contrôle de sécurité standard
+</div>
+
+* Aucun Secrets dans le code du frontend
+* Toute la logique de validation dans les Edge Functions
+* Stratégies RLS mises en œuvre et testées
+* Authentification via des méthodes sécurisées
+* Applications internes correctement protégées
+* Analyseur de sécurité exécuté et recommandations appliquées
+* Revues de sécurité régulières effectuées
+
+<div id="using-lovable-security-checker">
+  ## Utiliser le vérificateur de sécurité Lovable
+</div>
+
+Lovable propose un [vérificateur de sécurité](/fr/features/security#security-scanning-2) intégré pour t’aider à identifier les problèmes de sécurité potentiels :
+
+1. **Lance le vérificateur de sécurité** dans le tableau de bord de ton projet
+2. **Passe en revue toutes les recommandations** avec attention
+3. **Applique les correctifs suggérés** rapidement
+4. **Relance le vérificateur** après avoir effectué les modifications
+5. **Consigne toute exception** avec une justification claire
+
+N’oublie pas : la sécurité n’est pas une tâche ponctuelle, mais un processus continu. Passe régulièrement en revue et mets à jour tes mesures de sécurité au fur et à mesure que ton application évolue.

@@ -1,0 +1,129 @@
+---
+title: "Publique seu app"
+description: "Publique seu app Lovable e compartilhe com o público certo"
+icon: "rocket"
+keywords:
+  [
+    "publicar app Lovable",
+    "publicar app",
+    "publicar site",
+    "publicar projeto",
+    "apps internos",
+    "configurações de acesso ao site",
+    "publicação de app privado",
+    "restringir publicação externa",
+    "publicar app com segurança",
+    "publicar ferramentas internas",
+    "despublicar app",
+    "plano Lovable Business",
+    "plano Lovable Enterprise",
+    "publicar em domínio personalizado",
+    "atualizar app publicado",
+  ]
+---
+
+Publicar transforma seu projeto Lovable em um app web no ar que você pode compartilhar com outras pessoas. O Lovable torna simples publicar seu app na web — seja para compartilhar publicamente ou manter seu app privado dentro da sua área de trabalho.
+
+* **Planos Free e Pro:** Seu site publicado é **público** e acessível para qualquer pessoa com o link. Você não pode restringir o acesso nesses planos, então tenha certeza de que está pronto para compartilhar antes de publicar.
+* **Planos Business e Enterprise:** Você pode **controlar quem pode ver seu app** — qualquer pessoa com o link ou apenas membros autenticados da área de trabalho.
+
+Depois de publicar, você pode atualizar seu app no ar a qualquer momento e conectar um domínio personalizado para uma experiência refinada e alinhada à sua marca.
+
+<div id="website-access-settings-business-and-enterprise-plans">
+  ## Configurações de acesso ao site (planos Business e Enterprise)
+</div>
+
+Nos planos Business e Enterprise, você pode gerenciar quem pode ver apps publicados para manter a privacidade e o controle.
+
+Isso permite que você:
+
+* Crie e compartilhe **apps internos** que continuem privados na sua área de trabalho.
+* Evite que colegas publiquem apps externamente sem intenção.
+* Ofereça suporte à governança e conformidade para organizações que lidam com dados sensíveis.
+
+O acesso pode ser gerenciado tanto no **nível de área de trabalho** quanto no **nível de projeto**.
+
+<div id="workspace-level-setting">
+  ### Configuração em nível de Workspace
+</div>
+
+**Administradores** e **proprietários** da workspace podem definir uma política de acesso padrão para todos os apps publicados.
+
+Vá para **Workspace settings → Privacy &amp; Security → Default website access** e escolha uma das opções a seguir:
+
+* **Anyone with link:** Todos os apps publicados são públicos por padrão e acessíveis a qualquer pessoa.
+* **Workspace members**: Todos os apps publicados são privados por padrão e restritos apenas a membros autenticados da workspace. Isso garante que novos apps permaneçam privados, a menos que sejam explicitamente tornados públicos.
+
+<div id="project-level-setting">
+  ### Configuração no nível do projeto
+</div>
+
+Você pode substituir o padrão da área de trabalho em projetos individuais.
+
+Vá até **Publish** e defina **Who can access?** como:
+
+* **Anyone with link:** Acessível para qualquer pessoa com a URL.
+* **Workspace members:** Restrito a membros da área de trabalho que estejam conectados.
+
+Se você não alterar isso, o projeto herda a configuração padrão da área de trabalho.
+
+<div id="publishing-your-project">
+  ## Publicando seu projeto
+</div>
+
+<Note>
+  Nos planos Business e Enterprise, somente proprietários e administradores da
+  área de trabalho podem publicar projetos.
+</Note>
+
+1. No seu projeto, clique no ícone **Publicar** no canto superior direito.
+2. No modal de **Publicar**, revise e configure:
+   * **Endereço do site**: Por padrão, seu app é publicado em `[project-url-slug].lovable.app`. Você pode editar o `[project-url-slug]` ou adicionar um [domínio personalizado](/pt-BR/features/custom-domain) (disponível em planos pagos).
+   * **Informações do site**: Personalize os metadados do seu app — ícone, título, descrição e imagem de compartilhamento.
+   * Escolha **quem pode acessar** seu app publicado, configurável apenas nos planos Business e Enterprise:
+     * **Qualquer pessoa com o link**
+     * **Membros da área de trabalho**
+3. Clique em **Revisar segurança** para identificar possíveis vulnerabilidades de segurança antes de entrar no ar.
+
+<Danger>
+  Sempre faça uma revisão de segurança antes de publicar. Isso ajuda a
+  identificar vulnerabilidades que podem expor dados sensíveis ou permitir
+  acesso não autorizado. Saiba mais em [Segurança](/pt-BR/features/security).
+</Danger>
+
+4. Quando estiver pronto, clique em **Publicar**.\
+   Quando a publicação for concluída, você receberá um pop-up com o link publicado.
+
+Você pode continuar aprimorando seu app — quando estiver pronto para publicar atualizações, clique em **Atualizar** no modal de **Publicar**.
+
+<div id="faq">
+  ## Perguntas frequentes
+</div>
+
+<AccordionGroup>
+  <Accordion title="Por que não consigo publicar meu site?">
+    Se você receber um erro ao publicar seu site, é muito provável que haja um erro de build que não apareceu na interface, fazendo com que a versão atual do seu site não funcione. Tente solucionar o problema pedindo para o Lovable Agent investigá-lo.
+  </Accordion>
+
+  <Accordion title="Por que não consigo ver minhas alterações na versão publicada do meu site?">
+    As alterações não são enviadas automaticamente para o seu app publicado. Para publicar atualizações, clique em **Publicar** e depois em **Update**.
+  </Accordion>
+
+  <Accordion title="Posso alterar meu link publicado (URL do site)?">
+    Sim. Você pode alterar o slug de URL do seu projeto, que forma o endereço do seu site [lovable.app](http://lovable.app), de duas maneiras:
+
+    1. Clique em **Publicar**, edite o endereço do seu site e clique em **Update**.
+    2. Vá em **Project settings → Edit URL Slug**, altere o slug de URL e clique em **Update URL Slug**. 
+
+    Observe que renomear o projeto não altera a URL do projeto; isso muda apenas o nome de exibição do projeto.
+  </Accordion>
+
+  <Accordion title="Posso despublicar meu Projeto?">
+    Sim. Você pode despublicar seu projeto de duas maneiras:
+
+    1. Vá em **Project settings** e clique em **Unpublish project**.
+    2. Clique em **Publicar**, expanda a seção **Advanced** e clique em **Unpublish**.
+
+    Depois de despublicado, ninguém mais poderá acessar seu app.
+  </Accordion>
+</AccordionGroup>

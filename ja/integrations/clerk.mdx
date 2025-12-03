@@ -1,0 +1,432 @@
+---
+title: "Clerk の統合"
+description: "Lovable アプリに Clerk を統合する方法を解説します"
+icon: "people-arrows"
+---
+
+<div id="why-clerk">
+  ## なぜ Clerk なのか？
+</div>
+
+![What Is Clerk Pn](/images/what-is-clerk.png)
+
+[Clerk](https://clerk.com) は、認証とユーザー管理を代わりに処理してくれるので、ゼロから実装する必要がありません。いくつかのプロンプトと設定手順を踏むだけで、次のような機能がすぐに利用できます：
+
+- セキュアなサインイン & サインアップ（ソーシャル、パスワード、MFA）
+- 組み込み UI コンポーネント：ユーザープロフィール、組織管理、ユーザーなり替わり（impersonation）
+- B2B アプリ向けのサポート（チーム、ロール、招待）
+- Supabase、Stripe（近日対応予定）などとの連携
+- 早期アクセスを管理するウェイトリストモード
+- 充実した無料枠：10K MAUs（月間アクティブユーザー 1 万人）
+
+<div id="step-by-step-integration-guide">
+  ## ステップごとの連携ガイド
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/tyAsNwu_xCI?si=VHCGf2IlFRQzVLeD" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+手順は次のとおりです。
+
+<Steps>
+  <Step title="Clerk アプリのセットアップ" stepNumber="1">
+    <Steps>
+      <Step title="ステップ 1">
+        Clerk アカウントを作成 → [Clerk.com](https://clerk.com)
+      </Step>
+
+      <Step title="ステップ 2">
+        Clerk のダッシュボードで新しいアプリを作成します
+
+        <Steps>
+          <Step title="ステップ 1">
+            Clerk にサインインし、新しいアプリを作成します
+
+            ![Create Clerk Application Pn](/images/create-clerk-application.png)
+          </Step>
+
+          <Step title="ステップ 2">
+            利用したい認証プロバイダを有効化します（例: Google、GitHub）
+          </Step>
+
+          <Step title="ステップ 3">
+            **Configure &gt; Restrictions** の「Waitlist」を有効にします
+
+            ![Clerk Waitlist Pn](/images/clerk-waitlist.png)
+          </Step>
+
+          <Step title="ステップ 4">
+            **Public API Key** をコピーします
+
+            ![Clerk Api Key Pn](/images/clerk-api-key.png)
+          </Step>
+        </Steps>
+      </Step>
+
+      <Step title="ステップ 3">
+        **Clerk を Lovable アプリに追加する**
+
+        <Steps>
+          <Step title="ステップ 1">
+            **Lovable** で、Clerk を認証プロバイダとして追加します。
+
+            Lovable へのプロンプト:
+
+            <Info>
+              Asana のようなスタイルで、美しいプロジェクト・タスク管理アプリを作りましょう。ユーザーは、Clerk を使った認証とユーザー管理でログインとサインアップができるようにしてください。まずは見栄えの良いホームページを作成し、アプリの残りを構築している間は、ユーザーが参加できるように Clerk の waitlist コンポーネントを使いましょう。
+            </Info>
+
+            ![Asana Clone Lovable Pn](/images/asana-clone-lovable.png)
+          </Step>
+
+          <Step title="ステップ 2">
+            指示されたら **Public API Key** を貼り付けます
+          </Step>
+
+          <Step title="ステップ 3">
+            Lovable がログインページとサインアップページを自動生成します
+
+            ![Waitlist Component Clerk Pn](/images/waitlist-component-clerk.png)
+          </Step>
+
+          <Step title="ステップ 4">
+            デプロイしてテストします — これで Clerk 認証が利用できるようになりました
+          </Step>
+        </Steps>
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="ウェイトリストモードを有効にする（任意）" stepNumber="2">
+    <Note>
+      **なぜウェイトリストを使うのか？** – アプリを公開する前に、初期ユーザーを集めましょう！
+    </Note>
+
+    アプリ公開前のユーザーを集めるには、Clerk の組み込みウェイトリスト機能を使いましょう。
+
+    <Steps>
+      <Step title="ステップ 1">
+        Clerk ダッシュボードで **Configure &gt; Restrictions &gt; Waitlist** に移動します
+      </Step>
+
+      <Step title="ステップ 2">
+        新規サインアップは **pending** として表示されます
+      </Step>
+
+      <Step title="ステップ 3">
+        * サインアップしたユーザーは **pending approval**（承認待ち）になります
+        * 管理者は Clerk ダッシュボードからユーザーを承認できます
+
+        ![Clerk ウェイトリストの保留状態 Pn](/images/clerk-waitlist-pending.png)
+      </Step>
+
+      <Step title="ステップ 4（ボーナス）">
+        ウェイトリスト用メール（ブランディングや内容）をカスタマイズします
+
+        ![Clerk メールテンプレート Pn](/images/clerk-email-templates.png)
+
+        ![SMS コード認証 Pn](/images/sms-code-verification.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Clerk でのユーザーとチームの管理" stepNumber="3">
+    アプリにチームベースのアクセスを設定します。
+
+    <Steps>
+      <Step title="Step 1">
+        Clerk ダッシュボードで **Organizations** を有効にする
+
+        ![Organization Management Clerk Pn](/images/organization-management-clerk.png)
+      </Step>
+
+      <Step title="Step 2">
+        ロールを定義する（Admin、Member、Viewer など）
+      </Step>
+
+      <Step title="Step 3">
+        メールでユーザーを組織に招待する
+      </Step>
+
+      <Step title="Step 4">
+        ダッシュボードからロールと権限を割り当てる
+      </Step>
+
+      <Step title="Step 5">
+        Lovable に次の内容でプロンプトを送る:
+
+        <Info>
+          サインアップ後に、ユーザーに組織を作成または参加するよう促す
+        </Info>
+
+        ![Clerk Organization Create Pn](/images/clerk-organization-create.png)
+      </Step>
+    </Steps>
+
+    <Note>
+      **Clerk の User Profile コンポーネントを使う**
+
+      * あらかじめ用意されたユーザー管理ダッシュボードを提供
+      * ソーシャルログインおよびパスワード認証をサポート
+      * ユーザー自身でアカウントと 2FA を管理できる
+
+      ![Clerk Organization Members Pn](/images/clerk-organization-members.png)
+    </Note>
+  </Step>
+
+  <Step title="代理ログインモード（管理者用）" stepNumber="4">
+    <Tip>
+      **Impersonation Mode とは？**
+
+      管理者は任意のユーザーとしてログインし、問題の調査やトラブルシューティングができます
+    </Tip>
+
+    特定のユーザーになりきって、そのユーザーとしてアプリをトラブルシューティングできます。
+
+    <Steps>
+      <Step title="Step 1">
+        Clerk ダッシュボード &gt; Users で、対象のユーザーをクリックします
+      </Step>
+
+      <Step title="Step 2">
+        **Impersonate** をクリックします
+      </Step>
+
+      <Step title="Step 3">
+        そのユーザーの視点からアプリを確認します
+      </Step>
+
+      <Step title="Step 4">
+        セキュリティ: Impersonation 中の管理者は、パスワード変更などの機密性の高い操作は実行できません
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Supabase との連携（上級向け）" stepNumber="5">
+    Clerk Auth と Supabase バックエンドを組み合わせます。
+
+    ![Supabase Clerk Pn](/images/supabase-clerk.png)
+
+    <Note>
+      **なぜ Supabase と連携するのか？**
+
+      * ユーザーデータをデータベースに保存する
+      * JWT トークンによるセキュアな認証
+      * 認証をアプリの機能と連携させる
+    </Note>
+
+    **連携方法:**
+
+    <Steps>
+      <Step title="Step 1">
+        Supabase で、**Settings &gt; API &gt; JWT Secret（**[**ドキュメント**](https://clerk.com/docs/integrations/databases/supabase)**）** に移動します。
+
+        ![Supabase Clerk Integration Doc Pn](/images/supabase-clerk-integration-doc.png)
+
+        ![Sql Editor Supabase Pn](/images/sql-editor-supabase.png)
+      </Step>
+
+      <Step title="Step 2">
+        Clerk で、**JWT Templates &gt; Add Supabase** を開き、JWT シークレットを貼り付けます。
+
+        ![Supabase Api Key Clerk Pn](/images/Supabase-api-key-clerk.png)
+
+        ![Jwt Template Clerk Pn](/images/jwt-template-clerk.png)
+
+        ![Jwt Template Clerk Configuration Pn](/images/jwt-template-clerk-configuration.png)
+      </Step>
+
+      <Step title="Step 3">
+        **Clerk を認証プロバイダーとして有効化**します。
+
+        RLS ポリシーを更新して、Clerk の `auth.uid()` を使用するようにします。
+
+        Lovable に次のプロンプトを入力します:
+
+        <Info>
+          Clerk と連携するように Supabase をセットアップしましょう。Clerk には Supabase シークレットが設定済みです。ここに、Clerk を使った Supabase クライアント実装の例があります。これを参考にしてください。
+
+          *[Supabase client configuration import]*
+        </Info>
+      </Step>
+
+      <Step title="Step 4">
+        Clerk が発行したトークンが Supabase によって受け入れられることを確認します。
+
+        ![Supabase Tasks Table Pn](/images/supabase-tasks-table.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="カスタムドメインを追加（任意）" stepNumber="6">
+    <Note>
+      **なぜ独自ドメインを使うのか？**
+
+      ブランド認知と信頼性を高めるためです
+
+      [詳しくはこちら](https://docs.lovable.dev/tips-tricks/custom-domain)
+    </Note>
+
+    <Steps>
+      <Step title="ステップ 1">
+        Lovable 内で: **プロジェクト &gt; Settings &gt; Custom Domain**
+      </Step>
+
+      <Step title="ステップ 2">
+        購入したドメインを入力します（例: `app.yourcompany.com`）
+      </Step>
+
+      <Step title="ステップ 3">
+        Lovable が自動で DNS を設定します（Lovable から離れる必要はありません）
+      </Step>
+
+      <Step title="ステップ 4">
+        新しいドメインでアプリをデプロイしてテストします。
+      </Step>
+
+      <Step title="ステップ 5">
+        完了 ✅ — あなたのアプリはホワイトラベル対応になりました
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="まとめと今後のステップ" stepNumber="7">
+    **これであなたのアプリには、次の機能が備わりました：**
+
+    * Clerk を使ったセキュアな認証
+    * 早期ユーザーを集めるためのウェイトリスト
+    * ユーザーとチームの管理機能
+    * Supabase データベース連携
+    * プロフェッショナルな独自ドメイン
+  </Step>
+</Steps>
+
+<div id="bonus-build-b2b-features-in-minutes">
+  ## ボーナス: 数分で B2B 機能を構築する
+</div>
+
+Clerk は次の機能をサポートしています:
+
+- 組織向けロールベースのアクセス制御
+- 招待フロー（メールベース、事前構築済み UI）
+- 組織プロフィールのカスタマイズ（ロゴ、名前）
+- 複数組織の切り替え（例: Slack スタイル）
+
+**Lovable に次のように依頼してみましょう:**
+
+<Info>
+  組織切り替え用 UI を追加する
+</Info>
+
+<Info>
+  ユーザーがチームメイトを招待できるようにする
+</Info>
+
+<div id="tips-troubleshooting">
+  ## ヒントとトラブルシューティング
+</div>
+
+- **すでに Supabase Auth を使っていますか？** アプリのロジックを書き直さずに Clerk に切り替えられます。JWT を正しく設定して、認証プロバイダーを入れ替えるだけです。
+- **メールのカスタマイズ:** Clerk では、すべてのトランザクションメールテンプレート（ウェイティングリスト、招待、承認）を編集できます。
+- **モバイルログイン**: Clerk はパスキー、OTP、SMS に対応しており、Dev モードでは追加の設定は不要です。
+- **コンプライアンス**: Clerk は SOC2、HIPAA、GDPR に準拠しています。
+
+<div id="frequently-asked-questions-faq">
+  ## よくある質問（FAQ）
+</div>
+
+<AccordionGroup>
+  <Accordion title="Supabase Auth から Clerk へ簡単に切り替えられますか？">
+    はい。Clerk と Supabase はうまく連携します。次の設定を行うだけです。
+
+    - Clerk を設定して JWT を発行するようにする
+    - Clerk に Supabase の JWT シークレットを追加する
+    - Supabase の RLS ポリシーを、Clerk の `auth.uid()` を使うように更新する
+
+    これにより、既存の Supabase バックエンドのアプリに、最小限の変更で Clerk を組み込めます。
+  </Accordion>
+  <Accordion title="Google や GitHub などの OAuth プロバイダを設定する必要がありますか？">
+    本番環境でのみ必要です。開発モードでは、Clerk がテスト用の共有クレデンシャルを提供します。本番環境では、次のことを行ってください。
+
+    - 独自の Google / GitHub / その他のクレデンシャルを用意する
+    - Clerk の **OAuth settings** に追加する
+  </Accordion>
+  <Accordion title="Organizations と Users の違いは何ですか？">
+    - **Users**：あなたのアプリにログインできる個々のユーザー
+    - **Organizations**：ユーザーのグループ（チーム、企業など）
+
+    次のような場合は Organizations を使いましょう。
+
+    - ロールベースのアクセス（Admin、Member など）
+    - ユーザーにチームメイトを招待してもらいたい場合
+    - B2B SaaS 形式のフロー
+  </Accordion>
+  <Accordion title="“Impersonation Mode” とは何ですか？">
+    管理者が任意のユーザーとしてログインできるモードです。次のような場面でとても役立ちます。
+
+    - ユーザーの問題をデバッグする
+    - ユーザーの体験を把握する
+    - ライブサポートを提供する
+
+    <Note>
+      Clerk は、インパーソネーション中の管理者ができることを制限しています（例：パスワードの変更は不可）。
+    </Note>
+  </Accordion>
+  <Accordion title="Clerk の UI コンポーネントはカスタマイズできますか？">
+    はい。Clerk では次のことができます。
+
+    - `appearance` プロップを使ったフル CSS 対応
+    - Clerk の React hooks を使って、完全にカスタムな UI を構築するオプション
+
+    そのままの外観を使うことも、アプリのブランドに完全に合わせることもできます。
+  </Accordion>
+  <Accordion title="Clerk からウェイティングリストのユーザーにメールを送れますか？">
+    現時点では次の動作になります。
+
+    - ウェイティングリストから承認されたユーザーには自動通知される
+    - 一括メール送信のサポートは **近日対応予定**
+
+    それまでは、メールアドレスをエクスポートして、お好みのメールツールを使用してください。
+  </Accordion>
+  <Accordion title="Clerk は無料で使えますか？">
+    はい。Clerk には十分な無料枠があります。
+
+    - **月間アクティブユーザー（MAU）10,000人** まで
+    - 有料プランは **\$25/月** からで、その後は利用量に応じた課金
+
+    スケールするまでは、支払いなしで本番環境でも利用できます。
+  </Accordion>
+  <Accordion title="Clerk はコンプライアンス（SOC2、HIPAA、GDPR）に対応していますか？">
+    はい。Clerk は次のとおりです。
+
+    - **SOC 2 認証取得済み**
+    - **HIPAA 準拠**
+    - **GDPR 対応**
+
+    規制産業向けのプロダクトを開発するチームに最適です。
+  </Accordion>
+  <Accordion title="請求に Clerk と Stripe を一緒に使えますか？">
+    近日対応予定です。次のことができるようになります。
+
+    - プランの定義（例：Free、Pro、Enterprise）
+    - Clerk の UI から、ユーザー / Organization にサブスクリプションを管理してもらう
+    - Stripe にデータを自動同期する
+
+    最新情報は X で [@clerkdev](https://x.com/clerkdev?lang=en) をフォローしてください。
+  </Accordion>
+</AccordionGroup>
+
+この FAQ に質問を追加してほしい場合は、[Discord でお知らせください](https://discord.gg/lovable-dev)。
+
+<div id="final-thoughts">
+  ## 最後に
+</div>
+
+Clerk は認証をプロンプトで完結させます。もう自分で実装する必要はありません。
+
+**数回のクリックとプロンプトを入力するだけで、あなたのアプリには次のような機能が備わります：**
+
+- 安全でスケーラブルな認証
+- チームと組織の管理
+- デバッグ用のなりすましツール
+- Supabase を利用したデータおよびアクセス制御
+- 洗練された UX のためのカスタムドメイン対応

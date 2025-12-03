@@ -1,0 +1,117 @@
+---
+title: "Lovable で画像を使う"
+description: "Lovable のプロジェクトに画像を追加する方法を学ぶ"
+icon: "frame"
+---
+
+画像を追加するには、次の 4 つの方法があります。
+
+<AccordionGroup>
+  <Accordion title="画像をプロンプトチャットにアップロードしてください">
+    チャットにアップロードして、プロジェクトのどこに、どのように表示したいかを Lovable の Agent に伝えてください。例えば:
+
+    > ナビバーのロゴをこの画像に差し替えて
+  </Accordion>
+
+  <Accordion title="ビジュアルエディタで置き換えてください">
+    [ビジュアルエディター](https://docs.lovable.dev/features/precision-edit#visual-edits)機能を使って、既存の画像を直接置き換えることができます。
+
+    <Steps>
+      <Step title="手順 1">
+        「Edit」ツールをクリックします。
+      </Step>
+
+      <Step title="手順 2">
+        変更したい画像ホルダーを選択します。
+
+        ![images/visual-edit-replace.png](/images/visual-edit-replace.png)
+      </Step>
+
+      <Step title="手順 3">
+        画像を変更します。
+
+        ![images/visual-edit-image.png](/images/visual-edit-image.png)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="外部画像のURLを使用する">
+    プロジェクトに画像を追加する 1 つの方法は、外部 URL から画像を参照することです。この方法を使うと、Unsplash や Imgur などの外部プラットフォーム、その他の画像ホスティングサービスにある画像を利用できます。著作権の取り扱いには注意してください。
+
+    Lovable に外部画像を使わせるプロンプトの書き方は次のとおりです。
+
+    <Steps>
+      <Step title="ステップ 1">
+        使用したい画像を見つけます。
+
+        たとえば、Unsplash のようなサイトにアクセスして画像を選び、その URL をコピーします。
+      </Step>
+
+      <Step title="ステップ 2">
+        プロジェクトのプロンプト内で、その URL を指定して Lovable にその画像を使うように伝えます。例:
+
+        ```
+        Use the image from this URL 
+        https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/442px-Pale_Blue_Dot.png 
+        for the hero section image.
+        ```
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="GitHub の公開ディレクトリにある画像を使用する">
+    Lovable プロジェクトに画像を追加するもう 1 つの方法は、接続している GitHub リポジトリの `public` ディレクトリにアップロードした画像を使うやり方です。手順は次のとおりです。
+
+    <Steps>
+      <Step title="GitHub リポジトリを接続する">
+        プロジェクトが GitHub リポジトリに接続されていることを確認します。詳しい接続方法については、[リポジトリを接続する方法はこちら](https://docs.lovable.dev/integrations/git-integration)を参照してください。
+      </Step>
+
+      <Step title="public フォルダを見つける">
+        GitHub リポジトリ内で、`public` ディレクトリに移動します。このフォルダは通常、プロジェクト内で参照できる画像などのアセットを保存するために使用されます。
+      </Step>
+
+      <Step title="ファイルを追加する">
+        **Add file** をクリックし、表示されるドロップダウンから **Upload files** オプションを選択します。 <img src="/assets/using-images-github-upload.png" alt="アップロードするファイルを選択している画面" />
+      </Step>
+
+      <Step title="画像をアップロードする">
+        次に、画像をリポジトリにアップロードします：
+
+        * 画像を public フォルダにドラッグ＆ドロップする、または
+        * **&quot;choose your files&quot;** リンクをクリックして、画像ファイルを参照して選択します。 <img src="/assets/using-images-github-commiting.png" alt="アップロードするファイルを選択している画面" />
+      </Step>
+
+      <Step title="変更をコミットする">
+        画像を選択したら、簡単なコミットメッセージ（例: &quot;Adding image files to be used in the app&quot;）を入力し、**&quot;Commit changes&quot;** をクリックして、ファイルをリポジトリに保存します。
+      </Step>
+
+      <Step title="画像パスを取得する">
+        ファイルがアップロードされたら、そのファイルを選択し、ファイル名の横にあるコピーアイコンをクリックして画像のパスをコピーします。このパスは Lovable のプロンプト内で使用します。 <img src="/assets/using-images-github-selecting.png" alt="アップロードするファイルを選択している画面" />
+      </Step>
+
+      <Step title="Lovable で画像を使用する">
+        これで、次のようなプロンプトを使って、プロジェクト内でこの画像を参照できるようになります:
+
+        ```
+        Add an additional image to the hero section. 
+        This time, use this one from my local repo: public/c-64-close-up.jpg.jpeg
+        ```
+
+        前のステップでコピーした画像のファイル名とパスを必ず使用してください。
+
+        <Warning>
+          大きな画像ファイルを GitHub リポジトリにアップロードすると、リポジトリのサイズが大きくなり、Lovable のパフォーマンス（リポジトリのクローンにかかる時間が長くなる、プレビュー/サンドボックスの起動が遅くなるなど）に影響する可能性があります。
+
+          `public` フォルダにアップロードする前に、画像を圧縮したり、利用シーンに適した解像度に変更したりして最適化するようにしてください。例えば、小さなアイコンとしてしか表示しない場合に、フル HD サイズの画像を使用しないようにしましょう。
+        </Warning>
+      </Step>
+    </Steps>
+
+    上記の方法で画像を統合する手順をよりよく理解できるように、閲覧できるプロジェクトを用意しています: [Lovable プロジェクト例](https://lovable.dev/projects/e823fedf-238d-4313-86a8-1fd4bfc2a9ba)。このプロジェクトでは、実際のプロンプトと、各方法がどのように動作するかを確認できます。
+
+    また、コミット内容、アップロードされた画像、実装の詳細が含まれた公開 GitHub リポジトリもあります。こちらからリポジトリを閲覧できます: [GitHub: Adding Images Example](https://github.com/viborc/adding-images-example)。
+
+    このプロジェクトとリポジトリを自由に探索して、理解を深め、実装スキルを高めてください。
+  </Accordion>
+</AccordionGroup>

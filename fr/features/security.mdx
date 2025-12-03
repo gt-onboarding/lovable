@@ -1,0 +1,113 @@
+---
+title: "Sécurité"
+description: "Fonctionnalités de sécurité de Lovable"
+icon: "shield-halved"
+---
+
+<Note>
+  Pour des instructions détaillées sur la sécurisation de vos applications créées avec Lovable, consultez notre [guide complet pour préparer votre application à la publication et éviter les problèmes courants](/fr/tips-tricks/avoiding-security-pitfalls).
+</Note>
+
+<div id="api-keys">
+  # Clés API
+</div>
+
+Lovable génère du code frontend, ce qui signifie qu’il s’exécute dans le navigateur. Par conséquent, aucune donnée sensible, quelle qu’elle soit, ne doit jamais être stockée dans le code. À la place, Lovable met à disposition une fonctionnalité de stockage sécurisé des secrets.
+
+<div id="automatic-api-key-detection">
+  ## Détection automatique des clés API
+</div>
+
+Pour te connecter à des services tiers, des clés API ou des jetons sont souvent nécessaires. Chaque fois que tu colles une clé API dans le chat, Lovable la détecte automatiquement et t’avertit de ne pas insérer en dur des identifiants sensibles directement dans ton code frontend. Au lieu de coller des clés API, décris ce que tu essaies de faire et Lovable te guidera vers une implémentation sécurisée.
+
+![Détection de clé API en action](/assets/features/images/API-key-detection.png)
+
+Par exemple, au lieu de :
+
+&quot;Ajoute cette clé API pour appeler le service X : x&#95;test&#95;abc123...&quot;
+
+Essaie plutôt :
+
+&quot;Je veux intégrer l’API du service X pour générer des réponses textuelles&quot;
+
+Lovable te montrera alors comment :
+
+1. Stocker ta clé API de manière sécurisée dans le stockage Secrets.
+
+2. Créer une Fonction Edge pour effectuer l’appel d’API côté serveur.
+
+3. Appeler cette Fonction Edge depuis ton code frontend.
+
+Cette approche permet de garder tes identifiants sensibles en sécurité et respecte les bonnes pratiques de sécurité pour les applications web.
+
+<div id="rls-role-level-security">
+  ## RLS (sécurité au niveau des rôles)
+</div>
+
+Les politiques RLS déterminent qui peut accéder à quelles données dans votre base de données. Nous vous recommandons de les examiner attentivement avant de publier votre projet, puis de continuer à les revoir et à les mettre à jour au fur et à mesure du développement de votre projet.
+
+<div id="security-scanning">
+  # Analyse de sécurité
+</div>
+
+Avant de publier, Lovable affiche des avertissements de sécurité issus de son scanner de sécurité avancé alimenté par l’IA, et vous demandera de confirmer que vous souhaitez publier en cas de problèmes sérieux.
+
+Nous vous recommandons fortement de résoudre tous les problèmes sérieux avant de publier vos projets afin de garder les données de votre application en sécurité. Veillez à revoir l’analyse de sécurité et à effectuer un nouveau contrôle à chaque fois que vous modifiez significativement votre application.
+
+![Revue de sécurité avant publication](/assets/features/images/pre-publish-security-review.png)
+
+<Info>
+  L’absence d’avertissements ou d’erreurs de la part du scanner de sécurité ne garantit pas qu’il n’existe aucun problème de sécurité dans votre application. Nous vous recommandons d’effectuer un examen approfondi de la sécurité de votre application à l’aide des outils disponibles avant de publier, ou de faire appel à un consultant professionnel en sécurité pour réaliser un audit de l’application si votre app gère des données privées sensibles, fournit des fonctions critiques et si une éventuelle fuite de données peut entraîner de graves conséquences pour des personnes.
+</Info>
+
+Lovable inclut une analyse de sécurité complète, alimentée par l’IA, pour vous aider à identifier les vulnérabilités potentielles dans votre code avant de publier.
+
+<div id="security-view">
+  ## Vue de sécurité
+</div>
+
+La vue de sécurité affiche les résultats issus de plusieurs sources : l’assistant de sécurité de la base de données, une analyse approfondie par l’IA de votre schéma de base de données et de vos politiques RLS (Row Level Security), ainsi qu’un audit de sécurité de votre code alimenté par l’IA. Cette approche complète permet de couvrir un éventail plus large de problèmes de sécurité potentiels.
+
+Les résultats sont classés par niveau de gravité :
+
+* **Error** : problèmes de sécurité critiques qui doivent être traités immédiatement. Ceux-ci incluent l’option « Try to Fix », même si les corrections proposées ne résolvent pas nécessairement tous les cas.
+* **Warning** : problèmes de sécurité importants qui doivent être examinés et probablement corrigés.
+* **Info** : recommandations générales de sécurité et bonnes pratiques à prendre en considération.
+
+Le bouton « Security Review » déclenche une analyse par IA plus approfondie qui inclut l’ensemble de votre base de code, allant au-delà du simple schéma de base de données et des politiques RLS pour examiner le code de votre application à la recherche de vulnérabilités de sécurité supplémentaires.
+
+![Détection de clé API en action](/assets/features/images/security-view.png)
+
+<div id="on-demand-security-review">
+  ## Analyse de sécurité à la demande
+</div>
+
+Vous pouvez demander une analyse de sécurité à tout moment en demandant à Lovable de « vérifier la sécurité de mon app » ou en formulant une demande similaire.
+Lovable va :
+
+1. Analyser l&#39;intégralité de votre code pour détecter des vulnérabilités de sécurité.
+2. Vérifier les problèmes courants comme la prévention XSS, l&#39;assainissement des entrées et les failles d&#39;authentification.
+3. Examiner vos règles RLS et la sécurité de votre base de données.
+4. Fournir un rapport détaillé avec des recommandations précises.
+
+![Comment trouver l'analyse de sécurité](/assets/features/images/find-security-review.png)
+
+![Analyse de sécurité en action](/assets/features/images/security-review-in-action.png)
+
+<Warning>
+  À retenir : même en l&#39;absence d&#39;alertes de l&#39;outil d&#39;analyse, il est toujours recommandé de demander régulièrement une analyse de sécurité à la demande pour les applications en production.
+</Warning>
+
+<div id="types-of-findings-and-their-remediation">
+  ## Types de problèmes détectés et leur résolution
+</div>
+
+La plupart des problèmes peuvent être corrigés automatiquement en cliquant sur le bouton « Try to Fix », mais certains nécessitent une intervention manuelle.
+
+<div id="leaked-password-protection-disabled">
+  ### Protection contre les mots de passe compromis désactivée
+</div>
+
+Lorsque vous utilisez Lovable Cloud, activez l’option « Password HIBP Check » dans Cloud -&gt; Users -&gt; Auth Settings -&gt; Email.
+
+Si vous utilisez une base de données Supabase, suivez les instructions : https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection

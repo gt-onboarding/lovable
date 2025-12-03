@@ -1,0 +1,226 @@
+---
+title: "Replicate 集成"
+description: "了解如何在你的 Lovable 应用中集成 Replicate"
+icon: "robot"
+---
+
+<div id="what-is-replicate">
+  ## 什么是 Replicate？
+</div>
+
+[Replicate](https://replicate.com/) 让你只需几行代码就能运行开源机器学习模型——无需任何机器学习专业知识。
+
+它是一个 API 平台，开发者可以使用社区构建或自定义的 AI 模型生成图像、视频、音频以及更多内容。无论你是在构建 MVP、为创意功能制作原型，还是为应用添加生产级 AI，Replicate 都能为你提供对最前沿模型的快速且灵活的访问能力。
+
+<div id="why-use-replicate-with-lovable">
+  ## 为什么要在 Lovable 中使用 Replicate？
+</div>
+
+Replicate 自然融入 Lovable 的 AI 优先应用构建工作流。你可以：
+
+- 生成动态视觉素材（例如课程横幅、头像、场景）
+- 使用多模态 AI（图像、视频、语音、文本转语音）
+- 在无需自建模型基础设施的情况下添加实时内容生成功能
+
+借助 Lovable 对 Replicate 的 API 和模型的内置支持，集成只需几分钟，而不是几天。你只需描述你想要的效果，剩下的交给 Lovable 处理。
+
+<div id="step-by-step-tutorial">
+  ## 分步教程
+</div>
+
+在本教程中，我们将演示如何将 Replicate 集成到一个 Lovable 应用中，用于动态生成课程横幅图片，为你的产品增加一层新的互动性和精致感。你还将了解 Replicate 在 Lovable 更广泛 AI 工作流中的作用——包括如何将它与 OpenAI 搭配用于课程内容、与 Supabase 搭配用于后端逻辑，以及通过 [OpenAI 的 WebRTC API](https://platform.openai.com/docs/guides/realtime#connect-with-webrtc) 实现实时 AI 对话。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/eSDhk4VkVLE?si=9SNZ4G-ApyU-gsOg" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Steps>
+  <Step title="Step 1 – 构建语言学习应用">
+    我们首先使用 Lovable 创建一个西班牙语学习 Web 应用。这包括：
+
+    - 用户登录流程
+    - 用于西班牙语辅导的 AI 聊天
+    - 语音录制与回放
+    - 翻译功能
+
+    这样，用户就拥有了一个个性化的 AI 家教，可以通过语音或文字与之交流并进行学习。
+
+    ![Course Dashboard Pn](/images/course-dashboard.png)
+  </Step>
+  <Step title="Step 2 – 使用 AI 生成课程">
+    我们通过 AI 生成课程来增强应用功能：
+
+    ![Course Creation Ai Pn](/images/course-creation-ai.png)
+
+    - 用户定义一个主题（例如，_在烧烤聚会时可以问的问题_）。
+    - 一个由 OpenAI 驱动的函数会用西班牙语创建 10 道多选题。
+    - 课程会通过 Supabase 保存到用户账号中，并且可以随时回顾。
+      ![Course Creation Ai 2 Pn](/images/course-creation-ai-2.png)
+    - 用户会获得每道题的反馈和解释。
+    - 自动生成与主题匹配的**课程横幅图片**。Replicate 使用 **Flux Schnell** 模型快速生成图像，并将该图片动态插入到课程页面中。
+
+    <Info>
+      **工作原理：**
+
+      1. 在新课程创建时，我们调用 Replicate API。
+      2. 提示会根据课程主题动态生成。
+      3. Replicate 返回一个图片 URL，用作该课程的横幅图。
+    </Info>
+    ![Replicate Real Time Pn](/images/replicate-real-time.png)
+  </Step>
+  <Step title="Step 3 – 使用 Replicate 添加视觉效果">
+    现在，让我们使用 Replicate 为课程添加更丰富的视觉效果。
+
+    ![Replicate Image Pn](/images/replicate-image.png)
+
+    **提示示例：**
+
+    <Note>
+      一幅与该主题相关的、美观、有教育意义且引人入胜的数字艺术风格场景。色彩鲜艳。画面中不要包含文字。
+    </Note>
+    **响应处理示例：**
+
+    一些 Replicate 模型返回单个图片 URL，另一些则返回数组。请确保你的 Lovable 函数正确提取输出，例如：
+
+    ```
+    const imageUrl = response.output[0]
+    ```
+  </Step>
+  <Step title="Step 4 – 使用 Replicate Playground 进行微调">
+    Replicate 的 Playground 让你可以轻松测试提示并获取代码片段：
+
+    - 调整提示，直到对输出结果满意为止
+    - 使用 API 代码片段生成器获取适用于 Node.js、Python 等的示例
+    - 直接复制粘贴到 Lovable 的后端函数中
+
+    <Tip>
+      使用 Playground Beta 一次对比多个输出结果。
+    </Tip>
+    ![Replicate Playground Pn](/images/replicate-playground.png)
+  </Step>
+  <Step title="Step 5 – 使用 OpenAI 实现实时对话">
+    为了模拟真人对话，我们使用 OpenAI 的 WebRTC API 添加了实时西班牙语对话功能：
+
+    - 用户可以直接与 AI 家教进行语音交流。
+    - AI 能够实时理解、回复并纠正发音。
+    - 这让语言学习更加沉浸、更贴近日常使用场景。
+
+    该功能与 Lovable 的语音输入、WebRTC 处理和前端聊天界面无缝集成。
+
+    ![Course Voice Ai Pn](/images/course-voice-ai.png)
+  </Step>
+</Steps>
+
+<div id="tips-gotchas">
+  ## 提示与注意事项
+</div>
+
+- **模型输出差异**：Replicate 模型返回输出的方式各不相同。请务必查看 playground 实际返回的 JSON 数据。
+- **提示迭代是关键**：细微的提示变更就可能对图像质量产生巨大影响。使用 playground 进行反复试验。
+- **后端日志**：使用 Supabase 边缘日志调试你的 API 调用。Lovable 支持在应用内获取日志。
+- **Lovable 中的版本控制**：每次编辑提示都会自动提交，但你可以通过使用 “Deploy” 功能手动跟踪生产就绪状态的检查点。
+
+<div id="faq">
+  ## 常见问题解答
+</div>
+
+<AccordionGroup>
+  <Accordion title="用简单的话说，Replicate 是什么？">
+    Replicate 是一个平台，让你可以通过简单的 API 运行强大的机器学习模型（比如图像或视频生成），而无需自己训练或托管模型。
+  </Accordion>
+
+  <Accordion title="通常是谁在使用 Replicate？">
+    Replicate 在独立开发者、创业团队以及大型企业中都很受欢迎。无论你是在为 AI 功能做原型，还是在进行大规模部署，Replicate 都同时支持快速实验和稳定的生产级部署。
+  </Accordion>
+
+  <Accordion title="我需要自己的 Replicate API key 吗？">
+    需要。Lovable 会安全地存储你的 API 密钥，并在你添加后帮你发起 API 调用。
+  </Accordion>
+
+  <Accordion title="我可以在 Replicate 上使用哪些模型？">
+    Replicate 支持多种模态，包括：
+
+    * 图像生成（例如 Flux Schnell）
+    * 视频生成
+    * 音频和文本转语音
+    * 语言模型（虽然不是 Replicate 的主要侧重点）
+    * 自定义 Cog 模型（你可以部署的开源 Docker 化模型）
+
+    在 [replicate.com/explore](https://replicate.com/explore) 浏览全部模型。
+  </Accordion>
+
+  <Accordion title="我怎么知道哪个模型最适合我的用例？">
+    使用 Replicate 的 **Playground** 在集成之前测试不同模型。Playground 允许你微调提示、对比输出，并为你的应用复制可用的代码片段。
+  </Accordion>
+
+  <Accordion title="Replicate 旧版和新版 API 端点有什么区别？">
+    Replicate 有两种 API 格式：
+
+    * 原始的（`/predictions`）端点：最广为人知、使用最广泛。
+    * 更新的 `/models/{owner}/{model}/versions/{id}/predictions` 端点：更高效、更灵活。
+
+    Lovable 会根据模型的需求集成这两种端点。
+  </Accordion>
+
+  <Accordion title="如果某个模型返回的 JSON 结构与预期不同怎么办？">
+    模型输出会有所不同。有些会返回字符串 URL，有些会返回数组。使用 Replicate Playground 检查实际响应，并相应更新你的解析逻辑。
+
+    示例修复方式：
+
+    ```
+    const imageUrl = Array.isArray(output) ? output[0] : output;
+    ```
+  </Accordion>
+
+  <Accordion title="我可以只触发一次 Replicate 图像生成，还是要在每次课程查看时都生成？">
+    你可以选择：
+
+    * **在课程创建时一次性生成**：节省计算成本，并保持一致的视觉风格。
+    * **按会话动态生成**：如果你希望每次都有新的视觉效果。
+
+    在本教程中，我们选择在课程首次创建时生成一次图像。
+  </Accordion>
+
+  <Accordion title="Lovable 是否开箱即用地支持 Replicate？">
+    是的！Lovable 内置了关于 Replicate 及其许多热门模型的知识。它可以使用合适的依赖包和提示结构为你自动生成集成代码。
+  </Accordion>
+
+  <Accordion title="Lovable 如何处理像用于 Node.js 的 replicate 这样的依赖安装？">
+    Lovable 会根据你的提示和集成场景，在需要时自动安装并配置依赖包。除非在本地调试，否则你不需要手动执行 npm install。
+  </Accordion>
+
+  <Accordion title="在 Lovable 中调试 Replicate 错误的工作流程是什么？">
+    * 使用 Lovable 的 **Supabase 边缘函数日志** 来追踪问题。
+    * 如果预期与实际的 Replicate 响应不一致，请更新你的 JSON 处理逻辑。
+    * 使用 Lovable 中的 **“Fix this”** 按钮重试或重构函数逻辑。
+  </Accordion>
+
+  <Accordion title="我可以在 Lovable 中为正常工作的应用状态打检查点吗？">
+    目前，每次提示变化都会创建一个提交。你可以：
+
+    * 使用 **History** 选项卡查看提交记录（包括为提交添加书签）
+    * **部署** 某个版本，使其成为生产环境的检查点
+    * 可以启用 GitHub 同步以使用自定义的版本控制
+  </Accordion>
+
+  <Accordion title="GitHub 集成在 Lovable 中是如何工作的？">
+    你可以将 Lovable 项目导出到 GitHub，并启用 **双向同步**：
+
+    * Lovable 会将更改推送到 GitHub
+    * 你（或你的团队）可以在 IDE 中修改代码并推送回去
+    * 非常适合在 Lovable 中做前端、在你自己的编辑器中做后端的工作流
+  </Accordion>
+
+  <Accordion title="什么是适合 LLM 的 .lm.txt 或 .lm.md 文件？">
+    这些是基于 markdown 的简化文档，针对语言模型进行了优化。Replicate 正在积极添加这些文件，以帮助 Lovable（以及其他工具）自动更好地理解其模型。
+  </Accordion>
+
+  <Accordion title="我需要自己处理提示调优吗？">
+    需要，提示设计非常关键。Lovable 会通过自动提示和模板功能提供帮助，但你仍然应该在 Replicate Playground 中进行测试，以优化输入并获得最佳效果。
+  </Accordion>
+</AccordionGroup>
+
+<div id="resources">
+  ## 资源
+</div>
+
+- 查看 [Replicate API 文档](https://replicate.com/docs)、[Replicate 的模型目录](https://replicate.com/)
+- 了解更多关于 [OpenAI 函数调用](https://platform.openai.com/docs/guides/function-calling)、[OpenAI WebRTC](https://platform.openai.com/docs/guides/speech/real-time-speech) 的信息

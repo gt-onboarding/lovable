@@ -1,0 +1,211 @@
+---
+title: "自托管：在任意环境运行你的 Lovable Cloud 项目"
+sidebarTitle: "自托管"
+description: "在你自己的基础设施上部署和管理你的 Lovable Cloud 项目"
+icon: "door-open"
+---
+
+[Lovable Cloud](https://docs.lovable.dev/features/cloud) 旨在成为构建应用时最简单、最快速、也最令人愉悦的平台。我们支持迁移，是因为我们希望你留下是出于选择，而不是出于无奈。
+
+本指南说明如何进行自托管，并将你的 Lovable Cloud 项目迁移到其他服务提供商，例如 [Supabase](http://supabase.com/)。
+
+<div id="key-principles">
+  ## 核心原则
+</div>
+
+- **你的代码归你所有**。 \
+  使用我们的 [GitHub 集成](https://docs.lovable.dev/integrations/github) 随时导出你的代码。你可以不受限制地克隆、导出和自行托管。
+- **你的数据归你所有**。 \
+  你的数据库、存储和配置都可以导出或迁移到其他服务提供商。
+- **Lovable 基于开源技术构建**。 \
+  一切都运行在开放标准和开源技术之上。没有专有框架，没有隐藏依赖。
+- **我们通过品质而不是控制来赢得你的信任**。
+
+  Lovable Cloud 专为速度、简洁和可靠性而设计。你可以放心地构建、托管和扩展应用，并且始终可以将你的项目完整带走。
+
+<div id="migration-overview">
+  ## 迁移概览
+</div>
+
+| **应用组件**                      | **迁移方式**                 | **说明**                                                                                                                                                                                           |
+| :-------------------------------- | :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 数据库架构（schema）             | 通过 SQL 迁移自动完成        | 包括表、列、索引、RLS 策略、函数、触发器                                                                                                                                                          |
+| 存储 bucket                       | 通过 SQL 迁移自动完成        | 包括访问策略                                                                                                                                                                                      |
+| 身份验证提供商                    | 手动                         | 在新的托管环境中重新配置身份验证（例如 Google OAuth、GitHub）                                                                                                                                     |
+| 环境变量和机密信息               | 手动                         | 在新的托管环境中重新配置外部服务的任何 API 密钥、令牌或凭证（例如 Stripe）                                                                                                                       |
+| 数据（表内容）                   | 手动                         | 通过 CSV 导出/导入                                                                                                                                                                                |
+| 存储文件                         | 手动                         | 手动下载/上传                                                                                                                                                                                     |
+| 用户账号                         | 手动，部分迁移               | 你可以从数据库中导出用户数据，但无法导出用户密码，因此需要触发密码重置流程。我们建议在正式接入真实用户之前先规划好迁移方案。                                                                     |
+
+<div id="example-move-your-lovable-cloud-project-to-supabase">
+  ## 示例：将你的 Lovable Cloud 项目迁移到 Supabase
+</div>
+
+只要具备一定的技术知识，你就可以连接到任何后端解决方案。下面的步骤将指导你把 Lovable Cloud 项目迁移到 Supabase。有关 Supabase 具体操作的更多信息，请参阅 [Supabase 文档](https://supabase.com/docs)。
+
+<Warning>
+  将项目迁移到你自己的 Supabase 实例后，你必须在本地环境或你首选的 IDE 中继续开发。你在 Lovable 中的项目仍然连接到最初的 Lovable Cloud 数据库，因此迁移后在 Lovable 中进行的任何更改都**不会**与新的 Supabase 配置同步。
+</Warning>
+
+<div id="1-create-a-new-supabase-project">
+  ### 1. 创建一个新的 Supabase 项目
+</div>
+
+按照以下步骤创建一个新的 Supabase 项目。
+
+1. 访问 [supabase.com](https://supabase.com) → **New project**
+2. 选择你的组织并填写以下信息：
+   - **Project name：** 任意名称
+   - **Database password：** 足够强的密码
+   - **Region：** 最接近你用户的区域
+3. 点击 **Create new project**，并等待大约 2 分钟，直到项目初始化完成。
+4. 在新 Supabase 项目的设置中，**保存以下信息**：
+   - `Project ID`
+   - `Public API Key`（anon key）
+   - `Project URL`：`https://[your-project-id].supabase.co`
+
+<div id="2-update-environment-variables">
+  ### 2. 更新环境变量
+</div>
+
+在你的 `.env` 文件中，将 Lovable Cloud 的相关值替换为新的 Supabase 凭证。
+
+1. 在你的 Lovable 项目中，进入 **Code**。
+2. 找到 `.env` 文件。
+3. 使用新的 Supabase 凭证更新 Lovable Cloud 的相关值：
+
+```
+VITE_SUPABASE_PROJECT_ID="your-new-project-id"
+VITE_SUPABASE_PUBLISHABLE_KEY="your-new-anon-key"
+VITE_SUPABASE_URL="https://your-new-project-id.supabase.co"
+```
+
+4. 保存更改。
+
+
+<div id="3-update-supabase-configuration">
+  ### 3. 更新 Supabase 配置
+</div>
+
+在你的 `supabase/config.toml` 文件中，将 Lovable Cloud 项目 ID 替换为新的 Supabase 项目 ID。
+
+1. 在你的 Lovable 项目中，打开 **Code**。
+2. 找到 `supabase/config.toml` 文件。
+3. 将 Lovable Cloud 项目 ID 更新为新的 Supabase 项目 ID：
+
+```
+project_id = "your-new-project-id"
+```
+
+4. 保存更改。
+
+
+<div id="4-run-database-migrations">
+  ### 4. 运行数据库迁移
+</div>
+
+每个 Lovable Cloud 项目在 `supabase/migrations/` 文件夹中都包含 SQL 迁移文件。
+
+根据文件名中的时间戳按**时间顺序**运行这些文件。它们已按从最早到最晚排序。例如：
+
+```
+20251008155159_[hash].sql   # 第一个 - 最早
+20251008155215_[hash].sql   # 第二个
+```
+
+对于 Lovable Cloud 项目中的每个迁移文件，请按以下步骤操作：
+
+1. 复制每个迁移文件中的全部 SQL 内容。
+2. 将其粘贴到新 Supabase 项目的 **SQL 编辑器（SQL editor）** 中。
+3. 运行并等待出现成功提示。
+
+<Tip>
+  如果迁移失败，请检查迁移顺序、表之间的依赖关系以及 SQL 语法是否有错误。
+</Tip>
+
+
+<div id="5-export-and-import-your-data">
+  ### 5. 导出和导入你的数据
+</div>
+
+从你的 Lovable Cloud 项目中导出数据，然后手动将其导入到新的 Supabase 项目中。
+
+**从你的 Lovable Cloud 项目中导出每个数据表：**
+
+1. 前往 **Cloud → Database → Table**。
+2. 点击 **Export CSV**。
+3. 保存文件。
+
+**将 CSV 文件导入到新 Supabase 项目中对应的数据表：**
+
+1. 前往 **Table Editor**。
+2. 对于每个表，点击 **Insert → Import data from CSV**。
+3. 正确映射各列。
+4. 点击 **Import data**。
+
+<div id="6-reconfigure-authentication">
+  ### 6. 重新配置身份验证
+</div>
+
+如果你的 Lovable Cloud 项目需要身份验证，你需要在新的 Supabase 项目中手动重新配置身份验证提供商。
+
+1. 在新的 Supabase 项目中，前往 **Authentication → Sign In / Providers**。
+2. 启用并配置每个提供商。
+3. 在你的 OAuth 应用设置中（例如 Google Console、GitHub），\
+   将 **redirect URLs** 更新为使用新的 Supabase 项目 URL。
+
+<div id="7-migrate-storage-files">
+  ### 7. 迁移存储文件
+</div>
+
+从 Lovable Cloud 项目的存储桶中下载所需文件，并将它们上传到新的 Supabase 项目。
+
+1. 在你的 Lovable 项目中，前往 **Cloud → Storage**。
+1. 从存储桶中下载文件。
+2. 在 Supabase 中前往 **Storage**，将文件上传到对应的存储桶。
+
+<div id="8-set-up-environment-variables-and-secrets">
+  ### 8. 设置环境变量和机密信息
+</div>
+
+如果你在 Lovable Cloud 项目中使用了任何外部服务（例如 Stripe），则需要在新的 Supabase 项目中手动重新配置 API 密钥、令牌和凭证。
+
+- 在新的 Supabase 项目中，前往 **Edge Functions → Manage Secrets**。
+- 添加相关的 API 密钥或外部服务凭证。
+- 保存更改。
+
+<div id="9-verify-everything-works">
+  ### 9. 验证一切是否正常运行
+</div>
+
+完成所有步骤后，你的应用就会完全运行在 Supabase 后端上。请确认一切正常，例如：
+
+- 应用加载时没有报错
+- 你可以创建和读取数据库记录
+- 身份验证功能正常
+- 存储上传和下载均能成功完成
+
+<div id="advanced-cli-migration-option">
+  ### 高级：CLI 迁移选项
+</div>
+
+适用于熟悉命令行的开发者：
+
+```
+# 1. 安装 Supabase CLI
+npm install -g @supabase/cli
+# 或
+brew install supabase/tap/supabase
+
+# 2. 更新配置文件（.env + supabase/config.toml）
+
+# 3. 关联到你的新 Supabase 项目
+supabase login
+supabase link --project-ref your-new-project-id
+
+# 4. 推送所有迁移
+supabase db push
+
+# 5. 验证数据库架构
+supabase db diff
+```

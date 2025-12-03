@@ -1,0 +1,76 @@
+---
+title: "Verwendung benutzerdefinierter (Google-)Schriftarten"
+description: "Erfahre, wie du websichere Schriftarten und Google Fonts in deinen Lovable-Projekten verwendest"
+icon: "font"
+---
+
+Derzeit unterstützt Lovable kein direktes Hochladen benutzerdefinierter Schriftarten. 
+
+Es gibt jedoch mehrere einfache Möglichkeiten, websichere oder benutzerdefinierte Schriftarten in deine Projekte einzubinden. Im Folgenden führen wir dich durch die verfügbaren Methoden zur **Verwendung websicherer Schriftarten** und **Google Fonts**:
+
+<AccordionGroup>
+  <Accordion title="Verwendung einer websicheren Schrift">
+    <Info>
+      **Was sind websichere Schriftarten?**
+
+      Websichere Schriftarten sind Schriften, die auf den meisten Betriebssystemen (Windows, macOS, Linux usw.) üblicherweise installiert sind und auf nahezu allen Geräten angezeigt werden.
+
+      Diese Schriftarten stellen sicher, dass dein Text in verschiedenen Browsern und auf unterschiedlichen Plattformen konsistent aussieht, ohne dass externe Ressourcen geladen werden müssen. Zu den gängigen websicheren Schriftarten gehören:
+
+      - Arial/Helvetica
+      - Times New Roman
+      - Georgia
+      - Courier New
+      - Verdana
+      - Tahoma
+      - Trebuchet MS
+      - Lucida Sans Unicode
+    </Info>
+    Wenn du in deinem Projekt eine websichere Schrift verwenden möchtest, kannst du die Schrift direkt in deiner Eingabeaufforderung angeben. Wenn du zum Beispiel **Courier New** für eine Überschrift oder einen Titel im Hero-Bereich verwenden möchtest, nenne die Schrift einfach beim Namen in deiner Eingabeaufforderung.
+
+    ```text
+    Use Courier New as the heading font in the hero section for the main title.
+    ```
+
+    Websichere Schriftarten wie Courier New stellen sicher, dass dein Projekt auf allen Plattformen eine konsistente Typografie hat, ohne dass externe Ressourcen zum Laden der Schrift benötigt werden. Sie können jedoch deine Kreativität einschränken. Glücklicherweise gibt es Optionen wie die Verwendung von Google Fonts.
+  </Accordion>
+  <Accordion title="Verwendung von Google Fonts">
+    Wenn du lieber benutzerdefinierte Schriftarten verwenden möchtest, funktioniert Lovable sehr gut mit **Google Fonts**. So kannst du ganz einfach eine große Auswahl an Schriften in deinem Projekt nutzen. Du kannst einen Google Font entweder über seinen Namen oder per direktem Link zur Schriftressource referenzieren.
+
+    ### Verwendung per Name
+
+    In deiner Eingabeaufforderung kannst du den Namen eines Google Fonts angeben, und Lovable wird ihn in dein Projekt einbinden. Zum Beispiel:
+
+    ```text
+    Use Playfair Display as the first subtitle title font in the hero section. 
+    
+    Make sure to use the useEffect React hook to apply the font properly.
+    ```
+
+    ### Verwendung per Link
+
+    Alternativ kannst du einen direkten Link zum Google Font angeben, und Lovable wird diese Schrift in deinem Projekt verwenden. Du erhältst den Link von [Google Fonts](https://fonts.google.com), indem du die gewünschte Schrift auswählst und den Link kopierst.
+
+    So kannst du Lovable per Eingabeaufforderung anweisen, einen Google Font über einen Link zu verwenden:
+
+    ```text
+    Add this Google font link https://fonts.google.com/specimen/Dancing+Script 
+    and use this font for the third subtitle.
+    
+    Make sure to load the font using the useEffect React hook.
+    ```
+
+    Mit diesen Methoden kannst du die Typografie deines Lovable-Projekts anpassen – entweder mit websicheren Schriftarten oder mit Google Fonts.
+
+    ## Weiterführende Inhalte und Beispiele
+
+    Um diese Methoden zur Schriftenintegration in Aktion zu sehen, kannst du eines unserer Beispielprojekte erkunden: [Lovable using fonts example project](https://lovable.dev/projects/3a826f38-d9cb-4d60-b4da-30a9b00149c8).
+
+    In diesem Projekt findest du reale Eingabeaufforderungen, die zeigen, wie wir verschiedene Schriftstile angewendet haben, einschließlich websicherer Schriftarten wie Courier New und benutzerdefinierter Schriftarten von Google Fonts.
+
+    <Frame>
+      ![Verschiedene Schriftarten in einem Lovable-Projekt verwendet](/assets/using-custom-fonts-example.png)
+    </Frame>
+    Zusätzlich kannst du dir für einen technischeren Einblick in die Schriftintegration dieses öffentliche Repository ansehen: [GitHub: adding-fonts-example](https://github.com/viborc/adding-fonts-example). Es enthält alle Implementierungsdetails und zeigt, wie verschiedene Schriftarten im Projekt geladen und angewendet wurden.
+  </Accordion>
+</AccordionGroup>

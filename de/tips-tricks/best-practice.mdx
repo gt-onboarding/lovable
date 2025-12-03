@@ -1,0 +1,215 @@
+---
+title: "Best Practices"
+description: "Das Beste aus Lovable herausholen"
+icon: "dumbbell"
+---
+
+Dieser Leitfaden hilft allen Nutzer:innen – ob neu oder erfahren –, schnell durchzustarten und häufige Fallstricke beim Erstellen von Apps mit Lovable zu vermeiden.
+
+<div id="1-set-your-foundation-use-the-knowledge-file">
+  ## 1. Lege dein Fundament: Verwende die Knowledge-Datei
+</div>
+
+**Warum das wichtig ist:** Die [Knowledge](/de/features/knowledge)-Datei ist das Gehirn deines Projekts. Sie wird mit jeder Eingabeaufforderung gesendet und hilft der KI, den gesamten Kontext zu verstehen.
+
+**Was sie enthalten sollte:**
+
+* Deine Produktvision (ähnlich wie ein PRD)
+* User Journeys und Personas
+* Zentrale Features und Funktionen
+* Designsysteme und UI-Richtlinien
+* Rollenspezifisches Verhalten (z. B. Admin, User, Investor)
+
+<Tip>
+  Du kannst eine Knowledge-Datei automatisch über Chat mode generieren:
+
+  ```
+  Generate knowledge for my project at T=0 based on the features I’ve already implemented.
+  ```
+</Tip>
+
+<div id="2-prompting-best-practices">
+  ## 2. [Eingabeaufforderungen (Prompting)](/de/prompting/prompting-one) Best Practices
+</div>
+
+**Klare, ausführliche Eingabeaufforderungen = besseres Ergebnis.** Stell dir die KI wie deinen Engineering-Partner vor – sie weiß nur, was du ihr sagst.
+
+**Tipps für Eingabeaufforderungen:**
+
+* Sei spezifisch: Nenne die genaue Seite (z. B. `/dashboard`) und das erwartete Verhalten.
+* Verwende natürliche Sprache
+
+  ```
+  Ich möchte, dass Benutzer mit der Rolle Investor auf diese Komponente zugreifen können, aber nicht Admins.
+  ```
+* Füge Screenshots hinzu: Besonders hilfreich, um Bugs oder UX-Probleme zu beschreiben.
+* Setze Leitplanken: Sag der KI, was sie **nicht** anfassen soll. Z. B.
+
+  ```
+  Bearbeite /shared/Layout.tsx nicht.
+  ```
+* Wiederhole wichtige Anweisungen über mehrere Eingabeaufforderungen hinweg. Das Gedächtnis der KI kann begrenzt sein.
+* Versuche nicht, 5 Dinge gleichzeitig zu implementieren. Teile die Arbeit in kleinere, testbare Schritte auf. Verwende Chat Mode nach jedem Block, um zu validieren, bevor du weitermachst.
+
+  ```
+  **Vorlage zur Feature-Aufteilung:**
+  Erstelle die neue Seite
+  Füge das UI-Layout hinzu
+  Verbinde die Daten
+  Füge Logik + Randfälle hinzu
+  Teste pro Rolle
+  ```
+* Wenn deine App mehrere Rollen hat (z. B. Admin, Investor, Startup), definiere immer, *für welche Rolle* die Eingabeaufforderung gilt. So vermeidest du Bugs durch geteilte Logik/Komponenten.
+
+  ```
+  Als Investor möchte ich das Unternehmens-Dashboard ansehen können, aber ich sollte es nicht bearbeiten dürfen. Bitte isoliere dieses Feature ausschließlich auf die Rolle „Investor“.
+  ```
+
+<div id="3-use-chat-mode-early-and-often">
+  ## 3. Use chat mode early and often
+</div>
+
+[**Chat mode**](https://docs.lovable.dev/features/labs#chat-mode) = dein KI‑Copilot. Er hilft dir beim Debuggen, Brainstormen und Planen von Implementierungen – ohne deinen Code zu bearbeiten, bis du bereit bist.
+
+**Wann du zu Chat Mode wechseln solltest:**
+
+* Nach 2–3 fehlgeschlagenen „Try to Fix“-Versuchen
+* Beim Debuggen komplexer Logik oder Datenbankproblemen
+* Beim Planen neuer Features
+
+  ```
+  Suggest 3 ways to implement X
+  ```
+
+<Tip>
+  **Workflow-Tipp:**
+
+  Einige Nutzer verwenden Chat Mode gerne für 60–70 % ihrer Zeit. Klicke erst auf „Implement the plan“, wenn du vollständig zufrieden bist.
+</Tip>
+
+<Tip>
+  Falls du vergisst, den Chat mode zu verwenden, verbessert dieses Format die Konsistenz der Ergebnisse und verhindert unbeabsichtigte Änderungen an anderem Code.
+
+  ```
+  On page /settings, implement [feature]. The expected behavior is [XYZ]. Please don’t touch component A, layout B, or shared logic unless necessary. Follow best practices from Tailwind / Supabase / X.
+  ```
+</Tip>
+
+<Tip>
+  Um unerwünschte Codeausführung zu vermeiden:
+
+  ```
+  Investigate but don’t write code yet.
+  ```
+
+  ```
+  Suggest 3 ways to solve this without changing anything.
+  ```
+
+  So behältst du die Kontrolle.
+</Tip>
+
+<Tip>
+  Wenn die KI in eine „Schleife“ gerät, verwende diese Abfolge, um endlose Zyklen zu vermeiden, in denen immer wieder kaputter Code geflickt wird:
+
+  1. Wechsle zu Chat mode
+  2. Füge den Fehlerscreenshot ein
+  3. Sage:
+
+     ```
+     Please investigate this without breaking other features. If needed, revert to the last working version and fix from there.
+     ```
+</Tip>
+
+<div id="4-avoid-common-pitfalls-with-supabase">
+  ## 4. Häufige Fallstricke mit Supabase vermeiden
+</div>
+
+**Achtung:** [Supabase](https://docs.lovable.dev/integrations/supabase) lässt sich nicht sauber zurücksetzen. Wenn du eine Version zurücksetzt, kann dein Datenbankschema beschädigt werden.
+
+**Best Practices:**
+
+* Supabase **erst verbinden**, nachdem dein Frontend stabil ist
+* Wenn du zurücksetzen musst, gib der KI folgende Eingabeaufforderung:
+
+  ```
+  Please validate the SQL schema at T=0 and ensure no breaking changes have occurred.
+  ```
+* Teste immer alle datenbankgebundenen Funktionen, bevor du veröffentlichst
+
+<div id="5-use-visual-edit-for-quick-ui-fixes">
+  ## 5. Verwende Visual Edit für schnelle UI-Korrekturen
+</div>
+
+Das [**Visual Edit-Tool**](https://docs.lovable.dev/features/visual-edit) ist kostenlos und schnell. Verwende es statt Eingabeaufforderungen für:
+
+* Änderungen an Text, Farben, Schriftarten und kleine Layout-Anpassungen
+* Gleichzeitiges Bearbeiten mehrerer kleiner Elemente
+* Sichere Commits, ohne Credits zu verbrauchen (mit Rückgängig-Funktion)
+
+<div id="6-use-github-version-control-wisely">
+  ## 6. [GitHub](https://docs.lovable.dev/integrations/git-integration) + Versionskontrolle sinnvoll nutzen
+</div>
+
+* Jede Bearbeitung ist ein Commit. Nutze **Pinning**, um stabile Versionen zu markieren. Nach jedem funktionierenden Feature: **pinnen**
+* Nach jedem Bug: **Versionen visuell vergleichen.** Du kannst die folgende Eingabeaufforderung verwenden:
+
+  ```
+  Compare version at T–1 to T–0. What changed? What might be breaking?
+  ```
+* Wechsle zu einer stabilen Version zurück, wenn du das Gefühl hast, dass die KI zu viel kaputt gemacht hat.
+* Nutze **GitHub-Branching** auf eigenes Risiko. Vermeide das Löschen von Branches, bevor du in Lovable wieder zu `main` wechselst, um Projekt-Sync-Probleme zu verhindern.
+
+<div id="7-when-all-else-fails-remix">
+  ## 7. Wenn nichts mehr hilft, remixen
+</div>
+
+Viele Nutzer:innen merken: Beim zweiten Mal geht alles schneller.
+
+* [Remix](https://docs.lovable.dev/user-guides/quickstart#remix-an-existing-project:~:text=you%20to%20reuse-,the,-current%20state%20of) erstellt eine saubere Kopie deines Projekts bei T=0.
+* Baue mit besseren Eingabeaufforderungen + klarerem Verständnis neu auf
+* Nutze dein altes Projekt nur noch als Referenz
+
+**Anwendungsfälle:**
+
+* Du hängst in einer fehlerhaften Endlosschleife fest
+* Du willst sauber neu starten, aber den Verlauf erhalten
+* Du musst Supabase trennen und einen neuen Weg ausprobieren
+
+<Tip>
+  Zum Remixen musst du Supabase zuerst trennen.
+</Tip>
+
+<div id="8-stay-patient-stay-calm">
+  ## 8. Bleib geduldig, bleib gelassen
+</div>
+
+Du bist nicht allein. KI kann in einem Moment magisch und im nächsten frustrierend sein. Die letzten 5 % eines Builds sind oft die langsamsten – aber auch die wichtigsten.
+
+<Tip>
+  **Goldene Regel:**
+
+  Nimm dir Zeit für deine Eingabeaufforderungen. Überprüfe alles noch einmal. Teile die Arbeit in kleine, testbare Blöcke auf. Je präziser deine Eingaben sind, desto besser sind deine Ergebnisse.
+</Tip>
+
+<div id="9-use-the-docs-and-ask-for-help">
+  ## 9. Nutze die Doku und bitte um Hilfe
+</div>
+
+* In der [Dokumentation](https://docs.lovable.dev) findest du Schritt-für-Schritt-Anleitungen, Vorlagen, SEO-Tipps, Integrationen und mehr. Du kannst deine Fragen direkt an den KI-Assistenten in der Doku stellen.
+* Tritt der [Discord-Community](https://discord.gg/lovable-dev) für Unterstützung durch andere Nutzer:innen bei.
+* Wenn du so weit bist, reiche dein Projekt bei [Lovable Launch](https://docs.lovable.dev/features/launched) ein.
+
+<div id="10-bonus-tips">
+  ## 10. Bonustipps
+</div>
+
+* Füge für lange Eingabeaufforderungen eine sprachbasierte Eingabeaufforderung per Diktierfunktion hinzu (z. B. kannst du auf dem Mac das Mikrofon nutzen, um lange Eingabeaufforderungen zu diktieren). So erstellst du schneller bessere Eingaben – besonders hilfreich, wenn du frustriert oder müde bist.
+* Verwende das Muster der Eingabeaufforderung „`I am frustrated…`“, um den Fokus der KI zu verbessern.
+* Überprüfe nach einer größeren Änderung stets mehrere Rollen und deren Verhalten (insbesondere bei bedingter Logik).
+* Speichere stabile Versionen als Fallbacks für schnelleres Debugging.
+* Wenn du unerwartete Nebeneffekte siehst, hilft das, Bugs zu vermeiden, die durch zu generische Logik verursacht werden.
+
+  ```
+  Create a component specifically for [role X] and do not reuse shared components unless clearly scoped.
+  ```

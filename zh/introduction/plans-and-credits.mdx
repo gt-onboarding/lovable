@@ -1,0 +1,204 @@
+---
+title: "方案和点数"
+description: "了解 Lovable 中的方案、点数使用和点数结转"
+icon: "money-bill-wave"
+---
+
+Lovable 是一项基于订阅的服务，提供免费方案和多个付费方案。订阅付费方案后，你可以使用更多功能，并获得更多点数。在 Lovable 中发送消息需要使用点数。
+
+<div id="feature-comparison-free-plan-vs-paid-plans">
+  ## 功能对比：免费方案与付费方案
+</div>
+
+<div id="free-plan">
+  ### 免费方案
+</div>
+
+- 每天 5 个额度，每月最多 30 个
+- 工作区协作，成员数量不限
+
+<div id="pro-plan">
+  ### 专业版
+</div>
+
+- 每日 5 点数，每月最多 150 点
+- 每月点数数量取决于你的订阅计划
+- 工作区协作，成员数量不限
+- 工作区角色与权限
+- 私有项目
+- 可将自定义域名连接到你的 Lovable 项目
+- 可从你的 Lovable 项目中移除“Edit with Lovable”徽章
+- 可使用 Code 模式，在 Lovable 内直接编辑代码
+
+<div id="business-plan">
+  ### 商业套餐
+</div>
+
+_包含 Pro 的所有功能，另外还包括：_
+
+- SSO
+- 工作区内的个人项目
+- 选择不将数据用于训练
+- 构建可复用的设计模板，以简化你的项目
+
+<div id="available-paid-plans">
+  ### 可用的付费方案
+</div>
+
+每个付费方案都包含固定数量的月度额度。我们提供 **Pro** 和 **Business** 两种方案，每种都有不同的定价选项和专属权益，适合个人用户或团队使用。你可以选择按月或按年支付。按年计费还提供额外优惠，例如更低的折算月费，以及更高的未使用额度结转上限。
+
+**Pro**
+
+| 每月额度 (credits) | 按月计费        | 按年计费                    |
+| ------------------ | --------------- | --------------------------- |
+| 100                | \$25            | \$250 (\$21/月)            |
+| 200                | \$50            | \$500 (\$42/月)            |
+| 400                | \$100           | \$1,000 (\$84/月)          |
+| 800                | \$200           | \$2,000 (\$167/月)         |
+| 1,200              | \$294           | \$2,940 (\$245/月)         |
+| 2,000              | \$480           | \$4,800 (\$400/月)         |
+| 3,000              | \$705           | \$7,050 (\$588/月)         |
+| 4,000              | \$920           | \$9,200 (\$767/月)         |
+| 5,000              | \$1,125         | \$11,250 (\$938/月)        |
+| 7,500              | \$1,688         | \$16,880 (\$1,407/月)      |
+| 10,000             | \$2,250         | \$22,500 (\$1,875/月)      |
+
+**Business**
+
+| 每月额度 (credits) | 按月计费        | 按年计费                    |
+| ------------------ | --------------- | --------------------------- |
+| 100                | \$50            | \$500 (\$42/月)            |
+| 200                | \$100           | \$1,000 (\$84/月)          |
+| 400                | \$200           | \$2,000 (\$167/月)         |
+| 800                | \$400           | \$4,000 (\$334/月)         |
+| 1,200              | \$588           | \$5,880 (\$490/月)         |
+| 2,000              | \$960           | \$9,600 (\$800/月)         |
+| 3,000              | \$1,410         | \$14,100 (\$1,175/月)      |
+| 4,000              | \$1,840         | \$18,400 (\$1,534/月)      |
+| 5,000              | \$2,250         | \$22,500 (\$1,875/月)      |
+| 7,500              | \$3,300         | \$33,000 (\$2,750/月)      |
+| 10,000             | \$4,300         | \$43,000 (\$3,584/月)      |
+
+<Note>
+  当你升级方案时（例如从 100 额度方案升级到 200 额度方案），你并不会获得 200 个新的额度。
+  相反，你当月的总额度会更新为 200。也就是说，如果你已经有 100 个月度额度，升级后只会多出 100 个额度，而不是多出 200 个额度。
+</Note>
+
+<div id="credit-display">
+  ## 额度显示
+</div>
+
+要查看你拥有或已使用的额度，只需在主仪表盘中点击你的 Workspace 名称，或在项目编辑器中点击项目名称。  
+你会看到本计费周期剩余额度的数量，以及额度进度条。  
+额度进度条以可视化方式展示用户剩余额度和已使用额度。 
+
+- **灰色部分**：显示本计费周期已使用的额度数量。 
+- **蓝色部分**：显示不同类型的剩余额度。将鼠标悬停在每个彩色区块上时，会显示一个提示气泡，标明额度类型以及该类型的准确可用额度数量。
+
+<Frame>
+  <video autoPlay loop muted playsInline className="w-full">
+    <source src="/assets/introduction/videos/credit-bar.mp4" type="video/mp4" />
+  </video>
+</Frame>
+
+<div id="credit-usage">
+  ## 点数使用
+</div>
+
+Lovable 使用基于用量的点数系统，每发送一条消息都会消耗点数。  
+每条消息的消耗取决于其复杂度，以确保你只为实际使用的部分付费。 
+
+许多消息的消耗低于 1 点，更复杂的消息则会消耗更多。  
+这种方式可以让你对每条消息进行更精细的编辑，并提升使用效率，从而让整体使用 Lovable 的成本更低。
+
+下面是一些示例提示词及其对应的消耗：
+
+| 用户提示                          | 完成的工作                                                        | 消耗点数           |
+| ---------------------------------- | ----------------------------------------------------------------- | ------------------ |
+| Make the button gray               | 更改按钮样式                                                      | 0.50               |
+| Remove the footer                  | 移除页脚组件                                                      | 0.90               |
+| Add authentication                 | 添加登录和身份验证逻辑                                            | 1.20               |
+| Build a landing page with images   | 创建带生成图片、主题和多个区块的落地页                            | 2.00               |
+
+<Card title="查看已用点数" img="/assets/introduction/images/view-credits-on-message-agent.png">
+你可以在聊天记录中点击消息下方的三个点按钮，查看每条消息的消耗。
+</Card>
+
+<div id="credit-rollovers">
+  ## 额度结转
+</div>
+
+只要你的订阅保持为激活状态，所有未使用的月度额度都会在每个计费周期结束时自动结转，适用于按月和按年付费方案。对于月度方案，结转的额度将在接下来的一个月内可用。对于 **年度方案** 用户，结转的额度将在你的年度方案剩余期限内持续可用。
+
+**取消订阅**：当你取消付费订阅后，所有未使用额度和已结转额度都会在当前计费周期结束时失效，且不会继续结转。
+
+<Warning>
+  每日额度不会结转。无论是免费方案还是付费方案，未使用的每日额度在不同日期之间**不会累积**。
+</Warning>
+
+如需了解订阅选项的详细信息，请访问我们的[定价页面](https://lovable.dev/pricing)。
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="什么是 credit？">
+    在 Lovable 中发送消息会消耗 credit（积分）。
+  </Accordion>
+  <Accordion title="如何升级我的订阅？">
+    1. 点击控制台右上角的个人资料图标 → Settings → Plans &amp; credits，或访问[此页面](https://lovable.dev/?settings=billing)。 
+    2. 在“credits per month”下拉菜单中选择你希望的积分数量，然后点击“Upgrade”。接着在 Stripe 门户中完成升级。
+  </Accordion>
+  <Accordion title="如何降级我的订阅？">
+    1. 访问[此页面](https://lovable.dev/?settings=billing)，或点击控制台右上角的个人资料图标 → Settings → Plans &amp; credits。 
+    2. 在“credits/month”下拉菜单中选择你希望的积分数量，然后点击“Downgrade”。 
+    3. 先在 Lovable 中完成降级操作，然后在 Stripe 门户中确认。 
+    你当前的套餐会在本计费周期结束前保持有效。
+  </Accordion>
+  <Accordion title="如何取消我的订阅？">
+    1. 访问[此页面](https://lovable.dev/?settings=billing)，或点击控制台右上角的个人资料图标 → Settings → Plans &amp; credits。 
+    2. 点击 Manage → Downgrade to Free，并完成相关步骤。 
+    你当前的套餐会在本计费周期结束前保持有效。
+  </Accordion>
+  <Accordion title="如何更改我的账单信息？">
+    若要更改账单信息，点击控制台右上角的个人资料图标 → Settings → Plans &amp; credits → Manage your payment preferences。系统会将你重定向至 Stripe 门户，你可以在其中修改相关信息。
+  </Accordion>
+  <Accordion title="如何下载我的发票？">
+    你可以通过点击控制台右上角的个人资料图标 → Settings → Plans &amp; credits → Manage → View invoices 来查看历史发票。系统会将你重定向至 Stripe 门户，你可以在其中找到历史发票。
+  </Accordion>
+  <Accordion title="如何获取更多 credits？">
+    你可以在 Account Settings 中升级套餐，以获得更多积分。
+  </Accordion>
+  <Accordion title="我的每月 credit 限额何时重置？">
+    你的每月 credit 限额会在计费周期重置时一同重置。这个时间为你开始订阅时的同一天、同一时间。要查看具体日期和时间，请前往你的[账单设置](https://lovable.dev/?settings=billing)。
+  </Accordion>
+  <Accordion title="每日 credit 限额何时重置？">
+    每日 credit 会在每天的世界协调时（UTC）午夜重置。在免费套餐下，你每个日历月最多可以使用 30 个免费积分。
+  </Accordion>
+  <Accordion title="我可以单独购买额外的 credits 吗？">
+    在计费周期重置之前，获取更多积分的唯一方式是升级到更高一级的套餐。
+  </Accordion>
+  <Accordion title="如何查看某个工作区中剩余的 credits？">
+    你可以通过点击控制台右上角的个人资料图标查看剩余积分，或者在项目编辑器中点击项目名称旁的下拉菜单查看。
+  </Accordion>
+  <Accordion title="我可以获得免费 credits 吗？">
+    我们**不会通过客户支持请求**提供免费积分。
+  </Accordion>
+</AccordionGroup>
+
+<div id="common-issues-and-troubleshooting">
+  ## 常见问题与故障排查
+</div>
+
+<AccordionGroup>
+  <Accordion title="我无法为订阅付款，该怎么办？">
+    有时，支付可能会因为 Stripe 的问题而失败。如果发生这种情况，请仔细检查你的支付信息并重试。如果问题仍然存在，请尝试使用其他支付方式。
+  </Accordion>
+  <Accordion title="我已经付款，但仍然无法使用我的套餐，该怎么办？">
+    请通过 [support@lovable.dev](mailto:support@lovable.dev) 联系客户支持。
+  </Accordion>
+  <Accordion title="我已经升级了，但还没有收到任何额度，该怎么办？">
+    只有当你升级到额度更高的套餐时，你才会收到新的额度。如果你已经完成升级但仍未收到额度，请通过 [support@lovable.dev](mailto:support@lovable.dev) 联系客户支持。
+  </Accordion>
+</AccordionGroup>

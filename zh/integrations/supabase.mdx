@@ -1,0 +1,266 @@
+---
+title: "Supabase 集成"
+description: "使用 Supabase 为你的 Lovable 应用集成一个功能完备的后端。"
+icon: "database"
+---
+
+Lovable 的 **原生** [Supabase](https://supabase.com/) **集成**让你可以通过一个统一且简单易用的聊天界面，同时管理前端 UI 和后端数据库。换句话说，你可以在 Lovable 中完成应用界面的设计，_并且_ 配置云端 PostgreSQL 数据库，而无需离开 Lovable。这种一体化方式让强大的应用开发对所有人都触手可及——非技术用户可以依靠 Lovable 的引导，而有经验的开发者则可以按需使用 Supabase 的高级特性。
+
+<div id="overview">
+  ## 概览
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/-sSOyO0FiPE?si=WljVA-E0YU4LObMY" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Supabase 是一个开源的 Firebase 替代方案，提供托管式 PostgreSQL 数据库，具备实时功能、用户身份验证、文件存储以及无服务器函数。通过将 Supabase 连接到你的 Lovable 应用，你可以立即获得一个可用于生产环境的后端，而无需编写任何样板代码或手动配置服务器。Supabase 直观的 Web 控制台让你可以轻松管理数据和用户，而其强大的 SQL 基础则确保你能够充分发挥 PostgreSQL 数据库的全部性能和可扩展性。
+
+<div id="key-features-unlocked-by-supabase-integration">
+  ### **通过 Supabase 集成解锁的关键功能：**
+</div>
+
+- **数据库（PostgreSQL）** – 使用完整的 SQL 支持来存储和查询你的应用数据。Lovable 可以根据你的提示自动生成所需的数据表和表结构（schema）。
+- **用户认证** – 安全管理用户注册、登录和访问控制。Lovable 可以通过一个简单的提示，将预构建的认证流程（邮箱/密码等）添加到你的应用中。
+- **文件存储** – 通过 Supabase Storage 上传并提供图片或其他文件的访问。非常适合用户头像、文件上传，或你的应用需要处理的任何静态媒体。
+- **实时更新** – Supabase 可以将实时数据变更推送到你的应用。这可以实现诸如实时聊天、活动动态，或可为所有用户即时更新的协作型仪表盘等功能。
+- **Edge Functions（Serverless）** – 在 Supabase 的基础设施上运行自定义后端逻辑（使用 JavaScript/TypeScript）。Lovable 会为发送邮件、处理支付或与外部 API 集成等任务创建并部署这些函数。
+
+<div id="why-use-lovables-supabase-integration">
+  ### **为什么要使用 Lovable 的 Supabase 集成？**
+</div>
+
+在 Lovable 中，你不需要在前端设计和后端配置之间来回切换多套工具。只要和 Lovable 的 AI 对话，你就可以同时构建 UI，_并且_ 让底层的数据库和服务端函数为你自动创建。这意味着开发更高效，集成问题更少。比如，当你向 Lovable 提示 “Add a user feedback form and save responses to the database” 时，Lovable 会生成表单 UI，**并且** 创建一个 Supabase 表来存储反馈——一次性全部搞定。这种端到端的无缝生成能力是 Lovable 的独特优势，既能帮助初学者构建复杂应用，也能让高级用户大幅加快开发节奏。
+
+<div id="getting-started-connecting-supabase-to-lovable">
+  ## 入门：将 Supabase 连接到 Lovable
+</div>
+
+将 Supabase 后端连接到你的 Lovable 项目非常简单。你需要一个 Supabase 账号（免费套餐即可）和一个已经创建好的 Lovable 项目。如果你还没有 Supabase 账号，可以在 Supabase 官网注册——免费套餐不需要信用卡。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/V_2aZCjrTJo" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<Steps>
+  <Step title="创建 Supabase 账号">
+    在[这里](https://app.supabase.com/sign-up)注册一个新的 Supabase 账号，或者如果你已经有账号，可以直接[登录](https://app.supabase.com/sign-in)。
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/g8CvOq3b-sg" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+  </Step>
+  <Step title="在 Supabase 中创建一个新项目">
+    点击「+ New Project」，填写必要的信息，然后等待几分钟完成配置。
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/z6eDOn1613U?si=OhuL1AdNObVYFkbY" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Step>
+  <Step title="将 Supabase 连接到 Lovable">
+    <Steps>
+      <Step title="在 Lovable 中发起 Supabase 连接">
+        在项目编辑器中，进入项目设置。在 Integrations 下找到 Supabase 标签页。点击 **Connect Supabase**。Lovable 会提示你登录 Supabase 账号。登录你的 Supabase 账号并授权 Lovable。
+      </Step>
+      <Step title="授权并选择或创建项目">
+        接下来，你需要选择一个要与 Lovable 应用关联的 Supabase **organization** 和 **project**。你可以选择一个已有项目，或者现场创建一个新项目（如果需要，Lovable 的聊天窗口会引导你创建一个新的 Supabase 项目）。
+      </Step>
+      <Step title="等待配置完成">
+        选择项目后，Lovable 会自动完成连接配置。几秒钟内，你应该会在聊天中看到一条确认消息（例如 “✅ Supabase connected”）。此时，你的 Lovable 应用已经连接到 Supabase 数据库，可以开始使用认证、数据存储和其他后端功能。
+      </Step>
+    </Steps>
+    <Tip>
+      Lovable 和 Supabase 都为开发提供了非常慷慨的免费套餐。如果你的应用规模增长或需要高级功能，将来可能需要分别为每项服务升级到付费计划。当前阶段，你可以放心试验，而无需产生费用。
+    </Tip>
+  </Step>
+</Steps>
+
+<div id="adding-user-authentication">
+  ## 添加用户身份验证
+</div>
+
+你很可能最先想要实现的功能之一就是用户身份验证（让用户可以注册并登录你的应用）。Lovable 的 Supabase 集成让你可以在聊天中极其轻松地完成这一配置。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/LHpMUj-Jf_k" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<div id="email-and-password-basic-setup">
+  ### 邮箱和密码（基础设置）
+</div>
+
+一旦你的项目连接到 Supabase，Lovable 就可以为你生成身份验证页面。比如，你可以直接向 AI 输入提示：**“Add login”**。这通常会在你的应用中创建一个基础登录页面（以及相关的注册流程），并已经与 Supabase 的认证系统连接好。
+
+在 Lovable 添加好登录 UI 之后，你有几种方式可以创建用户用于测试：
+
+<Note>
+  示例提示：
+
+  ```
+  Add login
+  ```
+</Note>
+
+- **通过应用内的注册表单：** 使用应用中新添加的界面来注册用户（这会与 Supabase 通信以创建账号）。
+- **通过 Supabase Dashboard：** 前往你的 Supabase 项目的仪表盘，进入 **Authentication \> Users**，手动添加一个新用户（邮箱和密码）。这对于快速创建测试账号非常方便。
+
+<Tip>
+  为了方便开发调试，我们建议在测试时在 Supabase 中禁用邮箱确认。这样，用户无需验证邮箱就可以立即登录。要实现这一点，打开你的 Supabase 仪表盘，进入 **Authentication \> Settings（或 Providers）\> Email**，然后**禁用 “Confirm email”（确认邮箱）要求**。在生产环境上线时，你可以重新启用邮箱确认以增强安全性。
+</Tip>
+
+Lovable 已经为你的 Lovable 应用配置好了对已认证用户的识别（例如，在合适的情况下，仅允许已登录用户访问特定页面）。你可以通过 Lovable 的编辑器或提示进一步自定义登录/注册页面的外观和交互。Supabase Integration 2.0 甚至允许你为注册表单添加额外字段，或对表单进行样式调整以匹配你的品牌风格。
+
+<div id="social-logins-eg-google">
+  ### 社交登录（例如 Google）
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/W6-_0-Eekio?si=8WkxiJn0oe4wfSbe" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Supabase 支持 Google、GitHub、Twitter 等 OAuth 登录方式。你也可以将这些集成到你的 Lovable 应用中：
+
+1. **在 Supabase 中启用提供方：** 在你的 Supabase 控制台中，进入 **Authentication \> Providers**。你会看到一个外部登录提供方列表。切换开启 **Google**（例如），然后按照说明填写来自 Google 的必需 OAuth Client ID 和 Secret。_（Supabase 会引导你如何从 Google 的开发者控制台获取这些凭据。）_ 保存设置后，你的 Supabase 项目现在就知道如何处理 Google 登录了。
+2. **更新你的 Lovable 应用 UI：** 接下来，你可以向 Lovable 提示添加社交登录选项。例如：**“在登录页面添加一个 ‘Sign in with Google’ 按钮。”** Lovable 会修改认证页面，添加 Google 登录按钮，以及通过 Supabase 发起 OAuth 流程所需的代码。
+
+完成这些后，你应用的用户就可以点击 “Sign in with Google”，被重定向到 Google 进行身份验证，然后以已登录用户的身份返回到你的应用。你可以用类似的方式启用其他提供方（GitHub、Facebook 等）——只要记得在 Supabase 中为每一个进行配置，然后相应地调整你的 Lovable UI 即可。
+
+<div id="managing-data-with-supabase">
+  ## 使用 Supabase 管理数据
+</div>
+
+除了身份验证之外，大多数应用的核心是读写数据。借助 Lovable 和 Supabase，你可以创建数据库表，并且无需离开聊天界面，只需通过提示就能把它们连接到你的 UI。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/V5LdDEuCli4" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<div id="creating-database-tables-via-lovable">
+  ### 通过 Lovable 创建数据库表
+</div>
+
+连接 Supabase 之后，每当你需要持久化存储数据时，你都可以向 Lovable 发出指令，它会为你协调完成数据库设置。整个流程通常如下所示：
+
+<Steps>
+  <Step title="描述你需要的功能和数据">
+    在 Lovable 的聊天中，请求一个涉及数据存储的功能。例如，你可以说：**“添加一个反馈表单，并将回复保存到一个数据库表中。”** 尽可能清楚地说明你想存储哪些数据（例如带有消息和评分的用户反馈，或包含名称、价格等信息的库存项）。Lovable 会根据这些信息确定需要怎样的数据库结构。
+  </Step>
+  <Step title="查看生成的 SQL 代码片段">
+    Lovable 的 AI 会给出对你应用的更新建议。由于你的请求涉及数据存储，Lovable 还会生成一个 SQL schema 代码片段——本质上就是在 Supabase 中创建所需表或列的命令。例如，它可能会说：_“我将创建一个表 _`feedback`_，包含列 _`id`_、_`message`_ 和 _`rating`_”_，并提供相应的 SQL 代码。这个代码片段会出现在聊天或侧边栏中，方便你复制。
+  </Step>
+  <Step title="在 Supabase 中运行 SQL">
+    打开你的 Supabase 控制台，进入 **SQL Editor**。将来自 Lovable 的 SQL 代码片段粘贴进去并执行，这将在你的数据库中创建新表（或修改现有表）。你可以在 Supabase 的 **Table Editor** 中确认该表已经创建，并且包含指定的列。
+  </Step>
+  <Step title="确认并让 Lovable 完成集成">
+    回到 Lovable，确认你已经运行了 SQL（聊天可能会询问确认，或者你可以直接告诉 Lovable “done”，或点击提供的确认按钮）。随后 Lovable 会完成集成：它会更新你应用的 UI，将表单输入、列表或其他组件绑定到新的 Supabase 表。延续我们的例子，你应用中的反馈表单现在已经连接好了——当用户提交反馈时，它会被保存到 `feedback` 表中，你也可以检索并展示这些记录。
+  </Step>
+</Steps>
+
+就是这样\\！你无需手动设计数据库 schema，也不需要编写任何后端代码——Lovable 和 Supabase 会根据你的描述自动完成。你可以为任何新的数据功能（博客文章、评论、产品等）重复这一流程。
+
+例如，如果你希望用户能够在你的应用中发布文章，你可以给出这样的提示：**“允许用户创建带有标题和内容的帖子，并将这些内容存储在数据库中。”** Lovable 会生成一个 `posts` 表（包含标题、内容、作者、时间戳等字段），提供将其添加到 Supabase 的 SQL，然后将前端表单和页面与该表连接起来。
+
+<Note>
+  Supabase 的控制台提供了功能丰富的界面来管理你的数据。你可以在类似电子表格的 UI 中查看和编辑表行，定义表之间的关系，甚至从 CSV 或 Excel 导入数据。在底层，它完全基于 PostgreSQL——这意味着你可以根据需要执行复杂查询或使用各种 SQL 特性。Supabase 甚至在其 SQL 编辑器中提供了 **AI SQL Assistant**，如果你不熟悉 SQL，它可以帮助你编写查询。这对于高级分析或故障排查非常有用。
+</Note>
+
+<div id="file-storage-images-media">
+  ### 文件存储（图片和媒体）
+</div>
+
+当你的 Lovable 应用需要处理文件上传（例如用户头像、附件或各类媒体文件）时，Supabase 集成就能满足这一需求。Supabase 提供了一个方便的 **Storage** 服务，用于托管文件（图片、视频、PDF 等），并与数据库一同管理。
+
+如果你在 Lovable 应用中添加了一个 **Upload** 组件或图片上传功能，Lovable 会在幕后使用 Supabase Storage。上传的文件会存储在你 Supabase 项目中的一个存储桶（bucket）里，你会获得一个 URL 或引用，供之后显示或下载该文件使用。
+
+默认情况下，Supabase 的免费层允许上传的单个文件大小最多为 **50MB**。这已经足以覆盖大多数图片或短视频。如果你的应用需要处理更大的文件，Supabase 的付费方案支持更大体积的上传（包括针对超大文件的 **断点续传**）。你可以将文件组织到存储桶（buckets，相当于文件夹）中，并在需要时通过 Supabase 控制台管理访问权限。
+
+<Note>
+  假设你的应用有用户个人资料功能，并且你希望用户可以添加头像。你可以这样提示 Lovable：_“在账号设置页面添加一个头像上传功能。”_ Lovable 会创建用于上传图片的 UI。得益于 Supabase 集成，当用户上传文件时，它会被保存到你的 Supabase Storage 中（位于某个存储桶中，例如 `public/avatar-images`），并且 Lovable 会负责获取该图片 URL，在你的应用中显示头像。所有这一切都无需你编写任何与存储相关的代码。
+</Note>
+
+<div id="storing-secrets-api-keys-config">
+  ## 存储机密信息（API 密钥和配置）
+</div>
+
+许多应用需要使用密钥或 API 凭证来连接第三方服务，例如用 Stripe 处理支付，或用 OpenAI 提供 AI 功能。连接 Supabase 后，Lovable 提供了一种安全的方式来管理和使用这些机密信息。
+
+当某个功能需要机密信息时，Lovable 会自动检测到，并通过界面提示你输入所需的值。
+
+这些机密信息会安全地存储在 Supabase 的边缘函数机密信息管理器中，供你的项目使用。它们会被加密并安全保存在后端。当你部署 Edge Functions（见下一节）时，这些函数可以访问这些机密信息，以连接外部服务。
+
+<Tip>
+  例如，如果你集成 Stripe 来处理支付，你会将 Stripe 的 Secret Key 作为机密信息进行存储。当 Lovable 将支付处理函数部署到 Supabase 时，它会自动从机密信息存储中读取并注入该密钥，使该函数可以向 Stripe 进行身份验证。这样，你就无需在应用中硬编码机密信息，也可以避免将它们公开暴露。
+</Tip>
+
+<div id="backend-logic-with-edge-functions">
+  ## 使用 Edge Functions 实现后端逻辑
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/p_hKIDlxXp0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+有时你的应用需要的不仅是基础数据 CRUD（Create, Read, Update, Delete），还需要自定义的后端逻辑。**Supabase Edge Functions** 是无服务器函数（类似于 AWS Lambda），可以在后端被事件或请求触发来执行代码。借助 Lovable 与 Supabase 的集成，你可以用自然语言描述期望的后端行为，Lovable 会为你编写并部署所需的 Edge Function 代码到 Supabase。
+
+在 Lovable 中，Edge Functions 的典型用例包括：
+
+- **使用 AI 服务：** 例如，使用 OpenAI 或 Anthropic 的 API 处理某些输入（API 密钥按上文所述作为机密存储）。
+- **发送邮件或通知：** 例如，当用户注册时，通过像 Resend 这样的邮件 API 发送欢迎邮件。
+- **处理支付：** 例如，使用 Stripe 的 API 创建结账会话或完成订单。
+- **定时任务：** 例如，每小时/每天执行一次清理或汇总任务（Supabase Edge Functions 可以按计划触发）。
+- **复杂计算或第三方集成：** 任何你不希望在客户端运行的代码，都可以放在 Edge Function 中完成。
+
+要添加后端函数，只需在 Lovable 聊天中描述你的需求即可。例如：_“When a user submits the feedback form, analyze the text using OpenAI and store a sentiment score.”_ Lovable 会为这段逻辑生成一个 Supabase Edge Function（在这个例子中调用 OpenAI API），并将其部署到你的 Supabase 项目中。同时，它还会更新你的 Lovable 应用，在合适的时机调用这个函数（例如在表单提交时），并处理返回结果。
+
+你可以在 Supabase 控制台的 **Functions** 下找到并监控你的 Edge Functions。每个函数都会有日志，显示最近的执行情况以及输出或错误。Lovable 的 Supabase 集成 2.0 通过在出错时自动读取这些日志来改进这一体验——如果你的函数报错，Lovable 会在聊天中呈现错误信息，帮助你进行排查。当然，你也可以随时自行查看 Supabase 日志，以获取更多细节。
+
+<Warning>
+  **在正式上线之前：** Supabase 的默认安全规则在开发环境中较为宽松，但在生产环境中你应设置 **Row Level Security (RLS)** 策略来保护你的数据。RLS 允许你定义谁可以读取或写入数据库表中的每一行（例如，确保用户只能访问自己的数据）。如果你向它提供相应的提示（例如，“Apply security policies so users can only edit their own feedback”），Lovable 可以协助生成基础的 RLS 策略。不过，你务必在 Supabase 控制台的 **Auth \> Policies** 下对这些策略进行审查和测试。在邀请真实用户使用你的应用之前，正确配置安全性至关重要。
+</Warning>
+
+<div id="faq">
+  ### 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="Supabase 集成究竟能帮你做什么？">
+    它为你的 Lovable 应用提供一个完全托管的后端服务。没有它，Lovable 依然可以帮你构建 UI，但你将没有开箱即用的数据持久化或用户管理能力。连接 Supabase 之后，Lovable 可以创建用户账户（认证）、在数据库中存储和读取数据、上传文件、运行服务端代码等——而且这些都会自动完成。本质上，Supabase 为你的应用提供底层的数据库和服务器，而 Lovable 则通过提示来驱动它们。
+  </Accordion>
+
+  <Accordion title="我需要分别为 Lovable 和 Supabase 创建账户吗？">
+    是的。Lovable 和 Supabase 是两个独立的平台。除了你的 Lovable 账号之外，你还需要一个 Supabase 账号（用于托管你的数据库）。好消息是，这两个平台都有免费套餐，所以你可以零成本开始使用。只要记住，如果你之后为获取更高用量或更多功能而升级，你需要分别处理每项服务的计费。
+  </Accordion>
+
+  <Accordion title="如何将 Lovable 连接到 Supabase？">
+    1. 在 Lovable 编辑器中，转到 **Integrations** 部分。
+    2. 点击 **Connect to Supabase**，并按照身份验证步骤操作。
+    3. 如有需要，可在 Lovable 中新建一个 Supabase 项目。
+    4. Lovable 会自动生成所需的数据库 schema，并将其连接到你的项目。
+  </Accordion>
+
+  <Accordion title="我可以将已连接 Supabase 的 Lovable 应用与外部自动化工具集成吗？">
+    当然可以。使用 Lovable + Supabase 时，你的数据会存储在 Supabase 的数据库中，而 Supabase 还会为你的数据表自动生成 RESTful API（以及对应的客户端库）。这意味着你可以使用 Zapier、[Make.com](http://Make.com) 或任何其他服务，通过 HTTP 请求与应用的后端数据进行交互。比如，Zapier 可以从你应用的某个 Supabase 数据表中读取记录或写入新记录。此外，你还可以使用 Supabase 的 Edge Functions（Lovable 可以帮你创建）来定义自定义 API 端点，以触发更复杂的自动化流程。总之，集成第三方自动化服务是完全可行的——只是可能需要对 Supabase 的 API 密钥或 webhook 做一些额外配置。
+  </Accordion>
+
+  <Accordion title="当我的应用发展壮大时，Supabase 的扩展能力如何？">
+    Supabase 构建在 **PostgreSQL** 之上，能够处理海量数据和高访问量。开箱即用时，你的免费数据库就可以应对相当可观的工作负载（数百万行数据、多路并发连接）。随着需求增长，你可以升级 Supabase 套餐，以获得更多存储空间、更高吞吐量和更多功能。许多生产环境的应用完全运行在 Supabase 上，因此你可以放心使用。只要留意免费层的使用上限（Supabase 会在其网站上详细说明），如果接近这些上限，就要提前规划扩容。
+  </Accordion>
+
+  <Accordion title="如何为我的应用添加像聊天或实时动态这样的实时功能？">
+    Supabase 为你的数据库内置了实时订阅功能。这意味着你的应用可以监听特定数据表上的更改（插入、更新、删除），并立刻做出响应。要利用这一点，你可以照常设计 Lovable 应用的功能（例如，一个将消息写入 `messages` 表的聊天室）。Lovable 了解 Supabase 的实时能力，因此可以在前端设置对该数据表变更的订阅。
+
+    在实际使用中，当你创建好一个用于存储聊天消息的数据表后，你可以向 Lovable 提示 **“enable real-time updates for the chat”**，它会在底层使用 Supabase 的实时 API。这样，用户就能实时看到新消息，而无需刷新页面。对于任何需要实时更新的场景（评论、通知、仪表盘等），这一机制都适用。
+  </Accordion>
+
+  <Accordion title="Supabase 存储中的文件上传有没有限制？">
+    在免费方案下，Supabase 会将单个文件的上传大小限制为 **50MB**。这能覆盖大多数使用场景，比如图片、音频或短视频。如果你需要处理更大的文件（例如更长的视频或大型数据集），升级到付费方案后就可以使用更高的文件大小上限，甚至支持断点续传。另请注意，每个项目还有一个总存储配额（例如你总共可以存储多少 GB），并且在更高级别的方案中该配额会提高。
+  </Accordion>
+
+  <Accordion title="如何在 Supabase 中配置身份验证？">
+    Lovable 会自动设置身份验证，但你可能还需要：
+
+    * 前往 **Supabase Dashboard &gt; Authentication**。
+    * 启用 **Email Sign-in/Sign-up**。
+    * 禁用电子邮件确认，便于本地测试。
+  </Accordion>
+
+  <Accordion title="我可以在多个 Lovable 项目中共用同一个 Supabase 数据库吗？">
+    可以的。你可以在 Lovable 中构建多个前端应用，它们都连接到同一个 Supabase 项目（因此共享同一套数据库和认证机制）。这属于高级用法，但完全可行——例如，将主应用和管理后台分别作为独立的 Lovable 项目，但共用同一个数据库。在每个项目中连接 Supabase 时，只需选择同一个 Supabase 项目即可。请记住，这些应用都会对同一份数据进行读写，因此需要相应地进行设计和规划。
+  </Accordion>
+
+  <Accordion title="如果我想在不影响线上应用的前提下测试数据库的变更，该怎么办？">
+    目前，每个 Lovable 项目只连接到一个 Supabase 项目，并且 Lovable 尚不提供内置的预发布环境（staging）。如果你想要一个安全的试验环境，Supabase 提供了名为 **Branching** 的功能，可以让你创建数据库的临时副本（类似于 git 分支）来测试更改。你可以将一个单独的 Lovable 项目连接到数据库的某个分支或副本用于测试。一般来说，对于重要项目，在线上应用上直接修改数据库 schema 时要格外谨慎——建议先创建备份或使用 Branching，在准备就绪后再合并变更。Lovable 的集成能力还在不断演进，将来的更新可能会引入更顺畅的预发布工作流。
+  </Accordion>
+
+  <Accordion title="Supabase 或 Lovable 会帮我编写自定义 SQL 查询或数据库逻辑吗？">
+    是的。Supabase 的 Web 界面中包含一个 **AI SQL Assistant**，可以从自然语言生成 SQL 查询。所以如果你需要一条复杂的查询语句，或者不太熟悉写 SQL，可以在 Supabase 的 SQL 编辑器里试用这个工具。至于 Lovable 这边，你通常完全不需要手写 SQL —— AI 会为你处理大部分的 schema 创建和查询。但如果你是高级用户并且想做一些自定义操作，你随时可以使用 Lovable 的 GitHub 集成来查看或编辑代码，或者在需要时对数据库运行原生 SQL。
+  </Accordion>
+
+  <Accordion title="如何在 Lovable 应用中处理支付？">
+    支付通过与 Stripe 等服务的集成来完成，你可以将其与 Supabase Edge Functions 结合使用。比如，你可以向 Lovable 发出这样的提示：“添加一个结账按钮，并使用 Stripe 处理支付。” 然后，Lovable 会创建一个与 Stripe 的 API 通信的边缘函数（使用你以机密形式存储的 Stripe 密钥），并可能将交易详情存储在你的 Supabase 数据库中。UI 会随之更新，包含结账/支付按钮。本质上，Supabase 提供了实现支付所需的环境（Edge Functions、数据库），而 Lovable 可以为你生成相应的代码脚手架。更多详情可参考 Lovable 文档中的 Stripe &amp; Payments 集成指南，其中详细介绍了如何配置 Stripe。
+  </Accordion>
+</AccordionGroup>

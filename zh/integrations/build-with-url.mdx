@@ -1,0 +1,124 @@
+---
+title: "Lovable API：通过 URL 构建"
+description: "Lovable API 的 Build with URL 功能现已开放公测，使你能够通过简单、可分享的 URL 构建和分享 Lovable 应用。"
+icon: "window-restore"
+keywords: ['Lovable API', 'API', 'Build with URL API', 'Create apps from URL', 'build with lovable']
+---
+
+Lovable API 的 **Build with URL** 功能允许你通过在 URL 参数中传递提示词和图片，以编程方式创建应用。这样你就可以将其与网站、内部工具或自动化工作流无缝集成，让用户一键生成 Lovable 应用。
+
+每个链接都会告诉 Lovable 要构建*什么*，以及（可选）*要包含哪些图片*——剩下的都由 Lovable 自动完成。
+
+示例：
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+点击此链接会自动打开 Lovable，并开始创建一个待办事项应用。
+
+
+<div id="use-cases">
+  ## 使用场景
+</div>
+
+使用 Build with URL API，你可以：
+
+- 在你的网站或应用中嵌入一个 **Build with Lovable** 按钮。用户点击按钮后会跳转到 Lovable，并自动生成应用。
+- 通过 URL 与朋友、同事或在社交媒体上分享预设的提示词。
+- 将应用生成流程自动化，并将其纳入内部工作流。
+- 使用带有提示词和参考图像的 URL 快速构建应用原型。
+
+你可以自己构造该 URL，或使用 [Lovable Link Generator](https://lovable.dev/links)。更多信息见下文。
+
+<div id="base-url">
+  ## 基础 URL
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#
+```
+
+`autosubmit`（布尔类型）：必须设置为 `true` 才能自动处理请求
+
+
+<div id="url-with-parameters">
+  ## 带参数的 URL
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#prompt=YOUR_PROMPT_HERE&images=IMAGE_URL_1&images=IMAGE_URL_2
+```
+
+
+<div id="parameters">
+  ### 参数
+</div>
+
+| 参数       | 类型   | 描述                                                                                                                                                                          | 必填/可选   |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `prompt`   | string | 对要构建的应用的文本描述。长度上限为 50,000 个字符。请使用 URL 编码（例如将空格编码为 `%20`）。由于浏览器或解析限制，超长 URL 可能会导致请求失败。 | 必填        |
+| `images`   | string | 最多可提供 10 个已进行 URL 编码的图片 URL 作为参考。图片 URL 必须可被公开访问。支持的格式：JPEG、PNG、WebP。                                                                  | 可选        |
+
+<div id="lovable-link-generator">
+  ## Lovable 链接生成器
+</div>
+
+使用 [Lovable Link Generator](https://lovable.dev/links) 轻松构建可分享的 URL，这些链接会根据你输入的提示和图片生成应用。
+
+1. 输入你的提示，用来描述要构建的应用（最多 50k 字符）。
+2. 上传最多 10 个公开的图片 URL（JPEG、PNG 或 WebP）。
+3. 复制生成的 Lovable URL 并分享。
+
+这个工具可以帮助避免 URL 编码错误，并确保链接格式正确。
+
+<div id="build-with-url-examples">
+  ## 通过 URL 示例构建应用
+</div>
+
+**基础应用生成**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+**单张参考图片**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg
+```
+
+**多张参考图像**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg&images=https://img.com/2.jpg​
+```
+
+
+<div id="best-practices">
+  ## 最佳实践
+</div>
+
+- 保持提示词简洁，并聚焦于核心功能。
+- 使用清晰、具描述性的语言，以获得最佳生成效果。
+- 在合适的情况下加入参考图片，帮助引导生成过程。
+- 确保提示词和图片 URL 中的特殊字符已进行 URL 编码，以避免解析问题。
+
+<div id="app-creation-and-authentication-flow-for-shared-urls">
+  ## 使用共享 URL 的应用创建和身份验证流程
+</div>
+
+当用户点击 **Build with URL** 链接时：
+
+- **已登录用户**：选择要用于创建项目的工作区，然后应用会自动开始创建。
+- **未登录用户**：会被重定向到注册/登录页面。成功完成身份验证后，选择要用于创建项目的工作区，然后应用会自动开始创建，并保留原始提示和图片。
+
+<div id="error-handling">
+  ## 错误处理
+</div>
+
+如果 URL 过长或格式不正确，你可能会遇到：
+
+- 浏览器提示“URL 过长”错误
+- 参数解析不完整
+- 自动提交失败

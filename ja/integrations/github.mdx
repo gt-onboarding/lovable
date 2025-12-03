@@ -1,0 +1,174 @@
+---
+title: "プロジェクトをGitHubに接続する"
+sidebarTitle: "GitHub連携"
+description: "LovableのプロジェクトをGitHubに接続・同期・切断して、コードのバックアップ、コラボレーション、デプロイを行う方法を説明します。"
+icon: "github"
+keywords: ["LovableをGitHubに接続する","LovableのプロジェクトをGitHubにエクスポートする","GitHub連携","GitHub同期","GitHubの接続を解除する","Lovableのコードをバックアップする","LovableとGitHubを同期する","GitHubリポジトリのセットアップ","双方向同期","Lovableコードのエクスポート","GitHub連携ガイド","GitHubからLovableをデプロイする"]
+---
+
+Lovableでプロジェクトを作成すると、コードはLovableプラットフォーム内に保存されます。これは、ほとんどのクリエイターにとって理想的な形です。
+
+自分でコードのコピーを持っておきたい場合や、開発者と共同作業を行う予定がある場合、あるいはプロジェクトを別の場所へ移行したい場合は、数回クリックするだけで、すべてをGitHubにエクスポートして同期できます。
+
+<div id="about-github">
+  ## GitHub について
+</div>
+
+GitHub は、コードを保存・管理・共有するためのクラウドベースのプラットフォームです。すべての変更を記録し、共同作業をサポートし、Vercel や Netlify などの代表的なデプロイツールと連携します。開発者向けに作られた、コード版の **Google Drive** のようなものだと考えてください。
+
+<div id="why-connect-lovable-to-github">
+  ## なぜ Lovable を GitHub と接続するのか
+</div>
+
+Lovable のプロジェクトを GitHub に接続すると、次のことができるようになります。
+
+* **コードをバックアップできる:** プロジェクトを Lovable の外部に安全に保管できます。
+* **簡単にコラボレーションできる:** 開発者を招待し、プルリクエストやブランチ、コードレビューを活用できます。
+* **自動で同期できる:** Lovable での編集内容が GitHub に反映され、GitHub での変更はデフォルトブランチ（`main`）に対して Lovable に同期されます。
+* **ローカルで作業できる:** IDE でクローン、編集、コミットしつつ、プロジェクトの同期状態を保てます。
+* **どこにでもデプロイできる:** セルフホストしたり、別のプラットフォームにデプロイしたりできます。詳しくは [セルフホスティング: Lovable Cloud プロジェクトをどこでも実行する](/ja/tips-tricks/self-hosting) を参照してください。
+* **安全にテストできる:** 本番プロジェクトに変更をマージする前に機能を開発できるよう、**Settings → Account → Labs** で実験的機能の **GitHub branch switching** を有効にしてください。詳細は [Labs](/ja/features/labs) を参照してください。
+
+<Note>
+  Lovable を利用するのに GitHub は必須ではありません。多くのユーザーは Lovable だけでプロジェクトを構築し、公開しています。
+</Note>
+
+<div id="before-you-connect">
+  ## 接続する前に
+</div>
+
+GitHub 連携の仕組みを理解しておきましょう:
+
+* **GitHub アカウントが必要:** [github.com](http://github.com) で無料で作成できます。
+* **信頼できる唯一のコード保管場所:** 接続後は、コードは Lovable ではなく GitHub に保存されます。
+* **双方向同期:** Lovable での編集は GitHub に反映され、その逆も同様に反映されます。
+* **リポジトリの場所は固定:** 接続は、GitHub リポジトリの正確な名前、場所、所属組織、アカウントに依存します。
+
+<Warning>
+  接続後に GitHub リポジトリの名前変更、移動、削除は行わないでください。同期が壊れ、Lovable からプロジェクトを更新できなくなります。
+</Warning>
+
+<div id="set-up-the-github-integration">
+  ## GitHub連携を設定する
+</div>
+
+GitHub連携を管理できるのは、ワークスペースの**管理者とオーナー**のみです。アカウントやOrganizationの追加、プロジェクトの接続や切断を行えます。
+
+GitHubとの接続は、次の3つの段階で行います。
+
+1. **GitHubアカウントをリンクする**（OAuth認可）
+2. アカウントまたはOrganizationに**Lovable GitHub Appをインストールする**
+3. **個々のプロジェクトを**リポジトリに接続する
+
+<div id="step-1-connect-your-github-account">
+  ### ステップ 1：GitHub アカウントを接続する
+</div>
+
+このステップでは、OAuth 認可を通じてあなたの GitHub アカウントを Lovable にリンクします。
+
+1. **Settings → Integrations → GitHub** に移動します。
+2. **Connect GitHub** をクリックします。
+3. GitHub アカウントにサインインするか、GitHub の ID を確認するために **lovable.dev を承認** します。\
+   その後、プロジェクトを接続するオプションが表示されます。
+
+<div id="step-2-install-the-lovable-github-app">
+  ### ステップ 2: Lovable GitHub アプリをインストールする
+</div>
+
+このステップでは、GitHub の個人アカウントまたは組織に **Lovable GitHub App** をインストールし、Lovable がそこでリポジトリを作成・更新できるように権限を付与します。
+
+アプリは、個人の GitHub アカウント、または管理者権限を持つ任意の組織にインストールできます。
+
+1. **Settings → Integrations → GitHub** に移動します。
+2. **Connect project** をクリックします。
+3. **Add organizations** をクリックし、**install and authorize lovable.dev** を行う場所として、個人アカウントまたはいずれかの組織を選択します。
+4. **all repositories**（すべてのリポジトリ）か **only selected ones**（選択したリポジトリのみ）のどちらにアクセス権を付与するか選択します。
+5. **Install &amp; Authorize** をクリックして、選択したアカウントまたは組織で Lovable がリポジトリを作成および更新できるように権限を付与します。
+
+<div id="step-3-connect-a-project-to-github">
+  ### ステップ 3: プロジェクトを GitHub に接続する
+</div>
+
+このステップでは、特定の Lovable プロジェクトを GitHub リポジトリに接続します。各 Lovable プロジェクトには、**1 つのリポジトリだけをリンク**できます。
+
+1. **Settings → Integrations → GitHub** に移動し、**Connect project** をクリックするか、プロジェクト右上の GitHub アイコンをクリックして **Connect GitHub** をクリックします。
+2. コードを保存したい GitHub の組織またはアカウントを選択します。
+3. **Transfer anyway** をクリックして転送を確定し、双方向同期を設定します。\
+   プロジェクト用の新しい GitHub リポジトリが作成され、自動的に同期が開始されます。
+
+<div id="disconnect-your-project-from-github">
+  ## プロジェクトを GitHub から切断する
+</div>
+
+ワークスペースの管理者とオーナーは、いつでもプロジェクトの GitHub 設定から、そのプロジェクトを GitHub から切断できます。
+
+切断すると、次のことが起こります：
+
+* **同期が停止します：** Lovable と GitHub 間の双方向の連携が終了します。
+* **リポジトリは GitHub 上に残ります：** すべての履歴とファイルを保持したまま、そのまま残ります。
+* **コードは Lovable に残ります：** 今後の変更は Lovable 内にのみ保存されます。
+
+後で再接続した場合：
+
+* 最新の Lovable のコードを使って、**新しい GitHub リポジトリ** が作成されます。
+* **元のリポジトリ** は GitHub 上に残りますが、Lovable とはリンクされなくなります。
+
+<Note>
+  Lovable から GitHub リポジトリにアクセスできない場合（たとえば、リポジトリ名が変更された、移動された、削除されたなど）、プロジェクトを切断することはできません。
+</Note>
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="この機能を使うのに GitHub の知識は必要ですか？">
+    いいえ。接続して認可するだけで、GitHub があなたのコードを安全に保存します。
+
+    ブランチの運用や、ほかの開発者とのコラボレーションなど、より高度なことをしたい場合にだけ GitHub の機能を学ぶ必要があります。
+  </Accordion>
+
+  <Accordion title="「Connect GitHub」をクリックしても何も起きません — どうすればいいですか？">
+    ブラウザが GitHub のログインポップアップをブロックしている可能性があります。Lovable のポップアップを許可してから、もう一度お試しください。
+  </Accordion>
+
+  <Accordion title="GitHub リポジトリの名前変更、移動、削除をしたらどうなりますか？">
+    接続が切れます。プロジェクトの同期が止まり、Lovable で編集できなくなります。
+
+    これを修正するには、リポジトリを元の名前と場所に戻してください。削除した場合は、[GitHub 上でリポジトリを復元](https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository)できます。
+  </Accordion>
+
+  <Accordion title="GitHub のユーザー名または Organization 名を変更したらどうなりますか？">
+    接続が切れます。プロジェクトの同期が止まり、Lovable で編集できなくなります。
+
+    これを修正するには、元の GitHub ユーザー名または Organization 名に戻してください。
+  </Accordion>
+
+  <Accordion title="別の GitHub アカウントに切り替えるにはどうすればいいですか？">
+    一度接続した GitHub アカウントは変更できません。
+  </Accordion>
+
+  <Accordion title="リポジトリが誤った Organization に作成されてしまいました — 移動できますか？">
+    直接はできません。次の回避策を試してください。
+
+    1. **プロジェクトをリミックス**して、新しいコピーを作成します。
+    2. **新しいプロジェクトを GitHub に接続**します。
+    3. セットアップ中に正しい Organization を選択します。
+  </Accordion>
+
+  <Accordion title="Lovable からリポジトリにアクセスできません — どうすればいいですか？">
+    リポジトリの名前変更、移動、または削除を行った可能性があります。リポジトリ名、パス、オーナーに対する変更を元に戻すか、削除されている場合は[リポジトリを復元](https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository)すれば、プロジェクトは再び動作するはずです。
+  </Accordion>
+
+  <Accordion title="GitHub との接続を解除できますか？">
+    はい。管理者とオーナーは、いつでもプロジェクトの GitHub 設定から GitHub との接続を解除できます。リポジトリは GitHub 上に残りますが、同期は停止します。後で再接続した場合は、新しいリポジトリが作成されます。
+  </Accordion>
+
+  <Accordion title="既存の GitHub リポジトリを Lovable にインポートできますか？">
+    いいえ。Lovable から GitHub へのエクスポートのみが可能で、その逆はできません。
+  </Accordion>
+
+  <Accordion title="コミットが Lovable に反映されないのはなぜですか？">
+    Lovable は **デフォルトブランチ**（通常は `main`）だけを同期します。自分のブランチを `main` にマージするか、Lovable 内で[ブランチを切り替え](/ja/features/labs)てください。
+  </Accordion>
+</AccordionGroup>

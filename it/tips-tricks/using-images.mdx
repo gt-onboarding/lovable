@@ -1,0 +1,117 @@
+---
+title: "Utilizzare le immagini in Lovable"
+description: "Scopri come aggiungere immagini ai tuoi progetti Lovable"
+icon: "frame"
+---
+
+Per aggiungere immagini, puoi procedere in uno di questi quattro modi:
+
+<AccordionGroup>
+  <Accordion title="Carica l’immagine nella chat delle istruzioni">
+    Caricali semplicemente nella chat e spiega all&#39;Agent di Lovable dove e come vorresti che compaiano nel tuo Progetto. Ad esempio:
+
+    > Sostituisci il logo nella navbar con questa immagine
+  </Accordion>
+
+  <Accordion title="Sostituiscilo nell'editor visivo">
+    Puoi sostituire direttamente un&#39;immagine esistente usando la funzionalità di [editor visuale](https://docs.lovable.dev/features/precision-edit#visual-edits):
+
+    <Steps>
+      <Step title="Passaggio 1">
+        Fai clic sullo strumento &quot;Edit&quot;.
+      </Step>
+
+      <Step title="Passaggio 2">
+        Seleziona il contenitore dell&#39;immagine che desideri modificare.
+
+        ![images/visual-edit-replace.png](/images/visual-edit-replace.png)
+      </Step>
+
+      <Step title="Passaggio 3">
+        Sostituisci l&#39;immagine.
+
+        ![images/visual-edit-image.png](/images/visual-edit-image.png)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Usare un URL di un'immagine esterna">
+    Un modo per aggiungere immagini al tuo Progetto è fare riferimento a un&#39;immagine tramite un URL esterno. Questo metodo ti permette di usare immagini ospitate su piattaforme esterne come Unsplash, Imgur o qualsiasi altro servizio di hosting di immagini. Fai attenzione ai diritti d&#39;autore!
+
+    Ecco come fornire un&#39;istruzione a Lovable per usare un&#39;immagine esterna:
+
+    <Steps>
+      <Step title="Passaggio 1">
+        Trova l&#39;immagine che vuoi usare.
+
+        Ad esempio, puoi visitare un sito come Unsplash, selezionare un&#39;immagine e copiarne l&#39;URL.
+      </Step>
+
+      <Step title="Passaggio 2">
+        Nella tua istruzione per il Progetto, indica semplicemente a Lovable di usare quell&#39;immagine specificando l&#39;URL. Ad esempio:
+
+        ```
+        Use the image from this URL 
+        https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/442px-Pale_Blue_Dot.png 
+        for the hero section image.
+        ```
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Utilizzare immagini dalla tua directory pubblica su GitHub">
+    Un altro metodo per aggiungere immagini al tuo progetto Lovable è usare le immagini caricate nella directory `public` del repository GitHub collegato. Ecco come puoi farlo:
+
+    <Steps>
+      <Step title="Collega il tuo repository GitHub">
+        Assicurati che il tuo progetto sia collegato al tuo repository GitHub. [Ecco come collegare il tuo repository](https://docs.lovable.dev/integrations/git-integration).
+      </Step>
+
+      <Step title="Individua la cartella public">
+        All&#39;interno del tuo repository GitHub, vai alla directory `public`. Questa cartella è in genere usata per ospitare risorse come immagini che possono essere richiamate nel tuo progetto.
+      </Step>
+
+      <Step title="Aggiungi file">
+        Clicca su **Add file** e poi, dal menu a discesa, seleziona l&#39;opzione **Upload files**. <img src="/assets/using-images-github-upload.png" alt="Selezione dei file da caricare" />
+      </Step>
+
+      <Step title="Carica un'immagine">
+        Il passo successivo è trasferire l&#39;immagine nel tuo repository:
+
+        * Trascina e rilascia l&#39;immagine nella cartella public, oppure
+        * Clicca sul link **&quot;choose your files&quot;** per cercare e selezionare il file immagine. <img src="/assets/using-images-github-commiting.png" alt="Selezione dei file da caricare" />
+      </Step>
+
+      <Step title="Esegui il commit delle modifiche">
+        Dopo aver selezionato l&#39;immagine, scrivi un semplice messaggio di commit (ad esempio, &quot;Adding image files to be used in the app&quot;) e clicca su **&quot;Commit changes&quot;** per salvare il file nel tuo repository.
+      </Step>
+
+      <Step title="Ottieni il percorso dell'immagine">
+        Una volta caricato il file, selezionalo e poi clicca sull&#39;icona di copia accanto al nome del file per copiare il percorso dell&#39;immagine. Questo percorso verrà usato nella tua istruzione Lovable. <img src="/assets/using-images-github-selecting.png" alt="Selezione dei file da caricare" />
+      </Step>
+
+      <Step title="Usa l'immagine in Lovable">
+        Ora puoi usare questa immagine nel tuo progetto tramite un&#39;istruzione come la seguente:
+
+        ```
+        Add an additional image to the hero section. 
+        This time, use this one from my local repo: public/c-64-close-up.jpg.jpeg
+        ```
+
+        Assicurati di usare il nome dell&#39;immagine e il percorso che hai copiato nel passaggio precedente.
+
+        <Warning>
+          Caricare immagini di grandi dimensioni nel tuo repository GitHub può farlo aumentare di dimensioni, il che può influire sulle prestazioni di Lovable (tempi di clonazione del repository più lunghi, avvio più lento di anteprime/sandbox).
+
+          Cerca di ottimizzare le tue immagini prima di caricarle nella cartella `public`, comprimendole e usando dimensioni pertinenti al tuo caso d&#39;uso. Ad esempio, non usare un&#39;immagine in formato full HD se verrà visualizzata solo come una piccola icona.
+        </Warning>
+      </Step>
+    </Steps>
+
+    Per aiutarti a capire meglio come integrare le immagini usando i metodi descritti sopra, abbiamo un progetto che puoi esplorare: [Lovable Project Example](https://lovable.dev/projects/e823fedf-238d-4313-86a8-1fd4bfc2a9ba). In questo progetto puoi vedere i prompt effettivi e come ogni metodo funziona in pratica.
+
+    Inoltre, ecco un repository GitHub pubblico che include i commit, le immagini caricate e tutti i dettagli di implementazione. Puoi visualizzare il repository qui: [GitHub: Adding Images Example](https://github.com/viborc/adding-images-example).
+
+    Sentiti libero di esplorare il progetto e il repository per approfondire la tua comprensione e migliorare le tue abilità di implementazione.
+  </Accordion>
+</AccordionGroup>

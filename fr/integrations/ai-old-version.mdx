@@ -1,0 +1,181 @@
+---
+title: "Intégration de l'IA"
+description: "Comment intégrer des services d'IA dans des projets Lovable"
+icon: "wand-magic-sparkles"
+seo:
+  indexing: false
+---
+
+Lovable facilite l'intégration de services d'IA dans vos applications web. Que vous souhaitiez créer une landing page propulsée par l'IA, un outil de génération de texte ou une application SaaS complète, les intégrations intégrées de Lovable avec des services comme 
+[**OpenAI**](https://platform.openai.com/), [**Groq**](https://console.groq.com/keys), [**Claude**](https://www.anthropic.com/api), [**Deepseek**](https://api-docs.deepseek.com/), et [**Mistral**](https://docs.mistral.ai/api/) rendent cela possible sans avoir à écrire de code back-end. Voici comment faire : 
+
+<Steps>
+  <Step title="Choisir la fonctionnalité d'IA dont vous avez besoin">
+    Avant de commencer à créer, définissez ce que vous attendez de l'IA&nbsp;:
+
+    - Générer ou améliorer du texte (par exemple&nbsp;: rédacteur d'e-mails, générateur de tweets)
+    - Classer ou résumer du contenu
+    - Analyser des images
+    - Personnaliser les réponses
+    - S'intégrer à une API de LLM spécifique
+  </Step>
+  <Step title="Planifier d'abord avec des Prompts">
+    Utilisez l'interface de chat de Lovable pour décrire votre fonctionnalité en termes simples. Par exemple&nbsp;:
+
+    ```
+    Build an email enhancement tool. The user should write an email, then click buttons to make it more professional, concise, or friendly using Groq API.
+    ```
+
+    Lovable créera l'ossature de l'UI, suggérera des composants et vous permettra d'obtenir rapidement un aperçu de l'application.
+  </Step>
+  <Step title="Connecter un backend avec Supabase">
+    Les fonctionnalités d'IA ont souvent besoin de logique backend. Supabase fournit&nbsp;:
+
+    - Une base de données pour les données utilisateur
+    - Auth pour la connexion/l'inscription
+    - Edge Functions pour appeler des API externes de manière sécurisée
+
+    <Tip>
+      Configurez Supabase tôt dans votre projet pour éviter les incohérences entre l'UI et le backend.
+    </Tip>
+  </Step>
+  <Step title="Utiliser des Edge Functions pour les appels IA">
+    Pour appeler des API d'IA en toute sécurité, créez une Edge Function dans Lovable&nbsp;:
+
+    - Ajoutez votre clé API à Supabase en la transmettant via le formulaire de secrets
+    - Laissez Lovable générer le code de la Edge Function
+    - Assurez-vous d'utiliser le function calling si votre API renvoie des données structurées (par ex. calories, macros, fils de tweets)
+
+    **Exemple de Prompt&nbsp;:**
+
+    ```
+    Use GPT-4 and function calling to extract nutrition info from a meal description. Save the results to the backend.
+    ```
+
+    <Tip>
+      Structurez votre schéma de function calling OpenAI avec des champs définis comme&nbsp;:
+
+      ```
+      {
+        "name": "extract_nutrition",
+        "parameters": {
+          "calories": "number",
+          "protein": "number",
+          "carbs": "number",
+          "fat": "number"
+        }
+      }
+      ```
+    </Tip>
+  </Step>
+  <Step title="Rendre l'expérience interactive">
+    Ajoutez des boutons ou actions de formulaire pour&nbsp;:
+
+    - Envoyer du texte à l'IA
+    - Importer une image
+    - Basculer entre les modes (ton concis vs amical)
+
+    Lovable vous permet de&nbsp;:
+
+    - Attacher des fonctions aux boutons
+    - Animer les interactions
+    - Afficher des résultats en temps réel avec un minimum de prompts
+
+    <Tip>
+      Utilisez des captures d'écran et des phrases comme «&nbsp;rendre ceci plus fluide&nbsp;» pour guider le design.
+    </Tip>
+    <Tip>
+      **Conseil UX avancé&nbsp;:** implémentez des aperçus en direct côte à côte de la réponse de l'IA. Utilisez des blocs de mise en page gauche/droite ou des onglets pour permettre aux utilisateurs de comparer les résultats.
+    </Tip>
+  </Step>
+  <Step title="Utiliser des services externes (facultatif)">
+    Quelques intégrations populaires pour les workflows IA&nbsp;:
+
+    - **Resend** – envoyer des e-mails après la soumission d'un formulaire
+    - **Groq API** – inférence LLM ultra-rapide
+    - **Stripe** – restreindre l'accès aux outils IA derrière un paywall
+    - **Replicate** – générer ou transformer des images
+
+    **Exemple de Prompt&nbsp;:**
+
+    ```
+    When a user submits the contact form, send an email using Resend and store the message in Supabase.
+    ```
+
+    <Tip>
+      **Conseil paiements&nbsp;:** verrouillez les fonctionnalités d'IA avancées derrière un abonnement Stripe. Utilisez des flux conditionnels comme&nbsp;:
+
+      ```
+      if (user.isPaid) { showAIFeature(); } else { redirectToCheckout(); }
+      ```
+    </Tip>
+  </Step>
+  <Step title="Tester et itérer">
+    - Utilisez des liens d'aperçu pour tester la responsivité sur mobile
+    - Vérifiez les performances avec plusieurs appels d'API
+    - Partagez votre projet pour obtenir des retours
+    - Utilisez l'historique du chat pour annuler des changements ou refactoriser
+  </Step>
+  <Step title="Publier et promouvoir">
+    Quand vous êtes prêt&nbsp;:
+
+    - Déployez en un clic
+    - Utilisez [Lovable Launch](https://docs.lovable.dev/features/launched) pour gagner en visibilité
+    - Ajoutez des balises OG et un titre/une description SEO dans le panneau meta
+    - Soumettez votre application sur Product Hunt, dans des communautés et sur les réseaux sociaux
+  </Step>
+</Steps>
+
+<div id="debug-and-improve-prompts">
+  ## **Déboguer et améliorer les invites**
+</div>
+
+* Soyez précis dans les messages système : « Vous êtes un nutritionniste bienveillant. »
+* Testez l&#39;appel de fonctions en simulant les entrées.
+* Utilisez `console.log()` à l&#39;intérieur des Fonctions Edge pour tracer la logique.
+* Utilisez des captures d&#39;écran lorsque vous demandez à Lovable de déboguer une mise en page.
+
+**Astuce de Prompt :** Si l&#39;IA n&#39;utilise pas votre contexte (par exemple les repas de l&#39;utilisateur), dites :
+
+```
+Assurez-vous que tous les repas de l'utilisateur sont inclus dans le prompt envoyé à GPT-4.
+```
+
+
+<div id="troubleshooting">
+  ### Dépannage
+</div>
+
+<AccordionGroup>
+  <Accordion title="Données manquantes dans les prompts d'IA ?">
+    Veille à inclure du contexte, comme l'historique utilisateur ou les entrées précédentes.
+  </Accordion>
+  <Accordion title="L'UI ne se met pas à jour ?">
+    Utilise le mode chat uniquement pour déboguer une étape à la fois.
+  </Accordion>
+  <Accordion title="Problèmes de streaming avec Groq/OpenAI ?">
+    Assure-toi que `stream: true` est bien pris en charge.
+  </Accordion>
+  <Accordion title="Le chargement d'images ne fonctionne pas ?">
+    Utilise des champs de fichier et convertis-les en base64 ou envoie-les via Supabase Storage.
+  </Accordion>
+  <Accordion title="La Fonction Edge échoue silencieusement ?">
+    Affiche les journaux de la Fonction Edge dans l'éditeur de fonctions de Lovable ou dans le tableau de bord Supabase.
+  </Accordion>
+</AccordionGroup>
+
+<div id="example-projects-built-with-ai-integration">
+  ## Exemples de projets créés avec l’intégration de l’IA
+</div>
+
+- [**Nexus Smart Email** ](https://smart-email-nexus.lovable.app/) – Page d’atterrissage avec aperçu d’emails en temps réel optimisé par Groq
+- [**TweetMixer Pro**](https://www.youtube.com/watch?v=fT_dq_hyQAA&vl=de) – Collez des articles de blog et générez des fils de tweets avec GPT-4
+- [**AI Calorie Tracker**](https://www.youtube.com/watch?v=c0zhLzcVJRI&ab_channel=Lovable) – Analysez des repas avec GPT-4 à partir d’images importées
+- [**Robot Arena Shooter** ](https://www.youtube.com/watch?v=zmK36lkAb6I) – Jeu propulsé par Claude avec une logique améliorée par l’IA
+- [**Reindeer Quiz**](https://www.youtube.com/watch?v=XdZtpP3QpzQ) – Génération de résultats personnalisés avec Claude et logique de notation sur mesure
+
+<div id="final-thoughts">
+  ## Réflexions finales
+</div>
+
+Lovable est votre frontend, votre base de données, votre backend et votre pipeline de déploiement, le tout alimenté par l’IA. L’intégration de l’IA, c’est simplement prompt \+ contexte \+ tests. Procédez étape par étape, et souvenez-vous : vous n’avez pas besoin d’être ingénieur backend pour créer avec l’IA.

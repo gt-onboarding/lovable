@@ -1,0 +1,113 @@
+---
+title: "安全"
+description: "Lovable 中的安全功能"
+icon: "shield-halved"
+---
+
+<Note>
+  若要了解如何安全防护你在 Lovable 中构建的应用，请查阅我们的[为应用发布做准备并避免常见问题的详细指南](/zh/tips-tricks/avoiding-security-pitfalls)。
+</Note>
+
+<div id="api-keys">
+  # API 密钥
+</div>
+
+Lovable 会生成前端代码，这意味着这些代码会在浏览器中运行。因此，不应在代码中存储任何类型的敏感数据。为此，Lovable 提供了安全的机密存储功能。
+
+<div id="automatic-api-key-detection">
+  ## 自动检测 API 密钥
+</div>
+
+要连接第三方服务，通常需要 API 密钥或令牌。每当你在聊天中粘贴 API 密钥时，Lovable 都会自动检测，并提醒你不要将敏感凭证直接硬编码到前端代码中。与其粘贴 API 密钥，不如描述你想要实现的目标，Lovable 会引导你完成安全的实现方案。
+
+![API 密钥自动检测示例](/assets/features/images/API-key-detection.png)
+
+例如，与其这样：
+
+“添加这个 API 密钥来调用 Service X：x&#95;test&#95;abc123...”
+
+不如这样说：
+
+“我想集成 service X 的 API 来生成文本回复”
+
+然后 Lovable 会向你展示如何：
+
+1. 将你的 API 密钥安全地存储在机密信息存储（Secrets storage）中。
+
+2. 创建一个边缘函数，在服务端发起 API 调用。
+
+3. 在前端代码中调用该边缘函数。
+
+这种方式可以确保你的敏感凭证保持安全，并符合 web 应用的安全最佳实践。
+
+<div id="rls-role-level-security">
+  ## RLS（角色级安全性）
+</div>
+
+RLS 策略决定谁可以访问你数据库中的哪些数据。我们建议你在发布项目之前仔细审查这些策略，并在项目开发过程中持续回顾和更新它们。
+
+<div id="security-scanning">
+  # 安全扫描
+</div>
+
+在发布之前，Lovable 会显示由高级 AI 驱动的安全扫描器生成的安全警告，如果存在任何严重问题，会要求你确认是否仍要发布。
+
+我们强烈建议你在发布项目之前先解决所有严重问题，以保障应用的数据安全。每当你对应用进行重大修改时，一定要重新查看安全审查结果，并执行新一轮安全检查。
+
+![发布前安全审查](/assets/features/images/pre-publish-security-review.png)
+
+<Info>
+  安全扫描器未显示任何警告或错误并不代表你的应用不存在安全问题。我们建议你在发布前，结合可用工具对应用的安全性进行全面审查；如果你的应用处理敏感私人数据、提供关键功能，且潜在数据泄露可能对真实用户造成严重后果，建议聘请专业安全顾问对应用进行审计。
+</Info>
+
+Lovable 内置全面的 AI 驱动安全扫描功能，帮助你在发布之前识别代码中的潜在漏洞。
+
+<div id="security-view">
+  ## 安全视图
+</div>
+
+安全视图展示来自多个来源的检查结果：数据库安全顾问、对你的数据库 schema 和 RLS（行级安全，Row Level Security）策略的深入 AI 审查，以及对你的代码进行的 AI 驱动安全审查。这种综合方式可以更全面地覆盖潜在的安全问题。
+
+检查结果会按严重级别分类：
+
+* **Error**：需要立即处理的严重安全问题。包括提供 **Try to Fix** 选项，但无法保证所有问题都能被自动修复。
+* **Warning**：应当审查并很可能需要处理的重要安全隐患。
+* **Info**：供你参考的一般安全建议和最佳实践。
+
+点击 “Security Review” 按钮会触发一次更全面的 AI 分析，覆盖整个代码库，不仅检查数据库 schema 和 RLS 策略，还会审查你的应用代码，以发现更多潜在的安全漏洞。
+
+![API 密钥检测示例](/assets/features/images/security-view.png)
+
+<div id="on-demand-security-review">
+  ## 按需安全审查
+</div>
+
+你可以在任何时候请求安全审查，只需让 Lovable 执行“review my app&#39;s security”或发出类似措辞的请求。
+Lovable 将会：
+
+1. 分析你的整个代码库，查找安全漏洞。
+2. 检查常见问题，如 XSS 防护、输入净化以及身份验证缺陷。
+3. 审查你的 RLS 策略和数据库安全。
+4. 提供包含具体建议的详细报告。
+
+![如何找到安全审查功能](/assets/features/images/find-security-review.png)
+
+![正在执行的安全审查](/assets/features/images/security-review-in-action.png)
+
+<Warning>
+  请记住：即使扫描器没有给出任何警告，对于生产环境的应用，也应定期发起按需安全审查。
+</Warning>
+
+<div id="types-of-findings-and-their-remediation">
+  ## 问题类型及其修复方式
+</div>
+
+大多数问题都可以通过点击“Try to Fix”按钮自动修复，但有些仍需要手动处理。
+
+<div id="leaked-password-protection-disabled">
+  ### 泄露密码防护已禁用
+</div>
+
+使用 Lovable Cloud 时，请在 Cloud -&gt; Users -&gt; Auth Settings -&gt; Email 中启用“Password HIBP Check”开关。
+
+如果使用 Supabase 数据库，请按照以下文档中的说明进行操作：https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection

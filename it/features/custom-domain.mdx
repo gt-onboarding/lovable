@@ -1,0 +1,159 @@
+---
+title: "Collegare un dominio personalizzato"
+sidebarTitle: "Domini personalizzati"
+description: "Scopri come collegare, verificare, risolvere i problemi e gestire i domini personalizzati in Lovable"
+icon: "earth-europe"
+keywords: ["domini personalizzati","collegare dominio personalizzato","come aggiungere dominio personalizzato","dominio principale","stato del dominio","certificato SSL","verifica DNS","configurazione DNS"]
+---
+
+Un **dominio personalizzato** ti consente di usare il tuo dominio o sottodominio per il tuo Progetto Lovable pubblicato. Quando colleghi un dominio personalizzato, i visitatori possono accedere alla tua app utilizzando un URL con il tuo brand invece dell&#39;URL predefinito del Progetto `xxx.lovable.app`.
+
+Collegare un dominio personalizzato migliora il tuo sito in termini di:
+
+* **Identità del brand** - trasmetti maggiore affidabilità e professionalità
+* **Visibilità sui motori di ricerca** - SEO e reperibilità migliori
+* **Memorabilità** - più facile da condividere e ricordare per gli utenti
+
+<div id="prerequisites">
+  ## Prerequisiti
+</div>
+
+Per collegare un dominio personalizzato, assicurati che:
+
+* Tu abbia un piano Lovable a pagamento.
+* Il tuo Progetto sia pubblicato. Vedi [Pubblica la tua app](/it/features/publish) per ulteriori informazioni.
+* Tu possieda un nome di dominio. Puoi **acquistarne uno direttamente in Lovable** (tramite IONOS).
+* Tu abbia **accesso alle impostazioni DNS** per il dominio o sottodominio che vuoi collegare. La **verifica della proprietà** richiede di aggiungere i record DNS `A` e `TXT` forniti da Lovable durante la configurazione.
+
+<div id="connect-a-custom-domain">
+  ## Connetti un dominio personalizzato
+</div>
+
+Puoi connettere un dominio al tuo Progetto Lovable pubblicato usando la configurazione **automatica** (gestita da Entri) oppure la configurazione DNS **manuale**. Entrambi i metodi richiedono la verifica della proprietà del tuo dominio.
+
+Puoi connettere un dominio da due punti:
+
+* **Project → Settings → Domains**
+* **Finestra Pubblica → Dominio personalizzato** (puoi farlo anche dopo aver pubblicato il tuo progetto)
+
+Segui questi passaggi per connettere un dominio personalizzato:
+
+1. Clicca **Connect domain**.
+2. Inserisci il tuo dominio o sottodominio (ad esempio, `yourdomain.com` o `blog.yourdomain.com`), clicca **Connect domain**, quindi clicca **Continue**.
+
+   <Info>
+     Quando aggiungi un dominio, Lovable non aggiunge automaticamente il sottodominio `www`. Puoi aggiungerlo separatamente se vuoi usarli entrambi.
+   </Info>
+3. Ora puoi connettere il tuo dominio in due modi:
+   * **Configurazione automatica con Entri**: seleziona il tuo provider di dominio dall&#39;elenco, accedi e autorizza Entri ad aggiornare i tuoi record DNS.
+   * **Configurazione manuale**: se il tuo provider DNS non è nell&#39;elenco, scorri fino in fondo alla finestra **Select your domain provider** e scegli **Go to our manual setup**. Copia il record `A` e il record `TXT` e inseriscili direttamente nel tuo registrar di domini.
+4. Clicca **Done**. Attendi la verifica e l&#39;emissione del certificato SSL. Al termine, il dominio risulterà **Live** e la tua app Lovable sarà online sul tuo dominio personalizzato.
+
+<Info>
+  Le modifiche DNS possono richiedere fino a **72 ore per propagarsi**, anche se la maggior parte degli aggiornamenti è attiva entro poche ore.
+</Info>
+
+<div id="domain-statuses">
+  ## Stati del dominio
+</div>
+
+I domini possono trovarsi in stati ben definiti che riflettono l’avanzamento della verifica, la propagazione DNS, la disponibilità del certificato SSL e le azioni richieste all’utente.
+
+| Status               | Description                                                                                                                                                                                                                                       | User action                                                                                                                                                                                                 |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unpublished**      | Mostrato solo per l’URL del tuo Progetto `xxx.lovable.app` quando il Progetto non è ancora stato pubblicato.                                                                                                                                      | Pubblica il Progetto.                                                                                                                                                                                       |
+| **Ready**            | Il dominio è pronto ma il Progetto è stato depubblicato. Quando viene pubblicato di nuovo, lo stato diventa automaticamente **Live**.                                                                                                             | Pubblica il Progetto.                                                                                                                                                                                       |
+| **Action required**  | La configurazione del dominio personalizzato non è stata completata.                                                                                                                                                                              | Fai clic su **Complete setup** per completare la connessione.                                                                                                                                               |
+| **Verifying**        | In attesa che i record DNS si propaghino.                                                                                                                                                                                                         | Fai clic su **Check status** per controllare lo stato più recente e verificare i record DNS.<br /><br />Controlla che i tuoi record `A` e `TXT` siano aggiunti correttamente **presso il tuo provider DNS**, in particolare il valore TXT completo. |
+| **Unable to verify** | La verifica DNS non è stata completata entro un’ora. Di solito significa che i tuoi record DNS non sono corretti o sono ancora in propagazione. <br /><br />**Nota**: *la propagazione DNS può richiedere fino a 72 ore, anche se la maggior parte degli aggiornamenti viene applicata entro poche ore.* | Fai clic su **Check again** per aggiornare lo stato e verificare di nuovo i tuoi record DNS.<br /><br />Controlla che i tuoi record `A` e `TXT` siano aggiunti correttamente **presso il tuo provider DNS**, in particolare il valore TXT completo. |
+| **Setting up**       | Verifica completata; i certificati SSL sono in fase di emissione.                                                                                                                                                                                 | Nessuna azione richiesta; il dominio passerà automaticamente a **Live** o **Failed.**                                                                                                                       |
+| **Failed**           | Proprietà verificata, ma non è stato possibile fornire il certificato SSL.                                                                                                                                                                        | Fai clic su **Retry** per riprovare.                                                                                                                                                                        |
+| **Live**             | Il dominio è online e sta pubblicando il tuo Progetto.                                                                                                                                                                                            | Nessuna azione richiesta.                                                                                                                                                                                   |
+| **Offline**          | Il dominio era **Live** ma i record DNS non sono più validi. Il tuo dominio non punta più al tuo Progetto.                                                                                                                                        | Fai clic su **Recover**. Controlla i record DNS mostrati e aggiornali **presso il tuo provider DNS** per ricollegare il dominio.                                                                            |
+| **Removed**          | Questo dominio è stato rimosso perché è stato aggiunto a un altro Progetto o la verifica DNS non è mai stata completata (i record DNS non sono stati aggiunti correttamente o non hanno terminato la propagazione).                                | Fai clic su **Reconnect** per connettere di nuovo il dominio.                                                                                                                                               |
+
+Puoi rimuovere un dominio in qualsiasi momento, indipendentemente dal suo stato.
+
+<div id="primary-domain">
+  ## Dominio primario
+</div>
+
+Lovable ti consente di impostare **un solo dominio come primario**.
+
+* Lo stato del dominio deve essere **Live** per poterlo impostare come primario. Fai clic sul menu con i tre puntini accanto al tuo dominio e poi su **Set as primary**.
+* Il primo dominio personalizzato che aggiungi a un progetto diventa automaticamente il dominio primario (per i domini aggiunti dopo il 29 ottobre 2025).
+* Se un dominio è primario, tutti gli altri domini reindirizzano a questo.
+* Solo un dominio può essere primario alla volta.
+* Puoi rimuovere l&#39;impostazione di dominio primario; in tal caso, tutti i domini collegati mostrano il progetto allo stesso modo. Fai clic sul menu con i tre puntini accanto al tuo dominio primario e poi su **Unset as primary**.
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="Il mio dominio personalizzato è connesso, ma il sito non è online. Cosa devo fare?">
+    * Ricontrolla le impostazioni DNS usando uno strumento come [dnschecker.org](https://dnschecker.org/all-dns-records-of-domain.php). A volte le modifiche DNS possono impiegare fino a 72 ore per propagarsi. Vai su **Project → Settings → Domains** per trovare le impostazioni DNS corrette.
+    * Svuota la cache del browser o prova in una finestra in incognito.
+    * Prova a rimuovere e riaggiungere il dominio in **Project → Settings → Domains**.
+  </Accordion>
+
+  <Accordion title="Posso acquistare un dominio tramite Lovable?">
+    Sì. Puoi acquistare un dominio personalizzato direttamente in Lovable tramite il nostro partner IONOS. Vai su **Project → Settings → Domains** e fai clic su **Buy new domain** per acquistare un dominio tramite IONOS. Questa funzione è disponibile solo nei piani a pagamento.
+  </Accordion>
+
+  <Accordion title="Collegare un dominio personalizzato influisce sulla mia SEO?">
+    Sì, collegare un dominio personalizzato influisce positivamente sulla tua SEO. Un dominio personalizzato migliora la visibilità del tuo sito nei motori di ricerca e lo rende più affidabile agli occhi degli utenti.
+
+    Consulta [Implement SEO and GEO best practices](https://docs.lovable.dev/tips-tricks/seo-geo) per maggiori informazioni.
+  </Accordion>
+
+  <Accordion title="Lovable fornisce un certificato SSL per il mio dominio personalizzato?">
+    Sì. Quando colleghi un dominio personalizzato alla tua app Lovable, generiamo e installiamo automaticamente un certificato SSL per quel dominio. Questo garantisce che il tuo sito sia servito tramite HTTPS, mantenendo sicuri i dati dei visitatori e migliorando il posizionamento SEO del tuo sito. Se non è stato emesso dopo 72 ore, contatta il [Supporto Lovable](https://lovable.dev/support).
+  </Accordion>
+
+  <Accordion title="Posso collegare un sottodominio invece di un dominio completo?">
+    Sì. Puoi collegare un sottodominio (per esempio `blog.yourdomain.com` o `app.yourdomain.com`) invece del dominio root. Quando inserisci il tuo dominio nel flusso di configurazione, includi semplicemente il sottodominio che vuoi utilizzare.
+  </Accordion>
+
+  <Accordion title="Posso collegare più sottodomini al mio progetto Lovable?">
+    Sì. Puoi collegare più sottodomini, ma ciascuno deve essere aggiunto e configurato singolarmente in **Project → Settings → Domains**. Ad esempio, puoi collegare `blog.yourdomain.com`, `shop.yourdomain.com` e `app.yourdomain.com`.
+  </Accordion>
+
+  <Accordion title="Dove posso vedere i miei domini collegati?">
+    Puoi vedere i domini collegati in due sezioni:
+
+    * **Project → Settings → Domains** - qui vedi tutti i domini, indipendentemente dal loro stato
+    * **Publish modal** - qui vedi tutti i domini **Live**
+  </Accordion>
+
+  <Accordion title="Posso collegare un dominio utilizzato da un altro progetto?">
+    Sì. Finché puoi verificarne la proprietà, puoi collegare un dominio o sottodominio utilizzato da un altro progetto, anche se il progetto è stato eliminato.
+  </Accordion>
+
+  <Accordion title="Come imposto un dominio primario?">
+    Lo stato del dominio deve essere **Live** per poterlo impostare come primario.
+
+    Vai su **Project → Settings → Domains**, fai clic sul menu con i tre puntini accanto a un dominio **Live** e fai clic su **Set as primary**.
+  </Accordion>
+
+  <Accordion title="Come rimuovo l'impostazione di dominio primario?">
+    Vai su **Project → Settings → Domains**, fai clic sul menu con i tre puntini accanto al tuo dominio primario e fai clic su **Unset as primary**.
+  </Accordion>
+
+  <Accordion title="Come rimuovo un dominio personalizzato?">
+    Puoi rimuovere un dominio in qualsiasi momento, indipendentemente dal suo stato.
+
+    1. Vai su **Project → Settings → Domains.**
+    2. Fai clic sul menu con i tre puntini accanto al tuo dominio, fai clic su **Remove**, quindi fai di nuovo clic su **Remove** per confermare.
+
+    Questo disconnetterà il dominio dal progetto. Assicurati di cancellare le impostazioni DNS presso il provider del dominio per rimuovere completamente la connessione.
+  </Accordion>
+
+  <Accordion title="Posso rimuovere l'URL di progetto xxx.lovable.app?">
+    Al momento non è possibile rimuovere l&#39;URL di progetto `xxx.lovable.app` dal tuo progetto. Tuttavia, puoi aggiungere un dominio personalizzato e impostarlo come dominio primario. Questo permette ai visitatori di accedere alla tua app tramite un URL con il tuo brand invece dell&#39;URL di progetto predefinito `xxx.lovable.app`.
+  </Accordion>
+
+  <Accordion title="Devo collegare separatamente il sottodominio www?">
+    Sì, devi aggiungerlo separatamente e verrà elencato separatamente. Il sottodominio **www** non è incluso quando configuri il tuo dominio.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,127 @@
+---
+title: "发布你的应用"
+description: "发布你的 Lovable 应用，并将其分享给合适的受众"
+icon: "rocket"
+keywords:
+  [
+    "发布 Lovable 应用",
+    "发布应用",
+    "发布网站",
+    "发布项目",
+    "内部应用",
+    "网站访问设置",
+    "发布私有应用",
+    "限制外部发布",
+    "安全应用部署",
+    "发布内部工具",
+    "取消发布应用",
+    "Lovable Business 方案",
+    "Lovable Enterprise 方案",
+    "发布到自定义域名",
+    "更新已发布的应用",
+  ]
+---
+
+发布会将你的 Lovable 项目变成可与他人分享的在线 Web 应用。无论你是要**公开**分享，还是只在工作区内私密使用，Lovable 都能让你轻松将应用发布到 Web 上。
+
+* **Free 和 Pro 方案：**你已发布的网站是**公开**的，任何持有链接的人都可以访问。在这些方案中你无法限制访问权限，所以在发布前请确保已经准备好分享。
+* **Business 和 Enterprise 方案：**你可以**控制谁可以查看你的应用**——可以设为任何持有链接的人，或者仅限已通过身份验证的工作区成员。
+
+一旦发布，你可以随时更新在线应用，并连接自定义域名，为你的应用提供更专业、符合品牌形象的体验。
+
+<div id="website-access-settings-business-and-enterprise-plans">
+  ## 网站访问设置（Business 和 Enterprise 方案）
+</div>
+
+在 Business 和 Enterprise 方案中，你可以管理谁可以访问已发布的应用，从而确保隐私和访问控制。
+
+这可以帮助你：
+
+* 构建并共享仅在你的工作区内可见的**内部应用**。
+* 防止队友不小心将应用发布到外部。
+* 为处理敏感数据的组织提供治理和合规支持。
+
+访问权限可以在**工作区级别**和**项目级别**进行管理。
+
+<div id="workspace-level-setting">
+  ### 工作区级别设置
+</div>
+
+工作区的 **管理员** 和 **所有者** 可以为所有已发布的应用设置默认访问策略。
+
+前往 **Workspace settings → Privacy &amp; Security → Default website access**，然后选择以下选项之一：
+
+* **Anyone with link：** 所有已发布的应用默认是公开的，任何人都可以访问。
+* **Workspace members：** 所有已发布的应用默认是私有的，仅限已通过身份验证的工作区成员访问。这样可以确保新应用在被明确设置为公开之前保持私有。
+
+<div id="project-level-setting">
+  ### 项目级设置
+</div>
+
+你可以为单个项目覆盖工作区的默认设置。
+
+前往 **Publish**，将 **Who can access?** 设置为：
+
+* **Anyone with link:** 任何持有该 URL 的人都可以访问。
+* **Workspace members:** 仅已登录的工作区成员可以访问。
+
+如果你不更改此设置，项目会继承工作区的默认设置。
+
+<div id="publishing-your-project">
+  ## 发布你的项目
+</div>
+
+<Note>
+  在 Business 和 Enterprise 方案中，只有工作区所有者和管理员可以发布项目。
+</Note>
+
+1. 在项目中，点击右上角的 **Publish** 图标。
+2. 在 **Publish** 弹窗中，查看并配置：
+   * **Website address**：默认情况下，你的应用会发布到 `[project-url-slug].lovable.app`。你可以编辑 `[project-url-slug]` 或添加[自定义域名](/zh/features/custom-domain)（在付费方案中可用）。
+   * **Website info**：自定义应用的元数据——图标、标题、描述和分享图像。
+   * 选择**谁可以访问**你已发布的应用（仅在 Business 和 Enterprise 方案中可配置）：
+     * **Anyone with link**
+     * **Workspace members**
+3. 点击 **Review security**，在上线前排查潜在的安全漏洞。
+
+<Danger>
+  在发布前务必执行安全审查。这有助于识别可能暴露敏感数据或导致未经授权访问的漏洞。
+  在 [Security](/zh/features/security) 中了解更多信息。
+</Danger>
+
+4. 准备就绪后，点击 **Publish**。\
+   部署完成后，你会看到一个包含已发布链接的弹窗。
+
+你可以持续迭代你的应用——当准备好推送更新时，在 **Publish** 弹窗中点击 **Update**。
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="为什么我无法发布我的网站？">
+    如果在发布网站时遇到错误，很可能是某个尚未在界面中显示的构建错误，导致你当前版本的网站无法正常运行。你可以尝试让 Lovable Agent 帮你排查问题。
+  </Accordion>
+
+  <Accordion title="为什么我在已发布的网站上看不到我的更改？">
+    更改不会自动推送到你的线上应用。要发布更新，请点击 **Publish**，然后点击 **Update**。
+  </Accordion>
+
+  <Accordion title="我可以更改已发布链接（网站 URL）吗？">
+    可以。你可以更改项目的 URL slug，它会决定你的 [lovable.app](http://lovable.app) 网站地址。你可以通过两种方式进行更改：
+
+    1. 点击 **Publish**，编辑你的网站地址，然后点击 **Update**。
+    2. 前往 **Project settings → Edit URL Slug**，更改 URL slug，然后点击 **Update URL Slug**。 
+
+    注意，重命名项目不会更改项目 URL，它只会更改项目的显示名称。
+  </Accordion>
+
+  <Accordion title="我可以取消发布我的项目吗？">
+    可以。你可以通过两种方式取消发布项目：
+
+    1. 前往 **Project settings**，然后点击 **Unpublish project**。
+    2. 点击 **Publish**，展开 **Advanced** 部分，然后点击 **Unpublish**。
+
+    一旦取消发布，你的应用将不再对任何人可访问。
+  </Accordion>
+</AccordionGroup>

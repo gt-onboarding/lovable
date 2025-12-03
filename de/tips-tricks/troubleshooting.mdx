@@ -1,0 +1,100 @@
+---
+title: "Fehlerbehebung"
+description: "Konkrete Schritte zur Behebung von Problemen in deinem Entwicklungslebenszyklus."
+icon: "toolbox"
+---
+
+<div id="build-errors">
+  ## Build-Fehler
+</div>
+
+Das Bauen mit Lovable macht das Programmieren schneller und intuitiver, aber selbst die besten KI‑Entwicklungstools können gelegentlich ins Stocken geraten. Manchmal läuft dein Code nicht wie erwartet oder du stellst unerwartetes Verhalten fest, weil die KI deine Absicht falsch interpretiert.
+
+Hier ist eine Schritt‑für‑Schritt‑Anleitung, die dir hilft, Probleme zu lösen und schnell wieder weiterzuarbeiten:
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/0W8bsbHh2p8?si=p4kWhkdu0PEbgGXm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Steps>
+  <Step title="Verwende zuerst den Button „Try to Fix“">
+    Klicke auf den Button **Try to Fix**, sobald ein Fehler auftaucht. Lovable scannt deine Protokolle, erkennt das Problem und versucht eine schnelle Korrektur. Das ist dein schnellster erster Schritt. Wenn das nicht funktioniert, ist es Zeit, genauer hinzuschauen.
+  </Step>
+  <Step title="Unerwartetes Verhalten diagnostizieren">
+    Dein Code kann fehlerfrei laufen und sich trotzdem nicht wie beabsichtigt verhalten. Das ist **unerwartetes Verhalten** – schwerer zu erkennen und schwerer zu beheben. Versuche Folgendes:
+
+    - **Zurücksetzen und erneut auffordern**: Gehe zu dem Stand kurz vor dem Auftreten des Problems zurück und formuliere dann eine klarere, überarbeitete Eingabeaufforderung.
+  </Step>
+  <Step title="Schreibe effektivere Eingabeaufforderungen">
+    Klare, strukturierte Eingabeaufforderungen führen zu besseren Ergebnissen. Nutze dieses Format:
+
+    1. **Verwende den Chat Mode** und frage: „Can you outline the steps or plan for this feature?“
+    2. **Überprüfe den Plan**, den Lovable vorschlägt, und bitte bei Bedarf um Änderungen oder Klarstellungen.
+    3. **Gib Lovable eine Eingabeaufforderung**: „Now, let's build this step by step.“
+  </Step>
+  <Step title="In logischer Reihenfolge bauen">
+    Struktur ist wichtig. Folge diesem empfohlenen Ablauf:
+
+    1. Erstelle Layout und Seiten.
+    2. Verbinde dich mit Lovable Cloud oder einer externen Supabase‑Verbindung.
+    3. Richte Authentifizierung und Benutzerrollen ein.
+    4. Plane und strukturiere die Feature‑Logik.
+    5. Bitte Lovable per Eingabeaufforderung, die Features zu implementieren.
+  </Step>
+</Steps>
+
+<div id="general-issues">
+  ### Allgemeine Probleme
+</div>
+
+<AccordionGroup>
+  <Accordion title="Brauchst du schnelle Hilfe?">
+    Wechsle in den Chat-Only-Modus und gib Folgendes ein: „Diese spezielle Funktion funktioniert nicht. Kannst du mir Schritt für Schritt erklären, was passiert und was du bereits versucht hast?“
+  </Accordion>
+  <Accordion title="UI- oder Layout-Probleme">
+    - Sende Screenshots des UI-Problems direkt an die KI, um eine genauere Diagnose zu ermöglichen.
+    - Verwende das Bearbeitungstool, um bestimmte UI-Elemente auszuwählen und hervorzuheben, die du ändern möchtest, und beschreibe dann die gewünschte Anpassung.
+    - Zum Beispiel: „Siehst du das hervorgehobene Element? Zentriere es vertikal und erhöhe den Abstand.“
+  </Accordion>
+  <Accordion title="Wenn du komplett feststeckst">
+    - Eingabeaufforderung: „Geh einen Schritt zurück. Analysiere den Fehler und schlage einen anderen Ansatz vor.“
+    - Teile die Aufgabe in kleinere Schritte auf.
+    - Verwende den Revert-Button, wenn die Fehler weiterhin bestehen.
+  </Accordion>
+  <Accordion title="Vorschau nicht gefunden oder Sandbox startet nicht">
+    Probleme mit einer nicht gefundenen Vorschau oder einer Sandbox, die nicht startet, können entweder mit der Sandbox-Umgebung oder mit deiner Verbindung zusammenhängen. Sandbox-Probleme sind oft nur vorübergehend, versuche zuerst einen Hard-Refresh. Wenn das weiterhin besteht, kann das auf eine fehlerhafte Synchronisierung mit GitHub oder ein Verbindungsproblem hinweisen. Bei anhaltenden Problemen lies unseren [GitHub-Integrationsleitfaden](https://docs.lovable.dev/integrations/github).
+  </Accordion>
+</AccordionGroup>
+
+<div id="core-functionalities">
+  ### Zentrale Funktionen
+</div>
+
+<AccordionGroup>
+  <Accordion title="Vorschau ist weiß">
+    - Dies ist häufig die Folge von Problemen in der Datei vite.config.ts oder davon, dass Sicherheitsheader in das Projekt eingefügt wurden.
+    - Build-Fehler oder Syntaxfehler im Code
+    - JavaScript-Laufzeitfehler, die Abstürze verursachen
+    - Fehlende Abhängigkeiten oder defekte Komponenten
+    - Authentifizierungs- oder Routing-Probleme, die die Seite blockieren
+
+    Vorgehen zur Fehlerbehebung: Bitte Lovable, die Datei vite.config.ts zu überprüfen oder die Sicherheitsheader zu entfernen. Überprüfe die Browser-Konsole auf Fehler, stelle eine frühere Version wieder her oder bitte Lovable, das Problem mit dem weißen Bildschirm zu untersuchen.
+  </Accordion>
+  <Accordion title="Projekte zurückziehen oder deaktivieren">
+    Du kannst dein Projekt in den Projekteinstellungen zurückziehen (unpublish) oder löschen.
+  </Accordion>
+  <Accordion title="Fehler mit Edge Functions">
+    Überprüfe den Tab Cloud -\> Protokolle auf konkrete Fehlermeldungen. Stelle sicher, dass alle erforderlichen Geheimnisse und Umgebungsvariablen korrekt konfiguriert sind. Versuche, erneut bereitzustellen, indem du eine kleine Änderung am Code der Edge-Funktion vornimmst und Lovable dazu eine Eingabeaufforderung gibst. Stelle sicher, dass deine Datenbankverbindung funktioniert. Bitte Lovable, den konkreten Fehler zu untersuchen und alle in den Protokollen gefundenen Probleme zu beheben.
+  </Accordion>
+  <Accordion title="Projekt nicht gefunden">
+    Das bedeutet in der Regel, dass das Projekt gelöscht wurde. Wenn du es nicht absichtlich gelöscht hast, wende dich bitte an den Kundensupport, um Hilfe bei der Wiederherstellung deines Projekts zu erhalten.
+  </Accordion>
+</AccordionGroup>
+
+<div id="need-more-help">
+  ### Du brauchst mehr Hilfe?
+</div>
+
+Immer noch festgefahren? Probiere Folgendes:
+
+1. Verwende den Chat mode für eine schrittweise Anleitung.
+2. Wenn es ein Problem mit der UI oder einem Feature ist, setze auf einen stabilen Zustand zurück.
+3. Wenn du zahlender Kunde bist und ein Problem auf Plattform-Ebene melden möchtest, kontaktiere den [Kundensupport](https://lovable.dev/support).

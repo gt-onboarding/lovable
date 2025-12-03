@@ -1,0 +1,159 @@
+---
+title: "Benutzerdefinierte Domain verbinden"
+sidebarTitle: "Benutzerdefinierte Domains"
+description: "Erfahre, wie du benutzerdefinierte Domains in Lovable verbindest, verifizierst, Fehler behebst und verwaltest"
+icon: "earth-europe"
+keywords: ["benutzerdefinierte Domains","benutzerdefinierte Domain verbinden","wie man eine benutzerdefinierte Domain hinzufügt","primäre Domain","Domain-Status","SSL-Zertifikat","DNS-Verifizierung","DNS-Einrichtung"]
+---
+
+Eine **benutzerdefinierte Domain** ermöglicht es dir, deine eigene Domain oder Subdomain für dein veröffentlichtes Lovable-Projekt zu verwenden. Wenn du eine benutzerdefinierte Domain verbindest, können Besucher auf deine App über eine markenspezifische URL statt über die standardmäßige `xxx.lovable.app`-Projekt-URL zugreifen.
+
+Das Verbinden einer benutzerdefinierten Domain verbessert:
+
+* **Markenidentität** deiner Website – wirkt vertrauenswürdiger und professioneller
+* **Sichtbarkeit in Suchmaschinen** – besseres SEO und bessere Auffindbarkeit
+* **Einprägsamkeit** – einfacher für Nutzer, sie zu teilen und sich zu merken
+
+<div id="prerequisites">
+  ## Voraussetzungen
+</div>
+
+Um eine benutzerdefinierte Domain zu verbinden, stell sicher, dass:
+
+* Du einen kostenpflichtigen Lovable‑Tarif nutzt.
+* Dein Projekt veröffentlicht ist. Siehe [Veröffentliche deine App](/de/features/publish) für weitere Informationen.
+* Du eine Domain besitzt. Du kannst **eine direkt in Lovable erwerben** (über IONOS).
+* Du **Zugriff auf die DNS‑Einstellungen** für die Domain oder Subdomain hast, die du verbinden möchtest. **Verifizierung des Besitzes** erfordert das Hinzufügen von DNS‑`A`‑ und `TXT`‑Einträgen, die von Lovable während der Einrichtung bereitgestellt werden.
+
+<div id="connect-a-custom-domain">
+  ## Benutzerdefinierte Domain verbinden
+</div>
+
+Du kannst eine Domain mit deinem veröffentlichten Lovable-Projekt verbinden – entweder über die **automatische** Einrichtung (powered by Entri) oder über eine **manuelle** DNS-Konfiguration. Beide Methoden erfordern den Nachweis, dass die Domain dir gehört.
+
+Du kannst eine Domain von zwei Stellen aus verbinden:
+
+* **Project → Settings → Domains**
+* **Publish modal → Custom domain** (kann nach dem Veröffentlichen deines Projekts durchgeführt werden)
+
+Gehe wie folgt vor, um eine benutzerdefinierte Domain zu verbinden:
+
+1. Klicke auf **Connect domain**.
+2. Gib deine Domain oder Subdomain ein (zum Beispiel `yourdomain.com` oder `blog.yourdomain.com`), klicke auf **Connect domain** und dann auf **Continue**.
+
+   <Info>
+     Beim Hinzufügen einer Domain fügt Lovable die Subdomain `www` nicht automatisch hinzu. Du kannst sie separat hinzufügen, wenn du beide verwenden möchtest.
+   </Info>
+3. Jetzt kannst du deine Domain auf zwei Arten verbinden:
+   * **Automatic setup with Entri**: Wähle deinen Domainanbieter aus der Liste, melde dich an und autorisiere Entri, deine DNS-Einträge zu aktualisieren.
+   * **Manual setup**: Wenn dein DNS-Anbieter nicht aufgeführt ist, scrolle im Modal **Select your domain provider** nach unten und wähle **Go to our manual setup**. Kopiere den `A`-Eintrag und den `TXT`-Eintrag und füge sie direkt bei deinem Domain-Registrar ein.
+4. Klicke auf **Done**. Warte auf die Verifizierung und die Ausstellung des SSL-Zertifikats. Wenn dies abgeschlossen ist, wird der Status der Domain auf **Live** gesetzt und deine Lovable-App ist unter deiner benutzerdefinierten Domain erreichbar.
+
+<Info>
+  DNS-Änderungen können bis zu **72 Stunden für die vollständige Propagierung** benötigen, auch wenn die meisten Aktualisierungen innerhalb weniger Stunden live sind.
+</Info>
+
+<div id="domain-statuses">
+  ## Domain-Status
+</div>
+
+Domains haben klar definierte Status, die den Fortschritt der Verifizierung, die DNS-Propagation, die Bereitschaft des SSL-Zertifikats und erforderliche Benutzeraktionen widerspiegeln.
+
+| Status               | Beschreibung                                                                                                                                                                                                                                      | Benutzeraktion                                                                                                                                                                                              |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unpublished**      | Wird nur für deine `xxx.lovable.app`-Projekt-URL angezeigt, wenn das Projekt noch nicht veröffentlicht wurde.                                                                                                                                     | Veröffentliche das Projekt.                                                                                                                                                                                 |
+| **Ready**            | Die Domain ist bereit, aber das Projekt ist derzeit nicht veröffentlicht. Wenn du es erneut veröffentlichst, wird der Status automatisch zu **Live**.                                                                                             | Veröffentliche das Projekt.                                                                                                                                                                                 |
+| **Action required**  | Die Einrichtung der benutzerdefinierten Domain wurde nicht abgeschlossen.                                                                                                                                                                         | Klicke auf **Complete setup**, um die Verbindung abzuschließen.                                                                                                                                             |
+| **Verifying**        | Es wird darauf gewartet, dass sich die DNS-Einträge propagieren.                                                                                                                                                                                  | Klicke auf **Check status**, um den neuesten Status zu prüfen und die DNS-Einträge zu verifizieren.<br /><br />Überprüfe, ob deine `A`- und `TXT`-Einträge **bei deinem DNS-Anbieter** korrekt hinzugefügt wurden, insbesondere der vollständige TXT-Wert. |
+| **Unable to verify** | Die DNS-Verifizierung wurde nicht innerhalb einer Stunde abgeschlossen. Das bedeutet normalerweise, dass deine DNS-Einträge falsch sind oder sich noch propagieren. <br /><br />**Hinweis**: *Die DNS-Propagation kann bis zu 72 Stunden dauern, auch wenn die meisten Aktualisierungen innerhalb weniger Stunden wirksam werden.* | Klicke auf **Check again**, um den Status zu aktualisieren und deine DNS-Einträge erneut zu verifizieren.<br /><br />Überprüfe, ob deine `A`- und `TXT`-Einträge **bei deinem DNS-Anbieter** korrekt hinzugefügt wurden, insbesondere der vollständige TXT-Wert. |
+| **Setting up**       | Verifizierung abgeschlossen; SSL-Zertifikate werden ausgestellt.                                                                                                                                                                                  | Keine Aktion erforderlich; die Domain wechselt automatisch zu **Live** oder **Failed.**                                                                                                                     |
+| **Failed**           | Domaininhaberschaft verifiziert, aber das SSL-Zertifikat konnte nicht bereitgestellt werden.                                                                                                                                                      | Klicke auf **Retry**, um es erneut zu versuchen.                                                                                                                                                            |
+| **Live**             | Die Domain ist live und stellt dein Projekt bereit.                                                                                                                                                                                               | Keine Aktion erforderlich.                                                                                                                                                                                  |
+| **Offline**          | Die Domain war **Live**, aber die DNS-Einträge sind nicht mehr gültig. Deine Domain verweist nicht mehr auf dein Projekt.                                                                                                                         | Klicke auf **Recover**. Überprüfe die angezeigten DNS-Einträge und aktualisiere sie **bei deinem DNS-Anbieter**, um deine Domain wieder zu verbinden.                                                       |
+| **Removed**          | Diese Domain wurde entfernt, weil sie zu einem anderen Projekt hinzugefügt wurde oder die DNS-Verifizierung nie abgeschlossen wurde (DNS-Einträge wurden nicht korrekt hinzugefügt oder die Propagation wurde nicht abgeschlossen).                                                     | Klicke auf **Reconnect**, um die Domain erneut zu verbinden.                                                                                                                                                |
+
+Du kannst eine Domain jederzeit entfernen, unabhängig von ihrem Status.
+
+<div id="primary-domain">
+  ## Primäre Domain
+</div>
+
+Lovable ermöglicht dir, **eine Domain als primäre Domain** festzulegen.
+
+* Der Domain-Status muss **Live** sein, damit du sie als primär markieren kannst. Klicke auf das Drei-Punkte-Menü neben deiner Domain und dann auf **Als primär festlegen**.
+* Die erste benutzerdefinierte Domain, die du zu einem Projekt hinzufügst, wird automatisch zur primären Domain (gilt für Domains, die nach dem 29. Oktober 2025 hinzugefügt wurden).
+* Wenn eine Domain primär ist, werden alle anderen Domains auf sie umgeleitet.
+* Es kann immer nur eine Domain gleichzeitig primär sein.
+* Du kannst die primäre Domain wieder entfernen; in diesem Fall liefern alle verbundenen Domains das Projekt gleichberechtigt aus. Klicke auf das Drei-Punkte-Menü neben deiner primären Domain und dann auf **Als primär entfernen**.
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="Meine benutzerdefinierte Domain ist verbunden, aber meine Website ist nicht live. Was soll ich tun?">
+    * Überprüfe deine DNS-Einstellungen noch einmal mit einem Tool wie [dnschecker.org](https://dnschecker.org/all-dns-records-of-domain.php). Manchmal kann es bis zu 72 Stunden dauern, bis sich DNS-Änderungen vollständig verbreitet haben. Gehe zu **Project → Settings → Domains**, um die korrekten DNS-Einstellungen zu finden.
+    * Leere den Cache deines Browsers oder teste in einem Inkognito-Fenster.
+    * Versuche, die Domain in **Project → Settings → Domains** zu entfernen und erneut hinzuzufügen.
+  </Accordion>
+
+  <Accordion title="Kann ich eine Domain über Lovable kaufen?">
+    Ja. Du kannst eine benutzerdefinierte Domain direkt in Lovable über unseren Partner IONOS kaufen. Gehe zu **Project → Settings → Domains** und klicke auf **Buy new domain**, um eine Domain über IONOS zu kaufen. Dies ist nur in kostenpflichtigen Tarifen verfügbar.
+  </Accordion>
+
+  <Accordion title="Beeinflusst das Verbinden einer benutzerdefinierten Domain mein SEO?">
+    Ja, das Verbinden einer benutzerdefinierten Domain wirkt sich positiv auf dein SEO aus. Eine benutzerdefinierte Domain verbessert die Auffindbarkeit deiner Website in Suchmaschinen und lässt sie für Nutzer vertrauenswürdiger erscheinen.
+
+    Sieh dir [Implement SEO and GEO best practices](https://docs.lovable.dev/tips-tricks/seo-geo) für weitere Informationen an.
+  </Accordion>
+
+  <Accordion title="Stellt Lovable ein SSL-Zertifikat für meine benutzerdefinierte Domain bereit?">
+    Ja. Wenn du eine benutzerdefinierte Domain mit deiner Lovable-App verbindest, erstellen und installieren wir automatisch ein SSL-Zertifikat dafür. Dadurch wird deine Website über HTTPS ausgeliefert, was die Daten deiner Besucher schützt und das SEO-Ranking deiner Website verbessert. Wenn das Zertifikat nach 72 Stunden noch nicht ausgestellt wurde, wende dich bitte an den [Lovable Kundensupport](https://lovable.dev/support).
+  </Accordion>
+
+  <Accordion title="Kann ich statt einer vollständigen Domain eine Subdomain verbinden?">
+    Ja. Du kannst eine Subdomain (zum Beispiel `blog.yourdomain.com` oder `app.yourdomain.com`) anstelle der Root-Domain verbinden. Wenn du deine Domain im Einrichtungsprozess angibst, füge einfach die Subdomain hinzu, die du verwenden möchtest.
+  </Accordion>
+
+  <Accordion title="Kann ich mehrere Subdomains mit meinem Lovable-Projekt verbinden?">
+    Ja. Du kannst mehrere Subdomains verbinden, aber jede muss einzeln in **Project → Settings → Domains** hinzugefügt und konfiguriert werden. Du kannst zum Beispiel `blog.yourdomain.com`, `shop.yourdomain.com` und `app.yourdomain.com` verbinden.
+  </Accordion>
+
+  <Accordion title="Wo kann ich meine verbundenen Domains sehen?">
+    Du kannst deine verbundenen Domains an zwei Stellen sehen:
+
+    * **Project → Settings → Domains** – hier siehst du alle Domains, unabhängig von ihrem Status
+    * **Publish modal** – hier siehst du alle **Live**-Domains
+  </Accordion>
+
+  <Accordion title="Kann ich eine Domain verbinden, die von einem anderen Projekt verwendet wird?">
+    Ja. Solange du den Besitz nachweisen kannst, kannst du eine Domain oder Subdomain verbinden, die von einem anderen Projekt verwendet wird, selbst wenn das Projekt gelöscht wurde.
+  </Accordion>
+
+  <Accordion title="Wie lege ich eine primäre Domain fest?">
+    Der Domain-Status muss **Live** sein, damit du sie als primäre Domain festlegen kannst.
+
+    Gehe zu **Project → Settings → Domains**, klicke auf das Drei-Punkte-Menü neben einer **Live**-Domain und klicke auf **Set as primary**.
+  </Accordion>
+
+  <Accordion title="Wie entferne ich den Status als primäre Domain?">
+    Gehe zu **Project → Settings → Domains**, klicke auf das Drei-Punkte-Menü neben deiner primären Domain und klicke auf **Unset as primary**.
+  </Accordion>
+
+  <Accordion title="Wie entferne ich eine benutzerdefinierte Domain?">
+    Du kannst eine Domain jederzeit entfernen, unabhängig von ihrem Status.
+
+    1. Gehe zu **Project → Settings → Domains.**
+    2. Klicke auf das Drei-Punkte-Menü neben deiner Domain, klicke auf **Remove** und dann erneut auf **Remove**, um zu bestätigen.
+
+    Dadurch wird die Domain vom Projekt getrennt. Stelle sicher, dass du die DNS-Einstellungen bei deinem Domain-Anbieter löschst, um die Verbindung vollständig zu entfernen.
+  </Accordion>
+
+  <Accordion title="Kann ich die xxx.lovable.app-Projekt-URL entfernen?">
+    Derzeit gibt es keine Möglichkeit, die `xxx.lovable.app`-Projekt-URL aus deinem Projekt zu entfernen. Du kannst jedoch eine benutzerdefinierte Domain hinzufügen und sie als deine primäre Domain festlegen. So können Besucher deine App über eine Marken-URL statt über die standardmäßige `xxx.lovable.app`-Projekt-URL aufrufen.
+  </Accordion>
+
+  <Accordion title="Muss ich eine www-Subdomain separat verbinden?">
+    Ja, du musst sie separat hinzufügen, und sie wird auch separat aufgeführt. Die **www**-Subdomain ist bei der Einrichtung deiner Domain nicht automatisch enthalten.
+  </Accordion>
+</AccordionGroup>

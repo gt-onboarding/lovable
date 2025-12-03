@@ -1,0 +1,264 @@
+---
+title: "Supabase 連携"
+description: "Supabase を使って、フル機能のバックエンドを Lovable アプリケーションに統合します。"
+icon: "database"
+---
+
+Lovable の **ネイティブ** な [Supabase](https://supabase.com/) **連携**を使うと、使いやすい単一のチャットインターフェースから、フロントエンドの UI とバックエンドのデータベースの両方を管理できます。つまり、Lovable を離れることなく、アプリの画面をデザインしながら、クラウド上の PostgreSQL データベースをセットアップできます。この統合されたアプローチにより、強力なアプリ開発が誰にとっても身近になります。非エンジニアのユーザーは Lovable のガイドに頼ることができ、経験豊富な開発者は必要に応じて Supabase の高度な機能を活用できます。
+
+<div id="overview">
+  ## 概要
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/-sSOyO0FiPE?si=WljVA-E0YU4LObMY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Supabase は Firebase のオープンソース代替で、リアルタイム機能付きのマネージド PostgreSQL データベースに加えて、ユーザー認証、ファイルストレージ、サーバーレス関数を提供します。Supabase を Lovable アプリと接続すれば、ボイラープレートコードを書いたりサーバーを手動で構成したりすることなく、すぐに本番運用可能なバックエンドを利用できます。Supabase の直感的な Web ダッシュボードによりデータやユーザーを簡単に管理でき、堅牢な SQL を基盤としているため、PostgreSQL データベースならではの高い性能とスケーラビリティをそのまま活用できます。
+
+<div id="key-features-unlocked-by-supabase-integration">
+  ### **Supabase 連携で利用できる主な機能:**
+</div>
+
+- **Database (PostgreSQL)** – 完全な SQL サポート付きで、アプリのデータを保存し、クエリできます。Lovable は、あなたのプロンプトに基づいて必要なテーブルやスキーマを自動生成できます。
+- **User Authentication** – ユーザーのサインアップ、ログイン、アクセス制御を安全に管理できます。Lovable は、シンプルなプロンプトだけで、メール/パスワードなどのあらかじめ用意された認証フローをアプリに追加できます。
+- **File Storage** – Supabase Storage を使って、画像やその他のファイルをアップロードして配信できます。ユーザープロフィール写真、ユーザーからのアップロード、アプリで扱う静的メディアなどに最適です。
+- **Real-time Updates** – Supabase は、データの変更をリアルタイムでアプリにストリーミングできます。これにより、ライブチャット、アクティビティフィード、全ユーザーに即時反映されるコラボレーションダッシュボードなどの機能を実現できます。
+- **Edge Functions (Serverless)** – Supabase のインフラ上で、カスタムバックエンドロジック（JavaScript/TypeScript）を実行できます。Lovable は、メール送信、支払い処理、外部 API との連携などのタスクを行うこれらの関数を作成してデプロイできます。
+
+<div id="why-use-lovables-supabase-integration">
+  ### **なぜ Lovable の Supabase 連携を使うべきなのか？**
+</div>
+
+Lovable を使えば、フロントエンドのデザインとバックエンドのセットアップのために、別々のツールを使い分ける必要はありません。Lovable の AI と会話するだけで、UI を構築できるだけでなく、その裏側で動くデータベースやサーバー機能も自動的に作成されます。これにより、開発が高速化され、連携に関する煩雑さも大幅に減らせます。たとえば、Lovable に「ユーザーのフィードバックフォームを追加して、回答をデータベースに保存して」とプロンプトを送ると、Lovable はフォームの UI を生成すると同時に、フィードバックを保存するための Supabase テーブルもセットアップします。こうしたシームレスなエンドツーエンドの自動生成こそが Lovable のユニークな強みであり、初心者でも複雑なアプリを構築できるようにし、上級ユーザーがより高速に開発を進められるようにします。
+
+<div id="getting-started-connecting-supabase-to-lovable">
+  ## はじめに: Supabase を Lovable に接続する
+</div>
+
+Supabase のバックエンドを Lovable のプロジェクトに接続するのは簡単です。Supabase アカウント（無料プランで問題ありません）と、準備済みの Lovable プロジェクトが必要です。まだ Supabase アカウントを持っていない場合は、Supabase のウェブサイトから登録できます。無料プランではクレジットカードは不要です。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/V_2aZCjrTJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<Steps>
+  <Step title="Supabase アカウントを作成する">
+    新しい Supabase アカウントを[こちら](https://app.supabase.com/sign-up)から登録するか、すでにアカウントを持っている場合は[サインイン](https://app.supabase.com/sign-in)してください。
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/g8CvOq3b-sg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+  </Step>
+  <Step title="Supabase で新しいプロジェクトを作成する">
+    \+ New Project をクリックし、必要な項目を入力して、セットアップが完了するまで数分待ちます。
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/z6eDOn1613U?si=OhuL1AdNObVYFkbY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Step>
+  <Step title="Supabase を Lovable に接続する">
+    <Steps>
+      <Step title="Lovable で Supabase 接続を開始する">
+        プロジェクトエディタでプロジェクト設定を開きます。Integrations セクション内の Supabase タブを見つけて、**Connect Supabase** をクリックします。Supabase アカウントへのログインを求められるので、サインインして Lovable を承認してください。
+      </Step>
+      <Step title="承認し、プロジェクトを選択または作成する">
+        次に、Lovable アプリとリンクする Supabase の **organization** と **project** を選択するように求められます。既存のプロジェクトを選択することも、その場で新しいプロジェクトを作成することもできます（必要であれば、Lovable のチャットが新しい Supabase プロジェクトの作成を案内します）。
+      </Step>
+      <Step title="設定が完了するまで待つ">
+        プロジェクトを選択すると、Lovable が自動的に接続設定を行います。数秒以内に、チャット内に確認メッセージ（例: 「✅ Supabase connected」）が表示されるはずです。この時点で、Lovable アプリは Supabase データベースと接続され、認証、データストレージ、その他のバックエンド機能を利用できるようになります。
+      </Step>
+    </Steps>
+    <Tip>
+      Lovable と Supabase はどちらも、開発用に十分な無料プランを提供しています。アプリが成長したり高度な機能が必要になった場合は、それぞれのサービスで有料プランが必要になることがありますが、当面はコストをかけずに試すことができます。
+    </Tip>
+  </Step>
+</Steps>
+
+<div id="adding-user-authentication">
+  ## ユーザー認証を追加する
+</div>
+
+アプリで最初に用意したくなる機能のひとつがユーザー認証です（ユーザーがアプリにサインアップしてログインできるようにするためのものです）。Lovable の Supabase 連携を使えば、チャットでかんたんにセットアップできます。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/LHpMUj-Jf_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<div id="email-and-password-basic-setup">
+  ### メールアドレスとパスワード（基本設定）
+</div>
+
+プロジェクトを Supabase に接続すると、Lovable が認証ページを自動生成できます。たとえば、単に次のようにプロンプトを入力します：**“Add login”**。これにより、通常は Supabase の認証システムと連携した基本的なログインページ（および関連するサインアップフロー）があなたのアプリ内に作成されます。
+
+Lovable がログイン UI を追加したら、テスト用ユーザーを作成する方法がいくつかあります。
+
+<Note>
+  プロンプト例:
+
+  ```
+  Add login
+  ```
+</Note>
+
+- **アプリのサインアップフォーム経由:** アプリに新しく追加されたインターフェースを使ってユーザーを登録します（Supabase と通信してアカウントを作成します）。
+- **Supabase ダッシュボード経由:** Supabase プロジェクトのダッシュボードを開き、**Authentication \> Users** に進んで、新しいユーザー（メールアドレスとパスワード）を手動で追加します。テストアカウントをすぐに用意したいときに便利です。
+
+<Tip>
+  開発時の利便性のため、テスト中は Supabase でメール確認を無効にすることをおすすめします。こうすることで、ユーザーはメールアドレスを確認しなくてもすぐにログインできます。設定するには、Supabase ダッシュボードを開き、**Authentication \> Settings（または Providers）\> Email** に移動し、**「Confirm email」の必須設定を無効化**します。本番環境ではセキュリティのため、後から再度有効にできます。
+</Tip>
+
+Lovable はすでに、認証済みユーザーを認識するように Lovable アプリを設定しています（たとえば、必要に応じて特定のページをログイン済みユーザーのみに制限する、など）。ログインやサインアップページの見た目や挙動は、Lovable のエディタやプロンプトを使ってさらにカスタマイズできます。Supabase Integration 2.0 では、サインアップフォームに追加フィールドを加えたり、フォームのスタイルをブランドに合わせて調整したりすることも可能です。
+
+<div id="social-logins-eg-google">
+  ### ソーシャルログイン（例: Google）
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/W6-_0-Eekio?si=8WkxiJn0oe4wfSbe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Supabase は Google、GitHub、Twitter などの OAuth ログインをサポートしています。これらを Lovable アプリにも統合できます。
+
+1. **Supabase でプロバイダを有効にする:** Supabase ダッシュボードで **Authentication \> Providers** に移動します。外部ログインプロバイダの一覧が表示されるので、**Google**（例）をオンに切り替え、案内に従って Google から取得した OAuth Client ID と Secret を入力します。_(Google のデベロッパーコンソールからこれらの認証情報を取得する手順は Supabase が案内してくれます。)_ 設定を保存すると、あなたの Supabase プロジェクトは Google ログインを処理できるようになります。
+2. **Lovable アプリの UI を更新する:** 次に、Lovable にプロンプトを送ってソーシャルログインオプションを追加させます。たとえば、**“ログインページに『Sign in with Google』ボタンを追加して”** のように指示します。Lovable は認証ページを変更し、Google サインインボタンと、Supabase 経由で OAuth フローを開始するために必要なコードを追加します。
+
+これが完了すると、アプリのユーザーは「Sign in with Google」をクリックし、認証のために Google にリダイレクトされ、ログイン済みユーザーとしてアプリに戻れるようになります。他のプロバイダ（GitHub、Facebook など）も同様の手順で有効化できますが、それぞれを Supabase 側で設定し、その後で Lovable の UI も適切に調整することを忘れないでください。
+
+<div id="managing-data-with-supabase">
+  ## Supabase でデータを管理する
+</div>
+
+認証機能に加えて、ほとんどのアプリの中心となるのはデータの読み書きです。Lovable と Supabase を使えば、チャットのプロンプトから離れずにデータベーステーブルを作成し、UI に接続できます。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/V5LdDEuCli4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<div id="creating-database-tables-via-lovable">
+  ### Lovable を使ってデータベーステーブルを作成する
+</div>
+
+Supabase を接続したら、データを永続的に保存する必要が生じたときはいつでも、Lovable に指示するだけで、Lovable がデータベースのセットアップを調整してくれます。一般的な手順は次のとおりです。
+
+<Steps>
+  <Step title="必要な機能とデータを説明する">
+    Lovable のチャットで、データ保存を伴う機能をリクエストします。たとえば、**「フィードバックフォームを追加して、回答をデータベーステーブルに保存して」** のように伝えます。どんなデータを保存したいか（例: メッセージと評価を含むユーザーフィードバック、名前と価格などを含む在庫アイテム）をできるだけ明確に説明してください。Lovable はその情報を使って、どのようなデータベース構造が必要かを判断します。
+  </Step>
+  <Step title="生成された SQL スニペットを確認する">
+    Lovable の AI が、アプリに対する更新案を提示します。リクエストがデータの保存を伴う場合、Lovable は SQL スキーマのスニペットも生成します。これは、Supabase に必要なテーブルやカラムを作成するためのコマンドそのものです。たとえば、_「`feedback` テーブルを作成し、`id`、`message`、`rating` カラムを追加します」_ のように説明し、その SQL コードを提示してくれます。このスニペットは、コピーできるようにチャットまたはサイドバーに表示されます。
+  </Step>
+  <Step title="Supabase で SQL を実行する">
+    Supabase のダッシュボードを開き、**SQL Editor** に移動します。Lovable から得た SQL スニペットを貼り付けて実行すると、データベース内に新しいテーブルが作成される（または既存テーブルが変更される）ようになります。Supabase の **Table Editor** で、指定したカラムを持つテーブルが作成されていることを確認できます。
+  </Step>
+  <Step title="確認して Lovable に統合処理を完了させる">
+    Lovable に戻り、SQL を実行したことを確認します（チャットから確認を求められる場合もあれば、単に Lovable に「完了」と伝えたり、表示される確認ボタンをクリックしたりしてもかまいません）。すると Lovable が統合処理を完了します。アプリの UI を更新し、フォーム入力、リスト、その他のコンポーネントを新しい Supabase のテーブルにバインドします。先ほどの例で言えば、アプリ内のフィードバックフォームがテーブルに接続され、ユーザーがフィードバックを送信すると `feedback` テーブルに保存され、そのエントリーを取得して表示できるようになります。
+  </Step>
+</Steps>
+
+これで完了です\\! データベーススキーマを自分で設計したり、バックエンドコードを書いたりする必要はありません。あなたの説明に基づいて、Lovable と Supabase がすべて処理してくれます。この手順は、新しいデータ機能（ブログ投稿、コメント、商品など）を追加したいときに、何度でも繰り返し使えます。
+
+たとえば、ユーザーがアプリ内で記事を投稿できるようにしたい場合は、**「ユーザーがタイトルとコンテンツ付きで投稿を作成できるようにして、それらをデータベースに保存して」** とプロンプトを入力できます。Lovable は `posts` テーブル（title、content、author、timestamp などのフィールドを含む）を生成し、それを Supabase に追加するための SQL を提示し、さらにそのテーブルに接続されたフロントエンドのフォームやページもセットアップしてくれます。
+
+<Note>
+  Supabase のダッシュボードには、データを管理するための充実したインターフェースがあります。スプレッドシートのような UI でテーブルの行を表示・編集したり、テーブル間のリレーションを定義したり、CSV や Excel からデータをインポートすることもできます。内部ではすべて PostgreSQL が動作しているため、必要に応じて複雑なクエリを実行したり、SQL の機能を活用したりできます。さらに Supabase の SQL エディタには **AI SQL Assistant** が用意されており、SQL に慣れていなくてもクエリ作成を支援してくれます。高度な分析やトラブルシューティングの際にも役立ちます。
+</Note>
+
+<div id="file-storage-images-media">
+  ### ファイルストレージ（画像 & メディア）
+</div>
+
+Lovable アプリでファイルのアップロード（たとえば、ユーザーのプロフィール画像、添付ファイル、各種メディア）を扱う必要がある場合は、Supabase 連携を使えます。Supabase には、データベースと並んでファイル（画像、動画、PDF など）を便利にホストできる **Storage** サービスが含まれています。
+
+Lovable アプリに **Upload** コンポーネントや画像アップロード機能を追加すると、Lovable は裏側で Supabase Storage を利用します。アップロードされたファイルは、Supabase プロジェクト内のストレージバケットに保存され、そのファイルを後で表示またはダウンロードするために使える URL や参照が取得されます。
+
+デフォルトでは、Supabase の無料プランでは 1 ファイルあたり **50MB** までアップロードできます。これは、ほとんどの画像や短い動画には十分なサイズです。アプリでより大きなファイルを扱う必要がある場合は、Supabase の有料プランで、より大きなアップロード（非常に大きなファイル向けの**レジューム可能なアップロード**を含む）に対応できます。必要に応じて、ファイルをフォルダ（バケット）に整理し、Supabase ダッシュボードからアクセス権限を管理できます。
+
+<Note>
+  アプリにユーザープロフィールがあり、ユーザーにプロフィール画像を追加してもらいたいとします。このとき、Lovable に _「アカウント設定ページにプロフィール画像のアップロード機能を追加して。」_ のようにプロンプトを入力できます。Lovable は画像をアップロードするための UI を作成します。Supabase 連携のおかげで、ユーザーがファイルをアップロードすると、そのファイルは Supabase Storage（たとえば `public/avatar-images` のようなバケット）に保存され、Lovable がその画像 URL を取得して、アプリ内でプロフィール画像として表示します。こうした処理はすべて、あなたがストレージ処理用のコードを書くことなく行われます。
+</Note>
+
+<div id="storing-secrets-api-keys-config">
+  ## シークレットの保存（APIキーと設定）
+</div>
+
+多くのアプリケーションでは、Stripe による決済や OpenAI による AI 機能など、サードパーティサービスに接続するためのシークレットキーや API の認証情報が必要になります。Supabase が接続されている場合、Lovable はこれらのシークレットを安全に管理・利用する方法を提供します。
+
+Lovable は、機能でシークレットが必要になったときに自動的に検出し、必要な値を入力するための UI を表示します。
+
+これらのシークレットは、あなたのプロジェクト用に Supabase の Edge Functions シークレットマネージャー内に安全に保存されます。シークレットは暗号化され、バックエンド側で安全に保管されます。Edge Functions をデプロイするとき（次のセクション参照）、それらのシークレットにアクセスして外部サービスと接続できます。
+
+<Tip>
+  たとえば、決済のために Stripe を連携する場合、Stripe の Secret Key をシークレットとして保存します。Lovable が決済処理用の関数を Supabase にデプロイすると、その関数にはシークレットストアからそのキーが自動的に渡されるため、関数は Stripe に対して認証できます。このように、アプリ内にシークレットをハードコードする必要がなくなり、公開されてしまうリスクも避けられます。
+</Tip>
+
+<div id="backend-logic-with-edge-functions">
+  ## Edge Functions を使ったバックエンドロジック
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/p_hKIDlxXp0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+アプリによっては、基本的なデータ CRUD（Create, Read, Update, Delete）を超えたカスタムバックエンドロジックが必要になることがあります。**Supabase Edge Functions** はサーバーレス関数（AWS Lambda に似たもの）で、イベントやリクエストをトリガーとしてバックエンドでコードを実行できます。Lovable との連携により、必要なバックエンドの挙動を自然な言葉で指定するだけで、Lovable が必要な Edge Function のコードを自動生成し、Supabase にデプロイしてくれます。
+
+Lovable における Edge Functions の主なユースケースには、次のようなものがあります。
+
+- **AI サービスの利用:** たとえば OpenAI や Anthropic の API で入力を処理する（APIキーは上で説明したとおりシークレットとして保存します）。
+- **メールや通知の送信:** たとえば、ユーザーがサインアップしたときに Resend のようなメール API 経由でウェルカムメールを送信する。
+- **決済処理:** たとえば、Stripe の API を使ってチェックアウトセッションを作成したり、注文を確定したりする。
+- **スケジュールされたタスク:** たとえば、毎時／毎日のクリーンアップやサマリー処理を行う（Supabase Edge Functions はスケジュール実行をトリガーできます）。
+- **複雑な計算やサードパーティ連携:** クライアントサイドでは実行したくないあらゆるコードを Edge Function で実行できます。
+
+バックエンド関数を追加するには、Lovable のチャットで必要な内容をそのまま説明するだけです。たとえば、_「ユーザーがフィードバックフォームを送信したら、そのテキストを OpenAI で解析して、感情スコアを保存して」_ と指示します。Lovable は、このロジックのコードを Supabase Edge Function として生成し（この例では OpenAI API を呼び出します）、Supabase プロジェクトにデプロイします。また、フォーム送信時など適切なタイミングでこの関数を呼び出し、レスポンスを処理するように Lovable アプリも更新されます。
+
+Edge Functions は、Supabase ダッシュボードの **Functions** セクションで確認および監視できます。各関数には、最近の実行や出力・エラーを示すログがあります。Lovable の Supabase Integration 2.0 により、この体験はさらに向上しています。問題が発生したときにログを自動で読み取り、関数でエラーが起きた場合は Lovable がエラーメッセージをチャット上に表示して、トラブルシューティングを手助けします。もちろん、詳細を確認したい場合や安心のために、自分で Supabase のログを確認することもいつでも可能です。
+
+<Warning>
+  **本番公開前に:** Supabase のデフォルトのセキュリティルールは開発用途としては寛容ですが、本番環境のデータを保護するために **Row Level Security (RLS)** ポリシーを必ず設定する必要があります。RLS を使うと、データベーステーブル内の各行について、誰が読み書きできるかを定義できます（たとえば、ユーザーが自分自身のデータにしかアクセスできないようにするなど）。Lovable は、プロンプトで依頼すれば基本的な RLS ポリシーの生成を手伝えます（例: 「ユーザーが自分のフィードバックだけ編集できるようなセキュリティポリシーを適用して」）。ただし、これらのポリシーは必ず Supabase ダッシュボードの **Auth \> Policies** でレビューし、テストしてください。適切なセキュリティ設定は、実際のユーザーをアプリに招待する前に不可欠です。
+</Warning>
+
+<div id="faq">
+  ### よくある質問
+</div>
+
+<AccordionGroup>
+  <Accordion title="Supabase 連携を使うと、実際にはどんなことができるのですか？">
+    これは、あなたの Lovable アプリにフルマネージドなバックエンドを提供します。これがなくても Lovable で UI を構築することはできますが、データを永続化したり、ユーザーを標準機能として管理したりできる場所はありません。Supabase を接続すると、Lovable はユーザーアカウント（認証）の作成、データベースへのデータの保存と取得、ファイルのアップロード、サーバーサイドコードの実行などを、すべて自動で行えるようになります。要するに、Supabase はあなたのアプリの裏側でデータベースとサーバーを提供し、Lovable はプロンプトを通じてそれらを操作します。
+  </Accordion>
+
+  <Accordion title="Lovable と Supabase で別々のアカウントは必要ですか？">
+    はい。Lovable と Supabase は別々のプラットフォームです。データベースをホストするための Supabase アカウントが、Lovable アカウントとは別に必要になります。どちらにも無料枠があるため、費用なしで始められます。ただし、後からより多く利用したり機能を追加したりするためにアップグレードする場合は、それぞれのサービスごとに請求が個別になる点に注意してください。
+  </Accordion>
+
+  <Accordion title="Lovable と Supabase を連携するにはどうすればよいですか？">
+    1. Lovable エディタで、**Integrations** セクションに移動します。
+    2. **Connect to Supabase** をクリックし、認証手順に従います。
+    3. 必要に応じて、Lovable 内で新しい Supabase プロジェクトを作成します。
+    4. Lovable が必要なデータベーススキーマを自動的に生成し、プロジェクトに接続します。
+  </Accordion>
+
+  <Accordion title="Supabase 接続済みの Lovable アプリを外部の自動化ツールと連携できますか？">
+    もちろん可能です。Lovable と Supabase を組み合わせて使う場合、データは Supabase のデータベースに保存され、Supabase は各テーブル向けの自動生成された RESTful API（およびクライアントライブラリ）も提供します。つまり、Zapier や [Make.com](http://Make.com)、その他のサービスを使って、HTTP リクエスト経由でアプリのバックエンドデータにアクセス・操作できます。たとえば、Zapier からアプリで使っている Supabase のテーブルに対して、レコードの取得や追加が行えます。さらに、Supabase Edge Functions（Lovable での作成もサポートしています）を使ってカスタム API エンドポイントを作成し、より複雑なワークフローをトリガーすることもできます。要するに、サードパーティの自動化サービスとの連携は十分に可能ですが、Supabase の APIキー や webhook の設定が多少必要になることがあります。
+  </Accordion>
+
+  <Accordion title="アプリが成長したときに、Supabase はどの程度までスケールできますか？">
+    Supabase は **PostgreSQL** 上に構築されており、大量のデータや高いトラフィックを処理できます。デフォルト設定のままでも、無料プランのデータベースでかなりのワークロード（数百万行や複数接続）を扱えます。ニーズが増えてきたら、より多くのストレージ、スループット、機能を利用できるように Supabase のプランをアップグレードできます。多くの本番アプリが Supabase だけで稼働しているので、安心して使えます。ただし無料プランには利用上限がある点（Supabase の公式サイトに記載されています）には注意し、その上限に近づいてきたらスケールアップを検討してください。
+  </Accordion>
+
+  <Accordion title="チャットやライブフィードなどのリアルタイム機能をアプリに追加するにはどうすればよいですか？">
+    Supabase には、データベース向けのリアルタイムサブスクリプション機能が組み込まれています。つまり、アプリは特定のテーブルに対する変更（insert、update、delete）を検知して、即座に反応できるということです。これを活用するには、通常どおり Lovable アプリの機能を設計します（例：`messages` テーブルにメッセージを書き込むチャットルーム）。Lovable は Supabase のリアルタイム機能に対応しているため、そのテーブルの変更を購読するようにフロントエンド側を設定できます。実際には、たとえばチャットメッセージ用のテーブルを作成したあとで、Lovable に対して **「チャットのリアルタイム更新を有効にして」** とプロンプトすれば、内部的に Supabase のリアルタイム API が使われます。するとユーザーは、ページを再読み込みすることなく新しいメッセージがライブで表示されるようになります。これは、リアルタイム更新が役立つあらゆるシナリオ（コメント、通知、ダッシュボードなど）で利用できます。
+  </Accordion>
+
+  <Accordion title="Supabase のストレージにアップロードできるファイルに制限はありますか？">
+    無料プランでは、Supabase では 1 ファイルあたりのアップロードサイズが **50MB** に制限されています。これは画像、音声、短い動画など、ほとんどのユースケースをカバーします。長尺の動画や大規模なデータセットなど、より大きなファイルを扱う必要がある場合は、有料プランにアップグレードすることで、より大きなサイズのファイルや、中断から再開できるアップロードも利用できるようになります。また、プランに応じて上限が増えていく、プロジェクト単位のストレージ容量（保存できる合計 GB 数）の制限がある点にも注意してください。
+  </Accordion>
+
+  <Accordion title="Supabase で認証を設定するにはどうすればよいですか？">
+    Lovable は自動的に認証をセットアップしますが、必要に応じて次の設定を行ってください:
+
+    * **Supabase Dashboard &gt; Authentication** に移動します。
+    * **Email Sign-in/Sign-up** を有効にします。
+    * ローカルでのテストを容易にするため、メール確認を無効にします。
+  </Accordion>
+
+  <Accordion title="1つのSupabaseデータベースを複数のLovableプロジェクトで利用することはできますか？">
+    はい、可能です。Lovable で複数のフロントエンドアプリケーションを作成し、それらすべてを同じ Supabase プロジェクトに接続できます（つまり、同じデータベースと認証を共有します）。これは上級者向けですが、実現可能です。たとえば、共通のデータベースを使うメインアプリと管理ダッシュボードを、それぞれ別の Lovable プロジェクトとして構築するといった構成が考えられます。各プロジェクトで Supabase を接続するときに、同じ Supabase プロジェクトを選択するだけです。これらすべてのアプリが同じデータを読み書きすることになるので、その前提で設計してください。
+  </Accordion>
+
+  <Accordion title="本番アプリに影響を与えずにデータベースの変更をテストしたい場合は、どうすればよいですか？">
+    現時点では、各 Lovable プロジェクトは 1 つの Supabase プロジェクトに接続されており、Lovable には組み込みのステージングモードはありません。安全に試せるプレイグラウンドが欲しい場合は、Supabase が提供している **Branching** 機能を使うことができます。これは、データベースの一時的なコピー（git のブランチのようなもの）を作成して、そこで変更をテストできる機能です。テスト用として、別の Lovable プロジェクトをブランチまたは複製したデータベースに接続することもできます。一般的に、本格的なプロジェクトでは、稼働中のアプリでスキーマ変更を行う際には注意が必要です。変更の前にバックアップを作成するか Branching を使い、準備ができたら変更をマージするようにしてください。Lovable の Supabase 連携機能は進化を続けており、将来のアップデートで、よりシームレスなステージングワークフローが導入される可能性があります。
+  </Accordion>
+
+  <Accordion title="Supabase や Lovable は、カスタム SQL やデータベースロジックを書くのを手伝ってくれますか？">
+    はい。Supabase のウェブインターフェースには、自然言語から SQL クエリを生成できる **AI SQL Assistant** が用意されています。複雑なクエリが必要な場合や SQL を書くのに自信がない場合は、Supabase の SQL エディター内でそのツールを試してみてください。Lovable 側では、通常は SQL を自分で書く必要はありません。AI がスキーマ作成とクエリの大部分を代行してくれます。ただし、上級ユーザーで独自の処理を行いたい場合は、いつでも Lovable の GitHub連携を使ってコードを確認・編集したり、必要に応じてデータベースに対して生の SQL を実行したりできます。
+  </Accordion>
+
+  <Accordion title="Lovable アプリで決済を処理するにはどうすればよいですか？">
+    支払い処理は Stripe などとの連携を通じて行われ、Supabase Edge Functions と組み合わせて利用できます。たとえば、Lovable に「チェックアウトボタンを追加して、Stripe で支払いを処理して」とプロンプトを入力できます。すると Lovable は、Stripe の API（シークレットとして保存されたあなたの Stripe シークレットキーを使用）と通信し、さらに取引の詳細をあなたの Supabase データベースに保存するエッジ関数を作成します。UI も更新され、チェックアウト／支払いボタンが追加されます。要するに、Supabase は支払い処理を実装するための環境（Edge Functions、データベース）を提供し、Lovable がそのコードのひな型を自動生成してくれます。詳細については、Lovable のドキュメントにある Stripe &amp; Payments 連携ガイドも参照してください。Stripe のセットアップ方法について、具体的な手順が説明されています。
+  </Accordion>
+</AccordionGroup>

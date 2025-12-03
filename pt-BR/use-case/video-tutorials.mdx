@@ -1,0 +1,512 @@
+---
+title: "Tutorial em vídeo"
+description: "Confira estes vídeos para ter uma visão geral completa de como criar um app com o Lovable."
+icon: "video"
+---
+
+<div id="welcome-to-lovable">
+  ## Boas-vindas ao Lovable
+</div>
+
+<Accordion title="Lovable 101">
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/l2n9rpuqvdw?si=huqUvQcNK1tKTMVL" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+  <Steps>
+    <Step title="Começando pelos conceitos básicos do Lovable" />
+
+    <Step title="Conhecendo a interface e os controles" />
+
+    <Step title="Trabalhando com recursos de edição e histórico de versões" />
+
+    <Step title="Implementando autenticação e gerenciamento de usuários" />
+
+    <Step title="Usando bancos de dados Supabase e Funções de borda" />
+
+    <Step title="Integração com GitHub e gerenciamento de código" />
+
+    <Step title="Compartilhando Projetos e recebendo feedback da comunidade" />
+
+    <Step title="Explorando recursos adicionais e modelos" />
+  </Steps>
+</Accordion>
+
+<div id="lovable-tutorials">
+  ## Tutoriais da Lovable
+</div>
+
+<AccordionGroup>
+  <Accordion title="Crie um aplicativo web de controle de calorias com IA">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/c0zhLzcVJRI?si=7vcZf5eoxIobOxdE" title="Player de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos orientá-lo na criação de um aplicativo de rastreamento de calorias com inteligência artificial usando o [Lovable](/pt-BR/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-an-ai-powered-calorie-tracking-webapp), completo com autenticação, design responsivo elegante, integração com OpenAI e publicação em produção.
+
+    <Steps>
+      <Step title="Configurando a base">
+        A base de qualquer projeto no Lovable é um bom Prompt de IA. Para este app, veja este exemplo:
+
+        ```
+        Crie um aplicativo de rastreamento de calorias com os seguintes recursos:
+        Página inicial, painel de controle e uma página de refeições.
+        Campos de entrada para descrições ou imagens de refeições, com análise alimentada pelo GPT-4.
+        Rastreamento de progresso diário e integração com Supabase para autenticação e gerenciamento de banco de dados.
+        Interface bonita e responsiva para dispositivos móveis.
+        ```
+
+        Depois que o Lovable gerar o esqueleto da UI:
+
+        * Revise a configuração da navegação e o design da landing page.
+        * Itere no Prompt de IA para refinar o layout e garantir que ele seja responsivo em dispositivos móveis.
+
+        <Note>
+          Seja explícito sobre começar pela UI. O Lovable funciona melhor quando as tarefas são divididas em etapas claras. Por exemplo, defina a navegação, as estruturas das páginas e os temas de design logo no início do Prompt de IA.
+        </Note>
+      </Step>
+
+      <Step title="Design da interface do usuário">
+        Lovable enfatiza uma abordagem passo a passo, semelhante à construção de um edifício:
+
+        * Comece com o **andaime (scaffolding)**: Planeje a estrutura do seu app (por exemplo, fluxo de experiência do usuário, layout das páginas).
+        * Adicione a **primeira camada**: Crie páginas vazias com elementos básicos de design.
+        * Refine os **detalhes**: Adicione cores, animações e responsividade para dispositivos móveis.
+
+        <Note>
+          Se você tiver designs prontos no [Figma](), pode tirar capturas de tela e incluí-las no seu Prompt de IA do Lovable. Fornecer imagens em alta resolução garante melhores resultados.
+        </Note>
+      </Step>
+
+      <Step title="Integre o Supabase como backend e para autenticação">
+        Depois que a UI estiver pronta, é hora de adicionar a funcionalidade de backend:
+
+        1. Crie uma **conta** no [**Supabase**]() e um Projeto.
+        2. Conecte-a ao Lovable pressionando o botão &quot;Connect Supabase&quot;.
+        3. Para armazenamento de dados, o Lovable vai gerar tabelas SQL. Por exemplo:
+
+        * Uma tabela `profiles` para armazenar informações de usuário.
+        * Uma tabela `meals` vinculada aos usuários para acompanhar os registros diários.
+
+        <Note>
+          Use regras de row-level security (RLS) no Supabase para garantir a privacidade dos usuários. O Lovable pode cuidar disso automaticamente para você.
+        </Note>
+      </Step>
+
+      <Step title="Integração com a OpenAI para análise de refeições">
+        A mágica deste app está nos seus recursos de IA. Para analisar refeições:
+
+        1. Obtenha uma [chave de API da OpenAI]() no seu painel de desenvolvedor.
+        2. Use o [GPT-4]() para analisar descrições ou imagens de refeições.
+        3. Garanta que as chaves de API sejam armazenadas com segurança em funções de borda para evitar acesso não autorizado.
+
+        **Recursos a incluir:**
+
+        * **Analisar descrições de refeições**: Estimar valores nutricionais (calorias, proteína, carboidratos, gordura).
+        * **Reconhecimento de imagens**: Envie uma foto de uma refeição e o GPT-4 extrairá uma descrição e dados nutricionais.
+
+        <Note>
+          *Dicas avançadas para integração com OpenAI:*
+
+          * Use **function calling** para respostas estruturadas, garantindo que os dados sejam formatados corretamente para inserção no banco de dados.
+          * Teste esse recurso pedindo que o app analise entradas simples de refeições, como &quot;2 ovos&quot;.
+        </Note>
+      </Step>
+
+      <Step title="Como implementar pagamentos com Stripe">
+        Para monetizar o app, adicione pagamentos por assinatura:
+
+        1. Crie uma conta na [Stripe]() e configure um produto (por exemplo, &quot;Plano Padrão&quot; por US$ 12/mês).
+        2. Integre a Stripe à Lovable adicionando a chave de API e o ID de preço do produto.
+        3. Redirecione usuários não pagantes para a landing page. Apenas usuários pagantes podem acessar o app principal.
+
+        <Note>
+          *Dicas adicionais:*
+
+          * Ative o **portal do cliente** da Stripe para permitir que os usuários gerenciem suas assinaturas (por exemplo, cancelar ou atualizar métodos de pagamento).
+          * Teste pagamentos no modo de teste da Stripe usando os dados de cartão de crédito de teste fornecidos.
+        </Note>
+      </Step>
+
+      <Step title="Testes e depuração">
+        Erros fazem parte natural do desenvolvimento, e o Lovable simplifica a depuração:
+
+        * Use o botão **&quot;Try to Fix&quot;** sempre que ocorrer um erro de build.
+        * Para problemas de backend, confira os registros de log do Supabase para relatórios de erro detalhados.
+        * Se estiver publicando no [Netlify](), revise os registros de log de publicação para identificar problemas de build. Compartilhe os registros de log com o Lovable para obter correções sob medida.
+
+        <Note>
+          Se você ficar preso, volte para uma versão anterior usando o recurso &quot;Revert&quot; do Lovable. Isso economiza créditos e tempo.
+        </Note>
+      </Step>
+
+      <Step title="Publicando seu aplicativo">
+        Quando seu app estiver pronto, publique-o com a Lovable ou com a Netlify:
+
+        1. Use o recurso de publicação da Lovable para hospedar o app em um domínio padrão.
+        2. Para domínios personalizados:
+
+        * Conecte seu [repositório do GitHub]() à Netlify.
+        * Compre um domínio e configure as [configurações de DNS]() para vinculá-lo à Netlify.
+
+        <Note>
+          Atualize os metadados do seu app (favicon, meta tags, imagem OG) para fortalecer sua marca e melhorar o SEO.
+        </Note>
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Crie uma landing page SaaS com a Groq API">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/S0k8FOmqjog?si=935gSBuflrRbljlF" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos mostrar como criar uma landing page impressionante e totalmente interativa para um assistente de e-mail com tecnologia de IA usando [Lovable](/pt-BR/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-a-saas-landing-page-with-groq-api), 21st.dev e Supabase — com animações, integrações de API e publicação simples e sem complicações!
+
+    * Design com IA &amp; aprimoramentos de UI
+    * Adicionando animações &amp; elementos interativos
+    * Integrando aprimoramentos de e-mail com IA usando a Groq API
+    * Configurando um formulário de contato com Resend
+    * Publicando a página usando o Lovable Launch
+  </Accordion>
+
+  <Accordion title="Criar uma ferramenta de feedback">
+    A sessão apresentou as capacidades do [Lovable](/pt-BR/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-a-feedback-tool) para iterar rapidamente e entregar resultados prontos para produção.
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/tYDqBMilHkM?si=6eD-0GoQEywncOqQ" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="Autenticação">
+        * Usuários podem se cadastrar, fazer login e gerenciar perfis usando a integração com Supabase.
+        * Sessões de usuário seguras permitem experiências personalizadas.
+      </Step>
+
+      <Step title="Envio de Feedback e Votação">
+        * Usuários podem enviar feedback com títulos, descrições e imagens.
+        * Cada item de feedback exibe a contagem de votos e permite votos positivos em tempo real.
+      </Step>
+
+      <Step title="Dashboard Administrativo com Resumos de IA">
+        * Administradores podem revisar todos os feedbacks, filtrar por número de votos e ordenar os itens.
+        * Resumos com tecnologia de IA identificam insights acionáveis usando OpenAI e Supabase Edge Functions.
+      </Step>
+
+      <Step title="Monitoramento de Presença de Usuários">
+        Indicadores de presença em tempo real mostram quais usuários estão ativos na plataforma.
+      </Step>
+
+      <Step title="Páginas de Feedback Detalhadas com Comentários">
+        Cada item de feedback tem uma página dedicada para discussões, permitindo que as equipes colaborem e priorizem com eficiência.
+      </Step>
+
+      <Step title="Anexos de Arquivos">
+        Usuários podem anexar imagens ao feedback, armazenadas com segurança usando os recursos de armazenamento do Supabase.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Crie uma agência de desenvolvimento com serviços produtizados">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/eZsbfEA-_oI?si=ngagWq3q3Km1jY6J" title="Player de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    O objetivo desta sessão foi criar um app que permite que desenvolvedores, designers ou consultores ofereçam serviços por assinatura — um modelo de negócio inspirado em plataformas como a DesignJoy.
+
+    <Steps>
+      <Step title="Autenticação e gerenciamento de usuários">
+        A autenticação foi o primeiro recurso implementado, configurando uma base robusta para gerenciar usuários. A equipe enfatizou a importância de integrar a autenticação logo no início para evitar problemas ao escalar o app.
+
+        * Integração com Supabase para cadastros, logins e gerenciamento de perfis de usuário.
+        * Sessões de usuário persistentes para melhorar a usabilidade do app.
+      </Step>
+
+      <Step title="Integração de assinaturas com Stripe">
+        A sessão demonstrou como integrar o Stripe para o gerenciamento de assinaturas:
+
+        * Permitiu que usuários assinassem diferentes planos.
+        * Gerenciou o status da assinatura, garantindo que apenas usuários pagantes acessem recursos premium.
+      </Step>
+
+      <Step title="Dashboard e gerenciamento de tarefas">
+        * Dashboards específicos por usuário com quadros de tarefas e funcionalidade de arrastar e soltar.
+        * Atualizações de tarefas em tempo real para uma colaboração fluida.
+      </Step>
+
+      <Step title="Chatbot de IA">
+        A sessão foi concluída com a integração de um chatbot de IA, ilustrando como a OpenAI pode adicionar funcionalidades dinâmicas aos apps. Esse recurso pode ser expandido para atuar como assistente virtual, concierge ou interface de consulta de dados.
+
+        * Integração com a OpenAI para fornecer um chatbot capaz de responder de forma inteligente às dúvidas dos usuários.
+        * Construído com um único Prompt de IA, demonstrando a eficiência da Lovable.
+      </Step>
+
+      <Step title="Depuração iterativa e refinamento">
+        A equipe enfrentou desafios de depuração em tempo real, oferecendo insights valiosos sobre resolução de problemas. As técnicas incluíram:
+
+        * Usar registros de log do console e mensagens de erro para identificar problemas.
+        * Reverter para versões anteriores do app para evitar ficar preso em estados com erros.
+        * Orientar a IA da Lovable com instruções detalhadas para garantir correções precisas.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Boas práticas de Prompt de IA no Lovable">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/IqWfKj4mUIo?si=sIUpyvAuOH9Fu_oe" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, fazemos um mergulho profundo no desenvolvimento de apps com IA, na engenharia de prompts de IA e na automação de fluxos de trabalho com o convidado especial da [Lovable](https://lovable.dev/), ‪[Mark Kashef‬](https://www.youtube.com/@Mark_Kashef)!
+
+    * Como entender e criar prompts de IA eficazes
+    * Os quatro níveis da engenharia de prompts de IA
+    * Técnicas de meta prompts de IA e boas práticas
+    * Estratégias de depuração para fluxos de trabalho de IA
+    * Como criar um app de IA usando Lovable e Make.com
+    * Como integrar Visual Edits e Tailwind CSS ao design de UI
+  </Accordion>
+
+  <Accordion title="Construa um clone do Luma com Supabase e Lovable">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/-sSOyO0FiPE?si=TCamI0uASRJ2Kh6j" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos criar uma plataforma de eventos ao estilo Luma usando Lovable e [Supabase](https://docs.lovable.dev/integrations/supabase) – ao vivo!
+
+    * Como integrar Supabase ao Lovable
+    * Configurar autenticação &amp; gerenciamento de usuários
+    * Configurar bancos de dados &amp; comentários em tempo real
+    * Testar o desempenho &amp; lidar com vários usuários
+    * Depurar em tempo real &amp; otimizar o desempenho
+  </Accordion>
+
+  <Accordion title="Crie um app web com recursos de IA">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/gqsZGxuymTk?si=xwjEwFQCa5p8WVLh" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos mostrar como usar o Lovable, um builder no-code com IA, para criar um app de diário full-stack sem escrever nenhuma linha de código!
+
+    * Crie instantaneamente a interface do seu app
+    * Carregue seu design e gere um app funcional
+    * Conecte o Supabase para backend e autenticação
+    * Implemente o GPT-4o para recursos com IA
+    * Publique um app full-stack em poucos minutos!
+  </Accordion>
+
+  <Accordion title="Crie um CRM básico com Resend">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/5ZL744_Wxjo?si=qrKlOL_1fAnz7rgc" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos criar um CRM simples, mas poderoso, usando o [Lovable](/pt-BR/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-a-simple-crm-with-resend) para desenvolvimento, o Supabase para armazenamento de dados e o [Resend](https://docs.lovable.dev/integrations/resend) para automação de e-mails.
+
+    * Como o Resend funciona para automação de e-mails
+    * Como configurar e-mails de autenticação com Supabase
+    * Como criar um painel administrativo e um sistema de gerenciamento de contatos
+    * Como criar e personalizar modelos de e-mail
+    * Como adicionar um formulário de inscrição em newsletter e funcionalidade de envio em massa de e-mails
+  </Accordion>
+
+  <Accordion title="Crie elementos interativos no desenvolvimento web">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/b-O7Ew0Q2ig?si=UPyQQdnualImIP8j" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Criar experiências web envolventes e interativas ficou ainda mais fácil com as atualizações mais recentes do Lovable!
+
+    <Steps>
+      <Step title="Personalização de UI sem esforço com edições visuais">
+        Uma das maiores melhorias do Lovable é a capacidade de modificar elementos de UI instantaneamente sem consumir créditos de IA. Agora você pode:
+
+        * Editar texto diretamente no seu projeto.
+        * Ajustar cores e estilos de botões em tempo real.
+        * Enviar e trocar imagens sem interrupções.
+        * Passar o mouse sobre elementos para fazer ajustes rápidos.
+
+        <Note>
+          Usuários agora podem selecionar texto, mudar cores ou trocar ícones com facilidade, sem precisar de intervenção de IA — permitindo um processo de iteração de design mais fluido.
+        </Note>
+      </Step>
+
+      <Step title="Depuração avançada e tratamento de erros de API">
+        Antes, os usuários enfrentavam desafios ao lidar com erros de integração com APIs de terceiros. Agora o Lovable:
+
+        * Exibe mensagens de erro mais ricas para facilitar a depuração.
+        * Elimina pop-ups irrelevantes, melhorando o foco em problemas críticos.
+        * Habilita detecção de erros orientada por IA para correções automáticas.
+
+        <Note>
+          Em vez de sobrecarregar os usuários com pop-ups genéricos, o Lovable agora envia o contexto do erro diretamente para sua IA, que pode decidir quando um problema precisa ser tratado e como corrigi-lo.
+        </Note>
+      </Step>
+
+      <Step title="Criando fundos dinâmicos e animações">
+        O Lovable agora oferece suporte à integração perfeita de elementos animados e interativos usando **p5.js** e outras bibliotecas.
+
+        #### **Projeto de exemplo: site de agência de viagens com bandeiras interativas**
+
+        Uma demonstração ao vivo recente mostrou como criar uma landing page de agência de viagens com:
+
+        1. **Uma seção hero animada** com bandeiras aparecendo dinamicamente e se movendo em resposta às interações do mouse.
+        2. **Uma seção com rolagem fixa (sticky-scroll)** que muda com base na posição de rolagem do usuário.
+        3. **Efeitos de hover interativos** em que as imagens reagem aos movimentos do usuário.
+
+        #### **Como implementar efeitos animados**
+
+        Para criar esses efeitos, os usuários seguiram este processo simples:
+
+        * **Definir a animação desejada:**
+
+        <Note>
+          Deixe o plano de fundo interativo com elementos flutuantes que se afastam quando o cursor passa por cima.
+        </Note>
+
+        * **Usar p5.js para gerar efeitos:**
+          * Implementar um padrão de fumaça cromática.
+          * Trocar imagens estáticas por animações dinâmicas de bandeiras.
+        * **Aprimorar a experiência do usuário com interações baseadas em física:**
+          * Fazer com que os elementos se movam dinamicamente com base nas ações do usuário.
+
+        <Note>
+          Se uma animação não estiver funcionando, use o chat mode do Lovable para depurar e refinar o efeito com orientação passo a passo da IA.
+        </Note>
+      </Step>
+
+      <Step title="Importar elementos personalizados de bibliotecas externas">
+        Com [**21st.dev**](), os usuários agora podem integrar componentes de UI pré-construídos de forma integrada em Projetos Lovable.
+
+        1. Navegue pelo **21st.dev** em busca de um design de botão.
+        2. Copie o prompt de IA gerado.
+        3. Cole-o no Lovable e substitua um botão existente.
+
+        Essa abordagem acelera os fluxos de trabalho de design e permite interfaces mais polidas e visualmente coesas.
+
+        <Note>
+          Esse mesmo método funciona para importar presets de animação do **motion.dev**, facilitando a adição de efeitos de movimento de alta qualidade sem necessidade de código personalizado.
+        </Note>
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Autenticação com Clerk, Domínios personalizados & Listas de espera">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/tyAsNwu_xCI?si=VHCGf2IlFRQzVLeD" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos criar um **CRM personalizado** (sistema de gestão de relacionamento com clientes) usando [**Lovable**](/pt-BR/lovable-f9060f1e/lovable-f9060f1e/editor/main#clerk-authentication-custom-domains-and-waitlists) e [**Clerk**](https://docs.lovable.dev/integrations/clerk).
+  </Accordion>
+
+  <Accordion title="Como criar um CRM personalizado com Lovable e Make">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/zv4vcR7VCAk?si=BgJHeEuti27cbgYt" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Neste tutorial, vamos mostrar como criar um **CRM personalizado** (Customer Relationship Management, ou sistema de gerenciamento de relacionamento com clientes) usando [**Lovable**](/pt-BR/lovable-f9060f1e/lovable-f9060f1e/editor/main#how-to-build-a-custom-crm-with-lovable-and-make) e [**Make**](https://docs.lovable.dev/integrations/make).
+  </Accordion>
+
+  <Accordion title="Criando uma landing page de US$ 10 mil em uma hora">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/VVbC80KgF9E?si=71RW1V8KgpgxTya_" title="Player de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+</AccordionGroup>
+
+<div id="build-brand-and-launch-a-real-micro-saas-live">
+  ## Crie, dê sua marca e lance um micro-SaaS real, ao vivo!
+</div>
+
+Aprender espanhol nunca foi tão interativo! Imagine um app que não só ensina espanhol por meio de conversas, mas também cria interações de voz em tempo real, cursos dinâmicos e conteúdo visualmente atraente — tudo totalmente impulsionado por IA. Este tutorial pode ajudar você a acompanhar, passo a passo, o que Kristian e Harry construíram:
+
+<AccordionGroup>
+  <Accordion title="Etapa 1: Projetando as funcionalidades principais">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/8QDL9cCIXqU?si=JPHSSBoWO4dXl7vB" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="Construindo as bases">
+        Antes de implementar recursos de IA, focamos em **construir uma base sólida** para o app usando o **Lovable**. Isso incluiu configurar a autenticação, estruturar o dashboard e implementar o gerenciamento de usuários.
+      </Step>
+
+      <Step title="Sistema de autenticação">
+        * Integramos o **Supabase** para autenticação no backend.
+        * Habilitamos cadastro/login com e-mail e senha.
+        * Criamos um sistema de perfis para armazenar preferências do usuário e progresso de aprendizado.
+      </Step>
+
+      <Step title="Dashboard e navegação">
+        * Projetamos uma barra lateral intuitiva para navegação.
+        * Criamos seções para chat, cursos e configurações do usuário.
+        * Garantimos uma UI responsiva para uma experiência fluida em todos os dispositivos.
+      </Step>
+
+      <Step title="Perfis de usuário e armazenamento de dados">
+        * Adicionamos uma estrutura de banco de dados para armazenar o progresso do usuário.
+        * Configuramos opções de gerenciamento de perfil onde os usuários podem ajustar preferências de aprendizado.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Etapa 2: Recursos de aprendizado impulsionados por IA com o Replicate">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/eSDhk4VkVLE?si=-JhSjxsKIrPACNOK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="Cursos gerados por IA">
+        Para tornar o aprendizado interativo, implementamos um sistema de geração de cursos com IA usando o [modelo GPT da OpenAI](). Veja como funciona:
+
+        1. Usuários selecionam um tópico (por exemplo, “Perguntas para fazer em um churrasco”).
+        2. Lovable chama uma [função de borda da OpenAI]() para gerar **10 perguntas envolventes em espanhol**.
+        3. Usuários fazem quizzes, acompanham o progresso e recebem feedback da IA sobre suas respostas.
+      </Step>
+
+      <Step title="Aumentando o engajamento do usuário">
+        * **Perguntas geradas dinamicamente**: Cada quiz é gerado por IA, garantindo conteúdo novo e exclusivo sempre.
+        * **Feedback interativo**: A IA fornece explicações para respostas corretas e incorretas para melhorar o aprendizado.
+        * **Acompanhamento de progresso**: Usuários podem salvar e revisitar cursos, aumentando a retenção e a prática.
+      </Step>
+
+      <Step title="Aprimorando o engajamento visual com Replicate">
+        Para adicionar um elemento visual ao aprendizado, integramos o modelo de geração de imagens [**Flux Schnell da Replicate**]():
+
+        * **Banners de curso automatizados**: Cada curso gera dinamicamente uma imagem que corresponde ao tópico.
+        * **Experiência visualmente imersiva**: Visuais gerados por IA aumentam o engajamento e a retenção dos usuários.
+        * **Processamento rápido de imagens**: Usando a API da Replicate, as imagens são geradas em tempo real sem deixar a experiência mais lenta.
+      </Step>
+
+      <Step title="Conversas por voz em tempo real">
+        Um marco importante no desenvolvimento do app foi a adição de **prática de conversação em espanhol em tempo real** usando a [API WebRTC em tempo real da OpenAI]():
+
+        * **Tutor de IA interativo**: Usuários podem falar diretamente com uma IA que responde dinamicamente em espanhol.
+        * **Ajuda com pronúncia**: A IA fornece correções e sugestões em tempo real.
+        * **Conversas fluidas**: O fluxo natural da conversa faz com que pareça uma interação com um tutor humano.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Passo 3: Personalizar a identidade visual do app">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/fILdgFNqvmU?si=_Xg-XTMTQuBN7bE1" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="Definindo o conceito e o público-alvo">
+        Antes de trabalhar a marca, definimos nossos objetivos centrais:
+
+        * **Chat com IA** para conversas em espanhol em tempo real.
+        * **Quizzes automatizados** para sessões rápidas de prática.
+        * **Aprendizado estruturado** com armazenamento de aulas e acompanhamento de progresso.
+
+        Isso ajudou a moldar nossas escolhas de branding, garantindo que estivessem alinhadas com o propósito do app.
+      </Step>
+
+      <Step title="Escolha do nome e do domínio">
+        Buscamos um nome curto e memorável que refletisse a **jornada de aprendizado**. Usando IA, fizemos um brainstorming e chegamos a **Ruta** (em espanhol, “rota” ou “caminho”).
+
+        #### **Processo:**
+
+        * **Fizemos brainstorming de nomes** usando IA para encontrar palavras em espanhol marcantes.
+        * **Testamos opções** como &quot;Camino&quot; e &quot;Verbo&quot;, mas &quot;Ruta&quot; se destacou.
+        * **Verificamos a disponibilidade do domínio** e garantimos **rutaapp.com** imediatamente.
+      </Step>
+
+      <Step title="Criando uma identidade visual">
+        Criamos a marca rapidamente:
+
+        * **Logo**: Um ícone com **tema de bússola** obtido em bibliotecas de design e editado no Figma.
+        * **Combinação de fontes**: Usamos uma **tipografia moderna em negrito** para o logo e uma fonte de UI legível para a interface do app.
+        * **Paleta de cores**: Um esquema em azul **Tailwind CSS** para simbolizar viagem e descoberta.
+        * **Inspiração de estilo**: Experimentamos com **neo-brutalismo**, ajustando contraste, sombras e bordas para criar uma UI visualmente envolvente.
+      </Step>
+
+      <Step title="Criando uma experiência de usuário coesa">
+        Usando Lovable, garantimos **consistência visual** em todo o app:
+
+        * **Landing Page**: Gerada por IA com uma seção hero dinâmica e envolvente.
+        * **Dashboard e páginas de curso**: Estilizadas para combinar com a identidade da marca.
+        * **Estilização iterativa**: Aplicamos elementos **neo-brutalistas** para testar diferentes estilos de design.
+        * **Teste de fluxo do usuário**: Garantimos uma navegação fluida do cadastro até o chat em tempo real.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Etapa 4: Ajustes finais, grandes apostas e lançamento ao vivo">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/12013xnxYzM?si=4qOqTgcgO_IY_G1P" title="Player de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+</AccordionGroup>
+
+<div id="community-tutorials">
+  ## Tutoriais da comunidade
+</div>
+
+Confira os tutoriais da comunidade Lovable [aqui](https://www.youtube.com/playlist?list=PLbVHz4urQBZkJ6WMXlIGc3NGsufrleogY).

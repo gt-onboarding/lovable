@@ -1,0 +1,226 @@
+---
+title: "Replicate との連携"
+description: "Lovable アプリに Replicate を統合する方法を学びましょう"
+icon: "robot"
+---
+
+<div id="what-is-replicate">
+  ## Replicate とは？
+</div>
+
+[Replicate](https://replicate.com/) を使うと、数行のコードだけでオープンソースの機械学習モデルを実行できます。ML の専門知識は不要です。
+
+Replicate は API プラットフォームで、開発者はコミュニティが作成したモデルやカスタム AI モデルを使って、画像・動画・音声などを生成できます。MVP を構築している場合でも、クリエイティブな機能をプロトタイピングしている場合でも、アプリに本番対応の AI を組み込みたい場合でも、Replicate を使えば最先端のモデルに高速かつ柔軟にアクセスできます。
+
+<div id="why-use-replicate-with-lovable">
+  ## なぜ Lovable で Replicate を使うのか？
+</div>
+
+Replicate は、Lovable の AI ファーストなアプリ構築ワークフローに自然に組み込めます。例えば次のことができます：
+
+- 動的なビジュアルを生成する（例：コースバナー、アバター、シーン）
+- マルチモーダル AI を利用する（画像、動画、音声、テキスト読み上げ）
+- 自前でモデル用インフラを運用せずに、リアルタイムなコンテンツ生成を追加する
+
+Lovable には Replicate の API とモデルに関する知識が組み込まれているため、連携は数日ではなく数分で完了します。やりたいことを伝えるだけで、あとは Lovable がすべて処理します。
+
+<div id="step-by-step-tutorial">
+  ## ステップバイステップのチュートリアル
+</div>
+
+このチュートリアルでは、Lovable アプリケーションに Replicate を統合してコースのバナー画像を動的に生成し、プロダクトに新たなインタラクティブ性と洗練さを加える方法を順を追って説明します。さらに、Replicate が Lovable のより広い AI ワークフローの中でどのような役割を果たすかも学びます。たとえば、コースコンテンツには OpenAI、バックエンドロジックには Supabase、リアルタイムの AI 会話には [OpenAI の WebRTC API](https://platform.openai.com/docs/guides/realtime#connect-with-webrtc) をどのように組み合わせるかなどです。
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/eSDhk4VkVLE?si=9SNZ4G-ApyU-gsOg" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Steps>
+  <Step title="Step 1 – 言語チューターアプリを作る">
+    まず Lovable を使って、スペイン語学習用の Web アプリを作成します。これには次が含まれます:
+
+    - ユーザーログインフロー
+    - スペイン語チュータリング用の AI チャット
+    - 音声の録音と再生
+    - 翻訳機能
+
+    これにより、ユーザーは会話でもテキストでもやり取りしながら学習できる、パーソナライズされた AI チューターを利用できるようになります。
+
+    ![コースダッシュボード Pn](/images/course-dashboard.png)
+  </Step>
+  <Step title="Step 2 – AI でコースを生成する">
+    アプリに AI 生成コース機能を追加します:
+
+    ![コース作成 AI Pn](/images/course-creation-ai.png)
+
+    - ユーザーがトピックを定義します（例: _バーベキューで聞くべき質問_）。
+    - OpenAI を利用した関数が、スペイン語で 10 問の多肢選択式問題を作成します。
+    - コースは Supabase を使ってユーザーのアカウントに保存され、いつでも再利用できます。
+      ![コース作成 AI 2 Pn](/images/course-creation-ai-2.png)
+    - 各質問に対して、解説付きのフィードバックをユーザーに返します。
+    - トピックに合った **コースバナー画像** を自動生成します。Replicate は高速な画像生成のために **Flux Schnell** モデルを使用し、コースページに画像を動的に挿入します。
+
+    <Info>
+      **仕組み:**
+
+      1. 新しいコースが作成されたタイミングで Replicate API を呼び出します。
+      2. プロンプトはコースのトピックに基づいて動的に生成されます。
+      3. Replicate は画像 URL を返し、それをコースのバナーとして使用します。
+    </Info>
+    ![Replicate リアルタイム Pn](/images/replicate-real-time.png)
+  </Step>
+  <Step title="Step 3 – Replicate でビジュアルを追加する">
+    ここからは、Replicate を使ってビジュアル要素を追加していきます。
+
+    ![Replicate 画像 Pn](/images/replicate-image.png)
+
+    **プロンプト例:**
+
+    <Note>
+      デジタルアートスタイルで、トピックに関する美しく教育的で魅力的なシーン。鮮やかな色彩。画像内にテキストは入れないこと。
+    </Note>
+    **レスポンス処理の例:**
+
+    一部の Replicate モデルは単一の画像 URL を返し、他のモデルは配列を返します。Lovable の関数で出力を正しく取り出せていることを確認してください。例:
+
+    ```
+    const imageUrl = response.output[0]
+    ```
+  </Step>
+  <Step title="Step 4 – Replicate Playground で細かく調整する">
+    Replicate の Playground を使うと、プロンプトを簡単に試せて、コードスニペットも取得できます:
+
+    - 出力に満足いくまでプロンプトを調整する
+    - Node.js や Python など向けの API スニペットジェネレーターを使う
+    - Lovable のバックエンド関数にそのままコピーペーストする
+
+    <Tip>
+      Playground Beta を使うと、複数の出力を一度に比較できます。
+    </Tip>
+    ![Replicate Playground Pn](/images/replicate-playground.png)
+  </Step>
+  <Step title="Step 5 – OpenAI でリアルタイム会話を実現する">
+    人間同士の会話をシミュレートするために、OpenAI の WebRTC API を使ったリアルタイムのスペイン語会話機能を追加しました:
+
+    - ユーザーは AI チューターに直接話しかけることができます。
+    - AI はリアルタイムで理解し、応答し、発音を修正します。
+    - これにより、語学学習がより没入的で実践的になります。
+
+    この機能は、Lovable の音声入力、WebRTC 処理、フロントエンドのチャット UI とスムーズに統合されています。
+
+    ![コース音声 AI Pn](/images/course-voice-ai.png)
+  </Step>
+</Steps>
+
+<div id="tips-gotchas">
+  ## ヒントと注意点
+</div>
+
+- **モデル出力のばらつき**: Replicate のモデルは、出力の返し方（フォーマット）がそれぞれ異なります。必ず playground から返される実際の JSON を確認してください。
+- **プロンプトの反復が重要**: プロンプトを少し変えるだけで画像のクオリティが大きく変わることがあります。playground を使って試行錯誤しましょう。
+- **バックエンドのログ**: Supabase エッジのログを使って API 呼び出しをデバッグできます。Lovable はアプリ内でのログ取得に対応しています。
+- **Lovable におけるバージョン管理**: 各プロンプトの編集は自動コミットされますが、本番運用向けの状態をチェックポイントとして残したい場合は、「デプロイ」機能を使って手動で管理できます。
+
+<div id="faq">
+  ## よくある質問
+</div>
+
+<AccordionGroup>
+  <Accordion title="What is Replicate, in simple terms?">
+    Replicate は、強力な機械学習モデル（画像や動画生成など）を、シンプルな API を使って実行できるプラットフォームです。自分でモデルを学習・ホスティングする必要はありません。
+  </Accordion>
+
+  <Accordion title="Who typically uses Replicate?">
+    Replicate は、インディーハッカーやスタートアップのプロダクトビルダーから大企業まで、幅広いユーザーに利用されています。AI 機能を試作する場合でも、大規模にデプロイする場合でも、Replicate は素早いプロトタイピングから堅牢な本番デプロイまで対応できます。
+  </Accordion>
+
+  <Accordion title="Do I need my own Replicate API key?">
+    はい。Lovable があなたのキーを安全に保存し、追加後は API 呼び出しも自動で処理します。
+  </Accordion>
+
+  <Accordion title="What models can I use on Replicate?">
+    Replicate は、次のようなさまざまな形式をサポートしています:
+
+    * 画像生成（例: Flux Schnell）
+    * 動画生成
+    * 音声およびテキスト読み上げ（text-to-speech）
+    * 言語モデル（Replicate の主なフォーカスではありません）
+    * カスタム Cog モデル（自分でデプロイできるオープンソースの Docker 化モデル）
+
+    すべてのモデルは [replicate.com/explore](https://replicate.com/explore) で確認できます。
+  </Accordion>
+
+  <Accordion title="How do I know which model is right for my use case?">
+    Replicate の **Playground** を使って、連携前に異なるモデルを試してみてください。Playground では、プロンプトを調整したり、出力を比較したり、アプリで使えるコードスニペットをコピーしたりできます。
+  </Accordion>
+
+  <Accordion title="What’s the difference between Replicate's old and new API endpoints?">
+    Replicate には 2 種類の API 形式があります:
+
+    * 元々の（`/predictions`）エンドポイント: 最も広く知られ、よく使われています。
+    * 新しい `/models/{owner}/{model}/versions/{id}/predictions` エンドポイント: より効率的で柔軟です。
+
+    Lovable は、モデルの要件に応じて両方の形式に対応しています。
+  </Accordion>
+
+  <Accordion title="What if a model returns a different JSON structure than expected?">
+    モデルの出力はさまざまです。URL の文字列を返すものもあれば、配列を返すものもあります。Replicate Playground を使って実際のレスポンスを確認し、それに合わせてパース処理のロジックを更新してください。
+
+    修正例:
+
+    ```
+    const imageUrl = Array.isArray(output) ? output[0] : output;
+    ```
+  </Accordion>
+
+  <Accordion title="Can I trigger Replicate image generation only once, or on every course view?">
+    次のどちらかを選べます:
+
+    * **コース作成時に 1 回だけ生成**: 計算コストを抑えつつ、一貫したビジュアルアイデンティティを保てます。
+    * **セッションごとに動的に生成**: 毎回新しいビジュアルを表示したい場合に適しています。
+
+    このチュートリアルでは、コースが最初に作成されたタイミングで 1 回だけ画像を生成する方法を選択しています。
+  </Accordion>
+
+  <Accordion title="Does Lovable know how to work with Replicate out of the box?">
+    はい。Lovable には Replicate と、その人気のある多くのモデルに関する知識があらかじめ組み込まれています。適切なパッケージやプロンプト構造を使って、連携用のコードを自動生成できます。
+  </Accordion>
+
+  <Accordion title="How does Lovable handle package installation like replicate for Node.js?">
+    Lovable は、あなたのプロンプトや連携のコンテキストに基づいて、必要なパッケージを自動でインストール・設定します。ローカルでデバッグする場合を除き、自分で npm install を実行する必要はありません。
+  </Accordion>
+
+  <Accordion title="What’s the workflow for debugging Replicate errors in Lovable?">
+    * Lovable の **Superbase Edge function logs** を使って問題の原因をトレースします。
+    * 期待している Replicate のレスポンスと実際のレスポンスに差異がある場合は、JSON の処理ロジックを更新します。
+    * Lovable の **“Fix this”** ボタンを使って、関数ロジックの再実行やリファクタリングを行います。
+  </Accordion>
+
+  <Accordion title="Can I checkpoint my working app state in Lovable?">
+    現在、プロンプトを変更するたびにコミットが作成されます。次のことができます:
+
+    * **History** タブでコミットをたどる（コミットにブックマークを付けることも可能）
+    * バージョンを**デプロイ**して、本番用のチェックポイントとして固定する
+    * 独自のバージョン管理用に GitHub への同期を利用する
+  </Accordion>
+
+  <Accordion title="How does GitHub integration work with Lovable?">
+    Lovable のプロジェクトを GitHub にエクスポートし、**双方向同期**できます:
+
+    * Lovable から GitHub へ変更をプッシュ
+    * あなた（またはチーム）が IDE で変更し、それを GitHub 経由で Lovable に反映可能
+    * フロントエンドは Lovable、バックエンドは自分のエディタという構成にも最適です
+  </Accordion>
+
+  <Accordion title="What are LLM-friendly .lm.txt or .lm.md files?">
+    これらは、言語モデル向けに最適化された、シンプルな Markdown ベースのドキュメントです。Replicate は、Lovable（や他のツール）が自動的にモデルをよりよく理解できるように、これらのファイルを追加する取り組みを進めています。
+  </Accordion>
+
+  <Accordion title="Do I need to handle prompt tuning myself?">
+    はい、プロンプトの作り込みは重要です。Lovable は自動プロンプト生成やテンプレートでサポートしますが、最良の結果を得るためには、常に Replicate Playground で入力をテスト・調整してください。
+  </Accordion>
+</AccordionGroup>
+
+<div id="resources">
+  ## リソース
+</div>
+
+- [Replicate API ドキュメント](https://replicate.com/docs) と [Replicate のモデルカタログ](https://replicate.com/) を参照する
+- [OpenAI Function Calling](https://platform.openai.com/docs/guides/function-calling) と [OpenAI WebRTC](https://platform.openai.com/docs/guides/speech/real-time-speech) についてさらに学ぶ

@@ -1,0 +1,124 @@
+---
+title: "API de Lovable: Build with URL "
+description: "La función Build with URL de la API de Lovable está ahora en Beta abierta y te permite crear y compartir aplicaciones Lovable usando URLs simples y fáciles de compartir."
+icon: "window-restore"
+keywords: ['Lovable API', 'API', 'Build with URL API', 'Create apps from URL', 'build with lovable']
+---
+
+La función **Build with URL** de la API de Lovable te permite crear aplicaciones de forma programática pasando instrucciones e imágenes mediante parámetros en la URL. Esto posibilita una integración fluida con sitios web, herramientas internas o flujos de trabajo de automatización, de modo que los usuarios puedan generar aplicaciones Lovable con un solo clic.
+
+Cada enlace le indica a Lovable *qué* debe crear y, opcionalmente, *qué imágenes debe incluir* — y Lovable se encarga del resto.
+
+Ejemplo:
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+Al hacer clic en este enlace, Lovable se abre automáticamente y se empieza a crear una aplicación de tareas.
+
+
+<div id="use-cases">
+  ## Casos de uso
+</div>
+
+Puedes hacer lo siguiente con la API de Build with URL:
+
+- Insertar un botón **Build with Lovable** en tu sitio web o aplicación. Cuando el usuario hace clic en el botón, se le redirige a Lovable y la aplicación se crea automáticamente.
+- Compartir instrucciones predefinidas mediante URLs con amigos, colegas o en redes sociales.
+- Automatizar la generación de aplicaciones como parte de flujos de trabajo internos.
+- Crear prototipos de aplicaciones rápidamente usando URLs con instrucciones e imágenes de referencia.
+
+Puedes crear la URL tú mismo o usar el [Lovable Link Generator](https://lovable.dev/links). Consulta más abajo para obtener más información.
+
+<div id="base-url">
+  ## URL base
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#
+```
+
+`autosubmit` (boolean): Debe establecerse en `true` para procesar la solicitud automáticamente
+
+
+<div id="url-with-parameters">
+  ## URL con parámetros
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#prompt=YOUR_PROMPT_HERE&images=IMAGE_URL_1&images=IMAGE_URL_2
+```
+
+
+<div id="parameters">
+  ### Parámetros
+</div>
+
+| Parámetro | Tipo   | Descripción                                                                                                                                                                                                 | Obligatorio/Opcional |
+| --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `prompt`  | string | Texto que describe la aplicación que se va a crear. Máx. 50.000 caracteres. Usa codificación de URL (por ejemplo, `%20` para espacios). Las URL muy largas pueden producir errores debido a limitaciones del navegador o del proceso de análisis. | Obligatorio          |
+| `images`  | string | Máx. 10 direcciones URL de imágenes codificadas en URL como referencias. Las URL de imágenes deben ser públicamente accesibles. Formatos compatibles: JPEG, PNG, WebP.                                     | Opcional             |
+
+<div id="lovable-link-generator">
+  ## Generador de enlaces de Lovable
+</div>
+
+Usa el [Generador de enlaces de Lovable](https://lovable.dev/links) para crear fácilmente URL que se puedan compartir y que generen apps con la instrucción y las imágenes que elijas.
+
+1. Escribe tu instrucción, que describe la aplicación que se va a crear (hasta 50.000 caracteres).
+2. Sube hasta 10 URL de imágenes públicas (JPEG, PNG o WebP).
+3. Copia la URL de Lovable generada y compártela.
+
+Esta herramienta ayuda a evitar errores de codificación en la URL y garantiza que los enlaces tengan el formato correcto.
+
+<div id="build-with-url-examples">
+  ## Crear con ejemplos de URL
+</div>
+
+**Generación básica de apps**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Crea%20una%20aplicaci%C3%B3n%20de%20tareas%20pendientes
+```
+
+**Única imagen de referencia**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg
+```
+
+**Varias imágenes de referencia**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg&images=https://img.com/2.jpg​
+```
+
+
+<div id="best-practices">
+  ## Mejores prácticas
+</div>
+
+- Mantén las indicaciones breves y enfocadas en las funciones principales.
+- Usa un lenguaje claro y descriptivo para obtener mejores resultados de generación.
+- Incluye imágenes de referencia cuando sea relevante para ayudar a guiar el proceso de generación.
+- Asegúrate de que los caracteres especiales en las indicaciones y en las URL de las imágenes estén codificados para URL (URL-encoded) para evitar problemas de interpretación.
+
+<div id="app-creation-and-authentication-flow-for-shared-urls">
+  ## Flujo de creación de app y autenticación para URLs compartidas
+</div>
+
+Cuando un usuario hace clic en un enlace **Build with URL**:
+
+- **Usuarios con sesión iniciada**: seleccionan el espacio de trabajo para crear el proyecto y, a continuación, la creación de la app se inicia automáticamente.
+- **Usuarios sin sesión iniciada**: son redirigidos a la página de registro/inicio de sesión. Después de autenticarse correctamente, seleccionan el espacio de trabajo para crear el proyecto y, a continuación, la creación de la app se inicia automáticamente, preservando la instrucción original y las imágenes.
+
+<div id="error-handling">
+  ## Manejo de errores
+</div>
+
+Si la URL es demasiado larga o está mal formada, puede que te encuentres con:
+
+- Errores del navegador del tipo “URL demasiado larga”
+- Procesamiento incompleto de parámetros
+- Fallos en el envío automático

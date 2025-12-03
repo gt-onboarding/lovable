@@ -1,0 +1,106 @@
+---
+title: "Lovable AI"
+description: "解锁 Gemini 和 GPT 等强大模型——无需 API 密钥，无需额外配置。"
+icon: "bolt"
+---
+
+通常，要在应用中加入 AI，你需要自己四处寻找 API 密钥、在服务提供商那里配置计费，并把这些服务手动串联在一起。Lovable AI 让你可以轻松、快速地为应用添加强大的 AI 功能，从而立刻开始构建更智能、更有吸引力的应用。
+
+例如，你可以：
+
+- **AI 总结** – 自动将长文本精炼为清晰的要点
+- **AI 聊天机器人或智能 Agent** – 在应用中构建对话式助手
+- **情感分析** – 大规模洞察和理解用户反馈
+- **文档问答** – 让用户可以直接围绕你的内容提问
+- **创意生成** – 头脑风暴、撰写文案或扩展想法
+- **多语言翻译** – 为全球用户提供无缝体验
+- **任务自动完成** – 自动化重复性或多步骤工作流（Agent 能力）
+- **图像和文档分析** – 快速从图像和文档中提取、总结和解读关键信息，将非结构化内容转化为可执行洞察
+- **工作流自动化** – 处理重复任务、做出决策并优化流程，从而节省时间并减少错误。
+
+<div id="enabling-lovable-ai">
+  ## 启用 Lovable AI
+</div>
+
+<Note>
+  为获得最佳体验，我们建议将 Lovable AI 与 [Lovable Cloud](https://docs.lovable.dev/features/cloud) 搭配使用。
+</Note>
+
+默认情况下，你的工作区和用户偏好中都会启用 Lovable AI。这意味着在需要时，Lovable 会自动为你添加 AI 功能。你可以在用户偏好中管理项目中 Lovable AI 的行为：**Settings → Integrations → Lovable AI → User preferences**。
+
+<div id="default-ai-model">
+  ### 默认 AI 模型
+</div>
+
+Lovable AI 使用 **Gemini 2.5 Flash** 作为默认模型。如果你想使用其他模型或模型组合，可以在请求 AI 功能时，直接在提示中指定你的选择。有关支持的 AI 模型概览，请参阅 [Supported AI models](https://docs.lovable.dev/features/ai#supported-ai-models)。
+
+<div id="user-preferences">
+  ### 用户偏好设置
+</div>
+
+AI 集成的默认设置是 **始终允许**，这意味着 Lovable AI 会自动用于你的项目。你可以随时在 **Settings → Integrations → Lovable AI → User preferences** 中更改你的偏好设置。
+
+你可以在以下选项中进行选择：
+
+- **始终允许**：Lovable 会自动执行相关操作，不会请求你进行审核或批准。
+- **每次询问**：每当需要执行该操作时，Lovable 都会请求你的批准。例如，如果你想添加聊天机器人，你可以：
+  - **允许**：为当前项目启用该集成。
+  - **拒绝**：在此请求中拒绝该集成（之后可能会再次询问你）。
+  - **调整偏好设置**：更改未来项目的默认行为（不会影响当前项目）。
+- **从不允许**：Lovable 会阻止该操作，告知你此操作需要 AI 支持，并提示你启用 Lovable AI。
+
+<div id="usage-and-pricing">
+  ## 使用与定价
+</div>
+
+Lovable AI 采用 **基于用量的定价模式**。这意味着这些费用会随你的使用量变化，且不包含在订阅中。
+
+使用 Lovable AI 的成本与直接使用对应的 LLM 提供商完全相同，没有任何隐藏费用。若要核对成本，请参考下方我们“支持的 AI 模型”列表中链接的官方信息来源。
+
+每个工作区每月都包含 **\$1 的免费 AI 用量**，帮助你快速上手。之后，付费方案用户可以为余额充值，具体费用取决于你选择的底层模型。
+
+<Note>
+  **限时优惠，可能调整：** 截至 2025 年底，每个工作区每月可获得 \$25 Cloud 额度和 \$1 AI 额度，即使是使用免费方案的用户也包含在内。
+</Note>
+
+你可以在 **Settings → Usage** 中跟踪和管理 AI 用量成本。更多详情和示例，请参见[按用量计费的 Cloud 和 AI 定价](https://docs.lovable.dev/features/cloud#usage-based-cloud-and-ai-pricing)。
+
+<div id="supported-ai-models">
+  ## 支持的 AI 模型
+</div>
+
+Lovable AI 使用 **Gemini 2.5 Flash** 作为默认模型，但你可以通过提示让智能代理使用不同的模型或模型组合。
+
+| 模型                                                                                                   | 描述                                                                                                                                                                                      | 适用场景                                                                                                        |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [**Gemini 3 Pro**](https://deepmind.google/models/gemini/pro/)                                         | Google 最新的旗舰 Gemini 模型。相比 2.5 Pro，具备更高的推理准确度、更大的上下文窗口、更好的多模态对齐能力，以及更可靠的工具调用能力。速度更慢且价格更高。                                   | 高级智能代理、复杂研究、长程推理、高精度多模态分析                                                              |
+| [**Nano Banana Pro**](https://deepmind.google/models/gemini-image/pro/)                                | 基于 Gemini 3 Pro 图像架构构建的图像生成与编辑模型。具备影棚级高质量的高分辨率视觉效果，并针对图像中的文本和多图合成进行了优化。                                                          | 视觉素材创作、大规模图像工作流、信息图表、设计/创意内容的快速原型制作                                           |
+| [**Gemini 2.5 Pro**](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-pro) | 最智能、最复杂的 Gemini 模型。推理能力强、上下文窗口大，但速度较慢且成本最高。                                                                                                             | 深度推理、高级编程、研究、复杂多模态任务                                                                        |
+| [**Gemini 2.5 Flash (default)**](https://deepmind.google/models/gemini/flash/)                         | 均衡型模型。相比 Pro 更快、更便宜，但仍具备良好的推理能力，成本处于中等水平。                                                                                                             | 助手、分析、需要在速度与智能之间取得平衡的一般工作流                                                             |
+| [**Gemini 2.5 Flash Lite**](https://deepmind.google/models/gemini/flash-lite/)                         | 速度最快、成本最低的 Gemini。可大规模处理简单任务，但推理深度较低。                                                                                                                       | 大批量、轻量级任务，如分类、摘要、翻译                                                                          |
+| [**Gemini 2.5 Flash Image**](https://deepmind.google/models/gemini/image/)                             | 针对图像生成进行了优化。单张图像成本非常低，不适合用于文本推理。                                                                                                                           | 图像生成、快速产出视觉内容                                                                                      |
+| [**GPT-5**](https://openai.com/index/introducing-gpt-5/)                                               | 最智能的 OpenAI 模型。推理能力强、准确度高，但也是速度最慢、成本最高的模型。                                                                                                               | 最高质量的推理、对准确性要求极高的应用、复杂决策场景                                                            |
+| [**GPT-5 Mini**](https://platform.openai.com/docs/models/gpt-5-mini)                                   | 均衡版 GPT-5。相比 GPT-5 更便宜、更快，复杂度稍低，但通用能力依然强大。                                                                                                                   | 助手、中等复杂度推理、业务工作流                                                                                |
+| [**GPT-5 Nano**](https://platform.openai.com/docs/models/gpt-5-nano)                                   | 成本最低、速度最快的 GPT-5。推理能力较基础，最适合快速或简单的回复。                                                                                                                       | 摘要、分类、信息抽取、大规模简单任务                                                                            |
+
+<div id="best-and-most-cost-effective-choices">
+  ### 最佳且最具性价比的选择
+</div>
+
+- **总体智能表现最佳**：Gemini 3 Pro、GPT-5 和 Gemini 2.5 Pro（深度推理能力最强，但价格最高）
+- **最佳平衡（速度 + 成本 + 智能）**：GPT-5 Mini 和 Gemini 2.5 Flash
+- **大规模场景下最具性价比**：GPT-5 Nano 和 Gemini 2.5 Flash Lite（简单、快速、成本最低）
+- **图像处理效果最佳**：Nano Banana Pro 和 Gemini 2.5 Flash Image
+
+<div id="workspace-rate-limits">
+  ## 工作区请求频率限制
+</div>
+
+为了确保所有用户都能获得可靠的性能和公平的访问，Lovable AI 会针对每个工作区设置请求频率限制。这些限制有助于维护系统稳定、防止滥用、控制成本，并为所有人提供一致的体验。
+
+如果你的请求超过允许的频率，服务器会返回 **429 Too Many Requests** 状态码，请求将不会被处理。
+
+免费用户的请求频率限制更为严格，而付费方案则包含更高的阈值和更大的灵活性。
+
+- **免费方案用户**：可随时升级以提升你的额度。
+- **付费方案用户**：如需提升额度，请联系 [Lovable 客户支持](https://lovable.dev/support)。

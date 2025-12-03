@@ -1,0 +1,410 @@
+---
+title: "Lovable Cloud"
+description: "Crie aplicativos complexos sem esforço"
+icon: "database"
+---
+
+Lovable Cloud é uma plataforma de nuvem full-stack que cuida de todas as partes do seu aplicativo — desde o frontend que seus usuários veem até o backend que o alimenta por trás dos bastidores. Tudo o que você precisa fazer é descrever o que deseja diretamente no Lovable, e o Lovable gera automaticamente tanto o frontend quanto o backend, prontos para rodar na nuvem. Em vez de gerenciar hardware ou infraestrutura complexa, você obtém acesso sob demanda a hospedagem, computação e armazenamento que escalam automaticamente à medida que seu app cresce.
+
+Lovable Cloud utiliza a base de código aberto do Supabase, o que significa que você tem um ambiente pronto para produção desde o primeiro dia, sem precisar configurar o Supabase separadamente. Você conta com o poder de um banco de dados pronto para produção, atualizações em tempo real, autenticação de usuários e armazenamento — sem nenhuma das etapas manuais de configuração.
+
+<div id="why-choose-lovable-cloud">
+  ## Por que escolher o Lovable Cloud
+</div>
+
+- **Escala conforme você cresce**: Do seu primeiro protótipo a milhões de usuários, o Lovable escala sem interrupções de acordo com suas necessidades.
+- **Seguro por padrão**: Autenticação em nível corporativo, controles de acesso granulares e práticas recomendadas de conformidade protegem seu app e seus dados.
+- **Econômico**: Gerencie vários projetos em uma única área de trabalho com precificação baseada em uso. Toda área de trabalho começa com **US\$ 25 de uso gratuito por mês**, o suficiente para lançar e executar vários projetos (oferta temporária até o final de 2025, sujeita a alterações). Leia mais em [Precificação baseada em uso para Cloud e IA](https://docs.lovable.dev/features/cloud#usage-based-cloud-and-ai-pricing).
+
+<div id="enabling-lovable-cloud">
+  ## Habilitar o Lovable Cloud
+</div>
+
+Por padrão, o Lovable Cloud já vem habilitado para a sua área de trabalho. Você pode gerenciar o comportamento do Lovable Cloud para seus projetos em suas preferências de usuário: **Settings → Integrations → Lovable Cloud → User preferences.**
+
+<div id="user-preferences">
+  ### Preferências do usuário
+</div>
+
+A configuração padrão para a integração com o Lovable Cloud é **Perguntar sempre**, o que significa que você decide se quer ativar ou desativar o Lovable Cloud para cada Projeto. Você pode alterar sua preferência a qualquer momento em **Settings → Integrations → Lovable Cloud → User preferences.**
+
+O Lovable avisa quando um recurso precisa de funcionalidade de back-end (por exemplo, autenticação ou armazenamento de arquivos). Você tem três opções:
+
+- **Permitir**: habilita a integração para o Projeto atual.
+- **Negar**: recusa a integração para esta solicitação (talvez essa pergunta apareça novamente mais tarde).
+- **Ajustar preferências**: altera o comportamento padrão para projetos futuros (não afeta o Projeto atual).
+
+<div id="configuring-lovable-cloud-tools">
+  ### Configurando as ferramentas do Lovable Cloud
+</div>
+
+Cada ferramenta do Lovable Cloud nas suas preferências de usuário oferece três opções:
+
+- **Sempre permitir**: o Lovable executa a ação automaticamente, sem pedir revisão ou aprovação.
+- **Perguntar sempre**: o Lovable pede sua aprovação sempre que a ação for necessária.
+- **Nunca permitir**: o Lovable bloqueia a ação, informa que o acesso ao Lovable Cloud é necessário e orienta você a ativar o Lovable Cloud.
+
+Você pode alterar suas preferências de ferramentas do Lovable Cloud a qualquer momento em **Settings → Integrations → Lovable Cloud → User preferences.**
+
+<div id="tool-settings-and-defaults">
+  #### Configurações da ferramenta e valores padrão
+</div>
+
+| Configuração        | Descrição                                                                                                                     | Comportamento padrão |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| Cloud               | Crie e conecte um projeto Cloud para adicionar recursos de backend (banco de dados, autenticação, armazenamento). Obrigatório para usar as ferramentas do Cloud. | Perguntar sempre     |
+| Read database       | Permitir que o Lovable leia seu banco de dados.                                                                              | Sempre permitir      |
+| Read analytics      | Consultar registros de log para investigar problemas e comportamento.                                                        | Sempre permitir      |
+| Run security checks | Executar verificações de segurança automatizadas no seu banco de dados. Não é uma auditoria completa.                       | Sempre permitir      |
+| Modify database     | Fazer alterações de esquema e de políticas por meio de migrações SQL. Atualiza tipos gerados.                               | Sempre permitir      |
+| Add data            | Adicionar dados às tabelas do seu banco de dados.                                                                            | Sempre permitir      |
+| Read project info   | Ler a configuração do projeto e detalhes de ambiente.                                                                        | Sempre permitir      |
+| Configure auth      | Permitir que o Lovable configure configurações de autenticação (por exemplo, políticas de cadastro).                        | Sempre permitir      |
+| Read backend logs   | Ler registros de log de serviços de backend.                                                                                 | Sempre permitir      |
+
+<div id="lovable-cloud-features">
+  ## Recursos do Lovable Cloud
+</div>
+
+Você encontrará a **aba Cloud** em qualquer projeto Lovable clicando no botão `+` ao lado do **modo de Pré-visualização**.
+
+<img
+  src="/images/cloud-icon.png"
+  alt="Ícone do Lovable Cloud"
+  style={{ width:"37%" }}
+/>
+
+Os seguintes recursos e configurações estão disponíveis na aba Cloud:
+
+<div id="database">
+  ### Banco de dados
+</div>
+
+- **Gerar schemas automaticamente**: descreva os dados de que você precisa em linguagem natural e o Lovable cria as tabelas e o schema para você.
+- **Gerenciar sem SQL**: visualize, edite e organize registros diretamente na UI. Atualize valores, inspecione tabelas e mantenha os dados do seu app sincronizados sem escrever consultas.
+
+<div id="users-auth">
+  ### Usuários & autenticação
+</div>
+
+- **Gerenciamento de usuários**: visualize contas de usuário, acompanhe atividades e gerencie acessos.
+- **Autenticação integrada**: o Lovable pode gerar páginas de cadastro e login para o seu app. Oferece suporte a autenticação por e-mail, telefone e Google.
+- **Seguro por padrão**: a autenticação é gerenciada pelo Lovable Cloud, mantendo as credenciais dos usuários em segurança.
+
+<div id="storage">
+  ### Armazenamento
+</div>
+
+- **Manipulação de arquivos sem código**: faça upload, gerencie e disponibilize arquivos como fotos de perfil, documentos, vídeos ou recursos estáticos.
+- **Buckets de armazenamento**: os arquivos são armazenados com segurança em um bucket do Projeto, com URLs ou referências que você pode usar no seu app.
+- **Limites**: suporta arquivos de até 2 GB.
+
+<div id="edge-functions">
+  ### Edge Functions
+</div>
+
+- **Lógica serverless**: execute código personalizado para APIs, fluxos de trabalho ou recursos avançados, sem provisionar servidores. As funções escalam automaticamente conforme o tráfego.
+
+**Casos de uso comuns:**
+
+- Recursos com IA, como resumos com IA ou chatbots com IA. Use o [Lovable AI](https://docs.lovable.dev/features/ai) integrado.
+- Envio de e-mails ou notificações push
+- Processamento de pagamentos, por exemplo com o [Stripe](https://docs.lovable.dev/integrations/stripe#stripe-integration)
+- Tarefas agendadas
+- Cálculos pesados ou chamadas para APIs externas
+
+**Outros destaques:**
+
+- **Fáceis de criar**: basta descrever a função de que você precisa no chat do Lovable.
+- **Depuração integrada**: cada função inclui registros de log de execuções, resultados e erros. Se algo falhar, o Lovable mostra o erro para você solucionar o problema rapidamente.
+
+<div id="ai">
+  ### IA
+</div>
+
+- **Funcionalidade de IA integrada**: o Lovable Cloud vem com IA integrada para que você possa criar rapidamente funcionalidades que tornam seu app mais inteligente e envolvente. Para mais informações, consulte a [Lovable AI](https://docs.lovable.dev/features/ai).
+- Alguns exemplos de funcionalidades com IA incluem:
+  - **Resumos com IA** – condensam automaticamente textos longos em aprendizados claros
+  - **Chatbot ou agente com IA** – incorpore assistentes conversacionais ao seu app
+  - **Detecção de sentimento** – entenda o feedback dos usuários em escala
+- Você pode monitorar o uso e o desempenho da Lovable AI para o seu projeto na visão geral de IA.
+
+<div id="secrets">
+  ### Segredos
+</div>
+
+- **Variáveis de ambiente seguras**: armazene dados sensíveis, como chaves de API, tokens ou credenciais, sem expô-los no código.
+- **Detecção automática**: quando um recurso precisa de um segredo, o Lovable solicita que você o insira por meio de uma interface segura.
+- **Criptografados e seguros**: os segredos são armazenados com segurança e injetados automaticamente em Edge Functions ou outras integrações.
+
+**Exemplo:** Armazene sua Stripe Secret Key uma única vez e o Lovable garante que ela seja incluída em funções de processamento de pagamento sem que você precise inseri-la manualmente no código.
+
+<Note>
+  Alguns segredos, como as chaves do Supabase e a chave de API do Lovable, são adicionados automaticamente e são necessários para o funcionamento da plataforma Lovable. Essas chaves não podem ser excluídas.
+</Note>
+
+<div id="logs">
+  ### Registros de log
+</div>
+
+- **Monitoramento em tempo real**: acompanhe a atividade do app à medida que ela acontece.
+- **Depure e rastreie problemas**: identifique erros, acompanhe eventos e garanta que seu backend esteja funcionando corretamente.
+
+<div id="advanced-settings-upgrade-instance">
+  ### Configurações avançadas - Atualizar instância
+</div>
+
+Use as configurações avançadas para visualizar e gerenciar o tamanho atual da sua instância. Uma instância maior permite que seu app atenda mais usuários e tráfego. Lembre-se de que seus custos de uso da nuvem vão aumentar conforme o uso do seu app crescer.
+
+- **Usuários do plano gratuito**: faça upgrade de **Tiny** para uma instância maior atualizando seu plano a qualquer momento
+- **Usuários de plano pago**: escolha um novo tamanho de instância entre as opções abaixo:
+  - **Tiny**: ótimo para experimentar
+  - **Mini**: confiável para projetos iniciais
+  - **Small**: espaço para crescer junto com seu app
+  - **Medium**: escolha estável para uso regular
+  - **Large**: opção segura para demandas maiores
+
+<div id="example-flow-prompting-lovable-to-build-a-crm-tool">
+  ## Fluxo de exemplo - usando um Prompt de IA no Lovable para criar uma ferramenta de CRM
+</div>
+
+_Crie uma ferramenta de CRM para gerenciar clientes, acompanhar negócios, lidar com faturas e manter as anotações organizadas. Mantenha o design simples, moderno e profissional, com uma barra lateral para navegação._
+
+<div id="step-1-organize-the-data-database">
+  ### Etapa 1: Organize os dados (Database)
+</div>
+
+Diga ao Lovable que tipo de informações a ferramenta deve armazenar e acompanhar para você. O Lovable criará automaticamente as tabelas, então você não precisa mexer diretamente em bancos de dados.
+
+_Eu quero um lugar para gerenciar meus clientes, com nome, e-mail, telefone e observações. Também preciso de uma forma de controlar negócios, incluindo para qual cliente é, o valor, o estágio em que está e quando espero fechá-lo. E preciso de uma seção para faturas, com o cliente a que pertence, o valor, o status e a data de vencimento._
+
+<div id="step-2-make-it-secure-users-auth">
+  ### Etapa 2: Deixe seu app seguro (Usuários & Auth)
+</div>
+
+Adicione login para manter os dados privados e permitir que os usuários entrem com facilidade.
+
+_Adicione login ao app. Exija login antes de acessar o painel de CRM. Além disso, adicione um botão "Entrar com o Google" para que os usuários possam entrar com suas contas do Google._
+
+<div id="step-3-handle-files-storage">
+  ### Etapa 3: Gerenciar arquivos (Storage)
+</div>
+
+Você pode permitir que os usuários enviem e visualizem arquivos diretamente no app. A Lovable cuida do armazenamento e da vinculação, então você só precisa descrever quais arquivos devem ir para onde.
+
+_Adicione um campo de upload de contrato a cada negócio. Permita que os clientes tenham fotos de perfil e exiba-as na página de detalhes do cliente. Envie PDFs de faturas e mostre um link de download na tabela de faturas._
+
+<div id="step-4-automate-workflows-edge-functions">
+  ### Etapa 4: Automatizar fluxos de trabalho (Edge Functions)
+</div>
+
+Configure ações automáticas para economizar tempo.
+
+_Quando um novo lead for adicionado à tabela Clients, me envie uma notificação por e-mail. Analise, com a Lovable AI, as notas de reuniões com clientes e salve uma pontuação de sentimento na tabela Clients. Sincronize novos contatos automaticamente. Agende uma tarefa diária às 7h que me envie por e-mail um resumo dos follow-ups de hoje. Quando um pagamento for marcado como ‘paid’ no Stripe, atualize automaticamente o status da fatura relacionada para ‘Paid’._
+
+<div id="step-5-connect-to-other-tools-secrets">
+  ### Etapa 5: Conecte-se a outras ferramentas (Segredos)
+</div>
+
+Quando você usa serviços como Stripe ou Google Calendar, eles fornecem “chaves” privadas.\
+O Lovable vai solicitar que você as adicione com segurança sempre que forem necessárias, e somente o seu app poderá usá-las.
+
+<div id="step-6-add-ai-superpowers-ai">
+  ### Etapa 6: Adicione superpoderes de IA (IA)
+</div>
+
+Faça com que a ferramenta aja como seu assistente.
+
+_Resuma as notas de reunião de cada cliente e salve-as no perfil dele. Sugira os próximos passos para cada oportunidade em aberto. Gere rascunhos de e-mails personalizados para fazer o acompanhamento de leads. Classifique as mensagens dos clientes em categorias: vendas, suporte ou cobrança._
+
+<div id="usage-based-cloud-and-ai-pricing">
+  ## Preços de Cloud e IA baseados em uso
+</div>
+
+Lovable inclui hospedagem em nuvem e IA integrada em todos os planos, inclusive no plano Free. Esses serviços funcionam em um **modelo de precificação baseado em uso**. Isso significa que seus custos aumentam de acordo com o quanto você usa e não são cobertos pela sua assinatura.
+
+Na sua área de trabalho ou no projeto, vá em **Settings → Cloud & AI balance**. Aqui, você pode:
+
+- Ver o status do saldo da área de trabalho
+- Adicionar fundos ao saldo da sua área de trabalho (disponível apenas para planos pagos)
+- Acessar o histórico de faturas e gerenciar preferências de pagamento
+- Acompanhar o custo total de uso de Cloud e IA em toda a sua área de trabalho
+- Ver os custos detalhados de uso de Cloud e IA para cada projeto
+
+  <Note>
+    No momento, a lista inclui todos os projetos, mesmo aqueles que não usam Lovable Cloud ou IA. Projetos sem uso sempre exibem \$0.00.
+  </Note>
+
+A tela de Cloud & AI balance é atualizada da seguinte forma:
+
+- O uso de Cloud é atualizado diariamente às 10h (CET)
+- O uso de IA é atualizado continuamente
+
+<Note>
+  - Seu **Cloud balance** paga pela hospedagem de apps publicados.
+  - Seu **AI balance** paga pelos recursos de IA dentro de apps publicados.
+  - **Workspace Credits** são separados, usados apenas para mensagens durante a criação de apps e podem ser acompanhados em **Settings → Plans & credits**.
+</Note>
+
+<div id="included-free-usage-all-plans">
+  ### Uso gratuito incluído (todos os planos)
+</div>
+
+Cada área de trabalho recebe uso mensal gratuito, independentemente do plano e de quando, no mês, você começar o seu plano:
+
+- **US$ 25 de saldo Cloud** para hospedagem de apps
+- **US$ 1 de saldo de IA** para recursos de IA
+
+Esses valores gratuitos são renovados no primeiro dia de cada mês às 00:00 UTC (exibido no seu fuso horário) e não estão vinculados ao ciclo de cobrança do seu plano de assinatura. Os saldos gratuitos não utilizados não são acumulados para o mês seguinte.
+
+<Note>
+  **Oferta temporária, sujeita a alterações:** Até o final de 2025, cada área de trabalho recebe US$ 25 em Cloud e US$ 1 em IA por mês, mesmo para usuários do plano Free.
+</Note>
+
+<div id="adding-funds-paid-plans-only">
+  ### Adicionando créditos (apenas planos pagos)
+</div>
+
+Adicionar créditos ao saldo da sua área de trabalho para uso do Lovable Cloud e de IA está disponível apenas em planos pagos. Usuários do plano gratuito devem fazer upgrade do plano para acessar essa funcionalidade.
+
+Qualquer uso que exceder o valor incluído na assinatura será cobrado separadamente e não estará coberto pela sua assinatura.
+
+- **Uso de Cloud:** depende da atividade (número de usuários e interações) e da transferência de dados (uploads/downloads).
+- **Uso de IA:** depende do modelo utilizado e da complexidade da tarefa (modelos mais avançados custam mais). Para verificar os custos, consulte as fontes oficiais vinculadas na nossa lista de modelos de IA compatíveis em [Lovable AI](https://docs.lovable.dev/features/ai).
+
+Proprietários e administradores da área de trabalho em planos pagos podem adicionar créditos ao saldo fazendo uma recarga manual única ou configurando recargas automáticas.
+
+Os créditos não utilizados da área de trabalho são transferidos de um mês para o outro, mas expiram após um ano.
+
+**Recarga única**
+
+Recarregue manualmente o saldo da sua área de trabalho com o valor que você escolher.
+
+1. Vá para **Settings → Cloud & AI balance → Top up → One-time to-up.**
+2. Insira um valor personalizado ou escolha uma opção predefinida (\$10 mínimo, \$1000 máximo).
+3. Conclua o pagamento com segurança via Stripe.
+
+**Recarga automática**
+
+Adicione créditos automaticamente quando o seu saldo ficar abaixo de \$10, mas mantenha o controle das suas cobranças mensais adicionando um limite de cobrança mensal.
+
+1. Vá para **Settings → Cloud & AI balance → Top up → Automatic top-up.**
+2. Ative a recarga automática.
+3. Insira um valor de recarga que será cobrado automaticamente e adicionado ao saldo da sua área de trabalho quando o saldo ficar abaixo de \$10 (\$10 mínimo, \$1000 máximo).
+4. Defina um limite de cobrança mensal para controlar quanto pode ser cobrado no total a cada mês (\$10 mínimo, \$10.000 máximo).
+3. Clique em **Save**. \
+   Seu método de pagamento padrão será cobrado automaticamente quando o saldo ficar abaixo de \$10, desde que você não tenha atingido o seu limite de cobrança mensal.
+
+Ao configurar a recarga automática, você pode acompanhar visualmente suas cobranças mensais na tela **Automatic top-up**. O período de cobrança mensal é reiniciado no primeiro dia de cada mês às 00:00 UTC (exibido no seu fuso horário) e não está vinculado ao ciclo de cobrança do seu plano de assinatura.
+
+<div id="alerts-and-notifications">
+  ### Alertas e notificações
+</div>
+
+Lovable mantém você informado para evitar interrupções inesperadas de serviço:
+
+- **Notificações por e-mail** enviadas para proprietários e administradores da área de trabalho
+- **Alertas de uso** exibidos na tela de saldo de Cloud &amp; AI e na visão geral de Cloud
+
+Os alertas são acionados quando sua área de trabalho:
+
+- Atinge uma determinada porcentagem do uso incluído
+- Consome todo o uso incluído
+- Atinge uma determinada porcentagem do saldo da carteira
+- Consome todos os fundos da carteira
+
+Se o saldo da sua área de trabalho acabar, seu aplicativo vai parar de funcionar até que fundos sejam adicionados (ou que o uso gratuito seja redefinido no início do próximo mês).
+
+Para manter seu aplicativo funcionando:
+
+- **Plano gratuito:** faça upgrade para um plano pago para adicionar fundos.
+- **Planos pagos:** recarregue o saldo da sua área de trabalho a qualquer momento ou ative a recarga automática.
+
+<div id="example-workspace-cloud-and-ai-costs-per-month">
+  ### Exemplos de custos de Cloud e IA por área de trabalho (por mês)
+</div>
+
+Aqui estão alguns exemplos para você ter uma ideia de como podem ser os custos mensais típicos de Cloud e IA por área de trabalho, para diferentes tipos de apps. Esses números são estimativas aproximadas, apenas para ajudar a definir expectativas.
+
+Lembre-se:
+
+- Sua assinatura da Lovable não inclui custos de Cloud ou IA — você paga por eles separadamente.
+- Todo plano inclui \$25/mês de uso gratuito de Cloud e \$1/mês de uso gratuito de IA por área de trabalho.
+- O custo de usar o Lovable AI é exatamente o mesmo que ir diretamente ao provedor de LLM. Para verificar os custos, consulte as fontes oficiais vinculadas na nossa lista de modelos de IA compatíveis em [Lovable AI](https://docs.lovable.dev/features/ai).
+- Os custos de IA abaixo são estimados usando o modelo padrão, Gemini 2.5 Flash.
+
+| Tipo de app                    | Exemplo de uso mensal                                                                                                                                                                                                       | Custo de Cloud | Custo de IA | O que você paga para a Lovable                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Blog pessoal ou portfólio**  | 500 visitas, alguns posts/comentários, algumas imagens, servidor bem pequeno. A IA adiciona resumos ou títulos chamativos (2.500 chamadas de IA/mês, 50 tokens de entrada + 150 tokens de saída cada).                      | \$1            | \$1         | **Somente assinatura.**<br /><br />_O uso gratuito incluído cobre totalmente seus custos de Cloud e IA._                   |
+| **Site de pequena empresa**    | 5.000 visitas, listagem de produtos, formulários/cadastros na newsletter, imagens de produtos, servidor bem pequeno. A IA adiciona um assistente de chat simples (6.500 chamadas de IA/mês, 30 tokens de entrada + 120 tokens de saída cada). | \$5            | \$2         | **Assinatura + \$1 (IA)** <br /><br />_O uso gratuito incluído cobre totalmente seus custos de Cloud e \$1 em custos de IA._ |
+| **Gerenciador de projetos de equipe** | 20 usuários ativos, 10.000 visitas, tarefas e comentários, upload de arquivos, atualizações em tempo real, servidor pequeno. A IA adiciona sugestões de tarefas, lembretes e resumos de comentários (6.000 chamadas de IA/mês, 200 tokens de entrada + 300 tokens de saída cada). | \$15           | \$5         | **Assinatura + \$4 (IA)** <br /><br />_O uso gratuito incluído cobre totalmente seus custos de Cloud e \$1 em custos de IA._ |
+| **Loja virtual (e‑commerce)**  | 10.000 visitantes, 500 compras, muitas imagens de produtos, dados de clientes/pedidos, fluxos de checkout, servidor médio. A IA adiciona descrições de produtos e um assistente de compras (20.000 chamadas de IA/mês, 40 tokens de entrada + 200 tokens de saída cada). | \$65           | \$10        | **Assinatura + \$49 (Cloud + IA)**<br /><br />_O uso gratuito incluído cobre \$25 em custos de Cloud e \$1 em custos de IA._ |
+
+<div id="faq">
+  ## Perguntas frequentes
+</div>
+
+<AccordionGroup>
+  <Accordion title="Tenho controle total sobre minhas despesas mensais?">
+    Sim. Criamos o Lovable Cloud para dar a você controle total:
+
+    * **Opção 1: Orçamento rígido (zero cobranças)**
+      Fique estritamente dentro da franquia gratuita. Se você ultrapassar, seus projetos serão pausados automaticamente. Sua fatura permanece em US$ 0.
+    * **Opção 2: Recarga manual (escalonamento controlado)**
+      Recarregue o saldo da sua área de trabalho com o valor que você escolher. Seus apps escalam e você só paga pelo uso além da franquia gratuita. 
+      Se você consumir o saldo da sua área de trabalho, receberá uma notificação e seus projetos serão pausados automaticamente.
+    * **Opção 3: Recarga automática (escalonamento contínuo)**
+      Adicione fundos automaticamente quando seu saldo ficar abaixo de US$ 10, mas mantenha o controle de suas cobranças mensais adicionando um limite mensal de cobrança. Seus apps escalam sem interrupção e você só paga pelo uso além da franquia gratuita.
+      Se os fundos não puderem ser adicionados automaticamente porque você atingiu seu limite mensal de cobrança, seus projetos serão pausados quando o saldo restante da sua área de trabalho acabar.
+  </Accordion>
+
+  <Accordion title="Meus créditos são deduzidos pelo uso de Cloud e IA?">
+    Não, seus créditos da área de trabalho são separados e usados apenas para mensagens enquanto você cria apps. Você pode acompanhar o uso de créditos em **Settings → Plans &amp; credits**.
+
+    Você pode acompanhar o uso de Cloud e IA em **Settings → Cloud &amp; AI balance**.
+
+    * Seu saldo de Cloud paga pela hospedagem de apps publicados.
+    * Seu saldo de IA paga pelos recursos de IA dentro de apps publicados.
+  </Accordion>
+
+  <Accordion title="Qual é o custo do Lovable AI?">
+    O custo de usar o Lovable AI é exatamente o mesmo que ir diretamente ao provedor de LLM. Não há taxas ocultas. Para verificar os custos, consulte as fontes oficiais vinculadas em nossa lista de modelos de IA compatíveis em [Lovable AI](https://docs.lovable.dev/features/ai).
+  </Accordion>
+
+  <Accordion title="Atualmente estou usando a integração com Supabase. O que essa mudança significa para mim?">
+    Fique tranquilo, nada muda para seus projetos existentes. Sua integração com Supabase continuará funcionando exatamente como hoje, e continuaremos dando suporte a ela.
+
+    * Para projetos existentes: continue usando Supabase sem alterações.
+    * Para novos projetos: escolha entre Lovable Cloud ou Supabase.
+  </Accordion>
+
+  <Accordion title="Posso mudar de ideia depois de adicionar Cloud ao meu projeto?">
+    Não, quando você conecta seu projeto ao Cloud, não é possível reverter essa alteração nem desconectar seu projeto do Cloud.
+  </Accordion>
+
+  <Accordion title="Posso remixar projetos Cloud?">
+    Sim, projetos Cloud podem ser remixados apenas para projetos Cloud. Isso cria uma cópia do seu projeto que você pode editar separadamente na área de trabalho que estiver selecionada no momento. A estrutura dos dados relacionados ao backend, como tabelas e Edge Functions, é copiada sem nenhum dado. Para quaisquer chaves geradas automaticamente no projeto original, o Lovable gera novas chaves no projeto remixado. Chaves adicionadas manualmente não são copiadas.
+
+    Lembre-se de que você não pode reverter para uma versão anterior do seu app no projeto remixado se o projeto estiver usando o backend do Lovable. Para projetos somente de frontend hospedados no Cloud, reversões são possíveis.
+  </Accordion>
+
+  <Accordion title="Posso exportar meu projeto Cloud para o Supabase?">
+    Isso é tecnicamente possível, já que você é o proprietário do código no GitHub, mas não é algo simples. Estamos estudando como tornar isso mais fácil. Para mais informações, veja [Self-hosting: Run your Lovable Cloud project anywhere](https://docs.lovable.dev/tips-tricks/self-hosting).
+  </Accordion>
+
+  <Accordion title="Como sei quais projetos estão gerando mais uso?">
+    Você pode ver o detalhamento do uso de Cloud e IA por projeto em **Settings → Cloud &amp; AI balance.**
+
+    <Note>
+      No momento, a lista inclui todos os projetos, mesmo aqueles que não usam Lovable Cloud ou IA. Projetos sem uso sempre aparecem com US$ 0,00.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Posso migrar meu projeto de Supabase para Cloud?">
+    No momento, a migração de Supabase para Cloud não é suportada. Se o seu projeto já estiver conectado ao Supabase, recomendamos continuar usando-o, pois continuaremos oferecendo suporte ao Supabase daqui para frente.
+  </Accordion>
+
+  <Accordion title="Meus dados do Cloud não estão carregando. O que devo fazer?">
+    Isso pode acontecer se você tiver muitos dados em execução em uma instância menor de projeto Cloud. Para corrigir, acesse a **aba Cloud → Overview → Advanced settings** e escolha um tamanho de instância maior. Depois que você tiver mudado para uma instância maior e aguardado alguns minutos para a alteração ocorrer, os dados devem carregar e seu projeto Cloud deve voltar a funcionar. Lembre-se de que um tamanho de instância maior resultará em maior uso de Cloud e aumento nos respectivos custos.
+  </Accordion>
+</AccordionGroup>
