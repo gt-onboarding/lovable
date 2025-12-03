@@ -1,31 +1,31 @@
 ---
-title: "MCP サーバーを使って Lovable をツールと連携させる"
+title: "MCP サーバーを使って Lovable をツールと連携する"
 sidebarTitle: "MCP サーバー"
-description: "Lovable をチームのツールと接続し、コンテキストを踏まえた生成を可能にして、アイデアから検証、本番アプリまでこれまで以上に素早く進めましょう。"
+description: "Lovable をチームのツールと接続し、コンテキスト主導の生成を可能にして、アイデアから検証、本番アプリまでこれまでになく素早く進めましょう。"
 icon: "plug"
-keywords: ["Lovable integrations","Lovable connections","MCP server","Model Context Protocol","MCP connector","AI workspace automation","Notion","Linear","Jira","Confluence","Atlassian","Miro","n8n","Canva","custom MCP server","AI tools for productivity"]
+keywords: ["Lovable 連携","Lovable 接続","MCP サーバー","Model Context Protocol","MCP コネクタ","AI ワークスペース自動化","Notion","Linear","Jira","Confluence","Atlassian","Miro","n8n","Canva","カスタム MCP サーバー","生産性向上のための AI ツール"]
 ---
 
-**MCP (Model Context Protocol)** は、Lovable のような AI システムを外部のツール、サービス、データソースへ接続するためのオープンな標準仕様です。
+**MCP (Model Context Protocol)** は、Lovable のような AI システムを外部のツール、サービス、データソースに接続するためのオープン標準です。
 
-Lovable を Notion、Atlassian、Linear などのツールに接続すると、Lovable Agent はチームの実際のコンテキストを利用して、より正確なコード、プロトタイプ、ドキュメントを生成できます。
+Lovable を Notion や Atlassian、Linear などのツールに接続すると、Lovable Agent はチーム固有のコンテキストを利用して、より正確なコード、プロトタイプ、ドキュメントを生成できるようになります。
 
-MCP サーバーを接続すると、Lovable は構造化されたデータ（ドキュメント、課題、ダイアグラムのテキストなど）を読み取り、サーバーが対応している場合は、アイテムの作成や更新といった限定的なアクションを実行できます。
+MCP サーバーを接続すると、Lovable は構造化データ（ドキュメント本文や課題、ダイアグラムのテキストなど）を読み取り、対応している場合は項目の作成や更新といった限定的なアクションを実行できます。
 
-Lovable には、すべてのプランで利用できる複数のあらかじめ用意された MCP サーバーが含まれており、Business プランと Enterprise プランではカスタム MCP サーバーも追加できます。
+Lovable には、すべてのプランで利用できる複数の事前構成済み MCP サーバーが含まれており、Business および Enterprise プランではカスタム MCP サーバーを追加することもできます。
 
 <div id="why-connect-mcp-servers">
-  ## MCP サーバーを接続する理由
+  ## なぜ MCP サーバーを接続するのか
 </div>
 
-Lovable では、MCP サーバーを接続することで次の 2 つの重要な機能が有効になります。
+Lovable に MCP サーバーを接続すると、次の 2 つの重要な機能が使えるようになります。
 
 - **既存のコンテキストを Lovable に取り込む。**\
-  Lovable Agent は、チームのドキュメント、チケット、デザインファイルを読み取り、チームの基準に沿ったプロトタイプやフローを構築できます。
+  Lovable Agent は、チームのドキュメント、チケット、デザインファイルを読み取り、チームの標準やルールに沿ったプロトタイプやフローを構築できます。
 - **Lovable アプリをあなたのワークフローに接続する。**\
-  Lovable Agent は、接続済みツール上で後続の処理を実行できます。たとえば、チケットのステータス更新、プロトタイプのリンクをコメントとして追加すること、サポートされている場合は新しいアイテムを作成することなどです。
+  Lovable Agent は、接続されたツール上で後続の処理を実行できます。たとえば、チケットのステータス更新、コメントとしてのプロトタイプリンクの追加、対応しているツールであれば新規アイテムの作成などです。
 
-Lovable があなたのチームの世界を理解すると、手探りの作業がなくなり、反復が高速になり、**アイデアから本番アプリまでこれまで以上の速さで到達**できるようになります。
+Lovable があなたのチームの世界を理解することで、手探りの作業が減り、イテレーションが加速し、**アイデアからライブアプリまで今までにない速さで到達できる**ようになります。
 
 <div id="prebuilt-mcp-servers">
   ## あらかじめ用意された MCP サーバー
@@ -39,44 +39,43 @@ Lovable があなたのチームの世界を理解すると、手探りの作業
 | [**n8n**](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server/)                                                                | n8n のワークフローを使ってアプリにアクセス・連携できます。 | **豊富なワークフローとライブデータを扱うアプリを構築。**<br />n8n の自動化を Lovable に接続して、HubSpot、Google Sheets、Slack などのツールからデータを取得し、既存の自動化を基盤としたユーザー向けアプリを構築できます。                                                              |
 
 <div id="how-to-connect-a-prebuilt-mcp-server">
-  ### あらかじめ用意された MCP サーバーを接続する方法
+  ### 事前構築済み MCP サーバーを接続する方法
 </div>
 
-人気のサードパーティアプリやサービス向けのあらかじめ用意されたインテグレーションを使うには、次の手順を実行します。
+一般的なサードパーティ製アプリやサービス向けに用意されたインテグレーションを使うには、次の手順を実行します。
 
-1. **Settings → Integrations → MCP servers** に移動します。
-2. **MCP サーバーを選択**します（例: Notion、Linear、Atlassian など）。
-3. **Connect** をクリックします。サインインして、Lovable にアカウントへのアクセスを許可します。
+1. **Settings → Integrations → Your MCP servers** に移動します。
+2. **MCP サーバーを選択** します（例：Notion、Linear、Atlassian）。
+3. **Connect** をクリックします。サインインし、Lovable にあなたのアカウントへのアクセスを許可します。
 
-これらの手順に加えて、[n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server) 側で次の設定が必要です。
+これらの手順に加えて、[n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server) で次の操作を行う必要があります。
 
-- **Settings → MCP access** に移動し、**Enable MCP access** をオンにします（インスタンスオーナーまたは管理者権限が必要）
-- 公開したい各ワークフローについて、ワークフローエディタ内の **Settings** に移動し、**Available in MCP** をオンにします。
+- **Settings → MCP access** に移動し、**Enable MCP access** のトグルをオンにします（インスタンスのオーナーまたは管理者権限が必要です）
+- 公開したい各ワークフローについて、ワークフローエディタの **Settings** に移動し、**Available in MCP** のトグルをオンにします。
 
-<div id="custom-mcp-servers-business-enterprise">
-  ## カスタム MCP サーバー（Business & Enterprise）
+<div id="custom-mcp-servers-business-and-enterprise">
+  ## カスタム MCP サーバー（Business および Enterprise）
 </div>
 
-柔軟性を最大限に高めるために、**カスタム MCP サーバー** を接続して、社内システムやサードパーティシステムを Lovable と連携できます。プライベート API、社内 CRM、カスタムデータソースなどに最適です。
+最大限の柔軟性を得るために、**カスタム MCP サーバー**を接続して、社内システムやサードパーティシステムを Lovable に統合できます。プライベート API、社内 CRM、カスタムデータソースなどに最適です。
 
-Lovable と互換性のある高品質なリモート MCP サーバーを厳選した一覧である [remote MCP servers](https://mcpservers.org/remote-mcp-servers) をぜひご覧ください。
+Lovable と互換性のある高品質なリモート MCP サーバーを厳選した一覧である [remote MCP servers](https://mcpservers.org/remote-mcp-servers) を参照してください。
 
 <div id="how-to-connect-a-custom-mcp-server">
   ### カスタム MCP サーバーを接続する方法
 </div>
 
-カスタムまたは社内の MCP サーバーを接続するには、次の手順を実行します。
+カスタムまたは社内の MCP サーバーを接続するには、次の手順に従います。
 
 1. **Settings → Integrations → Your MCP servers** に移動します。
 2. **New MCP server** の横にある **Set up** をクリックします。
-3. **サーバーの詳細を入力します:**
-   - **Server name**: サーバーを識別しやすい名前（例: _Internal CRM_ や _Analytics API_）。
-   - **Server URL**: Lovable から MCP サーバーにアクセスできるアドレス。
-4. **認証:**
-   - **OAuth (default):** Lovable はデフォルトで OAuth を使用します。**Add server** をクリックすると、認可が求められます。
-   - **Bearer token or API key:** MCP サーバーが OAuth をサポートしていない場合は、**Advanced settings** を展開し、**bearer token または APIキー** を入力します。入力すると、Lovable は OAuth の代わりにこれを使ってリクエストを認証します。
-4. **Add server** をクリックします。\
-   これでカスタム MCP サーバーが一覧に表示され、ビルド時にコンテキストデータを提供できるようになります。
+3. **Server name**: サーバーが分かりやすいような名前を入力します（例: _Internal CRM_ や _Analytics API_）。
+4. **Server URL**: Lovable から MCP サーバーにアクセスできるアドレスを入力します。
+5. **Authentication:**
+   - **OAuth (default):** Lovable はデフォルトで OAuth を使用します。**Add & authorize** をクリックすると、認可画面が表示されます。
+   - **Bearer token or API key:** OAuth をサポートしていないサーバーの場合は、ベアラートークンまたは APIキーで認証できます。
+   - **No authentication**: サーバーが認証を必要としない場合は、認証情報なしで接続します。
+6. **Add server** をクリックします。カスタム MCP サーバーが一覧に表示され、ビルド時のコンテキストデータを提供できるようになります。
 
 <div id="practical-examples">
   ## 実践的な例
@@ -94,9 +93,9 @@ Lovable と互換性のある高品質なリモート MCP サーバーを厳選�
   ## セキュリティと権限
 </div>
 
-MCP サーバー接続は**ユーザー単位かつ個人用**です。いつでも **Settings → Integrations** から接続を確認したり取り消したりできます。
+MCP サーバー接続は**ユーザー単位の個人用**です。**Settings → Integrations** から、いつでも接続を確認・取り消しできます。
 
-プロジェクトレベルで素早くアクセスするには、プロンプトボックスの `+` をクリックし、**Integrations** に進みます。
+プロジェクトレベルで素早くアクセスするには、プロンプトボックスの `+` をクリックして **Integrations** に進みます。
 
 <img
   src="/images/mcp_integrations_project_access.png"
@@ -105,7 +104,7 @@ MCP サーバー接続は**ユーザー単位かつ個人用**です。いつで
   style={{ width:"51%" }}
 />
 
-**Business** と **Enterprise** プランでは、ワークスペースの**管理者とオーナー**が、すべてのユーザーに対してどのサーバーを利用可能にするかを管理できます。
+**Business** および **Enterprise** プランでは、ワークスペースの **admins と owners** が、すべてのユーザーに利用可能なサーバーを管理できます。
 
-- ワークスペース全体の MCP サーバーアクセスを有効または無効にするには、**Settings → Privacy & Security** に移動します。
-- 個々の MCP サーバーを有効または無効にするには、**Settings → Integrations → Manage servers** に移動します。
+- **Settings → Privacy & security** に移動して、ワークスペース全体の **MCP server access**（MCP サーバーへのアクセス）を有効化または無効化します。
+- **Settings → Integrations → Admin settings** に移動して、個々の MCP サーバーを有効化または無効化します。
