@@ -1,31 +1,31 @@
 ---
-title: "使用 MCP 服务器将 Lovable 集成到你的工具中"
+title: "使用 MCP 服务器将 Lovable 与你的工具集成"
 sidebarTitle: "MCP 服务器"
-description: "将 Lovable 连接到你团队的工具，实现以上下文驱动的创作——从想法到验证再到上线应用，比以往更快。"
+description: "将 Lovable 连接到你团队的工具，启用上下文驱动的创作，让你从想法到验证再到应用上线的速度前所未有地快。"
 icon: "plug"
 keywords: ["Lovable 集成","Lovable 连接","MCP 服务器","Model Context Protocol","MCP 连接器","AI 工作区自动化","Notion","Linear","Jira","Confluence","Atlassian","Miro","n8n","Canva","自定义 MCP 服务器","提升生产力的 AI 工具"]
 ---
 
-**MCP（Model Context Protocol）** 是一种开放标准，用于将 Lovable 等 AI 系统连接到外部工具、服务和数据源。
+**MCP（Model Context Protocol）** 是一种开放标准，用于将 Lovable 这类 AI 系统连接到外部工具、服务和数据源。
 
-通过将 Lovable 连接到 Notion、Atlassian 或 Linear 等工具，Lovable Agent 可以利用你团队的真实上下文来生成更准确的代码、原型和文档。
+通过将 Lovable 连接到 Notion、Atlassian 或 Linear 等工具，Lovable Agent 可以利用真实的团队上下文来生成更准确的代码、原型和文档。
 
-当你连接 MCP 服务器后，Lovable 可以读取结构化数据（如文档、Issue 或图表中的文本），并在受支持的情况下执行有限的操作，例如创建或更新项目。
+当你连接 MCP 服务器后，Lovable 可以读取结构化数据（例如文档、工单或图表中的文本），并且在支持的情况下执行一定范围的操作，比如创建或更新项目。
 
-所有套餐中都包含若干预置的 MCP 服务器，Business 和 Enterprise 套餐还支持添加自定义 MCP 服务器。
+所有套餐中都内置多个 MCP 服务器，而在 Business 和 Enterprise 套餐中，你还可以添加自定义 MCP 服务器。
 
 <div id="why-connect-mcp-servers">
   ## 为什么要连接 MCP 服务器
 </div>
 
-在 Lovable 中，MCP 服务器带来两个关键能力：
+在 Lovable 中，连接 MCP 服务器可以启用两项关键能力：
 
-- **把你现有的上下文带入 Lovable。**\
-  Lovable Agent 可以读取你团队的文档、工单和设计文件，以符合你标准的方式构建原型和流程。
-- **让你的 Lovable 应用连接到你的工作流程。**\
-  Lovable Agent 可以在你已连接的工具中执行后续操作——例如更新工单状态、将原型链接添加为评论，或在支持的工具中创建新条目。
+- **将你现有的上下文引入 Lovable。**\
+  Lovable Agent 可以读取你团队的文档、工单和设计文件，从而构建符合你规范的原型和流程。
+- **将你的 Lovable 应用连接到你的工作流程。**\
+  Lovable Agent 可以在你已连接的工具中执行后续操作，例如更新工单状态、将原型链接添加为评论，或在支持的情况下创建新的事项/记录。
 
-当 Lovable 理解你团队的世界时，它会变得更强大——减少盲猜、加快迭代，帮助你以前所未有的速度从**想法走向上线应用。**
+当 Lovable 理解你团队的实际环境时，它会变得更强大，消除摸索和猜测，加快迭代速度，帮助你以前所未有的速度，从 **想法走向上线应用。**
 
 <div id="prebuilt-mcp-servers">
   ## 预构建的 MCP 服务器
@@ -42,24 +42,24 @@ keywords: ["Lovable 集成","Lovable 连接","MCP 服务器","Model Context Prot
   ### 如何连接预构建的 MCP 服务器
 </div>
 
-要使用针对常见第三方应用和服务的预构建集成：
+要使用针对常见第三方应用和服务的预构建集成功能：
 
-1. 前往 **Settings → Integrations → MCP servers**。
+1. 前往 **Settings → Integrations → Your MCP servers**。
 2. **选择一个 MCP 服务器**（例如 Notion、Linear 或 Atlassian）。
-3. 点击 **Connect**，登录并授予 Lovable 访问你账号的权限。
+3. 点击 **Connect**，登录并授予 Lovable 访问你的账户的权限。
 
-除了上述步骤，你还需要在 [n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server) 中进行以下操作：
+除了以上步骤，你还需要在 [n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server) 中完成以下操作：
 
-- 前往 **Settings → MCP access** 并启用 **Enable MCP access**（需要实例所有者或管理员权限）
-- 对于每个你想公开的工作流，在工作流编辑器中打开 **Settings** 并启用 **Available in MCP.**
+- 前往 **Settings → MCP access**，启用 **Enable MCP access**（需要实例所有者或管理员权限）
+- 对于每个你希望在 MCP 中提供的工作流，在工作流编辑器中前往 **Settings**，并启用 **Available in MCP.**
 
-<div id="custom-mcp-servers-business-enterprise">
-  ## 自定义 MCP 服务器（Business 与 Enterprise）
+<div id="custom-mcp-servers-business-and-enterprise">
+  ## 自定义 MCP 服务器（Business 和 Enterprise）
 </div>
 
-为了获得充分的灵活性，你可以连接**自定义 MCP 服务器**，将内部或第三方系统接入 Lovable——非常适合私有 API、内部 CRM 或自定义数据源。
+为了获得最大程度的灵活性，你可以连接**自定义 MCP 服务器**，将内部或第三方系统接入 Lovable。这非常适合用于私有 API、内部 CRM 或自定义数据源。
 
-查看[远程 MCP 服务器](https://mcpservers.org/remote-mcp-servers)，这是一个与 Lovable 兼容的高质量远程 MCP 服务器精选列表。
+浏览 [remote MCP servers](https://mcpservers.org/remote-mcp-servers)，这里精心收录了一批高质量且与 Lovable 兼容的远程 MCP 服务器。
 
 <div id="how-to-connect-a-custom-mcp-server">
   ### 如何连接自定义 MCP 服务器
@@ -68,15 +68,14 @@ keywords: ["Lovable 集成","Lovable 连接","MCP 服务器","Model Context Prot
 要连接自定义或内部 MCP 服务器：
 
 1. 前往 **Settings → Integrations → Your MCP servers.**
-2. 点击 **Set up**（位于 **New MCP server** 旁边）。
-3. **输入服务器详细信息：**
-   - **Server name**：为你的服务器设置一个清晰的名称（例如 _Internal CRM_ 或 _Analytics API_）。
-   - **Server URL**：Lovable 访问你的 MCP 服务器所使用的地址。
-4. **Authentication：**
-   - **OAuth (default)：** Lovable 默认使用 OAuth。点击 **Add server** 后，系统会提示你完成授权。
-   - **Bearer token or API key：** 如果 MCP 服务器不支持 OAuth，展开 **Advanced settings** 并输入 **bearer token 或 API 密钥**。提供后，Lovable 将使用此凭证对请求进行身份验证，而不再使用 OAuth。
-4. 点击 **Add server**。\
-   自定义 MCP 服务器现在会出现在你的列表中，并可为构建过程提供上下文数据。
+2. 在 **New MCP server** 旁边点击 **Set up**。
+3. **Server name**：为你的服务器输入一个清晰的名称（例如 _Internal CRM_ 或 _Analytics API_）。
+4. **Server URL**：输入 Lovable 可以访问你的 MCP 服务器的地址。
+5. **Authentication：**
+   - **OAuth（默认）：** Lovable 默认使用 OAuth。点击 **Add & authorize** 后，系统会提示你进行授权。
+   - **Bearer token 或 API key：** 对于不支持 OAuth 的服务器，你可以使用 Bearer token 或 API 密钥进行认证。
+   - **No authentication**：如果服务器不需要认证，可以在不提供凭据的情况下连接。
+6. 点击 **Add server**。自定义 MCP 服务器现在会显示在你的列表中，并可为构建过程提供上下文数据。
 
 <div id="practical-examples">
   ## 实用示例
@@ -91,12 +90,12 @@ keywords: ["Lovable 集成","Lovable 连接","MCP 服务器","Model Context Prot
 | **工程师** 连接 **n8n** 或 **internal MCP**           | _构建一个工作流 UI，用于列出用户并支持删除操作。_                 | Lovable 构建一个使用实时数据和工作流的应用。                                             |
 
 <div id="security-and-permissions">
-  ## 安全性与权限
+  ## 安全性和权限
 </div>
 
-MCP 服务器连接是**基于用户、仅供个人使用**的。你可以随时在 **Settings → Integrations** 中查看或撤销连接。
+MCP 服务器连接是**基于用户的个人连接**。你可以随时在 **Settings → Integrations** 中查看或撤销这些连接。
 
-若要在项目层面快速访问，请点击提示框中的 `+`，然后前往 **Integrations**。
+若要在项目级快速访问，请在提示框中点击 `+`，然后前往 **Integrations**。
 
 <img
   src="/images/mcp_integrations_project_access.png"
@@ -105,7 +104,7 @@ MCP 服务器连接是**基于用户、仅供个人使用**的。你可以随时
   style={{ width:"51%" }}
 />
 
-在 **Business** 和 **Enterprise** 方案中，工作区的 **管理员和所有者** 可以管理哪些服务器对所有用户可用：
+在 **Business** 和 **Enterprise** 套餐中，工作区的**管理员和所有者**可以管理所有用户可用的服务器：
 
-- 前往 **Settings → Privacy & Security**，为整个工作区启用或禁用所有 MCP 服务器访问。
-- 前往 **Settings → Integrations → Manage servers**，启用或禁用单个 MCP 服务器。
+- 前往 **Settings → Privacy & security**，为整个工作区启用或禁用所有 **MCP server access**。
+- 前往 **Settings → Integrations → Admin settings**，启用或禁用单个 MCP 服务器。

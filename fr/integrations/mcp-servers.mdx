@@ -1,31 +1,31 @@
 ---
 title: "Intégrez Lovable à vos outils avec des serveurs MCP"
 sidebarTitle: "Serveurs MCP"
-description: "Connectez Lovable aux outils de votre équipe et activez une création pilotée par le contexte — passez de l’idée à la validation puis à une app en production plus rapidement que jamais."
+description: "Connectez Lovable aux outils de votre équipe et activez une création guidée par le contexte, pour passer de l’idée à la validation puis à une application en production plus rapidement que jamais."
 icon: "plug"
-keywords: ["Intégrations Lovable","Connexions Lovable","Serveur MCP","Model Context Protocol","Connecteur MCP","Automatisation de l’espace de travail par l’IA","Notion","Linear","Jira","Confluence","Atlassian","Miro","n8n","Canva","Serveur MCP personnalisé","Outils d’IA pour la productivité"]
+keywords: ["Intégrations Lovable","Connexions Lovable","Serveur MCP","Model Context Protocol","Connecteur MCP","Automatisation de l’espace de travail par l’IA","Notion","Linear","Jira","Confluence","Atlassian","Miro","n8n","Canva","Serveur MCP personnalisé","Outils IA pour la productivité"]
 ---
 
-**MCP (Model Context Protocol)** est un standard ouvert qui connecte des systèmes d’IA, comme Lovable, à des outils, services et sources de données externes.
+**MCP (Model Context Protocol)** est un standard ouvert qui connecte les systèmes d’IA, comme Lovable, à des outils, services et sources de données externes.
 
-En connectant Lovable à des outils comme Notion, Atlassian ou Linear, le Lovable Agent peut utiliser le contexte réel de votre équipe pour générer un code, des prototypes et de la documentation plus précis.
+En connectant Lovable à des outils comme Notion, Atlassian ou Linear, le Lovable Agent peut utiliser le contexte réel de votre équipe pour générer un code, des prototypes et une documentation plus précis.
 
-Quand vous connectez un serveur MCP, Lovable peut lire des données structurées (par exemple du texte provenant de documents, tickets ou diagrammes) et, lorsque c’est possible, effectuer des actions limitées comme créer ou mettre à jour des éléments.
+Lorsque vous connectez un serveur MCP, Lovable peut lire des données structurées (comme du texte issu de documents, de tickets ou de diagrammes) et, lorsque c’est pris en charge, effectuer des actions limitées comme créer ou mettre à jour des éléments.
 
-Lovable inclut plusieurs serveurs MCP intégrés dans toutes les offres, avec la possibilité d’en ajouter des personnalisés dans les offres Business et Enterprise.
+Lovable inclut plusieurs serveurs MCP préconfigurés dans toutes les offres, avec la possibilité d’ajouter des serveurs personnalisés dans les offres Business et Enterprise.
 
 <div id="why-connect-mcp-servers">
   ## Pourquoi connecter des serveurs MCP
 </div>
 
-Dans Lovable, les serveurs MCP activent deux fonctionnalités clés :
+Dans Lovable, les serveurs MCP ouvrent deux possibilités clés :
 
-- **Apportez votre contexte existant dans Lovable.**\
-  Le Lovable Agent peut lire la documentation de votre équipe, vos tickets et vos fichiers de design pour créer des prototypes et des parcours conformes à vos standards.
-- **Connectez vos apps Lovable à vos workflows.**\
-  Le Lovable Agent peut effectuer des actions de suivi dans vos outils connectés — comme mettre à jour le statut des tickets, ajouter des liens de prototype en commentaires ou créer de nouveaux éléments lorsque cela est pris en charge.
+- **Intégrer votre contexte existant dans Lovable.**\
+  Le Lovable Agent peut lire la documentation de votre équipe, vos tickets et vos fichiers de conception pour créer des prototypes et des parcours alignés sur vos standards.
+- **Connecter vos applications Lovable à vos workflows.**\
+  Le Lovable Agent peut effectuer des actions de suivi dans vos outils connectés, comme mettre à jour le statut des tickets, ajouter des liens de prototype en commentaire ou créer de nouveaux éléments lorsque c’est pris en charge.
 
-Lovable devient plus puissant lorsqu’il comprend le monde de votre équipe — éliminant les approximations, accélérant l’itération et vous aidant à passer de **l’idée à l’app en production plus rapidement que jamais.**
+Lovable devient plus puissant lorsqu’il comprend l’univers de votre équipe, supprimant les approximations, accélérant les itérations et vous aidant à passer de l’**idée à une application en ligne plus vite que jamais.**
 
 <div id="prebuilt-mcp-servers">
   ## Serveurs MCP prêts à l’emploi
@@ -42,41 +42,40 @@ Lovable devient plus puissant lorsqu’il comprend le monde de votre équipe —
   ### Comment connecter un serveur MCP préconfiguré
 </div>
 
-Pour utiliser des intégrations préconfigurées avec des applications et services tiers populaires :
+Pour utiliser des intégrations préconfigurées avec des applications et services tiers populaires :
 
-1. Va dans **Settings → Integrations → MCP servers**.
-2. **Sélectionne un serveur MCP** (par exemple Notion, Linear ou Atlassian).
-3. Clique sur **Connect**. Connecte-toi et accorde à Lovable l’accès à ton compte.
+1. Accédez à **Settings → Integrations → Your MCP servers**.
+2. **Sélectionnez un serveur MCP** (par exemple, Notion, Linear ou Atlassian).
+3. Cliquez sur **Connect**. Connectez-vous et accordez à Lovable l’accès à votre compte.
 
-En plus de ces étapes, tu dois effectuer les actions suivantes dans [n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server) :
+En plus de ces étapes, vous devez effectuer les actions suivantes dans [n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server) :
 
-- Va dans **Settings → MCP access** et active **Enable MCP access** (nécessite les autorisations de propriétaire ou d’admin de l’instance).
-- Pour chaque workflow que tu veux rendre disponible, va dans **Settings** dans l’éditeur de workflow et active **Available in MCP.**
+- Accédez à **Settings → MCP access** et activez **Enable MCP access** (nécessite les droits de propriétaire ou d’administrateur de l’instance).
+- Pour chaque workflow que vous souhaitez exposer, allez dans **Settings** dans l’éditeur de workflow et activez **Available in MCP.**
 
-<div id="custom-mcp-servers-business-enterprise">
-  ## Serveurs MCP personnalisés (Business & Enterprise)
+<div id="custom-mcp-servers-business-and-enterprise">
+  ## Serveurs MCP personnalisés (Business et Enterprise)
 </div>
 
-Pour une flexibilité maximale, vous pouvez connecter des **serveurs MCP personnalisés** afin d’intégrer des systèmes internes ou tiers dans Lovable — idéal pour des API privées, des CRM internes ou des sources de données personnalisées.
+Pour une flexibilité totale, vous pouvez connecter des **serveurs MCP personnalisés** afin d’intégrer des systèmes internes ou tiers dans Lovable. C’est idéal pour des API privées, des CRM internes ou des sources de données personnalisées.
 
-Explorez les [serveurs MCP distants](https://mcpservers.org/remote-mcp-servers), une liste soigneusement sélectionnée de serveurs MCP distants de haute qualité compatibles avec Lovable.
+Découvrez les [serveurs MCP distants](https://mcpservers.org/remote-mcp-servers), une liste sélectionnée de serveurs MCP distants de haute qualité compatibles avec Lovable.
 
 <div id="how-to-connect-a-custom-mcp-server">
   ### Comment connecter un serveur MCP personnalisé
 </div>
 
-Pour connecter un serveur MCP personnalisé ou interne :
+Pour connecter un serveur MCP personnalisé ou interne :
 
-1. Va dans **Settings → Integrations → Your MCP servers.**
+1. Accède à **Settings → Integrations → Your MCP servers.**
 2. Clique sur **Set up** à côté de **New MCP server**.
-3. **Renseigne les détails du serveur :**
-   - **Server name** : Un nom explicite pour ton serveur (par exemple, _Internal CRM_ ou _Analytics API_).
-   - **Server URL** : L’adresse à laquelle Lovable peut accéder à ton serveur MCP.
-4. **Authentification :**
-   - **OAuth (par défaut) :** Lovable utilise OAuth par défaut. Après avoir cliqué sur **Add server**, tu seras invité à autoriser.
-   - **Jeton Bearer ou clé API :** Si le serveur MCP ne prend pas en charge OAuth, déroule **Advanced settings** et saisis un **bearer token or API key**. Lorsque cette valeur est fournie, Lovable l’utilisera pour authentifier les requêtes au lieu d’OAuth.
-4. Clique sur **Add server**.\
-   Le serveur MCP personnalisé apparaît maintenant dans ta liste et peut fournir des données contextuelles pour tes builds.
+3. **Server name** : saisis un nom clair pour ton serveur (par exemple, _Internal CRM_ ou _Analytics API_).
+4. **Server URL** : saisis l’adresse à laquelle Lovable peut accéder à ton serveur MCP.
+5. **Authentication :**
+   - **OAuth (default)** : Lovable utilise OAuth par défaut. Après avoir cliqué sur **Add & authorize**, tu seras invité à autoriser la connexion.
+   - **Bearer token or API key** : pour les serveurs qui ne prennent pas en charge OAuth, tu peux t’authentifier avec un bearer token ou une clé API.
+   - **No authentication** : connecte-toi sans identifiants si le serveur ne nécessite pas d’authentification.
+6. **Add server**. Le serveur MCP personnalisé apparaît maintenant dans ta liste et peut fournir des données contextuelles pour les builds.
 
 <div id="practical-examples">
   ## Exemples pratiques
@@ -91,10 +90,10 @@ Chaque application connectée devient instantanément disponible comme contexte 
 | Un **ingénieur** connecte **n8n** ou un **MCP interne** | _Crée une interface de workflow qui liste les utilisateurs et permet de les supprimer._ | Lovable crée une application qui utilise des données et des workflows en temps réel.        |
 
 <div id="security-and-permissions">
-  ## Sécurité et autorisations
+  ## Sécurité et permissions
 </div>
 
-Les connexions au serveur MCP sont **propres à chaque utilisateur et personnelles**. Vous pouvez consulter ou révoquer les connexions à tout moment dans **Settings → Integrations**.
+Les connexions aux serveurs MCP sont **personnelles et propres à chaque utilisateur**. Vous pouvez consulter ou révoquer ces connexions à tout moment dans **Settings → Integrations**.
 
 Pour un accès rapide au niveau du projet, cliquez sur `+` dans la zone de prompt et allez dans **Integrations**.
 
@@ -105,7 +104,7 @@ Pour un accès rapide au niveau du projet, cliquez sur `+` dans la zone de promp
   style={{ width:"51%" }}
 />
 
-Avec les abonnements **Business** et **Enterprise**, les **administrateurs et propriétaires** de l’espace de travail peuvent déterminer quels serveurs sont disponibles pour tous les utilisateurs :
+Avec les offres **Business** et **Enterprise**, les **administrateurs et propriétaires** de l'espace de travail peuvent déterminer quels serveurs sont disponibles pour tous les utilisateurs :
 
-- Allez dans **Settings → Privacy & Security** pour activer ou désactiver tout accès aux serveurs MCP pour l’ensemble de l’espace de travail.
-- Allez dans **Settings → Integrations → Manage servers** pour activer ou désactiver chaque serveur MCP individuellement.
+- Allez dans **Settings → Privacy & security** pour activer ou désactiver l'**accès aux serveurs MCP** pour l'ensemble de l'espace de travail.
+- Allez dans **Settings → Integrations → Admin settings** pour activer ou désactiver chaque serveur MCP individuellement.
