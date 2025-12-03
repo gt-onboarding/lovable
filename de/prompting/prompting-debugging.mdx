@@ -1,0 +1,414 @@
+---
+title: "Eingabeaufforderungen zum Debuggen"
+description: "Workflows debuggen – mit Strategien, Beispiel‑Eingabeaufforderungen, Troubleshooting‑Flows und Beispielen für eine tiefgehende Debugging‑Denkweise."
+icon: "bug"
+---
+
+Mit KI zu bauen ist schnell und macht Spaß – bis etwas schiefgeht. Fehler, unerwartetes Verhalten oder Momente, in denen „die KI etwas Komisches gemacht hat“, gehören zum Prozess dazu. Dieser Leitfaden hilft dir, dich in **KI-basierten Debugging-Workflows in Lovable** zurechtzufinden. Wir behandeln, wie du einfache Probleme schnell behebst, Strategien für kniffligere Bugs, die Verwendung des Lovable-Chats zum Debuggen und sogar Rezepte für Eingabeaufforderungen, mit denen du systematisch Bugs beseitigst. Debugging mit einem KI-Assistenten ist eine neue Fähigkeit, aber mit Struktur und den richtigen Eingabeaufforderungen kannst du Probleme effizient lösen und sie sogar in Lernchancen verwandeln.
+
+<div id="advanced-debugging-prompts">
+  ## Erweiterte Eingabeaufforderungen zum Debuggen
+</div>
+
+Manchmal brauchst du eine umfangreiche Eingabeaufforderung, um ein Problem gründlich zu untersuchen oder den Zustand deines Projekts zu überprüfen. Hier findest du einige strukturierte Beispiele für Eingabeaufforderungen, die du für tiefgehende Debugging- oder Optimierungsszenarien verwenden kannst. Du kannst sie im Chat mode verwenden, um eine ausführliche Analyse zu erhalten, ohne den Code sofort zu ändern.
+
+<div id="full-system-review-codebase-audit">
+  ### Umfassende Systemüberprüfung (Codebasis-Audit)
+</div>
+
+Wenn dein Projekt stark gewachsen ist oder du strukturelle Probleme vermutest, kann eine Eingabeaufforderung für ein vollständiges Codebasis-Audit hilfreich sein. Damit bittest du die KI, das gesamte Projekt auf Sauberkeit, korrekte Architektur und fehlplatzierten Code hin zu analysieren. Es ist, als würdest du fragen: „Ist alles so organisiert, wie es sein sollte?“
+
+**Beispiel-Eingabeaufforderung – Codebasis-Audit:**
+
+```
+Führe ein umfassendes **Audit der gesamten Codebasis** durch, um zu prüfen, ob die Architektur sauber, modular und optimiert ist:
+
+- Identifiziere alle Dateien, Komponenten oder Logik, die am falschen Ort sind oder besser organisiert werden könnten. Gibt es Code-Instanzen, die nicht in ihre aktuelle Datei gehören (fehlplatzierte Logik)?
+- Bewerte, ob wir eine klare Trennung der Zuständigkeiten haben (z. B. Datenverarbeitung vs. UI vs. Zustandsverwaltung). Weise auf zu stark gekoppelte Code-Abschnitte hin.
+- Hebe alle Bereiche des Codes hervor, die übermäßig komplex sind oder nicht den Best Practices folgen.
+- Erstelle einen Bericht mit spezifischen Empfehlungen zur Verbesserung der Struktur und Wartbarkeit, **ohne zunächst Code-Änderungen vorzunehmen**.
+
+Gliedere die Vorschläge in eine geordnete Liste von Schritten, die wir unternehmen könnten, von den kritischsten bis zu optionalen Verbesserungen.
+
+*(Dies ist eine schreibgeschützte Analyse; ändere den Code während dieses Audits nicht.)*
+```
+
+Diese Eingabeaufforderung ist lang, aber sie weist die KI an, sich wie ein Code-Reviewer oder -Architekt zu verhalten. Wir haben sie gebeten, falsch platzierten Code zu finden, die Modularität zu prüfen und sogar die Korrekturen zu priorisieren. Die KI könnte mit etwas antworten wie:
+
+* &#95;„1. ****Separate API calls from components:**** Die &#95;`ProjectList`*-Komponente ruft Daten direkt ab. Vorschlag: Verschiebe das Laden der Daten in einen eigenen Hook oder Context, damit die Komponenten reine UI bleiben.​*
+
+1. **Reduce coupling in Task logic:** Der Umschalter für die Aufgabenfertigstellung aktualisiert sowohl den State als auch direkt `localStorage`. Das sollte so umgebaut werden, dass es nur noch eine einzige Quelle der Wahrheit gibt.​
+2. **Organize utility functions:** Es gibt Hilfsfunktionen in `App.tsx`, die besser in einem `utils`-Ordner aufgehoben wären (z. B. Datumsformatierungsfunktionen).
+3. ...“*
+
+Jeder Punkt könnte mit einer Erklärung und vielleicht Verweisen auf bestimmte Dateien versehen sein. Ein solcher Bericht hilft dir, den Wald vor lauter Bäumen nicht zu übersehen. Er ist besonders hilfreich, wenn du dich eine Weile nur auf ein einzelnes Feature konzentriert hast und dir die Gesamtstruktur schon länger nicht mehr angesehen hast.
+
+<Warning>
+  Vermeide allgemeine und zu breite Eingabeaufforderungen
+
+  ```
+  Nichts funktioniert, bitte reparieren!
+  ```
+</Warning>
+
+<Check>
+  Mache deine Eingabeaufforderungen ausführlicher und konkreter
+
+  ```
+  Jetzt ist der Bildschirm leer und ich kann keine Änderungen mehr vornehmen.
+  Kannst du prüfen, was passiert ist?
+  ```
+</Check>
+
+Nachdem du diese Ausgabe bekommen hast, kannst du entscheiden, welche Refactoring-Aufgaben du zuerst angehen möchtest (du kannst die KI sogar auffordern, einige dieser Empfehlungen nacheinander umzusetzen).
+
+
+<div id="safe-approach-for-fragile-updates">
+  ### Sichere Vorgehensweise für heikle Updates
+</div>
+
+Wenn du weißt, dass der Bereich, den du änderst, heikel ist (zum Beispiel ein komplexer Authentifizierungsflow oder ein Kernalgorithmus), ist es sinnvoll, deiner Eingabeaufforderung einen *vorsorglichen Hinweis* voranzustellen. Das findet zwar nicht direkt Bugs, hilft aber, sie zu vermeiden, indem es der KI sagt, dass sie besonders sorgfältig sein soll. Wir haben im Abschnitt Prompt-Bibliothek ein Beispiel zum Sperren von Dateien gesehen. Hier ist ein ähnliches Muster mit dem Fokus darauf, nichts kaputt zu machen.
+
+**Beispiel-Eingabeaufforderung – Leitfaden für heikle Updates:**
+
+```
+Die nächste Änderung betrifft einen **kritischen Teil der App** – gehen Sie daher mit **äußerster Vorsicht** vor. 
+
+- Prüfen Sie sorgfältig den gesamten zugehörigen Code und alle Abhängigkeiten, *bevor* Sie Änderungen vornehmen.
+- **Vermeiden Sie jegliche Änderungen** an nicht betroffenen Komponenten oder Dateien.
+- Falls Unsicherheiten bestehen, halten Sie inne und erläutern Sie Ihren Gedankengang, bevor Sie fortfahren.
+- Stellen Sie nach der Änderung durch gründliche Tests sicher, dass nichts anderes beeinträchtigt wurde.
+
+**Aufgabe:** Aktualisieren Sie die Benutzerauthentifizierungslogik, um OAuth-Login über Google zusätzlich zur bestehenden E-Mail/Passwort-Authentifizierung zu unterstützen, ohne einen der beiden Abläufe zu beeinträchtigen.
+
+*(Seien Sie äußerst vorsichtig und überprüfen Sie jeden Schritt während der Implementierung doppelt.)*
+```
+
+Indem du die kursiv gesetzten Richtlinien und fett gedruckten Warnungen einfügst, stellst du im Grunde die „Denkweise“ der KI darauf ein, vorsichtig vorzugehen. Die KI könnte dann einen eher abgewogenen Ansatz wählen, z. B. zuerst erklären, was sie tun wird, oder die OAuth-Erweiterung implementieren und dabei ausdrücklich vermerken, dass E‑Mail/Passwort unverändert geblieben ist. Diese Eingabeaufforderung liefert nicht sofort eine Lösung, sondern beeinflusst, *wie* die KI die Aufgabe ausführt, um das Einführen neuer Bugs zu minimieren.
+
+Diese Strategie ist nützlich für **fragile Bereiche**: Authentifizierung, Zahlungsabwicklung, Datenmigration – alles, bei dem ein kleiner Fehler viel kaputtmachen kann. Es ist eine präventive Debugging-Maßnahme.
+
+
+<div id="performance-optimization-check">
+  ### Performance-Optimierungscheck
+</div>
+
+Wenn deine App zwar korrekt funktioniert, aber **langsam** ist oder viele Ressourcen verbraucht, kannst du eine Eingabeaufforderung verwenden, damit die KI die Performance analysiert. Das kann beinhalten, dass Datenabrufmuster überprüft, Rendering‑Ineffizienzen untersucht oder Optimierungen (Caching, Memoization usw.) vorgeschlagen werden. Es ist, als würdest du fragen: „Wie können wir das schneller und reibungsloser machen?“
+
+**Beispiel-Eingabeaufforderung – Performance-Audit:**
+
+```
+Unsere App ist funktionsfähig, wirkt aber **träge**. Bitte **analysiere das Projekt auf Performance-Engpässe** und schlage Optimierungen vor:
+
+- Prüfe auf unnötige Datenbank- oder Netzwerkaufrufe (z. B. doppelte Abrufe oder N+1-Abfragemuster).
+- Identifiziere Komponenten, die möglicherweise zu häufig neu gerendert werden oder rechenintensive Arbeiten im Hauptthread ausführen.
+- Untersuche unsere Verwendung von Assets (Bilder, Skripte): Gibt es große Bundles oder nicht optimierte Assets, die die Ladezeit beeinträchtigen?
+- Schlage Verbesserungen vor wie das Caching häufig verwendeter Daten, die Verwendung von React Memo oder Lazy Loading wo sinnvoll, sowie weitere Möglichkeiten zur Beschleunigung der App.
+
+Stelle die Analyse und Empfehlungen in einer Liste bereit. Nimm noch keine Code-Änderungen vor – sage uns nur, was wir für eine bessere Performance verbessern sollten.
+```
+
+Wenn du dies im Chat mode ausführst, erhältst du einen Diagnosebericht. Die KI könnte zum Beispiel sagen:
+
+* *„Datenabruf:* Die `ProjectList`-Komponente ruft bei jedem Rendern Daten ab. Das ließe sich verbessern, indem du Caching verwendest oder den Fetch in einen höheren Kontext verschiebst, damit er sich nicht unnötig wiederholt. Erwäge, einen State oder Context zu verwenden, um Projekte nach dem ersten Abruf zu speichern.
+* *Re-Renders:* Die `TaskItem`-Komponente ist nicht memoisiert und wird jedes Mal neu gerendert, wenn sich irgendein übergeordneter State ändert. Wenn wir viele Tasks haben, kann das Interaktionen verlangsamen. Vorschlag: Verwende `React.memo` für `TaskItem`, um unnötige Re-Renders zu vermeiden.
+* *Assets:* Es wurde ein Bild (Logo) entdeckt, das 2 MB groß ist. Das ist ziemlich groß; komprimiere es oder verwende eine geringere Auflösung für schnelleres Laden.
+* *Bundle-Größe:* Alle Seiten sind in einem Bundle. Erwäge Code-Splitting (dynamisches `import()` für große Module), damit der initiale Ladevorgang schneller ist.
+* ...“*
+
+Jeder Vorschlag basiert auf gängigen Best Practices für Performance. Du kannst dann entscheiden, welche du umsetzen möchtest. Vielleicht bittest du Lovable, eine davon anzuwenden: *„Implementiere Caching für Projektdaten mithilfe von Context, wie vorgeschlagen.“* Wenn du diese Punkte angehst, verbesserst du die User Experience und reduzierst möglicherweise Kosten (weniger Aufrufe, weniger Rechenaufwand).
+
+
+<div id="handling-persistent-errors">
+  ### Umgang mit hartnäckigen Fehlern
+</div>
+
+Was ist mit Fehlern, die einfach nicht verschwinden oder in leicht veränderter Form immer wieder auftreten? Das kann passieren, wenn die eigentliche Ursache nicht behoben wird. Zum Beispiel behebst du ein Symptom, aber das zugrunde liegende Problem taucht an anderer Stelle als neuer Fehler wieder auf. Hier ist eine Strategie dafür:
+
+- **Frag die KI, was sie bereits versucht hat.** Manchmal ist nach ein paar „Try to Fix“-Versuchen oder manuellen Eingabeaufforderungen unklar, was alles geändert wurde. Verwende: \_„Welche Lösungen haben wir für diesen Fehler bisher ausprobiert?“\_​. Die KI kann die Versuche auflisten, was dir hilft zu vermeiden, dass du dieselben Änderungen wiederholst.
+- **Lass dir den Fehler von der KI in einfachen Worten erklären.** _„Erkläre in einfachen Worten, warum dieser Fehler auftritt.“_ Dadurch wird klar, ob die KI (und du) ihn wirklich versteht. Vielleicht entdeckst du hier ein Missverständnis.
+- **Zieh einen alternativen Ansatz in Betracht.** Frag: \_„Da dieser Fehler immer wieder auftritt, können wir einen anderen Ansatz versuchen, um das Ziel zu erreichen?“\_​. Die KI könnte eine andere Implementierungsstrategie vorschlagen, die den problematischen Bereich umgeht.
+- **Zurücksetzen und erneut ausführen.** Im schlimmsten Fall gehst du ein paar Schritte zurück. Lovable ermöglicht es dir, zu älteren Versionen zurückzukehren und sogar vergangene Nachrichten zu bearbeiten und zurückzusetzen, um einen anderen Ansatz zu wählen. Gehe danach mit kleineren Änderungen weiter vor.
+
+Wenn eine bestimmte Komponente schließlich „tot“ ist (überhaupt nicht mehr funktioniert, egal was du tust), isoliere sie. Erstelle per Eingabeaufforderung eine neue, minimale Version dieser Komponente, um zu sehen, ob sie funktioniert, und integriere sie dann langsam wieder in dein Projekt. Das ist vergleichbar mit „Aus- und Einschalten“, nur mit Code – manchmal ist es einfacher, ein Teil neu zu erstellen, als zu versuchen, ein stark beschädigtes zu flicken.
+
+Bewahre dabei stets den Dialog mit der KI. Behandle sie wie eine:n Partner:in: _„Wir haben X behoben, aber jetzt macht Y Probleme. Was ist die Beziehung zwischen X und Y? Könnte der Fix das Problem bei Y verursacht haben?“_ Die KI könnte Verbindungen erkennen, die dir entgangen sind.
+
+<div id="sample-debugging-flows">
+  ## Beispiel-Debugging-Abläufe
+</div>
+
+Um diese Konzepte zu festigen, sehen wir uns zwei häufige Debugging-Szenarien mit Beispielabläufen an:
+
+<div id="the-stuck-in-error-loop">
+  ### Die „Fehlerschleife, in der du feststeckst“
+</div>
+
+Du hast eine komplexe Eingabeaufforderung verwendet, jetzt lässt sich die App nicht mehr bauen und Try to Fix ist zweimal fehlgeschlagen.
+
+_Flow:_
+
+<Steps>
+  <Step title="Du wechselst in den Chat mode.">
+    
+  </Step>
+  <Step title="Du fragst, &quot;Was ist die Hauptursache für diesen Build-Fehler?&quot;">
+    
+  </Step>
+  <Step title="Die KI erklärt, dass es sich um einen Typkonflikt im API-Aufruf handelt.">
+    
+  </Step>
+  <Step title="Du sagst dann, &quot;Zeig mir den relevanten Code und die erwarteten Typen.&quot;">
+    
+  </Step>
+  <Step title="Die KI zeigt, dass die Funktion eine ID-Nummer erwartet hat, aber ein Objekt bekommen hat.">
+    
+  </Step>
+  <Step title="Jetzt, da du es siehst, gibst du die Eingabeaufforderung: &quot;Passe den Code so an, dass nur die numerische ID an die Funktion übergeben wird, nicht das gesamte Objekt.&quot;">
+    
+  </Step>
+  <Step title="Du wechselst zurück zu Default, führst diese Eingabeaufforderung aus, der Build ist erfolgreich.">
+    
+  </Step>
+  <Step title="Wenn nicht, würdest du zurückgehen und vielleicht fragen: &quot;Was könnte das sonst noch verursachen?&quot; usw.">
+    
+  </Step>
+</Steps>
+
+Währenddessen hast du den Fehler gezielt beschrieben und die KI gebeten, zu bestätigen, dass sie ihn richtig verstanden hat, statt einfach wiederholt blind auf Try to Fix zu klicken.
+
+<div id="the-feature-not-working-right">
+  ### Die „Funktion funktioniert nicht richtig“.
+</div>
+
+Du hast eine Benachrichtigungsfunktion hinzugefügt, aber E-Mails werden nicht gesendet.
+
+_Ablauf:_
+
+<Steps>
+  <Step title="Es wird kein Fehler angezeigt, also fragst du im Chat: „Die E-Mail-Benachrichtigung funktioniert nicht – ich habe eine E-Mail erwartet, wenn eine Aufgabe überfällig ist, aber nichts bekommen. Wie können wir das debuggen?“">
+    
+  </Step>
+  <Step title="Die KI schlägt vor, zu prüfen, ob die Serverfunktion ausgelöst wurde und ob die Antwort des E-Mail-Dienstes einen Fehler enthielt.">
+    
+  </Step>
+  <Step title="Du holst dir das Server-Log (z. B. aus Supabase) und siehst einen Berechtigungsfehler.">
+    
+  </Step>
+  <Step title="Du zeigst das der KI: „Im Log steht ‚permission denied when trying to send email.‘“">
+    
+  </Step>
+  <Step title="Die KI schlussfolgert, dass der API-Schlüssel für den E-Mail-Dienst vielleicht nicht gesetzt wurde oder der Dienst ihn blockiert hat.">
+    
+  </Step>
+  <Step title="Du korrigierst dann den API-Schlüssel in den Einstellungen (außerhalb von Lovable) oder bittest per Eingabeaufforderung darum, die Funktion so anzupassen, dass eine andere Methode verwendet wird.">
+    
+  </Step>
+</Steps>
+
+Im Grunde genommen konnte die KI die Untersuchung anleiten, weil du beschrieben hast, was du erwartest (eine E-Mail) und was tatsächlich passiert ist (nichts, plus ein Log-Ausschnitt).
+
+<div id="the-ui-element-disappeared">
+  ### Das „UI-Element ist verschwunden.“
+</div>
+
+Du hast etwas refaktoriert und jetzt ist ein ganzer Abschnitt der UI einfach weg (eine „tote Komponente“).
+
+_Flow:_
+
+<Steps>
+  <Step title="Du sagst der KI: „Der Projektlisten-Abschnitt wird überhaupt nicht mehr angezeigt. Vor der letzten Änderung hat er noch funktioniert.“ ">
+    
+  </Step>
+  <Step title="Die KI könnte prüfen, ob die Komponente noch gerendert wird oder ob ein return-Statement fehlt. ">
+    Vielleicht stellt sie fest, dass der Refactor `ProjectList` aus dem JSX der übergeordneten Komponente entfernt hat. Sie schlägt vor, sie erneut zu importieren und einzubinden. Oder vielleicht sorgen State-Änderungen in einer übergeordneten Komponente dafür, dass die Liste jetzt unbeabsichtigt herausgefiltert wird.
+  </Step>
+  <Step title="Die KI könnte verschiedene Möglichkeiten durchgehen: „Werden die Daten noch abgerufen? Bekommt die Komponente die Daten? Lass uns ein console.log im Render hinzufügen, um zu sehen, ob sie Props erhält.“ ">
+    
+  </Step>
+  <Step title="Du machst das (oder die KI erledigt es per Eingabeaufforderung) und siehst keine Logs – was bedeutet, dass die Komponente nicht gemountet ist. ">
+    Aha! Also gibst du die Eingabeaufforderung ein: _„Restore the _`<ProjectList>`_ in the Dashboard page JSX (it was accidentally removed).“_ Problem gelöst.
+  </Step>
+</Steps>
+
+In diesem Ablauf war der Schlüssel, zu bemerken, dass die Komponente komplett verschwunden war, und das zu kommunizieren. Die KI hat geholfen, den _Grund_ einzugrenzen (nicht gerendert vs. gerendert, aber leer usw.).
+
+<Note>
+  Verwendung von Dev-Tools und Konsolenprotokollen
+
+  ```
+  My app is not working anymore and the screen is blank.
+  Here's the copy/paste from Dev tools console, can you fix the issue?
+  
+  Error occurred:
+  TypeError: Q9() is undefined  at https://example.lovable.app/assets/index-DWQbrtrQQj.js
+  : 435 : 39117 index-DWQbrtrQQj.js:435:35112
+  onerror https://example.lovable.app/assets/index-DWQbrtrQQj.js:435
+  ```
+</Note>
+
+In all diesen Fällen sind _Kommunikation und schrittweises Vorgehen_ deine Verbündeten. Nutze die Stärke der KI, sich an Details zu erinnern (z. B. was sie vorher getan hat) und Protokolle oder Fehler zu analysieren. Und nutze deine Stärke, den Prozess zu steuern – du verstehst das übergeordnete Ziel und kannst entscheiden, wann du eine andere Herangehensweise ausprobieren solltest.
+
+<div id="root-cause-analysis-rollback-and-progressive-enhancement">
+  ## Root-Cause-Analyse, Rollback und schrittweise Verbesserung
+</div>
+
+Ein paar abschließende Tipps:
+
+<div id="root-cause-vs-symptom">
+  ### Ursache vs. Symptom
+</div>
+
+Frag dich immer „Warum ist das passiert?“ und nicht nur „Was mache ich jetzt?“. Die KI kann helfen, die eigentliche Ursache zu finden, sodass eine Änderung dauerhaft hält. Ein schneller KI-Fix könnte zum Beispiel einen Fehler unterdrücken, ohne den zugrunde liegenden Logik-Bug zu beheben. Wenn du das vermutest, geh der Sache genauer nach:
+
+<Info>
+  _Ich sehe, du hast den Nullpointer-Fehler durch eine zusätzliche Prüfung behoben, aber warum war der Wert überhaupt null? Können wir diese Ursache direkt angehen?_
+</Info>
+
+Das führt zu robusteren Lösungen.
+
+<div id="rollback-wisely">
+  ### **Rollbacks mit Bedacht:**
+</div>
+
+Lovable ermöglicht es dir, dein Projekt auf frühere Versionen zurückzusetzen. Zögere nicht, das zu nutzen, wenn der Code durch eine Reihe schlechter Fehlerbehebungen zu sehr verheddert ist. Oft ist es schneller, zurückzuspringen und einen anderen Ansatz zu wählen. Wenn du ein Rollback machst, lass die KI wissen, was du tust (damit sie nicht von Code verwirrt wird, der plötzlich anders aussieht). Zum Beispiel:
+
+<Info>
+  _Ich habe das Projekt auf den Stand vor dem Notifications-Feature zurückgesetzt. Lass es uns noch einmal implementieren, aber diesmal sorgfältiger._
+</Info>
+
+So hat die KI den Kontext, dass wir einige Änderungen rückgängig gemacht haben und einen neuen Versuch starten.
+
+<div id="progressive-enhancement">
+  ### **Progressive Erweiterung:**
+</div>
+
+Wenn du neue Features hinzufügst (insbesondere komplexe), baue sie in kleinen, testbaren Schritten. Das ist nicht nur ein Tipp für Eingabeaufforderungen – es ist eine Entwicklungsphilosophie, die sehr gut mit KI harmoniert. Wenn etwas nicht mehr funktioniert, weißt du genau, welcher kleine Schritt das Problem verursacht hat. Eingabeaufforderung für Eingabeaufforderung verbesserst du die App – und das bedeutet auch, dass du Eingabeaufforderung für Eingabeaufforderung isoliert debuggen kannst. Wenn du jemals dabei bist, eine sehr lange, absatzgroße Eingabeaufforderung mit mehreren Feature-Änderungen auf einmal zu schreiben, solltest du überlegen, sie in mehrere Eingabeaufforderungen aufzuteilen. Du wirst dir später bei der Fehlersuche dafür danken.
+
+<Note>
+  1. Fehlerhafte Testfälle hinzufügen.
+  2. Das Problem isolieren und Abhängigkeiten analysieren.
+  3. Ergebnisse dokumentieren, bevor du Korrekturen anwendest.
+
+  ```
+  Hier ist die fehlerhafte Konsolen-Logausgabe. Analysiere den Testfall, untersuche den Fehler im Auth-Flow und schlage eine Lösung vor, nachdem du die Abhängigkeiten verstanden hast.
+  ```
+</Note>
+
+<div id="document-as-you-go">
+  ### **Währenddessen dokumentieren:**
+</div>
+
+Es ist hilfreich, Notizen zu machen (oder sogar die KI zu bitten, nach einer Sitzung zusammenzufassen, was erledigt wurde). Das ist ähnlich wie umgekehrtes Meta-Prompting – es erzeugt eine Historie der Korrekturen. Z. B. könntest du nach der Behebung eines kniffligen Bugs die folgende Eingabeaufforderung verwenden:
+
+<Info>
+  _Fasse zusammen, was das Problem war und wie wir es behoben haben._
+</Info>
+
+Die Zusammenfassung der KI kann in einer `README`-Datei oder einem Protokoll gespeichert werden. Das ist sehr hilfreich für dein zukünftiges Ich oder andere Personen im Projekt, um nachzuvollziehen, was passiert ist.
+
+<div id="know-when-to-ask-for-human-help">
+  ### **Erkenne, wann du menschliche Hilfe brauchst:**
+</div>
+
+Manchmal stößt du trotz aller Bemühungen an eine Wand (vielleicht ein echter Bug in der Lovable‑Plattform oder etwas außerhalb deiner bzw. der Kontrolle der KI). Die Lovable‑Community und der Kundensupport sind für dich da. Es ist absolut in Ordnung, mit einer Frage auf ihrem Discord‑Server oder in den Foren nachzufragen. Oft hatten andere schon ein ähnliches Problem. Nutze zuerst die KI, um so viele Informationen wie möglich zu sammeln (damit du Details liefern kannst), und frage dann bei Bedarf die Community.
+
+<div id="community-debugging-guidebook">
+  ## Community-Debugging-Handbuch
+</div>
+
+Dieses Handbuch wurde in unserer Community auf Discord geteilt – es könnte beim Debuggen deines Projekts nützlich sein:
+
+<AccordionGroup>
+  <Accordion title="Fehlerkorrektur">
+    Wenn du Fehler behebst, konzentriere dich ausschließlich auf die relevanten Codestellen, ohne funktionierende, nicht betroffene Teile zu verändern. Analysiere die Fehlermeldung und verfolge sie bis zu ihrer Ursache. Implementiere gezielte Korrekturen, die das konkrete Problem beheben und gleichzeitig die Kompatibilität mit der bestehenden Codebasis erhalten. Bevor du eine Lösung bestätigst, prüfe, ob sie das ursprüngliche Problem löst, ohne neue Bugs einzuführen. Erhalte stets die bestehende Funktionalität und vermeide es, Code neu zu schreiben, der nicht direkt mit dem Fehler zusammenhängt.
+  </Accordion>
+
+  <Accordion title="Vorgehensweise für Codeänderungen">
+    Wenn du bestehenden Code änderst, geh chirurgisch vor und ändere nur so viel wie unbedingt nötig, um das gewünschte Feature oder die gewünschte Fehlerbehebung umzusetzen. Bewahre vorhandene Variablennamen, Coding-Patterns und Architekturentscheidungen im bestehenden Code. Analysiere vor Änderungsvorschlägen die Abhängigkeiten, um sicherzustellen, dass deine Anpassungen keine bestehende Funktionalität beeinträchtigen. Präsentiere Änderungen als minimale Diffs statt als vollständige Neuschreibungen. Wenn du Verbesserungen erkennst, die über die aktuelle Aufgabe hinausgehen, schlage sie separat vor, ohne sie automatisch umzusetzen.
+  </Accordion>
+
+  <Accordion title="Datenbank-Integration">
+    Bevor du neue Datenbankstrukturen vorschlägst, untersuche das bestehende Schema gründlich, um Tabellen, Beziehungen und Felder zu identifizieren. Nutze nach Möglichkeit bestehende Tabellen, anstatt Datenmodelle zu duplizieren. Wenn Änderungen an der Datenbank notwendig sind, stelle sicher, dass sie mit den bestehenden Abfragen und Datenzugriffsmustern kompatibel sind. Berücksichtige Migrationsstrategien für Schemaänderungen, die bestehende Daten erhalten. Überprüfe immer Fremdschlüsselbeziehungen und Datenintegritätsregeln, bevor du Änderungen vorschlägst.
+  </Accordion>
+
+  <Accordion title="Gründliche Problemanalyse">
+    Gehe jedes Problem mit einem umfassenden Diagnoseprozess an. Beginne damit, alle relevanten Informationen zu sammeln, indem du Fehlermeldungen, Protokolle und das Systemverhalten sorgfältig prüfst. Formuliere mehrere Hypothesen zu möglichen Ursachen, anstatt vorschnelle Schlüsse zu ziehen. Teste jede Hypothese systematisch, bis die eigentliche Ursache gefunden ist. Dokumentiere deinen Analyseprozess und deine Ergebnisse, bevor du Lösungen vorschlägst. Berücksichtige mögliche Randfälle und wie sie sich auf das System auswirken könnten.
+  </Accordion>
+
+  <Accordion title="Lösungsüberprüfung">
+    Bevor du eine Lösung bestätigst, implementiere einen gründlichen Verifizierungsprozess. Teste die Lösung anhand des ursprünglichen Problems, um sicherzustellen, dass es tatsächlich behoben wird. Überprüfe unbeabsichtigte Nebenwirkungen in verwandten Funktionen. Stelle sicher, dass die Performance nicht negativ beeinträchtigt wird. Prüfe die Kompatibilität mit verschiedenen Umgebungen und Konfigurationen. Gehe Randfälle durch, um die Robustheit sicherzustellen. Erst nachdem du diese Verifizierung abgeschlossen hast, solltest du die Lösung als bestätigt präsentieren.
+  </Accordion>
+
+  <Accordion title="Konsistenz des Codes">
+    Achte darauf, mit der bestehenden Codebasis in Bezug auf Stil, Muster und Vorgehensweisen konsistent zu bleiben. Analysiere den Code, um Namenskonventionen, Formatierungspräferenzen und Architekturmuster zu identifizieren. Folge diesen etablierten Mustern, wenn du neue Funktionen oder Fehlerbehebungen implementierst. Verwende dieselben Strategien für Fehlerbehandlung, Logging und Tests, die im Projekt bereits genutzt werden. Dadurch bleiben Lesbarkeit und Wartbarkeit erhalten und die kognitive Belastung für Entwickler wird reduziert.
+  </Accordion>
+
+  <Accordion title="Progressive Enhancement">
+    Wenn du neue Funktionen hinzufügst, baue auf der bestehenden Architektur auf, statt völlig neue Paradigmen einzuführen. Identifiziere Erweiterungspunkte im aktuellen Design und nutze sie für neue Funktionen. Implementiere Änderungen, die mit den etablierten Mustern und Prinzipien der Codebasis übereinstimmen. Konzentriere dich auf Abwärtskompatibilität, damit bestehende Funktionen wie erwartet weiter funktionieren. Dokumentiere, wie neue Erweiterungen sich in das bestehende System integrieren und dieses erweitern.
+  </Accordion>
+
+  <Accordion title="Dokumentation und Erklärung">
+    Gib klare, prägnante Erklärungen für alle Änderungen und Empfehlungen. Erkläre nicht nur, welche Änderungen vorgenommen werden, sondern auch, warum sie notwendig sind und wie sie funktionieren. Dokumentiere alle Annahmen oder Abhängigkeiten, die mit der Lösung verbunden sind. Füge Kommentare in den Code ein, wenn du komplexe Logik oder nicht sofort ersichtliche Lösungen einführst. Wenn du Architekturänderungen vorschlägst, erstelle Diagramme oder Erklärungen auf hoher Abstraktionsebene, die dabei helfen, die Auswirkungen zu visualisieren.
+  </Accordion>
+
+  <Accordion title="Bewusstsein für technische Schulden">
+    Erkenne, wann Lösungen technische Schulden erzeugen könnten, und sei bei diesen Abwägungen transparent. Wenn Zeitdruck nicht ideale Lösungen erfordert, benenne klar, welche Aspekte künftig von einem Refactoring profitieren würden. Unterscheide zwischen Quickfixes und sauberen Lösungen und empfehle je nach Kontext den passenden Ansatz. Wenn technische Schulden unvermeidbar sind, dokumentiere sie eindeutig, um zukünftige Verbesserungen zu erleichtern.
+  </Accordion>
+
+  <Accordion title="Lernen und Anpassung">
+    Passe dich kontinuierlich an die spezifischen Muster und Präferenzen des Projekts an. Achte auf Feedback zu früheren Vorschlägen und baue diese Erkenntnisse in zukünftige Empfehlungen ein. Erstelle ein mentales Modell der Anwendungsarchitektur, das im Laufe der Zeit immer genauer wird. Merke dir frühere Probleme und Lösungen, um wiederholte Fehler zu vermeiden. Bemühe dich aktiv, die zugrunde liegenden Geschäftsanforderungen zu verstehen, die hinter den technischen Entscheidungen stehen.
+  </Accordion>
+
+  <Accordion title="Doppelte Komponenten verhindern">
+    Bevor du neue Seiten, Komponenten oder Flows erstellst, solltest du zunächst eine gründliche Bestandsaufnahme der vorhandenen Elemente in der Codebase durchführen. Suche mit passenden Suchbegriffen und Dateimustern nach ähnlicher Funktionalität. Identifiziere Möglichkeiten, bestehende Komponenten wiederzuverwenden oder zu erweitern, anstatt Duplikate zu erstellen. Wenn ähnliche Funktionen bereits existieren, analysiere sie, um zu verstehen, ob sie parametrisiert oder angepasst werden können, statt sie zu duplizieren. Behalte ein mentales Modell der Struktur der Anwendung bei, um zu erkennen, wann vorgeschlagene Lösungen redundante Elemente erzeugen könnten. Wenn ähnliche Seiten oder Flows benötigt werden, erwäge, abstrahierte Komponenten zu erstellen, die mit unterschiedlichen Daten oder Konfigurationen wiederverwendet werden können, um DRY-Prinzipien (Don&#39;t Repeat Yourself) zu fördern.
+  </Accordion>
+
+  <Accordion title="Dead-Code-Eliminierung">
+    Identifiziere ungenutzten Code aktiv und entferne ihn, statt ihn einfach anzusammeln. Wenn du Funktionalität ersetzt, entferne die alte Implementierung sauber, anstatt sie nur auszukommentieren oder neben dem neuen Code liegen zu lassen. Bevor du Code löschst, überprüfe seine Verwendung in der gesamten Anwendung, indem du nach Importen und Referenzen suchst. Nutze, wenn verfügbar, Tools wie Abhängigkeitsanalysen, um zu bestätigen, dass Code wirklich ungenutzt ist. Verfolge beim Refactoring veraltete Methoden und stelle sicher, dass sie vollständig entfernt werden, sobald sie nicht mehr referenziert werden. Scanne regelmäßig nach verwaisten Komponenten, ungenutzten Importen, auskommentierten Blöcken und unerreichbaren Bedingungen. Wenn du das Entfernen von Code vorschlägst, gib eine klare Begründung dafür, warum er als toter Code gilt, und stelle sicher, dass vor dem Löschen keine subtilen Abhängigkeiten bestehen. Halte die Codebasis sauber, indem du vorrangig Codepfade entfernst, die nicht mehr ausgeführt werden.
+  </Accordion>
+
+  <Accordion title="Funktionierende Features erhalten">
+    Behandle funktionierende Features als abgeschlossene Systeme, deren Änderung eine ausdrückliche Freigabe erfordert. Bevor du Änderungen an einer funktionierenden Komponente vorschlägst, grenze ihre Zuständigkeiten und Abhängigkeiten eindeutig ab. Entferne oder verändere niemals Features, die aktuell funktionsfähig sind, grundlegend ohne ausdrückliche Anweisung. Wenn in einem Bereich Fehler auftreten, vermeide „auf Verdacht“ vorgenommene Änderungen an anderen, funktionierenden Komponenten. Behalte stets im Blick, welche Teile der Anwendung stabil sind und welche sich in Entwicklung befinden. Nutze einen Feature-fokussierten Ansatz, bei dem Änderungen auf bestimmte Feature-Sets begrenzt bleiben und nicht in andere hineinwirken. Wenn du gemeinsam genutzte Komponenten änderst, die von mehreren Features verwendet werden, stelle sicher, dass alle abhängigen Features weiterhin wie erwartet funktionieren. Schaffe Schutzmechanismen, indem du Abhängigkeiten über Features hinweg gründlich dokumentierst, bevor du Änderungen vornimmst, die sie beeinträchtigen könnten. Lass dir die Änderungsabsicht immer ausdrücklich bestätigen, bevor du Änderungen an etablierten, funktionsfähigen Teilen der Anwendung vorschlägst.
+  </Accordion>
+
+  <Accordion title="Tiefgreifender Problemlösungsansatz">
+    Wenn du auf komplexe Fehler stößt, widerstehe der Versuchung, sofortige Schnelllösungen anzuwenden, ohne das Problem wirklich zu verstehen. Tritt bewusst einen Schritt zurück und betrachte das Problem aus mehreren Perspektiven, bevor du Lösungen vorschlägst. Ziehe grundlegend unterschiedliche Ansätze in Betracht, statt nur kleine Varianten derselben Strategie. Dokumentiere mindestens drei potenzielle Lösungen mit ihren Vor- und Nachteilen, bevor du einen bestimmten Ansatz empfiehlst. Hinterfrage anfängliche Annahmen über die Ursache der Fehler, besonders wenn Standardlösungen nicht funktionieren. Berücksichtige unkonventionelle Fehlerquellen wie Umgebungskonfigurationen, externe Abhängigkeiten oder Race Conditions, die nicht sofort offensichtlich sind. Versuche, deine Denkweise umzukehren: Frage dich statt „Warum funktioniert das nicht?” eher „Unter welchen Bedingungen würde dieses Verhalten eigentlich Sinn ergeben?”. Zerlege komplexe Probleme in kleinere Komponenten, die unabhängig überprüft werden können. Setze gezielte Debugging-Strategien wie Logging, Breakpoints oder State Tracing ein, um mehr Informationen zu sammeln, wenn die Ursache eines Fehlers unklar bleibt. Sei bereit, experimentelle Lösungen als Lerngelegenheit statt als endgültige Antworten vorzuschlagen, wenn du es mit besonders schwer fassbaren Problemen zu tun hast.
+  </Accordion>
+
+  <Accordion title="Überprüfung von Datenbankabfragen">
+    Bevor du eine Datenbankabfrage oder eine Schemaänderung vorschlägst, überprüfe immer zuerst den aktuellen Zustand der Datenbank. Untersuche bestehende Tabellen, Felder und Beziehungen, um sicherzustellen, dass du nicht die Erstellung von Elementen empfiehlst, die bereits existieren. Wenn du Abfragen vorschlägst, prüfe zuerst, ob es in der Codebasis ähnliche Abfragen gibt, die angepasst werden können. Sieh dir bestehende Datenmodelle, Migrationsdateien und Schemadefinitionen an, um ein genaues Verständnis der Datenbankstruktur zu erhalten. Bestätige bei jedem Vorschlag zur Erstellung einer Tabelle ausdrücklich, dass die Tabelle noch nicht existiert, und erkläre, warum eine neue Tabelle notwendig ist, anstatt eine bestehende zu ändern. Wenn du neue Felder vorschlägst, überprüfe, ob nicht bereits ähnliche Felder denselben Zweck unter einem anderen Namen erfüllen. Berücksichtige die Auswirkungen der vorgeschlagenen Abfragen auf die Performance der Datenbank und biete bei Bedarf optimierte Alternativen an. Kontextualisiere Abfragevorschläge immer innerhalb der bestehenden Datenbankarchitektur, anstatt sie als isolierte Operationen zu behandeln.
+  </Accordion>
+
+  <Accordion title="UI-Konsistenz und Theming">
+    Halte dich in der gesamten Anwendung strikt an das festgelegte Designsystem und die Farbpalette. Bevor du neue UI-Komponenten erstellst, studiere die vorhandenen, um die visuelle Sprache, Abstands­muster, Interaktions­modelle und das zugrunde liegende Theme-Konzept zu verstehen. Wenn du neue Oberflächen umsetzt, verwende bestehende Komponenten­muster wieder, anstatt visuelle Variationen zu erstellen. Übernimm Farbwerte, Typografie, Abstände und andere Design-Tokens aus der bestehenden Codebasis, anstatt neue Werte einzuführen. Stelle eine konsistente Behandlung von Zuständen (Hover, Active, Disabled, Error usw.) in allen Komponenten sicher. Beachte die etablierten Muster für responsives Verhalten bei der Umsetzung neuer Layouts. Wenn du UI-Verbesserungen vorschlägst, achte darauf, dass sie die visuelle Kohärenz der Anwendung stärken und nicht stören. Halte Barrierefreiheits­standards in allen Komponenten konsequent ein, einschließlich Farbkontrast­verhältnissen, Tastatur­navigation und Screenreader-Unterstützung. Dokumentiere alle Komponenten­varianten und ihre geeigneten Einsatz­kontexte, um eine konsistente Anwendung zu erleichtern. Wenn du neue visuelle Elemente einführst, zeige explizit, wie sie sich in das bestehende Designsystem integrieren und es ergänzen, anstatt isoliert daneben zu stehen.
+  </Accordion>
+
+  <Accordion title="Systematischer Debugging-Ansatz">
+    Wenn du auf Fehler stößt, verwende eine wissenschaftliche Debugging-Methode, anstatt zufällige Änderungen vorzunehmen. Beginne damit, das genaue Problem in einer kontrollierten Umgebung zu reproduzieren. Sammle umfassende Daten, einschließlich Konsolenprotokollen, Netzwerk-Anfragen, Komponentenstatus und Fehlermeldungen. Formuliere mehrere Hypothesen zu möglichen Ursachen und teste jede davon systematisch. Isoliere das Problem, indem du die betroffenen Komponenten eingrenzt und auslösende Bedingungen identifizierst. Dokumentiere deinen Debugging-Prozess und deine Erkenntnisse für die zukünftige Referenz. Nutze geeignete Debugging-Tools, darunter Browser-Entwicklertools, React DevTools und Debugging-Techniken auf Code-Ebene. Überprüfe immer, ob deine Lösung das Problem vollständig behebt, ohne neue Fehler oder Regressionen an anderer Stelle in der Anwendung einzuführen.
+  </Accordion>
+
+  <Accordion title="Typsicherheit und Datenvalidierung">
+    Bevor du irgendeine Funktionalität implementierst, analysiere die Typdefinitionen sowohl aus dem Datenbankschema als auch aus den TypeScript-Interfaces gründlich. Halte im gesamten Code striktes Type-Checking ein und vermeide den „any“-Typ als Ausweichmöglichkeit. Wenn du mit Datentransformationen arbeitest, überprüfe die Typsicherheit in jedem Schritt der Pipeline. Achte besonders auf häufige Typinkonsistenzen wie Zahlen aus der Datenbank, die als Strings ankommen, Anforderungen an das Parsen von Datumswerten und den Umgang mit nullable Feldern. Implementiere konsistente Namenskonventionen zwischen Datenbankspalten und TypeScript-Interfaces. Dokumentiere komplexe Typbeziehungen und Sonderfälle in der Behandlung. Teste mit realen Datenstrukturen und prüfe Randfälle (Edge Cases), insbesondere den Umgang mit null/undefined. Wenn Fehler auftreten, verfolge die Datentransformationspipeline, um genau zu identifizieren, wo Typen auseinanderlaufen, und schlage Korrekturen vor, die die Typsicherheit beibehalten.
+  </Accordion>
+
+  <Accordion title="Datenflussverwaltung">
+    Stelle dir den Datenfluss als durchgängige Pipeline von der Datenbank über API und State bis zur UI vor. Verfolge bei der Implementierung von Features sorgfältig, wie Daten in jeder Phase transformiert werden. Implementiere geeignete Muster zur Invalidierung von Queries, damit die UI immer mit dem Datenbankzustand synchron bleibt. Füge an kritischen Stellen gezielt Console-Logs ein, um Datenübergänge zu überwachen. Entwickle ein klares mentales Modell, wann und wie sich Daten als Reaktion auf Aktionen aktualisieren sollten. Achte genau auf Caching-Strategien und potenzielle Probleme mit veralteten Daten. Wenn du Probleme im Datenfluss debuggen musst, folge dem Weg der Daten systematisch von der Quelle bis zum Ziel. Prüfe Timing-Probleme, Race Conditions und Transformationsfehler. Stelle sicher, dass die endgültige Datenstruktur, die in den Komponenten ankommt, dem entspricht, was sie erwarten. Implementiere robuste Error Boundaries und ein durchdachtes Management von Ladezuständen, um die UI-Stabilität bei Störungen im Datenfluss aufrechtzuerhalten.
+  </Accordion>
+
+  <Accordion title="Performance-Optimierung">
+    Überwache die Performance deiner Anwendung proaktiv, anstatt zu warten, bis Probleme kritisch werden. Überprüfe Caching-Strategien für Abfragen, um unnötige Datenbankaufrufe zu minimieren. Suche nach unnötigen erneuten Renderings von Komponenten und eliminiere sie durch korrektes Memoization und sauberes Dependency-Management. Analysiere Muster beim Daten-Fetching auf potenzielle N+1-Query-Probleme, übermäßige kaskadierende Anfragen (Waterfalls) oder redundante Requests. Implementiere Virtualisierung für lange Listen und paginiere große Datenmengen. Optimiere die Bundle-Größe durch Code-Splitting und Lazy Loading. Komprimiere und optimiere Assets, einschließlich Bildern. Nutze geeignete Performance-Messwerkzeuge, um Engpässe zu identifizieren, darunter React DevTools, den Performance-Tab, das Network-Panel und den Memory Profiler. Konzentriere Optimierungsmaßnahmen auf Metriken, die die User Experience direkt beeinflussen, wie Ladezeiten, Time to Interactive und UI-Reaktionsfähigkeit. Implementiere gezielte Performance-Verbesserungen anstatt vorschneller Optimierung.
+  </Accordion>
+
+  <Accordion title="Fehlerbehandlung und Resilienz">
+    Implementiere eine umfassende Strategie zur Fehlerbehandlung, die die Stabilität der Anwendung bewahrt und gleichzeitig aussagekräftiges Feedback liefert. Verwende `try/catch`-Blöcke gezielt an potenziell problematischen Codestellen. Erstelle eine Hierarchie von Error Boundaries, um Fehler auf bestimmte Komponenten zu begrenzen, statt die gesamte Anwendung abstürzen zu lassen. Entwirf Muster für eine „graceful degradation“, bei denen Komponenten mit eingeschränkten Daten weiterhin funktionieren können. Stelle klare, benutzerfreundliche Fehlermeldungen bereit, die das Problem ohne technischen Jargon erklären. Implementiere Mechanismen zur Wiederherstellung, einschließlich Retry-Logik, Fallbacks und Zurücksetzen des Zustands. Pflege ein robustes Error Logging, das genügend Kontext für das Debugging erfasst und gleichzeitig die Privatsphäre respektiert. Teste Fehlerszenarien gründlich, um sicherzustellen, dass die Wiederherstellungsmechanismen wie erwartet funktionieren. Achte bei Lösungsvorschlägen darauf, dass sie die eigentliche Ursache beheben statt nur Symptome zu unterdrücken, und überprüfe, dass sie in allen relevanten Umgebungen und Randfällen funktionieren.
+  </Accordion>
+
+  <Accordion title="Komponentenarchitektur">
+    Gehe das Komponentendesign mit einem klaren Verständnis der Komponenten­hierarchie und -verantwortlichkeiten an. Stelle dir Komponenten als Stammbaum mit klaren Eltern-Kind-Beziehungen vor. Minimiere Prop-Drilling, indem du Kontext oder State-Management dort einsetzt, wo es sinnvoll ist. Ziehe klare Grenzen zwischen Container- (smart) und Präsentationskomponenten (dumb). Etabliere konsistente Muster für die Kommunikation zwischen Komponenten, einschließlich Interaktionen zwischen Eltern- und Kindkomponenten sowie zwischen Geschwisterkomponenten. Analysiere beim Debuggen von Komponentenproblemen den vollständigen Komponentenbaum, den Prop-Fluss, den Ort des States und die Verbindungen der Event-Handler. Entwirf Komponenten nach dem Single-Responsibility-Prinzip und mit klaren Schnittstellen. Dokumentiere Komponentenbeziehungen und -abhängigkeiten, um die zukünftige Wartung zu erleichtern. Implementiere Performance-Optimierungen wie Memoization, Lazy Loading und Code-Splitting dort, wo sie sinnvoll sind. Halte ein Gleichgewicht zwischen Wiederverwendbarkeit und Spezialisierung von Komponenten, um sowohl Duplikation als auch Überabstraktion zu vermeiden.
+  </Accordion>
+
+  <Accordion title="API-Integration und Netzwerkverwaltung">
+    Gehe API-Integrationen mit einer umfassenden Strategie für Anfragen, Antworten und Fehlerbehandlung an. Überprüfe für jede Anfrage die Authentifizierungs-Header, Parameter und das Format des Request-Bodys. Implementiere eine robuste Fehlerbehandlung für alle Netzwerkoperationen mit spezifischen Catch-Blöcken für unterschiedliche Fehlertypen. Stelle eine konsistente Typisierung zwischen Request-Payloads, erwarteten Responses und dem Anwendungszustand sicher. Konfiguriere passende CORS-Einstellungen und überprüfe, dass sie in allen Umgebungen funktionieren. Implementiere intelligente Retry-Mechanismen für vorübergehende Fehler mit exponentiellem Backoff. Berücksichtige die Auswirkungen von Rate Limiting und implementiere ein geeignetes Throttling. Füge strategisches Request-Caching hinzu, um die Performance zu verbessern und die Serverlast zu reduzieren. Überwache die Netzwerkleistung, einschließlich Request-Timings und Payload-Größen. Teste API-Integrationen sowohl für Happy Paths als auch für verschiedene Fehlerszenarien. Pflege eine klare Dokumentation aller API-Endpoints, ihrer Zwecke, erwarteten Parameter und Response-Formate, um zukünftige Entwicklungen und Debugging zu erleichtern.
+  </Accordion>
+</AccordionGroup>

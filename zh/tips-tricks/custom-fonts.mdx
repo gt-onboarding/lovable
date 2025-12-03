@@ -1,0 +1,76 @@
+---
+title: "使用自定义（Google）字体"
+description: "了解如何在你的 Lovable 项目中使用网页安全字体和 Google Fonts"
+icon: "font"
+---
+
+目前，Lovable 尚不支持直接上传自定义字体文件。 
+
+不过，你可以通过几种简单的方式，在项目中使用网页安全字体或引入自定义字体。下面我们将引导你了解几种可用方法，用于**使用网页安全字体**和 **Google 字体**：
+
+<AccordionGroup>
+  <Accordion title="使用网页安全字体">
+    <Info>
+      **什么是网页安全字体？**
+
+      网页安全字体是预装在大多数操作系统（Windows、macOS、Linux 等）上的字体，在所有设备上都能正常显示。
+
+      这些字体可以确保你的文本在不同浏览器和平台上都保持一致的显示效果，而无需加载任何外部资源。常见的网页安全字体包括：
+
+      - Arial/Helvetica
+      - Times New Roman
+      - Georgia
+      - Courier New
+      - Verdana
+      - Tahoma
+      - Trebuchet MS
+      - Lucida Sans Unicode
+    </Info>
+    如果你想在项目中使用网页安全字体，可以在提示中直接指定字体名称。比如，如果你想在首屏 hero 区域的主标题中使用 **Courier New**，只需在提示中按名称引用该字体即可。
+
+    ```text
+    Use Courier New as the heading font in the hero section for the main title.
+    ```
+
+    像 Courier New 这样的网页安全字体，可以让你的项目在所有平台上都拥有一致的排版效果，而不需要加载外部资源来获取字体。但这类字体也可能限制你的创意。幸运的是，你还可以通过 Google Fonts 等方式获得更多选择。
+  </Accordion>
+  <Accordion title="使用 Google Fonts">
+    如果你更倾向于使用自定义字体，Lovable 能很好地配合 **Google Fonts** 工作。这样你就可以在项目中轻松使用大量不同的字体。你可以通过字体名称引用 Google 字体，也可以直接链接到字体资源。
+
+    ### 按名称使用
+
+    在你的提示中，可以指定某个 Google 字体的名称，Lovable 会在项目中为你引入该字体。比如：
+
+    ```text
+    Use Playfair Display as the first subtitle title font in the hero section. 
+    
+    Make sure to use the useEffect React hook to apply the font properly.
+    ```
+
+    ### 按链接使用
+
+    或者，你可以提供一个指向 Google 字体的直接链接，Lovable 会在你的项目中使用该字体。你可以在 [Google Fonts](https://fonts.google.com) 上选择所需字体并复制链接。
+
+    下面是一个通过链接提示 Lovable 使用 Google 字体的示例：
+
+    ```text
+    Add this Google font link https://fonts.google.com/specimen/Dancing+Script 
+    and use this font for the third subtitle.
+    
+    Make sure to load the font using the useEffect React hook.
+    ```
+
+    通过以上这些方法，你可以使用网页安全字体或 Google Fonts 来自定义 Lovable 项目的排版样式。
+
+    ## 进一步学习与示例
+
+    想要查看这些字体集成方法的实际效果，可以浏览我们的示例项目之一：[Lovable 使用字体示例项目](https://lovable.dev/projects/3a826f38-d9cb-4d60-b4da-30a9b00149c8)。
+
+    在这个项目中，你会看到真实的提示示例，展示我们如何应用不同的字体样式，包括像 Courier New 这样的网页安全字体，以及来自 Google Fonts 的自定义字体。
+
+    <Frame>
+      ![在 Lovable 项目中使用的不同字体](/assets/using-custom-fonts-example.png)
+    </Frame>
+    此外，如果你想从更技术的角度了解字体是如何集成的，可以查看这个公开代码仓库：[GitHub: adding-fonts-example](https://github.com/viborc/adding-fonts-example)。其中包含完整的实现细节，展示了在项目中加载和应用各种字体的具体方式。
+  </Accordion>
+</AccordionGroup>

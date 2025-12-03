@@ -1,0 +1,100 @@
+---
+title: "Solução de problemas"
+description: "Passos práticos para resolver problemas no ciclo de desenvolvimento."
+icon: "toolbox"
+---
+
+<div id="build-errors">
+  ## Erros de build
+</div>
+
+Criar com o Lovable torna a programação mais rápida e intuitiva, mas até as melhores ferramentas de desenvolvimento com IA podem, ocasionalmente, esbarrar em problemas. Às vezes, seu código não é executado como esperado ou você pode notar um comportamento inesperado quando a IA interpreta sua intenção de forma incorreta.
+
+Aqui está um guia passo a passo para ajudar você a lidar com os problemas e voltar ao caminho certo:
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/0W8bsbHh2p8?si=p4kWhkdu0PEbgGXm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Steps>
+  <Step title="Use primeiro o botão Try to Fix">
+    Clique no botão **Try to Fix** quando um erro aparecer. O Lovable vai analisar seus registros de log, detectar o problema e tentar uma correção rápida. É o seu passo inicial mais rápido. Se isso não funcionar, é hora de investigar mais a fundo.
+  </Step>
+  <Step title="Diagnostique comportamentos inesperados">
+    Seu código pode ser executado sem erros, mas não se comportar como esperado. Isso é um **comportamento inesperado**, mais difícil de perceber e mais difícil de corrigir. Tente o seguinte:
+
+    - **Reverter e reenviar o Prompt**: volte para o estado imediatamente anterior ao problema e, em seguida, tente um Prompt de IA mais claro e revisado.
+  </Step>
+  <Step title="Escreva Prompts mais eficazes">
+    Prompts claros e bem estruturados levam a resultados melhores. Use este formato:
+
+    1. **Use o Chat Mode** e pergunte: "Você pode descrever as etapas ou o plano para este recurso?"
+    2. **Revise o plano** sugerido pelo Lovable e peça alterações ou esclarecimentos, se necessário.
+    3. **Envie um Prompt de IA para o Lovable**: "Agora vamos construir isso passo a passo."
+  </Step>
+  <Step title="Construa em uma ordem lógica">
+    A estrutura importa. Siga este fluxo recomendado:
+
+    1. Crie o layout e as páginas.
+    2. Conecte ao Lovable Cloud ou a uma conexão externa do Supabase.
+    3. Configure autenticação e papéis de usuário.
+    4. Planeje e organize a lógica das funcionalidades.
+    5. Envie um Prompt de IA para o Lovable implementar as funcionalidades.
+  </Step>
+</Steps>
+
+<div id="general-issues">
+  ### Problemas gerais
+</div>
+
+<AccordionGroup>
+  <Accordion title="Precisa de ajuda rápida?">
+    Acesse o modo somente chat e digite: "Esta função específica não está funcionando. Você pode me explicar passo a passo o que está acontecendo e o que você já tentou?"
+  </Accordion>
+  <Accordion title="Problemas de UI ou layout">
+    - Envie capturas de tela do problema de UI diretamente para a IA para obter um diagnóstico mais claro.
+    - Use a ferramenta Edit para selecionar e destacar os elementos específicos da UI que você quer alterar e depois descreva o ajuste desejado.
+    - Por exemplo: "Vê o elemento destacado? Centralize-o verticalmente e aumente o espaçamento interno (padding)."
+  </Accordion>
+  <Accordion title="Quando estiver completamente travado">
+    - Prompt de IA: "Dê um passo para trás. Analise o erro e sugira uma abordagem diferente."
+    - Divida a tarefa em partes menores.
+    - Use o botão de reverter se os erros persistirem.
+  </Accordion>
+  <Accordion title="Pré-visualização não encontrada ou sandbox não inicia">
+    Problemas em que a Pré-visualização não é encontrada ou em que a sandbox fica apenas iniciando podem estar relacionados ao ambiente da sandbox ou à sua conexão. Problemas de sandbox geralmente são temporários; tente primeiro uma atualização forçada (hard refresh). Se isso continuar, pode indicar uma falha de sincronização com o GitHub ou um problema de conexão. Para problemas persistentes, consulte nosso [guia de Integração com GitHub](https://docs.lovable.dev/integrations/github).
+  </Accordion>
+</AccordionGroup>
+
+<div id="core-functionalities">
+  ### Funcionalidades principais
+</div>
+
+<AccordionGroup>
+  <Accordion title="A Pré-visualização está em branco">
+    - Isso geralmente é resultado de problemas no arquivo vite.config.ts ou de cabeçalhos de segurança que foram introduzidos no projeto.
+    - Erros de build ou erros de sintaxe no código
+    - Erros de JavaScript em tempo de execução causando travamentos
+    - Dependências ausentes ou componentes com falha
+    - Problemas de autenticação ou de roteamento bloqueando a página
+
+    Para solucionar o problema: peça à Lovable para revisar o arquivo vite.config.ts ou remover os cabeçalhos de segurança. Verifique o console do navegador em busca de erros, reverta para uma versão anterior ou peça à Lovable para investigar o problema da tela em branco.
+  </Accordion>
+  <Accordion title="Cancelar publicação ou desativar projetos">
+    Você pode cancelar a publicação ou excluir seu projeto em Project Settings.
+  </Accordion>
+  <Accordion title="Erro com Edge Functions">
+    Verifique a aba Cloud -\> Logs para encontrar mensagens de erro específicas. Confirme se todos os segredos e variáveis de ambiente necessários estão configurados corretamente. Tente publicar novamente fazendo uma pequena alteração no código da Função de borda usando um Prompt de IA para a Lovable. Certifique-se de que sua conexão com o banco de dados está funcionando. Peça à Lovable para investigar o erro específico e corrigir quaisquer problemas encontrados nos registros de log.
+  </Accordion>
+  <Accordion title="Projeto não encontrado">
+    Isso geralmente significa que o projeto foi excluído. Se você não o excluiu de propósito, entre em contato com o Suporte para obter ajuda para restaurar seu projeto.
+  </Accordion>
+</AccordionGroup>
+
+<div id="need-more-help">
+  ### Precisa de mais ajuda?
+</div>
+
+Ainda com dificuldade? Tente o seguinte:
+
+1. Use o Chat mode para obter ajuda passo a passo.
+2. Se for um problema com a interface (UI) ou com algum recurso, reverta para um estado estável anterior.
+3. Se você for um cliente pagante e quiser reportar um problema que afeta toda a plataforma, entre em contato com o [Suporte](https://lovable.dev/support).

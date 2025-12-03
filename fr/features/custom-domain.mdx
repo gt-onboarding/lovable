@@ -1,0 +1,159 @@
+---
+title: "Connecter un domaine personnalisé"
+sidebarTitle: "Domaines personnalisés"
+description: "Découvrez comment connecter, vérifier, dépanner et gérer des domaines personnalisés dans Lovable"
+icon: "earth-europe"
+keywords: ["domaines personnalisés","connecter un domaine personnalisé","comment ajouter un domaine personnalisé","domaine principal","statut du domaine","certificat SSL","vérification DNS","configuration DNS"]
+---
+
+Un **domaine personnalisé** vous permet d&#39;utiliser votre propre domaine ou sous-domaine pour votre projet Lovable publié. Lorsque vous connectez un domaine personnalisé, les visiteurs peuvent accéder à votre application en utilisant une URL personnalisée à votre marque au lieu de l&#39;URL de projet `xxx.lovable.app` par défaut.
+
+La connexion d&#39;un domaine personnalisé améliore votre site :
+
+* **Identité de marque** - donne une image plus professionnelle et rassurante
+* **Visibilité dans les moteurs de recherche** - meilleur SEO et meilleure découvrabilité
+* **Mémorisation** - plus facile à partager et à retenir pour les utilisateurs
+
+<div id="prerequisites">
+  ## Prérequis
+</div>
+
+Pour connecter un domaine personnalisé, assurez-vous que :
+
+* Vous disposez d&#39;une offre payante Lovable.
+* Votre projet est publié. Consultez [Publier votre application](/fr/features/publish) pour plus d’informations.
+* Vous possédez un nom de domaine. Vous pouvez **en acheter un directement via Lovable** (avec IONOS).
+* Vous avez **accès aux paramètres DNS** du domaine ou du sous-domaine que vous souhaitez connecter. **La vérification de la propriété** nécessite l’ajout d’enregistrements DNS de type `A` et `TXT` fournis par Lovable lors de la configuration.
+
+<div id="connect-a-custom-domain">
+  ## Connecter un domaine personnalisé
+</div>
+
+Vous pouvez connecter un domaine à votre projet Lovable publié en utilisant la configuration **automatique** (alimentée par Entri) ou une configuration DNS **manuelle**. Les deux méthodes nécessitent de vérifier que vous êtes propriétaire de votre domaine.
+
+Vous pouvez connecter un domaine depuis deux emplacements :
+
+* **Project → Settings → Domains**
+* **Publish modal → Custom domain** (vous pouvez aussi le faire après avoir publié votre projet)
+
+Suivez les étapes ci-dessous pour connecter un domaine personnalisé :
+
+1. Cliquez sur **Connect domain**.
+2. Saisissez votre domaine ou sous-domaine (par exemple, `yourdomain.com` ou `blog.yourdomain.com`), cliquez sur **Connect domain**, puis cliquez sur **Continue**.
+
+   <Info>
+     Lors de l’ajout d’un domaine, Lovable n’ajoute pas automatiquement le sous-domaine `www`. Vous pouvez l’ajouter séparément si vous souhaitez avoir les deux.
+   </Info>
+3. Vous pouvez maintenant connecter votre domaine de deux façons :
+   * **Configuration automatique avec Entri** : sélectionnez votre fournisseur de domaine dans la liste, connectez-vous et autorisez Entri à mettre à jour vos enregistrements DNS.
+   * **Configuration manuelle** : si votre fournisseur DNS ne figure pas dans la liste, faites défiler jusqu’en bas de la fenêtre modale **Select your domain provider** et choisissez **Go to our manual setup**. Copiez l’enregistrement `A` et l’enregistrement `TXT` et saisissez-les directement dans l’interface de votre bureau d’enregistrement de domaine.
+4. Cliquez sur **Done**. Patientez le temps que la vérification soit effectuée et que le certificat SSL soit émis. Une fois terminé, le domaine passera à l’état **Live** et votre application Lovable sera accessible via votre domaine personnalisé.
+
+<Info>
+  Les modifications DNS peuvent prendre jusqu’à **72 heures pour se propager**, même si la plupart des mises à jour sont actives en quelques heures.
+</Info>
+
+<div id="domain-statuses">
+  ## Statuts de domaine
+</div>
+
+Les domaines ont des statuts clairs qui indiquent la progression de la vérification, la propagation DNS, la disponibilité du certificat SSL et les actions requises de la part de l’utilisateur.
+
+| Status               | Description                                                                                                                                                                                                                                       | User action                                                                                                                                                                                                 |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unpublished**      | Affiché uniquement pour l’URL `xxx.lovable.app` de votre projet lorsque le projet n’est pas encore publié.                                                                                                                                       | Publiez le projet.                                                                                                                                                                                          |
+| **Ready**            | Le domaine est prêt mais le projet n’est plus publié. Lorsqu’il est publié à nouveau, le statut devient automatiquement **Live**.                                                                                                                | Publiez le projet.                                                                                                                                                                                          |
+| **Action required**  | La configuration du domaine personnalisé n’a pas été terminée.                                                                                                                                                                                   | Cliquez sur **Complete setup** pour terminer la connexion.                                                                                                                                                  |
+| **Verifying**        | En attente de la propagation des enregistrements DNS.                                                                                                                                                                                             | Cliquez sur **Check status** pour vérifier le dernier statut et valider les enregistrements DNS.<br /><br />Vérifiez que vos enregistrements `A` et `TXT` sont ajoutés correctement **chez votre fournisseur DNS**, en particulier la valeur TXT complète. |
+| **Unable to verify** | La vérification DNS ne s’est pas terminée en une heure. Cela signifie généralement que vos enregistrements DNS sont incorrects ou encore en cours de propagation. <br /><br />**Remarque** : *La propagation DNS peut prendre jusqu’à 72 heures, même si la plupart des mises à jour sont appliquées en quelques heures.* | Cliquez sur **Check again** pour actualiser le statut et revérifier vos enregistrements DNS.<br /><br />Vérifiez que vos enregistrements `A` et `TXT` sont ajoutés correctement **chez votre fournisseur DNS**, en particulier la valeur TXT complète.   |
+| **Setting up**       | Vérification terminée ; les certificats SSL sont en cours d’émission.                                                                                                                                                                            | Aucune action requise ; le domaine passera automatiquement à **Live** ou **Failed.**                                                                                                                        |
+| **Failed**           | Propriété du domaine vérifiée, mais le certificat SSL n’a pas pu être provisionné.                                                                                                                                                               | Cliquez sur **Retry** pour réessayer.                                                                                                                                                                       |
+| **Live**             | Le domaine est actif et affiche votre projet.                                                                                                                                                                                                    | Aucune action requise.                                                                                                                                                                                      |
+| **Offline**          | Le domaine était **Live** mais les enregistrements DNS ne sont plus valides. Votre domaine ne pointe plus vers votre projet.                                                                                                                     | Cliquez sur **Recover**. Passez en revue les enregistrements DNS affichés et mettez-les à jour **chez votre fournisseur DNS** pour reconnecter votre domaine.                                               |
+| **Removed**          | Ce domaine a été supprimé parce qu’il a été ajouté à un autre projet ou que la vérification DNS n’a jamais abouti (les enregistrements DNS n’ont pas été ajoutés correctement ou n’ont pas fini de se propager).                                 | Cliquez sur **Reconnect** pour connecter à nouveau le domaine.                                                                                                                                              |
+
+Vous pouvez supprimer un domaine à tout moment, quel que soit son statut.
+
+<div id="primary-domain">
+  ## Domaine principal
+</div>
+
+Lovable vous permet de définir **un seul domaine comme domaine principal**.
+
+* Le statut du domaine doit être **Live** pour que vous puissiez le marquer comme principal. Cliquez sur le menu à trois points à côté de votre domaine et cliquez sur **Définir comme principal**.
+* Le premier domaine personnalisé que vous ajoutez à un projet devient automatiquement votre domaine principal (pour les domaines ajoutés après le 29 octobre 2025).
+* Si un domaine est principal, tous les autres domaines y redirigent.
+* Un seul domaine peut être principal à la fois.
+* Vous pouvez retirer le statut de domaine principal ; dans ce cas, tous les domaines connectés servent le projet de la même façon. Cliquez sur le menu à trois points à côté de votre domaine principal et cliquez sur **Retirer comme principal**.
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="Mon domaine personnalisé est connecté, mais mon site n’est pas en ligne. Que dois-je faire ?">
+    * Vérifiez à nouveau vos paramètres DNS en utilisant un outil comme [dnschecker.org](https://dnschecker.org/all-dns-records-of-domain.php). Parfois, les modifications DNS peuvent prendre jusqu’à 72 heures pour se propager. Allez dans **Project → Settings → Domains** pour trouver les bons paramètres DNS.
+    * Videz le cache de votre navigateur ou faites un test dans une fenêtre de navigation privée.
+    * Essayez de supprimer puis de rajouter le domaine dans **Project → Settings → Domains**.
+  </Accordion>
+
+  <Accordion title="Puis-je acheter un domaine via Lovable ?">
+    Oui. Vous pouvez acheter un domaine personnalisé dans Lovable via notre partenaire IONOS. Allez dans **Project → Settings → Domains** et cliquez sur **Buy new domain** pour acheter un domaine via IONOS. Cette option est disponible uniquement avec les offres payantes.
+  </Accordion>
+
+  <Accordion title="La connexion d’un domaine personnalisé va-t-elle affecter mon SEO ?">
+    Oui, connecter un domaine personnalisé a un effet positif sur votre SEO. Un domaine personnalisé améliore la visibilité de votre site dans les moteurs de recherche et le rend plus digne de confiance aux yeux des utilisateurs.
+
+    Consultez [Implement SEO and GEO best practices](https://docs.lovable.dev/tips-tricks/seo-geo) pour plus d’informations.
+  </Accordion>
+
+  <Accordion title="Lovable fournit-il un certificat SSL pour mon domaine personnalisé ?">
+    Oui. Lorsque vous connectez un domaine personnalisé à votre application Lovable, nous générons et installons automatiquement un certificat SSL pour ce domaine. Cela garantit que votre site est servi en HTTPS, ce qui sécurise les données de vos visiteurs et améliore le classement SEO de votre site. S’il n’a pas été émis après 72 heures, contactez [Lovable Support](https://lovable.dev/support).
+  </Accordion>
+
+  <Accordion title="Puis-je connecter un sous-domaine au lieu d’un domaine complet ?">
+    Oui. Vous pouvez connecter un sous-domaine (par exemple, `blog.yourdomain.com` ou `app.yourdomain.com`) au lieu du domaine racine. Lorsque vous saisissez votre domaine dans le processus de configuration, incluez simplement le sous-domaine que vous voulez utiliser.
+  </Accordion>
+
+  <Accordion title="Puis-je connecter plusieurs sous-domaines à mon projet Lovable ?">
+    Oui. Vous pouvez connecter plusieurs sous-domaines, mais chacun doit être ajouté et configuré individuellement dans **Project → Settings → Domains**. Par exemple, vous pouvez connecter `blog.yourdomain.com`, `shop.yourdomain.com` et `app.yourdomain.com`.
+  </Accordion>
+
+  <Accordion title="Où puis-je voir mes domaines connectés ?">
+    Vous pouvez voir vos domaines connectés à deux endroits :
+
+    * **Project → Settings → Domains** – ici, vous voyez tous les domaines, quel que soit leur statut
+    * **Fenêtre de publication** – ici, vous voyez tous les domaines **Live**
+  </Accordion>
+
+  <Accordion title="Puis-je connecter un domaine utilisé par un autre projet ?">
+    Oui. Tant que vous pouvez en vérifier la propriété, vous pouvez connecter un domaine ou un sous-domaine utilisé par un autre projet, même si ce projet a été supprimé.
+  </Accordion>
+
+  <Accordion title="Comment définir un domaine principal ?">
+    Le statut du domaine doit être **Live** pour que vous puissiez le définir comme principal.
+
+    Allez dans **Project → Settings → Domains**, cliquez sur le menu à trois points à côté d’un domaine **Live**, puis cliquez sur **Set as primary**.
+  </Accordion>
+
+  <Accordion title="Comment annuler la définition d’un domaine principal ?">
+    Allez dans **Project → Settings → Domains**, cliquez sur le menu à trois points à côté de votre domaine principal, puis cliquez sur **Unset as primary**.
+  </Accordion>
+
+  <Accordion title="Comment supprimer un domaine personnalisé ?">
+    Vous pouvez supprimer un domaine à tout moment, quel que soit son statut.
+
+    1. Allez dans **Project → Settings → Domains.**
+    2. Cliquez sur le menu à trois points à côté de votre domaine, cliquez sur **Remove**, puis cliquez de nouveau sur **Remove** pour confirmer.
+
+    Cela va déconnecter le domaine du projet. Assurez-vous de supprimer les paramètres DNS chez votre fournisseur de domaine pour rompre complètement la connexion.
+  </Accordion>
+
+  <Accordion title="Puis-je supprimer l’URL de projet xxx.lovable.app ?">
+    Actuellement, il n’existe aucun moyen de supprimer l’URL de projet `xxx.lovable.app` de votre projet. Cependant, vous pouvez ajouter un domaine personnalisé et le définir comme domaine principal. Cela permet aux visiteurs d’accéder à votre application à partir d’une URL personnalisée avec votre marque, au lieu de l’URL de projet par défaut `xxx.lovable.app`.
+  </Accordion>
+
+  <Accordion title="Dois-je connecter séparément un sous-domaine www ?">
+    Oui, vous devez l’ajouter séparément, et il apparaîtra séparément dans la liste. Le sous-domaine **www** n’est pas inclus lorsque vous configurez votre domaine.
+  </Accordion>
+</AccordionGroup>

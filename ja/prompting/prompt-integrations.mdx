@@ -1,0 +1,581 @@
+---
+title: "プロンプトとインテグレーション"
+description: "強力な組み込みインテグレーションでアプリを強化する"
+icon: "signal"
+---
+
+Lovable は幅広い組み込みインテグレーションを提供しており、アプリケーションに高度な機能を追加できます。AI を活用した処理やドキュメント自動化、UI の拡張など、さまざまなニーズに Lovable が対応します。
+
+<Warning>
+  これらのインテグレーションを Lovable で利用するには、ご自身の APIキーを設定する必要があります。
+
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/6R4cc86bZD8?si=trT7a5wHvhs5da6i" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+</Warning>
+
+<div id="ai-llms">
+  ## AI と LLM
+</div>
+
+最先端の AI モデルを統合して、ユーザー体験を向上させ、ワークフローを自動化し、コンテンツを生成するインテリジェントなアプリケーションを構築しましょう。
+
+- **OpenAI のモデル** – 要約、分析、コンテンツ生成に最適です。高速で信頼性があります。
+- **Anthropic の最新モデル** – 複雑な推論と高度な分析に優れています。
+- **Google の最新モデル** – 論理的な推論と長いコンテキストの処理が得意です。
+- **Groq** – Llama 3 を搭載した、Create で最速の AI モデルです。
+- **Cohere Command R+** – ビジネスアプリケーション向けに設計されたスケーラブルな LLM です。
+
+**使い始めるためのプロンプト例:**
+
+<Info>
+  `[AI model]` を使って、文法を改善するライティングアシスタントを構築する。
+</Info>
+
+<Info>
+  `[AI model]` を使って、カスタマーサポートを行うチャットボットを作成する。
+</Info>
+
+<Info>
+  `[AI model]` を使った AI 搭載リサーチアシスタントを開発する。
+</Info>
+
+<Info>
+  テキスト分析に `[AI model]` を使うアプリを構築する。
+</Info>
+
+<Info>
+  コンテンツ生成に `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  長文ドキュメントを分析するために `[AI model]` を使うアプリを構築する。
+</Info>
+
+<Info>
+  複数ステップの推論に `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  `[AI model]` を使ったリサーチアシスタントを作成する。
+</Info>
+
+<Info>
+  リアルタイム分析に `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  `[AI model]` を使って素早く応答するチャットボットを構築する。
+</Info>
+
+<Info>
+  テキスト処理に `[AI model]` を使うアプリを作成する。
+</Info>
+
+<Info>
+  コンテンツ分析に `[AI model]` を使うアプリを構築する。
+</Info>
+
+<Info>
+  ライティング支援に `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  `[AI model]` を使ったリサーチ支援ツールを作成する。
+</Info>
+
+<Info>
+  複雑なトピックを説明するために `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  `[AI Model]` を使ってエッセイの構成を支援するライティングアシスタントを作成する。
+</Info>
+
+<Info>
+  リアルタイムのテキスト分析に `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  ブログ記事を生成し、`[Markdown Renderer]` を使って表示する。
+</Info>
+
+<Info>
+  `[Markdown Renderer]` を使って、[AI model] が生成したコンテンツを表示する Wiki を構築する。
+</Info>
+
+<div id="images-vision">
+  ## 画像とビジョン
+</div>
+
+最先端のビジョン系 API を活用して、画像の解析、補正、生成を行いましょう。Lovable では次のサービスをサポートしています:
+
+- GPT-4 Vision
+- Stable Diffusion
+- DALL-E
+- Pexels
+- Exa
+- など。
+
+**使い始めるときのプロンプト例:**
+
+<Info>
+  ユーザーが写真をアップロードし、`[AI model]` で解析できるようにする。
+</Info>
+
+<Info>
+  AI による補正機能を使って、高品質な商品写真を生成する。
+</Info>
+
+<Info>
+  画像からテキストを抽出するために `[AI model]` を使う。
+</Info>
+
+<Info>
+  ユーザーに画像の内容を説明してもらい、その説明から `[AI model]` を使って画像を生成する。
+</Info>
+
+<Info>
+  ロゴ生成に `[AI model]` を使うツールを作成する。
+</Info>
+
+<Info>
+  ユーザーにアートのイメージを説明してもらい、その説明から `[AI model]` を使って生成する。
+</Info>
+
+<Info>
+  説明文に基づいて AI 生成のアートワークを作成する。
+</Info>
+
+<Info>
+  特定のオブジェクトのストックフォトを `Pexels` を使って検索する。
+</Info>
+
+<Info>
+  犬がボール遊びをしている動画を `Pexels` で見つける。
+</Info>
+
+<Info>
+  最新の AI 関連研究論文を `Exa` で取得する。
+</Info>
+
+<Info>
+  最新のテック系ニュース記事を `Eva` で取得する。
+</Info>
+
+<Info>
+  画像内の顔や感情を検出する。
+</Info>
+
+<Info>
+  画像の解像度を自動的に向上させる。
+</Info>
+
+<div id="ui-components">
+  ## UIコンポーネント
+</div>
+
+アクセシビリティに配慮したデザインと再利用可能なUIコンポーネントのために、次のツールの利用をおすすめします:
+
+- **21st.dev**
+- **Chakra UI**
+- **shadcn/ui**
+
+詳しくは、[ベストなTailwind CSSコンポーネントガイド](https://lovable.dev/blog/best-tailwind-css-component)をご覧ください。
+
+**使い始めるためのプロンプト例:**
+
+<Info>
+  `[Chakra UI]` コンポーネントを使ってフォームを追加してください。
+</Info>
+
+<Info>
+  `[Chakra UI]` のレイアウトでダッシュボードを作成してください。
+</Info>
+
+<Info>
+  `[shadcn/ui]` を使ってレスポンシブなナビバーを作成してください。
+</Info>
+
+<Info>
+  `[shadcn/ui]` のダイアログコンポーネントを使ってポップアップフォームを作成してください。
+</Info>
+
+<Info>
+  `[shadcn/ui]` を使って設定パネルを作成してください。
+</Info>
+
+<Info>
+  スケジュール管理用のカレンダーコンポーネントを実装してください。
+</Info>
+
+<Info>
+  スムーズな操作のためのモーダルベースのUIを作成してください。
+</Info>
+
+<div id="audio-processing">
+  ## 音声処理
+</div>
+
+Eleven Labs は高品質な連携先として最有力候補のひとつです。
+
+- 音声をテキストに変換する
+- 自然な音声を生成する
+- 音声ファイルの音質を向上させる
+
+**使い始めるためのプロンプト例:**
+
+<Info>
+  アップロードした音声ファイルを、音声の文字起こし機能でテキストに変換します。
+</Info>
+
+<Info>
+  ポッドキャストの文字起こしツールを構築します。
+</Info>
+
+<Info>
+  Text-to-Speech を使ってコンテンツを読み上げます。
+</Info>
+
+<Info>
+  オーディオブック作成ツールを開発します。
+</Info>
+
+<Info>
+  会議の録音を文字起こしして要約します。
+</Info>
+
+<Info>
+  音声操作の UI を実装します。
+</Info>
+
+<Info>
+  実在感のある合成音声を生成します。
+</Info>
+
+<div id="maps">
+  ## 地図
+</div>
+
+**`Mapbox, Google Maps, and Weather APIs`** を使って、アプリケーションを次の機能で強化しましょう:
+
+- 位置情報
+- 地図表示
+- ビジネスインサイト 
+
+**はじめるためのプロンプト例:**
+
+<Info>
+  `[Mapbox]` を使って地図上に店舗の場所を表示する。
+</Info>
+
+<Info>
+  リアルタイム更新機能付きの配送追跡システムを作成する。
+</Info>
+
+<Info>
+  `[Google Maps]` を使って物件掲載アプリを構築する。
+</Info>
+
+<Info>
+  `[Google business data].` を使ってレストランを探す。
+</Info>
+
+<Info>
+  `[Google business data]` を使ってローカルビジネスのディレクトリを構築する。
+</Info>
+
+<Info>
+  `[Google business data].` を使ってレビュー集約ツールを作成する。
+</Info>
+
+<Info>
+  `[Google Place Autocomplete]` を使って住所のオートコンプリート機能を追加する。
+</Info>
+
+<Info>
+  `[Weather API]` を使ってリアルタイムの天気情報を表示する。
+</Info>
+
+<Info>
+  旅行を最適化するためのルートプランナーを実装する。
+</Info>
+
+<div id="documents">
+  ## ドキュメント
+</div>
+
+次のことができます:
+
+- プログラムからPDFを作成してダウンロードする
+- PDFからテキストを抽出・変換する
+- スキャンしたドキュメントを処理する
+- さまざまな形式にファイルを変換する
+- リンクやデータ、ビジネス用途向けのQRコードを生成する
+
+**使い始めに役立つプロンプト例:**
+
+<Info>
+  ユーザーにフォームに入力してもらい、`[PDF Generation]` を使ってダウンロードできるようにします。
+</Info>
+
+<Info>
+  `[PDF Generation]` を使って請求書をPDFとして生成します。
+</Info>
+
+<Info>
+  PDFとしてエクスポートできる履歴書ビルダーを作成します。
+</Info>
+
+<Info>
+  `[PDF Parser]` でスキャンしたドキュメントからテキストを抽出します。
+</Info>
+
+<Info>
+  `[PDF Parser]` を使ってドキュメント解析ツールを構築します。
+</Info>
+
+<Info>
+  `[PDF Parser]` を使ってPDF検索ツールを作成します。
+</Info>
+
+<Info>
+  `[Document Scanner]` でユーザーがドキュメントをスキャンできるようにします。
+</Info>
+
+<Info>
+  `[Document Scanner]` を使ってレシート管理ツールを構築します。
+</Info>
+
+<Info>
+  `[File Conversion]` を使ってPDFを画像に変換します。
+</Info>
+
+<Info>
+  `[File Conversion]` でドキュメント変換ツールを構築します。
+</Info>
+
+<Info>
+  リンクやビジネス情報用のQRコードを生成します。
+</Info>
+
+<Info>
+  `[QR Code]` を使ってQRコード付きのURL短縮ツールを作成します。
+</Info>
+
+<Info>
+  ドキュメント署名ワークフローを構築します。
+</Info>
+
+<Info>
+  レポートの自動生成を実装します。
+</Info>
+
+<div id="media-entertainment">
+  ## メディア＆エンターテインメント
+</div>
+
+次のことができます:
+
+- メディアデータを取得する
+- スポーツのスタッツを追跡する
+- 映画、テレビ番組、アニメ、本を検索する
+
+**使い始めるときのプロンプト例:**
+
+<Info>
+  `[TMDb]` を使って映画のレコメンドシステムを構築する。
+</Info>
+
+<Info>
+  `[Movies and TV Series]` で今後放送予定のテレビ番組を追跡する。
+</Info>
+
+<Info>
+  `[Movies and TV Series / TMDb]` を使ったウォッチリストアプリを作成する。
+</Info>
+
+<Info>
+  `[TMDb]` を使って「The Dark Knight」の詳細を取得する。
+</Info>
+
+<Info>
+  アニメの発見ツールを構築する。
+</Info>
+
+<Info>
+  マンガの読書リストを作成する。
+</Info>
+
+<Info>
+  アニメのおすすめシステムを作成する。
+</Info>
+
+<Info>
+  ファンタジー `[Sport]` の予測アプリを作成する。
+</Info>
+
+<Info>
+  ファンタジー `[Sport]` のサポートツールを作成する。
+</Info>
+
+<Info>
+  試合予測ツールを作成する。
+</Info>
+
+<Info>
+  `[Book Search]` を使って本の発見アプリを構築する。
+</Info>
+
+<Info>
+  読書リスト管理アプリを作成する。
+</Info>
+
+<Info>
+  パーソナライズされた本のレコメンドエンジンを開発する。
+</Info>
+
+<div id="web-tools">
+  ## Web ツール
+</div>
+
+次のことができます:
+
+- あらゆるウェブサイトから価値あるインサイトを抽出する
+- テキストを複数の言語間でシームレスに翻訳する
+- リアルタイムの検索結果にアクセスする
+- ウェブ上の画像を手軽に見つける
+
+**使い始めるためのプロンプト例:**
+
+<Info>
+  `[Web Scraper]` を使って `[Google Search]` の上位検索結果をスクレイピングします。
+</Info>
+
+<Info>
+  `[Google Translate]` を使ってテキストを動的に翻訳します。
+</Info>
+
+<Info>
+  `[Google Translate]` を使って語学学習アプリを構築します。
+</Info>
+
+<Info>
+  `[Google Search]` を使ってウェブを検索します。
+</Info>
+
+<Info>
+  `[Google Search]` を使ってトレンドトピック分析ツールを構築します。
+</Info>
+
+<Info>
+  `[Google Image Search]` を使って画像を検索します。
+</Info>
+
+<Info>
+  `[Google Image Search]` を使ってビジュアルリサーチアシスタントを作成します。
+</Info>
+
+<Info>
+  ウェブサイトから主要なデータを抽出して競合分析を自動化します。
+</Info>
+
+<Info>
+  市場調査のためのウェブスクレイピングツールを開発します。
+</Info>
+
+<div id="business">
+  ## ビジネス
+</div>
+
+次のことをシームレスに行えます：
+
+- 正確な売上税を計算する
+- 詳細な検索キーワード分析を行う
+- インタラクティブで動的なデータ可視化を作成する
+- メールアドレスをリアルタイムで検証する
+- ドメイン情報を確認する
+- 有害または不適切なコンテンツを検出する
+- チャットや通知機能を統合する
+- トランザクションメールを送信する
+- 組み込みの自動化機能でメールキャンペーンを効率的に管理する
+
+**使い始めるためのプロンプト例:**
+
+<Info>
+  `[US Sales Tax Calculator]` を使って注文合計を計算して。
+</Info>
+
+<Info>
+  EC サイトのチェックアウト機能を構築して。
+</Info>
+
+<Info>
+  価格設定ツールを作成して。
+</Info>
+
+<Info>
+  `[SEO Keyword Research]` を使って SEO キーワードを分析して。
+</Info>
+
+<Info>
+  コンテンツプランニングツールを構築して。
+</Info>
+
+<Info>
+  SEO 分析ツールを作成して。
+</Info>
+
+<Info>
+  売上データを Charts の折れ線グラフで表示して。
+</Info>
+
+<Info>
+  分析ページを作成して。
+</Info>
+
+<Info>
+  メールアドレスをチェックして、メールアドレス検証システムを作成して。 
+</Info>
+
+<Info>
+  `[GitHub]` を使ってサインアップフォームを構築して。
+</Info>
+
+<Info>
+  `[Domain Inspector]` を使ってドメインインスペクターツールを構築して。
+</Info>
+
+<Info>
+  ` [OpenAI Moderation]` を使って安全なチャットアプリを構築して。
+</Info>
+
+<Info>
+  `[Line]` 経由で注文確認を送信して。
+</Info>
+
+<Info>
+  `[Line].` を使って一斉配信システムを作成して。
+</Info>
+
+<Info>
+  `[Resend]` で注文確認メールを送信して。
+</Info>
+
+<Info>
+  `[Resend]` を使ってニュースレター配信システムを作成して。
+</Info>
+
+<Info>
+  `[NeverBounce]` を使ってメールアドレスを検証して。
+</Info>
+
+<Info>
+  `[NeverBounce]` を使って、これらのメールアドレスが有効かどうかを確認し、結果を保存して。
+</Info>
+
+<Info>
+  自動化された売上予測ツールを開発して。
+</Info>
+
+<Info>
+  AI 駆動型のリードスコアリングを実装して。
+</Info>

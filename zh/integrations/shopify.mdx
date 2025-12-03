@@ -1,0 +1,184 @@
+---
+title: "使用 Shopify 搭建电商店铺"
+sidebarTitle: "Shopify 集成"
+description: "使用 Lovable + Shopify 轻松从零构建并上线全新在线商店"
+icon: "shopify"
+keywords: ["Shopify","Shopify 集成","Shopify 商店","电商平台","电商","AI 商店构建器","线上商店搭建","shopify 集成\"","shopify 沙盒","管理商店","认领商店","发布商店"]
+---
+
+![Shopify 日本版](/images/shopify.jpg)
+
+无论是销售实物商品还是数字下载，Lovable 都能让你通过自然语言来构建、定制并持续迭代你的新店铺，而当你正式上线时，Shopify 会为你处理支付、库存和物流。
+
+<div id="use-cases">
+  ## 使用场景
+</div>
+
+借助 Lovable + Shopify，你可以构建并上线真正的网上商店，用于：
+
+- **实体产品**：销售服装、电子产品、小配件或家居用品
+- **数字产品**：提供电子书、课程、音乐或软件下载
+- **小众品牌**：快速搭建销售限量周边、本地产品、代发货或副业项目的商店
+- **小型企业**：展示面包店、咖啡店或手工艺小店，并在线接受订单
+- **测试新产品创意**：先添加少量产品，在量产前评估市场表现
+- **业务拓展**：只需一个提示，就能上线新系列、季节性活动或组合套餐
+
+<div id="before-you-begin">
+  ## 开始之前
+</div>
+
+在你使用 **Lovable + Shopify** 构建电商店铺之前，先了解以下几点重要信息：
+
+- **仅适用于新的 Shopify 店铺**\
+  Lovable + Shopify 集成专为构建和上线**全新的 Shopify 店铺**设计。现有店铺无法通过此集成进行连接或管理。
+- **沙盒店铺——无 Shopify 费用**\
+  Lovable 会自动为你创建一个沙盒店铺，让你可以安全地进行搭建和试验，而**无需支付任何 Shopify 费用**。此环境非常适合进行配置和测试，但它**不会处理真实付款**。
+- **认领你的店铺**\
+  当你准备好上线店铺时，你需要**认领你的店铺**。这会将店铺迁移到你的 Shopify 账户，并启动**30 天 Shopify 免费试用期**。在 Shopify 中，你需要开通支付并完成店铺设置，才能开始接收客户的真实付款。
+- **需要 Shopify 订阅**\
+  免费试用结束后，你需要一个**付费的 Shopify 套餐**，才能继续在线销售产品。此订阅**由 Shopify 直接管理**，并且**与 Lovable 的定价分开单独计费**。
+- **遵守 Shopify 评价政策**\
+  在发布你的店铺之前，请确保所有评价都**真实可信、公正客观，并符合**[**Shopify 的评价政策**](https://help.shopify.com/en/partners/help-support/faq/reviews)。
+
+<div id="enabling-the-shopify-integration">
+  ## 启用 Shopify 集成
+</div>
+
+默认情况下，你的工作区已启用 Shopify 集成。你可以在用户偏好设置中管理 Shopify 集成的行为，以及与你的项目相关的 Shopify 设置：**Settings → Integrations → Shopify → User preferences.**
+
+<div id="user-preferences">
+  ### 用户偏好设置
+</div>
+
+Shopify 集成的默认设置是 **每次询问**，也就是说，你可以为每个项目单独决定是否启用或禁用 Shopify 集成。你可以随时在 **Settings → Integrations → Shopify → User preferences** 中更改你的偏好设置。
+
+当需要使用 Shopify 集成时，Lovable 会向你发出提示。你有三个选项：
+
+- **Allow**：为当前项目启用集成。
+- **Decline**：拒绝在本次请求中使用集成（之后可能会再次询问你）。
+- **Adjust preferences**：更改未来项目的默认行为（不影响当前项目）。
+
+<div id="shopify-integration-flow">
+  ## Shopify 集成流程
+</div>
+
+你可以通过以下方式开始：
+
+- 创建一个新项目。
+- 复刻一个现有项目，参见 [Lovable + Shopify 模板](https://lovable.dev/shopify)。
+
+<div id="1-create-your-store">
+  ### 1. 创建你的商店
+</div>
+
+**在从零开始创建一个新项目时**，告诉 Lovable 你想创建的商店类型，并**指定使用 Shopify**。
+
+> 使用 **Shopify** 创建一个电商店铺，用来销售手工香薰蜡烛。
+
+**在复刻一个现有项目时**，通过提示让 Lovable 集成 Shopify 并移除模拟数据。使用一个清晰且全面的提示语非常重要。例如：
+
+> 我想用我自己的产品替换这个商店中的产品，并创建我的 Shopify 商店。请执行以下操作：
+>
+> 1. 连接 Shopify。
+> 2. 从商店中移除所有模拟产品数据，并创建 X 个带有产品图片的新产品。
+> 3. 更新产品卡片和产品详情页以使用新的产品信息。
+> 4. 更新产品详情页 URL，使其与新的产品匹配。
+> 5. 更新“加入心愿单”组件和逻辑，以匹配此更改。
+> 6. 更新我的购物车、“立即购买”按钮，以及任意页面上的所有相关结账操作，以体现与 Shopify 商店的集成。
+
+Lovable 会提示你**启用 Shopify 连接**——只需点击 **Allow** 即可。你的沙盒商店就可以开始配置了。
+
+<div id="2-add-products-and-product-images">
+  ### 2. 添加产品和产品图片
+</div>
+
+先为产品添加**名称、描述和价格**。例如：
+
+> 添加一个名为 _Lavender Breeze Candle_ 的产品，描述：‘A calming handmade soy candle infused with lavender essential oils,’ 价格：\$25。
+
+你可以稍后再编辑这些详情。如果你的产品没有显示出来，可以输入提示：
+
+> Display the products on the website.
+
+接着，使用下列任一方式为产品列表添加图片。务必使用能代表该产品的图片。
+
+**生成 AI 图片**
+
+> Add an AI-generated image to the product _Lavender Breeze Candle_.
+
+**上传或附加你自己的图片**
+
+> Add the attached image to the product _Lavender Breeze Candle_.
+
+**通过 URL 添加图片**
+
+> Add image from URL to the product _Lavender Breeze Candle_.
+
+<div id="3-manage-your-store">
+  ### 3. 管理你的店铺
+</div>
+
+在不离开 Lovable 的情况下管理你的产品并优化店铺。比如，你可以让 Lovable：
+
+- 更新产品名称、描述或价格
+- 删除产品
+- 显示所有产品
+- 添加产品筛选功能，并基于不同类别创建产品集合
+- 添加产品评价功能，并且仅允许对已验证购买进行评价
+- 添加按百分比或固定金额（USD）设置的折扣码，并包含有效期
+- 添加心愿单功能，并支持分享心愿单
+
+> 将 _Lavender Breeze Candle_ 的价格更新为 _\$28_。\
+> 修改 _Vanilla Bean Candle_ 的描述，以突出其木芯。\
+> 删除产品 _Cinnamon Spice Candle_。\
+> 显示所有产品。\
+> 创建一个产品评价系统，并且仅允许对已验证购买进行评价。\
+> 为产品 _Lavender Breeze Candle_ 创建一个 15% 的折扣码。折扣码应为 LAVANDER15，有效期至 2025 年 11 月底。\
+> 允许我将产品添加到心愿单并分享心愿单。
+
+<div id="4-claim-your-store">
+  ### 4. 认领你的商店
+</div>
+
+当你准备好认领并上线你的商店时，请先解锁商店，并通过完成 KYC（Know Your Customer，了解你的客户）流程来设置并激活支付功能。这个过程可能需要一些时间。
+
+1. 输入 "Claim the store"。Lovable 会提示你认领商店。点击 **Claim**。这会在新标签页中打开 Shopify，你可以登录并完成认领流程。你也可能会收到一封邀请你认领商店的电子邮件。
+2. 接受来自 Shopify 的 **Claim store** 链接。这会将你带回到你的 Lovable 项目。
+4. 前往 Shopify Admin（Shopify 管理后台）完成商店设置并激活支付功能，以便开始销售。更多信息参见 [Shopify payments](https://help.shopify.com/en/manual/payments/shopify-payments/onboarding)。
+
+当你认领商店时，Shopify 会为你的店铺分配一个永久域名——不用担心，那只是你的后端地址。**你真正的商店 URL 将是你的 lovable.app 或你的自定义域名。**
+
+<Warning>
+  只有在你完全准备好上线时再认领你的商店，因为在 30 天免费试用结束后，你需要付费的 Shopify 订阅才能继续在线销售商品。
+</Warning>
+
+<div id="5-launch-your-store">
+  ### 5. 发布你的商店
+</div>
+
+当你的商店已完成认领并完成所有设置后，发布你的 Lovable 项目，把商店分享给全世界吧！
+
+你可以随时在 Lovable 中直接：
+
+- 创建、更新和删除商品
+- 管理价格和描述
+- 发布新的商品系列、促销活动或组合套餐
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="我在复刻的项目中添加了自己的产品，但产品页面的链接打不开。我要如何修复？">
+    别担心——我们的智能代理还在学习你的新商店，你只需要给它一次提示，就能长期修复这个问题！请给代理发送如下提示：
+
+    > Please update the product URL logic to ensure that all new and future products in the store correctly display their respective product detail pages.
+
+    这样可以确保你之后不会再遇到类似问题。对于其他问题，点击“Try to Fix”按钮会向代理发送提示，让它尝试处理并解决该问题。 
+  </Accordion>
+  <Accordion title="我在复刻的项目中仍然看到一些示例产品，如何将它们移除？">
+    请给代理发送提示，更新你看到这些产品的页面，例如：
+
+    > Clear the store from any existing products across all pages except for those that I added to my Shopify store.
+  </Accordion>
+</AccordionGroup>

@@ -29,20 +29,22 @@
     ]
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Introduction",
-        "pages": [
-          "introduction/welcome",
-          "introduction/plans-and-credits",
-          "introduction/getting-started",
-          "introduction/faq"
-        ]
-      },
-      {
-        "tab": "Features",
+        "tabs": [
+          {
+            "tab": "Introduction",
             "pages": [
-              "features/modes",             
+              "introduction/welcome",
+              "introduction/plans-and-credits",
+              "introduction/getting-started",
+              "introduction/faq"
+            ]
+          },
+          {
+            "tab": "Features",
+            "pages": [
+              "features/modes",
               "features/code-mode",
               "features/design",
               "features/cloud",
@@ -52,7 +54,7 @@
               "features/private-projects",
               "features/publish",
               "features/analytics",
-              "features/custom-domain",                                         
+              "features/custom-domain",
               "features/security",
               "features/labs",
               "features/business/sso",
@@ -60,83 +62,821 @@
               "features/business/design-templates"
             ]
           },
-      {
-        "tab": "Integrations",
-        "groups": [
           {
-            "group": "About integrations",
-            "pages": [
-              "integrations/introduction",
-              "integrations/build-with-url"
+            "tab": "Integrations",
+            "groups": [
+              {
+                "group": "About integrations",
+                "pages": [
+                  "integrations/introduction",
+                  "integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "Integrations",
+                "pages": [
+                  "integrations/github",
+                  "integrations/mcp-servers",
+                  "integrations/supabase",
+                  "integrations/stripe",
+                  "integrations/shopify",
+                  "integrations/resend",
+                  "integrations/clerk",
+                  "integrations/make",
+                  "integrations/replicate",
+                  "integrations/21stdev"
+                ]
+              }
             ]
           },
           {
-            "group": "Integrations",
+            "tab": "Tips & Tricks",
             "pages": [
-              "integrations/github",
-              "integrations/mcp-servers",
-              "integrations/supabase",
-              "integrations/stripe",
-              "integrations/shopify",
-              "integrations/resend",
-              "integrations/clerk",
-              "integrations/make",
-              "integrations/replicate",
-              "integrations/21stdev"
+              "tips-tricks/best-practice",
+              "tips-tricks/troubleshooting",
+              "tips-tricks/seo-geo",
+              "tips-tricks/using-images",
+              "tips-tricks/using-videos",
+              "tips-tricks/custom-fonts",
+              "tips-tricks/npm-packages",
+              "tips-tricks/from-idea-to-app",
+              "tips-tricks/support-policy",
+              "tips-tricks/avoiding-security-pitfalls",
+              "tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "Prompt engineering",
+            "pages": [
+              "prompting/prompting-one",
+              "prompting/prompting-debugging",
+              "prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "Use cases",
+            "pages": [
+              "use-case/video-tutorials",
+              "use-case/launched"
+            ]
+          },
+          {
+            "tab": "Glossary",
+            "pages": [
+              "glossary"
+            ]
+          },
+          {
+            "tab": "Changelog",
+            "pages": [
+              "changelog"
             ]
           }
-        ]
+        ],
+        "language": "en"
       },
       {
-        "tab": "Tips & Tricks",
-        "pages": [
-          "tips-tricks/best-practice",
-          "tips-tricks/troubleshooting",
-          "tips-tricks/seo-geo",
-          "tips-tricks/using-images",
-          "tips-tricks/using-videos",
-          "tips-tricks/custom-fonts",
-          "tips-tricks/npm-packages",
-          "tips-tricks/from-idea-to-app",
-          "tips-tricks/support-policy",
-          "tips-tricks/avoiding-security-pitfalls",
-          "tips-tricks/self-hosting"
-        ]
+        "tabs": [
+          {
+            "tab": "Introducción",
+            "pages": [
+              "es/introduction/welcome",
+              "es/introduction/plans-and-credits",
+              "es/introduction/getting-started",
+              "es/introduction/faq"
+            ]
+          },
+          {
+            "tab": "Funciones",
+            "pages": [
+              "es/features/modes",
+              "es/features/code-mode",
+              "es/features/design",
+              "es/features/cloud",
+              "es/features/ai",
+              "es/features/knowledge",
+              "es/features/collaboration",
+              "es/features/private-projects",
+              "es/features/publish",
+              "es/features/analytics",
+              "es/features/custom-domain",
+              "es/features/security",
+              "es/features/labs",
+              "es/features/business/sso",
+              "es/features/business/data-opt-out",
+              "es/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "Integraciones",
+            "groups": [
+              {
+                "group": "Sobre las integraciones",
+                "pages": [
+                  "es/integrations/introduction",
+                  "es/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "Integraciones",
+                "pages": [
+                  "es/integrations/github",
+                  "es/integrations/mcp-servers",
+                  "es/integrations/supabase",
+                  "es/integrations/stripe",
+                  "es/integrations/shopify",
+                  "es/integrations/resend",
+                  "es/integrations/clerk",
+                  "es/integrations/make",
+                  "es/integrations/replicate",
+                  "es/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Consejos y trucos",
+            "pages": [
+              "es/tips-tricks/best-practice",
+              "es/tips-tricks/troubleshooting",
+              "es/tips-tricks/seo-geo",
+              "es/tips-tricks/using-images",
+              "es/tips-tricks/using-videos",
+              "es/tips-tricks/custom-fonts",
+              "es/tips-tricks/npm-packages",
+              "es/tips-tricks/from-idea-to-app",
+              "es/tips-tricks/support-policy",
+              "es/tips-tricks/avoiding-security-pitfalls",
+              "es/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "Ingeniería de instrucciones",
+            "pages": [
+              "es/prompting/prompting-one",
+              "es/prompting/prompting-debugging",
+              "es/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "Casos de uso",
+            "pages": [
+              "es/use-case/video-tutorials",
+              "es/use-case/launched"
+            ]
+          },
+          {
+            "tab": "Glosario",
+            "pages": [
+              "es/glossary"
+            ]
+          },
+          {
+            "tab": "Registro de cambios",
+            "pages": [
+              "es/changelog"
+            ]
+          }
+        ],
+        "language": "es"
       },
       {
-        "tab": "Prompt engineering",
-        "pages": [
-          "prompting/prompting-one",
-          "prompting/prompting-debugging",
-          "prompting/prompt-integrations"
-        ]
+        "tabs": [
+          {
+            "tab": "はじめに",
+            "pages": [
+              "ja/introduction/welcome",
+              "ja/introduction/plans-and-credits",
+              "ja/introduction/getting-started",
+              "ja/introduction/faq"
+            ]
+          },
+          {
+            "tab": "機能",
+            "pages": [
+              "ja/features/modes",
+              "ja/features/code-mode",
+              "ja/features/design",
+              "ja/features/cloud",
+              "ja/features/ai",
+              "ja/features/knowledge",
+              "ja/features/collaboration",
+              "ja/features/private-projects",
+              "ja/features/publish",
+              "ja/features/analytics",
+              "ja/features/custom-domain",
+              "ja/features/security",
+              "ja/features/labs",
+              "ja/features/business/sso",
+              "ja/features/business/data-opt-out",
+              "ja/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "連携",
+            "groups": [
+              {
+                "group": "連携について",
+                "pages": [
+                  "ja/integrations/introduction",
+                  "ja/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "連携",
+                "pages": [
+                  "ja/integrations/github",
+                  "ja/integrations/mcp-servers",
+                  "ja/integrations/supabase",
+                  "ja/integrations/stripe",
+                  "ja/integrations/shopify",
+                  "ja/integrations/resend",
+                  "ja/integrations/clerk",
+                  "ja/integrations/make",
+                  "ja/integrations/replicate",
+                  "ja/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "ヒントとテクニック",
+            "pages": [
+              "ja/tips-tricks/best-practice",
+              "ja/tips-tricks/troubleshooting",
+              "ja/tips-tricks/seo-geo",
+              "ja/tips-tricks/using-images",
+              "ja/tips-tricks/using-videos",
+              "ja/tips-tricks/custom-fonts",
+              "ja/tips-tricks/npm-packages",
+              "ja/tips-tricks/from-idea-to-app",
+              "ja/tips-tricks/support-policy",
+              "ja/tips-tricks/avoiding-security-pitfalls",
+              "ja/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "プロンプトエンジニアリング",
+            "pages": [
+              "ja/prompting/prompting-one",
+              "ja/prompting/prompting-debugging",
+              "ja/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "ユースケース",
+            "pages": [
+              "ja/use-case/video-tutorials",
+              "ja/use-case/launched"
+            ]
+          },
+          {
+            "tab": "用語集",
+            "pages": [
+              "ja/glossary"
+            ]
+          },
+          {
+            "tab": "変更履歴",
+            "pages": [
+              "ja/changelog"
+            ]
+          }
+        ],
+        "language": "ja"
       },
       {
-        "tab": "Use cases",
-        "pages": [
-          "use-case/video-tutorials",
-          "use-case/launched"
-        ]
+        "tabs": [
+          {
+            "tab": "简介",
+            "pages": [
+              "zh/introduction/welcome",
+              "zh/introduction/plans-and-credits",
+              "zh/introduction/getting-started",
+              "zh/introduction/faq"
+            ]
+          },
+          {
+            "tab": "功能特性",
+            "pages": [
+              "zh/features/modes",
+              "zh/features/code-mode",
+              "zh/features/design",
+              "zh/features/cloud",
+              "zh/features/ai",
+              "zh/features/knowledge",
+              "zh/features/collaboration",
+              "zh/features/private-projects",
+              "zh/features/publish",
+              "zh/features/analytics",
+              "zh/features/custom-domain",
+              "zh/features/security",
+              "zh/features/labs",
+              "zh/features/business/sso",
+              "zh/features/business/data-opt-out",
+              "zh/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "集成",
+            "groups": [
+              {
+                "group": "关于集成",
+                "pages": [
+                  "zh/integrations/introduction",
+                  "zh/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "集成",
+                "pages": [
+                  "zh/integrations/github",
+                  "zh/integrations/mcp-servers",
+                  "zh/integrations/supabase",
+                  "zh/integrations/stripe",
+                  "zh/integrations/shopify",
+                  "zh/integrations/resend",
+                  "zh/integrations/clerk",
+                  "zh/integrations/make",
+                  "zh/integrations/replicate",
+                  "zh/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "提示和技巧",
+            "pages": [
+              "zh/tips-tricks/best-practice",
+              "zh/tips-tricks/troubleshooting",
+              "zh/tips-tricks/seo-geo",
+              "zh/tips-tricks/using-images",
+              "zh/tips-tricks/using-videos",
+              "zh/tips-tricks/custom-fonts",
+              "zh/tips-tricks/npm-packages",
+              "zh/tips-tricks/from-idea-to-app",
+              "zh/tips-tricks/support-policy",
+              "zh/tips-tricks/avoiding-security-pitfalls",
+              "zh/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "提示工程",
+            "pages": [
+              "zh/prompting/prompting-one",
+              "zh/prompting/prompting-debugging",
+              "zh/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "应用场景",
+            "pages": [
+              "zh/use-case/video-tutorials",
+              "zh/use-case/launched"
+            ]
+          },
+          {
+            "tab": "术语表",
+            "pages": [
+              "zh/glossary"
+            ]
+          },
+          {
+            "tab": "更新日志",
+            "pages": [
+              "zh/changelog"
+            ]
+          }
+        ],
+        "language": "zh"
       },
       {
-        "tab": "Glossary",
-        "pages": [
-          "glossary"
-        ]
+        "tabs": [
+          {
+            "tab": "Introduction",
+            "pages": [
+              "fr/introduction/welcome",
+              "fr/introduction/plans-and-credits",
+              "fr/introduction/getting-started",
+              "fr/introduction/faq"
+            ]
+          },
+          {
+            "tab": "Fonctionnalités",
+            "pages": [
+              "fr/features/modes",
+              "fr/features/code-mode",
+              "fr/features/design",
+              "fr/features/cloud",
+              "fr/features/ai",
+              "fr/features/knowledge",
+              "fr/features/collaboration",
+              "fr/features/private-projects",
+              "fr/features/publish",
+              "fr/features/analytics",
+              "fr/features/custom-domain",
+              "fr/features/security",
+              "fr/features/labs",
+              "fr/features/business/sso",
+              "fr/features/business/data-opt-out",
+              "fr/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "Intégrations",
+            "groups": [
+              {
+                "group": "À propos des intégrations",
+                "pages": [
+                  "fr/integrations/introduction",
+                  "fr/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "Intégrations",
+                "pages": [
+                  "fr/integrations/github",
+                  "fr/integrations/mcp-servers",
+                  "fr/integrations/supabase",
+                  "fr/integrations/stripe",
+                  "fr/integrations/shopify",
+                  "fr/integrations/resend",
+                  "fr/integrations/clerk",
+                  "fr/integrations/make",
+                  "fr/integrations/replicate",
+                  "fr/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Conseils et astuces",
+            "pages": [
+              "fr/tips-tricks/best-practice",
+              "fr/tips-tricks/troubleshooting",
+              "fr/tips-tricks/seo-geo",
+              "fr/tips-tricks/using-images",
+              "fr/tips-tricks/using-videos",
+              "fr/tips-tricks/custom-fonts",
+              "fr/tips-tricks/npm-packages",
+              "fr/tips-tricks/from-idea-to-app",
+              "fr/tips-tricks/support-policy",
+              "fr/tips-tricks/avoiding-security-pitfalls",
+              "fr/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "Conception de Prompt",
+            "pages": [
+              "fr/prompting/prompting-one",
+              "fr/prompting/prompting-debugging",
+              "fr/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "Cas d’utilisation",
+            "pages": [
+              "fr/use-case/video-tutorials",
+              "fr/use-case/launched"
+            ]
+          },
+          {
+            "tab": "Glossaire",
+            "pages": [
+              "fr/glossary"
+            ]
+          },
+          {
+            "tab": "Journal des mises à jour",
+            "pages": [
+              "fr/changelog"
+            ]
+          }
+        ],
+        "language": "fr"
       },
       {
-        "tab": "Changelog",
-        "pages": [
-          "changelog"
-        ]
+        "tabs": [
+          {
+            "tab": "Einführung",
+            "pages": [
+              "de/introduction/welcome",
+              "de/introduction/plans-and-credits",
+              "de/introduction/getting-started",
+              "de/introduction/faq"
+            ]
+          },
+          {
+            "tab": "Funktionen",
+            "pages": [
+              "de/features/modes",
+              "de/features/code-mode",
+              "de/features/design",
+              "de/features/cloud",
+              "de/features/ai",
+              "de/features/knowledge",
+              "de/features/collaboration",
+              "de/features/private-projects",
+              "de/features/publish",
+              "de/features/analytics",
+              "de/features/custom-domain",
+              "de/features/security",
+              "de/features/labs",
+              "de/features/business/sso",
+              "de/features/business/data-opt-out",
+              "de/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "Integrationen",
+            "groups": [
+              {
+                "group": "Über Integrationen",
+                "pages": [
+                  "de/integrations/introduction",
+                  "de/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "Integrationen",
+                "pages": [
+                  "de/integrations/github",
+                  "de/integrations/mcp-servers",
+                  "de/integrations/supabase",
+                  "de/integrations/stripe",
+                  "de/integrations/shopify",
+                  "de/integrations/resend",
+                  "de/integrations/clerk",
+                  "de/integrations/make",
+                  "de/integrations/replicate",
+                  "de/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Tipps & Tricks",
+            "pages": [
+              "de/tips-tricks/best-practice",
+              "de/tips-tricks/troubleshooting",
+              "de/tips-tricks/seo-geo",
+              "de/tips-tricks/using-images",
+              "de/tips-tricks/using-videos",
+              "de/tips-tricks/custom-fonts",
+              "de/tips-tricks/npm-packages",
+              "de/tips-tricks/from-idea-to-app",
+              "de/tips-tricks/support-policy",
+              "de/tips-tricks/avoiding-security-pitfalls",
+              "de/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "Engineering von Eingabeaufforderungen",
+            "pages": [
+              "de/prompting/prompting-one",
+              "de/prompting/prompting-debugging",
+              "de/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "Anwendungsfälle",
+            "pages": [
+              "de/use-case/video-tutorials",
+              "de/use-case/launched"
+            ]
+          },
+          {
+            "tab": "Glossar",
+            "pages": [
+              "de/glossary"
+            ]
+          },
+          {
+            "tab": "Versionshinweise",
+            "pages": [
+              "de/changelog"
+            ]
+          }
+        ],
+        "language": "de"
+      },
+      {
+        "tabs": [
+          {
+            "tab": "Introdução",
+            "pages": [
+              "pt-BR/introduction/welcome",
+              "pt-BR/introduction/plans-and-credits",
+              "pt-BR/introduction/getting-started",
+              "pt-BR/introduction/faq"
+            ]
+          },
+          {
+            "tab": "Funcionalidades",
+            "pages": [
+              "pt-BR/features/modes",
+              "pt-BR/features/code-mode",
+              "pt-BR/features/design",
+              "pt-BR/features/cloud",
+              "pt-BR/features/ai",
+              "pt-BR/features/knowledge",
+              "pt-BR/features/collaboration",
+              "pt-BR/features/private-projects",
+              "pt-BR/features/publish",
+              "pt-BR/features/analytics",
+              "pt-BR/features/custom-domain",
+              "pt-BR/features/security",
+              "pt-BR/features/labs",
+              "pt-BR/features/business/sso",
+              "pt-BR/features/business/data-opt-out",
+              "pt-BR/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "Integrações",
+            "groups": [
+              {
+                "group": "Sobre as integrações",
+                "pages": [
+                  "pt-BR/integrations/introduction",
+                  "pt-BR/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "Integrações",
+                "pages": [
+                  "pt-BR/integrations/github",
+                  "pt-BR/integrations/mcp-servers",
+                  "pt-BR/integrations/supabase",
+                  "pt-BR/integrations/stripe",
+                  "pt-BR/integrations/shopify",
+                  "pt-BR/integrations/resend",
+                  "pt-BR/integrations/clerk",
+                  "pt-BR/integrations/make",
+                  "pt-BR/integrations/replicate",
+                  "pt-BR/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Dicas e truques",
+            "pages": [
+              "pt-BR/tips-tricks/best-practice",
+              "pt-BR/tips-tricks/troubleshooting",
+              "pt-BR/tips-tricks/seo-geo",
+              "pt-BR/tips-tricks/using-images",
+              "pt-BR/tips-tricks/using-videos",
+              "pt-BR/tips-tricks/custom-fonts",
+              "pt-BR/tips-tricks/npm-packages",
+              "pt-BR/tips-tricks/from-idea-to-app",
+              "pt-BR/tips-tricks/support-policy",
+              "pt-BR/tips-tricks/avoiding-security-pitfalls",
+              "pt-BR/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "Engenharia de Prompts de IA",
+            "pages": [
+              "pt-BR/prompting/prompting-one",
+              "pt-BR/prompting/prompting-debugging",
+              "pt-BR/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "Casos de uso",
+            "pages": [
+              "pt-BR/use-case/video-tutorials",
+              "pt-BR/use-case/launched"
+            ]
+          },
+          {
+            "tab": "Glossário",
+            "pages": [
+              "pt-BR/glossary"
+            ]
+          },
+          {
+            "tab": "Registro de alterações",
+            "pages": [
+              "pt-BR/changelog"
+            ]
+          }
+        ],
+        "language": "pt-BR"
+      },
+      {
+        "tabs": [
+          {
+            "tab": "Introduzione",
+            "pages": [
+              "it/introduction/welcome",
+              "it/introduction/plans-and-credits",
+              "it/introduction/getting-started",
+              "it/introduction/faq"
+            ]
+          },
+          {
+            "tab": "Funzionalità",
+            "pages": [
+              "it/features/modes",
+              "it/features/code-mode",
+              "it/features/design",
+              "it/features/cloud",
+              "it/features/ai",
+              "it/features/knowledge",
+              "it/features/collaboration",
+              "it/features/private-projects",
+              "it/features/publish",
+              "it/features/analytics",
+              "it/features/custom-domain",
+              "it/features/security",
+              "it/features/labs",
+              "it/features/business/sso",
+              "it/features/business/data-opt-out",
+              "it/features/business/design-templates"
+            ]
+          },
+          {
+            "tab": "Integrazioni",
+            "groups": [
+              {
+                "group": "Informazioni sulle integrazioni",
+                "pages": [
+                  "it/integrations/introduction",
+                  "it/integrations/build-with-url"
+                ]
+              },
+              {
+                "group": "Integrazioni",
+                "pages": [
+                  "it/integrations/github",
+                  "it/integrations/mcp-servers",
+                  "it/integrations/supabase",
+                  "it/integrations/stripe",
+                  "it/integrations/shopify",
+                  "it/integrations/resend",
+                  "it/integrations/clerk",
+                  "it/integrations/make",
+                  "it/integrations/replicate",
+                  "it/integrations/21stdev"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Consigli e trucchi",
+            "pages": [
+              "it/tips-tricks/best-practice",
+              "it/tips-tricks/troubleshooting",
+              "it/tips-tricks/seo-geo",
+              "it/tips-tricks/using-images",
+              "it/tips-tricks/using-videos",
+              "it/tips-tricks/custom-fonts",
+              "it/tips-tricks/npm-packages",
+              "it/tips-tricks/from-idea-to-app",
+              "it/tips-tricks/support-policy",
+              "it/tips-tricks/avoiding-security-pitfalls",
+              "it/tips-tricks/self-hosting"
+            ]
+          },
+          {
+            "tab": "Ingegneria delle istruzioni",
+            "pages": [
+              "it/prompting/prompting-one",
+              "it/prompting/prompting-debugging",
+              "it/prompting/prompt-integrations"
+            ]
+          },
+          {
+            "tab": "Casi d'uso",
+            "pages": [
+              "it/use-case/video-tutorials",
+              "it/use-case/launched"
+            ]
+          },
+          {
+            "tab": "Glossario",
+            "pages": [
+              "it/glossary"
+            ]
+          },
+          {
+            "tab": "Cronologia delle modifiche",
+            "pages": [
+              "it/changelog"
+            ]
+          }
+        ],
+        "language": "it"
       }
     ]
   },
- "contextual": {
-   "options": [
-     "copy"
-   ]
-},
+  "contextual": {
+    "options": [
+      "copy"
+    ]
+  },
   "footer": {
     "socials": {
       "x": "https://x.com/Lovable",

@@ -1,0 +1,174 @@
+---
+title: "将你的项目连接到 GitHub"
+sidebarTitle: "GitHub 集成"
+description: "了解如何将你的 Lovable 项目与 GitHub 连接、同步和断开连接，用于代码备份、协作和部署。"
+icon: "github"
+keywords: ["将 Lovable 连接到 GitHub","将 Lovable 项目导出到 GitHub","GitHub 集成","GitHub 同步","断开 GitHub","备份 Lovable 代码","同步 Lovable 和 GitHub","GitHub 仓库设置","双向同步","Lovable 代码导出","GitHub 集成指南","从 GitHub 部署 Lovable"]
+---
+
+当你使用 Lovable 构建应用时，你的代码会保存在 Lovable 平台中——对大多数创作者来说，这已经非常合适。
+
+如果你想要自己的代码副本、计划与开发者协作，或打算将项目迁移到其他地方，只需点击几下就可以将所有内容导出并同步到 GitHub。
+
+<div id="about-github">
+  ## 关于 GitHub
+</div>
+
+GitHub 是一个云端平台，用于存储、管理和分享代码。它会记录每一次变更，支持协作，并能与 Vercel、Netlify 等常用部署工具集成。你可以把它想象成专为开发者打造的、用来存放代码的 **Google Drive**。
+
+<div id="why-connect-lovable-to-github">
+  ## 为什么要将 Lovable 连接到 GitHub
+</div>
+
+将你的 Lovable 项目连接到 GitHub 可以让你：
+
+* **备份代码：** 将项目安全地存储在 Lovable 之外。
+* **轻松协作：** 邀请开发者参与，使用 Pull Request、分支和代码评审。
+* **自动同步：** 在 Lovable 中的编辑会出现在 GitHub 中，而 GitHub 中的更改会在默认分支（`main`）上同步回 Lovable。
+* **本地开发：** 在保持项目同步的前提下，本地克隆、编辑并在 IDE 中提交代码。
+* **在任意平台部署：** 自行托管或部署到其他平台，参见 [Self-hosting: Run your Lovable Cloud project anywhere](/zh/tips-tricks/self-hosting)。
+* **安全测试：** 在 **Settings → Account → Labs** 中启用实验性功能 **GitHub branch switching**，在将更改合并到线上项目之前先开发新功能。更多信息参见 [Labs](/zh/features/labs)。
+
+<Note>
+  使用 Lovable 并不需要 GitHub —— 许多用户完全在 Lovable 中构建和发布应用。
+</Note>
+
+<div id="before-you-connect">
+  ## 在连接之前
+</div>
+
+请先确认你了解此集成的工作方式：
+
+* **需要 GitHub 账号：** 可以在 [github.com](http://github.com) 免费注册。
+* **单一可信来源：** 连接后，你的代码将以 GitHub 为准，而不会单独存放在 Lovable 中。
+* **双向同步：** 在 Lovable 中的编辑会同步到 GitHub，反之亦然。
+* **稳定的仓库路径：** 连接依赖于 GitHub 仓库的精确名称、位置、所属组织和账号。
+
+<Warning>
+  连接后不要重命名、移动或删除你的 GitHub 仓库。否则会导致同步中断，Lovable 将无法更新你的项目。
+</Warning>
+
+<div id="set-up-the-github-integration">
+  ## 设置 GitHub 集成
+</div>
+
+只有工作区的 **管理员和所有者** 才能管理 GitHub 集成——添加账户和组织，以及连接或断开项目。
+
+连接 GitHub 分为三个步骤：
+
+1. **关联你的 GitHub 账户**（OAuth 授权）
+2. 在某个账户或组织上**安装 Lovable GitHub App**
+3. **将各个项目**连接到代码仓库
+
+<div id="step-1-connect-your-github-account">
+  ### 步骤 1：连接你的 GitHub 账户
+</div>
+
+此步骤会通过 OAuth 授权，将你的 GitHub 身份与 Lovable 关联起来。
+
+1. 前往 **Settings → Integrations → GitHub。**
+2. 点击 **Connect GitHub**。
+3. 登录你的 GitHub 账户，或点击 **authorize lovable.dev** 以验证你的 GitHub 身份。\
+   随后你会看到一个用于连接项目的选项。
+
+<div id="step-2-install-the-lovable-github-app">
+  ### 步骤 2：安装 Lovable GitHub 应用
+</div>
+
+此步骤会在你的 GitHub 个人账户或组织中安装 **Lovable GitHub App**，并授予 Lovable 在其中创建和更新仓库的权限。
+
+你可以在个人 GitHub 账户，或你拥有管理员权限的任意组织下安装该应用。
+
+1. 前往 **Settings → Integrations → GitHub。**
+2. 点击 **Connect project。**
+3. 点击 **Add organizations**，然后选择要在哪个账户或组织中 **install and authorize lovable.dev**——你的个人账户或你的某个组织。
+4. 选择是授予对 **all repositories** 的访问权限，还是仅对 **only selected ones** 授权访问。
+5. 点击 **Install &amp; Authorize**，授予 Lovable 在你选择的账户或组织中创建和更新仓库的权限。
+
+<div id="step-3-connect-a-project-to-github">
+  ### 步骤 3：将项目连接到 GitHub
+</div>
+
+在此步骤中，你会将某个特定的 Lovable 项目链接到一个 GitHub 仓库。每个 Lovable 项目只能有 **一个关联仓库**。
+
+1. 前往 **Settings → Integrations → GitHub** 并点击 **Connect project**，或者点击项目右上角的 GitHub 图标并选择 **Connect GitHub**。
+2. 选择你的代码应托管的 GitHub 组织或账号。
+3. 点击 **Transfer anyway** 以确认转移并设置双向同步。\
+   系统会为你的项目创建一个新的 GitHub 仓库，并自动开始同步。
+
+<div id="disconnect-your-project-from-github">
+  ## 将你的项目与 GitHub 断开连接
+</div>
+
+Workspace 管理员和所有者可以随时在项目的 GitHub 设置中将项目与 GitHub 断开连接。
+
+当你断开连接时：
+
+* **同步会停止：** Lovable 与 GitHub 之间的双向连接将结束。
+* **你的代码仓库仍在 GitHub 上：** 它会保留完整的历史记录和所有文件。
+* **你的代码会保留在 Lovable 中：** 之后的更改只会存储在 Lovable 内部。
+
+如果你之后重新连接：
+
+* 会基于你在 Lovable 中的最新代码创建一个 **新的 GitHub 仓库**。
+* 你**原来的仓库**会继续保留在 GitHub 上，但不再与 Lovable 关联。
+
+<Note>
+  如果 Lovable 无法访问 GitHub 仓库（例如仓库被重命名、移动或删除），你将无法断开项目连接。
+</Note>
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="使用这个功能需要懂 GitHub 吗？">
+    不需要。只要连接并授权即可——GitHub 会安全地托管你的代码。 
+
+    只有当你想做更高级的操作，比如创建分支或与其他开发者协作时，才需要去学习 GitHub 的功能。
+  </Accordion>
+
+  <Accordion title="点击 'Connect GitHub' 没反应 —— 出了什么问题？">
+    很可能是你的浏览器拦截了 GitHub 登录弹窗。请为 Lovable 允许弹窗，然后再试一次。
+  </Accordion>
+
+  <Accordion title="如果我重命名、移动或删除了 GitHub 仓库会怎样？">
+    连接会中断。你的项目将停止同步，你也将无法在 Lovable 中继续编辑它。
+
+    若要修复，请将仓库恢复到原来的位置和原来的名称。如果仓库被删除，你可以[在 GitHub 上恢复它](https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository)。
+  </Accordion>
+
+  <Accordion title="如果我修改了 GitHub 用户名或组织名称会怎样？">
+    连接会中断。你的项目将停止同步，你也将无法在 Lovable 中继续编辑它。
+
+    若要修复，请将 GitHub 用户或组织名称恢复为原始名称。
+  </Accordion>
+
+  <Accordion title="我怎样切换到另一个 GitHub 账号？">
+    一旦连接后，你就不能更改已关联的 GitHub 账号。
+  </Accordion>
+
+  <Accordion title="仓库出现在了错误的组织下 —— 我可以把它移过去吗？">
+    不能直接移动。你可以尝试这个变通方案：
+
+    1. **复刻你的项目** 来创建一个新副本。
+    2. **将新项目** 连接到 GitHub。
+    3. 在设置过程中选择正确的组织。
+  </Accordion>
+
+  <Accordion title="Lovable 无法访问我的仓库 —— 我该怎么办？">
+    你很可能重命名、移动或删除了该仓库。请恢复或回滚仓库名称、路径或所有者的任何更改；如果仓库已被删除，可以[恢复仓库](https://docs.github.com/en/repositories/creating-and-managing-repositories/restoring-a-deleted-repository)，项目应该就能再次正常工作。
+  </Accordion>
+
+  <Accordion title="我可以断开与 GitHub 的连接吗？">
+    可以。管理员和所有者可以随时在项目的 GitHub 设置中将项目与 GitHub 断开连接。你的仓库会保留在 GitHub 上，但同步会停止。如果之后重新连接，会创建一个新的仓库。
+  </Accordion>
+
+  <Accordion title="我可以把现有的 GitHub 仓库导入到 Lovable 吗？">
+    不可以。你只能从 Lovable 导出到 GitHub，不能反向导入。
+  </Accordion>
+
+  <Accordion title="为什么我的提交没有出现在 Lovable 中？">
+    Lovable 只会同步**默认分支**（通常是 `main`）。请将你的分支合并到 `main`，或者在 Lovable 内[切换分支](/zh/features/labs)。
+  </Accordion>
+</AccordionGroup>

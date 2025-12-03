@@ -1,0 +1,423 @@
+---
+title: "シングルサインオン（SSO）を設定する"
+sidebarTitle: "シングルサインオン（SSO）"
+description: "Lovable のシングルサインオン（SSO）を、OIDC または SAML 2.0 を使用してお使いのアイデンティティプロバイダーと連携し、安全で一元化されたワークスペース認証を実現します。"
+icon: "shield-keyhole"
+keywords: ["single sign-on","sso","SSO setup","SSO configuration","SSO integration","enterprise SSO","enforce SSO","identity provider","OIDC","SAML","Okta SSO","Auth0 SSO","Microsoft Entra ID SSO","Azure AD SSO"]
+---
+
+シングルサインオン（SSO）は **Business** プランと **Enterprise** プランで利用でき、組織全体で安全で一元化された認証を可能にします。SSO を利用すると、ユーザーは 1 組の認証情報で Lovable にアクセスでき、アクセス管理が簡素化されると同時にセキュリティも向上します。
+
+<Note>
+  **サービスプロバイダー（SP）起点のサインインのみ対応:** ユーザーは Lovable（SP）からサインインを開始する必要があります。
+
+  **アイデンティティプロバイダー（IdP）起点の SSO**（IdP のダッシュボードのタイルから開始する方法）には **対応していません**。
+</Note>
+
+<div id="supported-sso-protocols">
+  ## 対応している SSO プロトコル
+</div>
+
+Lovable は **OIDC** と **SAML 2.0** の両方のプロトコルに対応しており、Okta、Auth0、Microsoft Entra ID (Azure AD) など、主要な **アイデンティティ プロバイダー (IdP)** と連携できます。
+
+- **OpenID Connect (OIDC)**: 推奨される方式で、OAuth 2.0 の上に構築されたモダンなアイデンティティレイヤーとして、ユーザーの認証を提供します。
+- **SAML (Security Assertion Markup Language) 2.0**: 認証および認可データをやり取りするための XML ベースのプロトコルで、エンタープライズ環境で広く利用されています。
+
+<div id="prerequisites">
+  ## 前提条件
+</div>
+
+Lovable に OIDC または SAML を使ってアイデンティティプロバイダーを接続するには、次のものが必要です：
+
+- **IdP 管理者アクセス権**（Okta、Auth0、Microsoft Entra ID、または利用中のその他のプロバイダー）
+- **Lovable のワークスペースのオーナーまたは管理者ロール**
+- Lovable での **確認済みドメイン**
+
+<div id="start-sso-setup-in-lovable">
+  ## Lovable で SSO のセットアップを開始する
+</div>
+
+SSO の構成は、Lovable とあなたのアイデンティティプロバイダー間で行う**双方向の設定**です：
+
+- **Lovable → IdP:** Lovable の URL と設定を IdP アプリにコピーします。
+- **IdP → Lovable:** IdP の issuer、メタデータ、証明書を Lovable にコピーします。
+
+ワークスペースの**オーナー**または**管理者**が SSO を設定できます。開始するには、**Settings → Workspace → Identity → Add SSO provider** に移動し、**OIDC** または **SAML** を選択します。
+
+<div id="idp-configuration-reference">
+  ### IdP 設定リファレンス
+</div>
+
+Lovable で SSO プロバイダーのセットアップを開始すると、次の内容が表示されます:
+
+- **IdP 側で設定する項目**（アプリケーションタイプ、スコープ、属性マッピングなど）
+- IdP に入力する必要がある **Lovable の URL と識別子**
+
+IdP で OIDC または SAML を設定する際は、以下のリファレンスを参照してください。
+
+<Tabs>
+  <Tab title="OIDC">
+    - アプリケーションタイプ: `Web Application`
+    - グラントタイプ: `Authorization Code`
+    - トークンメソッド: `POST`（設定可能な場合）
+    - コピーして IdP に追加するリダイレクト URI: `https://auth.lovable.dev/__/auth/handler`
+    - OAuth スコープ:
+      - 必須: `openid`, `email`
+      - 推奨: `profile`
+  </Tab>
+  <Tab title="SAML">
+    - ACS URL（Assertion Consumer Service）: `https://auth.lovable.dev/__/auth/handler`
+    - SP Entity ID / Audience URI: `https://auth.lovable.dev/__/auth/handler`
+    - 属性マッピング:
+      - `email`（必須）: フォーマットが `EmailAddress` に設定されていることを確認
+      - `displayName`（推奨）: ユーザーのフルネームにマッピング
+      - `photoURL`（推奨）: ユーザーのプロフィール画像の URL にマッピング
+  </Tab>
+</Tabs>
+
+<div id="provider-specific-setup-guides">
+  ## プロバイダー別セットアップガイド
+</div>
+
+Okta、Auth0、または Microsoft Entra を使用している場合は、SSO を設定するためのプロバイダー別ドキュメントを参照できます。別のプロバイダーを使用している場合は、[その他のプロバイダーを設定する](#configure-other-providers)を参照してください。
+
+始める前に、IdP で使用する設定値を取得するために、[Lovable で SSO セットアップを開始する](#start-sso-setup-in-lovable)を完了してください。
+
+<div id="configure-okta-as-your-sso-provider">
+  ### Okta を SSO プロバイダーとして設定する
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <Steps>
+      <Step title="Okta 管理コンソールでアプリケーションを作成する">
+        - **Applications** で **Create App Integration** をクリックし、**OIDC** を選択します。その後、アプリケーションタイプとして **Web Application** を選択します。
+        - アプリに名前を付けます（例: `Lovable OIDC SSO`）。
+      </Step>
+      <Step title="OIDC 連携を設定する">
+        - **Grant type** を `Authorization Code` に設定します。
+        - デフォルトのリダイレクト URI を削除します。
+        - Lovable のリダイレクト URL を Okta の **Sign-in redirect URIs** に追加します: `https://auth.lovable.dev/__/auth/handler`
+        - **Assignments** を選択し、Lovable にアクセスさせたいユーザー/グループにこのアプリケーションを割り当てます。
+      </Step>
+      <Step title="アプリケーションを保存する">
+        **Save** をクリックします。これで Okta 上でアプリケーションが作成されます。
+      </Step>
+      <Step title="Okta Issuer URL を設定する">
+        Okta で **Sign On → OpenID Connect ID Token** に移動し、Issuer のドロップダウンから **Okta URL** を選択して **Save** します。
+      </Step>
+      <Step title="IdP 情報を Lovable に提供する">
+        Okta の **Sign On** タブで、次の値をコピーし、Lovable に入力します。
+
+        - Okta `Issuer URL` → Lovable `OIDC Issuer URL/Discovery Endpoint`
+
+        続いて、Okta の **General** タブで次の値をコピーし、Lovable に入力します。
+
+        - Okta `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - Okta `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+      <Step title="（任意）Lovable で設定をテストする">
+        Lovable で **Test configuration** をクリックします。すべてが正しく設定されていれば、検証は成功します。
+      </Step>
+      <Step title="Lovable で OIDC プロバイダー設定を完了する">
+        Lovable で **Configure provider** をクリックし、Okta を OIDC SSO プロバイダーとして設定する作業を完了します。
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="Okta 管理コンソールでアプリケーションを作成する">
+        - **Applications** で **Create App Integration** をクリックし、**SAML 2.0** を選択します。
+        - アプリに名前を付けます（例: `Lovable SAML SSO`）。
+      </Step>
+      <Step title="SAML 設定を行う">
+        - Single sign-on URL: `https://auth.lovable.dev/__/auth/handler`
+        - Audience URI (SP Entity ID): `https://auth.lovable.dev/__/auth/handler`
+        - Name ID format: `EmailAddress`
+      </Step>
+      <Step title="アプリケーションを保存する">
+        **Finish** をクリックします。これで Okta 上でアプリケーションが作成されます。
+      </Step>
+      <Step title="IdP 情報を Lovable に提供する">
+        Okta で **Sign On → SAML 2.0 → Metadata details** に移動し、**Metadata URL** をコピーして新しいタブで開きます。
+
+        次の **Metadata URL** の値をコピーし、Lovable に入力します:
+
+        - Okta `SingleSignOnService Location` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Okta `EntityID` → Lovable `Identity Provider Entity ID / Issuer`
+        - Okta `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            証明書の値は、`-----BEGIN CERTIFICATE-----` と `-----END CERTIFICATE-----` の行の間に貼り付けてください。
+          </Note>
+      </Step>
+      <Step title="Lovable で SAML プロバイダー設定を完了する">
+        Lovable で **Configure SAML Provider → Confirm & Enable SSO** をクリックし、Okta を SAML SSO プロバイダーとして設定する作業を完了します。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-auth0-as-your-sso-provider">
+  ### Auth0 を SSO プロバイダーとして設定する
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <Steps>
+      <Step title="Auth0 Admin Dashboard でアプリケーションを作成する">
+        - **Applications** で **Create application** をクリックし、アプリケーションタイプとして **Regular Web Applications** を選択します。
+        - 例えば `Lovable OIDC SSO` など、アプリに名前を付けます。
+        - **Create** をクリックします。
+      </Step>
+      <Step title="Allowed Callback URLs を設定する">
+        Auth0 でアプリケーション設定画面に移動し、**Allowed Callback URLs** に `https://auth.lovable.dev/__/auth/handler` を追加して、**Save** をクリックします。
+      </Step>
+      <Step title="Lovable に IdP 情報を提供する">
+        Auth0 の **Settings** タブから次の値をコピーし、Lovable に入力します。
+
+        - Auth0 `Domain` → Lovable `OIDC Issuer URL/Discovery Endpoint`（`https://` を含める）
+        - Auth0 `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - Auth0 `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+      <Step title="（オプション）Lovable で設定をテストする">
+        Lovable で **Test configuration** をクリックします。すべて正しく設定されていれば、検証が成功します。
+      </Step>
+      <Step title="Lovable で OIDC プロバイダーの設定を完了する">
+        Lovable で **Configure provider** をクリックし、Auth0 を OIDC SSO プロバイダーとして設定する作業を完了します。
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="Auth0 Admin Dashboard でアプリケーションを作成する">
+        - **Applications** で **Create application** をクリックし、アプリケーションタイプとして **Regular Web Applications** を選択します。
+        - 例えば `Lovable SAML SSO` など、アプリに名前を付けます。
+        - **Create** をクリックします。
+      </Step>
+      <Step title="Allowed Callback URLs を設定する">
+        Auth0 でアプリケーション設定画面に移動し、**Allowed Callback URLs** に `https://auth.lovable.dev/__/auth/handler` を追加して、**Save** をクリックします。
+      </Step>
+      <Step title="SAML2 Web App Add-on を設定する">
+        - Auth0 で **Addons** に移動し、**SAML2 Web app** を有効にします。
+        - **Addon: SAML2 Web app → Settings** で、次のように設定します:
+          - Application Callback URL: `https://auth.lovable.dev/__/auth/handler`
+          - Settings: 次の `mappings` JSON を貼り付けます
+
+        ```json
+            {
+              "mappings": {
+                "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+              },
+              "nameIdentifierFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+            }
+        ```
+
+        - **Enable** をクリックします。
+      </Step>
+      <Step title="Lovable に IdP 情報を提供する">
+        **Auth0 → Addon: SAML2 Web app → Usage** で、次の **SAML Protocol Configuration Parameter** の値をコピーし、Lovable に入力します。
+
+        - Auth0 `Identity Provider Login URL` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Auth0 `Issuer` → Lovable `Identity Provider Entity ID / Issuer`
+        - Auth0 `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            Auth0 の証明書をダウンロードし、`X509Certificate` の値をコピーします。証明書の値を `-----BEGIN CERTIFICATE-----` と `-----END CERTIFICATE-----` の行の間に貼り付けます。
+          </Note>
+      </Step>
+      <Step title="Lovable で SAML プロバイダーの設定を完了する">
+        Lovable で **Configure SAML Provider → Confirm & Enable SSO** をクリックし、Auth0 を SAML SSO プロバイダーとして設定する作業を完了します。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-microsoft-entra-id-as-your-sso-provider">
+  ### Microsoft Entra ID を SSO プロバイダーとして設定する
+</div>
+
+<Tabs>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="Microsoft Entra 管理センターでエンタープライズ アプリを作成する">
+        - **Enterprise applications** で **New application** を選択します。
+        - **Create your own application** を選択し、**Integrate any other application you don’t find in the gallery (Non-gallery)** を選びます。
+        - アプリに名前を付けます（例: `Lovable SAML SSO`）。
+        - **Create** をクリックします。これでアプリケーションが作成されます。
+      </Step>
+      <Step title="SAML SSO を設定する">
+        Microsoft Entra で **Single sign-on** のセットアップページに移動し、**SAML** を選択します。**Basic SAML Configuration** の項目で、次を入力します:
+
+        - Identifier (Entity ID): `https://auth.lovable.dev/__/auth/handler`
+        - Reply URL (Assertion Consumer Service URL): `https://auth.lovable.dev/__/auth/handler`
+
+        他の値は空欄のままにして、**Save** を選択します。
+      </Step>
+      <Step title="Lovable に IdP 情報を提供する">
+        アプリケーションのセットアップが完了したら、次の値をコピーして Lovable に入力します。
+
+        - Microsoft Entra `Login URL` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Microsoft Entra `Microsoft Entra Identifier` → Lovable `Identity Provider Entity ID / Issuer`
+        - Microsoft Entra `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            証明書 (Base 64) をダウンロードするか、`App Federation Metadata URL` を新しいタブで開いて `X509Certificate` の値をコピーできます。証明書の値を `-----BEGIN CERTIFICATE-----` と `-----END CERTIFICATE-----` の行の間に貼り付けてください。
+          </Note>
+      </Step>
+      <Step title="Lovable で SAML プロバイダーの設定を完了する">
+        Lovable で **Configure SAML Provider → Confirm & Enable SSO** をクリックし、Microsoft Entra ID を SAML SSO プロバイダーとしての設定を完了します。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-other-providers">
+  ## 他のプロバイダーを設定する
+</div>
+
+Lovable SSO では、任意の OIDC または SAML 準拠プロバイダーを設定できます。
+
+始める前に、IdP で使用するために必要な設定値を取得するため、[Start SSO setup in Lovable](#start-sso-setup-in-lovable) を完了してください。
+
+<Tabs>
+  <Tab title="OIDC">
+    **プロバイダーの対応関係**
+
+    各プロバイダーでよく使われるフィールド名:
+
+    - Redirect URI: `Callback URL`, `Sign-in redirect URI`
+    - Issuer/Domain: `Issuer URL`, `Authority`, `Okta domain`, `Auth0 domain`, `Tenant domain`
+    - Client credentials: `Client ID` と `Client Secret`
+
+    **手順**
+
+    <Steps>
+      <Step title="OIDC 機密クライアントアプリを作成する">
+        IdP（アイデンティティプロバイダー）で、新しい OIDC Web アプリケーションを作成します。
+      </Step>
+      <Step title="Redirect URI を設定する">
+        Redirect/Callback URLs に `https://auth.lovable.dev/__/auth/handler` を追加します。
+      </Step>
+      <Step title="必要なスコープを有効にする">
+        `openid` と `email` のスコープが有効になっており、必要に応じて同意が取得されていることを確認します。
+      </Step>
+      <Step title="Lovable に IdP 情報を提供する">
+        IdP で次の値をコピーし、Lovable に入力します:
+
+        - `Domain` または `Issuer URL` → Lovable の `OIDC Issuer URL/Discovery Endpoint`
+        - `Client ID` → Lovable の `OAuth Client ID/Application ID`
+        - `Client Secret` → Lovable の `OAuth Client Secret`
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    **プロバイダーの対応関係**
+
+    各プロバイダーでよく使われるフィールド名:
+
+    - ACS URL: `Single Sign-On URL`, `SSO URL`, `Reply URL`, `Assertion Consumer Service URL`
+    - Audience: `SP Entity ID`, `Audience URI`, `Identifier`
+    - Attribute mapping: `Attribute Statements`, `User Attributes & Claims`
+
+    **手順**
+
+    <Steps>
+      <Step title="SAML 2.0 アプリケーションを作成する">
+        プロバイダーで新しい SAML 2.0 アプリケーションを作成します。
+      </Step>
+      <Step title="エンドポイントを設定する">
+        - ACS URL: `https://auth.lovable.dev/__/auth/handler`
+        - Audience / Entity ID: `https://auth.lovable.dev/__/auth/handler`
+      </Step>
+      <Step title="属性をマッピングする">
+        `email` が SAML アサーションに含まれていることを確認します。`displayName` は任意です。
+      </Step>
+      <Step title="ユーザーを割り当てる">
+        Lovable にアクセスさせたいユーザー／グループに、このアプリケーションを割り当てます。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="troubleshooting">
+  ## トラブルシューティング
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <AccordionGroup>
+      <Accordion title="リダイレクト URI の不正または不一致">
+        IdP 側で、リダイレクト/コールバック URL が `https://auth.lovable.dev/__/auth/handler` と完全に一致していることを確認してください。
+      </Accordion>
+      <Accordion title="Issuer URL / ディスカバリーの失敗">
+        プロバイダーの OIDC Issuer URL（単なるドメインではなく）を使用してください。
+
+        - Okta の場合は **Sign-on** タブからコピーしてください。
+        - Auth0 の場合はテナントドメインを使用してください。
+      </Accordion>
+      <Accordion title="メールアドレスが返されない">
+        `email` スコープを付与し、ユーザーアカウントにプライマリメールアドレスが設定されていることを確認してください。
+      </Accordion>
+      <Accordion title="認可フローの問題">
+        機密クライアントとクライアントシークレットを使用した `Authorization Code` フローを利用してください。Implicit フローや PKCE のみのアプリタイプは避けてください。
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="SAML">
+    <AccordionGroup>
+      <Accordion title="ACS または Audience が不正">
+        IdP 側で、ACS と Audience/Entity ID の両方が `https://auth.lovable.dev/__/auth/handler` と完全に一致していることを確認してください。
+      </Accordion>
+      <Accordion title="Email クレームが存在しない">
+        Email クレームがマッピングされていることを確認してください。
+
+        Microsoft Entra ID の場合、`email` を `user.mail` にマッピングします。`user.mail` が空の場合は、`user.userprincipalname` を使用してください。
+      </Accordion>
+      <Accordion title="プロバイダーの認証情報が無効">
+        正しい `X.509` 証明書を貼り付けてください。証明書がローテーションされた場合は、Lovable の設定も更新してください。
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="すでにアカウントがありますが、SSO を使うビジネスワークスペースに参加する予定です。どのようにログインすればよいですか？">
+    すでに別のログイン方法（メールアドレス／パスワード、Google、または GitHub など）でアカウントを作成している場合は、まずその方法でログインしてください。ログインしたら、**Settings → Your account → Link SSO** に移動します。ここで既存のアカウントを会社の SSO とリンクできます。
+
+    <Note>
+      **重要:** 既存アカウントと SSO をリンクする前に SSO でログインしようとすると、エラーが表示されます。これは不正アクセスを防ぐためのセキュリティ対策です。まず元のログイン方法でログインしてから、リンク処理を完了してください。
+    </Note>
+  </Accordion>
+  <Accordion title="Lovable はどの SSO プロバイダーをサポートしていますか？">
+    Lovable は業界標準の OIDC と SAML プロトコルをサポートしているため、それらに対応した任意の SSO プロバイダーと連携できます。
+  </Accordion>
+  <Accordion title="Lovable はワークスペースごとに複数の SSO プロバイダーをサポートしていますか？">
+    いいえ。1 つのワークスペースには、同時に設定できる **有効な SSO プロバイダーは 1 つだけ**です。
+  </Accordion>
+  <Accordion title="ワークスペースに対して SSO を必須にできますか？">
+    はい。ワークスペースの **owner** または **admin** が、**Settings → Workspace → Identity** で **Enforce SSO** を有効にし、**session duration** を選択することで、再認証が必要になるまでユーザーがサインイン状態を維持する時間（24 時間、48 時間、7 日間）を設定できます。
+
+    これにより、ワークスペースメンバーは認証に必ず SSO を使用する必要があります。外部コラボレーターと招待リンクは無効になります。
+  </Accordion>
+  <Accordion title="Lovable は IdP 起点の SSO をサポートしていますか？">
+    いいえ。**IdP 起点の SSO**（IdP のダッシュボード上のタイルからサインインを開始する方式）はサポートしていません。
+
+    Lovable がサポートしているのは、**サービスプロバイダー（SP）起点のサインインのみ**です。ユーザーは Lovable からサインインを開始する必要があります。
+  </Accordion>
+  <Accordion title="Lovable は SCIM や自動ユーザープロビジョニングをサポートしていますか？">
+    Lovable は **JIT（ジャストインタイム）プロビジョニング**をサポートしています。ユーザーが SSO 経由で初めてサインインしたタイミングで、自動的にユーザーアカウントが作成され、あなたの会社のワークスペースに追加されます。
+
+    また、**JIT で作成されたユーザーのデフォルトロール**（admin、editor、viewer）を設定でき、ユーザーが SSO を通じて初めて参加したときにそのロールが適用されます。
+  </Accordion>
+  <Accordion title="tenant ID（SSO ログイン識別子）はどこで確認できますか？">
+    tenant ID は、**SSO ログイン URL** 内で使用される `{tenantId}` の値です。\
+    `https://lovable.dev/sso-login/{tenantId}` の部分で、Lovable で SSO プロバイダーを設定する際に指定した **SSO login identifier** と一致します。
+
+    プロバイダーの設定が完了した後は、**Settings → Workspace → Identity** からも確認できます。
+  </Accordion>
+</AccordionGroup>

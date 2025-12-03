@@ -1,0 +1,215 @@
+---
+title: "Best practice"
+description: "Sfruttare al massimo Lovable"
+icon: "dumbbell"
+---
+
+Questa guida aiuta tutti gli utenti—dai nuovi agli esperti—a mettersi rapidamente al passo ed evitare gli errori più comuni quando sviluppano con Lovable.
+
+<div id="1-set-your-foundation-use-the-knowledge-file">
+  ## 1. Imposta le basi: usa il file Knowledge
+</div>
+
+**Perché è importante:** Il file [Knowledge](/it/features/knowledge) è il cervello del tuo Progetto. Viene inviato con ogni istruzione e aiuta l&#39;IA a comprendere il contesto completo.
+
+**Cosa includere:**
+
+* La visione del tuo prodotto (pensala come un PRD)
+* User journey e personas
+* Funzionalità e caratteristiche principali
+* Design system e linee guida UI
+* Comportamenti specifici per ruolo (ad es. Admin, User, Investor)
+
+<Tip>
+  Puoi generare automaticamente un file Knowledge tramite Chat mode:
+
+  ```
+  Generate knowledge for my project at T=0 based on the features I’ve already implemented.
+  ```
+</Tip>
+
+<div id="2-prompting-best-practices">
+  ## 2. [Prompting](/it/prompting/prompting-one) Best practices
+</div>
+
+**Istruzioni chiare e dettagliate = risultati migliori.** Pensa all&#39;IA come al tuo partner di sviluppo: sa solo ciò che le dici.
+
+**Suggerimenti per scrivere buone istruzioni:**
+
+* Sii specifico: indica l&#39;esatta pagina (ad es. `/dashboard`) e il comportamento atteso.
+* Usa un linguaggio naturale.
+
+  ```
+  I want users with the role Investor to access this component, but not Admins.
+  ```
+* Aggiungi screenshot: sono particolarmente utili per descrivere bug o problemi di UX.
+* Aggiungi dei vincoli: indica all&#39;IA cosa **non** deve toccare, ad es.:
+
+  ```
+  Do not edit /shared/Layout.tsx.
+  ```
+* Ripeti le istruzioni importanti nei vari prompt. La memoria dell&#39;IA può essere limitata.
+* Evita di provare a implementare 5 cose alla volta. Suddividi il lavoro in blocchi più piccoli e testabili. Usa Chat Mode tra un blocco e l&#39;altro per validare prima di procedere.
+
+  ```
+  **Feature Breakdown Template:**
+  Create the new page
+  Add UI layout
+  Connect the data
+  Add logic + edge cases
+  Test per role
+  ```
+* Se la tua app ha più ruoli (ad es. Admin, Investor, Startup), specifica sempre *a quale ruolo* si applica il prompt. Questo aiuta a evitare bug causati da logiche o componenti condivisi.
+
+  ```
+  As an Investor, I want to view the company dashboard, but I shouldn’t be able to edit it. Please isolate this feature to the Investor role only.
+  ```
+
+<div id="3-use-chat-mode-early-and-often">
+  ## 3. Usa Chat mode fin da subito e spesso
+</div>
+
+[**Chat mode**](https://docs.lovable.dev/features/labs#chat-mode) = il tuo copilota AI. Ti aiuta a fare debug, fare brainstorming e pianificare le implementazioni, senza modificare il codice finché non sei pronto.
+
+**Quando passare a Chat mode:**
+
+* Dopo 2–3 tentativi di “Try to Fix” non riusciti
+* Quando fai debug di logiche complesse o di problemi al database
+* Quando pianifichi nuove funzionalità
+
+  ```
+  Suggest 3 ways to implement X
+  ```
+
+<Tip>
+  **Suggerimento di flusso di lavoro:**
+
+  Alcuni utenti usano Chat mode per il 60–70% del tempo. Fai clic su “Implement the plan” solo quando sei completamente soddisfatto.
+</Tip>
+
+<Tip>
+  Se ti dimentichi di usare Chat mode, questo formato migliora la coerenza dei risultati ed evita modifiche collaterali.
+
+  ```
+  On page /settings, implement [feature]. The expected behavior is [XYZ]. Please don’t touch component A, layout B, or shared logic unless necessary. Follow best practices from Tailwind / Supabase / X.
+  ```
+</Tip>
+
+<Tip>
+  Per evitare esecuzioni di codice indesiderate:
+
+  ```
+  Investigate but don’t write code yet.
+  ```
+
+  ```
+  Suggest 3 ways to solve this without changing anything.
+  ```
+
+  Così mantieni tu il controllo.
+</Tip>
+
+<Tip>
+  Quando l&#39;IA entra in un &quot;loop&quot;, usa questa sequenza per evitare cicli infiniti di correzioni su codice non funzionante:
+
+  1. Passa a Chat mode
+  2. Incolla lo screenshot dell&#39;errore
+  3. Dì:
+
+     ```
+     Please investigate this without breaking other features. If needed, revert to the last working version and fix from there.
+     ```
+</Tip>
+
+<div id="4-avoid-common-pitfalls-with-supabase">
+  ## 4. Evita gli errori più comuni con Supabase
+</div>
+
+**Attenzione:** [Supabase](https://docs.lovable.dev/integrations/supabase) non gestisce i revert in modo pulito. Se esegui il revert di una versione, lo schema del database potrebbe danneggiarsi.
+
+**Best practices:**
+
+* Collega Supabase **dopo** che il frontend è stabile
+* Se devi eseguire il revert, dai questa istruzione all&#39;AI:
+
+  ```
+  Please validate the SQL schema at T=0 and ensure no breaking changes have occurred.
+  ```
+* Verifica sempre le funzionalità collegate al database prima di fare clic su **Pubblica**
+
+<div id="5-use-visual-edit-for-quick-ui-fixes">
+  ## 5. Usa Visual Edit per veloci correzioni alla UI
+</div>
+
+Lo [**strumento Visual Edit**](https://docs.lovable.dev/features/visual-edit) è gratuito e veloce. Usalo invece delle istruzioni per:
+
+* Cambiare testo, colori, font, e apportare piccoli aggiustamenti al layout
+* Modificare più elementi piccoli contemporaneamente
+* Effettuare commit sicuri, senza consumo di crediti (con annullamento disponibile)
+
+<div id="6-use-github-version-control-wisely">
+  ## 6. Usa [GitHub](https://docs.lovable.dev/integrations/git-integration) + il controllo di versione in modo efficace
+</div>
+
+* Ogni modifica è un commit. Usa il **pinning** per contrassegnare le versioni stabili. Dopo ogni nuova funzionalità che funziona: **applica un pin**
+* Dopo ogni bug: **confronta visivamente le versioni.** Puoi usare la seguente istruzione:
+
+  ```
+  Compare version at T–1 to T–0. What changed? What might be breaking?
+  ```
+* Torna a una versione stabile se ti sembra che l&#39;IA abbia rotto troppe cose.
+* Usa il **branching di GitHub** a tuo rischio e pericolo. Evita di eliminare branch prima di tornare su `main` in Lovable per prevenire problemi di sincronizzazione del progetto.
+
+<div id="7-when-all-else-fails-remix">
+  ## 7. Quando tutto il resto fallisce, remixa
+</div>
+
+Molti utenti si rendono conto che rifare tutto da capo richiede meno tempo la seconda volta.
+
+* [Remix](https://docs.lovable.dev/user-guides/quickstart#remix-an-existing-project:~:text=you%20to%20reuse-,the,-current%20state%20of) crea una copia pulita del tuo progetto a T=0.
+* Ricostruisci con istruzioni migliori + conoscenze più chiare
+* Usa il tuo vecchio progetto solo come riferimento
+
+**Casi d&#39;uso:**
+
+* Sei bloccato in un loop pieno di bug
+* Vuoi ripartire da zero mantenendo la cronologia
+* Devi disconnettere Supabase e provare una nuova strada
+
+<Tip>
+  Il remixaggio richiede prima la disconnessione di Supabase.
+</Tip>
+
+<div id="8-stay-patient-stay-calm">
+  ## 8. Sii paziente, rimani calmo
+</div>
+
+Non sei solo. L&#39;IA può essere magica in un momento e frustrante in quello successivo. L&#39;ultimo 5% di qualsiasi progetto è spesso il più lento, ma anche il più importante.
+
+<Tip>
+  **Regola d&#39;oro:**
+
+  Prenditi il tempo necessario con i prompt. Ricontrolla tutto. Suddividi il lavoro in piccoli blocchi testabili. Più sono precisi i tuoi input, migliori saranno i tuoi output.
+</Tip>
+
+<div id="9-use-the-docs-and-ask-for-help">
+  ## 9. Usa la documentazione e chiedi aiuto
+</div>
+
+* La [documentazione](https://docs.lovable.dev) contiene walkthrough, template, consigli SEO, integrazioni e molto altro. Puoi fare domande direttamente all&#39;assistente AI presente nella doc.
+* Entra nella [community Discord](https://discord.gg/lovable-dev) per ricevere supporto da altri utenti.
+* Quando sei pronto, invia il tuo Progetto a [Lovable Launch](https://docs.lovable.dev/features/launched).
+
+<div id="10-bonus-tips">
+  ## 10. Suggerimenti bonus
+</div>
+
+* Aggiungi un&#39;istruzione come nota vocale usando la dettatura (ad es. su Mac, usa il microfono per dettare prompt lunghi). In questo modo creerai input migliori più velocemente — è particolarmente utile quando sei frustrato o stanco.
+* Usa il pattern di istruzione &quot;`I am frustrated…`&quot; per guidare meglio l&#39;attenzione dell&#39;IA
+* Dopo una modifica importante, ricontrolla sempre più ruoli e il loro comportamento (soprattutto se c&#39;è logica condizionale)
+* Conserva versioni stabili come fallback per un debug veloce
+* Se vedi effetti collaterali imprevisti, questo aiuta a evitare bug causati da logica troppo generica.
+
+  ```
+  Create a component specifically for [role X] and do not reuse shared components unless clearly scoped.
+  ```

@@ -1,0 +1,129 @@
+---
+title: "Publica tu aplicación"
+description: "Publica tu aplicación de Lovable y compártela con el público adecuado"
+icon: "rocket"
+keywords:
+  [
+    "publicar aplicación Lovable",
+    "publicar aplicación",
+    "publicar sitio web",
+    "publicar proyecto",
+    "aplicaciones internas",
+    "configuración de acceso al sitio web",
+    "publicación de aplicación privada",
+    "restringir publicación externa",
+    "despliegue seguro de aplicaciones",
+    "publicar herramientas internas",
+    "anular publicación de aplicación",
+    "plan Lovable Business",
+    "plan Lovable Enterprise",
+    "publicar en dominio personalizado",
+    "actualizar aplicación publicada",
+  ]
+---
+
+Publicar convierte tu proyecto de Lovable en una aplicación web activa que puedes compartir con otras personas. Lovable facilita publicar tu aplicación en la web, ya sea que la compartas públicamente o la mantengas privada dentro de tu espacio de trabajo.
+
+* **Planes Free y Pro:** Tu sitio web publicado es **público** y accesible para cualquier persona que tenga el enlace. No puedes restringir el acceso en estos planes, así que asegúrate de que estás listo para compartir antes de publicar.
+* **Planes Business y Enterprise:** Puedes **controlar quién puede ver tu aplicación**: cualquier persona con el enlace o solo los miembros autenticados del espacio de trabajo.
+
+Una vez publicada, puedes actualizar tu aplicación activa en cualquier momento y conectar un dominio personalizado para ofrecer una experiencia pulida y alineada con tu marca.
+
+<div id="website-access-settings-business-and-enterprise-plans">
+  ## Configuración de acceso al sitio web (planes Business y Enterprise)
+</div>
+
+En los planes Business y Enterprise, puedes gestionar quién puede ver las aplicaciones publicadas para mantener la privacidad y el control.
+
+Esto te permite:
+
+* Crear y compartir **aplicaciones internas** que permanezcan privadas dentro de tu espacio de trabajo.
+* Evitar que tus compañeros de equipo publiquen aplicaciones externamente por error.
+* Apoyar la gobernanza y el cumplimiento normativo en organizaciones que manejan datos sensibles.
+
+El acceso se puede gestionar tanto a nivel de **espacio de trabajo** como de **proyecto**.
+
+<div id="workspace-level-setting">
+  ### Configuración a nivel de espacio de trabajo
+</div>
+
+Los **administradores** y **propietarios** del Workspace pueden establecer una política de acceso predeterminada para todas las apps publicadas.
+
+Ve a **Workspace settings → Privacy &amp; Security → Default website access** y elige una de las siguientes opciones:
+
+* **Anyone with link:** Todas las apps publicadas son públicas de forma predeterminada y accesibles para cualquier persona.
+* **Workspace members**: Todas las apps publicadas son privadas de forma predeterminada y se restringen únicamente a miembros autenticados del espacio de trabajo. Esto garantiza que las nuevas apps se mantengan privadas a menos que se hagan públicas explícitamente.
+
+<div id="project-level-setting">
+  ### Configuración a nivel de proyecto
+</div>
+
+Puedes reemplazar la configuración predeterminada del espacio de trabajo para proyectos individuales.
+
+Ve a **Publicar** y define **¿Quién puede acceder?** como:
+
+* **Cualquiera con el enlace:** Accesible para cualquier persona que tenga la URL.
+* **Miembros del workspace:** Restringido a miembros del workspace que hayan iniciado sesión.
+
+Si no cambias esto, el proyecto heredará la configuración predeterminada del espacio de trabajo.
+
+<div id="publishing-your-project">
+  ## Publicar tu proyecto
+</div>
+
+<Note>
+  En los planes Business y Enterprise, solo los propietarios y administradores del Workspace pueden publicar
+  proyectos.
+</Note>
+
+1. En tu proyecto, haz clic en el icono **Publicar** en la esquina superior derecha.
+2. En el modal de **Publicar**, revisa y configura:
+   * **Dirección del sitio web**: De forma predeterminada, tu aplicación se publica en `[project-url-slug].lovable.app`. Puedes editar `[project-url-slug]` o añadir un [dominio personalizado](/es/features/custom-domain) (disponible en los planes de pago).
+   * **Información del sitio web**: Personaliza los metadatos de tu aplicación: icono, título, descripción e imagen para compartir.
+   * Elige **quién puede acceder** a tu aplicación publicada, configurable solo en los planes Business y Enterprise:
+     * **Cualquiera con el enlace**
+     * **Miembros del Workspace**
+3. Haz clic en **Revisar seguridad** para mostrar posibles vulnerabilidades de seguridad antes de hacerla pública.
+
+<Danger>
+  Realiza siempre una revisión de seguridad antes de publicar. Esto ayuda a identificar
+  vulnerabilidades que podrían exponer datos sensibles o permitir accesos no autorizados.
+  Obtén más información en [Security](/es/features/security).
+</Danger>
+
+4. Cuando estés listo, haz clic en **Publicar**.\
+   Una vez que el despliegue se complete, recibirás una ventana emergente con el enlace publicado.
+
+Puedes seguir iterando en tu aplicación: cuando estés listo para publicar las actualizaciones, haz clic en **Actualizar** en el modal de **Publicar**.
+
+<div id="faq">
+  ## Preguntas frecuentes
+</div>
+
+<AccordionGroup>
+  <Accordion title="¿Por qué no puedo publicar mi sitio?">
+    Si recibes un error al publicar tu sitio, lo más probable es que se deba a un error de compilación que no se muestra en la interfaz y que impide que la versión actual de tu sitio web funcione correctamente. Intenta solucionar el problema pidiéndole al Lovable Agent que lo investigue.
+  </Accordion>
+
+  <Accordion title="¿Por qué no puedo ver mis cambios en la versión publicada de mi sitio?">
+    Los cambios no se envían automáticamente a tu app en producción. Para publicar actualizaciones, haz clic en **Publicar** y luego en **Actualizar**.
+  </Accordion>
+
+  <Accordion title="¿Puedo cambiar mi enlace publicado (URL del sitio web)?">
+    Sí. Puedes cambiar el slug de URL de tu Proyecto, que forma la dirección de tu sitio web en [lovable.app](http://lovable.app), de dos maneras:
+
+    1. Haz clic en **Publicar**, edita la dirección de tu sitio web y haz clic en **Actualizar**.
+    2. Ve a **Configuración del Proyecto → Editar slug de URL**, cambia el slug de la URL y haz clic en **Actualizar slug de URL**.
+
+    Ten en cuenta que cambiar el nombre del Proyecto no cambia la URL del Proyecto, solo cambia el nombre visible del Proyecto.
+  </Accordion>
+
+  <Accordion title="¿Puedo despublicar mi Proyecto?">
+    Sí. Puedes despublicar tu Proyecto de dos maneras:
+
+    1. Ve a **Configuración del Proyecto** y haz clic en **Despublicar Proyecto**.
+    2. Haz clic en **Publicar**, despliega la sección **Avanzado** y haz clic en **Despublicar**.
+
+    Una vez despublicada, tu app dejará de ser accesible para nadie.
+  </Accordion>
+</AccordionGroup>

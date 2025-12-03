@@ -1,0 +1,69 @@
+---
+title: "Verwendung von Videos"
+description: "Lerne, wie du Videos mit externen Links oder GitHub-Uploads in deine Projekte einbettest"
+icon: "film"
+---
+
+Lovable bietet zwei Methoden, um Videos in deine Projekte einzubetten. Im Folgenden gehen wir beide Optionen Schritt für Schritt durch:
+
+<AccordionGroup>
+  <Accordion title="Verweisen auf ein externes Video">
+    <Tip>
+      Die einfachste und empfohlene Methode, ein Video einzubinden, ist das Verlinken eines extern gehosteten Videos, zum Beispiel auf YouTube.
+    </Tip>
+    <CodeGroup>
+
+    ```txt Beispiel-Eingabeaufforderung
+    Embed this video
+    https://www.youtube.com/watch?v=dQw4w9WgXcQ 
+    in the hero content section.
+    ```
+
+    </CodeGroup>
+  </Accordion>
+  <Accordion title="Verwendung eines Videos aus deinem öffentlichen GitHub-Ordner">
+    <Warning>
+      Das Hochladen großer Videos in dein GitHub-Repository kann dazu führen, dass es stark wächst, was die Leistung von Lovable beeinträchtigen kann (längere Repository-Klonzeiten, langsamerer Start von Vorschauen/Sandbox).
+
+      Eine bessere Option ist die Nutzung gehosteter Dienste (wie YouTube) oder von Speicherdiensten wie S3, sodass du im Grunde eine URL erhältst, auf die du dich beziehen kannst – wie in den vorherigen Schritten beschrieben.
+    </Warning>
+    Du kannst Videos in das GitHub-Repository deines Projekts hochladen und sie direkt referenzieren. So gehst du vor:
+
+    <Steps>
+      <Step title="Verbinde dein GitHub-Repository ">
+        Stelle zunächst sicher, dass dein Projekt mit einem GitHub-Repository verknüpft ist. [So richtest du dein Repository ein](https://docs.lovable.dev/integrations/git-integration).
+      </Step>
+      <Step title="Öffne den public-Ordner">
+        Navigiere in deinem verbundenen Repository in das `public`-Verzeichnis. Dieser Ordner wird speziell zum Hosten von Projekt-Assets wie Bildern, Videos und anderen Medien verwendet.
+      </Step>
+      <Step title="Lade ein Video hoch">
+        Du kannst dein Video nun zum public-Ordner hinzufügen, indem du es entweder per Drag-and-drop hineinziehst oder auf **"choose your files"** klickst, um die Datei von deinem lokalen Rechner auszuwählen und hochzuladen.
+      </Step>
+      <Step title="Committe die Datei">
+        Nachdem du deine Videodatei ausgewählt hast, gib eine kurze Commit-Nachricht ein (z. B. "Adds a Mars video to be used in the app") und klicke auf **"Commit changes"**.
+        ![Videodatei committen](/assets/using-videos-github-commiting.png)
+      </Step>
+      <Step title="Rufe den Videopfad ab">
+        Sobald der Upload abgeschlossen ist, klicke auf die Videodatei und verwende das Kopiersymbol  :octicons-copy-16: , um ihren Pfad zu kopieren. Du benötigst diesen Pfad im nächsten Schritt.
+        ![Pfad der Videodatei kopieren](/assets/using-videos-github-selecting.png)
+      </Step>
+      <Step title="Referenziere das Video in Lovable">
+        Jetzt kannst du das Video einbetten, indem du den Dateipfad in deiner Eingabeaufforderung angibst. Du kannst zum Beispiel eine Eingabeaufforderung wie diese verwenden:
+
+        <CodeGroup>
+
+        ```bash Beispiel-Eingabeaufforderung
+        Insert an additional video into the introduction section using this file: 
+        public/mars-video-nasa.mp4
+        ```
+
+        </CodeGroup>
+
+        Stelle sicher, dass du genau den Dateipfad verwendest, den du zuvor kopiert hast.
+      </Step>
+    </Steps>
+    Um diese Methoden in Aktion zu sehen, schau dir eines der Beispielprojekte an: [Lovable-Beispielprojekt zur Verwendung von Videos](https://lovable.dev/projects/380835ab-c8d7-4f45-9b0d-51ec04294457). Dort findest du echte Eingabeaufforderungen, die zeigen, wie Videos mit beiden Methoden integriert werden.
+
+    Zusätzlich findest du in diesem öffentlichen Repository einen technischeren Einblick in den Prozess zum Hinzufügen von Videos: [GitHub: Video Upload Example](https://github.com/viborc/adding-videos-example). Es enthält den Video-Upload und die Implementierungsdetails, die im Projekt verwendet werden.
+  </Accordion>
+</AccordionGroup>

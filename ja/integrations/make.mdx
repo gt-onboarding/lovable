@@ -1,0 +1,363 @@
+---
+title: "Make 連携"
+description: "Lovable アプリケーションに Make を統合する方法を学びましょう"
+icon: "wand-sparkles"
+---
+
+<div id="what-is-make">
+  ## Make とは？
+</div>
+
+![Make website](/images/make-hero.png)
+
+[Make](https://www.make.com) は、アプリ、API、データソース間のワークフローを視覚的に構築できる、強力なノーコード自動化プラットフォームです。
+
+バックエンドロジックをコードで書く代わりに、フローチャート形式のキャンバス上でモジュールをドラッグ＆ドロップしてつなげます。次のようなケースに最適です：
+
+- コードを書かずに自動化したい **非エンジニア**
+- 高速なプロトタイピングや API を使った拡張性を求める **開発者**
+- Slack、Airtable、Notion、Calendly、Supabase などのツールを連携させたい **チーム**
+
+Make を使うと、次のことができます：
+
+- （ボタンがクリックされたときなど）Lovable アプリから **アクションをトリガー** する
+- Webhook や API を使って **データを送受信** する
+- **1,500以上のツール** やカスタム API と接続する
+- メール送信、AI 呼び出し、データのエンリッチメント、リマインダーなどのタスクを **自動化** する
+
+<div id="why-use-make-with-lovable">
+  ## なぜ Lovable と一緒に Make を使うのか？
+</div>
+
+このチュートリアルでは、Make が **AI 対応のバックエンド** として動作し、Lovable がフロントエンドを担当します。その結果、数分で構築できる、完全に自動化されたカスタム CRM を作成できます。
+
+この構成は次のようなケースに最適です：
+
+- 高度なロジックが必要な非開発者
+- ワークフローが絶えず変化するセールスチーム
+- バックエンドの実装・運用負荷なしで高速に反復したい場合
+- リアルタイムに UI に反映される API ベースの自動化
+
+<div id="step-by-step-tutorial">
+  ## ステップバイステップガイド
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/zv4vcR7VCAk?si=BgJHeEuti27cbgYt" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<div id="what-well-build">
+  ### 何を作るか
+</div>
+
+これから、3つのコアデータモデルを持つ CRM を作成します：
+
+- **Deals**（ステージベースのトラッキング付き）
+- **Contacts**（インライン編集対応）
+- **Companies**（データのリッチ化が可能）
+
+各エンティティは Make 経由でオートメーションと連携します。最後まで終えると、次のことができるようになります：
+
+- Deal を移動してメール送信をトリガーする
+- Contact をクリックして AI セールスコールを開始する
+- Company をクリックしてリアルタイムデータを取得する
+- Supabase Edge Functions を使ってすべてを安全に守る
+
+<div id="how-are-we-going-to-build-it">
+  ### どのように構築するか
+</div>
+
+独自のCRMを一から作ると、完成までに数か月かかることもあります。**Lovable** と **Make** を使えば、1時間もかからずにリリースでき、バックエンドコードを書くことなく営業ワークフロー全体を自動化できます。このステップバイステップガイドでは、次の機能を備えた **フル機能のAI搭載CRM** の構築方法を学びます。
+
+- ビジュアルな案件パイプライン（ドラッグ＆ドロップ）
+- 編集可能なコンタクトおよび企業モーダル
+- [Vapi](https://vapi.ai/) を使ったAIコールエージェント
+- [Apollo.io](http://Apollo.io) による企業データのエンリッチメント
+- Supabase を使ったメールワークフローとセキュリティ
+- [Make](https://www.make.com) を使ったリアルタイム自動化
+
+<Steps>
+  <Step title="Lovable での CRM のセットアップ">
+    <Info>
+      CRMシステムを構築するにあたり、「Deals」「Contacts」「Companies」を用意します。テーマはライトテーマにしてください。
+    </Info>
+
+    <Steps>
+      <Step title="ステップ 1">
+        新しい Lovable プロジェクトを作成します。プロジェクトタイプとして **CRM** を選択します。
+      </Step>
+
+      <Step title="ステップ 2">
+        3つのエンティティ **Deals**、**Contacts**、**Companies** を定義します。
+      </Step>
+
+      <Step title="ステップ 3">
+        必要に応じて **Light Theme** を選択し、**Generate** をクリックします。
+
+        ![Make と連携した CRM](/images/crm-make.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="商談ステージを追加する（カンバンビュー）">
+    ![Crm Kanban Make ](/images/crm-kanban-make.png)
+
+    <Steps>
+      <Step title="ステップ 1">
+        Lovable の **Deals** セクションを開きます。
+      </Step>
+
+      <Step title="ステップ 2">
+        **Edit** をクリックし、次の 5 つのステージを追加します。
+
+        * **Lead**
+        * **Qualification**
+        * **Proposal Sent**
+        * **Negotiation**
+        * **Closed - Won/Lost**
+      </Step>
+
+      <Step title="ステップ 3">
+        ディールをステージ間でドラッグ＆ドロップして移動できるように、**Drag-and-Drop** 機能を有効にします。
+
+        <Info>
+          Drag-and-drop を使うと、ディールのステージに応じてアクションを自動化できます。
+        </Info>
+      </Step>
+    </Steps>
+
+    <Info>
+      **理由**: この設定により、ユーザーはディールを視覚的なワークフローで追跡できるようになります。
+    </Info>
+  </Step>
+
+  <Step title="連絡先管理システムの実装">
+    ![Contact Form Crm Make](/images/contact-form-crm-make.png)
+
+    <Steps>
+      <Step title="Step 1">
+        **Contacts** で、クリックして開く **モーダルビュー** を有効にします。
+      </Step>
+
+      <Step title="Step 2">
+        モーダル内のすべてのフィールドを、**インライン編集可能** にします。
+
+        * モーダルには **コンタクトの詳細** が表示されます。
+        * フィールドは **編集可能** なので、素早く更新できます。
+
+        <Info>
+          ビューを切り替える必要がなくなり、従来のCRMよりスムーズに作業できます。
+        </Info>
+      </Step>
+    </Steps>
+
+    <Info>
+      **なぜ？** 従来のCRMでは新しいページに遷移するため、ワークフローが遅くなりがちです。モーダルなら、同じ画面上で完結できます。
+    </Info>
+  </Step>
+
+  <Step title="Make と Vapi を連携して、AI 対応の通話を実現する">
+    <Steps>
+      <Step title="Make で Webhook を作成する">
+        ![Webhook Lovable Make](/images/webhook-lovable-make.png)
+
+        * [Make](https://www.make.com/) を開き、**新しいシナリオ**を作成します。
+        * **Webhooks &gt; Custom Webhook** をクリックし、名前を **Call Contact** にします。
+        * Webhook URL をコピーします。
+      </Step>
+
+      <Step title="Lovable から発信をトリガーする">
+        ![Ai Assistant Make](/images/ai-assistant-make.png)
+
+        * **Contacts** モーダルで、**Call Contact** ボタンを追加します。
+        * ボタンのアクションを変更し、JSON データ（名前、電話番号、会社名、通話の目的）を Make の Webhook に **送信** するように設定します。
+        * **Call Contact** をクリックして接続をテストします。
+      </Step>
+
+      <Step title="AI 通話に Vapi を使う">
+        ![Vapi Make](/images/vapi-make.png)
+
+        ![Vapi Make Automation Pn](/images/vapi-make-automation.png)
+
+        * Make で **API Call モジュール** を追加します。
+        * 通話の詳細を含めて [Vapi](https://vapi.ai/) にリクエストを送信します。
+        * カスタム Vapi エージェントは次のことを行います：
+          * 通話を発信する
+          * 案件に基づいた動的なプロンプトに従う
+          * 結果を Lovable にログとして保存する
+
+        <Info>
+          これにより、CRM の UI から即座にトリガーされる、自動化されたアウトバウンド AI 通話が実現します。
+        </Info>
+
+        ![Call Customer Make Pn](/images/call-customer-make.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Apollo を使って企業データのエンリッチメントを追加する">
+    <Steps>
+      <Step title="Make で Enrich Webhook を作成する">
+        * Make で、`Enrich Company` という名前の 2つ目の **Custom Webhook** を追加します。
+        * Webhook URL をコピーします。
+
+        ![Make Enrich Pn](/images/make-enrich.png)
+      </Step>
+
+      <Step title="Lovable からリクエストを送信する">
+        * **Companies** で、**Enrich Company** ボタンを追加します。
+        * クリック時に、会社のドメインを JSON ペイロードとして送信します。
+
+        <Info>
+          enrich ボタンをクリックしたときに、次の処理を行います:
+
+          1. これまで開いていたモーダルは不要なので削除する
+          2. 新しい本来のステップ &gt; ドメインを JSON として次の Webhook に送信する: [Link]
+          3. Webhook レスポンスを JSON として受け取り、これを動的にパースしてモーダルビューに反映できるように、動的フィールドを作成する
+        </Info>
+      </Step>
+
+      <Step title="Apollo.io API を呼び出す">
+        ![Apollo Make Lovable Pn](/images/apollo-make-lovable.png)
+
+        * Apollo の [Organization Enrichment API](https://apollo.io/docs) を使用します。
+        * 次の項目を取得します:
+          * 業種
+          * 従業員数
+          * 住所
+          * Web サイト
+          * 資金調達状況
+        * 補完されたデータを Lovable に返します。
+      </Step>
+
+      <Step title="レスポンスをモーダルビューにパースする">
+        ![Webhook Apollo Webhook Make Pn](/images/webhook-apollo-webhook-make.png)
+
+        * JSON から、Lovable のモーダル内に動的にフィールドを生成します。
+        * データを（生の JSON ではなく）読みやすい UI で表示します。
+
+        <Info>
+          Apollo による enrichment により、企業をより早く見極めるための重要なインサイトが追加されます。
+        </Info>
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Supabase Edge Functions を使って API 呼び出しを隠す">
+    ![Make Supabase Automation Pn](/images/make-supabase-automation.png)
+
+    Webhook を安全に利用するには:
+
+    * プロジェクト設定で **Supabase Integration** を有効にします。
+    * Make へのリクエストをプロキシする Supabase の **エッジ関数（Edge Function）** を作成します。
+    * 直接 Webhook を呼び出すのではなく、Supabase 関数を呼び出すように Lovable を更新します。
+
+    <Info>
+      これにより Webhook の URL がブラウザから見えなくなります — 公開アプリでは不可欠です。
+    </Info>
+
+    <Info>
+      enrich ボタンをクリックする際は、Webhook アドレスへの API コールを隠すために必ず Supabase のエッジ関数を使用してください。そのためには、機能の実装を変更し、API コールが実際にブラウザから見えないようにする必要があります。
+    </Info>
+  </Step>
+
+  <Step title="フォローアップやワークフローの自動化" stepNumber="7">
+    取引ステージに基づいてメールキャンペーンを自動化するには：
+
+    * Make でイベントをトリガーするロジックを追加します：
+      * 取引が **Proposal Sent** に移動したらメールを送信する
+      * 取引が **Negotiation** に到達したら Slack でチームに通知する
+      * 連絡先をニュースレターやキャンペーンフローに追加する
+
+    <Info>
+      これにより、あなたがオフラインのときでもセールス活動を止めることなく継続できます。
+    </Info>
+  </Step>
+
+  <Step title="最終テストとデプロイ" stepNumber="8">
+    <Steps>
+      <Step title="エンドツーエンドテストを実行する">
+        * テスト用の案件と連絡先を作成します。
+        * AI コールフローを起動します。
+        * 企業データを補完し、結果を検証します。
+      </Step>
+
+      <Step title="デプロイして共有し、本番公開する">
+        * **Custom Domain** を使って CRM をカスタマイズします。
+        * アプリをチームと共有します。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="🎉 やりましたね！" stepNumber="9">
+    バックエンドなしで、フル機能の AI 搭載 CRM を構築できました。
+
+    **次のステップ**
+
+    * 連携を追加: Slack、Notion、HubSpot、Calendly
+    * Supabase ですべてを保護し、監査ログを追加する
+  </Step>
+</Steps>
+
+<div id="pro-tips-from-the-live-session">
+  ## ライブセッションのプロティップス
+</div>
+
+- Lovable 内で **select＋プロンプト** を使ってピンポイントな編集を行う
+- 接続する前にフローを可視化・整理するために **Make の Visual Canvas** を使う
+- 未知の JSON フィールドを動的にパースしてモーダルに渡し、UX を向上させる
+- Vapi＋Apollo＋Make を組み合わせてリアルタイムの AI ワークフローを構築する
+- Supabase の Edge Functions を使って、すべての公開 API／webhook 呼び出しをマスクする
+
+<div id="faq">
+  ## FAQ
+</div>
+
+<AccordionGroup>
+  <Accordion title="Make とは何ですか？">
+    Make は、ドラッグ＆ドロップのモジュールを使ってツール同士を連携し、ワークフローを構築できるビジュアルオートメーションプラットフォームです。Zapier に似ていますが、より柔軟で開発者フレンドリーです。
+  </Accordion>
+  <Accordion title="なぜ Lovable と組み合わせて Make を使うのですか？">
+    - バックエンドコードを書く必要がない
+    - UI（ボタン、フォーム、モーダル）からワークフローをトリガーできる
+    - ビジュアルにオートメーションを構築できる（エージェント呼び出し、データエンリッチメント、メールフローなど）
+    - 1,500\+ のアプリ（Slack、Notion、Calendly、Airtable など）と接続できる
+  </Accordion>
+  <Accordion title="Make は Lovable とどのように連携しますか？">
+    Lovable は **HTTP Webhook** を使って、通常 JSON 形式のデータを Make のシナリオに送信します。Make はそのデータを受け取り、処理を行い（例：API を呼び出す）、Lovable にレスポンスを返すこともできます。
+  </Accordion>
+  <Accordion title="Make の Scenarios とは何ですか？">
+    Scenarios は自動化されたワークフローです。次のようなものを定義します：
+
+    - トリガー（例：Webhook）
+    - アクション（例：API 呼び出し、メール送信）
+    - ロジック（ルーター、フィルター、反復処理）
+  </Accordion>
+  <Accordion title="Make の Webhook を保護できますか？">
+    はい。次のような方法があります：
+
+    - **IP 制限**（Webhook を呼び出せる送信元を制限）
+    - **Supabase Edge Functions** を使ってプロキシし、機密性の高い URL を秘匿する
+    - ヘッダーでの **APIキー認証**
+  </Accordion>
+  <Accordion title="Make と Supabase Edge Functions の違いは何ですか？">
+    - **Make** はビジュアルなオートメーションツールで、ワークフロー、API 連携、AI トリガーなどに最適です。
+    - **Supabase Edge Functions** はサーバーレスなバックエンドコードで、ロジック、認証、セキュリティなどに最適です。
+
+    最良の結果を得るには、これらを**組み合わせて**使ってください。
+  </Accordion>
+  <Accordion title="Make プランのオペレーション数を超えた場合はどうなりますか？">
+    シナリオは一時停止されます。Make からアラートが送信されるので、プランをアップグレードするか、フローを最適化できます。このガイド用のウェビナーで提供される **無料のプロプラン**には **20,000 オペレーション**が含まれており、プロトタイプには十分な量です。
+  </Accordion>
+  <Accordion title="Lovable なしで Make の Scenarios をテストできますか？">
+    はい\! Webhook で **手動データ入力** を使うか、Postman または curl からシナリオをトリガーできます。これは Lovable と接続する前のデバッグに最適です。
+  </Accordion>
+</AccordionGroup>
+
+<div id="resources">
+  ## リソース
+</div>
+
+- [Make](https://www.make.com)
+- [Vapi AI](https://vapi.ai/)
+- [Apollo.io Enrichment API](https://apollo.io/docs)
+- [Supabase Edge Functions](https://supabase.com/docs/guides/functions)
+- **Make Academy** を参照: [academy.make.com](https://academy.make.com)

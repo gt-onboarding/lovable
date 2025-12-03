@@ -1,0 +1,226 @@
+---
+title: "Intégration de 21st.dev"
+description: "Créer des landing pages IA très performantes avec Lovable"
+icon: "ruler-combined"
+---
+
+La plupart des landing pages générées par l’IA se ressemblent : sections vagues, couleurs hors charte et aucune personnalité. Mais ce n’est pas une fatalité.
+
+Nous allons vous présenter un workflow structuré utilisant Lovable et 21st.dev pour créer des landing pages que les clients _aiment vraiment_ (comme [celle-ci](https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727)).
+
+![Section hero de landing page](/images/hero-section.png)
+
+<div id="step-by-step-guide">
+  ## Guide étape par étape
+</div>
+
+De l’inspiration de design aux dernières touches, voici le guide étape par étape qu’il utilise pour créer rapidement sans sacrifier la qualité&nbsp;:
+
+<Steps>
+  <Step title="Commencez par une inspiration de design, pas par un prompt">
+    Avant d’écrire le moindre mot de prompt, parcourez [Dribbble](https://dribbble.com/) ou [Behance](https://www.behance.net/). Recherchez des designs avec :
+
+    * Une typographie et des espacements soignés
+    * Des CTA clairs et une mise en page épurée
+    * Des interactions subtiles (sans être surchargées)
+
+    <Tip>
+      Choisissez quelque chose que vous serez réellement en mesure de reproduire. Évitez les designs 3D trop complexes si vous ne prévoyez pas de les recréer.
+    </Tip>
+
+    <Info>
+      Un vrai client a demandé un design « moderne et minimal ». Cela a servi de point de départ visuel. Évitez de choisir quelque chose que vous ne pourrez pas réaliser.
+    </Info>
+  </Step>
+
+  <Step title="Démarrer avec un projet vierge">
+    Commencez votre projet Lovable en rédigeant un Prompt :
+
+    <Note>
+      Commencez avec un projet vide. Nous ajouterons des détails par la suite.
+    </Note>
+  </Step>
+
+  <Step title="Convertir l’image WebP en PNG et préparer la capture d’écran de votre design ">
+    Une fois que vous avez trouvé votre design de référence, téléchargez-le. S’il est enregistré au format WebP, utilisez un convertisseur en ligne pour le transformer en PNG afin qu’il puisse être facilement utilisé dans des workflows Lovable ou GPT.
+
+    <Note>
+      Outils que nous recommandons : [https://cloudconvert.com/webp-to-png](https://cloudconvert.com/webp-to-png)
+    </Note>
+  </Step>
+
+  <Step title="Transformez votre inspiration en prompt détaillé avec Chat Mode">
+    Utilise le [Chat Mode](https://docs.lovable.dev/features/labs#chat-mode) de Lovable pour extraire :
+
+    * Sections de page (hero, fonctionnalités, FAQ, etc.)
+    * Structure de mise en page, espacement et ordre du contenu
+    * Familles de polices, palettes de couleurs et dégradés
+    * Types d’animations, effets au survol et transitions
+
+    <Info>
+      Lovable [Chat mode](https://docs.lovable.dev/features/labs#chat-mode) (ou customGPT) est également entraîné pour recommander des images Unsplash pour les miniatures de blog et les illustrations.
+    </Info>
+
+    <Warning>
+      Lovable étiquette parfois mal certains éléments (par exemple, la police &quot;Space Grotesque&quot; était mal orthographiée). Relis et corrige toujours les résultats de Prompt avant de les coller dans Lovable.
+    </Warning>
+
+    Tu peux même demander à Lovable Chat mode de développer certaines sections ou de réécrire le prompt avec de meilleures suggestions d’UX.
+  </Step>
+
+  <Step title=" Générez un premier brouillon avec Lovable">
+    Collez le prompt détaillé dans le mode Édition de Lovable. Puis :
+
+    * Téléversez votre capture d’écran PNG comme référence
+    * Ajoutez des notes comme « *Utiliser la police Space Grotesque* » ou « Utiliser Unsplash pour les miniatures de blog »
+
+    Cette combinaison permet d’obtenir des designs bien plus précis que des invites vagues en une seule phrase.
+
+    <Info>
+      Remarquez à quel point Lovable semble plus rapide que la configuration manuelle de Tailwind ou Bootstrap il y a seulement un an.
+    </Info>
+  </Step>
+
+  <Step title="Modifiez en temps réel : invites visuelles et textuelles">
+    Utilise l’[outil d’édition visuelle](https://docs.lovable.dev/features/visual-edit) de Lovable pour :
+
+    * Redimensionner les images (par exemple, « make this image 800px wide »)
+    * Positionner les images hero (par exemple, « place this image on the right side »)
+    * Aligner les sections de la mise en page avec l’image de référence
+
+    Combine cet outil avec des modifications en langage naturel pour plus de précision.
+  </Step>
+
+  <Step title="Peaufinez le design avec les composants de 21stdev">
+    Utilisez les composants d’interface utilisateur (UI) prêts à l’emploi de [21stdev](https://21st.dev/) pour améliorer :
+
+    ![21stdev custom component ](/images/21stdev.png)
+
+    * Sections hero
+    * Barres de navigation avec effets au survol
+    * Mises en page de témoignages
+    * Appels à l’action et grilles de fonctionnalités
+
+    Trouvez un composant qui vous plaît, copiez le prompt, puis collez‑le dans Lovable. Veillez à ce que le ton visuel reste cohérent avec le reste du site.
+  </Step>
+
+  <Step title="Corriger les mauvaises interprétations de l’IA">
+    L’IA fait gagner du temps, mais prévois un peu de travail de finition :
+
+    ![Ajouter un composant de spécification dans la landing page](/images/component.png)
+
+    * Ajuste l’identité visuelle (Lovable utilise le bleu par défaut)
+    * Améliore manuellement les espacements et les marges internes
+    * Utilise une typographie cohérente partout
+    * Ajoute des dégradés ou de la profondeur pour un rendu moins plat
+
+    Fais en sorte que le design ait l’air *réfléchi*, pas « par défaut ».
+  </Step>
+
+  <Step title="Optimiser pour le mobile (obligatoire)">
+    Ne néglige pas cette étape. Assure-toi que :
+
+    ![Site web adapté au mobile](/images/mobile-responsive.png)
+
+    * Les champs de saisie occupent toute la largeur
+    * Les tailles de police s’adaptent aux petits écrans
+    * Les boutons sont faciles à toucher
+    * Les sections s’empilent bien et défilent de manière fluide
+
+    L’UX mobile est essentielle pour les conversions.
+  </Step>
+
+  <Step title="Ajouter des animations légères et des microinteractions">
+    Pour moderniser l’aspect :
+
+    * Utilise des fondus d’entrée pour les sections hero
+    * Ajoute des effets au survol des boutons
+    * Anime les sections au défilement
+    * Utilise des mouvements subtils d’arrière-plan
+
+    Lovable peut intégrer [Framer Motion](https://motion.dev/) nativement si tu le demandes correctement dans ton Prompt.
+
+    ![Add animation landing page](/images/animation.png)
+  </Step>
+
+  <Step title="Générer des visuels personnalisés avec l’IA (facultatif)">
+    Rédigez des prompts pour ChatGPT, Midjourney ou Ideogram à partir de vos éléments préférés du design de référence.
+
+    **Étapes :**
+
+    <Steps>
+      <Step title="Prenez une capture d’écran de la section visuelle souhaitée" />
+
+      <Step title="Demandez à ChatGPT de rédiger un prompt correspondant" />
+
+      <Step title="Générez l’image dans votre outil d’IA" />
+
+      <Step title="Supprimez l’arrière-plan, puis réinsérez l’image dans Lovable" />
+    </Steps>
+
+    <Note>
+      La dernière version de ChatGPT 4o vaut vraiment la peine d’être testée.
+    </Note>
+
+    C’est particulièrement utile pour les visuels 3D ou les illustrations thématiques.
+  </Step>
+
+  <Step title="Déployez en un clic">
+    Une fois que vous êtes satisfait du résultat :
+
+    * Cliquez sur « Déployer » dans Lovable
+    * Connectez un domaine personnalisé via Netlify
+
+    Votre site est en ligne en quelques minutes, sans aucune configuration manuelle.
+  </Step>
+
+  <Step title="Partager avec les clients et itérer">
+    Copiez le lien public et partagez‑le avec votre client. Il pourra :
+
+    * Le consulter en temps réel
+    * Suggérer des ajustements
+    * Donner rapidement son accord
+
+    Vous pouvez continuer à affiner les sections en utilisant l’éditeur visuel de Lovable ou l’éditeur basé sur des Prompt. C’est un cycle d’itérations rapide.
+  </Step>
+</Steps>
+
+<div id="why-this-approach-works">
+  ## Pourquoi cette approche fonctionne-t-elle ?
+</div>
+
+L’IA n’est pas magique. Mais avec de la structure, elle devient un superpouvoir. Par rapport à un prompt non structuré :
+
+- La première version est 10 fois plus proche du résultat final
+- Vous passez moins de temps à corriger des erreurs
+- Chaque section a un objectif précis
+- Le produit final donne une impression de sur-mesure, pas de solution standardisée
+
+C’est un mélange d’automatisation **\+** de savoir-faire.
+
+<div id="key-takeaways">
+  ## Points clés
+</div>
+
+- Commence par une solide inspiration visuelle
+- Utilise des invites structurées avec Lovable Chat Mode
+- Ajoute des captures d’écran et clarifie les attentes
+- Améliore les sections avec les composants 21stdev
+- Corrige les petites bizarreries de design et optimise pour le mobile
+- Ajoute des animations là où ça compte
+- Déploie vite, itère encore plus vite
+
+C’est le workflow que [Prajwal](https://x.com/PrajwalTomar_/status/1902371273147064772) utilise chaque jour pour ses clients – que nous avons testé en interne – pour créer des pages de destination rapides, belles et à fort taux de conversion, propulsées par l’IA Lovable mais guidées par une intention claire.
+
+Bonnes créations !
+
+<div id="more-resources">
+  ## Ressources supplémentaires
+</div>
+
+- [Tutoriel de Brock Mesarich](https://www.youtube.com/watch?v=v48gJFQvE1Y&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- Tutoriel de Lukas Margerie ([1](https://www.youtube.com/watch?v=-GiBI0leMHU&t=30s&pp=ygUPbG92YWJsZSAyMXN0ZGV2) - [2](https://www.youtube.com/watch?v=uqdFobvoRQQ&pp=ygUPbG92YWJsZSAyMXN0ZGV20gcJCb0Ag7Wk3p_U))
+- [Tutoriel d’AI Jason](https://www.youtube.com/watch?v=8MPElOdNjtk&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Tutoriel de Mark Kashef](https://www.youtube.com/watch?v=Zv7N0SxfpRM&t=269s&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Tutoriel d’Alejavi Rivera](https://www.youtube.com/watch?v=mMBp0uGZOWw&pp=ygUPbG92YWJsZSAyMXN0ZGV2) (espagnol)
+- [Tutoriel de Fazt Code](https://www.youtube.com/watch?v=RGZeP1_oMoY&pp=ygUPbG92YWJsZSAyMXN0ZGV2)

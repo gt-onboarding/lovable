@@ -1,0 +1,512 @@
+---
+title: "動画チュートリアル"
+description: "Lovable でのアプリの作り方を一通り理解できる動画をご覧ください。"
+icon: "video"
+---
+
+<div id="welcome-to-lovable">
+  ## Lovable へようこそ
+</div>
+
+<Accordion title="Lovable 入門">
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/l2n9rpuqvdw?si=huqUvQcNK1tKTMVL" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+  <Steps>
+    <Step title="Lovable の基本から始める" />
+
+    <Step title="インターフェースと操作方法を理解する" />
+
+    <Step title="編集機能とバージョン履歴の扱い方" />
+
+    <Step title="認証とユーザー管理の実装" />
+
+    <Step title="Supabase データベースとエッジ関数の利用" />
+
+    <Step title="GitHub連携とコード管理" />
+
+    <Step title="プロジェクトの共有とコミュニティからのフィードバック" />
+
+    <Step title="追加リソースとテンプレートを活用する" />
+  </Steps>
+</Accordion>
+
+<div id="lovable-tutorials">
+  ## Lovable チュートリアル
+</div>
+
+<AccordionGroup>
+  <Accordion title="AI搭載のカロリー管理Webアプリを構築する">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/c0zhLzcVJRI?si=7vcZf5eoxIobOxdE" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、[Lovable](/ja/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-an-ai-powered-calorie-tracking-webapp)を使って、認証、美しいレスポンシブデザイン、OpenAI統合、本番環境へのデプロイを備えたAI搭載カロリー追跡アプリの作成手順を解説します。
+
+    <Steps>
+      <Step title="基盤を構築する">
+        あらゆるLovableプロジェクトの基盤となるのは、良いプロンプトです。このアプリの場合は、例えば次のようになります。
+
+        ```
+        以下の機能を備えたカロリー追跡アプリを作成してください：
+        ランディングページ、ダッシュボード、食事ページ。
+        食事の説明または画像の入力フィールド（GPT-4による分析機能付き）。
+        日々の進捗追跡機能と、認証およびデータベース管理のためのSupabaseとの連携。
+        美しくモバイル対応のUI。
+        ```
+
+        Lovable が UI のスケルトンを生成したら、次のことを行います。
+
+        * ナビゲーションの設定とランディングページのデザインを確認します。
+        * レイアウトを整え、モバイル対応を確実にするために、プロンプトを試行錯誤しながら調整します。
+
+        <Note>
+          プロンプトでは、まず UI から始めることをはっきり指示してください。Lovable はタスクを明確な手順に分解したときに最も効果的に動作します。たとえば、プロンプトの早い段階でナビゲーション、ページ構成、デザインテーマの概要を示しましょう。
+        </Note>
+      </Step>
+
+      <Step title="UI をデザインする">
+        Lovable では、建物を建てるように、ステップバイステップで進めるアプローチを重視しています。
+
+        * まずは**足場**を組む: アプリの構造（例: ユーザー体験フロー、ページレイアウト）を計画します。
+        * 次に**最初の層**を追加する: 基本的なデザイン要素だけを配置した空のページを作成します。
+        * そして**細部**を磨く: 色、アニメーション、モバイル対応を追加します。
+
+        <Note>
+          すでに [Figma]() でデザインが用意されている場合は、スクリーンショットを撮って Lovable のプロンプトに含めることができます。高解像度の画像を用意すると、より良い結果が得られます。
+        </Note>
+      </Step>
+
+      <Step title="Supabase をバックエンドおよび認証に統合する">
+        UI の準備ができたら、バックエンド機能を追加しましょう。
+
+        1. [**Supabase**]() の **アカウント** を作成し、プロジェクトを新規作成します。
+        2. 「Connect Supabase」ボタンを押して Lovable と接続します。
+        3. データの保存には、Lovable が SQL テーブルを生成します。たとえば、次のようなテーブルです:
+
+        * ユーザー情報を保存する `profiles` テーブル
+        * 日次の入力を追跡する、ユーザーに紐づいた `meals` テーブル
+
+        <Note>
+          ユーザーのプライバシーを確保するために、Supabase では行レベルセキュリティ (RLS) ルールを使用してください。Lovable がこれを自動的に処理することもできます。
+        </Note>
+      </Step>
+
+      <Step title="食事分析への OpenAI の統合">
+        このアプリの魔法は、AI 機能にあります。食事を分析するには:
+
+        1. 開発者ダッシュボードから [OpenAI API key]() を取得します。
+        2. 食事の説明文や画像を分析するには [GPT-4]() を使用します。
+        3. 不正アクセスを防ぐため、APIキーは必ずエッジ関数内に安全に保存してください。
+
+        **実装する機能:**
+
+        * **食事の説明文の分析**: 栄養価（カロリー、タンパク質、炭水化物、脂質）を推定します。
+        * **画像認識**: 食事の写真をアップロードすると、GPT-4 が説明文と栄養データを抽出します。
+
+        <Note>
+          *OpenAI 連携のプロ向けのヒント:*
+
+          * 構造化されたレスポンスを得るために **function calling** を使用し、データがデータベースに挿入しやすい形式で正しくフォーマットされるようにします。
+          * 「卵2個」のようなシンプルな食事入力をアプリに分析させて、動作をテストします。
+        </Note>
+      </Step>
+
+      <Step title="Stripe を用いた決済機能の実装">
+        アプリを収益化するには、サブスクリプションベースの決済を追加しましょう：
+
+        1. [Stripe]() アカウントを作成し、商品（例：「Standard Plan」月額12ドル）を設定します。
+        2. APIキーと商品の価格IDを追加して、Stripe を Lovable と連携します。
+        3. 支払いをしていないユーザーはランディングページにリダイレクトし、有料ユーザーのみがメインアプリにアクセスできるようにします。
+
+        <Note>
+          *追加のヒント:*
+
+          * ユーザーがサブスクリプションを管理できるように、Stripe の **カスタマーポータル** を有効にします（例：解約や支払い方法の更新）。
+          * Stripe のテストモードで、提供されているテスト用クレジットカード情報を使って決済をテストします。
+        </Note>
+      </Step>
+
+      <Step title="テストとデバッグ">
+        エラーは開発にはつきものですが、Lovable を使えばデバッグがぐっと簡単になります。
+
+        * ビルドエラーが発生したら、**「Try to Fix」** ボタンを使いましょう。
+        * バックエンドの問題が起きた場合は、Supabase のログをチェックして、詳細なエラー内容を確認してください。
+        * [Netlify]() にデプロイしている場合は、ビルドに関する問題がないかデプロイのログを確認してください。ログを Lovable と共有すると、状況に合わせた修正案を受け取れます。
+
+        <Note>
+          行き詰まった場合は、Lovable の「Revert」機能を使って以前のバージョンに戻してください。これにより、クレジットと時間を節約できます。
+        </Note>
+      </Step>
+
+      <Step title="アプリのデプロイ">
+        アプリの準備ができたら、Lovable または Netlify でデプロイしましょう。
+
+        1. Lovable のデプロイ機能を使って、アプリをデフォルトのドメインでホスティングします。
+        2. 独自ドメインを利用する場合は、次の手順に従います。
+
+        * [GitHub リポジトリ]() を Netlify に接続します。
+        * ドメインを購入し、[DNS 設定]() を行って Netlify に紐づけます。
+
+        <Note>
+          ブランドと SEO を強化するために、アプリのメタデータ（favicon、metaタグ、OG画像）を更新してください。
+        </Note>
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Groq API を使って SaaS 向けランディングページを作成する">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/S0k8FOmqjog?si=935gSBuflrRbljlF" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、[Lovable](/ja/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-a-saas-landing-page-with-groq-api)、21st.dev、Supabase を使って、アニメーション、API 連携、シームレスなデプロイまで備えた、AI 搭載メールアシスタント向けの魅力的でフルインタラクティブなランディングページを作成する方法を紹介します!
+
+    * AI を活用したデザインと UI 強化
+    * アニメーションとインタラクティブ要素の追加
+    * Groq API を使用した AI メール機能の統合
+    * Resend を使ったお問い合わせフォームの設定
+    * Lovable Launch を使ってページをデプロイする
+  </Accordion>
+
+  <Accordion title="フィードバックツールを構築する">
+    The session showcased [Lovable](/ja/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-a-feedback-tool) の機能を使って、高速にイテレーションを回し、本番環境にそのままデプロイできる成果物を作成する様子を紹介しました。
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/tYDqBMilHkM?si=6eD-0GoQEywncOqQ" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="認証">
+        * ユーザーは Supabase 連携を使って、サインアップ、ログイン、プロフィール管理ができます。
+        * 安全なユーザーセッションにより、ユーザーごとに最適化された体験を提供できます。
+      </Step>
+
+      <Step title="フィードバックの送信と投票">
+        * ユーザーはタイトル、説明、画像付きでフィードバックを送信できます。
+        * 各フィードバックには投票数が表示され、リアルタイムでのアップボート（賛成票の追加）に対応します。
+      </Step>
+
+      <Step title="AI サマリー付き管理ダッシュボード">
+        * 管理者はすべてのフィードバックを確認し、投票数でフィルタリングしたり、並べ替えたりできます。
+        * AI を活用したサマリーにより、OpenAI と Supabase Edge Functions を使って行動可能なインサイトを特定します。
+      </Step>
+
+      <Step title="ユーザープレゼンスのトラッキング">
+        リアルタイムのプレゼンス表示で、プラットフォーム上のアクティブユーザーを確認できます。
+      </Step>
+
+      <Step title="コメント付きの詳細フィードバックページ">
+        各フィードバックには議論用の専用ページがあり、チームでのコラボレーションと優先順位付けを効率的に行えます。
+      </Step>
+
+      <Step title="ファイル添付">
+        ユーザーはフィードバックに画像を添付でき、Supabase のストレージ機能を使って安全に保存されます。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="プロダクト化された開発会社を立ち上げる">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/eZsbfEA-_oI?si=ngagWq3q3Km1jY6J" title="YouTube ビデオプレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このセッションの目標は、開発者、デザイナー、コンサルタントが DesignJoy のようなプラットフォームから着想を得たサブスクリプション型サービスを提供できるアプリを構築することでした。
+
+    <Steps>
+      <Step title="認証とユーザー管理">
+        最初に実装した機能は認証で、ユーザー管理のための堅牢なフレームワークを構築しました。チームは、アプリをスケールさせる際の問題を防ぐために、早い段階で認証を統合しておくことの重要性を強調しました。
+
+        * ユーザーのサインアップ、ログイン、プロフィール管理のための Supabase 連携。
+        * アプリの使いやすさを向上させるための継続的なユーザーセッション。
+      </Step>
+
+      <Step title="Stripe サブスクリプション連携">
+        セッションでは、サブスクリプション管理のために Stripe を連携する方法をデモしました。
+
+        * ユーザーが異なる料金プランにサブスクライブできるようにする。
+        * サブスクリプションステータスを管理し、有料ユーザーのみがプレミアム機能にアクセスできるように制御する。
+      </Step>
+
+      <Step title="ダッシュボードとタスク管理">
+        * タスクボードとドラッグ＆ドロップ機能を備えた、ユーザーごとのダッシュボード。
+        * シームレスなコラボレーションを実現するリアルタイムなタスク更新。
+      </Step>
+
+      <Step title="AI チャットボット">
+        セッションは AI チャットボットの統合で締めくくられ、OpenAI がどのようにアプリに動的な機能を追加できるかを示しました。この機能は、バーチャルアシスタント、コンシェルジュ、データクエリ用インターフェースとして拡張することもできます。
+
+        * OpenAI を統合し、ユーザーの質問に賢く応答できるチャットボットを実装。
+        * 1 つのプロンプトだけで構築し、Lovable の効率性を実証しました。
+      </Step>
+
+      <Step title="反復的なデバッグと改善">
+        チームはリアルタイムのデバッグ課題に取り組み、トラブルシューティングに関する有益な知見を共有しました。採用したテクニックは次のとおりです。
+
+        * コンソールログやエラーメッセージを使って問題を特定する。
+        * 壊れた状態で行き詰まらないよう、以前のアプリバージョンに戻す。
+        * Lovable の AI を詳細なプロンプトでガイドし、正確な修正が行われるようにする。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Lovable を使ったプロンプト作成のコツ">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/IqWfKj4mUIo?si=sIUpyvAuOH9Fu_oe" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、AI を活用したアプリ開発、プロンプトエンジニアリング、そしてワークフロー自動化について、[Lovable](https://lovable.dev/) の特別ゲスト ‪[Mark Kashef‬](https://www.youtube.com/@Mark_Kashef) さんと一緒に深掘りしていきます。
+
+    * 効果的な AI プロンプトの書き方
+    * プロンプトエンジニアリングの 4 つの階層
+    * メタプロンプトのテクニックとベストプラクティス
+    * AI ワークフローのデバッグ手法
+    * Lovable と Make.com を使った AI アプリの構築
+    * UI デザインのための Visual Edits と Tailwind CSS の連携
+  </Accordion>
+
+  <Accordion title="Supabase と Lovable を使って Luma クローンを構築する">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/-sSOyO0FiPE?si=TCamI0uASRJ2Kh6j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、Lovable と [Supabase](https://docs.lovable.dev/integrations/supabase) を使って、Luma 風のイベントプラットフォームをライブで構築していきます!
+
+    * Supabase を Lovable と連携する方法
+    * 認証とユーザー管理のセットアップ
+    * データベースとリアルタイムコメント機能の設定
+    * パフォーマンスのテストと複数ユーザーへの対応
+    * ライブデバッグとパフォーマンス最適化
+  </Accordion>
+
+  <Accordion title="AIを活用したWebアプリを構築する">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/gqsZGxuymTk?si=xwjEwFQCa5p8WVLh" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、AI 搭載のノーコードビルダーである Lovable を使って、1 行もコードを書くことなくフルスタックのジャーナルアプリを作成する方法をご紹介します!
+
+    * アプリの UI をすぐにデザインする
+    * デザインをアップロードして、動作するアプリを生成する
+    * Supabase を接続してバックエンドと認証を構成する
+    * GPT-4o を使って AI 搭載機能を実装する
+    * 数分でフルスタックアプリをデプロイする!
+  </Accordion>
+
+  <Accordion title="Resend を使ってシンプルな CRM を構築する">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/5ZL744_Wxjo?si=qrKlOL_1fAnz7rgc" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、アプリ開発には [Lovable](/ja/lovable-f9060f1e/lovable-f9060f1e/editor/main#build-a-simple-crm-with-resend)、データ保存には Supabase、メール自動化には [Resend](https://docs.lovable.dev/integrations/resend) を使って、シンプルかつ高機能な CRM を構築する方法を順を追って紹介します。
+
+    * Resend を使ったメール自動化の仕組み
+    * Supabase での認証メールの設定方法
+    * 管理ダッシュボード＆顧客管理システムの構築
+    * メールテンプレートの作成とカスタマイズ
+    * ニュースレター登録フォームと一斉配信メール機能の追加
+  </Accordion>
+
+  <Accordion title="Web開発でインタラクティブ要素を構築する">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/b-O7Ew0Q2ig?si=UPyQQdnualImIP8j" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Lovable の最新アップデートにより、魅力的でインタラクティブな Web 体験をこれまで以上に簡単に構築できるようになりました!
+
+    <Steps>
+      <Step title="ビジュアル編集による手軽な UI カスタマイズ">
+        Lovable の最大のアップグレードの 1 つは、AI クレジットを消費せずに UI 要素を即座に変更できるようになったことです。これにより、次のことができるようになりました：
+
+        * プロジェクト上のテキストを直接編集。
+        * ボタンの色やスタイルをリアルタイムに調整。
+        * 画像をアップロードしてシームレスに差し替え。
+        * 要素にホバーして素早く調整。
+
+        <Note>
+          ユーザーは、AI に頼ることなくテキストの選択、色の変更、アイコンの差し替えが簡単にできるようになり、デザインの反復作業がよりスムーズになります。
+        </Note>
+      </Step>
+
+      <Step title="高度なデバッグと API エラー処理">
+        これまで、サードパーティ API との連携エラーへの対応には課題がありました。Lovable では次のように改善されています：
+
+        * より豊富なエラーメッセージを表示し、デバッグを容易に。
+        * 関係のないポップアップを排除し、重要な問題に集中しやすく。
+        * AI 主導のエラー検出により、自動修正を可能に。
+
+        <Note>
+          一般的なポップアップでユーザーを圧倒する代わりに、Lovable はエラーのコンテキストを直接 AI に渡し、その問題に対処すべきかどうか、またどのように修正するかを AI が判断できるようになりました。
+        </Note>
+      </Step>
+
+      <Step title="ダイナミックな背景とアニメーションの作成">
+        Lovable は **p5.js** やその他のライブラリを使った、アニメーションやインタラクティブ要素のシームレスな統合をサポートします。
+
+        #### **サンプルプロジェクト：インタラクティブな国旗付き旅行代理店サイト**
+
+        最近のライブデモでは、次のような旅行代理店のランディングページの構築方法を紹介しました：
+
+        1. **アニメーション付きヒーローセクション** — マウス操作に反応して国旗が動的に表示・移動。
+        2. **スクロールに追従するセクション（スティッキースクロール）** — ユーザーのスクロール位置に応じて内容が変化。
+        3. **インタラクティブなホバーエフェクト** — ユーザーの動きに応じて画像が反応。
+
+        #### **アニメーション効果の実装方法**
+
+        これらの効果を作成するために、ユーザーは次のシンプルな手順に従いました：
+
+        * **実現したいアニメーションを定義する：**
+
+        <Note>
+          ホバーしたときに離れていく浮遊要素で、背景をインタラクティブにしましょう。
+        </Note>
+
+        * **p5.js を使ってエフェクトを生成する：**
+          * クロマティックスモークのパターンを実装。
+          * 静的画像を動的な国旗アニメーションに差し替え。
+        * **物理挙動に基づくインタラクションでユーザー体験を向上させる：**
+          * ユーザーの操作に応じて要素がダイナミックに動くようにする。
+
+        <Note>
+          アニメーションがうまく動かない場合は、Lovable の Chat mode を使って、ステップバイステップの AI ガイド付きでデバッグと調整を行ってください。
+        </Note>
+      </Step>
+
+      <Step title="外部ライブラリからのカスタム要素のインポート">
+        [**21st.dev**]() を使うと、事前に用意された UI コンポーネントを Lovable のプロジェクトにシームレスに統合できます。
+
+        1. **21st.dev** でボタンデザインを探します。
+        2. AI 生成プロンプトをコピーします。
+        3. それを Lovable に貼り付けて、既存のボタンを置き換えます。
+
+        この方法により、デザインワークフローが加速し、より洗練され、視覚的に一貫したインターフェースを実現できます。
+
+        <Note>
+          同じ方法で **motion.dev** からアニメーションプリセットをインポートできるため、カスタムコードなしで高品質なモーションエフェクトを簡単に追加できます。
+        </Note>
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Clerk 認証、独自ドメイン & ウェイトリスト">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/tyAsNwu_xCI?si=VHCGf2IlFRQzVLeD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、[**Lovable**](/ja/lovable-f9060f1e/lovable-f9060f1e/editor/main#clerk-authentication-custom-domains-and-waitlists) と [**Clerk**](https://docs.lovable.dev/integrations/clerk) を使って **カスタム CRM**（顧客関係管理システム）を構築する方法を順を追って見ていきます。
+  </Accordion>
+
+  <Accordion title="Lovable と Make を使って独自の CRM を構築する方法">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/zv4vcR7VCAk?si=BgJHeEuti27cbgYt" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    このチュートリアルでは、[**Lovable**](/ja/lovable-f9060f1e/lovable-f9060f1e/editor/main#how-to-build-a-custom-crm-with-lovable-and-make) と [**Make**](https://docs.lovable.dev/integrations/make) を使って **カスタム CRM**（顧客関係管理システム）を構築する方法をステップごとに見ていきます。
+  </Accordion>
+
+  <Accordion title="1時間で1万ドルのランディングページを作る">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/VVbC80KgF9E?si=71RW1V8KgpgxTya_" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+</AccordionGroup>
+
+<div id="build-brand-and-launch-a-real-micro-saas-live">
+  ## 本物のマイクロSaaSを構築・ブランド化して、その場でローンチしよう！
+</div>
+
+スペイン語学習が、かつてないほどインタラクティブに！会話を通じてスペイン語を教えるだけでなく、リアルタイムの音声インタラクションやダイナミックなコース、視覚的に魅力的なコンテンツまで、すべてを AI で生成するアプリを想像してみてください。このチュートリアルでは、Kristian と Harry が実際に作ったものを、ステップごとにたどりながら学べます。
+
+<AccordionGroup>
+  <Accordion title="ステップ 1：コア機能の設計">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/8QDL9cCIXqU?si=JPHSSBoWO4dXl7vB" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="基盤づくり">
+        AI 機能を実装する前に、**Lovable** を使ってアプリの**堅牢な基盤を構築すること**に注力しました。これには、認証のセットアップ、ダッシュボード構造の設計、ユーザー管理の実装が含まれます。
+      </Step>
+
+      <Step title="認証システム">
+        * バックエンド認証に **Supabase** を統合しました。
+        * メールアドレスとパスワードによるサインアップ／ログインを有効化しました。
+        * ユーザーの好みや学習の進捗を保存するプロフィールシステムを作成しました。
+      </Step>
+
+      <Step title="ダッシュボードとナビゲーション">
+        * ナビゲーション用に直感的なサイドバーを設計しました。
+        * チャット、コース、ユーザー設定用のセクションを作成しました。
+        * デバイスを問わずシームレスに使えるよう、レスポンシブな UI を実現しました。
+      </Step>
+
+      <Step title="ユーザープロフィールとデータ保存">
+        * ユーザーの進捗を保存するためのデータベース構造を追加しました。
+        * ユーザーが学習の好みを調整できるプロフィール管理画面を設計しました。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="ステップ 2: Replicate を利用した AI 活用型学習機能">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/eSDhk4VkVLE?si=-JhSjxsKIrPACNOK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="AI生成コース">
+        学習をインタラクティブにするために、[OpenAI の GPT モデル]() を使った AI 駆動のコース生成システムを実装しました。しくみは次のとおりです。
+
+        1. ユーザーがトピックを選択します（例: 「バーベキューで聞く質問」）。
+        2. Lovable が [OpenAI のエッジ関数]() を呼び出して、**魅力的なスペイン語の質問を 10 個**生成します。
+        3. ユーザーはクイズに回答し、進捗を管理し、回答に対して AI からフィードバックを受け取ります。
+      </Step>
+
+      <Step title="ユーザーエンゲージメントの向上">
+        * **動的に生成される質問**: 各クイズは AI によって生成されるため、毎回新しくユニークなコンテンツになります。
+        * **インタラクティブなフィードバック**: AI が正解・不正解の理由を説明し、学習効果を高めます。
+        * **進捗管理**: ユーザーはコースを保存して後から再開できるため、定着と復習がしやすくなります。
+      </Step>
+
+      <Step title="Replicateでビジュアルエンゲージメントを強化">
+        視覚的な学習要素を追加するために、[**Replicate の Flux Schnell**]() 画像生成モデルを統合しました。
+
+        * **自動コースバナー**: 各コースは、トピックに合った画像を動的に生成します。
+        * **没入感のあるビジュアル体験**: AI 生成のビジュアルによって、ユーザーのエンゲージメントと定着率が向上します。
+        * **高速な画像処理**: Replicate の API を利用して、体験を損なうことなくリアルタイムで画像を生成します。
+      </Step>
+
+      <Step title="リアルタイム音声会話">
+        アプリ開発における大きなマイルストーンが、[OpenAI のリアルタイム WebRTC API]() を使った **リアルタイムのスペイン語会話練習** の追加でした。
+
+        * **インタラクティブな AI チューター**: ユーザーは AI に直接話しかけることができ、AI はスペイン語で動的に応答します。
+        * **発音サポート**: AI がリアルタイムで発音の修正や提案を行います。
+        * **スムーズな会話体験**: 自然な会話の流れにより、人間のチューターと対話しているような感覚になります。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="ステップ3：アプリのブランディング">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/fILdgFNqvmU?si=_Xg-XTMTQuBN7bE1" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    <Steps>
+      <Step title="コンセプトと対象ユーザーの明確化">
+        ブランディングに入る前に、コアとなる目標を定義しました：
+
+        * リアルタイムのスペイン語会話のための **AI を活用したチャット**。
+        * すぐに練習できる **自動クイズ**。
+        * レッスンの保存と進捗トラッキングができる **構造化された学習**。
+
+        これにより、アプリの目的に沿ったブランディングの方向性を定めることができました。
+      </Step>
+
+      <Step title="ネーミングとドメイン選定">
+        **学習の旅路**をイメージさせる、短くて覚えやすい名前を目指しました。AI を使ってブレインストーミングを行い、最終的に **Ruta**（スペイン語で「ルート」や「道」）に決めました。
+
+        #### **プロセス:**
+
+        * キャッチーなスペイン語の単語を見つけるために、AI で**候補名をブレインストーミング**。
+        * &quot;Camino&quot; や &quot;Verbo&quot; などを**テスト**しましたが、&quot;Ruta&quot; が最もフィットしました。
+        * **ドメインの空き状況を確認**し、すぐに **rutaapp.com** を取得しました。
+      </Step>
+
+      <Step title="ビジュアルアイデンティティの作成">
+        次に、ブランドのビジュアルを素早くデザインしました：
+
+        * **ロゴ**: デザインライブラリから取得した**コンパスをモチーフにした**アイコンを Figma で編集。
+        * **フォントの組み合わせ**: ロゴには**太くモダンな書体**を使い、アプリの UI には読みやすいフォントを採用。
+        * **カラーパレット**: 旅と発見を象徴する **Tailwind CSS のブルー系**カラースキーム。
+        * **スタイルのインスピレーション**: コントラスト、シャドウ、ボーダーを調整しながら **ネオ・ブルータリズム**を試し、視覚的に魅力的な UI を作成。
+      </Step>
+
+      <Step title="一貫したユーザー体験の構築">
+        Lovable を使って、アプリ全体で**ビジュアルの一貫性**を確保しました：
+
+        * **ランディングページ**: ダイナミックで印象的なヒーローセクションを備えた、AI 生成のページ。
+        * **ダッシュボードやコースページ**: ブランドのアイデンティティに沿ったスタイルに統一。
+        * **反復的なスタイリング**: **ネオ・ブルータリズムの要素**を適用し、さまざまなデザインスタイルを検証。
+        * **ユーザーフローのテスト**: サインアップからリアルタイムチャットまで、シームレスに移動できることを確認。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="ステップ4：最終調整・大胆なチャレンジ・本番公開">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/12013xnxYzM?si=4qOqTgcgO_IY_G1P" title="YouTube 動画プレーヤー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+</AccordionGroup>
+
+<div id="community-tutorials">
+  ## コミュニティチュートリアル
+</div>
+
+Lovable コミュニティによるチュートリアルは[こちら](https://www.youtube.com/playlist?list=PLbVHz4urQBZkJ6WMXlIGc3NGsufrleogY)からご覧いただけます。

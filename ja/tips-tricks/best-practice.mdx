@@ -1,0 +1,215 @@
+---
+title: "ベストプラクティス"
+description: "Lovable を最大限に活用する"
+icon: "dumbbell"
+---
+
+このガイドは、新規ユーザーから経験豊富なユーザーまで、すべてのユーザーが Lovable での開発をすばやく習得し、アプリ構築時によくある落とし穴を避けられるようにするためのものです。
+
+<div id="1-set-your-foundation-use-the-knowledge-file">
+  ## 1. 土台を整える：Knowledge ファイルを使う
+</div>
+
+**なぜ重要か:** [Knowledge](/ja/features/knowledge) ファイルは、あなたのプロジェクトの「頭脳」のような存在です。すべてのプロンプトに添付され、AI がコンテキストを完全に理解できるようにします。
+
+**含めるべき内容:**
+
+* プロダクトビジョン（PRD のようなイメージ）
+* ユーザージャーニーとペルソナ
+* 主要な機能と機能要件
+* デザインシステムと UI ガイドライン
+* ロールごとの挙動（例: Admin、User、Investor）
+
+<Tip>
+  Chat mode を使って Knowledge ファイルを自動生成できます:
+
+  ```
+  Generate knowledge for my project at T=0 based on the features I’ve already implemented.
+  ```
+</Tip>
+
+<div id="2-prompting-best-practices">
+  ## 2. [Prompting](/ja/prompting/prompting-one) のベストプラクティス
+</div>
+
+**明確で詳しいプロンプト = より良い出力。** AI はあなたのエンジニアリングパートナーのようなものです——伝えたことしか理解しません。
+
+**プロンプトのコツ:**
+
+* 具体的に書く: 対象ページ（例: `/dashboard`）と想定する挙動を明記します。
+* 自然な文章で書く
+
+  ```
+  I want users with the role Investor to access this component, but not Admins.
+  ```
+* スクリーンショットを追加する: 特にバグや UX の問題を説明する時に有用です。
+* ガードレールを追加する: AI に「**触ってほしくない**もの」を伝えます。例:
+
+  ```
+  Do not edit /shared/Layout.tsx.
+  ```
+* 重要な指示は複数のプロンプトで繰り返します。AI が保持できる内容には制限があります。
+* 一度に 5 個のことを実装しようとしないでください。作業を小さく分割し、テストしやすい単位にしましょう。各ブロックの間で Chat Mode を使って、次に進む前に内容を検証します。
+
+  ```
+  **Feature Breakdown Template:**
+  Create the new page
+  Add UI layout
+  Connect the data
+  Add logic + edge cases
+  Test per role
+  ```
+* アプリに複数のロール（例: Admin, Investor, Startup）がある場合は、プロンプトが**どのロールに対するものか**を必ず明示してください。共通ロジックやコンポーネントが原因のバグを避けるのに役立ちます。
+
+  ```
+  As an Investor, I want to view the company dashboard, but I shouldn’t be able to edit it. Please isolate this feature to the Investor role only.
+  ```
+
+<div id="3-use-chat-mode-early-and-often">
+  ## 3. Chat mode を早い段階から頻繁に使う
+</div>
+
+[**Chat mode**](https://docs.lovable.dev/features/labs#chat-mode) は、あなたの AI コパイロットです。準備が整うまでコードを編集せずに、デバッグ、ブレインストーミング、実装の計画をサポートします。
+
+**Chat Mode に切り替えるタイミング:**
+
+* 「Try to Fix」に 2〜3 回失敗したあと
+* 複雑なロジックやデータベースの問題をデバッグするとき
+* 新機能の設計や計画をするとき
+
+  ```
+  Suggest 3 ways to implement X
+  ```
+
+<Tip>
+  **ワークフローのヒント:**
+
+  一部のユーザーは、作業時間の 60〜70% を Chat Mode に使うのを好みます。完全に納得できたときだけ「Implement the plan」をクリックしましょう。
+</Tip>
+
+<Tip>
+  Chat mode の使用をつい忘れてしまう場合は、このフォーマットを使うと出力の一貫性が高まり、意図しない変更を防げます。
+
+  ```
+  On page /settings, implement [feature]. The expected behavior is [XYZ]. Please don’t touch component A, layout B, or shared logic unless necessary. Follow best practices from Tailwind / Supabase / X.
+  ```
+</Tip>
+
+<Tip>
+  望まないコード実行を避けるには:
+
+  ```
+  Investigate but don’t write code yet.
+  ```
+
+  ```
+  Suggest 3 ways to solve this without changing anything.
+  ```
+
+  こうすることで、主導権を自分の手元に保てます。
+</Tip>
+
+<Tip>
+  AI が「ループ」に入り込んだときは、壊れたコードを延々とパッチし続けないよう、次の手順を使ってください:
+
+  1. Chat mode に切り替える
+  2. エラーのスクリーンショットを貼り付ける
+  3. 次のように伝える:
+
+     ```
+     Please investigate this without breaking other features. If needed, revert to the last working version and fix from there.
+     ```
+</Tip>
+
+<div id="4-avoid-common-pitfalls-with-supabase">
+  ## 4. Supabase でよくある落とし穴を避ける
+</div>
+
+**注意：** [Supabase](https://docs.lovable.dev/integrations/supabase) は、リバートしてもクリーンに元に戻りません。バージョンをリバートすると、データベーススキーマが破損する可能性があります。
+
+**ベストプラクティス：**
+
+* フロントエンドが安定してから Supabase を接続する
+* どうしてもリバートが必要な場合は、AI に次のようなプロンプトを送る：
+
+  ```
+  Please validate the SQL schema at T=0 and ensure no breaking changes have occurred.
+  ```
+* 公開する前に、データベース連携機能を必ずテストする
+
+<div id="5-use-visual-edit-for-quick-ui-fixes">
+  ## 5. ちょっとしたUI修正には Visual Edit を使う
+</div>
+
+[**Visual Edit tool**](https://docs.lovable.dev/features/visual-edit) は無料で高速です。次のような場面では、プロンプトの代わりに使いましょう：
+
+* テキスト・色・フォントの変更やレイアウトの微調整
+* 複数の小さな要素をまとめて編集するとき
+* 安全に、クレジットを消費せずにコミット可能（元に戻すこともできます）
+
+<div id="6-use-github-version-control-wisely">
+  ## 6. [GitHub](https://docs.lovable.dev/integrations/git-integration) ＋ バージョン管理を賢く使う
+</div>
+
+* すべての編集はコミットです。安定したバージョンには **ピン留め** してマークしましょう。新しい機能が正常に動作したら、そのたびに：**ピン留めする**
+* バグが出たら：**バージョンを視覚的に比較** しましょう。次のようにプロンプトできます:
+
+  ```
+  Compare version at T–1 to T–0. What changed? What might be breaking?
+  ```
+* AI があまりに多くの箇所を壊してしまったと感じたら、安定したバージョンに戻りましょう。
+* **GitHub のブランチ運用** は自己責任で行ってください。Lovable で `main` に戻る前にブランチを削除すると、プロジェクトの同期に問題が発生する可能性があるので避けてください。
+
+<div id="7-when-all-else-fails-remix">
+  ## 7. うまくいかないときはリミックスする
+</div>
+
+多くのユーザーは、2回目に最初から作り直したほうが結果的に早いことに気づきます。
+
+* [Remix](https://docs.lovable.dev/user-guides/quickstart#remix-an-existing-project:~:text=you%20to%20reuse-,the,-current%20state%20of) は、T=0 の時点でプロジェクトのクリーンなコピーを作成します。
+* より良いプロンプトと、より明確な理解で作り直す
+* 以前のプロジェクトは参照専用にする
+
+**ユースケース:**
+
+* バグのループにはまり込んで抜け出せない
+* 履歴を残したまま、クリーンに再スタートしたい
+* Supabase を切り離して、新しいルートを試したい
+
+<Tip>
+  リミックスする前に、先に Supabase を切断する必要があります。
+</Tip>
+
+<div id="8-stay-patient-stay-calm">
+  ## 8. 焦らず、落ち着いて進める
+</div>
+
+あなただけではありません。AI は、ある瞬間は魔法のようでも、次の瞬間にはイライラさせられることがあります。どんなビルドでも、最後の 5% の作業がいちばん時間がかかりがちですが、その部分こそが最も重要です。
+
+<Tip>
+  **黄金律:**
+
+  プロンプトには時間をかけましょう。すべてを必ず見直してください。作業は小さく、テストしやすい単位に分割しましょう。入力が正確であればあるほど、出力は良くなります。
+</Tip>
+
+<div id="9-use-the-docs-and-ask-for-help">
+  ## 9. ドキュメントを活用し、ヘルプを求めましょう
+</div>
+
+* [ドキュメント](https://docs.lovable.dev)には、ウォークスルー、テンプレート、SEO のヒント、各種連携などがまとまっています。ドキュメント内の AI アシスタントに直接質問することもできます。
+* [Discord コミュニティ](https://discord.gg/lovable-dev)に参加して、他のユーザーと助け合いましょう。
+* 準備ができたら、プロジェクトを [Lovable Launch](https://docs.lovable.dev/features/launched) に投稿しましょう。
+
+<div id="10-bonus-tips">
+  ## 10. おまけのヒント
+</div>
+
+* 長いプロンプトには、音声入力（例：Mac でマイクを使って長文をディクテーション）を使ってボイスメモ風のプロンプトを追加しましょう。より良い入力を素早く作成できるようになり、とくにイライラしているときや疲れているときに役立ちます。
+* 「`I am frustrated…`」というプロンプトパターンを使って、AI のフォーカスをより良い方向にうまく誘導しましょう
+* 大きな編集を行ったあとは、必ず複数のロールとその挙動（とくに条件付きロジック）を再チェックしましょう
+* 安定して動作するバージョンは、すばやくデバッグできるようフォールバックとして保存しておきましょう
+* 想定外の副作用が出ている場合、これにより、汎用的すぎるロジックが原因のバグを避けやすくなります。
+
+  ```
+  [役割 X] 専用のコンポーネントを作成し、スコープが明確でないかぎり共有コンポーネントを再利用しないでください。
+  ```

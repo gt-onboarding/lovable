@@ -1,0 +1,503 @@
+---
+title: "はじめに"
+description: "インテグレーションや外部APIを利用して、ウェブサイトの機能を拡張しましょう。"
+icon: "link"
+---
+
+Lovable には、コードのエクスポートやバックエンドの追加のための、シームレスなネイティブインテグレーションがあります。また、特定の機能をウェブサイトに追加したい場合は、外部APIと連携することも可能です。
+
+<div id="what-is-an-api">
+  ## API とは？
+</div>
+
+API は、ソフトウェアアプリケーション同士がやり取りを行い、データを共有するための仕組みです。
+API ごとに、メール送信や決済処理など、提供される機能は異なります。
+API の活用については、[こちらのブログ記事](https://lovable.dev/blog/2025-01-28-the-power-of-apis)で詳しく紹介しています。
+
+<div id="native-integrations">
+  ## ネイティブ連携
+</div>
+
+以下のセクションを参照して、ネイティブGitHub連携とSupabase連携をすばやく始め、詳しく学びましょう。
+
+<CardGroup cols="2">
+  <Card title="GitHub連携" icon="github" href="ja/github">
+    コードのエクスポートやスムーズなバージョン管理のために、LovableをGitHubと連携する方法を学びましょう。
+  </Card>
+
+  <Card title="Supabase連携" icon="database" href="ja/supabase">
+    Supabaseを使ってウェブサイトにバックエンドを追加し、認証や永続的なデータ保存をサポートしましょう。
+  </Card>
+</CardGroup>
+
+<div id="verified-integrations">
+  ## 検証済みインテグレーション
+</div>
+
+検証済みインテグレーションは、Lovable と最も相性が良くスムーズに動作します。
+
+<CardGroup cols="3">
+  <Card title="Stripe" href="ja/stripe">
+    アプリに決済処理機能を追加します。
+  </Card>
+
+  <Card title="OpenAI" href="https://openai.com/api/">
+    OpenAI のモデルを使って、アプリに AI 機能を追加します。
+  </Card>
+
+  <Card title="Anthropic" href="https://www.anthropic.com/api">
+    Anthropic の Claude モデルを使って、アプリに AI 機能を追加します。
+  </Card>
+
+  <Card title="Resend" href="https://resend.com/">
+    Resend のモダンなメール API を使って、アプリにメール送信機能を追加します。
+  </Card>
+
+  <Card title="Clerk" href="https://clerk.com/">
+    包括的なユーザー管理プラットフォームです。
+  </Card>
+
+  <Card title="Three.js" href="https://threejs.org/docs/">
+    アプリにインタラクティブな 3D グラフィックスを追加します。
+  </Card>
+
+  <Card title="D3.js" href="https://devdocs.io/d3/">
+    動的でインタラクティブなデータビジュアライゼーションを作成します。
+  </Card>
+
+  <Card title="Highcharts" href="https://highcharts.com/docs/index">
+    プロフェッショナルなインタラクティブチャートやビジュアライゼーションを作成します。
+  </Card>
+
+  <Card title="p5.js" href="https://p5js.org/reference/">
+    クリエイティブコーディングプロジェクトやインタラクティブグラフィックスを作成します。
+  </Card>
+
+  <Card title="Runware" href="https://runware.ai/">
+    アプリでテキストプロンプトから画像を生成できるようにします。
+  </Card>
+
+  <Card title="ElevenLabs" href="https://elevenlabs.io/developers">
+    テキスト読み上げ（Text-to-Speech）機能を追加します。
+  </Card>
+
+  <Card title="Make" href="https://developers.make.com/api-documentation">
+    タスクを自動化しアプリ同士を連携するワークフローを構築できるビジュアルプラットフォームです。
+  </Card>
+
+  <Card title="Replicate" href="https://replicate.com/docs/">
+    オープンソースの AI モデルを実行およびファインチューニングできます。
+  </Card>
+
+  <Card title="Stability AI" href="https://platform.stability.ai/docs/api-reference">
+    さまざまなモダリティに対応したオープンな AI モデルを利用できます。
+  </Card>
+
+  <Card title="Twilio" href="https://www.twilio.com/docs/messaging/api">
+    Twilio を使って、アプリに SMS 機能を追加します。
+  </Card>
+
+  <Card title="n8n" href="https://docs.n8n.io/api/">
+    ビジュアルプラットフォーム上でアプリケーション向けのワークフローを構築できます。
+  </Card>
+</CardGroup>
+
+<div id="using-any-api-with-lovable">
+  ## Lovable であらゆる API を使う
+</div>
+
+他の呼び出し可能な API も引き続き統合できますが、多くの場合、追加のコンテキストや手順が必要になります。
+
+たとえば、次のようなものがあるかもしれません:
+
+* **カスタム API を持つ社内システム**\
+  あなたのチームが構築したサービス（在庫管理システム、分析パイプライン、社内ツールなど）で、REST や GraphQL のエンドポイントは公開しているものの、一般公開されていなかったり広く知られていないものです。
+  こうしたシステムから Lovable がデータを取得・送信して、ワークフローを自動化したり、ユーザーインターフェースのバックエンドとして使いたいと考えている状況です。
+* **Lovable がまだサポートしていないサードパーティ API**\
+  ニッチな SaaS プロダクトや特殊なデータプロバイダー、あるいは Lovable にあらかじめ組み込みのサポートがないパートナー連携を使っているかもしれません。
+  公式サポート対象ではなくても、Lovable に接続させてリクエストを送り、そのデータを扱いたいはずです。
+
+どちらの場合も課題は同じです: Lovable はデフォルトではその API を「知りません」。しかし、適切なドキュメントと認証設定があれば、問題なく効果的に利用できます。
+いずれにしてもアプローチは同じです: **Lovable はそれでも接続できます**。次の手順で行います。
+
+<Steps>
+  <Step title="Lovable に必要なコンテキストを与える">
+    Lovable は、その API を理解しているときに最大の力を発揮します。次のような情報を渡せます:
+
+    * **OpenAPI 仕様**（利用可能な場合）
+    * **ドキュメントやサンプルのコピー＆ペースト**（特にエンドポイントとリクエスト／レスポンス例）
+
+    ドキュメントが明確であればあるほど、Lovable は API の呼び出し方をより適切に理解して扱えます。
+  </Step>
+
+  <Step title="認証を安全に扱う">
+    認証が必要な API の場合:
+
+    **オプション 1: Supabase Edge Functions をプロキシとして使う**
+
+    * シークレットを Supabase に安全に保存する
+    * Lovable からは API を直接ではなく、Supabase のエッジ関数経由でエンドポイントを呼び出す
+
+    **オプション 2: Lovable プロジェクト内で直接 API 連携を実装する**
+
+    * 認証エンドポイントを公開する（例: 認証情報をトークンやセッションに交換するためのもの）
+    * 連携フローの一部として、その認証エンドポイントを Lovable から呼び出す
+    * その後の API 呼び出しに、トークン、ヘッダー、またはセッション情報を含める
+  </Step>
+</Steps>
+
+API の例:
+
+<CardGroup cols="3">
+  <Card title="Mapbox" href="https://docs.mapbox.com/">
+    世界中の人や荷物、車両のナビゲーションを支えています。
+  </Card>
+
+  <Card title="Rive" href="https://rive.app/docs/getting-started/introduction">
+    インタラクティブなアニメーションを作成して公開しましょう。
+  </Card>
+
+  <Card title="Together.ai" href="https://docs.together.ai/docs/introduction">
+    わずか数行のコードで、最先端のオープンソースモデルを実行したりファインチューニングしたりできます。
+  </Card>
+
+  <Card title="PostHog" href="https://posthog.com/docs">
+    ユーザー行動、セッションリプレイ、A/B テストを提供するオープンソースのプロダクト分析ツール。
+  </Card>
+
+  <Card title="Firecrawl" href="https://docs.firecrawl.dev/introduction">
+    ウェブサイトをLLM対応データに変換。
+  </Card>
+
+  <Card title="Perplexity" href="https://docs.perplexity.ai/home">
+    アプリに強力なAI機能を組み込もう。
+  </Card>
+
+  <Card title="Zapier" href="https://docs.zapier.com/platform/home">
+    さまざまなWebアプリケーション同士を連携させる自動化ツールです。
+  </Card>
+
+  <Card title="GoJS" href="https://gojs.net/latest/api/">
+    ワークフローやプロセスの可視化に特に有効なフローチャートを追加できます。
+  </Card>
+
+  <Card title="Transformers.js (HF)" href="https://huggingface.co/docs/transformers.js/en/index">
+    サーバー不要で、ブラウザ上で機械学習モデルを直接実行できます。
+  </Card>
+
+  <Card title="Grok / xAI" href="https://docs.x.ai/docs/overview">
+    アプリにAI機能を追加しましょう。
+  </Card>
+
+  <Card title="Twilio" href="https://www.twilio.com/docs">
+    電話の発着信やテキストメッセージの送受信ができます。
+  </Card>
+
+  <Card title="連携" href="https://www.linkup.so/">
+    アプリケーションに AI 検索エンジンを組み込みましょう。
+  </Card>
+
+  <Card title="Google Workspace" href="https://developers.google.com/docs/api/how-tos/overview">
+    Google が開発したクラウド型の生産性・コラボレーションツール。
+  </Card>
+
+  <Card title="Lemon Squeezy" href="https://docs.lemonsqueezy.com/api">
+    デジタル商品の販売を簡単にするECプラットフォーム。
+  </Card>
+
+  <Card title="Serper.dev" href="https://serper.dev/">
+    Google 検索結果をアプリケーションに統合します。
+  </Card>
+
+  <Card title="Notion" href="https://developers.notion.com/">
+    ノート作成、タスク管理、データベース機能。
+  </Card>
+
+  <Card title="Mailgun" href="https://documentation.mailgun.com/docs/mailgun/api-reference/intro/">
+    メールの送受信とトラッキングができます。
+  </Card>
+
+  <Card title="Calendly" href="https://developer.calendly.com/api-docs">
+    ミーティングのスケジュール調整を簡単にするツール。
+  </Card>
+
+  <Card title="SendGrid" href="https://sendgrid.com/en-us/solutions/email-api">
+    トランザクションメールおよびマーケティングメールの管理・送信を行うメール配信サービス。
+  </Card>
+
+  <Card title="TinyMCE" href="https://www.tiny.cloud/docs/tinymce/latest/apis/tinymce.root/">
+    WYSIWYG な編集体験を実現するリッチテキストエディタ。
+  </Card>
+
+  <Card title="bannerbear" href="https://www.bannerbear.com/">
+    SNS向けの画像や動画の生成を自動化します。
+  </Card>
+
+  <Card title="スクエア" href="https://developer.squareup.com/us/en">
+    決済を受け取り、売上を管理し、コマース関連のさまざまな業務を処理します。
+  </Card>
+
+  <Card title="HeyGen" href="https://www.heygen.com/api">
+    AI動画生成サービス。
+  </Card>
+
+  <Card title="GetLago" href="https://getlago.com/docs/api-reference/intro">
+    [オープンソースの使用量計測と従量課金](https://www.getlago.com/)
+  </Card>
+
+  <Card title="Ticketmaster" href="https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/">
+    イベントおよびチケット情報を埋め込みます。
+  </Card>
+
+  <Card title="テナー" href="https://tenor.com/gifapi/documentation">
+    アプリにGIFを追加する
+  </Card>
+
+  <Card title="Ideogram" href="https://developer.ideogram.ai/ideogram-api/api-setup">
+    AI でタイポグラフィや画像を生成します。
+  </Card>
+
+  <Card title="Luma" href="https://docs.lu.ma/reference/getting-started-with-your-api">
+    イベントの作成または共有
+  </Card>
+
+  <Card title="Freesound" href="https://freesound.org/docs/api/">
+    無料の効果音やループのライブラリにアクセスできます。
+  </Card>
+
+  <Card title="iLovePDF" href="https://www.iloveapi.com/">
+    PDFを変換、結合、編集します。
+  </Card>
+
+  <Card title="Discord" href="https://discord.com/developers/docs/reference">
+    AI 搭載ボットを構築する
+  </Card>
+
+  <Card title="Google Imagen" href="https://cloud.google.com/vertex-ai/generative-ai/docs/image/overview">
+    テキストから画像を生成するツール。
+  </Card>
+
+  <Card title="Slack" href="https://api.slack.com/">
+    メッセージとワークフローを自動化
+  </Card>
+
+  <Card title="Petfinder" href="https://www.petfinder.com/developers/">
+    何十万匹のペットが登録されている Petfinder データベースにアクセスできます。
+  </Card>
+
+  <Card title="Sports DB" href="https://www.thesportsdb.com/free_sports_api">
+    すべての選手、イベント、テレビ番組表、スコアのデータを検索し、アクセスできます。
+  </Card>
+
+  <Card title="天気アプリ" href="https://openweathermap.org/api">
+    任意の場所の現在の天気データにアクセスできます。
+  </Card>
+
+  <Card title="YouTube" href="https://developers.google.com/youtube/v3">
+    アプリにさまざまな YouTube 機能を追加できます。
+  </Card>
+
+  <Card title="Findwork" href="https://publicapi.dev/findwork-api">
+    求人情報やキャリア関連の各種リソースにアクセスできます。
+  </Card>
+
+  <Card title="Pixabay" href="https://pixabay.com/api/docs/">
+    ロイヤリティフリーの画像や動画を検索して取得できます。
+  </Card>
+
+  <Card title="Alpha Vantage" href="https://www.alphavantage.co/">
+    リアルタイムおよび過去の金融市場データ。
+  </Card>
+
+  <Card title="最新情報" href="https://currentsapi.services/">
+    世界中のニュースを、さまざまな情報源からリアルタイムで収集・閲覧できます。
+  </Card>
+
+  <Card title="Kofi" href="https://help.ko-fi.com/hc/en-us/articles/360004162298-Does-Ko-fi-have-an-API-or-webhook">
+    寄付を受け取り、商品を販売し、リクエストを受け付け、ストリーミング配信で収益を得ましょう。
+  </Card>
+
+  <Card title="GitHub の統計" href="https://docs.github.com/en/rest/metrics/statistics?apiVersion=2022-11-28">
+    リポジトリのアクティビティと貢献状況を追跡できます。
+  </Card>
+
+  <Card title="TheNews API" href="https://www.thenewsapi.com/">
+    世界中15万以上の情報源から集めたニュースやブログ記事を、ブログ内で検索できます。
+  </Card>
+
+  <Card title="Tripadvisor" href="https://www.tripadvisor.com/developers">
+    サービス内容を連携し、予約を獲得して、顧客レビューを Trip に誘導しましょう。
+  </Card>
+
+  <Card title="Verifone" href="https://verifone.cloud/api-catalog">
+    トランザクションデータを収集する。
+  </Card>
+
+  <Card title="ニューヨーク・タイムズ" href="https://developer.nytimes.com/apis">
+    New York Times の記事を検索
+  </Card>
+
+  <Card title="Polygon.io" href="https://polygon.io/">
+    最新の金融市場データを照会する。
+  </Card>
+
+  <Card title="ワードクラウド" href="https://wordcloudapi.com/">
+    ワードクラウドを作成します。
+  </Card>
+
+  <Card title="QRコード生成ツール" href="https://goqr.me/api/">
+    QRコード画像の生成やデコード／読み取りを行えます。
+  </Card>
+
+  <Card title="Deezers" href="https://developers.deezer.com/api">
+    アプリに音楽関連機能を追加しましょう。
+  </Card>
+
+  <Card title="HackerEarth" href="https://www.hackerearth.com/docs/wiki/developers/v4/">
+    複数のプログラミング言語でコードをコンパイルして実行できます。
+  </Card>
+
+  <Card title="Cocktail DB" href="https://www.thecocktaildb.com/api.php">
+    カクテルレシピ、材料、画像を大量に収録した大規模なデータベースにアクセスできます。
+  </Card>
+
+  <Card title="Beer API" href="http://beer-api.readthedocs.io/">
+    エール、ラガー、ポーター、スタウトなど、さまざまなビールの種類の説明を確認できます。
+  </Card>
+
+  <Card title="ハッシュタグAPI" href="https://publicapi.dev/hashtag-api#:~:text=The%20Hashtag%20API%20allows%20users,hashtag%20functionality%20into%20their%20applications.">
+    ハッシュタグを取得、作成、更新、削除します。
+  </Card>
+
+  <Card title="USAJobs" href="https://developer.usajobs.gov/">
+    自社サイトで求人情報を掲載できます。
+  </Card>
+
+  <Card title="SFMTA" href="https://www.sfmta.com/reports/gtfs-transit-data">
+    1件以上の Trip を SFMTA Electronic Access Taxi System に送信します。
+  </Card>
+
+  <Card title="UPCDatabase" href="https://upcdatabase.org/api">
+    UPC データベースにアクセス
+  </Card>
+
+  <Card title="Time API" href="https://timeapi.io/">
+    タイムゾーン情報にアクセスし、タイムゾーン間で時刻を変換し、夏時間（サマータイム）を管理します。
+  </Card>
+
+  <Card title="Plotly" href="https://plotly.com/python-api-reference/">
+    グラフライブラリは、インタラクティブで出版品質のグラフを作成できます。
+  </Card>
+
+  <Card title="Manifest.build" href="https://manifest.build/docs/rest-api">
+    マイクロバックエンド
+  </Card>
+
+  <Card title="PayPal" href="https://developer.paypal.com/api/rest/">
+    アプリケーションに PayPal チェックアウト ソリューションを統合する。
+  </Card>
+
+  <Card title="4everland" href="https://docs.4everland.org/hositng/hosting-api">
+    バックエンドの代替手段
+  </Card>
+
+  <Card title="Outseta" href="https://go.outseta.com/support/kb/articles/d1QpxQE7/how-to-integrate-with-outseta-s-rest-api">
+    人物情報、アカウント、サブスクリプション、請求書を作成および更新します。
+  </Card>
+
+  <Card title="Recraft" href="https://www.recraft.ai/docs">
+    テキストからベクター画像を生成
+  </Card>
+
+  <Card title="n8n" href="https://docs.n8n.io/api/">
+    オートメーションとワークフロー。
+  </Card>
+
+  <Card title="ヴェネツィア" href="https://venice.ai/api-beta">
+    検閲なしのAI会話と画像生成。
+  </Card>
+
+  <Card title="Shopify" href="https://shopify.dev/docs/api">
+    eコマース機能を強化しましょう。
+  </Card>
+
+  <Card title="BuildShip" href="https://buildship.com/">
+    バックエンドと自動化
+  </Card>
+
+  <Card title="RunPod" href="https://docs.runpod.io/sdks/python/apis">
+    カスタムロジックの統合とデプロイ。
+  </Card>
+
+  <Card title="Gumloop" href="https://docs.gumloop.com/nodes/advanced/call_api">
+    自動化・ワークフロー向けソリューション。
+  </Card>
+
+  <Card title="Odoo" href="https://www.odoo.com/documentation/18.0/developer/reference/external_api.html">
+    アプリ内でデータを取得・送信できます。
+  </Card>
+
+  <Card title="Tableau" href="https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api.htm">
+    データ分析ツール。
+  </Card>
+
+  <Card title="Power BI" href="https://learn.microsoft.com/en-us/rest/api/power-bi/">
+    データ分析ツール。
+  </Card>
+
+  <Card title="Mermaid" href="https://mermaid.js.org/config/usage.html">
+    カスタマイズ可能な図、グラフ、ビジュアライゼーションを表示できます。
+  </Card>
+
+  <Card title="Stancer" href="https://www.stancer.com/documentation/api/">
+    Stripe の代替サービス。
+  </Card>
+
+  <Card title="Mercado" href="https://www.mercadopago.com.ar/developers/en/docs/checkout-api/landing">
+    チェックアウトプロセスを作成する。
+  </Card>
+
+  <Card title="Canva" href="https://www.canva.dev/docs/connect/">
+    Canva を自分の Web アプリに組み込む。
+  </Card>
+
+  <Card title="Razorpay" href="https://razorpay.com/docs/api/">
+    インド向け決済インターフェースを構築する
+  </Card>
+
+  <Card title="Coinbase" href="https://www.coinbase.com/en-fr/developer-platform/products/exchange-api">
+    リアルタイムのマーケットデータ。
+  </Card>
+
+  <Card title="GSAP" href="https://gsap.com/docs/v3/">
+    アニメーションライブラリ
+  </Card>
+
+  <Card title="Cohere" href="https://docs.cohere.com/">
+    自然言語処理と生成をプロダクトに組み込みましょう。
+  </Card>
+
+  <Card title="OpenRouter" href="https://openrouter.ai/docs/quickstart">
+    数百種類のAIモデルにアクセスできます。
+  </Card>
+
+  <Card title="Fal AI" href="https://docs.fal.ai/">
+    カスタムAIモデルをデプロイ
+  </Card>
+
+  <Card title="Paystack" href="https://paystack.com/docs/api/">
+    オンライン決済ゲートウェイ（アフリカ）
+  </Card>
+
+  <Card title="Remotion" href="https://www.remotion.dev/docs/api">
+    AIで動画を作成し、MP4ファイルとして出力します。
+  </Card>
+
+  <Card title="Paddle" href="https://developer.paddle.com/api-reference/overview">
+    支払い、税金、サブスクリプションの管理。
+  </Card>
+
+  <Card title="Polar API" href="https://docs.polar.sh/api-reference">
+    Polar デバイスからアクティビティレベルや心拍数などのデータを取得します。
+  </Card>
+</CardGroup>

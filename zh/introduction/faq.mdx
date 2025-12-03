@@ -1,0 +1,328 @@
+---
+title: "常见问题"
+description: "Lovable 常见问题解答"
+icon: "circle-question"
+---
+
+<div id="getting-started">
+  ## 入门
+</div>
+
+<AccordionGroup>
+  <Accordion title="什么是 Lovable？">
+    Lovable 是一个由 AI 驱动的平台，可以让不同经验水平的用户通过自然语言创建全栈网站。你只需用文字描述你想要的内容，Lovable 就会为你构建出来。
+  </Accordion>
+
+  <Accordion title="我可以用 Lovable 构建什么？">
+    只要你能想象，就能用 Lovable 构建出来。从简单的落地页到针对细分场景的强大工具，Lovable 都能为你提供足够的灵活性，让你在几乎不受限制的情况下自由创建你需要的一切。
+  </Accordion>
+
+  <Accordion title="使用 Lovable 构建时需要有编程经验吗？">
+    不需要。Lovable 面向所有经验水平的用户设计。无论你是开发者还是非技术用户，都可以使用 Lovable 创建网站。
+  </Accordion>
+
+  <Accordion title="我该如何创建一个项目？">
+    要创建一个项目，只需在仪表盘上的消息输入框中输入一条消息。描述你想要构建的内容，接下来就交给 Lovable，它会为你的项目生成一个起点。记得从小处开始，逐步迭代构建！
+  </Accordion>
+
+  <Accordion title="我可以复用现有项目吗？">
+    可以，你可以复刻一个现有的公开项目，或者复刻你自己的项目。复刻可以让你将项目的当前状态作为起点，在此基础上继续构建。这样非常适合用来探索新想法、进行调整，或通过不同的修改不断迭代，同时保留原始版本。
+  </Accordion>
+</AccordionGroup>
+
+<div id="building-with-lovable">
+  ## 使用 Lovable 构建应用
+</div>
+
+<AccordionGroup>
+  <Accordion title="如何高效地使用 Lovable 构建？">
+    高效地使用 Lovable 构建，关键在于掌握合适的方法。只要稍加练习，任何人都能做到。要开始上手，请查看我们的[指南](https://mastering-lovable.lovable.app/)。
+  </Accordion>
+
+  <Accordion title="我应该如何组织提示以获得最佳效果？">
+    * 保持清晰且具体。
+    * 一次专注于一个功能。
+    * 逐步迭代构建。
+    * 使用一些与设计相关的关键词或流行术语，帮助生成更理想的设计。
+  </Accordion>
+
+  <Accordion title="遇到错误时我该怎么办？">
+    <Steps>
+      <Step title="Try-to-fix 按钮">
+        使用 **Try-to-fix** 选项。Lovable 会尝试自动解决问题。使用该按钮不会扣除任何点数。
+      </Step>
+
+      <Step title="调查问题">
+        如果 **Try-to-fix** 无法解决问题，请让 Lovable Agent 帮你调查问题。说明你看到了什么，以及具体哪些部分无法正常工作。
+      </Step>
+
+      <Step title="回退到旧版本">
+        如果仍然不行，你可以预览一个之前可正常工作的旧版本，然后在需要时回退到该版本，或者回退后编辑之前的消息以探索其他做法。不会丢失任何内容——在那之后所做的所有更改都会保留在对话中，并且可以随时重新应用。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="什么是重构，为什么它很重要？">
+    重构是在不改变功能的前提下，改进代码结构和效率。它有助于：
+
+    * 通过删除冗余来优化性能。
+    * 提高可维护性，方便未来更新。
+    * 通过更清晰地组织逻辑来避免冲突。
+  </Accordion>
+
+  <Accordion title="我可以把项目连接到后端来存储数据吗？">
+    如果你需要为应用添加后端能力，你可以：
+
+    * 连接到 Lovable 内置后端——[Lovable Cloud](https://docs.lovable.dev/features/cloud)
+    * 使用 Lovable 原生的 [Supabase 集成](https://docs.lovable.dev/integrations/supabase)
+  </Accordion>
+
+  <Accordion title="我可以给我的网站添加登录功能吗？">
+    可以，你可以通过使用 [Lovable Cloud](https://docs.lovable.dev/features/cloud) 或集成 [Supabase](https://docs.lovable.dev/integrations/supabase) 来添加身份验证。只需向 AI 发出提示让它帮你添加，并按照指引操作即可。
+  </Accordion>
+
+  <Accordion title="我可以在项目中添加第三方 API 吗？">
+    可以，你可以在提示中说明要使用的 API，例如 OpenAI、Stripe 等。阅读更多内容[请见此处](/zh/integrations/introduction)。
+  </Accordion>
+
+  <Accordion title="我可以在 Lovable 中保存敏感的 API 密钥吗？">
+    不可以！绝不要在 Lovable 中直接输入你的 API 密钥。如果你要集成某个 API，我们建议你在 [Lovable Cloud](https://docs.lovable.dev/features/cloud) 或 [Supabase](https://docs.lovable.dev/integrations/supabase) 中使用机密信息来存储你的 API 密钥，并结合它们的 Edge Functions 使用。
+  </Accordion>
+
+  <Accordion title="如何给我的网站添加支付功能？">
+    你可以通过将 Stripe 添加到你的项目中来添加支付功能。请参见 [Stripe 集成](/zh/integrations/stripe) 了解如何配置。
+  </Accordion>
+
+  <Accordion title="我如何提升项目的 SEO？">
+    按照我们的[实现 SEO 与 GEO 最佳实践](https://docs.lovable.dev/tips-tricks/seo-geo)指南操作，以获得最佳效果。
+  </Accordion>
+
+  <Accordion title="完成一个项目需要多长时间？">
+    这取决于项目的复杂度。通过将任务拆分为更小的步骤、提前规划，并根据反馈不断迭代，你可以在保证质量的同时快速推进。
+  </Accordion>
+</AccordionGroup>
+
+<div id="features">
+  ## 功能
+</div>
+
+<AccordionGroup>
+  <Accordion title="在哪里可以找到项目设置？">
+    你可以在编辑器左上角点击你的项目名称，然后选择 **Settings**，即可打开 **Project settings**。
+  </Accordion>
+
+  <Accordion title="我可以更改项目的可见性吗？">
+    是的，前往 **项目设置**，即可更改可见性设置。更多信息请参阅[管理项目可见性](/zh/features/private-projects)。
+  </Accordion>
+
+  <Accordion title="我可以申请访问私有项目的权限吗？">
+    可以。在访问私有项目时，你可以向项目所有者请求查看或编辑权限。这样既能保障私有工作内容的安全，又能让协作更加顺畅。
+  </Accordion>
+
+  <Accordion title="我可以隐藏 Lovable 徽章吗？">
+    可以，在 **项目设置** 中，你会看到隐藏徽章的选项。只有付费用户可以关闭该徽章。
+  </Accordion>
+
+  <Accordion title="我可以重命名项目吗？">
+    可以，在 **Project settings** 中，你会找到重命名项目的选项。
+  </Accordion>
+
+  <Accordion title="我可以复制一个项目吗？">
+    要复制一个项目，你需要复刻该项目。前往 **Project Settings**，选择 **Remix** 选项。这会在你当前选择的工作区中创建该项目的一个完全相同的副本。
+
+    <Note>
+      只有当项目未连接到 Supabase 时，你才能复刻其他用户的公开项目。
+    </Note>
+  </Accordion>
+
+  <Accordion title="我可以删除项目吗？">
+    是的，前往 **Project settings**，在那里你可以找到用于删除项目的 **Delete** 选项。
+
+    <Note>
+      此操作不可撤销，已删除的项目无法恢复。
+    </Note>
+  </Accordion>
+
+  <Accordion title="什么是复刻？">
+    复刻一个项目会创建一个完全相同的副本，供你单独编辑。在[这里](/zh/introduction/faq#can-i-make-a-copy-of-a-project)了解更多信息。
+  </Accordion>
+
+  <Accordion title="什么是 Chat mode？">
+    你可以在[这里](/zh/features/modes)进一步了解 Lovable 的不同模式以及 Chat mode。
+  </Accordion>
+
+  <Accordion title="我可以查看 Lovable 生成的代码并手动修改吗？">
+    是的，你可以通过 Lovable 的 [代码模式](/zh/features/code-mode)查看并手动编辑代码。
+  </Accordion>
+
+  <Accordion title="我可以手动修改文字或颜色吗？">
+    是的，你可以使用 [Visual Edits](/zh/features/visual-edit) 编辑文本和颜色。
+  </Accordion>
+
+  <Accordion title="我可以和他人一起在项目中协作吗？">
+    是的，你可以在 Lovable 中与他人协作开发项目。更多信息请参见[协作](/zh/features/collaboration)。
+  </Accordion>
+
+  <Accordion title="如何发布项目？">
+    请参阅 [发布](/zh/features/publish)，并按照其中的步骤发布你的项目。
+  </Accordion>
+
+  <Accordion title="如何为我的项目添加自定义域名？">
+    请参阅[自定义域名](/zh/features/custom-domain)，了解如何为你的项目添加自定义域名。
+  </Accordion>
+
+  <Accordion title="我可以查看自己已发布项目的分析数据吗？">
+    是的。更多信息请参阅 [项目分析](/zh/features/project-analytics)。
+  </Accordion>
+
+  <Accordion title="我可以在 Lovable 的提示中添加图片吗？">
+    可以。作为设计灵感的图片、你期望布局的草图，或是展示 UI 问题的截图，在设计你的网站时都非常有帮助。
+  </Accordion>
+
+  <Accordion title="我可以在 Lovable 的提示中添加视频吗？">
+    遗憾的是，目前暂时还不支持视频，不过截图通常就够用了。
+  </Accordion>
+
+  <Accordion title="我可以导出整个项目的代码吗？">
+    可以。将代码迁移到 GitHub 后，你可以导出代码并按自己的需要自由使用。更多信息请参见 [GitHub 集成](/zh/integrations/github)。
+  </Accordion>
+
+  <Accordion title="我可以通过从 GitHub 等外部来源导入代码来创建项目吗？">
+    目前还不支持基于已有代码（例如 GitHub 上的代码）来创建 Lovable 项目。
+  </Accordion>
+
+  <Accordion title="如何查看我的项目历史记录？">
+    你可以通过在聊天中向上滚动，或点击聊天顶部的 **View history** 图标来查看项目历史记录。你也可以选择较早的版本进行预览，或将项目恢复到该版本。
+  </Accordion>
+
+  <Accordion title="我可以将项目还原到之前的版本吗？">
+    可以。你可以预览较早的可用版本，并在需要时恢复到该版本，或者编辑一条之前的消息并恢复，以探索不同的思路。不会丢失任何内容——在那之后所做的所有更改都会保留在对话中，并且可以在任何时候再次应用。
+
+    * 在对话中每条回复下面，或在历史记录选项卡中选择你想恢复到的版本时，都可以找到恢复选项。
+    * 在对话中你发送的每条历史消息下面，都可以找到编辑该消息并恢复的选项。
+  </Accordion>
+</AccordionGroup>
+
+如需了解各项功能的相关问题和故障排查技巧，请查看各功能的[页面](/zh/features)。
+
+<div id="lovable-api">
+  ## Lovable API
+</div>
+
+<AccordionGroup>
+  <Accordion title="我可以用 Lovable API 做什么？">
+    **Lovable API** 让你可以以编程方式创建和分享 Lovable 应用——只需一个链接，就能把想法、提示词，甚至图片转换成完整的应用程序。 
+
+    首个版本中提供的功能 **Build with URL** 允许你直接从可分享的 URL 生成应用。通过它，你可以：
+
+    * 在你的网站或应用中嵌入一个 **Build with Lovable** 按钮。
+    * 通过 URL 将预定义的提示词分享给朋友、同事，或发布在社交媒体上。
+    * 将应用生成自动化，作为内部工作流的一部分。
+    * 使用包含提示词和参考图片的 URL 快速构建原型应用。
+
+    在我们的公告文章中了解该功能和真实使用场景：[通过链接使用 Lovable Build with URL 构建应用](https://lovable.dev/blog/introducing-lovable-api-build-with-url)。
+
+    在这里阅读完整技术指南：[Lovable API：Build with URL 文档](https://docs.lovable.dev/integrations/build-with-url)。
+  </Accordion>
+</AccordionGroup>
+
+<div id="managing-your-account">
+  ## 管理你的账号
+</div>
+
+<AccordionGroup>
+  <Accordion title="我可以更改用于登录的邮箱吗？">
+    目前暂时无法直接更改账号绑定的邮箱地址。作为替代方案，你可以使用想要的邮箱地址创建一个新账号，并按照以下步骤迁移你的项目：
+
+    1. 将你现有的项目临时设置为公开，并复制其 URL。
+    2. 在新账号登录的情况下访问该 URL。
+    3. 将这些项目复刻到你的新账号中。请注意，连接了 Supabase 的项目需要先与 Supabase 断开连接，才能进行复刻。
+    4. 项目转移完成后，如有需要，你可以再次将它们设为私有。
+
+    注意：如果你的目标工作区使用的是付费套餐，为了访问这些项目，可能需要先复刻公开项目。复刻后的项目不会继承原有订阅套餐中的功能，除非新工作区也具备相同的功能。
+  </Accordion>
+
+  <Accordion title="我可以删除我的账号吗？">
+    要删除你的账号，前往 **Settings → Your Account**，向下滚动并点击 **Delete account**。这将永久删除你的账号以及所有相关数据。
+  </Accordion>
+
+  <Accordion title="我可以重新激活已删除的账号吗？">
+    不可以，你无法重新激活已删除的账号。不过，在点击删除账号按钮后，你可以在 48 小时内取消此操作，以阻止账号被删除。
+  </Accordion>
+
+  <Accordion title="我可以更改工作区所有者吗？">
+    可以，当前所有者可以添加多个工作区所有者。
+  </Accordion>
+
+  <Accordion title="我怎样把项目的所有权转移给其他人？">
+    一种变通方式是由对方复刻该项目，复刻该项目的人将成为该复刻版本的所有者。
+  </Accordion>
+</AccordionGroup>
+
+关于点数和订阅问题的更多信息，请参阅[套餐和点数](/zh/introduction/plans-and-credits)。
+
+<div id="policies-and-security">
+  ## 政策与安全
+</div>
+
+<AccordionGroup>
+  <Accordion title="如何获得客户支持？">
+    访问 [Help &amp; Support](https://lovable.dev/support)。
+  </Accordion>
+
+  <Accordion title="在哪里可以查看 Lovable 的隐私政策？">
+    访问 [Privacy policy](https://lovable.dev/privacy)。
+  </Accordion>
+
+  <Accordion title="在哪里可以查看 Lovable 的服务条款？">
+    访问 [Terms of Service](https://lovable.dev/terms)。
+  </Accordion>
+
+  <Accordion title="Lovable 的退款政策是什么？">
+    请查看我们的 [Terms of Service](https://lovable.dev/terms)，了解更多关于退款政策的内容。
+  </Accordion>
+
+  <Accordion title="Lovable 是否符合安全标准？">
+    是的，Lovable 符合业内公认的安全标准，并遵循数据保护和风险管理的最佳实践。我们通过严格的第三方审计，并持有 ISO 27001 和 SOC 2 Type I 等认证，由 Delve 提供实时监控。你可以在[此处](https://trust.delve.co/lovable)查看我们当前的合规状态、次级处理方和相关政策。
+  </Accordion>
+
+  <Accordion title="Lovable 是否符合 GDPR 要求？">
+    是的，Lovable 完全符合 GDPR 要求。我们严格遵守《通用数据保护条例》（GDPR）中关于数据保护和隐私的规范，该条例适用于所有处理欧盟境内个人数据的组织。我们的系统会持续接受监控以确保合规，并且我们致力于在全球范围内保护用户数据。
+  </Accordion>
+</AccordionGroup>
+
+<div id="how-lovable-works">
+  ## Lovable 的工作原理
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable 支持哪些技术栈？">
+    Lovable 使用 React、Tailwind 和 Vite 构建前端，并且可以连接到 OpenAPI 后端。通过 Lovable Cloud 或 Supabase，可以实现数据持久化和身份验证功能。
+  </Accordion>
+
+  <Accordion title="Lovable 是否支持移动应用开发？">
+    不支持，Lovable 专注于构建 **Web 应用程序**，但你可以设计适配移动设备的 Web 应用。
+  </Accordion>
+
+  <Accordion title="Lovable 如何记住上下文？">
+    Lovable 会处理最近的消息来维持上下文。为了获得最佳效果，请在每个提示中包含相关细节，以确保结果清晰且准确。
+  </Accordion>
+
+  <Accordion title="谁拥有 Lovable 创建的项目和代码？">
+    你，作为创作者，拥有所有权！
+  </Accordion>
+</AccordionGroup>
+
+<div id="about-lovable">
+  ## 关于 Lovable
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable 的总部在哪里？">
+    Lovable **100% 诞生于欧洲**，总部位于 **瑞典斯德哥尔摩**。
+  </Accordion>
+
+  <Accordion title="Lovable 在招聘吗？">
+    是的！在[这里](https://lovable.dev/careers)查看我们当前的开放职位。
+  </Accordion>
+</AccordionGroup>

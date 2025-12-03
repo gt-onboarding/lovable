@@ -1,0 +1,423 @@
+---
+title: "设置单点登录（SSO）"
+sidebarTitle: "单点登录（SSO）"
+description: "使用 OIDC 或 SAML 2.0 通过你的身份提供商配置 Lovable 单点登录（SSO），实现安全、集中化的工作区身份验证。"
+icon: "shield-keyhole"
+keywords: ["单点登录","sso","SSO 设置","SSO 配置","SSO 集成","企业 SSO","强制使用 SSO","身份提供商","OIDC","SAML","Okta SSO","Auth0 SSO","Microsoft Entra ID SSO","Azure AD SSO"]
+---
+
+单点登录（SSO）适用于 **Business** 和 **Enterprise** 方案，可在你的组织中实现安全、集中化的身份验证。借助 SSO，用户只需一组凭据即可访问 Lovable，从而简化访问管理并提升安全性。
+
+<Note>
+  **仅支持由服务提供商（Service Provider，SP）发起的登录：** 用户必须从 Lovable（SP）发起登录。
+
+  **由身份提供商（Identity Provider，IdP）发起的 SSO**（从 IdP 仪表盘磁贴启动）**不受支持**。
+</Note>
+
+<div id="supported-sso-protocols">
+  ## 支持的 SSO 协议
+</div>
+
+Lovable 支持 **OIDC** 和 **SAML 2.0** 协议，可与所有主流 **身份提供商（IdP）** 集成，包括 Okta、Auth0、Microsoft Entra ID（Azure AD）等。
+
+- **OpenID Connect (OIDC)**：推荐使用；一种构建在 OAuth 2.0 之上的现代身份层规范，用于实现身份验证。
+- **SAML (Security Assertion Markup Language) 2.0**：基于 XML 的协议，用于交换身份验证和授权数据，在企业环境中被广泛使用。
+
+<div id="prerequisites">
+  ## 前提条件
+</div>
+
+要使用 OIDC 或 SAML 将你的身份提供商连接到 Lovable，你需要：
+
+- **IdP 管理员权限**（Okta、Auth0、Microsoft Entra ID，或你正在使用的任何其他提供商）
+- **Lovable 工作区所有者或管理员角色**
+- 在 Lovable 中**已验证的域名**
+
+<div id="start-sso-setup-in-lovable">
+  ## 在 Lovable 中开始配置 SSO
+</div>
+
+SSO 配置是在 Lovable 与身份提供商之间进行的**双向配置**：
+
+- **Lovable → IdP：** 将 Lovable 的 URL 和相关设置复制到你的 IdP 应用中。
+- **IdP → Lovable：** 将 IdP 的 issuer、metadata 和证书复制回 Lovable。
+
+工作区的**所有者（owner）**或**管理员（admin）**可以配置 SSO。首先进入 **Settings → Workspace → Identity → Add SSO provider**，然后选择 **OIDC** 或 **SAML**。
+
+<div id="idp-configuration-reference">
+  ### IdP 配置参考
+</div>
+
+当你在 Lovable 中开始设置 SSO 提供商时，你会看到：
+
+- **需要在你的 IdP 中配置的内容**（例如应用类型、scope 和属性映射）
+- **Lovable 的 URL 和标识符**，你可能需要在 IdP 中输入。
+
+在你的 IdP 中配置 OIDC 或 SAML 时，请参考下方内容。
+
+<Tabs>
+  <Tab title="OIDC">
+    - Application type: `Web Application`
+    - Grant type: `Authorization Code`
+    - Token method: `POST`（如果可配置）
+    - 需要复制并添加到你的 IdP 的 Redirect URI：`https://auth.lovable.dev/__/auth/handler`
+    - OAuth scopes:
+      - 必需：`openid`, `email`
+      - 推荐：`profile`
+  </Tab>
+  <Tab title="SAML">
+    - ACS URL（Assertion Consumer Service）：`https://auth.lovable.dev/__/auth/handler`
+    - SP Entity ID / Audience URI: `https://auth.lovable.dev/__/auth/handler`
+    - 属性映射：
+      - `email`（必需）：确保格式设置为 `EmailAddress`
+      - `displayName`（推荐）：映射到用户的全名
+      - `photoURL`（推荐）：映射到用户的头像图片 URL
+  </Tab>
+</Tabs>
+
+<div id="provider-specific-setup-guides">
+  ## 针对特定提供商的设置指南
+</div>
+
+如果你使用 Okta、Auth0 或 Microsoft Entra，你可以查看这些提供商的相关文档来完成 SSO 配置。如果你使用其他提供商，请参阅[配置其他提供商](#configure-other-providers)。
+
+在开始之前，先完成 [在 Lovable 中开始 SSO 设置](#start-sso-setup-in-lovable)，以获取你在身份提供商（IdP）中需要使用的配置和值。
+
+<div id="configure-okta-as-your-sso-provider">
+  ### 将 Okta 配置为你的 SSO 提供商
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <Steps>
+      <Step title="在 Okta 管理控制台中创建应用">
+        - 在 **Applications** 下，点击 **Create App Integration** 并选择 **OIDC**。然后选择 **Web Application** 应用类型。
+        - 为应用命名，例如 `Lovable OIDC SSO`。
+      </Step>
+      <Step title="配置 OIDC 集成">
+        - 将 **Grant type** 设置为 `Authorization Code`。
+        - 删除默认的重定向 URI。
+        - 将 Lovable 重定向 URL 添加到 Okta 的 **Sign-in redirect URIs**：`https://auth.lovable.dev/__/auth/handler`
+        - 在 **Assignments** 中，将该应用分配给需要访问 Lovable 的用户或用户组。
+      </Step>
+      <Step title="保存应用">
+        点击 **Save**。你的应用现在已经在 Okta 中创建完成。
+      </Step>
+      <Step title="配置 Okta Issuer URL">
+        在 Okta 中，前往 **Sign On → OpenID Connect ID Token**，在 Issuer 下拉菜单中选择 **Okta URL**，然后点击 **Save**。
+      </Step>
+      <Step title="向 Lovable 提供你的 IdP 信息">
+        在 Okta 中，从 **Sign On** 选项卡复制以下值并输入到 Lovable 中。
+
+        - Okta `Issuer URL` → Lovable `OIDC Issuer URL/Discovery Endpoint`
+
+        在 Okta 中，从 **General** 选项卡复制以下值并输入到 Lovable 中。
+
+        - Okta `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - Okta `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+      <Step title="（可选）在 Lovable 中测试配置">
+        在 Lovable 中，点击 **Test configuration**。如果所有配置都正确，验证应能通过。
+      </Step>
+      <Step title="在 Lovable 中完成 OIDC 提供商配置">
+        在 Lovable 中，点击 **Configure provider`**，完成将 Okta 配置为你的 OIDC SSO 提供商。
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="在 Okta 管理控制台中创建应用">
+        - 在 **Applications** 下，点击 **Create App Integration** 并选择 **SAML 2.0**。
+        - 为应用命名，例如 `Lovable SAML SSO`。
+      </Step>
+      <Step title="配置 SAML 设置">
+        - Single sign-on URL: `https://auth.lovable.dev/__/auth/handler`
+        - Audience URI (SP Entity ID): `https://auth.lovable.dev/__/auth/handler`
+        - Name ID format: `EmailAddress`
+      </Step>
+      <Step title="保存应用">
+        点击 **Finish.** 你的应用现在已经在 Okta 中创建完成。
+      </Step>
+      <Step title="向 Lovable 提供你的 IdP 信息">
+        在 Okta 中，前往 **Sign On → SAML 2.0 → Metadata details**，复制 **Metadata URL** 并在新标签页中打开。
+
+        复制该 **Metadata URL** 中的以下值并输入到 Lovable 中：
+
+        - Okta `SingleSignOnService Location` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Okta `EntityID` → Lovable `Identity Provider Entity ID / Issuer`
+        - Okta `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            将证书内容粘贴在 `-----BEGIN CERTIFICATE-----` 和 `-----END CERTIFICATE-----` 两行之间。
+          </Note>
+      </Step>
+      <Step title="在 Lovable 中完成 SAML 提供商配置">
+        在 Lovable 中，点击 **Configure SAML Provider → Confirm & Enable SSO**，以完成将 Okta 配置为你的 SAML SSO 提供商。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-auth0-as-your-sso-provider">
+  ### 将 Auth0 配置为你的 SSO 提供商
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <Steps>
+      <Step title="在 Auth0 管理控制台中创建应用">
+        - 在 **Applications** 中，点击 **Create application**。选择 **Regular Web Applications** 应用类型。
+        - 为应用命名，例如 `Lovable OIDC SSO`。
+        - 点击 **Create**。
+      </Step>
+      <Step title="配置 Allowed Callback URLs">
+        在 Auth0 中，前往你的应用设置，添加 **Allowed Callback URLs**：`https://auth.lovable.dev/__/auth/handler`，然后点击 **Save**。
+      </Step>
+      <Step title="将你的 IdP 信息提供给 Lovable">
+        在 Auth0 中，从 **Settings** 选项卡复制以下值，并将它们填写到 Lovable 中。
+
+        - Auth0 `Domain` → Lovable `OIDC Issuer URL/Discovery Endpoint`（请包含 `https://`）
+        - Auth0 `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - Auth0 `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+      <Step title="（可选）在 Lovable 中测试配置">
+        在 Lovable 中，点击 **Test configuration**。如果你配置正确，验证应会成功通过。
+      </Step>
+      <Step title="在 Lovable 中完成 OIDC 提供商配置">
+        在 Lovable 中，点击 **Configure provider**，完成将 Auth0 配置为 OIDC SSO 提供商。
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="在 Auth0 管理控制台中创建应用">
+        - 在 **Applications** 中，点击 **Create application**。选择 **Regular Web Applications** 应用类型。
+        - 为应用命名，例如 `Lovable SAML SSO`。
+        - 点击 **Create**。
+      </Step>
+      <Step title="配置 Allowed Callback URLs">
+        在 Auth0 中，前往你的应用设置，添加 **Allowed Callback URLs**：`https://auth.lovable.dev/__/auth/handler`，然后点击 **Save**。
+      </Step>
+      <Step title="配置 SAML2 Web App Add-on">
+        - 在 Auth0 中，前往 **Addons**，启用 **SAML2 Web app**。
+        - 在 **Addon: SAML2 Web app → Settings** 中设置：
+          - Application Callback URL：`https://auth.lovable.dev/__/auth/handler`
+          - Settings：粘贴以下 `mappings` JSON
+
+        ```json
+            {
+              "mappings": {
+                "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+              },
+              "nameIdentifierFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+            }
+        ```
+
+        - 点击 **Enable.**
+      </Step>
+      <Step title="将你的 IdP 信息提供给 Lovable">
+        在 **Auth0 → Addon: SAML2 Web app → Usage** 中，复制以下 **SAML Protocol Configuration Parameter** 的值，并将它们填写到 Lovable 中。
+
+        - Auth0 `Identity Provider Login URL` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Auth0 `Issuer` → Lovable `Identity Provider Entity ID / Issuer`
+        - Auth0 `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            下载 Auth0 证书并复制 `X509Certificate` 的值。将证书值粘贴到 `-----BEGIN CERTIFICATE-----` 和 `-----END CERTIFICATE-----` 行之间。
+          </Note>
+      </Step>
+      <Step title="在 Lovable 中完成 SAML 提供商配置">
+        在 Lovable 中，点击 **Configure SAML Provider → Confirm & Enable SSO**，完成将 Auth0 配置为 SAML SSO 提供商。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-microsoft-entra-id-as-your-sso-provider">
+  ### 将 Microsoft Entra ID 配置为你的 SSO 提供商
+</div>
+
+<Tabs>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="在 Microsoft Entra 管理中心创建企业应用">
+        - 在 **Enterprise applications** 中，选择 **New application**。
+        - 选择 **Create your own application**，然后选择 **Integrate any other application you don’t find in the gallery (Non-gallery)**。
+        - 为应用命名，例如 `Lovable SAML SSO`。
+        - 点击 **Create**。你的应用现已创建完成。
+      </Step>
+      <Step title="配置 SAML SSO">
+        在 Microsoft Entra 中，进入 **Single sign-on** 设置页面并选择 **SAML**。在 **Basic SAML Configuration** 中输入以下内容：
+
+        - Identifier (Entity ID): `https://auth.lovable.dev/__/auth/handler`
+        - Reply URL (Assertion Consumer Service URL): `https://auth.lovable.dev/__/auth/handler`
+
+        将其他值留空，然后选择 **Save**。
+      </Step>
+      <Step title="向 Lovable 提供你的 IdP 信息">
+        完成应用设置后，复制以下值并将它们填入 Lovable 中。
+
+        - Microsoft Entra `Login URL` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Microsoft Entra `Microsoft Entra Identifier` → Lovable `Identity Provider Entity ID / Issuer`
+        - Microsoft Entra `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            你可以下载证书（Base 64），或者在新标签页中打开 `App Federation Metadata URL` 并复制 `X509Certificate` 的值。将证书值粘贴到 `-----BEGIN CERTIFICATE-----` 和 `-----END CERTIFICATE-----` 行之间。
+          </Note>
+      </Step>
+      <Step title="在 Lovable 中完成 SAML 提供商配置">
+        在 Lovable 中，点击 **Configure SAML Provider → Confirm & Enable SSO**，完成将 Microsoft Entra ID 配置为你的 SAML SSO 提供商。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-other-providers">
+  ## 配置其他提供商
+</div>
+
+你可以将任何符合 OIDC 或 SAML 标准的身份提供商与 Lovable SSO 集成。
+
+在开始之前，先完成[在 Lovable 中开始 SSO 设置](#start-sso-setup-in-lovable)，以获取在 IdP 中需要使用的相关设置和值。
+
+<Tabs>
+  <Tab title="OIDC">
+    **提供商字段映射**
+
+    不同提供商中常见的字段名称包括：
+
+    - Redirect URI：`Callback URL`、`Sign-in redirect URI`
+    - Issuer/Domain：`Issuer URL`、`Authority`、`Okta domain`、`Auth0 domain`、`Tenant domain`
+    - Client credentials：`Client ID` 和 `Client Secret`
+
+    **步骤**
+
+    <Steps>
+      <Step title="创建 OIDC 机密应用">
+        在你的身份提供商中创建一个新的 OIDC Web 应用。
+      </Step>
+      <Step title="配置 Redirect URI">
+        在 Redirect/Callback URLs 中添加 `https://auth.lovable.dev/__/auth/handler`
+      </Step>
+      <Step title="启用所需 scopes">
+        确保已启用 `openid` 和 `email` scopes，并在需要时已完成授权同意。
+      </Step>
+      <Step title="向 Lovable 提供你的 IdP 信息">
+        在你的 IdP（身份提供商）中复制以下值，并将它们填入 Lovable：
+
+        - `Domain` 或 `Issuer URL` → Lovable `OIDC Issuer URL/Discovery Endpoint`
+        - `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    **提供商字段映射**
+
+    不同提供商中常见的字段名称包括：
+
+    - ACS URL：`Single Sign-On URL`、`SSO URL`、`Reply URL`、`Assertion Consumer Service URL`
+    - Audience：`SP Entity ID`、`Audience URI`、`Identifier`
+    - Attribute mapping：`Attribute Statements`、`User Attributes & Claims`
+
+    **步骤**
+
+    <Steps>
+      <Step title="创建 SAML 2.0 应用">
+        在你的身份提供商中创建一个新的 SAML 2.0 应用。
+      </Step>
+      <Step title="配置端点">
+        - ACS URL：`https://auth.lovable.dev/__/auth/handler`
+        - Audience / Entity ID：`https://auth.lovable.dev/__/auth/handler`
+      </Step>
+      <Step title="映射属性">
+        确保在 SAML 断言中包含 `email`。`displayName` 为可选。
+      </Step>
+      <Step title="分配用户">
+        将该应用分配给需要访问 Lovable 的用户/用户组。
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="troubleshooting">
+  ## 疑难解答
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <AccordionGroup>
+      <Accordion title="无效或不匹配的 Redirect URI">
+        请确保在 IdP 中配置的重定向/回调 URL 与 `https://auth.lovable.dev/__/auth/handler` 完全一致。
+      </Accordion>
+      <Accordion title="Issuer URL / 发现失败">
+        使用提供商的 OIDC Issuer URL（而不仅仅是域名）。
+
+        - 对于 Okta，从 **Sign-on**（登录）选项卡中复制
+        - 对于 Auth0，使用你的租户域名。
+      </Accordion>
+      <Accordion title="未返回邮箱">
+        授予 `email` scope，并确保用户账号具有主电子邮箱地址。
+      </Accordion>
+      <Accordion title="授权流程问题">
+        使用带有机密客户端和客户端密钥（client secret）的 `Authorization Code` 授权代码模式。避免使用 implicit 或仅 PKCE 的应用类型。
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="SAML">
+    <AccordionGroup>
+      <Accordion title="无效的 ACS 或 Audience">
+        请确保 ACS 和 Audience/Entity ID 都与 IdP 中配置的 `https://auth.lovable.dev/__/auth/handler` 完全一致。
+      </Accordion>
+      <Accordion title="缺少邮箱声明">
+        确保映射了一个电子邮件声明（email claim）。
+
+        对于 Microsoft Entra ID，将 `email` 映射到 `user.mail`。如果 `user.mail` 为空，则使用 `user.userprincipalname`。
+      </Accordion>
+      <Accordion title="提供商凭证无效">
+        粘贴正确的 `X.509` 证书。如果证书轮换，请在 Lovable 中更新。
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="我已经有账户了，但现在要加入使用 SSO 的企业工作区。我要如何登录？">
+    如果你是用其他登录方式（例如邮箱/密码、Google 或 GitHub）创建的账户，你需要**先**按原方式登录。登录后，前往 **Settings → Your account → Link SSO**。这样会把你现有账户与你公司的 SSO 关联起来。
+
+    <Note>
+      **重要：**如果在关联现有账户之前尝试使用 SSO 登录，你会看到一条错误提示。这是为了防止未经授权访问而设计的安全措施。请先用你最初的登录方式登录，再完成关联流程。
+    </Note>
+  </Accordion>
+  <Accordion title="Lovable 支持哪些 SSO 提供商？">
+    Lovable 支持业界标准的 OIDC 和 SAML 协议，因此你可以集成任何支持这些协议的 SSO 提供商。
+  </Accordion>
+  <Accordion title="Lovable 是否支持每个工作区配置多个 SSO 提供商？">
+    不支持。一个工作区在同一时间内只能配置**一个已启用的 SSO 提供商**。
+  </Accordion>
+  <Accordion title="我可以对我的工作区强制启用 SSO 吗？">
+    可以。工作区的 **owner** 或 **admin** 可以在 **Settings → Workspace → Identity** 中启用 **Enforce SSO**，并选择 **session duration**，用于配置用户在需要重新认证之前保持登录状态的时长（24 小时、48 小时或 7 天）。
+
+    启用后，所有工作区成员都必须通过 SSO 进行身份验证。外部协作者和邀请链接将被禁用。
+  </Accordion>
+  <Accordion title="Lovable 是否支持 IdP 发起的 SSO？">
+    不支持。不支持**IdP 发起的 SSO**（从 IdP 仪表盘图标开始的登录）。
+
+    Lovable 仅支持**由服务提供商（Service Provider，SP）发起的登录**。用户必须从 Lovable 发起登录。
+  </Accordion>
+  <Accordion title="Lovable 是否支持 SCIM 或自动用户开通（自动配置用户）？">
+    Lovable 支持**JIT（即时）开通**：当有人第一次通过 SSO 登录时，会自动创建用户账户，并将其添加到你公司的工作区。
+
+    你还可以为 **通过 JIT 创建的用户设置默认角色**（admin、editor 或 viewer），该角色会在他们首次通过 SSO 加入时自动应用。
+  </Accordion>
+  <Accordion title="我如何找到我的 tenant ID（SSO 登录标识符）？">
+    你的 tenant ID 是用于 **SSO 登录 URL** 中的 `{tenantId}` 值：\
+    `https://lovable.dev/sso-login/{tenantId}`。它与你在 Lovable 中配置 SSO 提供商时设置的 **SSO login identifier** 一致。
+
+    在你配置好提供商之后，也可以在 **Settings → Workspace → Identity** 中找到它。
+  </Accordion>
+</AccordionGroup>

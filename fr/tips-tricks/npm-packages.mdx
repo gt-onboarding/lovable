@@ -1,0 +1,56 @@
+---
+title: 'Utiliser des packages npm'
+description: 'Découvrez comment exploiter les packages npm pour étendre vos applications Lovable avec des fonctionnalités avancées'
+icon: 'box'
+---
+
+Même si Lovable est déjà très puissant et permet aux utilisateurs de créer des applications web sophistiquées, vous pouvez exploiter des packages npm pour bénéficier de fonctionnalités plus avancées et complémentaires. Ces packages vous aident à créer encore plus facilement des applications plus complexes et riches en fonctionnalités.
+
+<Info>
+  **Qu’est‑ce que npm ?**
+
+  npm (Node Package Manager) est un gestionnaire de packages pour JavaScript qui permet aux développeurs de partager et de réutiliser du code. Il héberge des milliers de packages, qui sont des blocs de code réutilisables, que vous pouvez facilement intégrer à vos projets pour en étendre les fonctionnalités.
+
+  Vous pouvez y accéder [sur npmjs.com](https://www.npmjs.com/).
+</Info>
+
+<div id="using-npm-packages-for-advanced-features">
+  ## Utiliser des packages npm pour des fonctionnalités avancées
+</div>
+
+Imaginons que vous souhaitiez créer un outil qui vous permette d’organiser vos tâches dans différents tableaux Kanban, comme dans de nombreux outils de gestion de projet populaires. Vous pouvez créer un Prompt pour demander à Lovable de construire cet outil à partir de zéro, mais cela risque d’être plus lent et plus difficile pour obtenir la fonctionnalité souhaitée.
+
+À la place, vous pouvez utiliser des packages npm pour simplifier et accélérer le processus. Par exemple, le package [@hello-pangea/dnd](https://www.npmjs.com/package/@hello-pangea/dnd) fournit une fonctionnalité de glisser-déposer robuste. En utilisant ce package, vous pouvez facilement créer un tableau Kanban où les utilisateurs peuvent ajouter de nouvelles cartes, les déplacer dans les colonnes et les réorganiser.
+
+<CodeGroup>
+  ```bash Example prompt
+  Utilise le package npm hello-pangea/dnd pour ajouter une fonctionnalité de glisser-déposer à mon application de tableau Kanban. 
+  Assure-toi que les utilisateurs puissent ajouter de nouvelles cartes, les déplacer dans les colonnes et les réorganiser.
+  ```
+</CodeGroup>
+
+Ce Prompt indique à Lovable d’intégrer le package à votre Projet, ce qui facilite l’obtention de la fonctionnalité souhaitée. En fonction d’autres exigences, le résultat pourrait ressembler à ceci.
+
+<Frame>
+  <img src="/assets/npm-example-using-pangea-dnd.png" alt="Lovable a implémenté une fonctionnalité Kanban avec glisser-déposer" />
+</Frame>
+
+<div id="quality-and-responsibility">
+  ## Qualité et responsabilité
+</div>
+
+Il est important de noter que, bien que les packages npm puissent grandement améliorer vos Projets, Lovable ne peut pas garantir la qualité ni la fiabilité de ces packages tiers.
+
+La fonctionnalité et les performances des packages npm relèvent de la responsabilité de l'utilisateur final ; il est donc essentiel de les tester et de les valider minutieusement au sein de votre application.
+
+<div id="increasing-your-chances-of-success">
+  ### Augmenter vos chances de réussite
+</div>
+
+Voici quelques stratégies pour vous aider à évaluer la légitimité et la qualité des packages npm avant de les intégrer à vos projets.
+
+* **Nombre de téléchargements** - Vérifiez le nombre de téléchargements sur la page npm du package. Un nombre élevé de téléchargements indique généralement que le package est largement utilisé et qu'il bénéficie de la confiance de la communauté.
+
+* **Statut de maintenance et dernières mises à jour** - Consultez le dépôt du package pour voir s'il est activement maintenu. Des commits fréquents, des mises à jour récentes et une bonne réactivité sur les issues sont de bons indicateurs d’un package activement maintenu. Assurez-vous que le package a bien des mises à jour récentes. Un package régulièrement mis à jour a plus de chances d'être compatible avec les dernières versions des dépendances et les pratiques de sécurité actuelles.
+
+* **Avis et retours de la communauté** - De nombreux packages npm sont hébergés sur GitHub ou des dépôts de code similaires. Lisez aussi les avis, discussions et retours d'autres développeurs sur ces plateformes. De plus, des forums de développeurs spécialisés peuvent fournir des informations utiles sur la fiabilité du package et d'éventuels problèmes.

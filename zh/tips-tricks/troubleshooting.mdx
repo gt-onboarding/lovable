@@ -1,0 +1,100 @@
+---
+title: "故障排查"
+description: "在开发生命周期中用于解决问题的可操作步骤。"
+icon: "toolbox"
+---
+
+<div id="build-errors">
+  ## 构建错误
+</div>
+
+使用 Lovable 进行构建可以让编码更快速、更直观，但即使是最好的 AI 开发工具，有时也会遇到问题。你的代码有时可能无法按预期运行，或者你会发现一些异常行为——AI 误解了你的意图。
+
+下面是一份分步指南，帮助你排查问题并迅速回到正轨：
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/0W8bsbHh2p8?si=p4kWhkdu0PEbgGXm" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+<Steps>
+  <Step title="先使用 Try to Fix 按钮">
+    当出现错误时，先点击 **Try to Fix** 按钮。Lovable 会扫描你的日志、检测问题并尝试快速修复。这是你最快的第一步操作。如果这还不能解决问题，就需要更深入地排查。
+  </Step>
+  <Step title="诊断异常行为">
+    你的代码可能没有报错，但行为却不符合预期。这就是**异常行为**，更难发现，也更难修复。可以尝试这样做：
+
+    - **回滚并重新给出提示**：回滚到问题出现之前的版本，然后用更清晰、修改后的提示再试一次。
+  </Step>
+  <Step title="编写更有效的提示">
+    清晰、有结构的提示能带来更好的结果。可以使用下面这种格式：
+
+    1. **使用 Chat Mode** 并询问：“Can you outline the steps or plan for this feature?”
+    2. **查看 Lovable 提供的方案**，如有需要，请求修改或进一步说明。
+    3. **向 Lovable 提示**：“Now, let's build this step by step.”
+  </Step>
+  <Step title="按合理顺序构建">
+    结构很重要。按照下面推荐的流程来操作：
+
+    1. 创建布局和页面。
+    2. 连接 Lovable Cloud 或外部 Supabase 连接。
+    3. 设置认证和用户角色。
+    4. 规划和整理功能逻辑。
+    5. 提示 Lovable 实现这些功能。
+  </Step>
+</Steps>
+
+<div id="general-issues">
+  ### 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="需要快速帮助？">
+    进入 Chat-Only 模式并输入：“这个特定功能不起作用。你能一步步讲解现在发生了什么，以及你已经尝试过哪些方法吗？”
+  </Accordion>
+  <Accordion title="UI 或布局问题">
+    - 将 UI 问题的截图直接提供给 AI，以便更清晰地诊断。
+    - 使用 Edit 工具选择并高亮显示你想要更改的特定 UI 元素，然后描述你希望进行的调整。
+    - 例如：“看到高亮的元素了吗？让它垂直居中并增加 padding。”
+  </Accordion>
+  <Accordion title="完全卡住时">
+    - 提示：“退一步。分析这个错误并建议一个不同的解决方案。”
+    - 将任务拆分成更小的部分。
+    - 如果错误仍然存在，使用 Revert 按钮。
+  </Accordion>
+  <Accordion title="找不到预览或沙盒一直在加载">
+    预览无法打开或沙盒一直在加载的问题，通常与沙盒环境或你的网络连接有关。沙盒问题通常是暂时的，先尝试强制刷新页面。如果问题持续存在，可能表示与 GitHub 的同步已中断或存在连接问题。对于持续性问题，请查看我们的 [GitHub 集成指南](https://docs.lovable.dev/integrations/github)。
+  </Accordion>
+</AccordionGroup>
+
+<div id="core-functionalities">
+  ### 核心功能
+</div>
+
+<AccordionGroup>
+  <Accordion title="预览是白屏">
+    - 这通常是由 `vite.config.ts` 文件中的问题，或在项目中引入了安全头部（security headers）导致的。
+    - 代码中的构建错误或语法错误
+    - 导致崩溃的 JavaScript 运行时错误
+    - 缺少依赖或损坏的组件
+    - 阻止页面加载的身份验证或路由问题
+
+    排查方法：让 Lovable 检查 `vite.config.ts` 文件或移除安全头部。检查浏览器控制台中的错误，还原到更早的版本，或让 Lovable 调查白屏问题。
+  </Accordion>
+  <Accordion title="取消发布或停用项目">
+    你可以在 Project Settings（项目设置）中取消发布或删除你的项目。
+  </Accordion>
+  <Accordion title="Edge Functions 错误">
+    检查 Cloud 选项卡 -> Logs（日志），以获取具体错误信息。确认所有必需的机密信息和环境变量都已正确配置。尝试通过向 Lovable 提示，让其对边缘函数代码做一个小改动后重新部署。确保你的数据库连接正常工作。让 Lovable 调查具体错误，并修复在日志中发现的任何问题。
+  </Accordion>
+  <Accordion title="找不到项目">
+    这通常意味着项目已被删除。如果你不是有意删除，请联系客户支持，寻求恢复项目的帮助。
+  </Accordion>
+</AccordionGroup>
+
+<div id="need-more-help">
+  ### 需要更多帮助？
+</div>
+
+还是卡住了吗？可以试试这样：
+
+1. 使用 Chat mode 获取一步步的帮助。
+2. 如果是 UI 或某个功能出现问题，将其恢复到之前的稳定状态。
+3. 如果你是付费客户并且想报告影响整个平台的问题，请联系[客户支持](https://lovable.dev/support)。

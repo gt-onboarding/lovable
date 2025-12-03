@@ -1,0 +1,117 @@
+---
+title: "Verwendung von Bildern in Lovable"
+description: "Lerne, wie du Bilder zu deinen Lovable Projekten hinzufügst"
+icon: "frame"
+---
+
+Um Bilder hinzuzufügen, kannst du eine von vier Möglichkeiten nutzen:
+
+<AccordionGroup>
+  <Accordion title="Lade das Bild in den Eingabeaufforderungs-Chat hoch">
+    Lade sie einfach im Chat hoch und erkläre dem Lovable-Agenten, wo und wie sie in deinem Projekt erscheinen sollen. Zum Beispiel:
+
+    > Ersetze das Logo in der Navbar durch dieses Bild
+  </Accordion>
+
+  <Accordion title="Ersetze es im visuellen Editor">
+    Du kannst ein vorhandenes Bild direkt über die Funktion des [Visual Editors](https://docs.lovable.dev/features/precision-edit#visual-edits) ersetzen:
+
+    <Steps>
+      <Step title="Schritt 1">
+        Klicke auf das Werkzeug „Edit“.
+      </Step>
+
+      <Step title="Schritt 2">
+        Wähle das Bildelement aus, das du ändern möchtest.
+
+        ![images/visual-edit-replace.png](/images/visual-edit-replace.png)
+      </Step>
+
+      <Step title="Schritt 3">
+        Ersetze das Bild.
+
+        ![images/visual-edit-image.png](/images/visual-edit-image.png)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Verwenden einer externen Bild-URL">
+    Eine Möglichkeit, Bilder zu deinem Projekt hinzuzufügen, besteht darin, ein Bild über eine externe URL zu referenzieren. Auf diese Weise kannst du Bilder verwenden, die auf externen Plattformen wie Unsplash, Imgur oder einem anderen Bildhosting-Dienst gespeichert sind. Achte dabei immer auf die Urheberrechte!
+
+    So kannst du Lovable per Eingabeaufforderung anweisen, ein externes Bild zu verwenden:
+
+    <Steps>
+      <Step title="Schritt 1">
+        Suche das Bild, das du verwenden möchtest.
+
+        Du kannst zum Beispiel eine Seite wie Unsplash besuchen, ein Bild auswählen und seine URL kopieren.
+      </Step>
+
+      <Step title="Schritt 2">
+        Gib in deiner Projekt-Eingabeaufforderung einfach an, dass Lovable dieses Bild über die URL verwenden soll. Zum Beispiel:
+
+        ```
+        Use the image from this URL 
+        https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/442px-Pale_Blue_Dot.png 
+        for the hero section image.
+        ```
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Verwendung von Bildern aus deinem öffentlichen GitHub-Verzeichnis">
+    Eine weitere Möglichkeit, Bilder zu deinem Lovable-Projekt hinzuzufügen, ist die Verwendung von Bildern, die du in das Verzeichnis `public` deines verbundenen GitHub-Repositories hochgeladen hast. So gehst du vor:
+
+    <Steps>
+      <Step title="Verbinde dein GitHub-Repository">
+        Stelle sicher, dass dein Projekt mit deinem GitHub-Repo verbunden ist. [Hier erfährst du, wie du dein Repo verbindest](https://docs.lovable.dev/integrations/git-integration).
+      </Step>
+
+      <Step title="Finde den `public`-Ordner">
+        Navigiere in deinem GitHub-Repository zum Verzeichnis `public`. Dieser Ordner wird typischerweise für Assets wie Bilder verwendet, auf die in deinem Projekt verwiesen werden kann.
+      </Step>
+
+      <Step title="Datei hinzufügen">
+        Klicke auf **Add file** und wähle dann im Dropdown die Option **Upload files** aus. <img src="/assets/using-images-github-upload.png" alt="Dateien zum Hochladen auswählen" />
+      </Step>
+
+      <Step title="Ein Bild hochladen">
+        Im nächsten Schritt überträgst du dein Bild in dein Repo:
+
+        * Ziehe das Bild per Drag &amp; Drop in den `public`-Ordner, oder
+        * Klicke auf den Link **&quot;choose your files&quot;**, um die Bilddatei zu durchsuchen und auszuwählen. <img src="/assets/using-images-github-commiting.png" alt="Dateien zum Hochladen auswählen" />
+      </Step>
+
+      <Step title="Die Änderungen committen">
+        Nachdem du dein Bild ausgewählt hast, schreibe eine kurze Commit-Nachricht (z. B. &quot;Adding image files to be used in the app&quot;) und klicke auf **&quot;Commit changes&quot;**, um die Datei in deinem Repo zu speichern.
+      </Step>
+
+      <Step title="Den Bildpfad kopieren">
+        Sobald die Datei hochgeladen ist, wähle sie aus und klicke dann auf das Kopiersymbol neben dem Dateinamen, um den Pfad des Bildes zu kopieren. Dieser Pfad wird in deiner Lovable-Eingabeaufforderung verwendet. <img src="/assets/using-images-github-selecting.png" alt="Dateien zum Hochladen auswählen" />
+      </Step>
+
+      <Step title="Das Bild in Lovable verwenden">
+        Du kannst nun in deinem Projekt auf dieses Bild verweisen, indem du eine Eingabeaufforderung wie die folgende verwendest:
+
+        ```
+        Add an additional image to the hero section. 
+        This time, use this one from my local repo: public/c-64-close-up.jpg.jpeg
+        ```
+
+        Achte darauf, den Bildnamen und Pfad zu verwenden, den du im vorherigen Schritt kopiert hast.
+
+        <Warning>
+          Das Hochladen großer Bilder in dein GitHub-Repo kann dazu führen, dass es stark anwächst, was die Leistung von Lovable beeinträchtigen kann (längere Repo-Klonzeiten, langsamerer Start von Vorschauen/Sandbox).
+
+          Versuche, deine Bilder zu optimieren, bevor du sie in deinen `public`-Ordner hochlädst, indem du sie komprimierst und Abmessungen verwendest, die zu deinem Anwendungsfall passen. Verwende zum Beispiel kein Bild in Full-HD-Größe, wenn es nur als kleines Symbol angezeigt wird.
+        </Warning>
+      </Step>
+    </Steps>
+
+    Um dir besser zu veranschaulichen, wie du Bilder mit den oben beschriebenen Methoden integrieren kannst, haben wir ein Projekt, das du dir ansehen kannst: [Lovable Project Example](https://lovable.dev/projects/e823fedf-238d-4313-86a8-1fd4bfc2a9ba). In diesem Projekt kannst du die tatsächlichen Eingabeaufforderungen sehen und nachvollziehen, wie jede Methode in der Praxis funktioniert.
+
+    Außerdem gibt es ein öffentliches GitHub-Repository, das die Commits, hochgeladenen Bilder und vollständigen Implementierungsdetails enthält. Du kannst das Repository hier ansehen: [GitHub: Adding Images Example](https://github.com/viborc/adding-images-example).
+
+    Sieh dir das Projekt und das Repository in Ruhe an, um dein Verständnis zu vertiefen und deine Implementierungsfähigkeiten zu verbessern.
+  </Accordion>
+</AccordionGroup>

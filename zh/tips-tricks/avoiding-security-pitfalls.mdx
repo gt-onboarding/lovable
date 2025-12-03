@@ -1,0 +1,395 @@
+---
+title: "避免安全陷阱"
+description: "使用 Lovable 构建和发布应用时"
+icon: "lock"
+---
+
+<Note>
+  **不要忘记修复 Security Checker 的问题**
+
+  在将应用发布到线上之前，请务必先处理 Lovable 内置的 [security checker](#using-lovable-security-checker) 的所有扫描结果。security checker 会自动扫描你的应用，并提供有助于提升安全性的实用建议。
+</Note>
+
+尽管 Lovable AI 和像 security checker 这样的工具可以发现并防止大量安全问题，但在应用上线互联网之后，自动发现或解决所有可能出现的问题并不总是现实或可行的。本指南将更深入地介绍 Lovable 应用在底层是如何工作的、哪些关键安全实践可以帮助构建者保护客户数据，以及如何避免常见错误。
+
+<div id="understanding-lovables-architecture">
+  ## 理解 Lovable 的架构
+</div>
+
+除非另有说明，Lovable 会使用以下架构来生成应用：
+
+* **Frontend**：TypeScript/React 应用
+* **Backend**：Supabase Edge Functions（无服务器函数）
+* **Database**：Supabase（支持实时特性的 PostgreSQL）
+
+这种关注点分离对于保障安全性至关重要。每一层都有其特定的职责和安全考量。
+
+<div id="frontend-security-never-trust-client-side-code">
+  ## 前端安全：切勿信任客户端代码
+</div>
+
+<div id="the-golden-rule-frontend-code-is-public">
+  ### 黄金法则：前端代码是公开的
+</div>
+
+所有 React 代码都在用户的浏览器中运行，本质上是公开的。用户可以查看、修改或绕过任何前端代码。因此：
+
+* **永远不要在前端代码中存储机密信息**——例如 API 密钥、密码或敏感配置
+* **永远不要在前端代码中执行校验**——客户端校验可以被绕过
+* **永远不要信任前端数据**——务必在边缘函数中进行校验
+
+<div id="common-frontend-security-mistakes">
+  ### 常见的前端安全问题
+</div>
+
+```typescript
+// ❌ 错误 - 切勿这样做
+const API_KEY = "sk-1234567890abcdef"; // 会暴露给用户
+const validateUser = (userData) => {
+  // 客户端验证可被绕过
+  return userData.email.includes('@');
+};
+```
+
+正确的做法是让 Lovable 添加一个 secret key——它会打开一个表单，并在自己的后端安全地存储该密钥。
+
+<div id="examples-of-prompts-for-validating-and-enhancing-frontend-security">
+  #### 用于验证和提升前端安全性的提示词示例
+</div>
+
+```
+安全地添加 Stripe 支付的 API 密钥,避免在前端代码中暴露
+```
+
+```
+将验证逻辑从 React 组件移至 Edge Functions 以提高安全性
+```
+
+```
+检查前端代码是否暴露了机密信息、API 密钥或敏感信息。我有一个显示用户偏好的设置页面，我想确保其中没有敏感数据可见
+```
+
+```
+识别应迁移到后端边缘函数的客户端验证
+```
+
+如需查看更多提示词，请参阅 Lovable [提示库](/zh/prompting/prompting-library)。
+
+<div id="backend-security-move-business-logic-to-edge-functions">
+  ## 后端安全：将业务逻辑迁移到 Edge Functions
+</div>
+
+<div id="treat-edge-functions-as-your-api-layer">
+  ### 将 Edge Functions 视作你的 API 层
+</div>
+
+Supabase Edge Functions 应当包含你所有的业务逻辑、验证以及敏感操作：
+
+* **认证和授权**
+* **数据验证和清洗**
+* **业务逻辑和业务流程**
+* **与外部服务的集成**
+* **敏感数据处理**
+
+<div id="best-practices-for-edge-functions">
+  ### Edge Functions 的最佳实践
+</div>
+
+你可以把 Edge Functions 想象成你应用的安全卫士和业务经理。它们会在应用的非公开部分安全地处理所有需要完成的重要工作。
+
+<div id="what-edge-functions-should-handle">
+  #### Edge Functions 应该处理哪些内容
+</div>
+
+**用户身份验证和授权**
+
+* 在允许用户执行操作之前，始终验证用户确实是其声称的身份
+* 检查用户是否对特定操作拥有相应权限
+* 绝不要仅因为有人声称已登录就信任其登录状态
+
+**数据验证和清理**
+
+* 检查所有传入数据，确保其格式正确
+* 从用户输入中移除任何潜在有害内容
+* 在处理之前，确保数据符合你的业务规则
+
+**业务逻辑和工作流程**
+
+* 处理复杂的业务流程，如订单处理、支付金额计算或用户注册
+* 管理不同数据之间的关联关系
+* 在一次操作中协调多个步骤
+
+**外部服务集成**
+
+* 安全地连接到第三方服务，例如支付处理方、邮件服务商或各类 API
+* 安全保存敏感的 API 密钥和凭证
+* 合理地处理错误和超时情况
+
+**敏感数据处理**
+
+* 处理个人信息、金融数据或其他敏感内容
+* 在需要时应用加密或其他安全措施
+* 记录重要事件以支持安全审计
+
+<div id="security-benefits-of-edge-functions">
+  #### 使用 Edge Functions 带来的安全优势
+</div>
+
+**隔离性**：Edge Functions 在与前端隔离的安全环境中运行，大大提高了攻击者获取敏感代码或数据的难度。
+
+**安全集中管理**：所有安全检查都在同一位置完成，便于维护和更新安全策略。
+
+**无客户端暴露**：敏感业务逻辑不会进入用户的浏览器，从而避免被查看或篡改。
+
+**一致的验证**：每个请求都会经过相同的验证流程，确保整个应用的安全性保持一致。
+
+<div id="example-of-prompts-for-secure-edge-functions">
+  #### 安全 Edge Functions 的提示词示例
+</div>
+
+```
+创建一个边缘函数用于用户注册，并进行适当的验证和安全检查。用户在注册时应提供电子邮件、密码以及可选的个人资料图片
+```
+
+```
+将支付处理逻辑从前端迁移到安全的边缘函数。我有一个结账组件，目前直接在浏览器中处理 Stripe 支付
+```
+
+```
+构建边缘函数以实现文件上传功能，包含类型和大小验证。用户可以上传个人资料图片（最大 5MB）和文档（仅限 PDF，最大 10MB）
+```
+
+```
+设置边缘函数，在用户注册时安全地发送欢迎邮件。使用提供商 API 发送包含用户姓名和账户详情的个性化欢迎邮件
+```
+
+```
+实现边缘函数来处理外部服务的 webhook 事件。处理 Stripe 支付确认并在数据库中更新订单状态
+```
+
+如需更多提示词，请参阅 Lovable [Prompt Library](/zh/prompting/prompting-library)。
+
+<div id="database-security-keep-rls-simple-and-start-early">
+  ## 数据库安全：及早启用 RLS，并保持其规则简单
+</div>
+
+<div id="row-level-security-rls-in-lovable">
+  ### Lovable 中的行级安全（RLS）
+</div>
+
+Lovable 会自动为你的表设置基础的行级安全（RLS）策略，但你应该根据应用的安全需求进行审查和自定义。可以把 RLS 理解为：决定谁能查看和修改数据库中哪些数据的规则。
+
+**尽早审查至关重要**：在应用还处于早期阶段时调整 RLS 策略，要比等到用户已经创建了大量数据之后轻松得多。
+
+**简单更安全**：让 RLS 策略保持简单，聚焦在数据访问本身，而不是承载复杂的业务逻辑。Lovable 的默认策略通常是一个不错的起点。
+
+<div id="common-rls-patterns-in-lovable-apps">
+  #### Lovable 应用中的常见 RLS 模式
+</div>
+
+**个人数据保护**
+
+* 用户只能查看自己的个人资料、设置和个人数据
+* 默认模式：“用户只能访问自己的数据”
+
+**基于团队的访问控制**
+
+* 团队成员可以查看其所在团队内的共享项目数据
+* 模式：“用户只能访问其所属团队的数据”
+
+**带有所有权的公开内容**
+
+* 公开帖子任何人都可以阅读，但只有所有者可以编辑
+* 模式：“任何人都可以阅读，但只有所有者可以修改”
+
+**基于组织的访问控制**
+
+* 公司员工可以访问公司数据
+* 模式：“用户只能访问其所属组织的数据”
+
+<div id="reviewing-rls-in-your-lovable-app">
+  #### 在你的 Lovable 应用中检查 RLS
+</div>
+
+**检查你的数据表**
+
+* 查看哪些数据表已启用 RLS
+* 确认敏感数据表已得到保护
+* 确保公开数据表具有合适的读取策略
+
+**测试访问模式**
+
+* 验证用户只能看到自己的数据
+* 测试共享数据是否对合适的人可访问
+* 确认公开数据对所有人都可见
+
+**需要留意的常见问题**
+
+* 对敏感数据未启用 RLS 的数据表
+* 过于宽松、会暴露过多数据的策略
+* 新数据表或新功能缺少相应策略
+
+<div id="prompt-examples-for-rls-review">
+  #### RLS 审核提示示例
+</div>
+
+```
+检查我的 Lovable 应用中的 RLS 策略，确保用户只能访问自己的数据，且共享数据受到妥善保护
+```
+
+```
+检查 users 和 posts 表的 RLS 策略 - 用户应仅能查看自己的个人资料,但可以读取所有公开帖子
+```
+
+```
+为设置表添加 RLS 策略，确保用户只能访问自己的设置
+```
+
+```
+修复过度宽松的访问权限 - 用户当前可以看到所有用户的所有帖子，限制为仅显示自己的帖子和公开帖子
+```
+
+```
+为团队和项目表设置 RLS，确保团队成员只能查看本团队的项目
+```
+
+```
+确保用户只能访问其所属组织的数据（多租户应用）
+```
+
+```
+审查 RLS 策略的安全漏洞，防止用户访问未授权数据
+```
+
+```
+简化复杂的 RLS 策略，同时保持安全性 - 当前策略过于复杂
+```
+
+<div id="quick-rls-checklist">
+  #### RLS 快速检查清单
+</div>
+
+* 所有敏感数据表都已启用 RLS
+* 用户只能访问自己的个人数据
+* 共享数据配置了合适的访问控制
+* 新建表会自动应用 RLS 策略
+* 策略简单且易于理解
+
+<div id="authentication-security-keep-logic-server-side">
+  ## 身份验证安全：将逻辑放在服务端
+</div>
+
+<div id="authentication-logic-must-run-on-the-server">
+  ### 身份验证逻辑必须在服务器上运行
+</div>
+
+所有身份验证决策、令牌验证和用户验证都应该在服务器端完成，而不是在浏览器中。客户端身份验证很容易被绕过或篡改。
+
+**关键原则：**
+
+* **永远不要信任客户端的身份验证检查** - 用户可以修改浏览器中的代码
+* **在服务器上验证令牌** - 始终在边缘函数中执行身份验证校验
+* **将会话管理保持在服务器端** - 让 Supabase 处理安全的会话存储
+* **切勿暴露身份验证相关机密信息** - API 密钥和令牌绝不能暴露给前端
+
+<div id="secure-authentication-flow">
+  ### 安全认证流程
+</div>
+
+```typescript
+// ❌ 错误 - 客户端身份验证逻辑
+const isAuthenticated = localStorage.getItem('authToken') !== null;
+if (isAuthenticated) {
+  // 用户可以绕过此验证
+  showAdminPanel();
+}
+
+// ✅ 正确 - 服务器端身份验证校验
+// 在边缘函数中：
+const { user } = await supabase.auth.getUser();
+if (!user) {
+  return new Response('Unauthorized', { status: 401 });
+}
+// 继续执行已认证逻辑
+```
+
+<div id="authentication-best-practices">
+  ### 身份验证最佳实践
+</div>
+
+**服务端验证：**
+
+* 在处理请求之前，始终在边缘函数中验证用户身份
+* 在服务器端而不是在 React 组件中检查用户权限和角色
+* 在数据库或认证服务中校验会话令牌
+
+**客户端处理：**
+
+* 使用 Supabase 内置的会话管理来安全存储令牌
+* 根据身份验证状态渲染 UI，但绝不要在客户端做安全决策
+* 会话过期时重定向到登录页，但务必先在服务器端完成验证
+
+<div id="workspace-protection-secure-internal-applications">
+  ## 工作区保护：保障内部应用安全
+</div>
+
+<div id="ensure-that-internal-apps-have-visibility-set-to-workspace">
+  ### 确保内部应用的「visibility」设置为「Workspace」
+</div>
+
+对于不应被公开访问的应用程序：
+
+* **在项目仪表盘中将内部应用的项目可见性设置为「Workspace」**
+* **确认它们没有发布到互联网**
+* **为所有内部工具使用适当的身份验证机制**
+* **定期审计对私有应用程序的访问权限**
+
+<div id="security-best-practices-summary">
+  ## 安全最佳实践概览
+</div>
+
+<div id="development-workflow">
+  ### 开发流程
+</div>
+
+1. **从一开始就重视安全性** - 从第一天起就实现 RLS 和身份验证
+2. **使用安全检查工具** - 定期运行 Lovable 的安全检查工具
+3. **遵循安全建议** - 落实所有安全建议
+4. **充分测试** - 验证安全措施是否按预期生效
+5. **记录安全相关决策** - 记录安全方面的选择及其理由
+
+<div id="regular-security-audits">
+  ### 定期安全审计
+</div>
+
+* **检查边缘函数权限**
+* **审计 RLS 策略**
+* **检查是否存在机密信息暴露**
+* **验证身份认证流程**
+* **测试访问控制**
+
+<div id="common-security-checklist">
+  ### 常见安全检查清单
+</div>
+
+* 前端代码中不包含机密信息
+* 所有验证都在边缘函数中完成
+* 已实现并测试 RLS 策略
+* 使用安全的方法进行身份验证
+* 内部应用得到妥善保护
+* 已运行安全检查工具并遵循其建议
+* 定期开展安全审查
+
+<div id="using-lovable-security-checker">
+  ## 使用 Lovable 安全检查器
+</div>
+
+Lovable 提供了内置的[安全检查器](/zh/features/security#security-scanning-2)，用于帮助你识别潜在的安全问题：
+
+1. 在你的项目仪表盘中**运行安全检查器**
+2. **仔细审查所有建议**
+3. **及时实施建议的修复措施**
+4. **在更改后重新运行检查器**
+5. **记录任何例外情况**，并附上清晰的理由
+
+请记住：安全不是一次性任务，而是一个持续的过程。随着应用的不断发展，定期审查并更新你的安全措施。

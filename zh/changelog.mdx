@@ -1,0 +1,743 @@
+---
+title: "更新日志"
+description: "及时掌握 Lovable 发布的新功能、改进和问题修复。"
+icon: "clock-rotate-left"
+rss: true
+---
+
+<Update label="2025 年 11 月 26 日">
+  **MCP 服务器**
+
+  ![Changelog Connectors 11 18 25 Pn](/images/changelog-connectors-11-18-25.png)
+
+  将 Lovable 连接到您的工作工具:Atlassian(Jira、Confluence)、Notion、Linear 和 n8n。直接将 PRD、工单和线框图导入到您的项目构建中。通过 n8n 工作流,您可以集成 400 多个应用,如 Salesforce、Slack 和 Google Sheets。商业版和企业版套餐支持添加自定义 MCP 并控制可用的服务器。
+
+  [了解更多](https://docs.lovable.dev/integrations/mcp-servers)
+
+  **设计视图**
+
+  ![Changelog Design View 11 26 25 Pn](/images/changelog-design-view-11-26-25.png)
+
+  全新的设计视图提供了一个专用面板,让您可以在项目的设计工具之间无缝切换。其中包括可视化编辑功能的更新,以及主题和 AI 图像生成等新功能。
+
+  [了解更多](https://docs.lovable.dev/features/design)
+
+  **主题**
+
+  ![Changelog Themes 11 18 25 Pn](/images/changelog-themes-11-18-25.png)
+
+  一次性设置您的品牌标准：颜色、字体、间距。应用到任何项目。应用前预览主题效果。
+
+  **全新可视化编辑功能**
+
+  ![Changelog Visual Edits 18 11 25 Pn](/images/changelog-visual-edits-11-18-25.png)
+
+  从设计视图访问可视化编辑功能，或使用提示框中的可视化编辑快捷方式（原名为&quot;编辑&quot;），即可直接在左侧面板中进行编辑。 现在您可以编辑混合内容元素中的文本，例如同时包含文本和图标的按钮。 同时选择和编辑多个元素。 直接在页面上修改文本。 调整外边距、内边距、边框、阴影、颜色和图标。 更新图像或通过 AI 生成图像。
+
+  **可视化编辑中的 AI 驱动图像生成**
+
+  ![Changelog AI Image Gen 18 11 25 Pn](/images/changelog-AI-image-gen-11-18-25.png)
+
+  描述您想要的内容，即可生成自定义图像。无需离开 Lovable，即可为您的项目创建原创视觉素材。AI 图像生成不会消耗 Lovable 积分。
+
+  **人人可用的私有项目**
+
+  所有套餐现在都包含仅限工作区项目（默认启用）。在&quot;设置 → 隐私与安全&quot;中更改默认设置。
+
+  [了解更多](https://docs.lovable.dev/features/private-projects)
+
+  **Shopify 集成优化**
+
+  您现在可以**将现有的 Shopify 商店连接**到 Lovable。出于安全考虑，Lovable 用户的邮箱地址必须与 Shopify 商店所有者的邮箱地址一致。
+
+  创建**新店铺**时，您现在可以在设置过程中选择店铺位置，认领流程也已优化，状态显示更加清晰。店铺被认领后，执行认领操作的 Lovable 用户将成为该 Shopify 店铺的所有者。
+
+  授权更新
+
+  * 只有连接了现有商店或认领了新商店的用户才拥有写权限（可创建、更新和删除商品、商品变体及折扣码）。
+  * 协作者对 Shopify 数据仅有读取权限（可以搜索和获取商品、商品变体和折扣码），但仍然可以完整搭建店面。
+
+  **Gemini 3 Pro 和图像生成支持**
+
+  Lovable AI 现已支持 Google 的最新模型,包括 Gemini 3 Pro 和 Nano Banana Pro。启用 Lovable Cloud &amp; AI 即可在您的应用中使用这些模型。
+
+  **分享与邀请体验优化**
+
+  分享对话框经过重新设计,让项目权限一目了然。权限显示更清晰,分享预览更醒目,协作概念更明确。
+
+  **云存储优化**
+
+  直接在 Cloud 视图中管理您的存储。创建私有或公开存储桶、整理文件夹,以及上传、重命名、删除或下载文件。私有存储桶中的文件现在也可以在界面中查看了。
+
+  **问题**
+
+  当您的需求有多种实现方式时,Lovable 现在可以在开始构建前询问澄清问题。您可以从多个选项中选择,或添加自己的说明,帮助 Lovable 准确理解您的需求。
+
+  **集成中心**
+
+  项目设置中新增的&quot;集成&quot;选项卡整合了 Lovable Cloud、Lovable AI、MCP 服务器、Supabase、Shopify 和 Stripe。
+
+  **对话建议**
+
+  上下文感知提示会出现在聊天中,建议您接下来构建什么。
+
+  **积分余额不足提醒**
+
+  Pro 和 Business 工作区的用户现在会在构建积分不足 5 个时收到提醒，同时提供升级套餐的快捷入口以增加每月积分额度。该提醒显示在提示框上方以及项目和工作区菜单中，帮助确保您在构建过程中不会用完积分。
+
+  **临时教育账号登录**
+
+  教育工作者可以在 lovable.dev/login/temp 为课堂教学创建临时学生账户。
+
+  **改进的复刻体验**
+
+  复刻项目时可查看逐步进度。当项目无法复刻时,会显示清晰的错误提示说明原因。复刻操作在后台运行并持续显示通知,您可以继续进行其他工作。现已支持复刻包含自定义机密信息的项目。
+
+  **更强大的回退功能和消息编辑回退能力**
+
+  &quot;Restore&quot;功能现已更名为&quot;Revert&quot;。您可以跳转回对话历史中的任意节点,或编辑之前的消息来探索新方向。您的原始内容会保留在对话中,随时可以重新应用。
+
+  **项目 URL**
+
+  项目 URL 不再在创建项目时自动生成。您可以在发布前设置自己的唯一项目 URL，也可以让 Lovable 为您自动生成。
+
+  **项目显示名称**
+
+  Lovable 现在会自动为您的项目生成更有意义的显示名称。该显示名称仅对您和工作区成员可见，已发布应用的访问者看不到。显示名称仅需在工作区内保持唯一，从而减少名称被占用的问题。您随时可以在项目设置中将项目重命名为更有意义的名称。
+
+  **更好的提交消息**
+
+  提交信息现在描述的是项目中实际发生的变更，而不仅仅是您的请求内容，让您更轻松地浏览项目历史记录。
+
+  **导航更新**
+
+  隐私和安全设置已移至单独的标签页，便于访问。
+
+  **错误修复：**
+
+  * 修复了预览重新加载时的错误，此前这些错误会一直卡在“Try to Fix”状态，直到刷新页面。系统现在会自动检测短暂性错误并重试。
+  * Figma 导入功能因质量问题已下线。我们正在研发全新且令人期待的方案，敬请期待。
+</Update>
+
+<Update label="Nov 5, 2025">
+  **Lovable × Shopify 集成**
+
+  ![image](/images/changelog_shopifyxlovable.png)
+
+  通过与 AI 对话来搭建在线商店。Lovable 会为你配置商品、购物车和结账流程；当你准备好后，只需在 Shopify 中认领该商店并发布即可。适用于从兴趣小店到大型商品目录的各种场景。
+
+  在我们的周边商店中查看实际效果：lovable.dev/merch。
+
+  额外福利：通过 Lovable 注册可享受 30 天 Shopify 试用。
+
+  **把你的想法直观地展示给智能助手**
+
+  ![image](/images/changelog_screenshot_capture.png)
+
+  Lovable 智能助手现在能更好地理解你的上下文。它知道你在 Lovable 中当前查看的是哪个标签页——无论是 Code Editor、SEO、Analytics、Cloud 设置还是 Secrets——从而提供更相关的回复。你可以让助手为你的构建内容截图，或直接在聊天界面中从电脑上的任意位置捕获屏幕截图。
+
+  **Cloud 与 AI 余额永远充足**\
+  当余额低于 \$10 时会自动充值，同时你可以通过设置月度上限来控制每月支出。你现在还可以按项目跟踪 Cloud 与 AI 的使用情况。
+
+  **更好用的自定义域名管理**\
+  为你的项目设置主域名，其他自定义域名会自动重定向到该主域名。新增域名的流程现在更清晰，并提供分步操作指引。我们还新增了域名验证，在域名正式生效前先校验所有权。
+
+  **请求访问私有项目**\
+  当访问一个私有项目时，你可以向该项目所有者请求访问权限。既能保证私有工作的安全，又让协作更轻松。
+
+  **仅工作区可访问的发布（Business 与 Enterprise 方案）**\
+  已发布的项目现在可以设置为仅限工作区访问，需要身份验证并仅对你的工作区成员开放。非常适合用于构建内部工具和应用。
+
+  **桌面通知**\
+  启用桌面通知，以便在耗时较长的构建完成时收到提醒。无需反复返回页面查看是否已完成。
+
+  **将项目与 GitHub 断开连接**\
+  现在你可以在需要时将项目与 GitHub 断开连接。如果你需要将项目迁移到另一个 GitHub 组织，这会非常有用。
+
+  **错误修复**
+
+  - 修复了助手回复会一次性全部显示，而不是逐字打出的问题。
+  - 减少了你在注册后立即看到的弹出通知数量。
+  - 当出现问题时，现在能更一致地显示错误消息。
+  - 修复并优化了聊天界面中的间距和对齐问题。
+</Update>
+
+<Update label="2025 年 10 月 6 日">
+  **Lovable Cloud**
+
+  ![image](/images/lvbl-cloud-logo.png)
+
+  构建全栈应用，无需手动配置 Supabase。Lovable Cloud 为你提供按需数据库、用户认证和存储，并会在应用增长时自动扩展。
+
+  Lovable Cloud 适用于所有新项目，以及任何尚未与 Supabase 集成的现有项目。了解更多[请见此处](https://docs.lovable.dev/features/cloud)。
+
+  **Lovable AI**
+
+  ![image](/images/lvbl-ai-logo.png)
+
+  你现在可以在 Lovable 中仅通过提示来构建原生 AI 应用。我们负责管理服务提供商访问和 API，让你专注于构建你的产品。直到 10 月 13 日，我们提供由 Google Gemini 驱动的嵌入式 AI 功能免费使用。
+
+  你现在可以构建如下类型的应用：
+
+  - **特定用途的 ChatGPT 克隆** — 为客服、销售或知识工作量身定制的对话式助手。
+  - **头像和图像生成器** — 让用户创建、编辑和自定义可视化内容。
+  - **教练类应用** — 个性化指导、入职教练、习惯养成工具等。
+
+  每个套餐都包含可用于嵌入式 AI 功能的每月免费额度。是的，免费套餐也有！完整定价请见[这里](https://docs.lovable.dev/features/cloud#usage-based-cloud-and-ai-pricing)。
+
+  **语音模式（Voice Mode）**
+
+  你现在可以直接和 Lovable 说话。我们推出了一种更直观、更对话式的构建方式：把你的想法和修改大声说出来，Lovable 会帮你实现。
+
+  **把你的文件变成应用**
+
+  ![image](https://lovable.dev/_next/image?url=%2Fcontent%2Fnews%2Fcovers%2Fiboxasset.png&w=1920&q=75)
+
+  将任意类型的文件拖放到 Lovable 中，即可将其转换为应用。
+
+  例如：
+
+  - 表格 →  交互式仪表盘
+  - 简历 →  作品集
+  - 幻灯片 → 自定义演示文稿
+
+  **Sonnet 4.5**
+
+  Anthropic 最新模型现已帮助驱动你在 Lovable 上的构建。你可以期待更强的推理能力、更稳定的结果，以及在多步编辑和结构化数据上的更佳表现。
+
+  **更流畅的构建体验**
+
+  在 Lovable 上构建现在更加流畅：更快速地访问 Visual Editor（可视化编辑器）、更好的长时使用体验，以及 Code Editor（代码编辑器）中的图片支持。
+
+  **自信地发布和取消发布**
+
+  放心发布。发布流程现在在正式上线前支持编辑链接预览。如果出错了？一键即可取消发布。
+
+  **Stripe 集成**
+
+  我们更新了 Stripe 集成，提供更清晰的账单和支付流程。只需在聊天中描述你想要构建的内容，即可完成所有 Stripe 逻辑的设置——无需手动配置。
+
+  **更新的社区资源**
+
+  我们的 Partner 页面和复刻（Remix）都已升级，让你可以通过社区扩展你的构建。在 Partner 页面上查找专业代理机构（或申请展示），并在你喜欢的 Lovable Cloud 项目上使用复刻功能以更快开始。
+
+  **更好的工作区管理**
+
+  全新的统一成员视图可以帮助你了解使用情况并在整个团队中执行操作。管理员现在可以设置会话时长限制、开启即时开通（SSO）、禁用发布以及强制执行项目隐私设置。
+
+  **错误修复**
+
+  - 修复了聊天内尺寸问题导致的水平滚动
+  - 将构建错误减少了 20%
+</Update>
+
+<Update label="Sep 1, 2025">
+  **学生和教师优惠现已上线**
+
+  我们正在让学生和教育工作者更轻松地开始构建应用。现在，学生和教师都可以在长达一年的时间里，享受 Pro 方案最高 5 折优惠。只要你从免费工作区开始，就可以享受折扣——在不增加预算压力的情况下，解锁 Lovable 的全部能力。[在此了解更多优惠详情](https://lovable.dev/students)。
+
+  **安全性升级**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734639962_security_01K42RPM40HYH5PH5QS40Z6FMY.png)
+
+  安全是我们的首要任务。我们扩展了安全功能、策略和合规认证，包括新增 SOC 2 Type 2 合规以及 ISO 27001:2022 认证。我们还聘请了出色的首席信息安全官（CISO）Igor Andriushchenko——因此你可以放心地将你的创意、数据和客户交给我们。你可以在[这里](https://lovable.dev/security)了解更多安全相关功能。
+
+  **全新的 Lovable 收件箱**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734786651_inbox_01K42RV3BXGH7MP6MYJ1KHKQH8.png)
+
+  你的全新个人收件箱可以帮助你跟踪项目和工作区邀请，还可以查看我们最近发布的更新——让你始终掌握最新动态。
+
+  **更智能的新应用 SEO** 当你创建新应用或网页时，Lovable 现在会自动包含更符合 SEO 最佳实践的智能说明。这有助于你的项目在搜索引擎中获得更好的收录，并触达你正在为之构建产品的目标用户。
+
+  **工作区查看者角色（Pro+）** 针对 Pro+ 成员，我们新增了一个 Viewer（查看者）角色。Viewer 可以查看工作区元数据、项目和成员，但不能创建或编辑项目，也不能邀请他人。这个角色非常适合需要了解情况、但不需要编辑项目的相关干系人。
+
+  **更灵活的套餐管理**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734900964_Screenshot%202025-08-28%20at%205.05.18%20pm_01K42RYK0KYRNYETKVWAW22NFR.png)
+
+  你现在只需点击几下就可以升级或降级你的套餐——无论是需要更多额度，还是想降级回免费方案。
+
+  **更清晰的错误反馈**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734470366_image%20\(4\)_01K42RHEPDYDCZT5NG96S3TEGY.png)
+
+  如果 LLM 误解了你的请求，Lovable 现在会直接提示你。你可以看到出了什么问题，从而调整你的提示，更快向前推进。
+
+  **跟踪你的编辑次数和连续天数**
+
+  ![image](https://userimg-assets-eu.customeriomail.com/images/client-env-165734/1756734477303_GyzkRM5bEAAz-_N_01K42RHN8S62MTE2T7KC65JCB3.jpeg)
+
+  我们新增了一个个人仪表盘，你可以在其中查看自己在 Lovable 中完成了多少次编辑，并跟踪你的连续编辑天数。这是保持动力、并长期看到自己进步的好方式。可在账号设置（Account Settings）中查看。
+</Update>
+
+<Update label="Aug 11, 2025">
+  **Agent Mode 现在是默认模式**
+
+  通过这次升级，Lovable 成为你真正的智能代理伙伴——可以理解你的请求、读懂你的代码库、修复问题、在多个文件中执行复杂的多步编辑、集成外部工具，并将错误率降低 91%，让你以更少阻力、更高速度构建更有雄心的应用。
+
+  旧版模式（不使用 Agent 的模式）将于 2025 年 9 月 1 日停用。
+
+  **你的 Lovable 应用现在支持实时分析**
+
+  想知道你的应用在真实环境中的表现如何？你现在可以直接在 Lovable 内追踪实时流量和互动情况，包括：
+
+  - 访问者：有多少人在使用你的应用
+  - 页面浏览量：哪些页面最受关注
+  - 访问时长：用户停留多长时间
+  - 跳出率：有多少百分比的用户即时离开
+  - 每次访问浏览页数：用户参与深度如何
+
+  数据会以近乎实时的方式更新，方便你发现趋势、排查问题，或者单纯为你的第一批用户庆祝！现在可以在 Project Settings → Analytics 中查看。
+
+  **chat mode 即将调整计费方式**
+
+  chat mode 的计费将从每条消息 1 个点数改为动态计费，以与 agent mode 的计费模型保持一致。也就是说，每条消息和回复的费用将取决于消息的复杂度；因此有些消息和回复会低于 1 个点数，而有些如果相当复杂，则会高于 1 个点数。此变更将于 2025 年 9 月 1 日向所有用户逐步推出。
+
+  **Lovable Business 方案**
+
+  我们推出了专为需要更高控制、隐私和灵活性的团队打造的 Lovable Business 方案。它包含 Pro 中的所有内容，并提供强大的升级能力：
+
+  - SSO，支持整个组织的安全登录
+  - 仅你可见的个人项目
+  - 用于统一样式的模板
+  - 现在支持年度订阅方案
+
+  你现在可以为任意付费的 Lovable 方案切换为年度订阅。享受折扣价格、简化账单管理，不再为每月续费操心。
+
+  **Visual edits v2**
+
+  在大量反馈的基础上，我们打磨了 Visual Edits 的使用体验。响应更快、更精确、用起来更顺手。现在微调 UI、修改文案或调整布局比以往更快，而且无需离开实时预览。
+
+  使用 Visual Edits 时，你也可以在代码中跳转到选中的元素，进一步缩短设计与实现之间的循环。
+
+  **项目邀请流程**
+
+  受邀用户现在必须正式接受或拒绝对项目的访问权限——无论是通过邮件还是 magic link。这可以避免过期的“待处理”成员，并改进协作者追踪。
+
+  **在代码编辑器中搜索所有文件**
+
+  使用代码编辑器中的文件搜索，可以快速定位代码，并将文件路径直接添加到聊天中。
+
+  **统一的点数栏**
+
+  我们上线了一条新的点数栏，将所有点数类型组合到一个简洁、统一的视图中——不再需要在不同视图之间来回切换以追踪使用情况。
+
+  **升级的 People 标签页**
+
+  工作区设置中的 People 标签页已重新设计。它现在支持分页（每页 20 位用户）、搜索，以及按成员状态筛选——让管理大型团队变得更加轻松。
+
+  **可扩展到大型工作区**
+
+  得益于后端改进，我们现在可以在没有性能问题的情况下支持拥有数万名成员的超大型工作区。
+
+  **已发布项目徽章**
+
+  我们新增了一个小而实用的改进：所有已发布的项目现在都会显示一个“Published”徽章，让你一眼就能看出哪些项目已经上线。
+
+  **问题修复**
+
+  - 修复了图像上传 bug：在用户未登录的情况下，会导致超过 1% 的初始生成失败。
+  - 当项目已与已部署版本保持同步时，防止出现多余的更新。
+  - 当断开组织连接时，你现在可以将项目从旧版 Supabase 中断开。
+  - 现在可以无缝重新连接令牌无效的组织。
+</Update>
+
+<Update label="Jun 26, 2025">
+  **焦点更新**
+
+  我们让在 Lovable 上协作变得更加易用——现在对所有用户完全免费。
+
+  对于 Free 和 Pro 用户：
+
+  - 工作区协作现已完全免费 —— 邀请你的队友一起构建，无需额外费用。
+  - 在 Free 和 Pro 方案中，都可以为最多 20 名成员开启工作区协作。
+  - 在 Free 方案中，新增成员将作为编辑加入；Pro 方案则提供更细粒度的工作区角色和权限。
+
+  对于 Teams 方案用户：
+
+  - 我们简化了价格结构，并将你迁移到 Pro 方案，同时带来可观的节省：
+    - 你已被自动从 Teams 方案迁移到 Pro 方案。
+    - 从下一个续费周期开始，你的费用将降低 20%。
+    - 你仍然可以使用之前的所有同等功能和额度 —— 只是价格更低。
+    - 你的所有项目和工作区设置保持不变。
+
+  **改进**
+
+  - 重新设计了移动端体验，可以直接在手机上构建应用和网站。
+  - 发布了 Visual Edits 体验焕新，新增悬浮组合框控件，就出现在你正在编辑的元素旁边。
+  - 新增项目搜索功能，支持按名称模糊匹配 —— _提示：重命名你的项目以提高可发现性_。
+  - 向所有用户推出全栈初始生成，允许你在进行初始生成之前先连接 Supabase。
+  - 在我们的首页添加了悬浮提示栏，让你在页面向下滚动时也能输入提示。
+  - 增强了历史记录视图，提供更清晰的时间线，优先显示日期，已恢复版本现在可见，并简化了版本导航。
+  - 使用最新信息更新了招聘页面。[在此查看](https://lovable.dev/careers)。
+
+  **错误修复**
+
+  - 修复了管理员访问用户项目集成设置的问题。
+  - 解决了管理员无法正确访问工作区的问题，该问题会在访问团队项目时导致编辑器显示和功能异常。
+  - 修复了导致在 Lovable 应用中出现不必要重定向的 iframe 重定向问题。
+</Update>
+
+<Update label="Jun 4, 2025">
+  **焦点更新**
+
+  - 通过新的筛选选项增强了项目的可发现性，让你更轻松地查找和管理项目。
+  - 为社区项目添加了分类，更容易发现由社区创建的项目。
+
+  **改进**
+
+  - Chat mode 现在可以渲染 Mermaid 图表，帮助你可视化应用的后端逻辑和结构（让它“画图”即可触发）。
+  - 为 Supabase Auth 集成自动配置重定向 URL —— 无需再手动配置，身份验证设置更加顺畅。
+  - 新增内置反馈系统 —— 当编辑导致问题时，点击“踩”按钮，帮助我们改进 Lovable 的 AI，惠及所有用户。
+  - 引入智能提醒，引导你在调试需要对话式帮助的问题时前往 Chat Mode。
+  - 编辑历史现在在悬停时显示截图预览，让你无需打开每个版本就能快速查看应用在不同阶段的样子。
+
+  **安全**
+
+  - 在聊天中添加了 API 密钥检测，在你不小心分享机密信息等敏感内容前发出警告。
+  - 推出了由 AI 驱动的“安全审查”（Security review）功能，帮助识别应用中的潜在漏洞。可在通过发布弹窗发布应用前触发执行。
+</Update>
+
+<Update label="May 24, 2025">
+  **焦点更新**
+
+  - Claude 4 现在已在 Lovable 中使用！它为大部分提示提供支持，包括项目创建以及对所有项目（包括旧项目）的编辑。这应当让 Lovable 的错误减少 25%，整体速度提升 40%。
+
+  **改进**
+
+  - 重构了 GitHub 和 Supabase 的设置流程，简化多步骤引导以减少困惑。
+  - 在首页为精选项目添加了视觉标签，提升发现效率。
+  - 新增了从你的 Lovable 应用中移除自定义域名的支持。
+  - 协作者管理方面的多项改进：
+    - 在 People 标签页的邮件邀请表单中添加了校验
+    - 工具提示现在会解释每个角色的权限（admin / owner / editor）
+    - 你现在可以看到待处理邀请的角色
+    - 针对邀请已在工作区中的用户等特殊情况，提供了更清晰的错误信息
+  - 提交说明现在更多地依赖会话历史，以提供更好的上下文。
+  - 提升了流式输出的质量：体验更流畅，不再出现文本闪动。
+  - 用户现在无需登录即可查看公开的 Lovable 项目。
+  - 当前编辑卡片现在会被高亮，便于识别当前激活的是哪一张。
+  - 默认的 “Edit Code” 按钮现在会打开预览，而不是原始代码。
+
+  **错误修复**
+
+  - 修复了在某些情况下显示错误实时预览的 bug。
+  - 修复了刷新预览可能更改当前路径的 bug。
+  - 修复了在登录后启动实时预览时导致无限重定向循环的 bug。
+</Update>
+
+<Update label="May 9, 2025">
+  **重点更新**
+
+  - 我们新增了在不同工作区之间转移项目的功能！
+  - Lovable 现在更擅长理解图片了——无论你上传的是设计参考还是真实站点资源，它都能分辨出来并做出相应处理
+
+  **Bug 修复**
+
+  - 修复了已发布项目和已部署预览链接未能反映最新版本的问题
+  - 项目可见性设置已重新回到团队工作区，但目前仍保持禁用状态
+  - 修复了在团队工作区中，工作区拥有者无法编辑由非拥有者创建的项目的问题
+  - 修复了账单页面中的“降级按钮”会跳转到错误 Stripe 页面的问题
+  - 修复了部分用户在升级到更高套餐后无法看到自己当前套餐信息的问题
+</Update>
+
+<Update label="May 2, 2025">
+  **改进**
+
+  - 改进了额度追踪，当你达到每月 30 额度上限时会明确提示，并清晰显示你的每日和每月额度何时重置
+  - 现在你可以邀请尚未使用 Lovable 的用户加入团队工作区
+  - 全面改版错误弹窗，可以显示更有帮助的提示信息（例如 Supabase token 问题），而不仅仅是“Request failed”
+  - 将设置页中的标签（Projects、Knowledge、Domains）更新为全新设计
+
+  **Bug 修复**
+
+  - 修复了额度不会刷新，除非你手动刷新页面的问题
+  - 修复了 Lovable 无法获取 Edge Function 日志的问题
+  - 修复了在你重命名仓库后，GitHub 分支切换会失败的问题
+  - 修复了阻止用户应用某些 SQL 迁移的 Bug
+  - 修复了移动端定价页面样式不佳的问题
+  - 修复了阻止项目重命名的问题
+  - 修复了首页项目计数不显示正确数量的问题
+  - 修复了导致 Supabase 反复要求重新认证的循环问题
+  - 修复了在 Dev Mode 中所做编辑未被保存的问题
+  - 修复了协作者看不到“Working…”指示器的问题
+</Update>
+
+<Update label="Apr 25, 2025" description="Lovable 2.0">
+  我们非常高兴地发布 **Lovable 2.0**！这一版重点关注协作、安全，以及让你拥有更多掌控力。
+
+  ![Lovable Two Point Zero Pn](/images/lovable-two-point-zero.png)
+
+  - 我们完成了品牌升级！全新 Logo、更明亮的配色和更干净的 UI。马上往下看看吧——希望你会觉得这是一次真正的焕新。
+  - [Teams](https://docs.lovable.dev/user-guides/teams)：实时协作终于来了！邀请其他人共同编辑应用，或创建共享的团队工作区。
+  - [**简化定价**](https://docs.lovable.dev/user-guides/messaging-limits#free-vs-paid-plans-comparison)，提供两个清晰选项：Pro 起价 \$25/月，Teams 起价 \$30/月。
+  - **安全扫描：** 当你发布时（如果已连接 Supabase），Lovable 现在会检查是否存在漏洞。这只是我们让“vibe coding”默认更加安全的第一步。
+  - 当你尝试回滚到执行数据库迁移之后的某次编辑时，Lovable 会提示你我们不会回滚数据库。
+  - 你提，我们听。[Chat mode](https://docs.lovable.dev/features/modes#2-chat-mode) 现在变得 _聪明多了_，并且对所有人来说**都会长期保留**。它不会直接修改代码，但 _可以_ 帮助你分析问题、规划功能、查看日志、查询数据库等。可以把它当成一个聪明但“只动嘴不动手”的结对编程伙伴。
+
+  这次是一个重要的前进步伐——而我们才刚刚开始。
+
+  非常感谢你一路与我们同行
+</Update>
+
+<Update label="Apr 17, 2025">
+  - 发布了 GitHub 可靠性改进。即使用户 token 失效，我们现在通常也仍然可以同步到 GitHub。
+  - 发布了一些修复预览内容过期问题的更新。
+  - 在转移仓库时，被封禁的组织/用户会标记为已封禁。点击后你会跳转到解除封禁的页面。
+</Update>
+
+<Update label="Apr 11, 2025">
+  - 你现在可以直接在项目设置中购买域名——只需点击“Buy a domain”，搜索你想要的域名，然后几次点击就能完成结账。我们与 IONOS 合作实现了这一功能。点击[这里](http://email.lovable.dev/e/c/eyJlbWFpbF9pZCI6ImRnVG1qZ29EQUotUVZKNlFWQUdXRzVfR2VPdTVlSEVGMnU1Wk5hbz0iLCJocmVmIjoiaHR0cHM6Ly94LmNvbS9sb3ZhYmxlX2Rldi9zdGF0dXMvMTkwOTYzMzY1NjQ0MTc4NjYwOCIsImludGVybmFsIjoiZTY4ZTBhMmRhZWRkMDE5ZjkwNTQiLCJsaW5rX2lkIjoyMDk2fQ/de4d0c380fdfac4a4accea202b7884c14b49d33fc1c0ca808b5a4ebc9e6540fe)了解更多。
+  - 现在可以更轻松地直接在 Lovable 中更新网站图标（favicon）。
+  - 加载大型项目现在应该会快得多，因为在打开项目时不会一次性加载所有消息。只有当用户向上滚动时才会加载更多历史消息。
+  - 点击 Supabase 按钮（首次生成时显示）现在会打开设置面板。我们还为首次使用的用户添加了一个小的 “What is Supabase?” 提示，链接到我们的文档和教程。
+</Update>
+
+<Update label="Apr 4, 2025">
+  - **全新 UI：** 更新了编辑器导航栏设计，将页面下拉菜单和相关按钮从预览面板的标题移动到了导航栏。
+  - 重构了 diff 创建逻辑，现在可以正确处理对同一文件的多次编辑。
+  - 升级了 [Stripe 集成](https://docs.lovable.dev/tips-tricks/setting-up-payments)。
+  - 新的聊天滚动行为：会将新的用户消息滚动到视口顶部，而不是在生成文本时自动向下滚动。
+  - Lovable 现在提供 Dev 模式。启用 Dev 模式后，你不仅可以查看项目的代码，还可以直接在 Lovable 中进行编辑。点击[这里](http://email.lovable.dev/e/c/eyJlbWFpbF9pZCI6ImRnVG1qZ29EQUotUVZKNlFWQUdXRzVfR2VPdTVlSEVGMnU1Wk5hbz0iLCJocmVmIjoiaHR0cHM6Ly94LmNvbS9sb3ZhYmxlX2Rldi9zdGF0dXMvMTkwNzgxNjU2Nzk0NzA5NjM0MSIsImludGVybmFsIjoiZTY4ZTBhMmRhZWRkMDE5ZjkwNTQiLCJsaW5rX2lkIjoyMDk1fQ/c876becf4f48a97a1c3fd592a50e2bb9bcb03651afcb81988c68b031dc617425)了解更多信息。
+  - 修复了 Supabase 集成中 AI 会在错误文件夹中创建 `config.toml` 文件的问题。
+  - 修复了你可以再次使用 `x` 按钮关闭可视化编辑，以及 `alt+s` 快捷键在预览中再次正常工作的问题。
+</Update>
+
+<Update label="2025 年 3 月 28 日">
+  - [Linkable.site](https://linkable.site/)：将你的 LinkedIn 个人资料打造成个性化网站。
+  - 想知道是不是有服务宕机？你现在可以查看我们的状态页获取实时更新。点此查看[状态页](http://email.lovable.dev/e/c/eyJlbWFpbF9pZCI6ImRnVG1qZ29EQUotUVZKNlFWQUdXRzVfR2VPdTVlSEVGMnU1Wk5hbz0iLCJocmVmIjoiaHR0cHM6Ly9zdGF0dXMubG92YWJsZS5kZXYvIiwiaW50ZXJuYWwiOiJlNjhlMGEyZGFlZGQwMTlmOTA1NCIsImxpbmtfaWQiOjIwOTd9/727d92f8476ca681a08a3e2849ba1e6f28522466839aba17c98f79ab56a89035)。
+  - 已上线改动：当屏幕一片空白时会显示 Try to Fix 按钮。
+  - 修复了仅获取第一个边缘函数日志的 bug。
+  - 修复了在进入个人资料页时导致无限请求的 bug。
+  - 修复了实验服务中由于并发 map 写入导致 panic 的问题。
+  - 将我们混用 `lov-sql` 和 `lov-code` 的消息出现次数减少了 4 倍。
+  - 修复了 Labs 设置无法保存的问题。
+  - 预览功能已经恢复上线。如果你的域名仍然无法正常工作，请告知我们。
+  - 修复了仅获取第一个边缘函数日志的 bug。
+  - 我们对 Supabase 做了一些重大改进和修复，尤其是在如何调用边缘函数方面。
+  - 当你在代码编辑器中更新 Supabase 函数时，现在会自动进行部署。同时，当 AI 修改 Supabase 函数时，代码编辑器中的内容也会实时更新。
+</Update>
+
+<Update label="2025 年 3 月 21 日">
+  我们已经听取了你反馈的问题，并在努力逐一修复。本周我们在产品可靠性方面上线了以下更新：
+
+  - 修复了 AI 会创建新的边缘函数而不是修复已有函数的 bug。
+  - [Labs Features](https://docs.lovable.dev/features/labs) 设置现在会保存到你的用户账号，而不是本地存储，确保在不同设备之间也能保持一致。
+  - 月度额度计数器现在位于设置菜单中，便于快速查看。
+  - 修复了在 AI 编辑后导致实时预览窗口不同步的 bug。
+  - 修复了 Supabase 认证会话持久化问题。
+  - 完全重写了自定义域名后端。系统现在应该更稳定、更快、自我修复，并支持 Unicode 域名。
+  - 在发布对话框中为尚未向项目连接任何域名的用户新增 _连接自定义域名_ 操作。
+  - Chat mode 现在比以往更快，并修复了偶尔会卡住不响应的 bug。
+  - 为项目卡片中已连接 Supabase 的项目增加了 Supabase 图标；对于你自己的项目，该图标可点击，会带你进入 Supabase 控制台。
+  - 完整支持 SEO 和 Open Graph 图片，因此链接（例如在 X 上）现在会显示正确的卡片预览。
+  - 更新了 UI，以更清晰地说明 Supabase 连接发生在组织级别。
+  - 上线了内存泄漏修复，以防止在用户请求（包括长时间初始运行）过程中导致后端崩溃。
+  - 上线了持续延长项目锁定时间和沙盒心跳，以支持长时间运行的请求，避免被过早终止。
+</Update>
+
+<Update label="2025 年 3 月 14 日">
+  - 我们对 Lovable 的项目设置布局进行了改进，让体验更直观。你现在可以在项目页面左上角找到 Project Settings（项目设置），以便更快速访问和更顺畅地导航。[查看具体更新内容](https://discord.com/channels/1119885301872070706/1120705825317593149/1350101727768084491)。
+  - 在 Lovable 中引入了 [自定义域名](https://docs.lovable.dev/tips-tricks/custom-domain)。
+  - 宣布与 Lovable、Anthropic、Supabase 和 Sentri 一起推出 \$10K [Lovable's Build Competition](https://build-launch-win.lovable.app/)。
+  - 最佳网站设计奖，\$3K 现金奖励。[相关推文在此](https://x.com/lovable_dev/status/1900574280011731167)。
+</Update>
+
+<Update label="Mar 7, 2025">
+  - [推出 Versioning 2.0](https://x.com/lovable_dev/status/1896637541618778574)，支持添加书签、更轻松的恢复操作以及改进的历史记录视图。
+  - [Dev Mode：](https://x.com/lovable_dev/status/1897693825767768542) 可以在 Lovable 中直接轻松编辑你项目中的任何代码。所有付费用户都可以在设置中启用 dev-mode。
+  - 修复了一个 **Chat Mode 流式输出问题。**
+  - 解决了默认模式中的 **内部服务器错误**。
+  - 处理了 [Sonnet 3.7](https://lovable.dev/blog/anthropic-sonnet-3-7-lovable-diff-viewer) 引入的 **主要回归问题**。
+  - 修复了 **SQL 语法错误。**
+  - 解决了在一次编辑中 **同时进行迁移与密钥管理** 导致的问题。
+</Update>
+
+<Update label="Feb 28, 2025" description="代码查看器">
+  - Sonnet 3.7 以其出色的编码和设计能力给我们留下了深刻印象。现在所有 Lovable 用户在主工作流中都使用 Sonnet 3.7，这意味着 Lovable 比以往任何时候都更智能。
+  - [在 Lovable 中引入 Code viewer](https://x.com/lovable_dev/status/1895500151889768596)：你现在可以查看你的 Lovable 项目的代码。和之前一样，你也可以通过 GitHub 对 Lovable 项目进行代码编辑。
+  - 不再需要向客户支持提问“_为什么我的项目坏了_”。我们现在会在错误对话框中显示实际错误信息，帮助你自行修复错误。
+  - 修复了用户反馈的，由于 Supabase 连接导致项目版本回退的 bug。
+  - 编辑元素后，“_Edit_” 模式会自动关闭。
+</Update>
+
+<Update label="Feb 21, 2025">
+  - [视觉编辑改进](https://x.com/lovable_dev/status/1892249059718484100)，包括修改字重、对齐方式以及调整图片大小。
+  - 修复了 Supabase 语法问题，使集成更顺畅，并在部署过程中减少错误。
+  - 解决了部分用户会被意外重定向到首页的问题。
+  - 连接 API 和外部数据源可能比较棘手。我们已经让它变得更简单。Lovable 现在会直接读取网络日志，并将其作为上下文来调试和实现第三方集成。不再有打断你操作的错误弹窗——Lovable 现在利用实时网络洞察，帮助你更快地修复问题并持续构建。
+  - 修复了最近一次获取提交记录的问题，确保项目同步准确且最新。
+  - 对于那些生成代码但不会产生提交的消息（例如 AI 试图在没有权限的情况下编辑文件，或实际上没有改动），不再会卡在 `saving changes...`。
+</Update>
+
+<Update label="Feb 12, 2025" description="可视化编辑">
+  - [推出 Visual Edits。](https://lovable.dev/blog/introducing-visual-edits)
+  - [Supabase Integration 2.0。](https://lovable.dev/blog/lovable-supabase-integration-second-version)
+  - 现在在此文档中集中发布更新日志，而不是分散在各处。
+  - 改进了文档，新增了集成教程、提示指南和用户指南。
+  - 全球 Lovable 黑客松活动。[在此报名](https://lu.ma/1dl5m906)。
+  - 提升了 LLM 调用容量，降低了处理中途触发速率限制的风险。
+  - 应用的预览部署和生产部署已恢复正常。
+  - 解决了用户进入项目时会被重定向到首页的问题。
+  - 修复了由于同时使用 S3 和 GitHub 的错误配置仓库导致获取最后一次提交不一致的问题。
+  - 修复了对具有自定义主分支覆盖的项目进行复刻和转移时出现的失败问题。
+  - 解决了一个偶尔会导致错误的 Python 日志名称冲突问题。
+  - 修复了新项目中缺少选择和编辑工具的问题。
+  - 更漂亮的回退按钮
+</Update>
+
+<Update label="Feb 7, 2025" description="Go 迁移">
+  - Chat mode 变得更智能了，现在会计入你的消息额度。
+  - 推出 [Hire a Lovable Partner](https://lovable.dev/blog/introducing-hire-a-lovable-partner)。
+  - 为了获得更好的稳定性、更高的响应速度和更快的功能发布，我们完成了 [From Python to Go](https://lovable.dev/blog/from-python-to-go) 的迁移。
+  - 推出 [Lovable Launched](https://lovable.dev/blog/2025-01-30-how-to-launch-and-get-traffic-to-an-app-built-with-lovable)，你可以在这里发布你的应用，把它展示在用户面前。
+  - [Cloudflare R2](https://www.cloudflarestatus.com/) 曾经宕机，现在已恢复运行。
+  - [Lovable 客户支持 2.0](https://lovable.dev/support) 已上线并正常运行。
+</Update>
+
+<Update label="Jan 28, 2025" description="Figma 到 Lovable">
+  - Figma 到 Lovable：使用 Builder.io 将设计转换为代码。
+  - 回滚操作的可见性得到提升。
+  - 改进了对 Replicate 的支持。
+  - 随着迁移到 Node SDK，对 Resend 的支持得到改进。
+  - 在创建注册和登录流程时，Lovable 会构建与应用风格一致的自定义认证 UI。
+  - 在使用 Supabase 驱动的应用中，角色管理现在更加可靠。
+  - Lovable 现在支持基于 Realtime OpenAI 和 RTC 进行构建。
+</Update>
+
+<Update label="Jan 18, 2025">
+  - lovable.app 的 DNS 问题已解决。
+  - 沙盒问题已解决，服务已完全恢复运行。
+  - Supabase 连接问题已解决，只需点击“Add another organization”按钮。
+</Update>
+
+<Update label="Jan 6, 2025">
+  - [GitHub Integration Outage](https://lovable.dev/news/github-incident-2025-01-02)。
+  - 新增 Labs 部分，可通过 Settings -\> Account Settings -\> Labs 访问。
+  - 访问我们的 [支持页面](https://lovable.dev/support) 获取帮助、提交问题或进一步了解如何使用 Lovable。
+  - 借助 Firecrawl 和 React Flow，改进了对抓取和节点图的支持。
+  - “Edit with Lovable” 徽章已对所有用户启用。
+  - Select-to-Edit 现在位于聊天输入框中。
+  - 即将推出 5 集直播系列，带你构建并发布一款由 AI 驱动的西班牙语辅导应用。
+  - 无限使用周末（Unlimited weekend）！
+</Update>
+
+<Update label="Dec 11, 2024">
+  - 将可自定义的消息额度添加到 Scale 套餐中。
+  - “Ask the AI to fix” 不会计入你的使用额度。 
+  - 在 Hall of Fame 展示你的作品。
+  - 集成 Stripe、Three.js、p5.js、Resend 和 Fabric.js。
+  - [Christmas Hackathon](https://hackathon.lovable.app/submit) 提供超过 \$3,000 的奖品。
+  - 与云服务提供商相关的问题已解决。
+</Update>
+
+<Update label="Dec 3, 2024" description="Lovable 1.0">
+  - **Templates**：使用预构建设计更快地进行构建。
+  - 推出用于提交功能和集成请求的 [feedback.lovable.dev](http://feedback.lovable.dev/)。
+  - 添加了 shadcn 侧边栏，并支持使用 three.js 构建 3D 应用。 
+  - 你现在可以访问 [设置页面](https://lovable.dev/settings) 查看剩余消息数量。
+  - Lovable 不再自动进行重构。
+  - 添加了对新的 [shadcn sidebar 组件](https://ui.shadcn.com/docs/components/sidebar) 的支持。
+  - 提升了页面下拉菜单的稳定性。
+  - 添加了新的 [FAQ](https://docs.lovable.dev/faq) 和一个 [端到端教程](https://docs.lovable.dev/user-guides/quickstart) 来为用户提供引导。
+  - 与云服务提供商相关的问题已解决。
+  - 当你发送聊天请求时，我们会检查所有项目依赖是否为最新版本。
+</Update>
+
+<Update label="Nov 11, 2024">
+  - 使用 Select 功能进行精确编辑。
+  - 借助改进的 Supabase 集成，实现真正的全栈开发。
+  - 将错误减少 10 倍。
+  - 价格更新。详情请访问我们的定价页面。
+</Update>
+
+<Update label="2024 年 10 月 2 日">
+  - 更好的版本管理。
+  - 大型项目的速度提升至 12 倍。
+  - 降低了依赖 RAG 的触发阈值。
+  - GPT Engineer 现在不再急于立刻生成代码。
+  - 修复了 GPT Engineer 安装依赖时会失败的 bug。
+  - 开源了 GPT Engineer 的文档。
+</Update>
+
+<Update label="2024 年 9 月 23 日">
+  - 分支切换，带来更强的可控性。
+  - 新增「热门项目」标签页，用于获取灵感。
+  - 改进了网络错误检测能力。
+  - 针对大型项目的上下文管理进行了优化。
+  - 进一步优化了对模型「偷懒」行为的处理。
+</Update>
+
+<Update label="2024 年 9 月 9 日">
+  - 你现在可以分享自己的个人资料 URL。
+  - 你现在可以向项目添加自定义知识。
+  - 为 PRO 用户移除了 "Edit with GPT Engineer" 徽章。
+  - 已更新提示，以减少「偷懒」情况。
+  - 已解决 Supabase 集成可能卡住的问题。
+</Update>
+
+<Update label="2024 年 8 月 20 日">
+  - 我们显著增强了编辑体验。
+  - 现在每次编辑时，聊天中都会显示加载指示器。
+  - 我们更新了定价。免费用户现在每天可获得 10 次免费编辑。
+  - 引入了用户个人资料，允许你设置用户名和位置。
+  - 通过导航到 Settings -\> Rename Project 来重命名你的项目。
+  - 所有 GitHub 项目现在默认设置为私有。
+</Update>
+
+<Update label="2024 年 7 月 17 日">
+  - 重新设计了卡片展示方式，以统一进度指示器。
+  - 你现在可以停止任何在后台运行的活动任务。
+  - Shadcn 现在是新项目的默认设计系统。
+</Update>
+
+<Update label="2024 年 6 月 5 日">
+  - 完全重新设计了主页和编辑器。
+  - 正在构建并测试更加「agentic」的流程。
+  - 新增页面选择下拉菜单。
+  - 可以将图片附加到你的提示词中。
+  - 自动安装 NPM 包。
+</Update>
+
+<Update label="2024 年 3 月 26 日">
+  - 构建可与现有后端服务配合使用的前端。
+  - 引入了对更多技术栈的支持，例如 Tailwind、简单 HTML 和 Daisy UI。
+  - 新增 Claude 3 Haiku 模型集成。
+  - 为实例添加了自定义 404 页面。
+  - 在用于展示错误改进建议的模态框中加入了更多故障排查提示。
+</Update>
+
+<Update label="2024 年 3 月 13 日">
+  - 改进了编辑卡片的样式。
+  - 使用新的基础模型 Claude 3 Opus 生成项目。
+  - 简化了转移 GitHub 项目时的用户体验。
+  - 修复了「可领取项目」实际上无法领取的问题。
+</Update>
+
+<Update label="2024 年 3 月 1 日">
+  - 新项目现在会附带配置文件 gpt-engineer.toml。
+  - 当需要进行许多相似的代码修改时，使 AI 更加稳定。
+  - 减少了生成代码中的注释数量，从而提高可靠性。
+  - 修复了 "Connect to Github" 按钮。
+  - GPT Engineer 现在可以与私有 GitHub 项目一起工作。
+  - 修复了用户有时会被不必要地登出的问题。
+</Update>
+
+<Update label="2024 年 2 月 13 日">
+  - 将项目转移到你自己的 GitHub 账号！
+  - 已添加。
+  - 修复了修复 bug 步骤的输出会显示在 "Planning" 下方的问题。
+</Update>
+
+<Update label="2024 年 1 月 18 日">
+  - 添加了 "Revert to this version" 操作，让你可以更轻松地回退到较早的编辑版本。
+  - 修复了 AI 有时会用注释替换代码的问题。
+  - 当项目被删除时，现在会同时删除对应的 GitLab 仓库。
+</Update>
+
+<Update label="2024 年 1 月 15 日" description="GPT Engineer">
+  - 将开发者推送的 git 提交与编辑器中的内容进行同步。
+  - 减少了生成代码中的注释数量，从而提高可靠性。
+  - 修复了在发生错误时，无法从 UI 访问计划／摘要的问题。
+</Update>

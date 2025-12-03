@@ -1,0 +1,342 @@
+---
+title: "Resend 集成"
+description: "了解如何在 Lovable 应用中集成 Resend"
+icon: "envelope"
+---
+
+<div id="what-is-resend">
+  ## 什么是 Resend？
+</div>
+
+[Resend](https://resend.com/emails) 是一款为开发者打造的电子邮件 API。它专注于高送达率、易集成性，以及在发送事务类和营销邮件时提供简洁流畅的开发体验。
+
+<div id="step-by-step-tutorial">
+  ## 分步教程
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/5ZL744_Wxjo?si=qrKlOL_1fAnz7rgc" title="YouTube 视频播放器" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+本教程会在不到一小时内，引导你构建一个功能完整的 CRM——包括线索收集、邮件确认、订阅电子简报，以及内部管理后台。你将会使用：
+
+- **Lovable**：用于生成前端和后端逻辑。
+- **Supabase**：用于安全的数据存储和身份验证。
+- **Resend**：用于自动化并跟踪事务类和营销类电子邮件。
+
+现在开始吧。
+
+<Steps>
+  <Step title="创建包含联系表单的落地页">
+    使用 Lovable 的 AI 为你的产品或服务快速生成落地页。
+
+    **操作指南：**
+
+    <Steps>
+      <Step title="新建 Lovable 项目">
+        新建一个 Lovable 项目。
+      </Step>
+
+      <Step title="提示：">
+        <Info>
+          创建一个 SaaS 落地页，其中包含一个联系表单，用于收集姓名、邮箱和留言。
+        </Info>
+
+        ![落地页 Lovable 项目 Pn](/images/landing-page-lovable-project.png)
+      </Step>
+
+      <Step title="检查生成的代码">
+        检查生成的代码，或使用选择工具微调各个元素。
+      </Step>
+
+      <Step title="添加输入验证">
+        添加输入验证以及一个 `message` 字段，以提升用户体验。
+
+        ![电子邮件 Resend 表单 Pn](/images/email-resend-form.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="在 Supabase 中存储表单提交内容">
+    Supabase 作为你的安全后端数据库。
+
+    <Steps>
+      <Step title="Supabase 账户">
+        创建一个免费的 Supabase 账户并新建一个项目。
+      </Step>
+
+      <Step title="API 密钥">
+        在 Lovable 中，使用 API 密钥连接你的 Supabase 项目。
+
+        ![Supabase Resend 邮件示例图](/images/supabase-resend-email.png)
+      </Step>
+
+      <Step title="创建一个 `contacts` 表，包含：">
+        * `id`: UUID，主键
+        * `name`: text
+        * `email`: text
+        * `message`: text
+        * `created_at`: timestamp
+      </Step>
+
+      <Step title="提交逻辑">
+        修改表单提交逻辑，将数据插入 Supabase。
+      </Step>
+
+      <Step title="RLS">
+        应用 Supabase 行级安全（RLS）策略，将访问权限限制为仅通过身份验证的用户。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="通过 Resend 发送确认邮件">
+    设置 [Resend]()，在每次有潜在客户提交表单时自动发送确认邮件。
+
+    <Steps>
+      <Step title="在 Resend 上注册">
+        在 [Resend](https://resend.com) 上注册并验证你的自定义域名。
+
+        * 系统会要求你更新 DNS 记录（TXT、MX）。
+        * 使用 `updates.domain.com` 之类的子域名，以更好地管理邮件发送声誉。
+      </Step>
+
+      <Step title="API 密钥">
+        通过环境设置或后端函数，在 Lovable 中集成 API 密钥。
+      </Step>
+
+      <Step title="SDK">
+        使用 Resend 的 SDK 在表单提交时发送确认邮件。
+
+        ![Confirmation Email Submission Resend Pn](/images/confirmation-email-submission-resend.png)
+      </Step>
+
+      <Step title="可选：React Email">
+        使用 [React Email](https://react.email)（同样由 Resend 提供），通过可复用组件自定义邮件的外观和样式。
+
+        ![Customize Email Resend Pn](/images/customize-email-resend.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="构建安全的管理后台">
+    仅允许已通过认证的用户查看和管理潜在客户。
+
+    <Steps>
+      <Step title="Admin 路由">
+        在 Lovable 中创建一个 `/admin` 路由。
+      </Step>
+
+      <Step title="Supabase 身份验证">
+        启用 Supabase 的邮箱/密码登录身份验证。
+      </Step>
+
+      <Step title="联系人">
+        显示包含以下列的 `contacts` 表：
+
+        * 姓名
+        * 邮箱
+        * 消息预览
+        * 提交日期
+      </Step>
+
+      <Step title="完整联系人信息">
+        添加一个详情面板（例如滑出面板），在点击某一行时显示完整的联系人信息。
+
+        ![CRM Resend 邮件界面](/images/crm-resend-email.png)
+      </Step>
+
+      <Step title="重定向逻辑">
+        添加重定向逻辑，使未通过认证的用户被重定向到 `/login`。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="启用来自管理员的自定义邮件回复">
+    让你的团队能够发送个性化的跟进邮件。
+
+    <Steps>
+      <Step title="联系人详情面板">
+        在联系人详情面板中，添加一个**文本字段**和**预定义模板**（例如 “Thanks for signing up!”）。
+      </Step>
+
+      <Step title="添加发送按钮">
+        添加一个**发送按钮**并将其连接到 Resend。
+      </Step>
+
+      <Step title="存储已发送消息">
+        将每封已发送邮件存储在 Supabase 中的 `sent_emails` 表中：
+
+        * `contact_id`
+        * `subject`
+        * `body`
+        * `sent_at`
+
+        这样你就会拥有一份可搜索的所有跟进消息日志。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="添加新闻通讯订阅表单">
+    使用 Resend 的 **Audiences** 来管理订阅者并发送群发邮件。
+
+    ![Subscription Newsletter Resend Pn](/images/subscription-newsletter-resend.png)
+
+    <Steps>
+      <Step title="添加新表单">
+        在你的落地页上添加一个用于订阅新闻通讯的表单。
+      </Step>
+
+      <Step title="Resend 联系人">
+        当用户提交表单后：
+
+        * 通过 API 创建一个 Resend 联系人
+        * （可选）同时在 Supabase 中本地存储该联系人
+      </Step>
+
+      <Step title="设计">
+        使用 Resend 的群发邮件界面来设计并发送新闻通讯。
+
+        * 内置退订逻辑
+        * 表现洞察（打开率、送达状态）
+      </Step>
+
+      <Step title="合规检查！">
+        在合规方面（例如 GDPR），请考虑实现一个 **双重订阅确认（double opt-in）** 流程。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="附加内容：将 Resend 与 Supabase Auth 集成">
+    ![发送批量邮件 GDPR Resend Pn](/images/send-batch-emails-gdpr-resend.png)
+    想优化 Supabase 默认的邮箱验证（目前每小时最多只能发送 4 封邮件）吗？
+
+    <Steps>
+      <Step title="Resend Supabase 集成">
+        前往 [Resend 的 Supabase 集成页面](https://resend.com/integrations/supabase)。
+      </Step>
+
+      <Step title="身份验证">
+        使用你的 Supabase 项目完成身份验证。
+      </Step>
+
+      <Step title="域名设置">
+        选择要使用的域名以及发件人名称/邮箱地址。
+      </Step>
+
+      <Step title="SMTP">
+        Resend 会自动配置 SMTP，并替换 Supabase 的默认邮件系统。
+      </Step>
+
+      <Step title="自定义">
+        现在你可以在 Supabase 控制台中自定义验证邮件模板。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="最后调整与最佳实践">
+    ![Audience Resend Pn](/images/audience-resend.png)
+
+    * **错误处理**：Lovable 可能会显示实际上并不存在的构建错误。务必在实际运行环境中测试你的功能。
+    * **使用 Supabase 回滚**：如果在 Lovable 中回滚代码，记得手动删除关联的 Supabase 策略或迁移——这些内容不会被自动回滚。
+    * **投递率优化建议**：
+      * 使用子域名来隔离发信声誉。
+      * 始终在邮件中包含纯文本版本。
+      * 使用 Resend 的 Insights 仪表盘监控邮件表现。
+  </Step>
+
+  <Step title="大功告成！🎉">
+    在不到一小时内，你就已经搭建好了一个现代化的 CRM，具备：
+
+    * 着陆页和联系表单
+    * 数据库驱动的线索存储
+    * 自动邮件确认
+    * 用于管理线索的管理后台
+    * 自定义邮件回复
+    * 新闻通讯群发
+    * 身份认证和邮箱验证
+  </Step>
+</Steps>
+
+<div id="want-to-go-further">
+  ## 想更进一步？
+</div>
+
+- 通过 Supabase 的 cron 任务添加 **定时邮件** 功能
+- 构建 **自动化流程**，根据线索阶段触发邮件
+- 优化你的 UI 样式，提升品牌信任感和转化率
+
+<div id="resend-integration-faq">
+  ## Resend 集成常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="什么是 Resend？">
+    Resend 是为开发者打造的电子邮件 API。它专注于高送达率、易于集成，以及在发送事务型和营销邮件时提供简洁顺畅的开发者体验。
+  </Accordion>
+  <Accordion title="完成本教程需要付费 Resend 套餐吗？">
+    不需要。你可以完全使用 **Resend 的免费套餐** 完成整个 CRM 设置，它支持从已验证域名发送邮件，并支持最多 3,000 个营销邮件联系人。
+  </Accordion>
+  <Accordion title="如何在 Resend 中验证域名？">
+    进入 Resend → **Domains** → 添加你的域名。系统会提供 DNS 记录（TXT、MX），你需要通过 DNS 服务提供商（如 Cloudflare、Namecheap）添加这些记录。添加完成后，点击 **Verify**。
+
+    <Tip>
+      建议使用类似 `updates.yourdomain.com` 这样的子域名，以隔离你的发信信誉。
+    </Tip>
+  </Accordion>
+  <Accordion title="为什么我通过 Resend 发送的邮件会进垃圾邮箱？">
+    常见原因包括：
+
+    - 你还没有验证域名
+    - 邮件缺少纯文本版本
+    - 你使用了通用发件人地址，比如 `onboarding@resend.dev`
+    - 你没有遵循最佳实践（例如在营销邮件中缺少退订链接）
+
+    使用 Resend 的 **Deliverability Insights** 面板获取可执行的优化建议。
+  </Accordion>
+  <Accordion title="我可以自定义我发送邮件的设计吗？">
+    可以。使用 [React Email](https://react.email/)——由 Resend 团队开发的开源库——通过 React 组件设计带样式的响应式邮件。
+  </Accordion>
+  <Accordion title="Resend 只支持事务型邮件吗？营销邮件也支持吗？">
+    Resend **两者都支持**：
+
+    - **事务型邮件**（确认、重置、通知），通过 API 或 SDK 发送。
+    - **营销邮件**，通过 **Broadcast** 功能和 **Audiences** 实现。
+
+    你可以在仪表盘中创建、预览并跟踪活动。
+  </Accordion>
+  <Accordion title="如何在 Resend 中管理订阅新闻简报的用户？">
+    使用 **Audiences**（受众列表）：
+
+    - 手动添加联系人、通过 CSV 导入，或使用 API 以编程方式添加。
+    - 每个 Audience 都有唯一 ID，你可以用它来关联订阅关系。
+    - 用户可以通过 Resend 内置的退订链接自动退订。
+  </Accordion>
+  <Accordion title="可以为新闻简报设置双重确认订阅（double opt-in）吗？">
+    默认不支持，但你可以手动实现：
+
+    1. 用户提交表单后，先发送一封确认邮件。
+    2. 在邮件中要求用户点击链接。
+    3. 用户点击后，确认其订阅并将其加入你的 Resend audience。
+  </Accordion>
+  <Accordion title="可以在 Resend 中安排或自动化邮件流程吗？">
+    目前还不行。Resend 目前尚不支持滴灌式营销活动或自动化邮件序列。
+
+    <Tip>
+      变通方案：
+
+      使用 **Supabase Cron Jobs** 来调度任务，在设定的时间间隔触发 Resend 邮件发送。
+    </Tip>
+  </Accordion>
+  <Accordion title="如何将 Resend 连接到 Supabase Auth？">
+    使用 Resend 提供的官方 Supabase 集成（Supabase Integration）：
+
+    1. 使用你的 Supabase 项目进行身份验证。
+    2. 提供域名和发件人名称。
+    3. Resend 会自动配置你的 Supabase Auth 邮件，使其通过你的 Resend 账户发送。
+  </Accordion>
+  <Accordion title="Resend 如何处理退订？">
+    Resend 会自动处理退订：
+
+    - 你必须在群发邮件中包含退订链接。
+    - 当用户退订后，他们会从所选 audience 中移除。
+    - 这是电子邮件合规要求的一部分（例如 CAN-SPAM、GDPR）。
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,975 @@
+---
+title: "Implementar las mejores prácticas de SEO y GEO"
+sidebarTitle: "Mejores prácticas de SEO y GEO"
+description: "Guía práctica para optimizar tus aplicaciones de Lovable para motores de búsqueda, vistas previas en redes sociales y sistemas de IA usando metadatos, sitemaps, datos estructurados, comprobaciones de rendimiento y patrones optimizados para LLM."
+icon: "magnifying-glass"
+keywords: ["lovable seo","lovable geo","client-side rendering seo","mejores prácticas de seo","mejores prácticas de geo","optimización de búsqueda con IA","datos estructurados","sitemap","robots.txt","open graph","títulos de página","metadescripciones","core web vitals","marcado de schema","optimización para llm","rastreabilidad de IA","prerenderizado"]
+---
+
+<div id="how-seo-and-geo-work-in-lovable">
+  ## Cómo funcionan el SEO y el GEO en Lovable
+</div>
+
+Lovable te da mucha flexibilidad: **Search Engine Optimization (SEO)** y **Generative Engine Optimization (GEO)** surgen del código que genera Lovable Agent cuando creas páginas, contenido y funciones.
+
+Lovable Agent puede añadir elementos como títulos, descripciones o etiquetas basándose en tus indicaciones, pero esto no es sistemático y **no garantiza una implementación completa ni correcta.**
+
+Por este motivo, deberías **tratar el SEO y el GEO como código**: algo que revisas, pruebas y perfeccionas de forma intencionada. Esta guía te muestra exactamente qué pedir y cómo verificarlo.
+
+<div id="built-in-speed-tool">
+  ### Herramienta Speed integrada
+</div>
+
+Lovable también incluye una **herramienta Speed integrada, impulsada por Google Lighthouse**. Ofrece una vista rápida del rendimiento, la accesibilidad, las buenas prácticas y las comprobaciones de SEO de tu sitio publicado.
+
+![Herramienta Lovable Speed](/images/speed-tool.png)
+
+Es una excelente primera vista del estado de tu sitio, pero Lighthouse no verifica factores críticos como la capacidad de rastreo, los datos estructurados, la precisión de los metadatos o las vistas previas en redes sociales, así que esta guía cubre esos vacíos.
+
+<div id="custom-domains">
+  ### Dominios personalizados
+</div>
+
+Usar un **dominio personalizado** es uno de los pasos más importantes para el SEO y la segmentación geográfica (GEO). Un dominio con tu marca ayuda a los motores de búsqueda a comprender tu sitio web, preserva el valor de los backlinks con el tiempo y garantiza que todo el tráfico se consolide bajo una única URL canónica.
+
+Lovable te permite:
+
+* Conectar tu propio dominio o subdominio
+* Elegir un **dominio principal** (todos los demás dominios redirigen a él)
+
+Después de configurar tu dominio personalizado, [**verifícalo en Google Search Console**](#google-search-console-gsc-setup) para que Google pueda rastrear e indexar el dominio correcto. Para obtener instrucciones detalladas de configuración, consulta [**Dominios personalizados**](/es/features/custom-domain).
+
+<div id="understanding-lovables-architecture">
+  ## Comprender la arquitectura de Lovable
+</div>
+
+Lovable crea aplicaciones web modernas usando React y Vite, lo que significa que tu app es una **aplicación de una sola página (SPA)** con **renderizado en el lado del cliente (CSR)**. En lugar de servir un archivo HTML diferente para cada página, el navegador carga una estructura HTML inicial ligera y luego gestiona el enrutamiento y el renderizado con JavaScript.
+
+Las **plataformas tradicionales** como WordPress o Webflow envían al navegador una página HTML completamente construida para cada URL.
+
+**Lovable** envía código e instrucciones que tu dispositivo usa para generar cada vista. Todas las “páginas” son en realidad solo diferentes estados de la misma aplicación.
+
+Para los visitantes, esto significa navegación rápida, transiciones instantáneas y una experiencia fluida.
+
+<div id="what-this-means-for-seo-and-geo">
+  ### Qué significa esto para SEO y GEO
+</div>
+
+Para **motores de búsqueda, plataformas sociales y rastreadores de IA**, la arquitectura cambia cómo se descubre tu contenido.
+
+**Google y los motores de búsqueda tradicionales:**
+
+Google puede indexar sitios con CSR, pero lo hace en dos etapas:
+
+1. **Rastrear el HTML inicial** y recopilar la estructura de tu página
+2. **Volver después para renderizar JavaScript (JS)** y capturar el contenido completo
+
+Este proceso en dos pasos funciona de manera fiable, pero:
+
+* La indexación puede tardar **un poco más** (días en lugar de horas)
+* Las páginas nuevas pueden aparecer más tarde en los resultados
+* **No perjudica el posicionamiento**, solo la velocidad de indexación
+
+**Plataformas sociales y sistemas de IA:**
+
+* Plataformas como **Facebook, X/Twitter y LinkedIn** no esperan a que se renderice el contenido, por lo que solo ven la estructura HTML inicial de la página.
+* Si todas tus páginas comparten el mismo título básico y la misma imagen de vista previa, los enlaces sociales pueden mostrar información genérica o incorrecta
+* Muchos **sistemas de IA** no ven de manera fiable el contenido renderizado dinámicamente, por lo que pueden omitir tus páginas o ver solo parte del contenido
+
+**Los motores de búsqueda modernos manejan bien el CSR.** CSR no bloquea la indexación ni el posicionamiento; lo que más importa es la implementación y la calidad del contenido.
+
+Sigue las buenas prácticas de esta guía para **asegurarte de que tu sitio de Lovable esté optimizado para motores de búsqueda, plataformas sociales y sistemas de IA y pueda competir de forma eficaz.**
+
+<div id="foundation-make-your-site-crawlable">
+  ## Fundamentos: Haz que tu sitio se pueda rastrear
+</div>
+
+Estos pasos garantizan que los motores de búsqueda puedan acceder, descubrir e indexar todas las páginas importantes de tu app de Lovable.
+
+<div id="xml-sitemap">
+  ### Sitemap XML
+</div>
+
+Los sitemaps ayudan a que los motores de búsqueda descubran todas tus páginas. Esto es especialmente importante para sitios CSR donde los rastreadores no pueden encontrar fácilmente todas las rutas. Lovable Agent puede generar `sitemap.xml` con todas las rutas públicas cuando se le solicite.
+
+<Accordion title="Cómo implementar y verificar sitemap.xml">
+  **Ejemplo de instrucción**
+
+  > Crea un sitemap XML en /sitemap.xml que liste todas las rutas públicas. Incluye fechas lastmod y prioridades: página de inicio 1.0, páginas principales 0.8, entradas de blog 0.6.
+
+  **Verificar**
+
+  * Publica tu proyecto para que el archivo del sitemap esté disponible
+  * Comprueba que sea accesible en: `https://yourdomain.com/sitemap.xml` (debería devolver XML)
+  * Revisa que incluya todas las rutas clave (inicio, páginas principales, blog, productos)
+  * Actualiza `lastmod` cada vez que cambie el contenido
+  * Usa `priority` para indicar la importancia (0.0–1.0)
+  * Envíalo a Google Search Console y Bing Webmaster Tools
+  * Regenera y vuelve a enviarlo al agregar o eliminar páginas (no es automático). Por ejemplo, instrucción:
+
+    > Actualiza sitemap.xml para incluir /new-page y eliminar /old-page y luego vuelve a enviarlo a Google Search Console.
+
+  **Ejemplo de sitemap.xml**
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>https://yourdomain.com/</loc>
+      <lastmod>2025-01-15</lastmod>
+      <priority>1.0</priority>
+    </url>
+    <url>
+      <loc>https://yourdomain.com/about</loc>
+      <lastmod>2025-01-15</lastmod>
+      <priority>0.8</priority>
+    </url>
+  </urlset>
+  ```
+</Accordion>
+
+<div id="robotstxt">
+  ### Robots.txt
+</div>
+
+El archivo `robots.txt` les indica a los motores de búsqueda a qué áreas de tu sitio se les permite acceder. Es importante evitar bloquear recursos clave que Google necesita para renderizar tus páginas correctamente. Lovable Agent puede crear un archivo `robots.txt` cuando se le solicite.
+
+<Accordion title="Cómo implementar y verificar robots.txt">
+  **Instrucción de ejemplo**
+
+  > Crea robots.txt en /public/robots.txt que permita todos los rastreadores, haga referencia al Sitemap: https://yourdomain.com/sitemap.xml y permita GPTBot y PerplexityBot para la visibilidad en IA.
+
+  **Verificar**
+
+  * Comprueba que sea accesible en: `https://yourdomain.com/robots.txt`
+  * Nunca bloquees CSS, JavaScript ni la carpeta `/assets/`
+  * Incluye una línea `Sitemap:` que apunte a tu sitemap
+  * Controla el acceso de bots de IA (GPTBot, PerplexityBot) según tu estrategia
+
+  **Ejemplo de robots.txt**
+
+  ```
+  User-agent: *
+  Allow: /
+  Sitemap: https://yourdomain.com/sitemap.xml
+
+  User-agent: GPTBot
+  Allow: /
+  ```
+</Accordion>
+
+<div id="canonical-tags">
+  ### Etiquetas canónicas
+</div>
+
+Las etiquetas canónicas le indican a los motores de búsqueda qué URL es la versión “oficial” de una página, lo que ayuda a evitar problemas de contenido duplicado. Lovable Agent puede generar etiquetas canónicas cuando se le solicita.
+
+<Accordion title="Cómo implementar y verificar etiquetas canónicas">
+  **Instrucción de ejemplo**
+
+  > Añade etiquetas canónicas a todas las páginas que apunten a sus propias URLs. Usa el formato https://yourdomain.com sin barra al final.
+
+  **Verificar**
+
+  * Revisa cada página. Pega esto en la consola del navegador:
+
+    ```
+    console.log('Canonical:', document.querySelector('link[rel="canonical"]')?.href);
+    ```
+  * Confirma que exista **exactamente una** etiqueta canónica por página.
+  * Asegúrate de que coincida con tu dominio preferido y la variante de URL (HTTPS, barra final).
+  * Evita apuntar diferentes páginas a la misma etiqueta canónica a menos que sea intencional (por ejemplo, vistas de productos filtrados).
+</Accordion>
+
+<div id="clean-urls-and-routing">
+  ### URLs limpias y enrutamiento
+</div>
+
+Los motores de búsqueda dependen de las URLs para entender de qué trata una página, así que las URLs limpias y descriptivas ayudan a mejorar tanto la capacidad de rastreo como el posicionamiento en buscadores. Lovable Agent generalmente genera rutas limpias automáticamente mediante React Router.
+
+<Accordion title="Cómo implementar y verificar URLs limpias">
+  **Ejemplo de instrucción**
+
+  > Revisa todas las rutas y asegúrate de que las URLs sean limpias y descriptivas. Usa guiones para separar palabras y evita los parámetros de consulta.
+
+  **Verificar**
+
+  * Navega a cada ruta y comprueba si hay errores en la consola del navegador
+  * Las URLs deben ser: estables, descriptivas, sin IDs aleatorios
+  * Formato coherente en todo el sitio (con barra final o sin ella, con `www` o sin `www`)
+  * Todas las rutas se cargan sin errores de JavaScript
+</Accordion>
+
+<div id="internal-linking">
+  ### Enlazado interno
+</div>
+
+Los enlaces internos conectan tus páginas para que tanto los usuarios como los motores de búsqueda puedan navegar fácilmente por tu sitio. Los motores de búsqueda dependen de estos enlaces para descubrir contenido, entender las relaciones temáticas y distribuir la autoridad de página en todo tu sitio.
+
+Lovable Agent puede crear enlaces en la navegación y el pie de página y sugerir o crear enlaces contextuales cuando se le solicite.
+
+<Accordion title="Cómo implementar y verificar el enlazado interno">
+  **Instrucción de ejemplo**
+
+  > Añade de 3 a 5 enlaces internos contextuales a páginas relacionadas. Usa texto ancla descriptivo en lugar de &quot;haz clic aquí&quot;.
+
+  **Verificar**
+
+  * Comprueba que los enlaces se puedan rastrear. La cantidad debería coincidir aproximadamente con lo que esperas según tu navegación y contenido.
+
+    ```
+    console.log('Links:', document.querySelectorAll('a[href]').length);
+    ```
+  * Usa etiquetas reales `<a href>`, no manejadores `onClick`
+  * Las páginas importantes tienen múltiples enlaces internos apuntando a ellas
+  * Incluye enlaces a tus páginas más importantes en el pie de página para que aparezcan en todo el sitio
+  * El texto ancla es descriptivo e incluye palabras clave (no &quot;haz clic aquí&quot;)
+    * Buen texto ancla: `organic dog food benefits`
+    * Mal texto ancla: `click here`, `read more`
+  * Las páginas profundas son accesibles con un máximo de 3 clics desde la página de inicio
+</Accordion>
+
+<div id="on-page-seo-help-search-engines-understand-content">
+  ## SEO on-page: ayuda a que los motores de búsqueda comprendan el contenido
+</div>
+
+Estas prácticas aclaran de qué trata cada página, lo que facilita que los motores de búsqueda interpreten tu contenido y lo clasifiquen con precisión.
+
+<div id="page-titles">
+  ### Títulos de página
+</div>
+
+Los títulos de página son un factor de posicionamiento crítico en la página. Aparecen en los resultados de búsqueda y en las pestañas del navegador, y tienen un fuerte impacto en la tasa de clics. Lovable Agent puede generar etiquetas de título basadas en el propósito de tu página.
+
+<Accordion title="Cómo implementar y verificar los títulos de página">
+  **Instrucción de ejemplo**
+
+  > Actualiza los títulos de página para todas las rutas. Usa títulos claros y descriptivos que coincidan con el propósito de cada página y mantenlos por debajo de 60 caracteres.
+
+  **Verificar**
+
+  * Revisa el contenido y la longitud del título de cada página. Pega esto en la consola del navegador:
+
+    ```
+    console.log('Title:', document.title, '| Length:', document.title.length);
+    ```
+  * Cada ruta tiene un título único y descriptivo (no genérico `Home` en todas partes)
+  * Menos de 60 caracteres para evitar que se trunquen
+  * Incluye la palabra clave principal más el nombre de la marca
+</Accordion>
+
+<div id="meta-descriptions">
+  ### Metadescripciones
+</div>
+
+Las metadescripciones aparecen en los resultados de búsqueda justo debajo del título de la página. No son un factor de posicionamiento directo, pero influyen mucho en la tasa de clics. Lovable Agent puede añadir metadescripciones si se lo pides.
+
+<Accordion title="Cómo implementar y verificar metadescripciones">
+  **Ejemplo de instrucción**
+
+  > Escribe metadescripciones únicas para todas las páginas clave. Mantén cada una clara, útil y entre 140 y 160 caracteres.
+
+  **Verificar**
+
+  * Comprueba la descripción y la longitud de cada página. Pega esto en la consola del navegador:
+
+    ```
+    console.log('Desc:', document.querySelector('meta[name="description"]')?.content, '| Length:', document.querySelector('meta[name="description"]')?.content.length);
+    ```
+  * Cada página tiene una descripción única (**140-160 caracteres**)
+    * Malo: `Welcome to our website ` (genérica, repetida)
+    * Bueno: `Premium organic dog food delivered fresh to your door. Free shipping over $50.` (158 chars)
+  * Destaca beneficios, diferenciación y una llamada a la acción sutil
+  * No está duplicada entre páginas
+</Accordion>
+
+<div id="heading-structure-h1-h3">
+  ### Estructura de encabezados (H1 → H3)
+</div>
+
+Una estructura de encabezados clara (de H1 a H3) ayuda a los motores de búsqueda a entender cómo está organizado tu contenido y qué secciones son más importantes. Lovable Agent puede generar etiquetas H1 correctas y una jerarquía lógica cuando se lo solicites.
+
+<Accordion title="Cómo implementar y verificar la estructura de encabezados">
+  **Ejemplo de instrucción**
+
+  > Revisa la estructura de encabezados en cada página. Debe haber un solo H1 en la parte superior, con H2 para las secciones principales y H3 para el contenido anidado. No te saltes niveles de encabezado.
+
+  **Verifica**
+
+  * Comprueba que solo haya una etiqueta H1. Pega esto en la consola del navegador: debería devolver 1:
+
+    ```
+    console.log('H1s:', document.querySelectorAll('h1').length);
+    ```
+  * Revisa el contenido del encabezado. Pega esto en la consola del navegador:
+
+    ```
+    console.log('H1:', document.querySelector('h1')?.textContent);
+    ```
+  * El H1 incluye la palabra clave principal y expresa el propósito de la página
+  * Los encabezados siguen un flujo lógico (H1 → H2 → H3, nunca se saltan niveles)
+  * Los encabezados no se usan únicamente para dar estilo
+</Accordion>
+
+<div id="semantic-html">
+  ### HTML semántico
+</div>
+
+El HTML semántico utiliza etiquetas significativas para describir tu contenido, ayudando tanto a los motores de búsqueda como a los lectores de pantalla a comprender la estructura de tu página. Lovable Agent suele añadir elementos semánticos como `<main>`, `<nav>` y `<section>`.
+
+<Accordion title="Cómo implementar y verificar HTML semántico">
+  **Instrucción de ejemplo**
+
+  > Revisa la estructura HTML y usa etiquetas semánticas cuando corresponda. Coloca el contenido principal en `<main>`, la navegación en `<nav>`, las secciones en `<section>` y el contenido del pie de página en `<footer>`.
+
+  **Verificación**
+
+  * Pega esto en la consola del navegador; debería devolver `true` cuando corresponda:
+
+  ```
+  console.log('Tiene <main>:', !!document.querySelector('main'));
+  console.log('Tiene <nav>:', !!document.querySelector('nav'));
+  console.log('Tiene <footer>:', !!document.querySelector('footer'));
+  console.log('Tiene <section>:', !!document.querySelector('section'));
+  ```
+
+  * Verifica lo siguiente para cada página:
+    * Un solo `<main>` envuelve el contenido principal
+    * Navegación dentro de `<nav>`
+    * Contenido del pie de página en `<footer>`
+    * Contenido relacionado en etiquetas `<section>` y `<article>`
+</Accordion>
+
+<div id="image-optimization">
+  ### Optimización de imágenes
+</div>
+
+Optimizar tus imágenes mejora la accesibilidad, refuerza la relevancia temática y ayuda a que tu contenido aparezca en los resultados de búsqueda de imágenes. Usar formatos eficientes e imágenes con el tamaño correcto también mejora la velocidad de la página, que es un factor de posicionamiento importante. Lovable Agent puede añadir texto alternativo (`alt`) y habilitar la carga diferida según sea necesario.
+
+<Accordion title="Cómo implementar y verificar la optimización de imágenes">
+  **Instrucción de ejemplo**
+
+  > Revisa todas las imágenes y añade texto alternativo claro y descriptivo. Asegúrate de que cada imagen tenga atributos de ancho y alto y esté correctamente comprimida para una carga rápida.
+
+  **Verificar**
+
+  * Confirma que cada imagen tenga texto alternativo. Pega esto en la consola del navegador: debería devolver 0:
+
+    ```
+    console.log('Missing alt:', document.querySelectorAll('img:not([alt])').length);
+    ```
+  * Evalúa la calidad del texto `alt`: debe ser descriptivo y contener palabras clave relevantes
+    * Malo: `alt="image"` , `alt="photo"`, `alt=""`
+    * Bueno: `alt="Golden retriever eating organic grain-free dog food from a bowl"`
+  * Usa formatos de archivo adecuados y mantén los tamaños de archivo pequeños:
+    * WebP para fotos e ilustraciones
+    * SVG para logotipos, íconos y gráficos simples
+    * Imágenes comprimidas por debajo de 200 KB
+  * Atributos de ancho y alto presentes (evita desplazamientos de diseño)
+</Accordion>
+
+<div id="off-page-seo-build-authority-with-backlinks">
+  ## SEO fuera de la página: crea autoridad con backlinks
+</div>
+
+Los motores de búsqueda dependen en gran medida de los enlaces desde otros sitios confiables para determinar qué tan confiable y con autoridad es tu contenido. Para palabras clave competitivas, los backlinks sólidos pueden ser más importantes que cualquier optimización en la página.
+
+Los backlinks ayudan a tu sitio de Lovable a:
+
+* Posicionarse más alto para las palabras clave objetivo
+* Ser indexado más rápido
+* Generar autoridad temática
+* Competir con sitios más grandes o antiguos
+
+<Accordion title="Cómo crear backlinks de alta calidad">
+  1. **Crea contenido digno de ser enlazado**
+
+  * Guías, tutoriales e investigaciones en profundidad
+  * Datos, estadísticas o ideas originales
+  * Herramientas interactivas, calculadoras, estimadores de ROI
+  * Plantillas, listas de verificación y recursos descargables
+
+  2. **Publica como autor invitado**
+
+  * Contribuye con artículos a blogs de tu nicho
+  * Incluye enlaces contextuales y bien pensados hacia tu sitio
+  * Usa biografías de autor para reforzar la credibilidad de la marca
+
+  3. **Asóciate con negocios complementarios**
+
+  * Coproduce contenido (artículos, seminarios web, recursos)
+  * Enlaza de forma cruzada entre páginas relevantes
+
+  4. **Consigue aparecer en directorios y páginas de recursos**
+
+  * Directorios del sector
+  * Listados de negocios locales
+  * Listados de startups
+  * Recursos seleccionados relevantes para tu producto
+
+  5. **Promociona el contenido**
+
+  * Compártelo en plataformas sociales
+  * Inclúyelo en newsletters
+  * Anima a influencers, blogueros o clientes a hacer referencia a él
+  * Usa acciones de relaciones públicas para grandes actualizaciones o lanzamientos
+
+  **Lista de verificación de calidad de backlinks**
+
+  Los motores de búsqueda priorizan los backlinks que son:
+
+  * **Relevantes** (mismo tema o sector)
+  * **Autoritativos** (dominios confiables)
+  * **Editoriales** (ganados, no pagados)
+  * **Con texto ancla descriptivo** (que incluyan de forma natural palabras clave relevantes)
+  * **Colocados en contexto** (dentro de contenido real, no en pies de página o barras laterales aleatorias)
+  * **Que evitan tácticas de spam** (granjas de enlaces, directorios de baja calidad o esquemas de enlaces pagados), ya que pueden perjudicar el posicionamiento.
+</Accordion>
+
+<div id="rich-results-stand-out-in-search">
+  ## Resultados enriquecidos: Destaca en las búsquedas
+</div>
+
+Estas mejoras ayudan a que tus páginas califiquen para resultados enriquecidos y generen vistas previas de alta calidad en redes sociales y en las páginas de resultados de búsqueda (SERPs).
+
+<div id="structured-data-json-ld-schema">
+  ### Datos estructurados (esquema JSON-LD)
+</div>
+
+Los datos estructurados, implementados mediante el esquema JSON-LD, proporcionan a los motores de búsqueda contexto adicional sobre tu contenido y pueden habilitar resultados enriquecidos como valoraciones con estrellas, detalles de productos y desplegables de preguntas frecuentes (FAQ). Lovable Agent puede generar el marcado de esquema cuando se lo pidas.
+
+Los tipos de esquema usados con más frecuencia incluyen:
+
+* `Product`: precios, disponibilidad, reseñas, valoraciones
+* `Article`: autor, fecha de publicación, imagen destacada
+* `FAQPage`: preguntas y respuestas
+* `LocalBusiness`: detalles del negocio como dirección, teléfono y horario
+
+<Accordion title="Cómo implementar y verificar datos estructurados">
+  **Instrucción de ejemplo**
+
+  > Añade el esquema `Product` a las páginas de producto con nombre, descripción, precio, disponibilidad, imagen, marca y detalles de la valoración.
+
+  **Verificar**
+
+  * Comprueba su presencia en las páginas clave (por ejemplo, inicio, productos, entradas del blog, FAQ). Pega esto en la consola del navegador; debería devolver 1 a menos que hayas añadido intencionadamente varios tipos de esquema:
+
+  ```
+  console.log('Schema:', document.querySelectorAll('script[type="application/ld+json"]').length);
+  ```
+
+  * Valida con la [prueba de resultados enriquecidos de Google](https://search.google.com/test/rich-results)
+  * Corrige cualquier error o campo obligatorio que falte
+  * Mantén los datos de esquema sincronizados con el contenido visible de la página
+</Accordion>
+
+<div id="social-media-optimization-open-graph-and-twitter-cards">
+  ### Optimización para redes sociales: Open Graph y Twitter Cards
+</div>
+
+Las etiquetas Open Graph (OG), las Twitter Cards y las imágenes OG controlan cómo aparecen tus páginas cuando se comparten en redes sociales. Las imágenes de vista previa de alta calidad pueden mejorar drásticamente el rendimiento de las publicaciones y generar confianza en tu marca.
+
+Lovable Agent incluye metadatos básicos de OG y Twitter de forma predeterminada, pero **debes personalizar la imagen, el título y la descripción de cada página.**
+
+La mayoría de las plataformas sociales (Facebook, Twitter/X, LinkedIn) no ejecutan JavaScript, lo que significa que tu sitio puede mostrar vistas previas de enlaces genéricas o incompletas a menos que configures explícitamente los metadatos de Open Graph y Twitter Card en el HTML inicial.
+
+<Accordion title="Cómo implementar y verificar Open Graph, Twitter Cards e imágenes OG">
+  **Instrucción de ejemplo**
+
+  > Añade metadatos únicos de Open Graph y Twitter a cada página importante. Establece un título, descripción, URL e imagen social personalizados para cada ruta. Usa una imagen JPG de 1200×630 por página y actualiza `og:image` y `twitter:image` en consecuencia.
+
+  **Verificar**
+
+  * Antes de compartir cualquier URL, verifica cómo aparece:
+    * [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+    * [X (Twitter) Card Validator](https://cards-dev.twitter.com/validator)
+    * [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+  * Cada página importante tiene valores únicos de `og:title`, `og:description`, `og:image`, `og:url` en el HTML
+  * Las etiquetas incluyen `twitter:card` y `twitter:image`
+  * La vista previa muestra el título, la descripción y la imagen correctos
+  * Las imágenes son de 1200×630 px y pesan menos de 1 MB
+  * Son visualmente coherentes con la marca
+  * Evita usar una sola imagen genérica para todas las páginas
+
+  **Ejemplo de metadatos de Open Graph y Twitter Card**
+
+  ```
+  <meta property="og:title" content="Organic Dog Food Delivery | PetFood Co" />
+  <meta property="og:description" content="Premium grain-free dog food delivered fresh to your door." />
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+  <meta property="og:url" content="https://yourdomain.com/products" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg" />
+  ```
+</Accordion>
+
+<div id="performance-and-mobile-improve-load-speed-and-user-experience">
+  ## Rendimiento y móviles: mejora la velocidad de carga y la experiencia del usuario
+</div>
+
+Estas optimizaciones mejoran la velocidad real, la usabilidad en dispositivos móviles y la capacidad de Google para representar tu contenido de forma eficaz.
+
+<div id="core-web-vitals-and-performance">
+  ### Core Web Vitals y rendimiento
+</div>
+
+La velocidad de carga de la página es un factor de posicionamiento confirmado. Los sitios más rápidos se posicionan mejor y convierten más. Lovable Agent usa patrones de optimización modernos como carga diferida (*lazy loading*) y minificación de código para favorecer un renderizado rápido.
+
+* Usa la **herramienta Speed integrada** de Lovable (impulsada por Google Lighthouse) para analizar el rendimiento, la accesibilidad, las buenas prácticas y las comprobaciones de SEO de tu sitio.
+* Usa **Google Search Console para verificar las Core Web Vitals**, un conjunto de métricas que miden la experiencia real de los usuarios en cuanto al rendimiento de carga, la interactividad y la estabilidad visual de la página.
+
+<Accordion title="Cómo optimizar y verificar las Core Web Vitals y el rendimiento">
+  **Ejemplo de instrucción**
+
+  > Mejora el rendimiento de la página de inicio comprimiendo imágenes, añadiendo atributos de ancho/alto, aplazando los scripts no esenciales y precargando los recursos clave. Apunta a una puntuación de Rendimiento de 90+ en Lighthouse.
+
+  **Verificar**
+
+  * Ejecuta la herramienta **Speed** en Lovable (auditoría de Google Lighthouse)
+  * Objetivos de puntuación:
+    * Rendimiento: 90+
+    * Accesibilidad: 90+
+    * Buenas prácticas: 90+
+    * SEO: 100
+  * Corrige las páginas con puntuaciones de rendimiento bajas
+  * En GSC, revisa y corrige los **objetivos de Core Web Vitals:**
+
+  | Métrica                             | Objetivo        | Qué mide                                             | Cómo corregir                                                                                                    |
+  | ----------------------------------- | :-------------- | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+  | **LCP** (Largest Contentful Paint)  | Menos de 2.5 s  | Rendimiento de carga, tiempo hasta que aparece el contenido principal | Comprime las imágenes *hero*, usa WebP, precarga recursos críticos, reduce el tiempo de respuesta del servidor  |
+  | **INP** (Interaction to Next Paint) | Menos de 200 ms | Qué tan rápido responde una página web a las interacciones del usuario | Reduce el tiempo de ejecución de JavaScript, aplaza scripts no críticos, divide tareas largas                   |
+  | **CLS** (Cumulative Layout Shift)   | Menos de 0.1    | Estabilidad visual durante la carga                  | Añade ancho/alto a todas las imágenes, reserva espacio para contenido dinámico, evita insertar contenido en la parte visible inicial de la página después de la carga |
+</Accordion>
+
+<div id="mobile-optimization">
+  ### Optimización para dispositivos móviles
+</div>
+
+Más del 60% de las búsquedas se realizan en dispositivos móviles. Google utiliza indexación mobile-first, lo que significa que tu versión móvil determina el posicionamiento. Lovable Agent genera diseños adaptables con la etiqueta `viewport`. La etiqueta `viewport` es obligatoria para un escalado compatible con móviles.
+
+<Accordion title="Cómo optimizar y verificar el rendimiento en móviles">
+  **Instrucción de ejemplo**
+
+  > Revisa la experiencia en móviles. Aumenta el tamaño de las áreas táctiles a un mínimo de 48x48px, añade espacio entre elementos interactivos, asegúrate de que el texto tenga un mínimo de 16px y corrige cualquier desplazamiento horizontal en pantallas pequeñas.
+
+  **Verificar**
+
+  * Usando **Chrome DevTools** y **dispositivos reales**, prueba las páginas clave en varios tamaños de dispositivo: iPhone, Android y tamaños de tabletas.
+  * Confirma que todos los flujos principales funcionen sin problemas en móviles
+  * Que no haya desplazamiento horizontal en ninguna página
+  * Texto legible sin hacer zoom (tamaño de fuente mínimo de 16px)
+  * Botones y enlaces de al menos 48×48px, con espacio entre ellos y fáciles de pulsar
+  * Formularios que funcionen correctamente en dispositivos táctiles (campos grandes, etiquetas claras)
+  * Navegación accesible (menú hamburguesa funcional)
+  * Imágenes y vídeos se ajusten al ancho de la pantalla
+  * **Confirma que exista la etiqueta** `viewport`. Pega esto en la consola del navegador:
+
+    ```
+    document.querySelector('meta[name="viewport"]')?.outerHTML
+    ```
+
+    y deberías ver: 
+
+    ```
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    ```
+</Accordion>
+
+<div id="geo-make-your-content-aillm-friendly">
+  ## GEO: Haz que tu contenido sea compatible con IA/LLM
+</div>
+
+La Generative Engine Optimization (GEO) ayuda a que sistemas de IA como ChatGPT, Perplexity, Gemini y Claude descubran y citen tu contenido. Los motores generativos extraen información de forma diferente a los motores de búsqueda. Muchos no ejecutan JavaScript, por lo que dependen en gran medida de HTML estático y del schema.
+
+La mayoría de las buenas prácticas de GEO son extensiones de un buen SEO. Si sigues las secciones anteriores más los extras de aquí, estarás bien posicionado para obtener visibilidad en sistemas de IA.
+
+<div id="semantic-html-and-schema-for-ai">
+  ### HTML semántico y schema para IA
+</div>
+
+Los rastreadores de IA leen directamente el HTML sin ejecutar JavaScript. Una estructura clara y un buen schema les ayudan a extraer información para citas. Lovable Agent proporciona estructura semántica y puede agregar schema cuando se le solicita.
+
+<Accordion title="Cómo implementar y verificar HTML semántico y schema para IA">
+  **Instrucción de ejemplo**
+
+  > Revisa la página de inicio para asegurarte de que la información importante esté en HTML plano con encabezados claros. Agrega schema de `Organization`, incluyendo nombre, descripción, URL, logo y enlaces a redes sociales.
+
+  **Verificar**
+
+  * Coloca los datos clave en HTML estático (por ejemplo, qué haces, a quién te diriges, precios)
+  * Usa encabezados claros (H2, H3) para estructurar la información
+  * Agrega schema completo: `Organization`, `Product`, `FAQPage`, `Article`
+  * Escribe con un lenguaje claro y basado en hechos que la IA pueda analizar y citar
+  * Mantén los hechos coherentes en todo tu sitio, en el schema y en los perfiles externos.
+</Accordion>
+
+<div id="ai-bot-access-robotstxt">
+  ### Acceso de bots de IA (robots.txt)
+</div>
+
+Controla qué sistemas de IA pueden acceder a tu contenido para entrenamiento o para responder consultas. Lovable Agent puede configurar el `robots.txt` para permitir los bots que desees cuando se lo pidas.
+
+<Accordion title="Cómo implementar y verificar el acceso de bots de IA en robots.txt">
+  **Instrucción de ejemplo**
+
+  > Actualiza `robots.txt` para permitir GPTBot, PerplexityBot y Claude-Web, y bloquear Google-Extended y CCBot. Mantén permitidos todos los rastreadores estándar de motores de búsqueda.
+
+  **Verificar**
+
+  * Decide la estrategia de visibilidad: permitir citas de IA o bloquear el entrenamiento de IA
+  * Permite o bloquea explícitamente los bots según la estrategia
+    * Bots comunes: GPTBot (ChatGPT), PerplexityBot, Claude-Web, Google-Extended (entrenamiento), CCBot
+  * Vuelve a revisar después de los cambios para asegurarte de que los bots deseados no se bloqueen accidentalmente
+
+  **Ejemplo de robots.txt**
+
+  ```
+  User-agent: *
+  Allow: /
+
+  User-agent: GPTBot
+  Allow: /
+
+  User-agent: Google-Extended
+  Disallow: /
+  ```
+</Accordion>
+
+<div id="llm-quotable-content-patterns">
+  ### Patrones de contenido citables por LLM
+</div>
+
+Los sistemas de IA prefieren contenido que sea claro, estructurado y fácil de citar. Proporcionar información en este formato hace que sea más probable que se cite con precisión. Lovable Agent puede generar secciones de preguntas frecuentes (FAQ) y contenido estructurado cuando se le solicita.
+
+<Accordion title="Cómo implementar y verificar patrones de contenido citables por LLM">
+  **Instrucción de ejemplo**
+
+  > Actualiza las respuestas de las FAQ para que sean breves, directas y fáciles de citar por la IA. Empieza con la respuesta principal, incluye datos concretos y elimina el lenguaje de marketing ambiguo.
+
+  **Verifica**
+
+  * Escribe respuestas claras a preguntas comunes en formato FAQ/Preguntas y respuestas (P&amp;R)
+  * Utiliza patrones de definición que sean fáciles de citar: &quot;X es [definición clara]&quot;
+  * Evita textos de marketing vagos
+  * Crea listas y viñetas para facilitar la lectura y el procesamiento
+  * Incluye estadísticas con sus fuentes cuando sea posible
+
+  **Ejemplos**
+
+  * Mal: `Soluciones increíbles y transformadoras`
+  * Bien: `Comida para perros orgánica certificada por el USDA, entregada semanalmente. Los planes comienzan en 45 US$/mes, con envío gratuito en pedidos superiores a 50 US$.`
+</Accordion>
+
+<div id="static-llm-friendly-summary-page">
+  ### Página estática de resumen optimizada para LLM
+</div>
+
+Una página de resumen dedicada facilita mucho que los sistemas de IA entiendan y citen la información clave de tu empresa. Lovable Agent puede crear páginas de resumen dedicadas con información clave en un formato rastreable cuando se le solicite.
+
+<Accordion title="Cómo implementar y verificar una página estática de resumen optimizada para LLM">
+  **Instrucción de ejemplo**
+
+  > Crea una página estática `llm.html` dentro de la carpeta public que explique claramente qué hace la empresa, qué ofrece, en qué se diferencia, los conceptos básicos de precios, las preguntas frecuentes y cómo contactarnos. Añade el esquema `Organization` y `FAQPage` y organiza la página con encabezados H2/H3 sencillos. Incluye esta nueva URL en el sitemap.xml
+
+  **Verificar**
+
+  * La página se crea en una URL clara como `/llm.html` o `/about-ai.html`.
+  * La página está incluida en el `sitemap.xml`.
+  * El contenido está estructurado con encabezados H2/H3 claros.
+  * La página incluye información clave: resumen de la empresa, productos/servicios, factores diferenciadores, modelo de precios, datos de contacto y preguntas frecuentes (FAQs).
+  * Los esquemas `Organization` y `FAQPage` están presentes para que los sistemas de IA puedan extraer datos estructurados.
+  * El contenido es basado en hechos, conciso y fácil de citar (evita las frases de marketing vacías).
+  * La información se mantiene actualizada a medida que cambia la oferta.
+</Accordion>
+
+<div id="monitoring-and-maintenance-keep-seo-and-geo-healthy">
+  ## Monitorización y mantenimiento: mantén el SEO y el GEO en buen estado
+</div>
+
+Un SEO y GEO eficaces requieren una monitorización continua. Usa Google Search Console y revisiones periódicas para mantener tu sitio saludable, indexado y con buen rendimiento a lo largo del tiempo.
+
+<div id="google-search-console-gsc-setup">
+  ### Configuración de Google Search Console (GSC)
+</div>
+
+Google Search Console muestra cómo Google rastrea, indexa y clasifica tu sitio. Es una herramienta clave para hacer seguimiento del rendimiento SEO y detectar problemas técnicos.
+
+<Accordion title="Cómo configurar y usar GSC para monitoreo y mantenimiento">
+  Si estás usando un **dominio personalizado**, asegúrate de **reclamarlo y verificarlo** en Google Search Console.
+
+  **Verifica la propiedad del sitio** (elige un método)
+
+  Verifica tu dominio para que Google pueda asegurarse de que eres el propietario del sitio web antes de prestarte servicios. Google usa esta verificación para hacer seguimiento de la indexación, el estado del sitemap y el rendimiento de búsqueda de tu dominio en producción.
+
+  * **Registro DNS TXT** (recomendado): agrega el registro TXT en la configuración DNS de tu proveedor de dominio
+  * **Verificación mediante metaetiqueta**: pídele a Lovable que agregue la metaetiqueta
+
+  > Agrega la metaetiqueta de verificación de GSC: &lt;meta name=&#39;google-site-verification&#39; content=&#39;YOUR&#95;CODE&#39; /&gt; en el &lt;head&gt;
+
+  * **Subida de archivo HTML**: sube el archivo de verificación de Google y pídele a Lovable que lo coloque en la raíz del sitio (normalmente `/public`)
+
+  **Enviar sitemap**
+
+  1. En GSC, ve a **Sitemaps**
+  2. Introduce la URL de tu sitemap: `https://yourdomain.com/sitemap.xml`
+  3. Haz clic en **Submit**
+
+   Google puede tardar entre **24 y 48 horas** en procesarlo y mostrar los datos.
+
+  **Usar la herramienta de Inspección de URL**
+
+  Úsala para:
+
+  * Confirmar que Google ve contenido real (no una página en blanco)
+  * Diagnosticar problemas de renderizado CSR
+  * Verificar si recursos clave (JavaScript y CSS) están bloqueados
+
+  Para cualquier URL:
+
+  1. Introduce la URL en la barra de **URL Inspection**
+  2. Haz clic en **Test Live URL**
+  3. Abre **View Tested Page** para revisar:
+     * Captura de pantalla de lo que ve Googlebot
+     * HTML renderizado
+     * Errores de consola
+     * Recursos bloqueados
+  4. Haz clic en **Request Indexing** para páginas nuevas o actualizadas (con límite de frecuencia)
+
+  **Informes para revisar semanalmente**
+
+  * **Cobertura/Indexación de páginas:**
+    * Páginas indexadas vs. excluidas
+    * Errores de rastreo y motivos de exclusión
+    * Tendencia de indexación a lo largo del tiempo
+  * **Rendimiento (resultados de búsqueda):**
+    * Impresiones, clics, CTR, posición promedio
+    * Principales consultas y páginas
+    * Páginas que ganan o pierden visibilidad
+  * **Core Web Vitals:**
+    * LCP, INP y CLS en el uso real
+    * Identificar páginas lentas y problemáticas
+    * Comparar el rendimiento en móvil vs. escritorio
+  * **Usabilidad móvil:**
+    * Problemas con objetivos táctiles, viewport, ancho del contenido
+    * Corrige errores para mantener el posicionamiento en móvil
+</Accordion>
+
+<div id="suggested-maintenance-schedule">
+  ### Calendario de mantenimiento sugerido
+</div>
+
+Mantener tu SEO y GEO en buen estado requiere revisiones periódicas. Usa este calendario permanente para adelantarte a problemas de indexación, cambios de rendimiento y actualizaciones de contenido.
+
+<Accordion title="Calendario de mantenimiento: qué revisar cada semana, mes y trimestre">
+  **Semanalmente**
+
+  * Revisa la cobertura en GSC para detectar nuevos errores y páginas recién indexadas
+  * Echa un vistazo a las tendencias de rendimiento en búsqueda
+  * Ejecuta la inspección de URL para las URL que se han vuelto importantes y solicita la indexación si es necesario
+
+  **Mensualmente**
+
+  * Actualiza `sitemap.xml` si ha habido cambios en las páginas
+  * Renueva títulos y descripciones con bajo rendimiento (páginas con bajo CTR)
+  * Ejecuta la **herramienta de velocidad incorporada (auditoría Lighthouse)**
+  * Haz una pequeña ronda de mejoras de contenido o creación de enlaces
+
+  **Trimestralmente**
+
+  * Haz una auditoría técnica más profunda: canónicos, `robots.txt`, schema (datos estructurados), enlaces internos, usabilidad en dispositivos móviles
+  * Revisa el rendimiento de palabras clave y las principales páginas de destino
+  * Actualiza contenido antiguo o en declive
+</Accordion>
+
+<div id="faq">
+  ## Preguntas frecuentes
+</div>
+
+<AccordionGroup>
+  <Accordion title="¿Puede mi sitio lograr un buen posicionamiento en buscadores usando Lovable?">
+    Sí. Las apps de Lovable pueden posicionarse igual que cualquier sitio web moderno basado en JavaScript. Siempre que tu contenido se cargue correctamente y no se bloqueen los recursos clave, Google puede rastrear, renderizar, indexar y posicionar tus páginas. Algunos ejemplos que hoy tienen buen rendimiento:
+
+    * [sparklestales.com](https://sparklestales.com)
+    * [workveg.com](https://workveg.com)
+    * [renamify.co](https://renamify.co)
+
+    Para obtener los mejores resultados, sigue las recomendaciones técnicas y de contenido de esta guía, especialmente las relacionadas con metadatos, rendimiento y configuración del sitemap.
+
+    <Note>
+      El rendimiento en búsqueda también depende de factores que están fuera del control de Lovable, como la calidad del contenido, los enlaces entrantes (backlinks), la competencia y los algoritmos de posicionamiento en buscadores.
+    </Note>
+  </Accordion>
+
+  <Accordion title="¿Cómo puedo lograr los mejores resultados de SEO y GEO con Lovable?">
+    Para obtener buenos resultados de SEO y GEO con Lovable, sigue las prácticas recomendadas descritas en esta guía. Asegúrate de cubrir estos aspectos esenciales:
+
+    **Contenido y factores on-page**
+
+    * Escribe contenido único y de alta calidad
+    * Apunta a una intención de búsqueda clara y a palabras clave de cola larga
+    * Crea páginas completas cuando sea necesario
+    * Mantén el contenido actualizado y relevante
+    * Usa encabezados claros y HTML semántico
+    * Agrega marcado con esquema JSON-LD en las páginas importantes
+
+    **Imágenes**
+
+    * Comprime las imágenes grandes
+    * Agrega texto alternativo descriptivo
+    * Usa formatos eficientes (WebP/AVIF, SVG)
+
+    **Enlazado interno**
+
+    * Usa texto ancla descriptivo y rico en palabras clave
+    * Enlaza entre sí las páginas relacionadas
+    * Asegúrate de que las páginas importantes reciban múltiples enlaces internos
+
+    **Técnico**
+
+    * Optimiza los Core Web Vitals
+    * Usa la **Speed tool** integrada para detectar pronto las regresiones de rendimiento
+    * Garantiza una usabilidad plena en dispositivos móviles
+    * Establece los metadatos correctos en cada página
+    * Mantén un sitemap y un robots.txt precisos
+    * Usa un **dominio personalizado** y configúralo como **dominio principal**
+    * Verifica tu dominio en Google Search Console
+
+    **Backlinks**
+
+    * Crea contenido que merezca enlaces (guías, herramientas, estudios)
+    * Escribe artículos como autor invitado en sitios relevantes
+    * Colabora con negocios complementarios
+    * Incluye tu sitio en directorios de buena reputación
+    * Comparte novedades relevantes y participa en tu comunidad
+  </Accordion>
+
+  <Accordion title="¿Cuánto tiempo tarda Google en indexar mi página?">
+    La indexación suele tardar **desde unas horas hasta unos días**. Puedes acelerar el proceso:
+
+    * Enviando tu sitemap a GSC
+    * Probando la página con URL Inspection
+    * Usando **Request Indexing** para páginas prioritarias
+  </Accordion>
+
+  <Accordion title="¿Qué pasa si no veo que mi página aparezca en el ranking?">
+    Cuando una página no aparece en los resultados de búsqueda, verifica lo básico:
+
+    * Revisa la indexación en GSC mediante Coverage o URL Inspection
+    * Asegúrate de que tu sitemap se haya enviado y que incluya la URL
+    * Revisa la calidad del contenido, la alineación con la intención de búsqueda y el SEO on-page, como títulos, descripciones, encabezados y enlaces internos
+    * Confirma el estado técnico: buenas puntuaciones de rendimiento, usabilidad móvil completa y que JavaScript o CSS no estén bloqueados
+  </Accordion>
+
+  <Accordion title="¿Cuándo es Lovable una buena opción para SEO y GEO, y cuándo deberías considerar SSR o prerenderizado?">
+    Lovable funciona bien para muchos escenarios de SEO y GEO, especialmente en sitios pequeños y medianos donde puedes gestionar metadatos, enlaces internos y sitemaps de forma estratégica.
+
+    ### **Buenos casos de uso**
+
+    * Sitios de marketing y landing pages
+    * Sitios web de startups o negocios
+    * Blogs sencillos o sitios de documentación (hasta ~200 páginas)
+    * Portafolios y sitios personales
+    * Herramientas internas y dashboards (donde el SEO no es necesario)
+    * Apps detrás de autenticación (no deberían indexarse)
+    * Sitios pequeños (5–20 páginas) donde es fácil gestionar los metadatos
+    * Proyectos impulsados por referidos, tráfico desde redes sociales, canales de pago o crecimiento impulsado por el producto
+    * Blogs basados en contenido (~50+ artículos) con mantenimiento constante
+    * Sitios de e‑commerce medianos (cientos de productos) con una gestión cuidadosa de metadatos
+
+    **Por qué el SEO y GEO pueden funcionar bien en estos casos**
+
+    * El número de páginas es lo suficientemente manejable como para mantener metadatos y sitemaps precisos
+    * Google renderiza de forma confiable sitios CSR, por lo que el contenido aún puede indexarse y posicionarse
+    * El rendimiento y la optimización móvil son sencillos en Lovable
+    * Puedes mantener manualmente los elementos que más importan: títulos, descripciones, schema, etiquetas OG y enlaces internos
+
+    ### **Cuándo el SSR o el prerenderizado pueden ayudar**
+
+    Para algunos proyectos grandes o altamente competitivos, las páginas renderizadas en servidor o prerenderizadas pueden complementar Lovable mejorando la eficiencia de rastreo y la confiabilidad de la vista previa.
+
+    * Sitios muy grandes (cientos a miles de páginas, catálogos extensos o bibliotecas de blogs grandes)
+    * Proyectos donde la búsqueda orgánica es el canal de crecimiento principal
+    * Verticales muy competitivas o sensibles al tiempo (noticias, finanzas, sector legal)
+    * Proyectos donde la máxima visibilidad en IA/LLM es una prioridad
+
+    **Por qué estos se benefician de SSR o prerenderizado**
+
+    * Los sitios grandes requieren automatización para metadatos y sitemaps
+    * El SSR/prerenderizado puede acelerar el descubrimiento inicial de contenido por parte de los motores de búsqueda
+    * Los rastreadores sociales y de IA que no ejecutan JavaScript obtienen vistas previas completas de inmediato
+  </Accordion>
+
+  <Accordion title="¿Un dominio personalizado ayudará a que mi sitio se posicione mejor?">
+    Sí. Cambiar a un **dominio personalizado** es una de las mejoras con más impacto que puedes hacer si quieres:
+
+    * Tráfico orgánico en buscadores
+    * Marca sólida a largo plazo
+    * SEO competitivo
+    * Backlinks que aumenten su valor con el tiempo
+    * Control total sobre el SEO técnico
+
+    Lovable te permite:
+
+    * Conectar tu propio dominio o subdominio
+    * Elegir un **dominio principal** (todos los demás dominios redirigen a él)
+
+    Después de configurar tu dominio personalizado, [**verifícalo en Google Search Console**](#google-search-console-gsc-setup) para que Google pueda rastrear e indexar el dominio correcto. Para obtener instrucciones detalladas de configuración, consulta [**Dominios personalizados**](/es/features/custom-domain).
+
+    Un subdominio `lovable.app` funciona bien para:
+
+    * MVPs y demos
+    * Landing pages temporales o experimentales
+    * Herramientas internas
+    * Proyectos impulsados principalmente por tráfico social o de pago
+  </Accordion>
+
+  <Accordion title="¿Pueden los motores de búsqueda con IA (Perplexity, ChatGPT, Gemini, Claude) indexar aplicaciones de Lovable?">
+    Muchos rastreadores de IA normalmente no ejecutan JavaScript, por lo que dependen del HTML inicial que pueden recuperar. Esto significa que es posible que no vean contenido que se renderiza del lado del cliente.
+
+    Aun así, puedes hacer que tu contenido sea muy accesible para estos rastreadores si te aseguras de lo siguiente:
+
+    * HTML semántico limpio con datos clave en contenido estático
+    * Marcado de schema completo
+    * Una página de resumen dedicada al LLM, como `/llm.html` o `/about-ai.html`, también incluida en el sitemap
+    * Contenido claro y fácil de citar (definiciones, preguntas frecuentes, respuestas breves y objetivas)
+  </Accordion>
+
+  <Accordion title="¿Cada cuánto debería actualizar los ajustes de SEO, el contenido y el mapa del sitio?">
+    * **Mapa del sitio:** Actualízalo cada vez que cambien las URL, o al menos una vez al mes en sitios activos.
+    * **Metadatos (títulos y descripciones):** Revísalos mensualmente y mejora las páginas con tasas de clics bajas.
+    * **Rendimiento:** Ejecuta comprobaciones mensuales con Lighthouse y revisa los Core Web Vitals (LCP, INP, CLS) para detectar pronto problemas de velocidad o usabilidad.
+    * **Auditoría técnica:** Realiza una revisión trimestral de etiquetas canónicas, robots.txt, schema, enlaces internos, redirecciones y usabilidad en dispositivos móviles.
+    * **Contenido:** Actualiza o amplía el contenido importante trimestralmente, o antes si bajan las clasificaciones o el tráfico.
+  </Accordion>
+
+  <Accordion title="¿Qué es el prerenderizado y cuándo lo necesito?">
+    El prerenderizado (también llamado renderizado dinámico) genera una instantánea HTML estática específicamente para bots, mientras que las personas que visitan el sitio siguen viendo la app basada en JavaScript. Esto puede mejorar la rapidez con la que los motores de búsqueda y los rastreadores de IA entienden tu contenido.
+
+    El prerenderizado es especialmente útil para:
+
+    * Sitios con mucho contenido
+    * Sitios que publican páginas nuevas con frecuencia
+    * Nichos enfocados en SEO o con alta competencia
+    * Proyectos que necesitan una indexación más rápida
+    * Mejorar la visibilidad en IA/LLM, ya que muchos rastreadores no ejecutan JavaScript y se benefician de HTML completamente renderizado
+
+    Lovable no incluye prerenderizado de forma nativa, pero puedes añadirlo a través de tu hosting o proxy utilizando servicios externos como:
+
+    * [Prerender.io](https://Prerender.io): opción muy utilizada y fiable
+    * [DataJelly](https://datajelly.app/): funcionalidades similares con una configuración sencilla
+    * [Rendertron](https://github.com/GoogleChrome/rendertron): alternativa de código abierto (autoalojada)
+  </Accordion>
+
+  <Accordion title="¿Cuáles son las principales limitaciones de SEO con CSR y cómo puedes sortearlas?">
+    El renderizado en el lado del cliente (CSR) funciona bien para muchos sitios, pero hay algunas cosas que debes tener en cuenta para lograr el mejor comportamiento de SEO, GEO y vista previa. Aquí te explicamos cómo abordarlas:
+
+    * **La indexación puede ser un poco más lenta que con SSR**
+      → Envía un sitemap y usa la herramienta de inspección de URL para las páginas prioritarias.
+    * **Muchos crawlers de IA y algunos bots no ejecutan JavaScript**
+      → Usa HTML semántico claro y schema, y considera agregar una página de resumen con un LLM.
+    * **Las plataformas sociales no ejecutan JavaScript para las vistas previas de enlaces**
+      → Agrega etiquetas de Open Graph y Twitter/X Card directamente en el HTML estático.
+    * **Los metadatos no se actualizan automáticamente entre rutas**
+      → Pídele a Lovable que instale `react-helmet-async` y define títulos y descripciones únicas para cada página.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,111 @@
+---
+title: "Integra Lovable con tus herramientas usando servidores MCP"
+sidebarTitle: "Servidores MCP"
+description: "Conecta Lovable con las herramientas de tu equipo y habilita la creación basada en contexto: pasa de la idea a la validación y a la app en producción más rápido que nunca."
+icon: "plug"
+keywords: ["Integraciones de Lovable","Conexiones de Lovable","Servidor MCP","Model Context Protocol","Conector MCP","Automatización del espacio de trabajo con IA","Notion","Linear","Jira","Confluence","Atlassian","Miro","n8n","Canva","Servidor MCP personalizado","Herramientas de IA para la productividad"]
+---
+
+**MCP (Model Context Protocol)** es un estándar abierto que conecta sistemas de IA, como Lovable, con herramientas, servicios y fuentes de datos externas.
+
+Al conectar Lovable con herramientas como Notion, Atlassian o Linear, el Agente de Lovable puede usar el contexto real de tu equipo para generar código, prototipos y documentación más precisos.
+
+Cuando conectas un servidor MCP, Lovable puede leer datos estructurados (como texto de documentos, incidencias o diagramas) y, cuando la integración lo permita, realizar acciones limitadas como crear o actualizar elementos.
+
+Lovable incluye varios servidores MCP preconfigurados en todos los planes, con la opción de añadir servidores personalizados en los planes Business y Enterprise.
+
+<div id="why-connect-mcp-servers">
+  ## Por qué conectar servidores MCP
+</div>
+
+En Lovable, los servidores MCP habilitan dos capacidades clave:
+
+- **Incorpora tu contexto existente a Lovable.**\
+  El agente de Lovable puede leer la documentación de tu equipo, los tickets y los archivos de diseño para crear prototipos y flujos alineados con tus estándares.
+- **Conecta tus apps de Lovable con tus flujos de trabajo.**\
+  El agente de Lovable puede realizar acciones de seguimiento en tus herramientas conectadas — como actualizar el estado de los tickets, añadir enlaces a prototipos como comentarios o crear nuevos elementos cuando la herramienta lo permita.
+
+Lovable se vuelve más potente cuando entiende el mundo de tu equipo — eliminando la incertidumbre, acelerando la iteración y ayudándote a pasar de **idea a app en producción más rápido que nunca.**
+
+<div id="prebuilt-mcp-servers">
+  ## Servidores MCP preconfigurados
+</div>
+
+| Tool                                                                                                                                | Description                                              | Example capabilities                                                                                                                                                                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Atlassian**](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/) | Accede a tus incidencias de Jira y páginas de Confluence. | **Convierte la documentación de producto en prototipos funcionales.**<br />Lovable puede leer la documentación de producto y los epics vinculados de Jira (PRDs, especificaciones, documentos de arquitectura) para generar prototipos que cumplan los estándares de tu equipo. Vuelve a insertar los prototipos generados en Confluence para recopilar comentarios. |
+| [**Linear**](https://linear.app/docs/mcp)                                                                                           | Accede a tus incidencias y datos de proyectos de Linear. | **Prototipa a partir de incidencias y tickets reales.**<br />Lovable puede leer incidencias de Linear, incluidas descripciones y criterios de aceptación, para generar prototipos funcionales. Vuelve a adjuntar las aplicaciones resultantes en Linear para su revisión.                                                               |
+| [**Notion**](https://developers.notion.com/docs/mcp)                                                                                | Accede a tus páginas y bases de datos de Notion.         | **Crea directamente desde el espacio de trabajo de Notion de tu equipo.**<br />Lovable puede leer PRDs, especificaciones de diseño o briefs de marketing y convertirlos en aplicaciones funcionales, landing pages o prototipos. Vuelve a incrustar las aplicaciones de Lovable generadas en Notion para una colaboración sin interrupciones.                        |
+| [**n8n**](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server/)                                                                | Accede a tus aplicaciones y poténcialas con tus flujos de trabajo de n8n. | **Crea aplicaciones ricas en flujos de trabajo con datos en tiempo real.**<br />Conecta tus automatizaciones de n8n con Lovable para extraer datos de herramientas como HubSpot, Google Sheets o Slack y crear aplicaciones de cara al usuario impulsadas por automatizaciones existentes.                                                    |
+
+<div id="how-to-connect-a-prebuilt-mcp-server">
+  ### Cómo conectar un servidor MCP preconfigurado
+</div>
+
+Para usar integraciones preconfiguradas con aplicaciones y servicios de terceros populares:
+
+1. Ve a **Settings → Integrations → MCP servers**.
+2. **Selecciona un servidor MCP** (por ejemplo, Notion, Linear o Atlassian).
+3. Haz clic en **Connect**. Inicia sesión y concede a Lovable acceso a tu cuenta.
+
+Además de estos pasos, debes hacer lo siguiente en [n8n](https://docs.n8n.io/advanced-ai/accessing-n8n-mcp-server):
+
+- Ve a **Settings → MCP access** y activa **Enable MCP access** (requiere permisos de propietario de la instancia o de administrador).
+- Para cada workflow que quieras exponer, ve a **Settings** en el editor de workflows y activa **Available in MCP.**
+
+<div id="custom-mcp-servers-business-enterprise">
+  ## Servidores MCP personalizados (Business & Enterprise)
+</div>
+
+Para una flexibilidad total, puedes conectar **servidores MCP personalizados** para integrar sistemas internos o de terceros en Lovable, ideal para APIs privadas, CRM internos o fuentes de datos personalizadas.
+
+Explora los [servidores MCP remotos](https://mcpservers.org/remote-mcp-servers), una lista seleccionada de servidores MCP remotos de alta calidad compatibles con Lovable.
+
+<div id="how-to-connect-a-custom-mcp-server">
+  ### Cómo conectar un servidor MCP personalizado
+</div>
+
+Para conectar un servidor MCP personalizado o interno:
+
+1. Ve a **Settings → Integrations → Your MCP servers.**
+2. Haz clic en **Set up** junto a **New MCP server**.
+3. **Introduce los detalles del servidor:**
+   - **Server name**: Un nombre claro para tu servidor (por ejemplo, _Internal CRM_ o _Analytics API_).
+   - **Server URL**: La dirección a la que Lovable puede acceder para comunicarse con tu servidor MCP.
+4. **Autenticación:**
+   - **OAuth (default):** Lovable usa OAuth de forma predeterminada. Después de hacer clic en **Add server**, se te pedirá que autorices.
+   - **Bearer token or API key:** Si el servidor MCP no admite OAuth, despliega **Advanced settings** e introduce un **bearer token** o una **clave API**. Si lo proporcionas, Lovable lo usará para autenticar las solicitudes en lugar de OAuth.
+4. Haz clic en **Add server**.\
+   El servidor MCP personalizado ahora aparece en tu lista y puede proporcionar datos contextuales para tus builds.
+
+<div id="practical-examples">
+  ## Ejemplos prácticos
+</div>
+
+Cada app conectada pasa a estar disponible al instante como contexto para el Lovable Agent. Puedes interactuar con las herramientas conectadas usando instrucciones en lenguaje natural.
+
+| **Escenario**                                         | **Ejemplo de instrucción**                                      | **Resultado de ejemplo**                                                                |
+| :---------------------------------------------------- | :--------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| Una **product manager** conecta **Linear** o **Jira** | _Genera un prototipo basado en los tickets del sprint actual._  | Lovable lee las descripciones de los issues y los criterios de aceptación para crear una UI alineada y comprobable. |
+| Una **especialista en marketing** vincula **Notion** o **Confluence** | _Convierte nuestro brief de la campaña de Q4 en una landing page._ | Lovable usa el documento como contexto para generar una página editable alineada con la marca. |
+| Un **ingeniero** vincula **n8n** o **MCP interno**    | _Crea una UI de workflow que liste usuarios y permita eliminarlos._ | Lovable crea una app que utiliza datos en tiempo real y workflows.                      |
+
+<div id="security-and-permissions">
+  ## Seguridad y permisos
+</div>
+
+Las conexiones del servidor MCP son **por usuario y personales**. Puedes revisar o revocar conexiones en cualquier momento en **Settings → Integrations**.
+
+Para acceder rápidamente a nivel de proyecto, haz clic en `+` en el cuadro de instrucciones y ve a **Integrations**.
+
+<img
+  src="/images/mcp_integrations_project_access.png"
+  alt="mcp_integrations_project_access.png"
+  title="mcp_integrations_project_access.png"
+  style={{ width:"51%" }}
+/>
+
+En los planes **Business** y **Enterprise**, los **administradores y propietarios** del Workspace pueden gestionar qué servidores están disponibles para todos los usuarios:
+
+- Ve a **Settings → Privacy & Security** para habilitar o deshabilitar el acceso a todos los servidores MCP para todo el Workspace.
+- Ve a **Settings → Integrations → Manage servers** para habilitar o deshabilitar servidores MCP individuales.

@@ -1,0 +1,209 @@
+---
+title: "Self-hosting: esegui il tuo progetto Lovable Cloud ovunque"
+sidebarTitle: "Self-hosting"
+description: "Distribuisci e gestisci i tuoi progetti Lovable Cloud sulla tua infrastruttura"
+icon: "door-open"
+---
+
+[Lovable Cloud](https://docs.lovable.dev/features/cloud) è progettato per essere l’ambiente più semplice, veloce e piacevole in cui creare. La migrazione è supportata perché vogliamo che tu rimanga per scelta, non per necessità.
+
+Questa guida spiega come eseguire il self-hosting e migrare il tuo progetto Lovable Cloud presso un altro provider, ad esempio [Supabase](http://supabase.com/).
+
+<div id="key-principles">
+  ## Principi fondamentali
+</div>
+
+- **Il codice è tuo**. \
+  Usa la nostra [Integrazione GitHub](https://docs.lovable.dev/integrations/github) per esportare il tuo codice in qualsiasi momento. Clona, esporta ed esegui il self‑hosting senza restrizioni.
+- **I dati sono tuoi**. \
+  Il tuo database, lo storage e le configurazioni possono essere esportati o migrati a un altro fornitore.
+- **Lovable è basato su tecnologie open source**. \
+  Tutto si basa su standard aperti e tecnologie open source. Nessun framework proprietario, nessuna dipendenza nascosta.
+- **Ci conquistiamo la tua fiducia con la qualità, non con il controllo**.
+
+  Lovable Cloud è progettato per velocità, semplicità e affidabilità. Puoi creare, ospitare e scalare in tutta sicurezza, sapendo che puoi portare il tuo progetto con te.
+
+<div id="migration-overview">
+  ## Panoramica della migrazione
+</div>
+
+| **Componenti dell'app**           | **Metodo di migrazione**           | **Note**                                                                                                                                                                                           |
+| :-------------------------------- | :--------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Schema del database               | Automatico tramite migrazioni SQL | Include tabelle, colonne, indici, criteri RLS, funzioni, trigger                                                                                                                                  |
+| Bucket di storage                 | Automatico tramite migrazioni SQL | Include criteri di accesso                                                                                                                                                                        |
+| Provider di autenticazione        | Manuale                            | Riconfigura l'autenticazione (ad esempio Google OAuth, GitHub) nel tuo nuovo ambiente di hosting                                                                                                  |
+| Variabili di ambiente e Segreti   | Manuale                            | Riconfigura eventuali chiavi API, token o credenziali per servizi esterni (ad esempio Stripe) nel tuo nuovo ambiente di hosting                                                                  |
+| Dati (contenuto delle tabelle)    | Manuale                            | Esporta/importa in formato CSV                                                                                                                                                                    |
+| File di storage                   | Manuale                            | Scarica/carica manualmente                                                                                                                                                                        |
+| Account utente                    | Manuale, parziale                  | Puoi esportare i dati utente dal database, ma non puoi esportare le password degli utenti, quindi devi attivare un flusso di reimpostazione della password. Ti consigliamo di pianificare la migrazione prima di coinvolgere utenti reali. |
+
+<div id="example-move-your-lovable-cloud-project-to-supabase">
+  ## Esempio: sposta il tuo progetto Lovable Cloud su Supabase
+</div>
+
+Puoi collegarti a qualsiasi soluzione backend con un po' di conoscenze tecniche. I passaggi seguenti ti guidano nella migrazione del tuo progetto Lovable Cloud su Supabase. Per ulteriori informazioni sui passaggi specifici di Supabase, consulta la [documentazione Supabase](https://supabase.com/docs).
+
+<Warning>
+  Dopo aver migrato il tuo progetto alla tua istanza di Supabase, devi continuare lo sviluppo nel tuo ambiente locale o nell'IDE che preferisci. Il tuo progetto in Lovable rimane collegato al database originale di Lovable Cloud, quindi eventuali modifiche apportate in Lovable dopo la migrazione **non** verranno sincronizzate con la tua nuova configurazione di Supabase.
+</Warning>
+
+<div id="1-create-a-new-supabase-project">
+  ### 1. Crea un nuovo progetto Supabase
+</div>
+
+Segui questi passaggi per creare un nuovo progetto Supabase.
+
+1. Vai su [supabase.com](https://supabase.com) → **New project**
+2. Scegli la tua organizzazione e compila i campi:
+   - **Project name:** qualsiasi nome
+   - **Database password:** password sicura
+   - **Region:** la più vicina ai tuoi utenti
+3. Fai clic su **Create new project** e attendi circa 2 minuti per l'inizializzazione del progetto.
+4. Dalle impostazioni del tuo nuovo progetto Supabase, **salva questi valori**:
+   - `Project ID`
+   - `Public API Key` (anon key)
+   - `Project URL`: `https://[your-project-id].supabase.co`
+
+### 2. Aggiorna le variabili d&#39;ambiente
+
+Sostituisci i valori di Lovable Cloud con le nuove credenziali Supabase nel tuo file `.env`.
+
+1. Nel tuo progetto Lovable, vai su **Code**.
+2. Individua il file `.env`.
+3. Aggiorna i valori di Lovable Cloud con le nuove credenziali Supabase:
+
+```
+VITE_SUPABASE_PROJECT_ID="your-new-project-id"
+VITE_SUPABASE_PUBLISHABLE_KEY="your-new-anon-key"
+VITE_SUPABASE_URL="https://your-new-project-id.supabase.co"
+```
+
+4. Salva le modifiche.
+
+
+<div id="3-update-supabase-configuration">
+  ### 3. Aggiorna la configurazione di Supabase
+</div>
+
+Sostituisci l&#39;ID del progetto Lovable Cloud con il nuovo ID del progetto Supabase nel file `supabase/config.toml`.
+
+1. Nel tuo progetto Lovable, vai su **Code.**
+2. Trova il file `supabase/config.toml`.
+3. Aggiorna l&#39;ID del progetto Lovable Cloud con il nuovo ID del progetto Supabase:
+
+```
+project_id = "your-new-project-id"
+```
+
+4. Salva le modifiche.
+
+
+<div id="4-run-database-migrations">
+  ### 4. Esegui le migrazioni del database
+</div>
+
+Ogni Progetto Lovable Cloud include file di migrazione SQL nella cartella `supabase/migrations/`.
+
+Eseguili in **ordine cronologico** in base al timestamp nel nome del file. Sono ordinati dal più vecchio al più recente. Ad esempio:
+
+```
+20251008155159_[hash].sql   # primo - più vecchio
+20251008155215_[hash].sql   # secondo
+```
+
+Per ogni file di migrazione nel tuo Progetto Lovable Cloud, segui i passaggi di seguito:
+
+1. Copia l&#39;intero contenuto SQL da ogni file di migrazione.
+2. Incollalo nell&#39;**editor SQL** del tuo nuovo Progetto Supabase.
+3. Esegui la query e attendi il messaggio di conferma.
+
+<Tip>
+  Se una migrazione non va a buon fine, controlla l&#39;ordine delle migrazioni, le dipendenze tra tabelle e gli errori di sintassi SQL.
+</Tip>
+
+
+<div id="5-export-and-import-your-data">
+  ### 5. Esporta e importa i tuoi dati
+</div>
+
+Esporta i dati dal tuo Progetto Lovable Cloud e poi importali manualmente nel tuo nuovo Progetto Supabase.
+
+**Esporta ogni tabella con dati dal tuo Progetto Lovable Cloud:**
+
+1. Vai a **Cloud → Database → Table**.
+2. Fai clic su **Export CSV**.
+3. Salva il file.
+
+**Importa i file CSV nelle tabelle corrispondenti nel tuo nuovo Progetto Supabase:**
+
+1. Vai a **Table Editor**.
+2. Per ogni tabella, fai clic su **Insert → Import data from CSV**.
+3. Associa correttamente le colonne.
+4. Fai clic su **Import data**.
+
+<div id="6-reconfigure-authentication">
+  ### 6. Riconfigura l'autenticazione
+</div>
+
+Se il tuo progetto Lovable Cloud richiede l'autenticazione, devi riconfigurare manualmente i provider di autenticazione nel tuo nuovo progetto Supabase.
+
+1. Nel tuo nuovo progetto Supabase, vai su **Authentication → Sign In / Providers**.
+2. Abilita e configura ciascun provider.
+3. Nelle impostazioni della tua app OAuth (ad esempio Google Console, GitHub),\
+   aggiorna gli **URL di redirect** per usare il nuovo URL del tuo progetto Supabase.
+
+<div id="7-migrate-storage-files">
+  ### 7. Migra i file di storage
+</div>
+
+Scarica tutti i file dai bucket di storage del tuo Progetto Lovable Cloud e caricali nel tuo nuovo Progetto Supabase.
+
+1. Nel tuo Progetto Lovable Cloud, vai su **Cloud → Storage**.
+1. Scarica i file dai tuoi bucket di storage.
+2. In Supabase, vai su **Storage** e carica i file nei bucket corrispondenti.
+
+<div id="8-set-up-environment-variables-and-secrets">
+  ### 8. Configura le variabili d’ambiente e i segreti
+</div>
+
+Se utilizzi servizi esterni (ad esempio Stripe) nel tuo progetto Lovable Cloud, devi riconfigurare manualmente le chiavi API, i token e le credenziali nel tuo nuovo progetto Supabase.
+
+- Nel tuo nuovo progetto Supabase, vai a **Edge Functions → Manage Secrets**.
+- Aggiungi le chiavi API o le credenziali dei servizi esterni.
+- Salva le modifiche.
+
+<div id="9-verify-everything-works">
+  ### 9. Verifica che tutto funzioni
+</div>
+
+Quando hai completato tutti i passaggi, la tua app viene eseguita interamente sul backend di Supabase. Assicurati che tutto funzioni, ad esempio:
+
+- L'app si carica senza errori
+- Puoi creare e leggere record nel database
+- L'autenticazione funziona
+- I caricamenti/download nello storage vanno a buon fine
+
+<div id="advanced-cli-migration-option">
+  ### Avanzato: opzione di migrazione tramite CLI
+</div>
+
+Per gli sviluppatori a loro agio con la riga di comando:
+
+```
+# 1. Installa la CLI di Supabase
+npm install -g @supabase/cli
+# oppure
+brew install supabase/tap/supabase
+
+# 2. Aggiorna i file di configurazione (.env + supabase/config.toml)
+
+# 3. Collega il tuo nuovo progetto Supabase
+supabase login
+supabase link --project-ref your-new-project-id
+
+# 4. Esegui il push di tutte le migrazioni
+supabase db push
+
+# 5. Verifica lo schema
+supabase db diff
+```

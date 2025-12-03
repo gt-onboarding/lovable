@@ -1,0 +1,56 @@
+---
+title: '使用 npm 包'
+description: '了解如何利用 npm 包为你的 Lovable 应用扩展高级功能'
+icon: 'box'
+---
+
+虽然 Lovable 本身就足够强大，可以让用户构建复杂的 Web 应用，但你还可以借助 npm 包来实现更高级、更多样的扩展功能。这些包可以帮助你更轻松地构建更复杂、功能更完善的应用。
+
+<Info>
+  **什么是 npm？**
+
+  npm（Node Package Manager）是 JavaScript 的包管理器，它允许开发者共享和复用代码。它托管了大量包，这些包都是可复用的代码片段，你可以轻松将它们集成到项目中来扩展功能。
+
+  你可以在 [npmjs.com](https://www.npmjs.com/) 访问它。
+</Info>
+
+<div id="using-npm-packages-for-advanced-features">
+  ## 使用 npm 包实现高级功能
+</div>
+
+假设你想创建一个工具，让你可以像许多流行的项目管理工具那样，把任务整理到不同的看板中。你可以通过向 Lovable 提示从零开始构建这个工具，但这样可能会更慢，也更难实现你想要的功能。
+
+你也可以使用 npm 包来简化并加速这个过程。例如，[@hello-pangea/dnd](https://www.npmjs.com/package/@hello-pangea/dnd) 这个包提供了强大的拖放功能。通过使用这个包，你可以轻松创建一个看板，让用户可以添加新卡片、在列内移动卡片，并对卡片重新排序。
+
+<CodeGroup>
+  ```bash Example prompt
+  Use the hello-pangea/dnd npm package to add drag-and-drop functionality to my Kanban board app. 
+  Ensure users can add new cards, move them within columns, and reorder them.
+  ```
+</CodeGroup>
+
+这个提示会指示 Lovable 将该包集成到你的项目中，使你更容易实现所需的功能。根据你的其他需求，最终效果可能会大致如下所示。
+
+<Frame>
+  <img src="/assets/npm-example-using-pangea-dnd.png" alt="Lovable 实现的拖放看板功能" />
+</Frame>
+
+<div id="quality-and-responsibility">
+  ## 质量与责任
+</div>
+
+需要注意的是，虽然 npm 包可以显著增强你的项目功能，但 Lovable 无法对这些第三方包的质量或可靠性作出任何保证。
+
+npm 包的功能和性能由最终用户自行负责，因此务必要在你的应用中对它们进行充分测试和验证。
+
+<div id="increasing-your-chances-of-success">
+  ### 提高成功率
+</div>
+
+在将 npm 包集成到你的项目之前，可以采用以下策略来评估它们的可靠性和质量。
+
+* **下载次数** - 在该包的 npm 页面查看下载次数。较高的下载量通常表明该包被广泛使用，并且在社区中具有较高的可信度。
+
+* **维护状态和最新更新** - 查看该包的代码仓库，确认它是否在持续维护。频繁的提交、最近的更新以及对问题的及时响应，都是包被积极维护的良好信号。确保该包近期有更新。定期更新的包更有可能与最新版本的依赖和安全实践保持兼容。
+
+* **评价和社区反馈** - 许多 npm 包托管在 GitHub 或类似的代码仓库上。你也可以阅读这些平台上其他开发者的评价、讨论和反馈。此外，一些专门的开发者论坛也能提供有关该包可靠性及潜在问题的有价值信息。

@@ -1,0 +1,226 @@
+---
+title: "21st.dev-Integration"
+description: "Mit Lovable KI-Landingpages mit hoher Conversion-Rate erstellen"
+icon: "ruler-combined"
+---
+
+Die meisten KI-generierten Landingpages sehen gleich aus – vage Abschnitte, unpassende Farben und keine Persönlichkeit. Aber das muss nicht so sein.
+
+Wir zeigen dir einen strukturierten Workflow mit Lovable und 21stdev, mit dem du Landingpages erstellst, die deine Kund:innen _wirklich_ lieben (wie [diese hier](https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727)).
+
+![Hero-Bereich der Landingpage](/images/hero-section.png)
+
+<div id="step-by-step-guide">
+  ## Schritt-für-Schritt-Anleitung
+</div>
+
+Von der Design-Inspiration bis zum letzten Feinschliff – hier ist die Schritt-für-Schritt-Anleitung, die er verwendet, um schnell zu entwickeln, ohne Abstriche bei der Qualität zu machen:
+
+<Steps>
+  <Step title="Beginne mit Designinspiration statt mit einer Eingabeaufforderung">
+    Bevor du auch nur ein Wort deiner Eingabeaufforderung schreibst, stöbere auf [Dribbble](https://dribbble.com/) oder [Behance](https://www.behance.net/). Achte auf Designs mit:
+
+    * Klarer Typografie und großzügigen Abständen
+    * Klaren CTAs und minimalistischem Layout
+    * Dezenten Interaktionen (nicht überdesignt)
+
+    <Tip>
+      Such dir etwas aus, das du realistisch nachbauen kannst. Vermeide übermäßig komplexe 3D-Designs, wenn du sie nicht wirklich umsetzen willst.
+    </Tip>
+
+    <Info>
+      Ein echter Kunde hat nach einem „modernen und minimalistischen“ Design gefragt. Das war der visuelle Ausgangspunkt. Vermeide es, etwas auszuwählen, das du nicht liefern kannst.
+    </Info>
+  </Step>
+
+  <Step title="Mit einem leeren Projekt starten">
+    Starte dein Lovable-Projekt, indem du eine Eingabeaufforderung eingibst:
+
+    <Note>
+      Starte mit einem komplett leeren Projekt. Wir fügen die Details anschließend hinzu.
+    </Note>
+  </Step>
+
+  <Step title="WebP in PNG umwandeln und deinen Design-Screenshot vorbereiten ">
+    Sobald du dein Referenzdesign gefunden hast, lade es herunter. Wenn es im WebP-Format vorliegt, nutze einen Onlinekonverter, um es in PNG umzuwandeln, damit du es problemlos in Lovable- oder GPT-Workflows verwenden kannst.
+
+    <Note>
+      Empfohlene Tools: [https://cloudconvert.com/webp-to-png](https://cloudconvert.com/webp-to-png)
+    </Note>
+  </Step>
+
+  <Step title="Verwandle deine Inspiration im Chat Mode in eine detaillierte Eingabeaufforderung">
+    Verwende den Lovable [Chat Mode](https://docs.lovable.dev/features/labs#chat-mode), um Folgendes zu extrahieren:
+
+    * Seitenabschnitte (Hero-Bereich, Features, FAQ usw.)
+    * Layoutstruktur, Abstände und Reihenfolge der Inhalte
+    * Schriftfamilien, Farbpaletten und Verläufe
+    * Animationstypen, Hover-Effekte und Übergänge
+
+    <Info>
+      Lovable [Chat mode](https://docs.lovable.dev/features/labs#chat-mode) (oder customGPT) wurde außerdem darauf trainiert, Unsplash-Bilder für Blog-Thumbnails und Illustrationen zu empfehlen.
+    </Info>
+
+    <Warning>
+      Lovable benennt Elemente gelegentlich falsch (z. B. wurde die Schriftart „Space Grotesque“ falsch geschrieben). Überprüfe und korrigiere immer die Ergebnisse der Eingabeaufforderung, bevor du sie in Lovable einfügst.
+    </Warning>
+
+    Du kannst Lovable Chat mode sogar bitten, Abschnitte weiter auszuarbeiten oder die Eingabeaufforderung mit besseren UX-Vorschlägen neu zu formulieren.
+  </Step>
+
+  <Step title=" Erstelle mit Lovable den ersten Entwurf">
+    Füge die detaillierte Eingabeaufforderung in den Lovable Edit Mode ein. Dann:
+
+    * Lade deinen PNG-Screenshot als Referenz hoch
+    * Füge Notizen wie &quot;*Use Space Grotesque font*&quot; oder &quot;Use Unsplash for blog thumbnails&quot; hinzu
+
+    Diese Kombination führt zu deutlich präziseren Designs als vage Eingabeaufforderungen, die nur aus einem einzigen Satz bestehen.
+
+    <Info>
+      Bitte beachte, wie viel schneller sich Lovable im Vergleich dazu anfühlt, als noch vor einem Jahr Tailwind oder Bootstrap manuell einzurichten.
+    </Info>
+  </Step>
+
+  <Step title="In Echtzeit bearbeiten: Visuelle und textbasierte Eingabeaufforderungen">
+    Verwende das [visuelle Bearbeitungstool](https://docs.lovable.dev/features/visual-edit) von Lovable, um:
+
+    * Bilder zu skalieren (z. B. „make this image 800px wide“)
+    * Hero-Bilder zu positionieren (z. B. „place this image on the right side“)
+    * Designabschnitte am Referenzbild auszurichten
+
+    Kombiniere das mit Bearbeitungen in natürlicher Sprache für mehr Präzision.
+  </Step>
+
+  <Step title="Gib deinem Design mit 21stdev‑Komponenten den letzten Schliff">
+    Verwende die vorgefertigten UI-Komponenten von [21stdev](https://21st.dev/), um Folgendes zu verbessern:
+
+    ![21stdev custom component ](/images/21stdev.png)
+
+    * Hero-Sektionen
+    * Navigationsleisten mit Hover-Effekten
+    * Testimonial-Layouts
+    * CTAs und Feature-Grids
+
+    Wähle eine Komponente aus, kopiere die Eingabeaufforderung und füge sie in Lovable ein. Achte darauf, dass der visuelle Stil zum Rest der Website passt.
+  </Step>
+
+  <Step title="KI-Fehlinterpretationen korrigieren">
+    KI spart Zeit, aber rechne mit Nacharbeit:
+
+    ![Spec-Komponente auf der Landing Page hinzufügen](/images/component.png)
+
+    * Passe das Branding an (standardmäßig ist Lovable blau)
+    * Optimiere Abstände und Padding manuell
+    * Verwende konsequent eine einheitliche Typografie
+    * Füge Verläufe oder Tiefe hinzu, damit der Look nicht flach wirkt
+
+    Sorge dafür, dass sich das Design *bewusst gestaltet* anfühlt – nicht „standardmäßig“.
+  </Step>
+
+  <Step title="Für Mobilgeräte optimieren (ein Muss)">
+    Überspringe das nicht. Achte darauf, dass:
+
+    ![Mobil optimierte Website](/images/mobile-responsive.png)
+
+    * Eingabefelder die gesamte Breite einnehmen
+    * Schriftgrößen sich an kleinere Bildschirme anpassen
+    * Buttons gut mit dem Finger zu bedienen sind
+    * Abschnitte sauber untereinander gestapelt werden und sich flüssig scrollen lassen
+
+    Mobile UX ist entscheidend für Conversions.
+  </Step>
+
+  <Step title="Dezente Animationen und Mikrointeraktionen hinzufügen">
+    Um das Look &amp; Feel zu modernisieren:
+
+    * Verwende Fade-ins für Hero-Bereiche
+    * Füge Hover-Effekte für Buttons hinzu
+    * Animiere Abschnitte beim Scrollen
+    * Nutze dezente Hintergrundbewegungen
+
+    Lovable kann [Framer Motion](https://motion.dev/) out of the box integrieren, wenn du die passende Eingabeaufforderung verwendest.
+
+    ![Animation zur Landingpage hinzufügen](/images/animation.png)
+  </Step>
+
+  <Step title="Individuelle Visuals mit KI erstellen (optional)">
+    Formuliere Eingabeaufforderungen für ChatGPT, Midjourney oder Ideogram auf Basis deiner bevorzugten Elemente aus dem Referenzdesign.
+
+    **Schritte:**
+
+    <Steps>
+      <Step title="Erstelle einen Screenshot des gewünschten visuellen Bereichs" />
+
+      <Step title="Bitte ChatGPT, eine passende Eingabeaufforderung zu formulieren" />
+
+      <Step title="Generiere das Bild in deinem KI-Tool" />
+
+      <Step title="Entferne den Hintergrund und füge das Bild dann wieder in Lovable ein" />
+    </Steps>
+
+    <Note>
+      Die neueste Version von ChatGPT 4o ist einen Test wert.
+    </Note>
+
+    Dies ist besonders nützlich für 3D-Grafiken oder thematische Illustrationen.
+  </Step>
+
+  <Step title="Mit nur einem Klick bereitstellen">
+    Sobald du mit dem Ergebnis zufrieden bist:
+
+    * Klicke in Lovable auf „Bereitstellen“
+    * Verbinde bei Netlify eine benutzerdefinierte Domain
+
+    Deine Website ist in wenigen Minuten live. Keine manuelle Einrichtung erforderlich.
+  </Step>
+
+  <Step title="Mit Kunden teilen & iterieren">
+    Kopiere den öffentlichen Link und teile ihn mit deinem Kunden. Dein Kunde kann:
+
+    * Die Seite live ansehen
+    * Anpassungen vorschlagen
+    * Schnell freigeben
+
+    Du kannst die Abschnitte weiterhin mit dem visuellen Editor oder dem Eingabeaufforderungs-Editor von Lovable verfeinern. So entsteht ein schneller Iterationszyklus.
+  </Step>
+</Steps>
+
+<div id="why-this-approach-works">
+  ## Warum funktioniert dieser Ansatz?
+</div>
+
+KI ist keine Magie. Aber mit Struktur wird sie zur Superkraft. Im Vergleich zu unstrukturierten Eingabeaufforderungen gilt:
+
+- Der erste Entwurf ist zehnmal näher am fertigen Ergebnis
+- Du verbringst weniger Zeit damit, Fehler zu beheben
+- Jeder Abschnitt hat einen klaren Zweck
+- Das Endprodukt wirkt individuell, nicht von der Stange
+
+Es ist eine Mischung aus Automatisierung **\+** Handwerkskunst.
+
+<div id="key-takeaways">
+  ## Wichtigste Erkenntnisse
+</div>
+
+- Starte mit starker visueller Inspiration
+- Verwende strukturierte Eingabeaufforderungen mit Lovable Chat Mode
+- Füge Screenshots hinzu und schaffe klare Erwartungen
+- Werte Abschnitte mit 21stdev Components auf
+- Behebe Design-Macken und optimiere für Mobilgeräte
+- Animiere dort, wo es zählt
+- Schnell bereitstellen, noch schneller iterieren
+
+Das ist der Workflow, den [Prajwal](https://x.com/PrajwalTomar_/status/1902371273147064772) täglich für seine Kund:innen nutzt – und den wir intern ausprobiert haben –, um schnelle, schöne, hoch konvertierende Landingpages zu bauen – unterstützt von Lovable AI, aber geleitet von klarer Intention.
+
+Viel Spaß beim Bauen\!
+
+<div id="more-resources">
+  ## Weitere Ressourcen
+</div>
+
+- [Tutorial von Brock Mesarich](https://www.youtube.com/watch?v=v48gJFQvE1Y&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- Tutorial von Lukas Margerie ([1](https://www.youtube.com/watch?v=-GiBI0leMHU&t=30s&pp=ygUPbG92YWJsZSAyMXN0ZGV2) - [2](https://www.youtube.com/watch?v=uqdFobvoRQQ&pp=ygUPbG92YWJsZSAyMXN0ZGV20gcJCb0Ag7Wk3p_U))
+- [Tutorial von AI Jason](https://www.youtube.com/watch?v=8MPElOdNjtk&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Tutorial von Mark Kashef](https://www.youtube.com/watch?v=Zv7N0SxfpRM&t=269s&pp=ygUPbG92YWJsZSAyMXN0ZGV2)
+- [Tutorial von Alejavi Rivera](https://www.youtube.com/watch?v=mMBp0uGZOWw&pp=ygUPbG92YWJsZSAyMXN0ZGV2) (Spanisch)
+- [Tutorial von Fazt Code](https://www.youtube.com/watch?v=RGZeP1_oMoY&pp=ygUPbG92YWJsZSAyMXN0ZGV2)

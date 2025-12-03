@@ -1,0 +1,124 @@
+---
+title: "Lovable API: URL でビルド"
+description: "Lovable API の「Build with URL」機能がオープンベータ版になりました。シンプルで共有可能な URL を使って、Lovable アプリを作成・共有できます。"
+icon: "window-restore"
+keywords: ['Lovable API', 'API', 'Build with URL API', 'Create apps from URL', 'build with lovable']
+---
+
+Lovable API の **Build with URL** 機能を使うと、URL パラメーター経由でプロンプトや画像を渡すことで、アプリケーションをプログラムから作成できます。これにより、Web サイトや社内ツール、自動化ワークフローとのシームレスな連携が可能になり、ユーザーはワンクリックで Lovable アプリを生成できるようになります。
+
+各リンクは、Lovable に対して「何を作るか」と、必要に応じて「どの画像を含めるか」を指定します。あとはすべて Lovable にお任せです。
+
+例：
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+このリンクをクリックすると Lovable が自動的に開き、ToDo アプリの作成が始まります。
+
+
+<div id="use-cases">
+  ## ユースケース
+</div>
+
+Build with URL API を使うと、次のことができます：
+
+- 自分の Web サイトやアプリケーションに **Build with Lovable** ボタンを埋め込む。ユーザーがボタンをクリックすると、Lovable に遷移してアプリが自動的に生成されます。
+- あらかじめ用意したプロンプトを URL 経由で友人や同僚、またはソーシャルメディア上で共有する。
+- 社内ワークフローの一部として、アプリ生成を自動化する。
+- プロンプトと参照画像を含む URL を使って、アプリのプロトタイプをすばやく作成する。
+
+URL は自分で組み立てることも、[Lovable Link Generator](https://lovable.dev/links) を使うこともできます。詳しくは以下を参照してください。
+
+<div id="base-url">
+  ## ベース URL
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#
+```
+
+`autosubmit` (boolean): リクエストを自動処理するには `true` を設定する必要があります
+
+
+<div id="url-with-parameters">
+  ## パラメータ付きURL
+</div>
+
+```
+https://lovable.dev/?autosubmit=true#prompt=YOUR_PROMPT_HERE&images=IMAGE_URL_1&images=IMAGE_URL_2
+```
+
+
+<div id="parameters">
+  ### パラメーター
+</div>
+
+| Parameter | Type   | Description                                                                                                                                                                         | Required/Optional |
+| --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `prompt`  | string | 作成するアプリケーションの内容を記述するテキスト。最大 50,000 文字。URL エンコードを使用してください（例: 空白は `%20`）。非常に長い URL は、ブラウザまたは解析上の制約により失敗する可能性があります。 | Required          |
+| `images`  | string | 参照用として、URL エンコードされた画像 URL を最大 10 個まで指定できます。画像 URL はインターネット上で公開されている必要があります。サポートされている形式: JPEG、PNG、WebP。                                                            | Optional          |
+
+<div id="lovable-link-generator">
+  ## Lovable Link Generator
+</div>
+
+[Lovable Link Generator](https://lovable.dev/links) を使うと、指定したプロンプトと画像からアプリを生成する、共有用の URL を簡単に作成できます。
+
+1. 作成したいアプリケーションの内容を説明するプロンプトを入力します（最大 50,000 文字）。
+2. 最大 10 個までの公開画像（JPEG、PNG、または WebP）の URL をアップロードします。
+3. 生成された Lovable の URL をコピーして共有します。
+
+このツールを使うことで、URL エンコードのエラーを防ぎ、リンクが正しい形式になるようにできます。
+
+<div id="build-with-url-examples">
+  ## URL例を使ってアプリを作成する
+</div>
+
+**基本的なアプリの生成**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Create%20a%20todo%20app
+```
+
+**1枚の参照画像**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg
+```
+
+**複数の参考画像**
+
+```
+https://lovable.dev/?autosubmit=true#prompt=Display%20these%20images&images=https://img.com/1.jpg&images=https://img.com/2.jpg​
+```
+
+
+<div id="best-practices">
+  ## ベストプラクティス
+</div>
+
+- プロンプトは簡潔にし、主な機能に絞りましょう。
+- 最適な生成結果のために、明確で具体的な表現を使いましょう。
+- 必要に応じて、生成プロセスを適切に誘導できる参考画像を含めましょう。
+- プロンプトや画像URLに含まれる特殊文字は、解析上の問題を避けるために必ずURLエンコードしてください。
+
+<div id="app-creation-and-authentication-flow-for-shared-urls">
+  ## 共有URLからのアプリ作成と認証フロー
+</div>
+
+ユーザーが **Build with URL** リンクをクリックした場合:
+
+- **ログイン済みユーザー**: プロジェクトを作成するワークスペースを選択すると、自動的にアプリの作成が開始されます。
+- **未ログインユーザー**: サインアップ/ログインページにリダイレクトされます。認証に成功したら、プロジェクトを作成するワークスペースを選択すると、元のプロンプトと画像を保持したまま自動的にアプリの作成が開始されます。
+
+<div id="error-handling">
+  ## エラー処理
+</div>
+
+URL が長すぎる、または形式が不正な場合、次のような問題が発生する可能性があります。
+
+- ブラウザの「URL が長すぎます」エラー
+- パラメーターの解析が不完全になる
+- 自動送信に失敗する

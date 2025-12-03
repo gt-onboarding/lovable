@@ -1,0 +1,975 @@
+---
+title: "实施 SEO 和 GEO 最佳实践"
+sidebarTitle: "SEO 和 GEO 最佳实践"
+description: "一份实用指南，帮助你通过元数据、站点地图、结构化数据、性能检查和 LLM 友好模式来优化 Lovable 应用，在搜索引擎、社交媒体预览和 AI 系统中获得更佳表现。"
+icon: "magnifying-glass"
+keywords: ["lovable seo","lovable geo","客户端渲染 SEO","SEO 最佳实践","GEO 最佳实践","AI 搜索优化","结构化数据","站点地图","robots.txt","Open Graph","页面标题","Meta 描述","核心网页指标","Schema 标记","LLM 优化","AI 可抓取性","预渲染"]
+---
+
+<div id="how-seo-and-geo-work-in-lovable">
+  ## SEO 和 GEO 在 Lovable 中如何工作
+</div>
+
+Lovable 为你提供了高度的灵活性：**搜索引擎优化（SEO）** 和 **生成式引擎优化（GEO）** 都源自 Lovable Agent 在你创建页面、内容和功能时生成的代码。
+
+Agent 可能会根据你的提示添加标题、描述或标签等元素，但这并不是系统性地进行的，且**不能保证实现是完整或正确的。**
+
+因此，你应该**像对待代码一样对待 SEO 和 GEO**：有意识地进行审查、测试和迭代优化。本指南会准确告诉你应该向 Agent 提出什么请求，以及如何进行验证。
+
+<div id="built-in-speed-tool">
+  ### 内置 Speed 工具
+</div>
+
+Lovable 还包含一个由 Google Lighthouse 提供支持的 **内置 Speed 工具**。它可以让你快速了解已发布站点在性能、可访问性、最佳实践和 SEO 方面的表现。
+
+![Lovable Speed Tool](/images/speed-tool.png)
+
+这是了解站点健康状况的一个很好的起点，但 Lighthouse 不会验证可抓取性、结构化数据、元数据准确性或社交预览等关键因素，因此本指南会补充这些空白。
+
+<div id="custom-domains">
+  ### 自定义域名
+</div>
+
+使用**自定义域名**是进行 SEO 和 GEO 的最重要步骤之一。品牌域名有助于搜索引擎理解你的网站，长期保留反向链接价值，并确保所有流量都集中到单一规范 URL 之下。
+
+Lovable 让你可以：
+
+* 连接你自己的域名或子域名
+* 选择一个**主域名**（所有其他域名都会重定向到它）
+
+在设置好自定义域名之后，[**在 Google Search Console 中验证它**](#google-search-console-gsc-setup)，以便 Google 能抓取并索引正确的域名。有关详细设置步骤，请参阅[**自定义域名**](/zh/features/custom-domain)。
+
+<div id="understanding-lovables-architecture">
+  ## 理解 Lovable 的架构
+</div>
+
+Lovable 使用 React 和 Vite 构建现代 Web 应用，这意味着你的应用是一个**客户端渲染（CSR）**的**单页应用（SPA）**。浏览器不会为每个页面分别加载不同的 HTML 文件，而是先加载一个精简的初始 HTML 外壳，然后通过 JavaScript 处理路由和渲染。
+
+**传统平台**（如 WordPress 或 Webflow）会为每个 URL 向浏览器发送一整页预先组装好的 HTML。
+
+**Lovable** 则发送代码和指令，由你的设备来构建每一个视图。所有“页面”本质上只是同一个应用的不同状态。
+
+对访问者来说，这意味着更快的导航、即时过渡，以及连贯顺滑的使用体验。
+
+<div id="what-this-means-for-seo-and-geo">
+  ### 这对 SEO 和 GEO 意味着什么
+</div>
+
+对于**搜索引擎、社交平台和 AI 爬虫**来说，这种架构会改变你的内容被发现的方式。
+
+**Google 和传统搜索引擎：**
+
+Google 可以索引 CSR 网站，但会分两步进行：
+
+1. **抓取初始 HTML** 并收集页面结构
+2. **稍后回访并渲染 JavaScript (JS)**，以获取完整内容
+
+这个两步流程总体是可靠的，但会带来一些影响：
+
+* 收录可能会**稍微慢一些**（以天为单位，而不是小时）
+* 新页面在搜索结果中出现的时间会更晚
+* 这**不会影响排名高低**，只会影响收录速度
+
+**社交媒体平台和 AI 系统：**
+
+* 像 **Facebook、X/Twitter 和 LinkedIn** 这样的平台不会等待内容渲染完成，因此它们只能看到最初的 HTML 页面结构。
+* 如果你的所有页面都使用相同的基础标题和预览图片，社交分享链接可能会显示通用或不正确的信息
+* 许多 **AI 系统**无法可靠地识别动态渲染的内容，因此可能会错过你的页面，或者只能看到部分内容
+
+**现代搜索引擎对 CSR 的处理能力很好。** CSR 不会阻止收录或影响排名，实现方式和内容质量才是最关键的。
+
+请遵循本指南中的最佳实践，**确保你的 Lovable 站点针对搜索引擎、社交平台和 AI 系统进行了优化，并能够在竞争中占据有利位置。**
+
+<div id="foundation-make-your-site-crawlable">
+  ## 基础：让搜索引擎能抓取你的网站
+</div>
+
+通过以下步骤，可确保搜索引擎能够访问、发现并索引你 Lovable 应用中的所有重要页面。
+
+<div id="xml-sitemap">
+  ### XML 网站地图
+</div>
+
+网站地图有助于搜索引擎发现你的所有页面。对于爬虫不易发现全部路由的 CSR 站点，这一点尤为重要。Lovable Agent 可以在需要时生成包含所有公开路由的 `sitemap.xml`。
+
+<Accordion title="如何配置并验证 sitemap.xml">
+  **示例提示**
+
+  > 在 /sitemap.xml 创建一个 XML 网站地图，列出所有公开路由。包含 lastmod 日期和优先级：主页 1.0，主要页面 0.8，博客文章 0.6。
+
+  **验证**
+
+  * 发布你的项目，使网站地图文件上线
+  * 检查它能通过以下地址访问：`https://yourdomain.com/sitemap.xml`（应返回 XML）
+  * 检查所有关键路由是否已包含（首页、主要页面、博客、产品）
+  * 每当内容变更时更新 `lastmod`
+  * 使用 `priority` 表示重要程度（0.0–1.0）
+  * 提交到 Google Search Console 和 Bing Webmaster Tools
+  * 在添加/删除页面时重新生成并再次提交（不会自动完成）。例如，提示：
+
+    > 更新 sitemap.xml，将 /new-page 加入、移除 /old-page，然后重新提交到 Google Search Console。
+
+  **示例 sitemap.xml**
+
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>https://yourdomain.com/</loc>
+      <lastmod>2025-01-15</lastmod>
+      <priority>1.0</priority>
+    </url>
+    <url>
+      <loc>https://yourdomain.com/about</loc>
+      <lastmod>2025-01-15</lastmod>
+      <priority>0.8</priority>
+    </url>
+  </urlset>
+  ```
+</Accordion>
+
+<div id="robotstxt">
+  ### Robots.txt
+</div>
+
+`robots.txt` 会告诉搜索引擎你的网站中哪些区域允许被抓取。避免屏蔽 Google 正常渲染页面所需的关键资源非常重要。Lovable Agent 可以在你需要时为你创建一个 `robots.txt` 文件。
+
+<Accordion title="如何配置并验证 robots.txt">
+  **示例提示**
+
+  > 在 /public/robots.txt 创建 robots.txt，允许所有爬虫抓取，引用 Sitemap: https://yourdomain.com/sitemap.xml，并允许 GPTBot 和 PerplexityBot 以提升 AI 可见性。
+
+  **验证**
+
+  * 检查是否可通过以下地址访问：`https://yourdomain.com/robots.txt`
+  * 切勿屏蔽 CSS、JavaScript 或 `/assets/` 文件夹
+  * 包含指向你网站地图的 `Sitemap:` 行
+  * 根据你的策略控制 AI 机器人（GPTBot、PerplexityBot）的访问
+
+  **robots.txt 示例**
+
+  ```
+  User-agent: *
+  Allow: /
+  Sitemap: https://yourdomain.com/sitemap.xml
+
+  User-agent: GPTBot
+  Allow: /
+  ```
+</Accordion>
+
+<div id="canonical-tags">
+  ### Canonical 标签
+</div>
+
+Canonical 标签会告诉搜索引擎某个页面的哪个 URL 是该页面的“官方”版本，从而帮助避免重复内容问题。按你的要求，Lovable Agent 可以为你生成 canonical 标签。
+
+<Accordion title="如何添加和验证 canonical 标签">
+  **示例提示**
+
+  > 为所有页面添加 canonical 标签，指向它们各自的 URL。使用 https://yourdomain.com 格式，末尾不要加斜杠。
+
+  **验证**
+
+  * 检查每个页面。在浏览器控制台中粘贴以下代码：
+
+    ```
+    console.log('Canonical:', document.querySelector('link[rel="canonical"]')?.href);
+    ```
+  * 确认每个页面**只有一个** canonical 标签。
+  * 确保它与你首选的域名和 URL 变体匹配（是否使用 HTTPS、是否带结尾斜杠）。
+  * 避免让不同页面指向同一个 canonical，除非这是有意为之（例如带筛选条件的产品视图）。
+</Accordion>
+
+<div id="clean-urls-and-routing">
+  ### 简洁 URL 与路由
+</div>
+
+搜索引擎依靠 URL 来理解页面内容，因此简洁、易读且具有描述性的 URL 有助于提升抓取效率和排名。Lovable Agent 通常会通过 React Router 自动生成简洁的路由。
+
+<Accordion title="如何实现并验证简洁 URL">
+  **示例提示**
+
+  > 检查所有路由，确保 URL 简洁且具有描述性。使用连字符分隔单词，并避免使用查询参数。
+
+  **验证**
+
+  * 访问每个路由，并检查浏览器控制台是否存在错误
+  * URL 应该：稳定、具描述性、没有随机 ID
+  * 全站使用一致的格式（是否带结尾斜杠、是否带 `www`）
+  * 所有路由加载时都不存在 JavaScript 错误
+</Accordion>
+
+<div id="internal-linking">
+  ### 内部链接
+</div>
+
+内部链接将你的页面连接起来，让用户和搜索引擎都能更轻松地浏览你的网站。搜索引擎依赖这些链接来发现内容、理解主题之间的关系，并在你的网站中分配页面权重。
+
+Lovable Agent 可以创建导航/页脚链接，并在你提出请求时建议或创建上下文相关的链接。
+
+<Accordion title="如何实施并验证内部链接">
+  **示例提示**
+
+  > 为相关页面添加 3–5 个具有上下文相关性的内部链接。使用具有描述性的锚文本，而不是“click here”。
+
+  **验证**
+
+  * 检查链接是否可被抓取。数量大致应与你根据导航和内容的预期相符。
+
+    ```
+    console.log('Links:', document.querySelectorAll('a[href]').length);
+    ```
+  * 使用标准的 `<a href>` 标签，而不是 `onClick` 事件处理程序
+  * 重要页面应有多个内部链接指向它们
+  * 在页脚中包含指向最重要页面的链接，使其在整个站点中都可见
+  * 锚文本应包含关键词且描述清晰（不要使用“click here”）
+    * 良好锚文本：`organic dog food benefits`
+    * 不良锚文本：`click here`, `read more`
+  * 深层页面应能在距首页不超过 3 次点击内到达
+</Accordion>
+
+<div id="on-page-seo-help-search-engines-understand-content">
+  ## 页面 SEO：帮助搜索引擎理解内容
+</div>
+
+这些做法可以明确每个页面的主题，使搜索引擎更容易理解你的内容并进行更准确的排名。
+
+<div id="page-titles">
+  ### 页面标题
+</div>
+
+页面标题是影响页面排名的关键因素之一。它们会显示在搜索结果和浏览器标签页中，并且对点击率有很大影响。Lovable Agent 可以根据页面的用途生成标题标签。
+
+<Accordion title="如何设置并验证页面标题">
+  **示例提示**
+
+  > 更新所有路由的页面标题。使用清晰、具描述性的标题，与每个页面的用途相匹配，并将长度控制在 60 个字符以内。
+
+  **验证**
+
+  * 检查每个页面的标题内容和长度。在浏览器控制台中粘贴以下代码：
+
+    ```
+    console.log('Title:', document.title, '| Length:', document.title.length);
+    ```
+  * 每个路由都有唯一且具描述性的标题（不要在所有页面都使用通用的 `Home`）
+  * 控制在 60 个字符以内，以避免在搜索结果中被截断
+  * 包含核心关键词和品牌名称
+</Accordion>
+
+<div id="meta-descriptions">
+  ### Meta 描述
+</div>
+
+Meta 描述会出现在搜索结果中页面标题的正下方。它们不是直接的排名因素，但会对点击率产生显著影响。根据你的需求，Lovable Agent 可以添加 meta 描述。
+
+<Accordion title="如何添加和验证 Meta 描述">
+  **示例提示**
+
+  > 为所有关键页面编写独特的 meta 描述。每条都要清晰、有帮助，并控制在 140–160 个字符之间。
+
+  **验证**
+
+  * 检查每个页面的描述内容和长度。在浏览器控制台中粘贴以下代码：
+
+    ```
+    console.log('Desc:', document.querySelector('meta[name="description"]')?.content, '| Length:', document.querySelector('meta[name="description"]')?.content.length);
+    ```
+  * 确保每个页面都有唯一的描述（**140–160 个字符**）
+    * 不佳：`Welcome to our website `（通用、重复）
+    * 良好：`Premium organic dog food delivered fresh to your door. Free shipping over $50.`（158 个字符）
+  * 突出展示优势、差异化，并包含温和的号召性用语
+  * 各页面之间不要重复
+</Accordion>
+
+<div id="heading-structure-h1-h3">
+  ### 标题结构（H1 → H3）
+</div>
+
+清晰的标题结构（H1 到 H3）有助于搜索引擎理解你的内容是如何组织的，以及哪些部分最重要。Lovable Agent 可以在你需要时生成正确的 H1 标签和合理的层级结构。
+
+<Accordion title="如何实现并验证标题结构">
+  **示例提示**
+
+  > 检查每个页面的标题结构。顶部应只有一个 H1，主要部分使用 H2，嵌套内容使用 H3。不要跳过标题层级。
+
+  **验证**
+
+  * 检查是否只有一个 H1 标签。在浏览器控制台中粘贴以下代码 —— 返回值应为 1：
+
+    ```
+    console.log('H1s:', document.querySelectorAll('h1').length);
+    ```
+  * 查看标题内容。在浏览器控制台中粘贴以下代码：
+
+    ```
+    console.log('H1:', document.querySelector('h1')?.textContent);
+    ```
+  * H1 包含主要关键词，并清楚说明页面的用途
+  * 标题层级逻辑清晰（H1 → H2 → H3，不要跳级）
+  * 不要仅为了样式效果而使用标题标签
+</Accordion>
+
+<div id="semantic-html">
+  ### 语义化 HTML
+</div>
+
+语义化 HTML 使用有意义的标签来描述你的内容，帮助搜索引擎和屏幕阅读器更好地理解页面结构。Lovable Agent 通常会添加诸如 `<main>`、`<nav>` 和 `<section>` 等语义元素。
+
+<Accordion title="如何实现并验证语义化 HTML">
+  **示例提示**
+
+  > 检查 HTML 结构，并在合适的地方使用语义标签。将主要内容放在 `<main>` 中，导航放在 `<nav>` 中，各个版块放在 `<section>` 中，页脚内容放在 `<footer>` 中。
+
+  **验证**
+
+  * 将以下代码粘贴到浏览器控制台——如果相应元素存在，应返回 `true`：
+
+  ```
+  console.log('Has <main>:', !!document.querySelector('main'));
+  console.log('Has <nav>:', !!document.querySelector('nav'));
+  console.log('Has <footer>:', !!document.querySelector('footer'));
+  console.log('Has <section>:', !!document.querySelector('section'));
+  ```
+
+  * 为每个页面检查以下内容：
+    * 由单个 `<main>` 包裹主要内容
+    * 导航位于 `<nav>` 中
+    * 页脚内容位于 `<footer>` 中
+    * 相关内容使用 `<section>` 和 `<article>` 标签
+</Accordion>
+
+<div id="image-optimization">
+  ### 图片优化
+</div>
+
+优化图片可以提升可访问性、强化主题相关性，并帮助你的内容出现在图片搜索结果中。使用高效格式和合适尺寸的图片还能提升页面加载速度，而页面速度是一个重要的排名因素。Lovable Agent 可以根据需要添加 `alt` 文本并启用懒加载。
+
+<Accordion title="如何实施并验证图片优化">
+  **示例提示**
+
+  > 检查所有图片并添加清晰、具有描述性的 alt 文本。确保每张图片都有 width 和 height 属性，并经过适当压缩以实现快速加载。
+
+  **验证**
+
+  * 确认每张图片都有 alt 文本。在浏览器控制台中粘贴以下代码——返回值应为 0：
+
+    ```
+    console.log('Missing alt:', document.querySelectorAll('img:not([alt])').length);
+    ```
+  * 评估 `alt` 文本质量——必须具有描述性，并包含相关关键词
+    * 不佳示例：`alt="image"`，`alt="photo", alt=""`
+    * 良好示例：`alt="Golden retriever eating organic grain-free dog food from a bowl"`
+  * 使用合适的文件格式并尽量减小文件大小：
+    * 对照片和插画使用 WebP
+    * 对 logo、图标和简单图形使用 SVG
+    * 图片压缩到 200KB 以下
+  * 必须包含 width 和 height 属性（防止布局位移）
+</Accordion>
+
+<div id="off-page-seo-build-authority-with-backlinks">
+  ## 站外 SEO：通过反向链接建立权威性
+</div>
+
+搜索引擎在很大程度上依赖来自其他可信网站的链接，来判断你的内容是否值得信任、是否具有权威性。对于竞争激烈的关键词，强有力的反向链接有时比任何站内优化都更重要。
+
+反向链接可以帮助你的 Lovable 站点：
+
+* 在目标关键词上的排名更高
+* 更快被索引
+* 建立主题权威性
+* 与规模更大或历史更久的网站竞争
+
+<Accordion title="如何构建高质量反向链接">
+  1. **创建值得被链接的内容**
+
+  * 深度指南、教程和研究内容
+  * 数据、统计或原创洞察
+  * 交互式工具、计算器、ROI 预估工具
+  * 模板、检查清单和可下载资源
+
+  2. **发布客座文章**
+
+  * 向你所在细分领域的博客投稿
+  * 在文中加入经过思考的上下文链接指向你的网站
+  * 利用作者简介强化品牌可信度
+
+  3. **与互补型业务合作**
+
+  * 共同制作内容（文章、网络研讨会、资源）
+  * 在相关页面之间交叉链接
+
+  4. **将网站收录到目录和资源页中**
+
+  * 行业目录
+  * 本地商家列表
+  * 初创公司名录
+  * 与你的产品相关的精选资源
+
+  5. **推广内容**
+
+  * 在社交平台上分享
+  * 加入到电子邮件简报中
+  * 鼓励影响者、博主或客户引用
+  * 对重大更新或发布进行公关推广
+
+  **反向链接质量检查列表**
+
+  搜索引擎优先考虑以下类型的反向链接：
+
+  * **高度相关**（相同主题或行业）
+  * **权威性强**（受信任的域名）
+  * **编辑推荐型**（自然获得，而非付费购买）
+  * **锚文本具描述性**（自然包含相关关键词）
+  * **置于相关语境中**（出现在真实内容正文中，而不是随意放在页脚或侧边栏里）
+  * 并且要**避免垃圾链接策略**（链接工厂、低质量目录或付费买链），否则可能会损害排名。
+</Accordion>
+
+<div id="rich-results-stand-out-in-search">
+  ## 富结果展示：在搜索中脱颖而出
+</div>
+
+这些增强功能有助于你的页面获得富结果展示的资格，并在社交平台和搜索结果页中生成高质量的预览。
+
+<div id="structured-data-json-ld-schema">
+  ### 结构化数据（JSON-LD schema）
+</div>
+
+通过 JSON-LD schema 实现的结构化数据，可以为搜索引擎提供有关你内容的更多上下文信息，并启用如星级评分、产品详情和 FAQ 下拉列表等丰富搜索结果。Lovable Agent 可以在你需要时生成相应的 schema 标记。
+
+常用的 schema 类型包括：
+
+* `Product`：定价、库存/可用性、评论、评分
+* `Article`：作者、发布日期、特色图片
+* `FAQPage`：问题和答案
+* `LocalBusiness`：地址、电话、营业时间等业务详情
+
+<Accordion title="如何实现和验证结构化数据">
+  **示例提示**
+
+  > 为产品页面添加 `Product` schema，包含名称、描述、价格、可用性、图片、品牌和评分等信息。
+
+  **验证**
+
+  * 在关键页面上检查是否存在（例如首页、产品页、博客文章、FAQ）。将以下代码粘贴到浏览器控制台——如果你没有有意添加多个 schema 类型，返回值应为 1：
+
+  ```
+  console.log('Schema:', document.querySelectorAll('script[type="application/ld+json"]').length);
+  ```
+
+  * 使用 [Google Rich Results Test](https://search.google.com/test/rich-results) 进行验证
+  * 修复任何错误或缺失的必填字段
+  * 确保 schema 数据与页面可见内容保持同步
+</Accordion>
+
+<div id="social-media-optimization-open-graph-and-twitter-cards">
+  ### 社交媒体优化：Open Graph 和 Twitter Cards
+</div>
+
+Open Graph（OG）标签、Twitter Cards 和 OG 图片决定了你的页面在社交媒体上被分享时的展示效果。高质量的预览图片可以显著提升分享表现，并增强用户对你品牌的信任。
+
+Lovable Agent 默认会包含基础的 OG 和 Twitter 元数据，但**你需要为每个页面自定义图片、标题和描述。**
+
+大多数社交平台（Facebook、Twitter/X、LinkedIn）不会执行 JavaScript，这意味着如果你没有在初始 HTML 中显式配置 Open Graph 和 Twitter Card 元数据，你的网站可能只会显示通用或不完整的链接预览。
+
+<Accordion title="如何实现和验证 Open Graph、Twitter Cards 和 OG 图片">
+  **示例提示**
+
+  > 为每个重要页面添加唯一的 Open Graph 和 Twitter 元数据。为每条路由设置自定义标题、描述、URL 和社交分享图片。每个页面使用一张 1200×630 的 JPG 图片，并相应更新 `og:image` 和 `twitter:image`。
+
+  **验证**
+
+  * 在分享任何 URL 之前，先验证它的展示情况：
+    * [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+    * [X (Twitter) Card Validator](https://cards-dev.twitter.com/validator)
+    * [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+  * 每个重要页面在 HTML 中都有唯一的 `og:title`、`og:description`、`og:image`、`og:url`
+  * 标签中包含 `twitter:card` 和 `twitter:image`
+  * 预览显示正确的标题、描述和图片
+  * 图片为 1200×630px，且小于 1MB
+  * 视觉上与品牌保持一致
+  * 避免为所有页面使用同一张通用图片
+
+  **Open Graph 和 Twitter Card 元数据示例**
+
+  ```
+  <meta property="og:title" content="Organic Dog Food Delivery | PetFood Co" />
+  <meta property="og:description" content="Premium grain-free dog food delivered fresh to your door." />
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+  <meta property="og:url" content="https://yourdomain.com/products" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg" />
+  ```
+</Accordion>
+
+<div id="performance-and-mobile-improve-load-speed-and-user-experience">
+  ## 性能与移动端：提升加载速度和用户体验
+</div>
+
+这些优化将提升实际使用中的速度、移动端易用性，并帮助 Google 更高效地渲染你的内容。
+
+<div id="core-web-vitals-and-performance">
+  ### Core Web Vitals 核心网页指标和性能
+</div>
+
+页面速度是已确认的排名因素。网站越快，排名越高、转化率越好。Lovable Agent 使用懒加载、代码压缩等现代优化模式来支持快速渲染。
+
+* 使用 Lovable 的 **内置 Speed 工具**（由 Google Lighthouse 提供支持）分析你的网站性能、可访问性、最佳实践和 SEO 检查。
+* 使用 **Google Search Console（GSC）验证 Core Web Vitals 核心网页指标**，这是一组衡量页面在加载性能、交互性和视觉稳定性等方面真实用户体验的指标。
+
+<Accordion title="如何优化和验证 Core Web Vitals 核心网页指标和性能">
+  **示例提示**
+
+  > 通过压缩图片、添加宽度/高度属性、延迟加载非关键脚本以及预加载关键资源来提升首页性能。目标是在 Lighthouse 中获得 90+ 的 Performance（性能）评分。
+
+  **验证**
+
+  * 在 Lovable 中运行 **Speed** 工具（Google Lighthouse 审计）
+  * 目标评分：
+    * Performance：90+
+    * Accessibility：90+
+    * Best Practices：90+
+    * SEO：100
+  * 修复性能评分较差的页面
+  * 在 GSC 中检查并修复 **Core Web Vitals 核心网页指标目标：**
+
+  | 指标                                | 目标值          | 衡量内容                                             | 修复方式                                                                                                         |
+  | ----------------------------------- | :-------------- | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+  | **LCP** (Largest Contentful Paint)  | 小于 2.5s       | 加载性能，直到主要内容出现所需时间                   | 压缩首屏大图、使用 WebP、预加载关键资源、减少服务器响应时间                                                      |
+  | **INP** (Interaction to Next Paint) | 小于 200ms      | 网页对用户交互的响应速度                             | 减少 JavaScript 执行时间、延迟非关键脚本、拆分长任务                                                              |
+  | **CLS** (Cumulative Layout Shift)   | 小于 0.1        | 加载过程中的视觉稳定性                               | 为所有图片添加宽度/高度、为动态内容预留空间、避免在加载后在首屏以上区域插入新内容                                 |
+</Accordion>
+
+<div id="mobile-optimization">
+  ### 移动端优化
+</div>
+
+超过 60% 的搜索发生在移动端。Google 使用移动优先索引，这意味着你的移动端版本将决定搜索排名。Lovable Agent 会生成带有 `viewport` 标签的响应式布局。`viewport` 标签是实现适配移动端缩放所必需的。
+
+<Accordion title="如何优化和验证移动端性能">
+  **示例提示**
+
+  > 审查移动端体验。将点击/触控目标尺寸增大到至少 48x48px，在交互元素之间增加间距，确保文字至少为 16px，修复小屏幕上的任何水平滚动。
+
+  **验证**
+
+  * 使用 **Chrome DevTools** 和 **真实设备**，在多种设备尺寸上测试关键页面——包括 iPhone、Android 和平板尺寸。
+  * 确认所有主要流程在移动端运行顺畅
+  * 任何页面上都不存在水平滚动
+  * 文本无需缩放即可清晰可读（最小字体大小 16px）
+  * 按钮和链接至少为 48×48px，之间有间距，并且易于点击/触控
+  * 表单在触屏设备上正常工作（较大的输入框、清晰的标签）
+  * 导航可正常使用（汉堡菜单功能正常）
+  * 图片和视频适配屏幕宽度
+  * **确认存在** `viewport` **标签。** 在浏览器控制台中粘贴以下代码：
+
+    ```
+    document.querySelector('meta[name="viewport"]')?.outerHTML
+    ```
+
+    然后你应该会看到：
+
+    ```
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    ```
+</Accordion>
+
+<div id="geo-make-your-content-aillm-friendly">
+  ## GEO: 让你的内容更适合 AI/LLM
+</div>
+
+Generative Engine Optimization（GEO，生成式引擎优化）可以帮助 ChatGPT、Perplexity、Gemini 和 Claude 等 AI 系统发现并引用你的内容。生成式引擎提取信息的方式不同于搜索引擎。很多引擎不会执行 JavaScript，因此它们高度依赖静态 HTML 和结构化数据（schema）。
+
+大多数 GEO 最佳实践都是良好 SEO 的延伸。如果你遵循前面章节的做法，再结合本节的这些补充，就能在 AI 相关曝光方面占据有利位置。
+
+<div id="semantic-html-and-schema-for-ai">
+  ### 面向 AI 的语义 HTML 与 schema
+</div>
+
+AI 爬虫会直接读取 HTML，而不会执行 JavaScript。清晰的结构和 schema 有助于它们提取可用于引用的事实。Lovable Agent 会提供语义结构，并且在你需要时可以添加 schema。
+
+<Accordion title="如何为 AI 实现并验证语义 HTML 和 schema">
+  **示例提示语**
+
+  > 检查首页，确保重要信息使用带有清晰标题的纯 HTML 呈现。添加包含名称、描述、URL、logo 和社交链接的 `Organization` schema。
+
+  **验证要点**
+
+  * 将关键信息放在静态 HTML 中（例如，你做什么、服务对象、定价）
+  * 使用清晰的标题层级（H2、H3）来组织信息
+  * 添加完善的 schema：`Organization`、`Product`、`FAQPage`、`Article`
+  * 使用清晰、基于事实的语言，方便 AI 解析和引用
+  * 在站点内容、schema 和外部资料之间保持事实一致
+</Accordion>
+
+<div id="ai-bot-access-robotstxt">
+  ### AI 机器人访问（robots.txt）
+</div>
+
+控制哪些 AI 系统可以访问你的内容用于训练或回答问题。Lovable Agent 可以根据你的需求配置 `robots.txt`，以允许指定的机器人访问。
+
+<Accordion title="如何在 robots.txt 中配置并验证 AI 机器人访问">
+  **示例提示**
+
+  > 更新 `robots.txt`，允许 GPTBot、PerplexityBot 和 Claude-Web，并阻止 Google-Extended 和 CCBot。继续允许所有标准搜索引擎爬虫访问。
+
+  **验证**
+
+  * 决定可见性策略：允许 AI 引用你的内容，或阻止用于 AI 训练
+  * 根据策略明确允许或阻止不同的机器人
+    * 常见机器人：GPTBot（ChatGPT）、PerplexityBot、Claude-Web、Google-Extended（训练）、CCBot
+  * 修改后重新检查，确保希望允许的机器人没有被意外阻止
+
+  **robots.txt 示例**
+
+  ```
+  User-agent: *
+  Allow: /
+
+  User-agent: GPTBot
+  Allow: /
+
+  User-agent: Google-Extended
+  Disallow: /
+  ```
+</Accordion>
+
+<div id="llm-quotable-content-patterns">
+  ### 适合 LLM 引用的内容模式
+</div>
+
+AI 系统更偏好清晰、结构化、且便于引用的内容。以这种格式提供信息，更有可能被准确引用。Lovable Agent 可以按需生成 FAQ 区块和结构化内容。
+
+<Accordion title="如何实现并验证适合 LLM 引用的内容模式">
+  **示例提示**
+
+  > 将 FAQ 回答更新为简短、直接、且便于 AI 引用。先给出主要答案，包含具体事实，并移除模糊的营销措辞。
+
+  **验证**
+
+  * 以 FAQ/Q&amp;A 格式撰写对常见问题的清晰回答
+  * 使用便于引用的定义模式：&quot;X 是 [清晰的定义]&quot;
+  * 避免模糊的营销文案
+  * 创建列表和项目符号，方便解析
+  * 尽可能包含带来源的统计数据
+
+  **示例**
+
+  * 不佳：`Amazing transformative solutions`
+  * 良好：`USDA-certified organic dog food delivered weekly. Plans start at $45/month with free shipping over $50.`
+</Accordion>
+
+<div id="static-llm-friendly-summary-page">
+  ### 静态、适配 LLM 的摘要页面
+</div>
+
+专门的摘要页面可以让 AI 系统更容易理解并引用你公司的关键信息。Lovable Agent 可以在你需要时，为你生成包含关键信息、可被抓取的专用摘要页面。
+
+<Accordion title="如何实现并验证静态 LLM 友好型摘要页面">
+  **示例提示**
+
+  > 在 public 文件夹下创建一个静态的 `llm.html` 页面，清晰说明公司是做什么的、提供哪些产品/服务、有何独特之处、基础定价信息、常见问题（FAQ）以及如何联系到我们。添加 `Organization` 和 `FAQPage` schema，并使用简单的 H2/H3 标题对页面进行分块组织。将这个新 URL 加入 sitemap.xml 中。
+
+  **验证**
+
+  * 页面使用清晰的 URL 创建，例如 `/llm.html` 或 `/about-ai.html`。
+  * 页面已包含在 `sitemap.xml` 中。
+  * 内容使用清晰的 H2/H3 标题进行结构化。
+  * 页面包含关键信息：公司概述、产品/服务、差异化优势、定价模式、联系方式和常见问题（FAQ）。
+  * 存在 `Organization` 和 `FAQPage` schema，便于 AI 系统提取结构化事实。
+  * 内容客观、简明、便于引用（避免空洞的营销话术）。
+  * 会随着产品/服务的变化及时更新相关信息。
+</Accordion>
+
+<div id="monitoring-and-maintenance-keep-seo-and-geo-healthy">
+  ## 监控与维护：保持 SEO 和 GEO 健康运行
+</div>
+
+要让 SEO 和 GEO 有效发挥作用，需要持续监控。使用 Google Search Console 并定期检查，确保你的网站在较长时间内保持健康、已被索引且表现良好。
+
+<div id="google-search-console-gsc-setup">
+  ### Google Search Console（GSC）设置
+</div>
+
+Google Search Console 展示了 Google 如何抓取、索引并为你的网站排名。它是跟踪 SEO 表现和发现技术问题的关键工具。
+
+<Accordion title="如何设置和使用 GSC 进行监控与维护">
+  如果你使用的是**自定义域名**，请确保在 Google Search Console 中**认领并验证该域名**。
+
+  **验证站点所有权**（任选一种方式）
+
+  验证你的域名，以便在向你提供服务之前，Google 可以确认你拥有该网站。Google 会基于此验证来跟踪你的线上域名的索引情况、sitemap 状态和搜索表现。
+
+  * **DNS TXT 记录**（推荐）：在你的域名服务商的 DNS 设置中添加 TXT 记录
+  * **Meta 标签验证**：提示 Lovable 帮你添加该 meta 标签
+
+  > 在 &lt;head&gt; 中添加 GSC 验证 meta 标签：&lt;meta name=&#39;google-site-verification&#39; content=&#39;YOUR&#95;CODE&#39; /&gt;
+
+  * **HTML 文件上传**：上传 Google 的验证文件，并让 Lovable 将其放在站点根目录（通常为 `/public`）
+
+  **提交 sitemap**
+
+  1. 在 GSC 中，进入 **Sitemaps**
+  2. 输入你的 sitemap URL：`https://yourdomain.com/sitemap.xml`
+  3. 点击 **Submit**
+
+   Google 处理并开始给出报告可能需要 **24–48 小时**。
+
+  **使用 URL Inspection 工具**
+
+  使用该工具可以：
+
+  * 确认 Google 能看到真实内容（而不是空白页）
+  * 诊断 CSR（客户端渲染）相关的渲染问题
+  * 检查关键资源（JavaScript 和 CSS）是否被阻止
+
+  针对任意 URL：
+
+  1. 在 **URL Inspection** 输入框中输入该 URL
+  2. 点击 **Test Live URL**
+  3. 打开 **View Tested Page** 检查：
+     * Googlebot 所见页面截图
+     * 渲染后的 HTML
+     * 控制台错误
+     * 被阻止的资源
+  4. 为新的或已更新的页面点击 **Request Indexing**（有频率限制）
+
+  **每周需要关注的报告**
+
+  * **Coverage/Page indexing：**
+    * 已索引页面 vs. 被排除页面
+    * 抓取错误和被排除的原因
+    * 随时间变化的索引趋势
+  * **Performance（搜索结果）：**
+    * 展示次数、点击次数、CTR、平均排名
+    * 表现最佳的查询和页面
+    * 可见度上升或下降的页面
+  * **Core Web Vitals：**
+    * 真实用户环境下的 LCP、INP、CLS
+    * 找出较慢和存在问题的页面
+    * 对比移动端和桌面端表现
+  * **Mobile usability：**
+    * 点按目标、视口、内容宽度相关问题
+    * 修复错误以保持移动端排名
+</Accordion>
+
+<div id="suggested-maintenance-schedule">
+  ### 建议的维护计划
+</div>
+
+要保持你的 SEO 和 GEO 处于良好状态，需要定期检查。使用下面这个持续维护计划，提前应对索引问题、性能变化和内容更新需求。
+
+<Accordion title="维护计划：每周、每月和每季度需要检查的内容">
+  **每周**
+
+  * 在 GSC Coverage 中检查是否有新的错误和新收录的页面
+  * 简要查看搜索表现趋势
+  * 对新的重要 URL 运行 URL Inspection，并在需要时请求索引
+
+  **每月**
+
+  * 如果页面有变更，更新 `sitemap.xml`
+  * 优化表现不佳的标题和描述（低 CTR 页面）
+  * 运行内置的 **Speed tool (Lighthouse audit)**
+  * 做一小轮内容优化或外链建设
+
+  **每季度**
+
+  * 进行更深入的技术检查：canonicals、`robots.txt`、schema、内部链接、移动端可用性
+  * 审查关键词表现和主要着陆页
+  * 更新较旧或表现下滑的内容
+</Accordion>
+
+<div id="faq">
+  ## 常见问题
+</div>
+
+<AccordionGroup>
+  <Accordion title="使用 Lovable 搭建的网站还能在搜索结果中获得不错的排名吗？">
+    是的。Lovable 应用和任何现代 JavaScript 网站一样，可以在搜索结果中获得良好排名。只要你的内容能够正确加载、关键资源未被阻止，Google 就可以抓取、渲染、索引并为你的页面排名。当前表现良好的示例：
+
+    * [sparklestales.com](https://sparklestales.com)
+    * [workveg.com](https://workveg.com)
+    * [renamify.co](https://renamify.co)
+
+    为了获得最佳效果，请遵循本指南中的技术和内容建议，特别是关于元数据、性能和网站地图（sitemap）配置的部分。
+
+    <Note>
+      搜索表现还取决于 Lovable 无法控制的因素，包括内容质量、外链（反向链接）、竞争状况以及搜索排名算法。
+    </Note>
+  </Accordion>
+
+  <Accordion title="如何借助 Lovable 获得最佳 SEO 和 GEO 表现？">
+    要在 Lovable 中获得出色的 SEO 和 GEO 表现，请遵循本指南中的最佳实践。确保你涵盖以下关键要点：
+
+    **内容与页面优化**
+
+    * 撰写独特且高质量的内容
+    * 明确定位搜索意图和长尾关键词
+    * 在需要时创建内容详尽的页面
+    * 保持内容及时更新且高度相关
+    * 使用清晰的标题和语义化 HTML
+    * 在重要页面添加 JSON-LD schema
+
+    **图片**
+
+    * 压缩大尺寸图片
+    * 添加具有描述性的替代文本（alt 文本）
+    * 使用高效格式（WebP/AVIF、SVG）
+
+    **内部链接**
+
+    * 使用具有描述性、包含关键词的锚文本
+    * 将相关页面相互链接
+    * 确保重要页面获得多条内部链接
+
+    **技术**
+
+    * 优化 Core Web Vitals
+    * 使用内置的 **Speed tool** 及早发现性能回退
+    * 确保在移动端具有良好可用性
+    * 为每个页面设置正确的 metadata
+    * 维护准确的 sitemap 和 robots.txt
+    * 使用**自定义域名**并将其设置为**主域名**
+    * 在 Google Search Console 中验证你的域名
+
+    **反向链接**
+
+    * 创建值得被链接的内容（指南、工具、研究）
+    * 在相关网站撰写客座文章
+    * 与互补型业务建立合作关系
+    * 将你的网站提交到权威目录网站
+    * 分享具有新闻价值的更新，并积极参与所在社区
+  </Accordion>
+
+  <Accordion title="Google 需要多长时间才能索引我的页面？">
+    索引通常需要 **数小时到数天**。你可以通过以下方式加快收录速度：
+
+    * 在 Google 搜索控制台（GSC）中提交站点地图（sitemap）
+    * 使用 URL 检查工具（URL Inspection）测试页面
+    * 使用 **Request Indexing** 功能为重要页面请求优先索引
+  </Accordion>
+
+  <Accordion title="如果没有看到自己页面的排名，该怎么办？">
+    当某个页面没有出现在搜索结果中时，先核查这些关键点：
+
+    * 通过 GSC 的 Coverage 或 URL Inspection 检查该页面是否已被索引
+    * 确认已提交 sitemap 且其中包含该 URL
+    * 检查内容质量、搜索意图匹配度，以及页面内 SEO，比如标题、描述、标题层级和内部链接
+    * 确认技术状况良好：性能评分良好、在移动端完全可用，且没有被阻止的 JavaScript 或 CSS
+  </Accordion>
+
+  <Accordion title="在哪些情况下，Lovable 适合用于 SEO 和 GEO，而什么时候你应该考虑使用 SSR 或预渲染（prerendering）？">
+    Lovable 在许多 SEO 和 GEO 场景下表现良好，尤其适合你可以有规划地管理元数据、内部链接和站点地图的小型到中型网站。
+
+    ### **适用场景**
+
+    * 营销网站和登录页
+    * 初创公司或企业官网
+    * 简单的博客或文档站点（约 200 页以内）
+    * 作品集和个人网站
+    * 内部工具和仪表盘（不需要 SEO）
+    * 需要登录后访问的应用（不应被索引）
+    * 小型站点（5–20 页），元数据易于维护
+    * 主要由推荐、社交流量、付费渠道或产品驱动增长的项目
+    * 以内容为主的博客（约 50+ 篇文章），并且持续维护更新
+    * 中型电商网站（数百个商品），对元数据有精细管理
+
+    **为什么在这些场景下 SEO 和 GEO 效果较好**
+
+    * 页面数量可控，更容易保持元数据和站点地图的准确性
+    * Google 能可靠地渲染 CSR 站点，因此内容依然可以被索引和排名
+    * 在 Lovable 上进行性能和移动端优化相对简单
+    * 你可以手动维护最关键的要素：标题、描述、schema、OG 标签和内部链接
+
+    ### **何时 SSR 或预渲染会更有帮助**
+
+    对于一些大型或竞争非常激烈的项目，通过服务器渲染或预渲染页面，可以在提升爬取效率和预览可靠性方面对 Lovable 起到补充作用。
+
+    * 超大规模站点（数百到数千页，大型目录或大规模博客内容库）
+    * 以自然搜索作为主要增长渠道的项目
+    * 竞争极为激烈或高度时效性的垂直领域（新闻、金融、法律）
+    * 以获得最大 AI/LLM 可见性为优先目标的项目
+
+    **为什么这些场景更适合 SSR 或预渲染**
+
+    * 大型站点需要对元数据和站点地图进行自动化管理
+    * SSR/预渲染可以加快搜索引擎对初始内容的发现
+    * 不运行 JavaScript 的社交平台和 AI 爬虫可以立即获得完整的预览
+  </Accordion>
+
+  <Accordion title="使用自定义域名能帮助我的网站在搜索结果中获得更高的排名吗？">
+    是的。如果你希望获得以下效果，将站点切换到**自定义域名**是最能产生影响的升级之一：
+
+    * 自然搜索流量
+    * 强有力、长期的品牌形象
+    * 具有竞争力的 SEO
+    * 会随时间增值的反向链接
+    * 对技术 SEO 的完全掌控
+
+    在 Lovable 中，你可以：
+
+    * 连接你自己的域名或子域名
+    * 选择一个**主域名**（所有其他域名都会重定向到它）
+
+    在完成自定义域名的设置后，[**在 Google Search Console 中验证它**](#google-search-console-gsc-setup)，这样 Google 才能抓取并索引正确的域名。有关详细的设置步骤，请参见[**自定义域名**](/zh/features/custom-domain)。
+
+    `lovable.app` 子域名在以下场景下依然非常适用：
+
+    * MVP 和演示
+    * 临时或实验性的着陆页
+    * 内部工具
+    * 主要依赖社交流量或付费流量的项目
+  </Accordion>
+
+  <Accordion title="AI 搜索引擎（Perplexity、ChatGPT、Gemini、Claude）能索引 Lovable 应用吗？">
+    许多 AI 爬虫通常不会执行 JavaScript，因此它们依赖于能获取到的初始 HTML。也就是说，它们可能看不到在客户端渲染的内容。
+
+    你仍然可以通过以下方式，让你的内容更容易被这些爬虫访问和理解：
+
+    * 使用结构清晰、语义良好的 HTML，并将关键信息放在静态内容中
+    * 提供完整的 Schema 标记
+    * 提供一个专门的 LLM 摘要页面，例如 `/llm.html` 或 `/about-ai.html`，并将其包含在 sitemap 中
+    * 提供清晰、便于引用的内容（术语定义、FAQ 问答、简短的事实性回答）
+  </Accordion>
+
+  <Accordion title="我应该多久更新一次 SEO 设置、内容和网站地图？">
+    * **网站地图：** 每当 URL 发生变化时更新，或对于活跃站点至少每月更新一次。
+    * **元数据（标题和描述）：** 每月检查一次，优先优化点击率较低的页面。
+    * **性能：** 每月运行 Lighthouse 检查，并查看核心网页指标（Core Web Vitals：LCP、INP、CLS），及早发现速度或可用性方面的问题。
+    * **技术审计：** 每季度检查一次 canonical、robots.txt、schema、站内链接、重定向和移动端可用性。
+    * **内容：** 对重要内容每季度进行更新或扩展，如果排名或流量下降，则需更早更新。
+  </Accordion>
+
+  <Accordion title="什么是预渲染？什么时候需要使用它？">
+    预渲染（也称为动态渲染）会专门为爬虫机器人生成一个静态 HTML 快照，而人类访客仍然看到由 JavaScript 驱动的应用。这可以提升搜索引擎和 AI 爬虫理解你内容的速度。
+
+    预渲染在以下情况中特别有用：
+
+    * 内容量较大的网站
+    * 频繁发布新页面的网站
+    * 注重 SEO 或竞争激烈的细分领域
+    * 需要更快被收录的项目
+    * 需要更高 AI/LLM 可见度的场景，因为许多爬虫不会运行 JavaScript，并且能从完整渲染的 HTML 中获益
+
+    Lovable 默认不内置预渲染功能，但你可以通过托管服务或代理，结合以下外部服务来实现：
+
+    * [Prerender.io](https://Prerender.io)：广泛使用且可靠的选择
+    * [DataJelly](https://datajelly.app/)：功能相似，设置简单
+    * [Rendertron](https://github.com/GoogleChrome/rendertron)：开源替代方案（自托管）
+  </Accordion>
+
+  <Accordion title="CSR 在 SEO 方面有哪些主要限制？我该如何应对这些限制？">
+    客户端渲染（CSR）适用于很多站点，但要获得最佳的 SEO、GEO 和预览效果，需要注意以下几点。你可以这样处理：
+
+    * **索引速度可能会比 SSR 略慢**
+      → 为优先级较高的页面提交 sitemap，并使用 URL Inspection 工具。
+    * **许多 AI 爬虫和部分机器人不会运行 JavaScript**
+      → 使用清晰的语义化 HTML 和 schema，并考虑添加一个 LLM 摘要页面。
+    * **社交平台在生成链接预览时不会执行 JavaScript**
+      → 直接在静态 HTML 中添加 Open Graph 和 Twitter/X Card 标签。
+    * **不同路由之间的 metadata 不会自动更新**
+      → 让 Lovable 安装 `react-helmet-async`，并为每个页面设置唯一的标题和描述。
+  </Accordion>
+</AccordionGroup>

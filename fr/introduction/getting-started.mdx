@@ -1,0 +1,263 @@
+---
+title: "Premiers pas"
+description: "Du premier Prompt à l’app full‑stack"
+icon: "stairs"
+---
+
+<div id="overview-of-lovable">
+  ## Aperçu de Lovable
+</div>
+
+Bienvenue dans ce guide pas à pas pour créer une application full‑stack avec Lovable :
+
+![Lovable Dashboard Pn](/images/lovable-dashboard.png)
+
+<div id="the-lovable-platform-overview">
+  ### Présentation de la plateforme Lovable
+</div>
+
+<AccordionGroup>
+  <Accordion title="Créer votre premier projet">
+    <Steps>
+      <Step title="Étape 1">
+        Pour commencer, rendez-vous sur [lovable.dev](https://lovable.dev) et créez un compte. Une fois inscrit, vous pourrez créer votre premier projet.
+      </Step>
+
+      <Step title="Étape 2">
+        Saisissez simplement un prompt initial pour démarrer, et Lovable fera le reste ! C&#39;est le **point de départ** de tout projet sur Lovable, où vous pouvez donner vie à vos idées instantanément.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Tableau de bord Lovable">
+    Chez Lovable, la simplicité est essentielle :
+
+    * [**Ici**](https://lovable.dev/) **vous lancez votre projet** avec un simple prompt.
+    * **Explorez tous les projets**, y compris les plus récents et les projets mis en avant.
+    * **Démarrez avec un modèle** issu de notre sélection soigneusement choisie.
+    * **Personnalisez votre expérience** en affichant et en modifiant votre profil.
+    * [**Gérez votre compte**](https://lovable.dev/settings) pour vérifier vos crédits mensuels et ajuster vos paramètres.
+    * **Expérimentez avec les fonctionnalités** [**Labs**](https://lovable.dev/settings/account) **comme Chat mode — activez-les ou désactivez-les.**
+    * [**Mettez à niveau ou rétrogradez**](https://lovable.dev/settings/plans) **votre formule** en toute simplicité.
+  </Accordion>
+
+  <Accordion title="Vue d'ensemble du projet">
+    Dans Lovable, chaque projet suit un workflow structuré :
+
+    * **Modifiez facilement** grâce à une interface de chat.
+    * **Joignez des images** pour des modifications précises et pour vous inspirer.
+    * **Sélectionnez et modifiez visuellement les composants** pour une expérience de conception fluide.
+    * **Basculez facilement** entre le mode édition et Chat mode.
+    * **Suivez les modifications** avec l&#39;historique des versions et revenez à n&#39;importe quelle version précédente.
+    * **Naviguez facilement entre les pages** de votre projet.
+    * **Activez le remixage** ou renommez votre projet selon vos besoins.
+    * **Utilisez Lovable Cloud** (ou intégrez Supabase) pour les fonctionnalités backend.
+    * **Collaborez via GitHub** pour modifier et gérer votre code.
+    * **Publiez, déployez et partagez** votre projet avec un lien d&#39;aperçu (pensez à republier après des modifications).
+    * **Basculez entre la vue web et la vue mobile** pour un design responsive.
+    * **Actualisez la fenêtre modale d&#39;aperçu** pour voir immédiatement les mises à jour.
+    * **Ouvrez directement votre projet** en utilisant le lien d&#39;aperçu.
+  </Accordion>
+
+  <Accordion title="Paramètres du projet">
+    Les paramètres de chaque projet vous permettent de :
+
+    * **Afficher les principaux détails du projet** comme le nombre total de modifications et la date de création.
+    * **Configurer des connaissances personnalisées** pour adapter le contexte de votre projet.
+    * **Connecter un dépôt GitHub** pour une collaboration fluide.
+    * **Ajuster la visibilité du projet** selon vos besoins.
+    * **Gérer l&#39;affichage du badge** (disponible uniquement pour les offres payantes).
+    * **Renommer votre projet** à tout moment.
+    * **Supprimer votre projet** (⚠️ zone à risques).
+  </Accordion>
+
+  <Accordion title="Accès rapide au projet">
+    Vous pouvez toujours accéder rapidement à :
+
+    * **Tableau de bord** pour une vue d&#39;ensemble de vos projets.
+    * **Paramètres du compte** pour gérer votre profil et vos préférences.
+    * **Documentation et Support client** pour obtenir des conseils et de l&#39;aide.
+    * **Déconnexion** en toute sécurité de votre compte Lovable.
+  </Accordion>
+</AccordionGroup>
+
+<div id="start-your-project">
+  ### Démarrer ton projet
+</div>
+
+Il existe plusieurs façons de commencer avec Lovable, selon tes préférences et tes ressources :
+
+<AccordionGroup>
+  <Accordion title="Prompt">
+    Le système basé sur les Prompt de Lovable simplifie la création d’applications.
+
+    * Décris simplement ce que tu veux construire dans le champ de Prompt.
+    * Plus tu es précis, meilleurs seront les résultats.
+    * Commence avec des invites claires et détaillées.
+    * Tu peux affiner et ajuster ton projet au fur et à mesure.
+
+    <Info>
+      Exemple :
+
+      *« Crée un tableau de bord avec connexion utilisateur, ventes mensuelles dans un graphique en courbes et données démographiques des clients dans un graphique en secteurs. »*
+    </Info>
+  </Accordion>
+
+  <Accordion title="Remixer un projet existant">
+    Tu peux remixer un projet public existant ou l’un de tes propres projets. Le Remixage te permet de réutiliser l’état actuel d’un projet comme point de départ et de construire dessus. C’est un excellent moyen d’explorer de nouvelles idées, d’apporter des ajustements ou d’itérer avec différentes modifications tout en préservant la version originale.
+
+    <Note>
+      Tu peux uniquement remixer les projets publics d’autres utilisateurs si le projet n’est pas connecté à Supabase.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Utiliser Figma">
+    Si tu as une maquette dans Figma, prends une capture d’écran de n’importe quelle partie de celle-ci. Tu peux coller la capture directement dans Lovable ou faire glisser le fichier image. Une fois que tu appuies sur Entrée, Lovable convertira ta maquette en code fonctionnel.
+  </Accordion>
+
+  <Accordion title="Utiliser un croquis">
+    <Steps>
+      <Step title="Étape 1">
+        Utilise [**Excalidraw**](https://excalidraw.com/) ou tout autre outil similaire pour esquisser ton interface.
+      </Step>
+
+      <Step title="Étape 2">
+        Prends une capture d’écran de ton dessin, puis colle-la ou fais-la glisser dans Lovable. La plateforme transformera ton croquis en code fonctionnel.
+      </Step>
+    </Steps>
+
+    [Plus d’informations ici.](https://www.youtube.com/watch?v=c0zhLzcVJRI)
+  </Accordion>
+
+  <Accordion title="Cloner un site web ou une application">
+    Si tu veux reproduire une page web existante :
+
+    <Steps>
+      <Step title="Étape 1">
+        Prends une capture d’écran en utilisant des raccourcis comme *Cmd+Shift+4* sur Mac ou des outils comme l’extension Chrome [GoFullPage](https://chromewebstore.google.com/detail/gofullpage-full-page-scre/fdpohaocaechififmbbbbbknoalclacl).
+      </Step>
+
+      <Step title="Étape 2">
+        Colle ou fais glisser la capture d’écran dans Lovable. Lovable recréera la structure de la page web dans ton projet.
+      </Step>
+    </Steps>
+
+    [Plus d’informations ici.](https://www.youtube.com/watch?v=tYDqBMilHkM)
+  </Accordion>
+</AccordionGroup>
+
+<div id="edit-your-project">
+  ### Modifier votre projet
+</div>
+
+<AccordionGroup>
+  <Accordion title="Ajouter des connaissances personnalisées à votre projet">
+    La fonctionnalité [Custom knowledge](/fr/features/knowledge) dans Lovable sert de **plan directeur** pour votre projet, en regroupant fonctionnalités, design et objectifs au même endroit.
+  </Accordion>
+
+  <Accordion title="Utiliser Visual Edits">
+    Visual Edits vous permet de sélectionner des éléments sur la page et soit de les modifier instantanément (par exemple mettre à jour du texte ou des couleurs), soit d&#39;utiliser des prompts pour ajuster les fonctionnalités et la mise en page.
+
+    Consultez [Visual Edits](https://docs.lovable.dev/features/visual-edit) pour plus d&#39;informations.
+  </Accordion>
+
+  <Accordion title="Annuler une modification ou modifier un message et revenir en arrière pour essayer une autre approche">
+    La vitesse est importante lorsque vous créez des applications pilotées par l&#39;IA, mais la stabilité et le contrôle le sont tout autant. C&#39;est pourquoi nous avons amélioré la gestion des versions pour rendre le suivi des modifications simple et fluide.
+
+    <Steps>
+      <Step title="Revenir instantanément à des versions antérieures ou essayer une autre approche">
+        Vous pouvez afficher un aperçu d&#39;une ancienne version fonctionnelle, puis revenir à cette version si nécessaire, ou modifier un message passé et revenir en arrière pour explorer une autre approche. Rien n&#39;est perdu — toutes les modifications effectuées après ce point restent dans la discussion et peuvent être réappliquées à tout moment.
+      </Step>
+
+      <Step title="Ajouter aux favoris les modifications clés">
+        Gardez votre travail organisé en ajoutant aux favoris les modifications importantes, ce qui permet de les retrouver et de les revisiter facilement plus tard.
+      </Step>
+
+      <Step title="Historique des versions intuitif">
+        Le panneau d&#39;historique fonctionne désormais comme dans Google Docs, ce qui facilite le suivi des modifications.
+
+        ![](/images/history.png)
+
+        ![](/images/redesign-history.jpeg)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Ajouter un composant d'animation avec 21st dev">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/MJ9pB741sXw?si=7vPZVpe0TyHIgTLp" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+
+  <Accordion title="Ajouter des images au prompt">
+    Joignez des images directement à la discussion pour ajouter du contexte à vos invites. Cela facilite l&#39;illustration d&#39;idées ou de concepts qui sont plus parlants en image qu&#39;en texte.
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/uaGnrK5Dkkc" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+  </Accordion>
+
+  <Accordion title="Ajouter une nouvelle page à votre projet">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/h6vnvFKzd0Y?si=cw_zapDQW3hQfVOc" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+
+  <Accordion title="Refactoriser du code">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/epVlkdNSVrs?si=ufy8WTXkPcpbhkW6" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Accordion>
+
+  <Accordion title="Connecter votre projet à GitHub">
+    Intégrez votre projet avec GitHub pour itérer sur votre application en toute fluidité. Vous pouvez apporter des modifications au code dans GitHub ou dans votre IDE préféré, tout en gardant tout synchronisé avec Lovable.
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/zgNkhU4SYgQ" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+    Voir l&#39;[intégration GitHub](https://docs.lovable.dev/integrations/git-integration) pour plus d&#39;informations.
+  </Accordion>
+</AccordionGroup>
+
+<div id="add-fullstack-capabilities-to-your-project">
+  ### Ajouter des fonctionnalités full‑stack à votre projet
+</div>
+
+<AccordionGroup>
+  <Accordion title="Connecter un backend">
+    Si vous devez ajouter des fonctionnalités de backend à votre application, vous pouvez :
+
+    * Connecter le backend intégré de Lovable : [Lovable Cloud](https://docs.lovable.dev/features/cloud)
+    * Utiliser l&#39;intégration native [Supabase](https://docs.lovable.dev/integrations/supabase) de Lovable
+  </Accordion>
+
+  <Accordion title="Ajouter des fonctionnalités de paiement à votre application avec Stripe">
+    Il existe de nombreuses façons de connecter Stripe à Lovable, mais la manière la plus simple consiste à utiliser les liens de paiement intégrés de Stripe. Consultez l&#39;[intégration Stripe](https://docs.lovable.dev/integrations/stripe) pour plus d&#39;informations.
+  </Accordion>
+
+  <Accordion title="Ajouter des fonctionnalités e‑mail avec Resend">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/w5Xq-Kvt3J0?si=wdSxtbhg3-uH3NZt" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+    Consultez l&#39;[intégration Resend](https://docs.lovable.dev/integrations/resend) pour plus d&#39;informations.
+  </Accordion>
+</AccordionGroup>
+
+<div id="deploy-and-publish-your-project">
+  ### Déployer et publier votre projet
+</div>
+
+<AccordionGroup>
+  <Accordion title="Configurer le SEO">
+    Obtenez les meilleurs résultats en suivant notre guide [Mettre en œuvre les bonnes pratiques SEO et GEO](https://docs.lovable.dev/tips-tricks/seo-geo).
+  </Accordion>
+
+  <Accordion title="Ajouter un domaine personnalisé">
+    Vous pouvez ajouter un domaine personnalisé à l&#39;aide de :
+
+    * Entri (intégré à Lovable)
+    * Netlify
+    * Vercel
+    * Namecheap
+
+    Consultez [Domaine personnalisé](https://docs.lovable.dev/features/custom-domain) pour plus d&#39;informations.
+  </Accordion>
+
+  <Accordion title="Publier mon projet">
+    Une fois que votre projet est prêt, publiez-le pour générer une URL partageable. Cela facilite la présentation de votre application ou son partage avec vos collaborateurs et autres intervenants.
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/GFtWVXkZDTw" title="Lecteur vidéo YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+    Consultez [Publier](https://docs.lovable.dev/features/publish) pour plus d&#39;informations.
+  </Accordion>
+</AccordionGroup>

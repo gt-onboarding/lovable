@@ -1,0 +1,423 @@
+---
+title: "Configurar el inicio de sesión único (SSO)"
+sidebarTitle: "Inicio de sesión único (SSO)"
+description: "Configura el inicio de sesión único (SSO) de Lovable usando OIDC o SAML 2.0 con tu proveedor de identidad para una autenticación centralizada y segura en tu espacio de trabajo."
+icon: "shield-keyhole"
+keywords: ["inicio de sesión único","sso","configuración de SSO","configurar SSO","integración de SSO","SSO para empresas","forzar SSO","proveedor de identidad","OIDC","SAML","Okta SSO","Auth0 SSO","Microsoft Entra ID SSO","Azure AD SSO"]
+---
+
+El inicio de sesión único (SSO) está disponible en los planes **Business** y **Enterprise** y permite una autenticación segura y centralizada en toda tu organización. Con SSO, los usuarios pueden acceder a Lovable con un único conjunto de credenciales, lo que simplifica la gestión de accesos y mejora la seguridad.
+
+<Note>
+  **Solo inicio de sesión iniciado por el proveedor de servicios (SP):** los usuarios deben iniciar sesión desde Lovable (SP).
+
+  El **SSO iniciado por el proveedor de identidad (IdP)** (empezando desde un acceso directo en el panel del IdP) **no es compatible**.
+</Note>
+
+<div id="supported-sso-protocols">
+  ## Protocolos de SSO compatibles
+</div>
+
+Lovable es compatible con los protocolos **OIDC** y **SAML 2.0**, lo que permite integrarse con los principales **proveedores de identidad (IdP)**, incluidos Okta, Auth0, Microsoft Entra ID (Azure AD) y otros.
+
+- **OpenID Connect (OIDC)**: recomendado; una capa de identidad moderna basada en OAuth 2.0 que proporciona verificación de identidad.
+- **SAML (Security Assertion Markup Language) 2.0**: protocolo basado en XML para intercambiar datos de autenticación y autorización, ampliamente utilizado en entornos empresariales.
+
+<div id="prerequisites">
+  ## Requisitos previos
+</div>
+
+Para conectar tu proveedor de identidad con Lovable mediante OIDC o SAML, necesitas:
+
+- **Acceso de administrador al IdP** (Okta, Auth0, Microsoft Entra ID u otro proveedor que estés usando)
+- **Rol de propietario o administrador del espacio de trabajo de Lovable**
+- Un **dominio verificado** en Lovable
+
+<div id="start-sso-setup-in-lovable">
+  ## Inicia la configuración de SSO en Lovable
+</div>
+
+La configuración de SSO es una **configuración bidireccional** entre Lovable y tu proveedor de identidad:
+
+- **Lovable → IdP:** copia las URL y los ajustes de Lovable en la aplicación de tu IdP.
+- **IdP → Lovable:** copia el emisor (issuer), los metadatos y los certificados de tu IdP nuevamente en Lovable.
+
+El **propietario** o el **administrador** del espacio de trabajo pueden configurar SSO. Para empezar, ve a **Settings → Workspace → Identity → Add SSO provider**, luego elige **OIDC** o **SAML**.
+
+<div id="idp-configuration-reference">
+  ### Referencia de configuración del IdP
+</div>
+
+Cuando inicias la configuración del proveedor de SSO en Lovable, verás:
+
+- **Qué configurar en tu IdP** (por ejemplo, tipo de aplicación, scopes y asignaciones de atributos)
+- **URLs e identificadores de Lovable** que quizá tengas que introducir en el IdP.
+
+Usa la siguiente referencia al configurar OIDC o SAML en tu IdP.
+
+<Tabs>
+  <Tab title="OIDC">
+    - Tipo de aplicación: `Web Application`
+    - Tipo de concesión (grant type): `Authorization Code`
+    - Método de token: `POST` (si es configurable)
+    - URI de redirección para copiar y añadir a tu IdP: `https://auth.lovable.dev/__/auth/handler`
+    - Scopes de OAuth:
+      - Obligatorios: `openid`, `email`
+      - Recomendado: `profile`
+  </Tab>
+  <Tab title="SAML">
+    - URL de ACS (Assertion Consumer Service): `https://auth.lovable.dev/__/auth/handler`
+    - ID de entidad del SP / URI de audiencia: `https://auth.lovable.dev/__/auth/handler`
+    - Asignaciones de atributos:
+      - `email` (obligatorio): asegúrate de que el formato esté establecido en `EmailAddress`
+      - `displayName` (recomendado): asigna el nombre completo del usuario
+      - `photoURL` (recomendado): asigna la URL de la foto de perfil del usuario
+  </Tab>
+</Tabs>
+
+<div id="provider-specific-setup-guides">
+  ## Guías de configuración específicas del proveedor
+</div>
+
+Si usas Okta, Auth0 o Microsoft Entra, puedes encontrar documentación específica de cada proveedor para configurar SSO. Si usas otro proveedor, consulta [Configurar otros proveedores](#configure-other-providers).
+
+Antes de comenzar, completa [Iniciar la configuración de SSO en Lovable](#start-sso-setup-in-lovable) para obtener la configuración y los valores que necesitas usar en tu IdP.
+
+<div id="configure-okta-as-your-sso-provider">
+  ### Configura Okta como tu proveedor de SSO
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <Steps>
+      <Step title="Crea una aplicación en Okta Admin Console">
+        - En **Applications**, haz clic en **Create App Integration** y selecciona **OIDC**. Luego selecciona el tipo de aplicación **Web Application**.
+        - Asigna un nombre a la aplicación, por ejemplo `Lovable OIDC SSO`.
+      </Step>
+      <Step title="Configura la integración OIDC">
+        - Establece **Grant type** en `Authorization Code`.
+        - Elimina las URIs de redirección predeterminadas.
+        - Añade la URL de redirección de Lovable en las **Sign-in redirect URIs** de Okta: `https://auth.lovable.dev/__/auth/handler`
+        - En **Assignments**, asigna la aplicación a los usuarios/grupos que deban acceder a Lovable.
+      </Step>
+      <Step title="Guarda la aplicación">
+        Haz clic en **Save**. Tu aplicación se ha creado en Okta.
+      </Step>
+      <Step title="Configura la Okta Issuer URL">
+        En Okta, ve a **Sign On → OpenID Connect ID Token**, selecciona **Okta URL** en el menú desplegable **Issuer** y haz clic en **Save**.
+      </Step>
+      <Step title="Proporciona a Lovable la información de tu IdP">
+        En Okta, copia el siguiente valor de la pestaña **Sign On** e introdúcelo en Lovable.
+
+        - Okta `Issuer URL` → Lovable `OIDC Issuer URL/Discovery Endpoint`
+
+        En Okta, copia los siguientes valores de la pestaña **General** e introdúcelos en Lovable.
+
+        - Okta `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - Okta `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+      <Step title="(Opcional) Prueba la configuración en Lovable">
+        En Lovable, haz clic en **Test configuration**. Si todo está configurado correctamente, la validación debería completarse correctamente.
+      </Step>
+      <Step title="Finaliza la configuración del proveedor OIDC en Lovable">
+        En Lovable, haz clic en **Configure provider** para finalizar la configuración de Okta como tu proveedor de SSO OIDC.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="Crea una aplicación en Okta Admin Console">
+        - En **Applications**, haz clic en **Create App Integration** y selecciona **SAML 2.0**.
+        - Asigna un nombre a la aplicación, por ejemplo `Lovable SAML SSO`.
+      </Step>
+      <Step title="Configura los parámetros de SAML">
+        - Single sign-on URL: `https://auth.lovable.dev/__/auth/handler`
+        - Audience URI (SP Entity ID): `https://auth.lovable.dev/__/auth/handler`
+        - Name ID format: `EmailAddress`
+      </Step>
+      <Step title="Guarda la aplicación">
+        Haz clic en **Finish.** Tu aplicación se ha creado en Okta.
+      </Step>
+      <Step title="Proporciona a Lovable la información de tu IdP">
+        En Okta, ve a **Sign On → SAML 2.0 → Metadata details**, copia la **Metadata URL** y ábrela en una nueva pestaña.
+
+        Copia los siguientes valores de la **Metadata URL** e introdúcelos en Lovable:
+
+        - Okta `SingleSignOnService Location` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Okta `EntityID` → Lovable `Identity Provider Entity ID / Issuer`
+        - Okta `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            Pega el valor del certificado entre las líneas `-----BEGIN CERTIFICATE-----` y `-----END CERTIFICATE-----`.
+          </Note>
+      </Step>
+      <Step title="Finaliza la configuración del proveedor SAML en Lovable">
+        En Lovable, haz clic en **Configure SAML Provider → Confirm & Enable SSO** para finalizar la configuración de Okta como tu proveedor de SSO SAML.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-auth0-as-your-sso-provider">
+  ### Configurar Auth0 como tu proveedor de SSO
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <Steps>
+      <Step title="Crear una aplicación en Auth0 Admin Dashboard">
+        - En **Applications**, haz clic en **Create application**. Selecciona el tipo de aplicación **Regular Web Applications**.
+        - Asigna un nombre a la app, por ejemplo `Lovable OIDC SSO`.
+        - Haz clic en **Create**.
+      </Step>
+      <Step title="Configurar Allowed Callback URLs">
+        En Auth0, ve a la configuración de tu aplicación, agrega las **Allowed Callback URLs**: `https://auth.lovable.dev/__/auth/handler` y haz clic en **Save**.
+      </Step>
+      <Step title="Proporcionar a Lovable la información de tu IdP">
+        En Auth0, copia los siguientes valores de la pestaña **Settings** e introdúcelos en Lovable.
+
+        - Auth0 `Domain` → Lovable `OIDC Issuer URL/Discovery Endpoint` (incluye `https://`)
+        - Auth0 `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - Auth0 `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+      <Step title="(Opcional) Probar la configuración en Lovable">
+        En Lovable, haz clic en **Test configuration**. Si configuraste todo correctamente, la validación debería completarse correctamente.
+      </Step>
+      <Step title="Finalizar la configuración del proveedor OIDC en Lovable">
+        En Lovable, haz clic en **Configure provider** para finalizar la configuración de Auth0 como tu proveedor de SSO OIDC.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="Crear una aplicación en Auth0 Admin Dashboard">
+        - En **Applications**, haz clic en **Create application**. Selecciona el tipo de aplicación **Regular Web Applications**.
+        - Asigna un nombre a la app, por ejemplo `Lovable SAML SSO`.
+        - Haz clic en **Create**.
+      </Step>
+      <Step title="Configurar Allowed Callback URLs">
+        En Auth0, ve a la configuración de tu aplicación, agrega las **Allowed Callback URLs**: `https://auth.lovable.dev/__/auth/handler` y haz clic en **Save**.
+      </Step>
+      <Step title="Configurar SAML2 Web App Add-on">
+        - En Auth0, ve a **Addons** y habilita **SAML2 Web app**.
+        - En **Addon: SAML2 Web app → Settings**, configura lo siguiente:
+          - Application Callback URL: `https://auth.lovable.dev/__/auth/handler`
+          - Settings: pega el siguiente JSON de `mappings`
+
+        ```json
+            {
+              "mappings": {
+                "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+              },
+              "nameIdentifierFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+            }
+        ```
+
+        - Haz clic en **Enable.**
+      </Step>
+      <Step title="Proporcionar a Lovable la información de tu IdP">
+        En **Auth0 → Addon: SAML2 Web app → Usage**, copia los siguientes valores de **SAML Protocol Configuration Parameter** e introdúcelos en Lovable.
+
+        - Auth0 `Identity Provider Login URL` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Auth0 `Issuer` → Lovable `Identity Provider Entity ID / Issuer`
+        - Auth0 `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            Descarga el certificado de Auth0 y copia el valor de `X509Certificate`. Pega el valor del certificado entre las líneas `-----BEGIN CERTIFICATE-----` y `-----END CERTIFICATE-----`.
+          </Note>
+      </Step>
+      <Step title="Finalizar la configuración del proveedor SAML en Lovable">
+        En Lovable, haz clic en **Configure SAML Provider → Confirm & Enable SSO** para finalizar la configuración de Auth0 como tu proveedor de SSO SAML.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-microsoft-entra-id-as-your-sso-provider">
+  ### Configura Microsoft Entra ID como tu proveedor de SSO
+</div>
+
+<Tabs>
+  <Tab title="SAML">
+    <Steps>
+      <Step title="Crea una app empresarial en el centro de administración de Microsoft Entra">
+        - En **Enterprise applications**, selecciona **New application**.
+        - Selecciona **Create your own application** y elige **Integrate any other application you don’t find in the gallery (Non-gallery)**.
+        - Asigna un nombre a la app, por ejemplo `Lovable SAML SSO`.
+        - Haz clic en **Create**. Tu aplicación ya está creada.
+      </Step>
+      <Step title="Configura SAML SSO">
+        En Microsoft Entra, ve a la página de configuración de **Single sign-on** y selecciona **SAML**. En **Basic SAML Configuration**, introduce lo siguiente:
+
+        - Identifier (Entity ID): `https://auth.lovable.dev/__/auth/handler`
+        - Reply URL (Assertion Consumer Service URL): `https://auth.lovable.dev/__/auth/handler`
+
+        Deja los demás valores en blanco y selecciona **Save**.
+      </Step>
+      <Step title="Proporciona a Lovable la información de tu IdP">
+        Cuando hayas configurado la aplicación, copia los siguientes valores e introdúcelos en Lovable.
+
+        - Microsoft Entra `Login URL` → Lovable `SAML SSO Sign-on URL from your IdP`
+        - Microsoft Entra `Microsoft Entra Identifier` → Lovable `Identity Provider Entity ID / Issuer`
+        - Microsoft Entra `X509Certificate` → Lovable `X.509 Signing Certificate (public key)`
+
+          <Note>
+            Puedes descargar el certificado (Base 64) o abrir la `App Federation Metadata URL` en una nueva pestaña y copiar el valor de `X509Certificate`. Pega el valor del certificado entre las líneas `-----BEGIN CERTIFICATE-----` y `-----END CERTIFICATE-----`.
+          </Note>
+      </Step>
+      <Step title="Finaliza la configuración del proveedor SAML en Lovable">
+        En Lovable, haz clic en **Configure SAML Provider → Confirm & Enable SSO** para finalizar la configuración de Microsoft Entra ID como tu proveedor de SAML SSO.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="configure-other-providers">
+  ## Configurar otros proveedores
+</div>
+
+Puedes configurar cualquier proveedor compatible con OIDC o SAML con el SSO de Lovable.
+
+Antes de comenzar, completa [Start SSO setup in Lovable](#start-sso-setup-in-lovable) para obtener la configuración y los valores que necesitas usar en tu IdP.
+
+<Tabs>
+  <Tab title="OIDC">
+    **Asignación de proveedor**
+
+    Nombres de campos comunes entre proveedores:
+
+    - Redirect URI: `Callback URL`, `Sign-in redirect URI`
+    - Issuer/Domain: `Issuer URL`, `Authority`, `Okta domain`, `Auth0 domain`, `Tenant domain`
+    - Client credentials: `Client ID` y `Client Secret`
+
+    **Pasos**
+
+    <Steps>
+      <Step title="Crear una app confidencial OIDC">
+        Crea una nueva aplicación web OIDC en tu proveedor de identidad.
+      </Step>
+      <Step title="Configurar la Redirect URI">
+        En Redirect/Callback URLs, agrega `https://auth.lovable.dev/__/auth/handler`
+      </Step>
+      <Step title="Habilitar los scopes requeridos">
+        Asegúrate de que los scopes `openid` y `email` estén habilitados y, si es necesario, se haya otorgado el consentimiento.
+      </Step>
+      <Step title="Proporcionar a Lovable la información de tu IdP">
+        En tu IdP, copia los siguientes valores e introdúcelos en Lovable:
+
+        - `Domain` o `Issuer URL` → Lovable `OIDC Issuer URL/Discovery Endpoint`
+        - `Client ID` → Lovable `OAuth Client ID/Application ID`
+        - `Client Secret` → Lovable `OAuth Client Secret`
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="SAML">
+    **Asignación de proveedor**
+
+    Nombres de campos comunes entre proveedores:
+
+    - ACS URL: `Single Sign-On URL`, `SSO URL`, `Reply URL`, `Assertion Consumer Service URL`
+    - Audience: `SP Entity ID`, `Audience URI`, `Identifier`
+    - Attribute mapping: `Attribute Statements`, `User Attributes & Claims`
+
+    **Pasos**
+
+    <Steps>
+      <Step title="Crear una aplicación SAML 2.0">
+        Crea una nueva aplicación SAML 2.0 en tu proveedor.
+      </Step>
+      <Step title="Configurar endpoints">
+        - ACS URL: `https://auth.lovable.dev/__/auth/handler`
+        - Audience / Entity ID: `https://auth.lovable.dev/__/auth/handler`
+      </Step>
+      <Step title="Mapear atributos">
+        Asegúrate de que `email` esté incluido en la aserción SAML. `displayName` es opcional.
+      </Step>
+      <Step title="Asignar usuarios">
+        Asigna la aplicación a los usuarios/grupos que deban acceder a Lovable.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<div id="troubleshooting">
+  ## Solución de problemas
+</div>
+
+<Tabs>
+  <Tab title="OIDC">
+    <AccordionGroup>
+      <Accordion title="Redirect URI no válida o que no coincide">
+        Asegúrate de que la URL de redirección/callback coincida exactamente con `https://auth.lovable.dev/__/auth/handler` en tu IdP.
+      </Accordion>
+      <Accordion title="Error en Issuer URL / discovery">
+        Usa la URL de emisor (Issuer) OIDC del proveedor (no solo el dominio).
+
+        - Para Okta, cópiala desde la pestaña **Sign-on**
+        - Para Auth0, usa el dominio de tu tenant.
+      </Accordion>
+      <Accordion title="Correo electrónico no devuelto">
+        Concede el scope `email` y asegúrate de que la cuenta de usuario tenga un correo electrónico principal.
+      </Accordion>
+      <Accordion title="Problemas con el flujo de autorización">
+        Usa `Authorization Code` con un cliente confidencial y su client secret. Evita los tipos de aplicaciones implícitas o solo PKCE.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="SAML">
+    <AccordionGroup>
+      <Accordion title="ACS o Audience no válidos">
+        Asegúrate de que tanto ACS como Audience/Entity ID coincidan exactamente con `https://auth.lovable.dev/__/auth/handler` en tu IdP.
+      </Accordion>
+      <Accordion title="Falta la claim de correo electrónico">
+        Asegúrate de asignar (mapear) una claim de correo electrónico.
+
+        Para Microsoft Entra ID, asigna `email` a `user.mail`. Si `user.mail` está vacío, usa `user.userprincipalname`.
+      </Accordion>
+      <Accordion title="Credenciales del proveedor no válidas">
+        Pega el certificado `X.509` correcto. Si el certificado se rota o renueva, actualízalo en Lovable.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+
+<div id="faq">
+  ## Preguntas frecuentes
+</div>
+
+<AccordionGroup>
+  <Accordion title="Ya tengo una cuenta, pero me estoy uniendo a un espacio de trabajo empresarial que usa SSO. ¿Cómo inicio sesión?">
+    Si creaste tu cuenta usando otro método de inicio de sesión (como correo electrónico/contraseña, Google o GitHub), primero tienes que iniciar sesión de esa manera. Una vez que hayas iniciado sesión, ve a **Settings → Your account → Link SSO**. Esto vinculará tu cuenta existente con el SSO de tu empresa.
+
+    <Note>
+      **Importante:** Si intentas iniciar sesión con SSO antes de vincular tu cuenta existente, verás un error. Esta es una medida de seguridad para evitar accesos no autorizados. Inicia sesión primero usando tu método original para completar el proceso de vinculación.
+    </Note>
+  </Accordion>
+  <Accordion title="¿Qué proveedores de SSO admite Lovable?">
+    Lovable admite los protocolos estándar de la industria OIDC y SAML, por lo que puedes integrarte con cualquier proveedor de SSO que los admita.
+  </Accordion>
+  <Accordion title="¿Lovable admite varios proveedores de SSO por espacio de trabajo?">
+    No. Un espacio de trabajo puede tener **un único proveedor de SSO activo** configurado a la vez.
+  </Accordion>
+  <Accordion title="¿Puedo exigir el uso de SSO para mi espacio de trabajo?">
+    Sí. El **propietario** o **administrador** del espacio de trabajo puede habilitar **Enforce SSO** en **Settings → Workspace → Identity** y elegir la **duración de la sesión** para configurar cuánto tiempo permanecen los usuarios conectados antes de requerir una nueva autenticación (24 horas, 48 horas o 7 días).
+
+    Esto exige que todos los miembros del espacio de trabajo usen SSO para la autenticación. Los colaboradores externos y los enlaces de invitación se deshabilitarán.
+  </Accordion>
+  <Accordion title="¿Lovable admite SSO iniciado por el IdP?">
+    No. El **SSO iniciado por el IdP** (con acceso desde un tile en el panel del IdP) no es compatible.
+
+    Lovable admite **solo inicio de sesión iniciado por el Proveedor de servicios (SP)**. Los usuarios deben iniciar sesión desde Lovable.
+  </Accordion>
+  <Accordion title="¿Lovable admite SCIM o el aprovisionamiento automático de usuarios?">
+    Lovable admite **aprovisionamiento JIT (just-in-time)**: las cuentas de usuario se crean automáticamente la primera vez que alguien inicia sesión mediante SSO y se añaden a tu espacio de trabajo de la empresa.
+
+    También puedes establecer un **rol predeterminado para usuarios creados por JIT** (admin, editor o viewer) que se aplicará cuando se unan mediante SSO por primera vez.
+  </Accordion>
+  <Accordion title="¿Cómo puedo encontrar mi tenant ID (identificador de inicio de sesión de SSO)?">
+    Tu tenant ID es el valor `{tenantId}` usado en tu **URL de inicio de sesión de SSO**:\
+    `https://lovable.dev/sso-login/{tenantId}`. Coincide con el **identificador de inicio de sesión de SSO** que definiste al configurar tu proveedor de SSO en Lovable.
+
+    También puedes encontrarlo en **Settings → Workspace → Identity** después de haber configurado tu proveedor.
+  </Accordion>
+</AccordionGroup>

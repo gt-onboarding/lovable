@@ -1,0 +1,159 @@
+---
+title: "连接自定义域名"
+sidebarTitle: "自定义域名"
+description: "了解如何在 Lovable 中连接、验证、排查故障并管理自定义域名"
+icon: "earth-europe"
+keywords: ["自定义域名","连接自定义域名","如何添加自定义域名","主域名","域名状态","SSL 证书","DNS 验证","DNS 配置"]
+---
+
+**自定义域名** 让你可以为已发布的 Lovable 项目使用你自己的域名或子域名。连接自定义域名后，访问者可以通过带有你品牌的 URL 访问你的应用，而不是使用默认的 `xxx.lovable.app` 项目 URL。
+
+连接自定义域名可以提升你网站的：
+
+* **品牌形象** - 看起来更值得信赖、更专业
+* **搜索引擎可见性** - 更好的 SEO 和曝光度/可发现性
+* **易记性** - 用户更容易分享和记住
+
+<div id="prerequisites">
+  ## 前提条件
+</div>
+
+要连接自定义域名，请确保：
+
+* 你订阅的是 Lovable 的付费方案。
+* 你的项目已发布。更多信息请参见 [发布你的应用](/zh/features/publish)。
+* 你拥有一个域名。你可以**直接在 Lovable 中购买域名**（通过 IONOS）。
+* 你**拥有要连接的域名或子域名的 DNS 设置访问权限**。在设置过程中，进行**所有权验证**时需要添加由 Lovable 提供的 DNS `A` 和 `TXT` 记录。
+
+<div id="connect-a-custom-domain">
+  ## 连接自定义域名
+</div>
+
+你可以通过 **自动** 设置（由 Entri 驱动）或 **手动** 配置 DNS，将域名连接到你已发布的 Lovable 项目。这两种方式都需要验证你对该域名的所有权。
+
+你可以从以下两个位置连接域名：
+
+* **项目 → 设置 → 域名（Domains）**
+* **发布弹窗 → 自定义域名**（可以在项目发布后进行）
+
+按照以下步骤连接自定义域名：
+
+1. 点击 **Connect domain**（连接域名）。
+2. 输入你的域名或子域名（例如 `yourdomain.com` 或 `blog.yourdomain.com`），点击 **Connect domain**，然后点击 **Continue**。
+
+   <Info>
+     在添加域名时，Lovable 不会自动添加 `www` 子域名。如果你希望两者都能使用，可以单独添加。
+   </Info>
+3. 现在，你可以通过两种方式连接你的域名：
+   * **使用 Entri 自动设置**：从列表中选择你的域名服务商，登录并授权 Entri 更新你的 DNS 记录。
+   * **手动设置**：如果你的 DNS 服务商不在列表中，滚动到 **Select your domain provider** 弹窗底部，并选择 **Go to our manual setup**。复制其中的 `A` 记录和 `TXT` 记录，并将它们直接输入到你的域名注册商后台。
+4. 点击 **Done**。等待完成验证并签发 SSL 证书。完成后，域名状态会变为 **Live**，你的 Lovable 应用即可通过该自定义域名访问。
+
+<Info>
+  DNS 变更的完全生效可能需要长达 **72 小时**，但在大多数情况下会在数小时内生效。
+</Info>
+
+<div id="domain-statuses">
+  ## 域名状态
+</div>
+
+域名会显示清晰的状态，用于反映验证进度、DNS 传播、SSL 证书准备情况，以及是否需要你进行操作。
+
+| Status               | Description                                                                                                                                                                                                                                       | User action                                                                                                                                                                                                 |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unpublished**      | 仅在项目尚未发布时，会显示在你的 `xxx.lovable.app` 项目 URL 上。                                                                                                                                                                                 | 发布该项目。                                                                                                                                                                                                |
+| **Ready**            | 域名已就绪，但项目处于未发布状态。项目重新发布后，状态会自动变为 **Live**。                                                                                                                                                                      | 发布该项目。                                                                                                                                                                                                |
+| **Action required**  | 自定义域名配置尚未完成。                                                                                                                                                                                                                          | 点击 **Complete setup** 完成连接。                                                                                                                                                                          |
+| **Verifying**        | 正在等待 DNS 记录传播。                                                                                                                                                                                                                           | 点击 **Check status** 查看最新状态并验证 DNS 记录。<br /><br />检查你的 `A` 和 `TXT` 记录是否已在**你的 DNS 服务商**处正确添加，特别是完整的 TXT 值。                                                      |
+| **Unable to verify** | DNS 验证未在一小时内完成。通常意味着你的 DNS 记录不正确或仍在传播中。<br /><br />**Note**：*DNS 传播最多可能需要 72 小时，但大多数更新会在数小时内生效。*                                                          | 点击 **Check again** 刷新状态并重新验证你的 DNS 记录。<br /><br />检查你的 `A` 和 `TXT` 记录是否已在**你的 DNS 服务商**处正确添加，特别是完整的 TXT 值。                                                    |
+| **Setting up**       | 验证已完成；正在签发 SSL 证书。                                                                                                                                                                                                                   | 无需操作；域名会自动变为 **Live** 或 **Failed.**                                                                                                                                                            |
+| **Failed**           | 已验证所有权，但无法签发 SSL 证书。                                                                                                                                                                                                               | 点击 **Retry** 再次尝试。                                                                                                                                                                                   |
+| **Live**             | 域名已上线，并正在为你的项目提供服务。                                                                                                                                                                                                            | 无需操作。                                                                                                                                                                                                  |
+| **Offline**          | 域名之前为 **Live**，但 DNS 记录已不再有效。你的域名不再指向你的项目。                                                                                                                                                                            | 点击 **Recover**。查看显示的 DNS 记录，并在**你的 DNS 服务商**处更新它们，以重新连接你的域名。                                                                                                             |
+| **Removed**          | 该域名已被移除，因为它被添加到了另一个项目，或者 DNS 验证从未完成（DNS 记录未正确添加或未完成传播）。                                                                                                                                            | 点击 **Reconnect** 再次连接该域名。                                                                                                                                                                         |
+
+你可以在任意时间移除某个域名，而不受其当前状态限制。
+
+<div id="primary-domain">
+  ## 主域名
+</div>
+
+Lovable 允许你将**一个域名设置为主域名**。
+
+* 域名状态必须为 **Live**，才能将其标记为主域名。点击你的域名旁边的三点菜单，然后点击 **Set as primary**。
+* 你为项目添加的第一个自定义域名会自动成为主域名（适用于 2025 年 10 月 29 日之后添加的域名）。
+* 如果某个域名是主域名，所有其他域名都会重定向到它。
+* 同一时间只能有一个主域名。
+* 你可以取消主域名设置；在这种情况下，所有已连接的域名都会同样指向该项目。点击你的主域名旁边的三点菜单，然后点击 **Unset as primary**。
+
+<div id="faq">
+  ## 常见问题解答
+</div>
+
+<AccordionGroup>
+  <Accordion title="我的自定义域名已连接，但我的站点还没有上线。我该怎么办？">
+    * 使用类似 [dnschecker.org](https://dnschecker.org/all-dns-records-of-domain.php) 这样的工具再次检查你的 DNS 设置。DNS 变更有时可能需要长达 72 小时才能完全生效。前往 **Project → Settings → Domains** 查找正确的 DNS 设置。
+    * 清除浏览器缓存，或在无痕/隐身窗口中进行测试。
+    * 尝试在 **Project → Settings → Domains** 中先移除再重新添加该域名。
+  </Accordion>
+
+  <Accordion title="我可以通过 Lovable 购买域名吗？">
+    可以。你可以在 Lovable 内通过我们的合作伙伴 IONOS 购买自定义域名。前往 **Project → Settings → Domains** 并点击 **Buy new domain**，即可通过 IONOS 购买域名。此功能仅适用于付费套餐。
+  </Accordion>
+
+  <Accordion title="连接自定义域名会影响我的 SEO 吗？">
+    会的，连接自定义域名会对你的 SEO 产生正面影响。自定义域名可以提升你网站在搜索引擎中的可发现性，并让用户觉得你的网站更可信。
+
+    更多信息请参见 [Implement SEO and GEO best practices](https://docs.lovable.dev/tips-tricks/seo-geo)。
+  </Accordion>
+
+  <Accordion title="Lovable 会为我的自定义域名提供 SSL 证书吗？">
+    会。当你将自定义域名连接到你的 Lovable 应用时，我们会自动为其生成并安装 SSL 证书。这可确保你的网站通过 HTTPS 提供服务，从而保障访问者的数据安全，并提升你网站的 SEO 排名。如果在 72 小时后仍未签发证书，请联系 [Lovable 客户支持](https://lovable.dev/support)。
+  </Accordion>
+
+  <Accordion title="我可以连接子域名而不是整个域名吗？">
+    可以。你可以连接子域名（例如 `blog.yourdomain.com` 或 `app.yourdomain.com`），而不是根域名。在设置流程中输入域名时，只需填写你想要使用的子域名即可。
+  </Accordion>
+
+  <Accordion title="我可以将多个子域名连接到同一个 Lovable 项目吗？">
+    可以。你可以连接多个子域名，但每个子域名都需要在 **Project → Settings → Domains** 中单独添加和配置。比如，你可以连接 `blog.yourdomain.com`、`shop.yourdomain.com` 和 `app.yourdomain.com`。
+  </Accordion>
+
+  <Accordion title="我可以在哪里查看已连接的域名？">
+    你可以在两个位置查看已连接的域名：
+
+    * **Project → Settings → Domains** - 在这里你可以看到所有域名，无论其状态如何
+    * **Publish 模态窗口** - 在这里你可以看到所有 **Live** 的域名
+  </Accordion>
+
+  <Accordion title="我可以连接另一个项目正在使用的域名吗？">
+    可以。只要你可以验证所有权，你就可以连接另一个项目正在使用的域名或子域名，即使该项目已经被删除。
+  </Accordion>
+
+  <Accordion title="我该如何设置主域名？">
+    域名状态必须为 **Live**，才能将其设置为主域名。
+
+    前往 **Project → Settings → Domains**，点击某个 **Live** 域名旁边的三点菜单，然后点击 **Set as primary**。
+  </Accordion>
+
+  <Accordion title="我该如何取消主域名设置？">
+    前往 **Project → Settings → Domains**，点击你的主域名旁边的三点菜单，然后点击 **Unset as primary**。
+  </Accordion>
+
+  <Accordion title="我该如何移除自定义域名？">
+    无论当前状态如何，你都可以随时移除某个域名。
+
+    1. 前往 **Project → Settings → Domains.**
+    2. 点击你的域名旁边的三点菜单，点击 **Remove**，然后再次点击 **Remove** 以确认。
+
+    这会将域名与项目断开连接。请务必在域名服务商中清除相关 DNS 设置，以彻底移除这条连接。
+  </Accordion>
+
+  <Accordion title="我可以移除 xxx.lovable.app 项目 URL 吗？">
+    目前，你无法从项目中移除 `xxx.lovable.app` 项目 URL。不过，你可以添加自定义域名并将其设置为主域名。这样，访问者就可以通过品牌化的 URL 访问你的应用，而不是默认的 `xxx.lovable.app` 项目 URL。
+  </Accordion>
+
+  <Accordion title="我需要单独连接 www 子域名吗？">
+    需要，你需要单独添加它，并且它会单独列出。在你设置域名时，**www** 子域名并不会自动包含在内。
+  </Accordion>
+</AccordionGroup>

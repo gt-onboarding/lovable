@@ -1,0 +1,181 @@
+---
+title: "AI-Integration"
+description: "So integrierst du AI-Services in Lovable-Projekte"
+icon: "wand-magic-sparkles"
+seo:
+  indexing: false
+---
+
+Lovable macht es einfach, AI-Services in deine Webanwendungen zu integrieren. Egal, ob du eine AI-gestützte Landing Page, ein Textgenerierungs-Tool oder eine vollwertige SaaS-App bauen möchtest – Lovables integrierte Integrationen mit Diensten wie 
+[**OpenAI**](https://platform.openai.com/), [**Groq**](https://console.groq.com/keys), [**Claude**](https://www.anthropic.com/api), [**Deepseek**](https://api-docs.deepseek.com/) und [**Mistral**](https://docs.mistral.ai/api/) machen das möglich, ohne Backend-Code schreiben zu müssen. So gehst du vor: 
+
+<Steps>
+  <Step title="Wähle die benötigte KI-Funktion">
+    Bevor du mit dem Erstellen beginnst, lege fest, was die KI tun soll:
+
+    - Text generieren oder verbessern (z. B. E-Mail-Schreiber, Tweet-Generator)
+    - Inhalte klassifizieren oder zusammenfassen
+    - Bilder analysieren
+    - Antworten personalisieren
+    - Mit einer bestimmten LLM-API integrieren
+  </Step>
+  <Step title="Plane zuerst mit Eingabeaufforderungen">
+    Nutze die Chat-Oberfläche von Lovable, um deine Funktion in einfachen Worten zu beschreiben. Zum Beispiel:
+
+    ```
+    Build an email enhancement tool. The user should write an email, then click buttons to make it more professional, concise, or friendly using Groq API.
+    ```
+
+    Lovable erstellt ein Grundgerüst für die Benutzeroberfläche (UI), schlägt Komponenten vor und ermöglicht dir, die App schnell in der Vorschau anzusehen.
+  </Step>
+  <Step title="Mit einem Backend über Supabase verbinden">
+    KI-Funktionen benötigen häufig Backend-Logik. Supabase bietet:
+
+    - Eine Datenbank für Benutzerdaten
+    - Authentifizierung für Login/Signup
+    - Edge Functions zum sicheren Aufruf externer APIs
+
+    <Tip>
+      Richte Supabase früh in deinem Projekt ein, um Inkonsistenzen zwischen UI und Backend zu vermeiden.
+    </Tip>
+  </Step>
+  <Step title="Edge Functions für KI-Aufrufe verwenden">
+    Um KI-APIs sicher aufzurufen, erstelle eine Edge-Funktion in Lovable:
+
+    - Füge deinen API-Schlüssel zu Supabase hinzu, indem du ihn über das Geheimnisse-Formular übermittelst
+    - Lass Lovable den Code für die Edge-Funktion generieren
+    - Stelle sicher, dass du Function Calling verwendest, wenn deine API strukturierte Daten zurückgibt (z. B. Kalorien, Makros, Tweet-Threads)
+
+    **Beispiel für eine Eingabeaufforderung:**
+
+    ```
+    Use GPT-4 and function calling to extract nutrition info from a meal description. Save the results to the backend.
+    ```
+
+    <Tip>
+      Strukturiere dein OpenAI-Function-Calling-Schema mit definierten Feldern wie:
+
+      ```
+      {
+        "name": "extract_nutrition",
+        "parameters": {
+          "calories": "number",
+          "protein": "number",
+          "carbs": "number",
+          "fat": "number"
+        }
+      }
+      ```
+    </Tip>
+  </Step>
+  <Step title="Mach es interaktiv">
+    Füge Schaltflächen oder Formularaktionen hinzu für:
+
+    - Text an die KI senden
+    - Ein Bild hochladen
+    - Zwischen Modi umschalten (prägnanter vs. freundlicher Ton)
+
+    Lovable ermöglicht dir:
+
+    - Funktionen mit Schaltflächen zu verknüpfen
+    - Interaktionen zu animieren
+    - Ergebnisse in Echtzeit mit minimaler Eingabeaufforderung anzuzeigen
+
+    <Tip>
+      Nutze Screenshots und Formulierungen wie „mach das flüssiger“, um das Design zu steuern.
+    </Tip>
+    <Tip>
+      **Erweiterter UX-Tipp:** Implementiere Live-Vorschauen der KI-Antwort nebeneinander. Verwende Links/Rechts-Layoutblöcke oder Tabs, damit Nutzer Ausgaben vergleichen können.
+    </Tip>
+  </Step>
+  <Step title="Externe Dienste verwenden (optional)">
+    Einige beliebte Integrationen für KI-Workflows:
+
+    - **Resend** – E-Mails nach Formularübermittlung senden
+    - **Groq API** – extrem schnelle LLM-Inferenz
+    - **Stripe** – Zugriff auf KI-Tools hinter einer Paywall
+    - **Replicate** – Bilder generieren oder transformieren
+
+    **Beispiel für eine Eingabeaufforderung:**
+
+    ```
+    When a user submits the contact form, send an email using Resend and store the message in Supabase.
+    ```
+
+    <Tip>
+      **Tipp zu Zahlungen:** Schalte erweiterte KI-Funktionen nur mit einem Stripe-Abonnement frei. Nutze bedingte Flows wie:
+
+      ```
+      if (user.isPaid) { showAIFeature(); } else { redirectToCheckout(); }
+      ```
+    </Tip>
+  </Step>
+  <Step title="Testen und iterieren">
+    - Nutze Vorschaulinks, um die Darstellung auf Mobilgeräten zu testen
+    - Prüfe die Performance mit mehreren API-Aufrufen
+    - Teile dein Projekt, um Feedback zu erhalten
+    - Nutze den Chatverlauf, um Änderungen rückgängig zu machen oder zu refaktorisieren
+  </Step>
+  <Step title="Veröffentlichen und bewerben">
+    Wenn du bereit bist:
+
+    - Mit einem Klick bereitstellen
+    - [Lovable Launch](https://docs.lovable.dev/features/launched) verwenden, um Sichtbarkeit zu gewinnen
+    - OG-Tags und SEO-Titel/-Beschreibung im Meta-Panel hinzufügen
+    - Deine App bei Product Hunt, in Communities und in sozialen Medien einreichen
+  </Step>
+</Steps>
+
+<div id="debug-and-improve-prompts">
+  ## **Eingabeaufforderungen debuggen und verbessern**
+</div>
+
+* Formuliere Systemnachrichten präzise: „Du bist ein hilfreicher Ernährungsberater.“
+* Teste Funktionsaufrufe, indem du Eingaben simulierst.
+* Verwende `console.log()` in Edge Functions, um die Logik nachzuvollziehen.
+* Verwende Screenshots, wenn du Lovable bittest, ein Layout zu debuggen.
+
+**Tipp zur Eingabeaufforderung:** Wenn die KI deinen Kontext nicht berücksichtigt (z. B. die Mahlzeiten eines Nutzers), sag:
+
+```
+Stelle sicher, dass alle Mahlzeiten des Nutzers in der Eingabeaufforderung an GPT-4 enthalten sind.
+```
+
+
+<div id="troubleshooting">
+  ### Fehlerbehebung
+</div>
+
+<AccordionGroup>
+  <Accordion title="Fehlende Daten in KI-Eingabeaufforderungen?">
+    Stelle sicher, dass du Kontext wie Nutzerverlauf oder frühere Einträge einbeziehst.
+  </Accordion>
+  <Accordion title="UI wird nicht aktualisiert?">
+    Verwende den reinen Chat-Modus, um Schritt für Schritt zu debuggen.
+  </Accordion>
+  <Accordion title="Streaming-Probleme mit Groq/OpenAI?">
+    Stelle sicher, dass `stream: true` unterstützt wird.
+  </Accordion>
+  <Accordion title="Bilduploads funktionieren nicht?">
+    Verwende Datei-Inputs und konvertiere in Base64 oder lade über Supabase Storage hoch.
+  </Accordion>
+  <Accordion title="Edge-Funktion schlägt ohne Fehlermeldung fehl?">
+    Sieh dir die Protokolle der Edge-Funktion im Funktionseditor von Lovable oder im Supabase-Dashboard an.
+  </Accordion>
+</AccordionGroup>
+
+<div id="example-projects-built-with-ai-integration">
+  ## Beispielprojekte mit KI-Integration
+</div>
+
+- [**Nexus Smart Email** ](https://smart-email-nexus.lovable.app/)– Landing-Page mit Groq-optimierter E-Mail-Vorschau in Echtzeit
+- [**TweetMixer Pro**](https://www.youtube.com/watch?v=fT_dq_hyQAA&vl=de) – Blogbeiträge einfügen, Tweet-Threads mit GPT-4 erstellen
+- [**AI Calorie Tracker**](https://www.youtube.com/watch?v=c0zhLzcVJRI&ab_channel=Lovable) – Mahlzeiten mit GPT-4 anhand von Bild-Uploads analysieren
+- [**Robot Arena Shooter** ](https://www.youtube.com/watch?v=zmK36lkAb6I)– Claude-gestütztes Spiel mit KI-gestützter Logik
+- [**Reindeer Quiz**](https://www.youtube.com/watch?v=XdZtpP3QpzQ) – Personalisierte Ergebnisse mit Claude und eigener Bewertungslogik
+
+<div id="final-thoughts">
+  ## Abschließende Gedanken
+</div>
+
+Lovable ist dein KI-gestütztes Frontend, deine Datenbank, dein Backend und deine Deployment-Pipeline in einem. KI-Integration ist nur Eingabeaufforderung \+ Kontext \+ Testen. Geh Schritt für Schritt vor und denk daran: Du musst kein Backend-Entwickler sein, um mit KI zu bauen.

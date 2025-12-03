@@ -1,0 +1,432 @@
+---
+title: "Integración con Clerk"
+description: "Descubre cómo integrar Clerk en tu aplicación de Lovable"
+icon: "people-arrows"
+---
+
+<div id="why-clerk">
+  ## ¿Por qué Clerk?
+</div>
+
+![What Is Clerk Pn](/images/what-is-clerk.png)
+
+[Clerk](https://clerk.com) gestiona la autenticación y la administración de usuarios para que no tengas que desarrollarlas desde cero. Con solo unas pocas indicaciones y pasos de configuración, obtienes:
+
+- Inicio de sesión y registro seguros (social, contraseña, MFA)
+- Componentes de UI preconstruidos: perfiles de usuario, administración de organizaciones, suplantación de identidad
+- Soporte para aplicaciones B2B (equipos, roles, invitaciones)
+- Integración con Supabase, Stripe (próximamente) y más
+- Modo lista de espera para gestionar el acceso anticipado
+- Generoso plan gratuito: 10 000 usuarios activos mensuales (MAU)
+
+<div id="step-by-step-integration-guide">
+  ## Guía paso a paso para la integración
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/tyAsNwu_xCI?si=VHCGf2IlFRQzVLeD" title="Reproductor de video de YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Aquí encontrarás una guía paso a paso:
+
+<Steps>
+  <Step title="Configura tu app de Clerk" stepNumber="1">
+    <Steps>
+      <Step title="Paso 1">
+        Crea una cuenta en Clerk → [Clerk.com](https://clerk.com)
+      </Step>
+
+      <Step title="Paso 2">
+        En el panel de control de Clerk, crea una nueva app
+
+        <Steps>
+          <Step title="Paso 1">
+            Inicia sesión en Clerk y crea una nueva app
+
+            ![Create Clerk Application Pn](/images/create-clerk-application.png)
+          </Step>
+
+          <Step title="Paso 2">
+            Habilita los proveedores de autenticación que quieras (p. ej., Google, GitHub)
+          </Step>
+
+          <Step title="Paso 3">
+            Habilita “Waitlist” en **Configure &gt; Restrictions**
+
+            ![Clerk Waitlist Pn](/images/clerk-waitlist.png)
+          </Step>
+
+          <Step title="Paso 4">
+            Copia tu **Public API Key**
+
+            ![Clerk Api Key Pn](/images/clerk-api-key.png)
+          </Step>
+        </Steps>
+      </Step>
+
+      <Step title="Paso 3">
+        **Agrega Clerk a tu app de Lovable**
+
+        <Steps>
+          <Step title="Paso 1">
+            En **Lovable**, agrega Clerk como tu proveedor de autenticación.
+
+            Dale a Lovable esta instrucción:
+
+            <Info>
+              Construyamos una hermosa app de gestión de proyectos y tareas al estilo de Asana. Los usuarios deben poder iniciar sesión y registrarse usando Clerk para la autenticación y gestión de usuarios. Comencemos creando una página de inicio con un gran diseño y usemos el componente de lista de espera (waitlist) de Clerk para que los usuarios se unan mientras construimos el resto de la app.
+            </Info>
+
+            ![Asana Clone Lovable Pn](/images/asana-clone-lovable.png)
+          </Step>
+
+          <Step title="Paso 2">
+            Pega tu **Public API Key** cuando se te solicite
+          </Step>
+
+          <Step title="Paso 3">
+            Lovable genera las páginas de inicio de sesión y registro
+
+            ![Waitlist Component Clerk Pn](/images/waitlist-component-clerk.png)
+          </Step>
+
+          <Step title="Paso 4">
+            Despliega y haz pruebas: ahora ya estás usando Clerk para la autenticación
+          </Step>
+        </Steps>
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Activar el modo de lista de espera (opcional)" stepNumber="2">
+    <Note>
+      **¿Por qué usar una lista de espera?** – ¡Consigue tus primeros usuarios antes de lanzar tu aplicación!
+    </Note>
+
+    Usa la lista de espera integrada de Clerk para recopilar usuarios antes del lanzamiento.
+
+    <Steps>
+      <Step title="Step 1">
+        En el panel de control de Clerk: **Configure &gt; Restrictions &gt; Waitlist**
+      </Step>
+
+      <Step title="Step 2">
+        Los nuevos registros aparecerán como **pending**
+      </Step>
+
+      <Step title="Step 3">
+        * Los usuarios que se registren ahora estarán **pending approval**
+        * Los administradores pueden aprobar usuarios desde el panel de control de Clerk
+
+        ![Clerk Waitlist Pending Pn](/images/clerk-waitlist-pending.png)
+      </Step>
+
+      <Step title="Step 4 (Bonus)">
+        Personaliza los correos de la lista de espera (marca, contenido)
+
+        ![Clerk Email Templates Pn](/images/clerk-email-templates.png)
+
+        ![Sms Code Verification Pn](/images/sms-code-verification.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Gestión de usuarios y equipos en Clerk" stepNumber="3">
+    Configura acceso basado en equipos en tu app.
+
+    <Steps>
+      <Step title="Step 1">
+        En el panel de Clerk, habilita **Organizations**
+
+        ![Organization Management Clerk Pn](/images/organization-management-clerk.png)
+      </Step>
+
+      <Step title="Step 2">
+        Define roles (Administrador, Miembro, Lector, etc.)
+      </Step>
+
+      <Step title="Step 3">
+        Invita a usuarios a tu organización por correo electrónico
+      </Step>
+
+      <Step title="Step 4">
+        Asigna roles y permisos desde el panel
+      </Step>
+
+      <Step title="Step 5">
+        Indica a Lovable que:
+
+        <Info>
+          Pida a los usuarios que creen o se unan a una organización después de registrarse
+        </Info>
+
+        ![Clerk Organization Create Pn](/images/clerk-organization-create.png)
+      </Step>
+    </Steps>
+
+    <Note>
+      **Uso del componente User Profile de Clerk**
+
+      * Proporciona un panel de gestión de usuarios preconstruido
+      * Permite inicios de sesión con redes sociales y autenticación mediante contraseña
+      * Los usuarios pueden gestionar sus propias cuentas y 2FA (autenticación en dos pasos)
+
+      ![Clerk Organization Members Pn](/images/clerk-organization-members.png)
+    </Note>
+  </Step>
+
+  <Step title="Modo de suplantación de identidad (para administradores)" stepNumber="4">
+    <Tip>
+      **¿Qué es el modo de suplantación?**
+
+      Los administradores pueden iniciar sesión como cualquier usuario para solucionar incidencias
+    </Tip>
+
+    Soluciona problemas de tu app como si fueras un usuario concreto.
+
+    <Steps>
+      <Step title="Paso 1">
+        En el panel de Clerk &gt; Users, haz clic en un usuario
+      </Step>
+
+      <Step title="Paso 2">
+        Haz clic en **Impersonate**
+      </Step>
+
+      <Step title="Paso 3">
+        Ve tu app desde su perspectiva
+      </Step>
+
+      <Step title="Paso 4">
+        Seguridad: quienes suplantan no pueden realizar acciones sensibles (por ejemplo, cambiar la contraseña)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Integración con Supabase (avanzado)" stepNumber="5">
+    Combina Clerk Auth con el backend de Supabase.
+
+    ![Supabase Clerk Pn](/images/supabase-clerk.png)
+
+    <Note>
+      **¿Por qué integrar con Supabase?**
+
+      * Almacenar los datos de usuario en una base de datos
+      * Autenticación segura mediante tokens JWT
+      * Conectar la autenticación con las funciones de la app
+    </Note>
+
+    **Cómo integrar:**
+
+    <Steps>
+      <Step title="Step 1">
+        En Supabase, ve a **Settings &gt; API &gt; JWT Secret (**[**documentation**](https://clerk.com/docs/integrations/databases/supabase)**)**
+
+        ![Supabase Clerk Integration Doc Pn](/images/supabase-clerk-integration-doc.png)
+
+        ![Sql Editor Supabase Pn](/images/sql-editor-supabase.png)
+      </Step>
+
+      <Step title="Step 2">
+        En Clerk: **JWT Templates &gt; Add Supabase**, pega el secreto JWT
+
+        ![Supabase Api Key Clerk Pn](/images/Supabase-api-key-clerk.png)
+
+        ![Jwt Template Clerk Pn](/images/jwt-template-clerk.png)
+
+        ![Jwt Template Clerk Configuration Pn](/images/jwt-template-clerk-configuration.png)
+      </Step>
+
+      <Step title="Step 3">
+        Habilita **Clerk como proveedor de autenticación**
+
+        Actualiza las políticas RLS para usar `auth.uid()` de Clerk
+
+        Pídele a Lovable que:
+
+        <Info>
+          Vamos a configurar Supabase para integrarlo con Clerk. Clerk ya se ha configurado con un secreto de Supabase. Aquí tienes un ejemplo de cómo implementar el cliente de Supabase usando Clerk. Úsalo como referencia.
+
+          *[Supabase client configuration import]*
+        </Info>
+      </Step>
+
+      <Step title="Step 4">
+        Confirma que Supabase acepta los tokens emitidos por Clerk
+
+        ![Supabase Tasks Table Pn](/images/supabase-tasks-table.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Agregar un dominio personalizado (opcional)" stepNumber="6">
+    <Note>
+      **¿Por qué usar un dominio personalizado?**
+
+      Aumenta el reconocimiento de tu marca y la confianza
+
+      [Más información aquí](https://docs.lovable.dev/tips-tricks/custom-domain).
+    </Note>
+
+    <Steps>
+      <Step title="Paso 1">
+        En Lovable: **Project &gt; Settings &gt; Custom Domain**
+      </Step>
+
+      <Step title="Paso 2">
+        Introduce el dominio que compraste (p. ej. `app.yourcompany.com`)
+      </Step>
+
+      <Step title="Paso 3">
+        Lovable configura el DNS automáticamente (no necesitas salir de Lovable)
+      </Step>
+
+      <Step title="Paso 4">
+        Despliega y prueba tu app con el nuevo dominio.
+      </Step>
+
+      <Step title="Paso 5">
+        Listo ✅ — tu app ahora es de marca blanca
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Conclusiones y próximos pasos" stepNumber="7">
+    **Tu app ahora tiene:**
+
+    * Autenticación segura con Clerk
+    * Una lista de espera para captar a tus primeros usuarios
+    * Funciones de gestión de usuarios y equipos
+    * Integración de base de datos con Supabase
+    * Un dominio personalizado profesional
+  </Step>
+</Steps>
+
+<div id="bonus-build-b2b-features-in-minutes">
+  ## Extra: crea funcionalidades B2B en minutos
+</div>
+
+Clerk ofrece:
+
+- Acceso basado en roles para organizaciones
+- Flujos de invitación (por correo electrónico, interfaz de usuario preconstruida)
+- Personalización del perfil de la organización (logotipo, nombre)
+- Cambio entre múltiples organizaciones (por ejemplo, al estilo Slack)
+
+**Pídele a Lovable que:**
+
+<Info>
+  Agregar la interfaz para cambiar de organización
+</Info>
+
+<Info>
+  Permitir que los usuarios inviten a sus compañeros de equipo
+</Info>
+
+<div id="tips-troubleshooting">
+  ## Consejos y resolución de problemas
+</div>
+
+- **¿Ya usas Supabase Auth?** Puedes cambiar a Clerk sin reescribir la lógica de tu app. Solo tienes que configurar correctamente el JWT y cambiar el proveedor de autenticación.
+- **Personalización del correo electrónico:** Clerk te permite editar todas las plantillas de correos transaccionales (lista de espera, invitaciones, aprobaciones).
+- **Inicio de sesión móvil**: Clerk es compatible con passkeys, códigos OTP y SMS; no necesitas configuración adicional en Dev Mode.
+- **Cumplimiento normativo**: Clerk cumple con SOC2, HIPAA y GDPR.
+
+<div id="frequently-asked-questions-faq">
+  ## Preguntas frecuentes (FAQ)
+</div>
+
+<AccordionGroup>
+  <Accordion title="¿Puedo cambiar fácilmente de Supabase Auth a Clerk?">
+    Sí. Clerk y Supabase funcionan bien juntos. Solo necesitas:
+
+    - Configurar Clerk para que emita JWT
+    - Agregar el secreto JWT de Supabase en Clerk
+    - Actualizar las políticas RLS de Supabase para usar `auth.uid()` de Clerk
+
+    Esto te permite conectar Clerk a una app existente basada en Supabase con cambios mínimos.
+  </Accordion>
+  <Accordion title="¿Necesito configurar proveedores OAuth como Google o GitHub?">
+    Solo para producción. En modo de desarrollo, Clerk proporciona credenciales compartidas para pruebas. Para producción:
+
+    - Configura tus propias credenciales de Google/GitHub/etc.
+    - Agrégalas en Clerk en **Configuración de OAuth**
+  </Accordion>
+  <Accordion title="¿Cuál es la diferencia entre Organizations y Users?">
+    - **Users**: Personas individuales que pueden iniciar sesión en tu app
+    - **Organizations**: Grupos de usuarios (equipos, empresas)
+
+    Usa organizaciones cuando quieras:
+
+    - Acceso basado en roles (Admin, Member, etc.)
+    - Que los usuarios inviten a compañeros de equipo
+    - Flujos de tipo B2B SaaS
+  </Accordion>
+  <Accordion title="¿Qué es «Impersonation Mode»?">
+    Permite que los administradores inicien sesión como cualquier usuario; es muy útil para:
+
+    - Depurar problemas de usuarios
+    - Entender su experiencia
+    - Proporcionar soporte en vivo
+
+    <Note>
+      Clerk limita lo que los suplantadores pueden hacer (por ejemplo, no pueden cambiar contraseñas).
+    </Note>
+  </Accordion>
+  <Accordion title="¿Puedo personalizar los componentes de UI de Clerk?">
+    Sí. Clerk ofrece:
+
+    - Soporte completo de CSS mediante props de `appearance`
+    - La opción de crear interfaces totalmente personalizadas usando los hooks de React de Clerk
+
+    Puedes mantener el aspecto predeterminado o hacer que coincida por completo con la marca de tu app.
+  </Accordion>
+  <Accordion title="¿Puedo enviar correos a los usuarios de mi lista de espera desde Clerk?">
+    Actualmente:
+
+    - Los usuarios reciben notificaciones automáticas cuando se les aprueba desde la lista de espera
+    - El soporte para envío masivo de correos electrónicos llegará **pronto**
+
+    Por ahora, exporta las direcciones de correo y usa tu herramienta de email preferida.
+  </Accordion>
+  <Accordion title="¿Clerk es gratuito?">
+    Sí. Clerk tiene un generoso plan gratuito:
+
+    - Hasta **10.000 usuarios activos mensuales (MAU)**
+    - Los planes de pago comienzan en **$25/mes**, con precios basados en el uso a partir de ahí
+
+    Puedes usarlo en producción sin pagar hasta que escales.
+  </Accordion>
+  <Accordion title="¿Clerk ofrece compatibilidad con normativas (SOC2, HIPAA, GDPR)?">
+    Sí. Clerk es:
+
+    - **Certificado SOC 2**
+    - **Compatible con HIPAA**
+    - **Preparado para GDPR**
+
+    Es ideal para equipos que trabajan en sectores regulados.
+  </Accordion>
+  <Accordion title="¿Puedo usar Clerk con Stripe para la facturación?">
+    Próximamente. Pronto podrás:
+
+    - Definir planes (por ejemplo, Free, Pro, Enterprise)
+    - Permitir que usuarios/organizaciones gestionen sus suscripciones desde la UI de Clerk
+    - Sincronizar datos automáticamente con Stripe
+
+    Sigue a [@clerkdev](https://x.com/clerkdev?lang=en) en X para recibir novedades.
+  </Accordion>
+</AccordionGroup>
+
+¿Quieres que agreguemos una pregunta a este FAQ? [Cuéntanoslo en Discord](https://discord.gg/lovable-dev)!
+
+<div id="final-thoughts">
+  ## Reflexiones finales
+</div>
+
+Clerk convierte la autenticación en una instrucción. No necesitas implementarla por tu cuenta.
+
+**Con solo unos cuantos clics e indicaciones, tu app ahora tiene:**
+
+- Autenticación segura y escalable
+- Gestión de equipos y organizaciones
+- Herramientas de suplantación de identidad para depuración
+- Datos y control de acceso respaldados por Supabase
+- Compatibilidad con dominios personalizados para una experiencia de usuario pulida

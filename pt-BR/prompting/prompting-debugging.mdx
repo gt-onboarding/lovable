@@ -1,0 +1,414 @@
+---
+title: "Depurando prompts de IA"
+description: "Depure fluxos de trabalho com estratégias, prompts de exemplo, fluxos de resolução de problemas e exemplos de mentalidade de depuração avançada."
+icon: "bug"
+---
+
+Criar com IA é rápido e divertido – até que algo saia errado. Erros, comportamentos inesperados ou momentos em que “a IA fez algo estranho” fazem parte do processo. Este guia vai ajudar você a navegar por **fluxos de trabalho de depuração baseados em IA no Lovable**. Vamos abordar como corrigir rapidamente problemas simples, estratégias para bugs mais difíceis, como usar o chat do Lovable para depuração e até receitas de Prompts de IA para eliminar bugs de forma sistemática. Depurar com um assistente de IA é uma nova habilidade, mas com estrutura e os prompts certos, você pode resolver problemas com eficiência e até transformá-los em oportunidades de aprendizado.
+
+<div id="advanced-debugging-prompts">
+  ## Prompts avançados de depuração
+</div>
+
+Às vezes, você precisa de um Prompt de IA mais robusto para investigar um problema ou revisar a integridade do seu Projeto. Aqui estão alguns exemplos de Prompts de IA estruturados para cenários de depuração profunda ou otimização. Eles podem ser usados no Chat mode para obter uma análise detalhada sem alterar o código de imediato.
+
+<div id="full-system-review-codebase-audit">
+  ### Revisão completa do sistema (auditoria da base de código)
+</div>
+
+Se o seu Projeto cresceu muito ou você suspeita que haja problemas estruturais, um Prompt de IA de auditoria completa da base de código pode ser útil. Ele pede para a IA analisar o Projeto inteiro em busca de organização, arquitetura correta e qualquer código fora do lugar. É como perguntar: “Está tudo organizado do jeito que deveria estar?”
+
+**Prompt de IA de exemplo – auditoria da base de código:**
+
+```
+Realize uma **auditoria completa de toda a base de código** para verificar se a arquitetura está limpa, modular e otimizada:
+
+- Identifique quaisquer arquivos, componentes ou lógica que estejam no lugar errado ou que possam ser melhor organizados. Há alguma instância de código que não pertence ao seu arquivo atual (lógica posicionada incorretamente)?
+- Avalie se há uma separação clara de responsabilidades (por exemplo, manipulação de dados vs. UI vs. gerenciamento de estado). Aponte quaisquer seções de código excessivamente acopladas.
+- Destaque quaisquer áreas do código que sejam excessivamente complexas ou que não sigam as melhores práticas.
+- Forneça um relatório com recomendações específicas para melhorar a estrutura e a manutenibilidade, **sem fazer nenhuma alteração no código ainda**.
+
+Divida as sugestões em uma lista ordenada de etapas que podemos seguir, das mais críticas às melhorias opcionais.
+
+*(Esta é uma análise somente leitura; não modifique o código durante esta auditoria.)*
+```
+
+Este Prompt de IA é longo, mas orienta a IA a agir como um revisor de código ou arquiteto. Pedimos que ela encontre código mal localizado, verifique a modularidade e até priorize as correções. A IA pode responder com algo como:
+
+* &#95;“1. ****Separate API calls from components:**** The &#95;`ProjectList`*component is directly fetching data. Suggestion: move data fetching to a dedicated hook or context to keep components pure UI.​*
+
+1. **Reduzir acoplamento na lógica de Task:** O toggle de conclusão de tarefa está atualizando o estado e gravando diretamente no localStorage. Isso deve ser refatorado para ter uma fonte única de verdade.​
+2. **Organizar funções utilitárias:** Há funções utilitárias em `App.tsx` que ficariam melhor em uma pasta `utils` (por exemplo, funções de formatação de data).
+3. ...”*
+
+Cada ponto pode vir com explicações e talvez referências a arquivos específicos. Esse tipo de relatório ajuda você a ver o quadro geral. É especialmente útil se você vem focando em uma funcionalidade de cada vez e não olha para a estrutura geral há algum tempo.
+
+<Warning>
+  Evite prompts genéricos e muito amplos
+
+  ```
+  Nothing works, fix it!
+  ```
+</Warning>
+
+<Check>
+  Deixe suas instruções mais detalhadas e específicas
+
+  ```
+  Now the screen has gone blank and I am no longer able to make edits.
+  Can you check what happened?
+  ```
+</Check>
+
+Depois de receber esse resultado, você pode decidir quais tarefas de refatoração abordar (talvez até pedir para a IA implementar algumas dessas recomendações, uma por uma).
+
+
+<div id="safe-approach-for-fragile-updates">
+  ### Abordagem segura para atualizações delicadas
+</div>
+
+Quando você sabe que a área que está alterando é delicada (talvez um fluxo de autenticação complexo ou um algoritmo central), é uma boa ideia incluir antes uma *orientação de cautela* no seu Prompt de IA. Isso não encontra bugs em si, mas ajuda a evitá-los ao instruir a IA a ter cuidado redobrado. Vimos um exemplo na seção Prompt Library para bloqueio de arquivos. Aqui vai um padrão semelhante, focado em não quebrar nada.
+
+**Prompt de exemplo – orientação para atualização delicada:**
+
+```
+A próxima alteração está em uma **parte crítica do app**, então proceda com **máxima cautela**. 
+
+- Examine cuidadosamente todo o código relacionado e dependências *antes* de fazer alterações.
+- **Evite qualquer modificação** em componentes ou arquivos não relacionados.
+- Se houver qualquer incerteza, pause e explique seu raciocínio antes de continuar.
+- Garanta testes completos após a alteração para confirmar que nada mais foi afetado.
+
+**Tarefa:** Atualize a lógica de autenticação de usuário para dar suporte a login OAuth via Google, além do email/senha existente, sem quebrar nenhum dos fluxos.
+
+*(Seja extremamente cuidadoso e verifique cada etapa duas vezes durante a implementação.)*
+```
+
+Ao incluir as diretrizes em itálico e os avisos em negrito, você basicamente está definindo a “mentalidade” da IA para ser mais cautelosa. A IA pode então adotar uma abordagem mais cuidadosa, por exemplo, primeiro explicando o que vai fazer ou implementando a adição de OAuth enquanto deixa claro explicitamente que manteve o login por e‑mail/senha intacto. Esse Prompt de IA não gera uma solução imediatamente; em vez disso, influencia *como* a IA vai executar a tarefa para minimizar a introdução de novos bugs.
+
+Essa estratégia é útil para **seções frágeis**: autenticação, processamento de pagamentos, migração de dados — qualquer coisa em que um pequeno erro possa quebrar muita coisa. É uma medida preventiva de depuração.
+
+
+<div id="performance-optimization-check">
+  ### Verificação de otimização de desempenho
+</div>
+
+Se seu app funciona corretamente, mas é **lento** ou consome muitos recursos, você pode usar um Prompt de IA para pedir que a IA analise o desempenho. Isso pode envolver revisar padrões de busca de dados, identificar ineficiências de renderização ou sugerir otimizações (caching, memoization etc.). É como perguntar: “Como podemos deixar isso mais rápido e fluido?”
+
+**Exemplo de Prompt de IA – auditoria de desempenho:**
+
+```
+Nosso app está funcional, mas parece **lento**. Por favor, **analise o projeto em busca de gargalos de desempenho** e sugira otimizações:
+
+- Verifique se há chamadas desnecessárias ao banco de dados ou à rede (por exemplo, buscas duplicadas ou padrões de consulta N+1).
+- Identifique componentes que possam estar sendo renderizados novamente com muita frequência ou realizando processamento pesado na thread principal.
+- Analise nosso uso de assets (imagens, scripts): há algum bundle grande ou assets não otimizados afetando o tempo de carregamento?
+- Sugira melhorias como fazer cache de dados usados com frequência, usar React memo ou lazy loading quando apropriado, e quaisquer outras formas de acelerar o app.
+
+Forneça a análise e as recomendações em uma lista. Não faça alterações no código ainda – apenas nos diga o que melhorar para obter melhor desempenho.
+```
+
+Executar isso no Chat mode gera um relatório de diagnóstico. A IA pode dizer, por exemplo:
+
+* *“Busca de dados:* O componente `ProjectList` busca dados a cada renderização. Isso pode ser melhorado com cache ou movendo a busca para um contexto em nível mais alto, para que ela não se repita desnecessariamente. Considere usar um state ou context para armazenar os projetos assim que forem carregados.
+* *Re-renders:* O componente `TaskItem` não é memoizado e é renderizado novamente sempre que qualquer state do componente pai muda. Se tivermos muitas tarefas, isso pode deixar as interações mais lentas. Sugestão: use `React.memo` para `TaskItem` para evitar re-renders desnecessários.
+* *Assets:* Notei uma imagem (logo) de 2MB. Isso é bem grande; compacte ou use uma resolução menor para um carregamento mais rápido.
+* *Tamanho do bundle:* Todas as páginas estão em um único bundle. Considere fazer code splitting (`import()` dinâmico para módulos grandes) para que o carregamento inicial seja mais rápido.
+* ...”*
+
+Cada sugestão se baseia em boas práticas comuns de desempenho. Você pode então decidir quais delas implementar. Talvez você envie um Prompt de IA pedindo que o Lovable aplique uma delas: *“Implemente cache para os dados de projeto usando context, conforme sugerido.”* Ao tratar esses pontos, você melhora a experiência do usuário e possivelmente reduz custos (menos chamadas, menos computação).
+
+
+<div id="handling-persistent-errors">
+  ### Lidando com erros persistentes
+</div>
+
+E quanto aos erros que simplesmente não desaparecem ou continuam voltando com pequenas variações? Isso pode acontecer se a causa raiz não for tratada. Por exemplo, você corrige uma coisa, mas o problema subjacente aparece como um novo erro em outro lugar. Aqui vai uma estratégia para isso:
+
+- **Pergunte à IA o que ela já tentou.** Às vezes, depois de algumas tentativas de “Try to Fix” ou prompts manuais, não fica claro o que foi alterado. Use: \_“Quais soluções já tentamos até agora para esse erro?”\_​. A IA pode listar as tentativas, o que ajuda você a evitar repetir as mesmas correções.
+- **Peça para a IA explicar o erro em termos simples.** _“Explique em termos simples por que esse erro ocorre.”_ Isso pode revelar se a IA (e você) realmente entenderam o erro. Você pode identificar um mal-entendido aqui.
+- **Considere uma abordagem alternativa.** Pergunte: \_“Dado que esse erro continua acontecendo, podemos tentar uma abordagem diferente para atingir o objetivo?”\_​. A IA pode sugerir uma estratégia de implementação diferente que contorne a área problemática.
+- **Reverter e refazer.** No pior cenário, você pode voltar alguns passos. A Lovable permite reverter para versões anteriores e até editar mensagens passadas e reverter para seguir uma abordagem diferente. Depois, avance com alterações menores.
+
+Por fim, se um componente específico estiver “morto” (não funcionar de jeito nenhum, aconteça o que acontecer), isole-o. Crie uma nova versão mínima desse componente via Prompt de IA para ver se funciona e, depois, integre-o lentamente de volta ao seu projeto. Isso é parecido com desligar e ligar as coisas de novo, mas com código – às vezes começar algo do zero é mais fácil do que tentar remendar algo muito quebrado.
+
+Em todo esse processo, mantenha um diálogo com a IA. Trate-a como uma colaboradora: _“Corrigimos X, mas agora Y está dando problema. Qual é a relação entre X e Y? A correção pode ter causado o problema em Y?”_ A IA pode fazer conexões que você não percebeu.
+
+<div id="sample-debugging-flows">
+  ## Exemplos de fluxos de depuração
+</div>
+
+Para consolidar essas ideias, vamos analisar dois cenários comuns de depuração com fluxos de exemplo:
+
+<div id="the-stuck-in-error-loop">
+  ### O “loop de erro sem saída”.
+</div>
+
+Você enviou um Prompt de IA complexo, e agora o app não faz build e o Try to Fix falhou duas vezes.
+
+_Fluxo:_
+
+<Steps>
+  <Step title="Você muda para o Chat mode.">
+    
+  </Step>
+  <Step title="Você pergunta: “Qual é a causa raiz deste erro de build?”">
+    
+  </Step>
+  <Step title="A IA explica que é uma incompatibilidade de tipos na chamada de API.">
+    
+  </Step>
+  <Step title="Você então diz: “Mostre o código relevante e os tipos esperados.”">
+    
+  </Step>
+  <Step title="A IA mostra que a função esperava um número de ID, mas recebeu um objeto.">
+    
+  </Step>
+  <Step title="Agora que você entendeu o problema, você envia um Prompt de IA: “Ajuste o código para passar apenas o ID numérico para a função, não o objeto inteiro.” ">
+    
+  </Step>
+  <Step title="Altere para Default, execute esse Prompt de IA e o build é concluído com sucesso.">
+    
+  </Step>
+  <Step title="Se não desse certo, você voltaria e talvez perguntasse: “O que mais poderia causar isso?” etc.">
+    
+  </Step>
+</Steps>
+
+Durante todo o processo, você descreveu o erro de forma específica e fez a IA confirmar o entendimento, em vez de simplesmente clicar em Try to Fix repetidas vezes.
+
+<div id="the-feature-not-working-right">
+  ### O “recurso não está funcionando direito.”
+</div>
+
+Você adicionou um recurso de notificação, mas os emails não estão sendo enviados.
+
+_Fluxo:_
+
+<Steps>
+  <Step title="Nenhum erro aparece, então você pergunta no Chat: “A notificação por email não está funcionando – eu esperava receber um email quando uma tarefa ficasse atrasada, mas não chegou nada. Como podemos depurar isso?”">
+    
+  </Step>
+  <Step title="A IA sugere verificar se a função de servidor foi acionada e se a resposta do serviço de email retornou algum erro.">
+    
+  </Step>
+  <Step title="Você pega o log do servidor (talvez do Supabase) e vê um erro de permissão.">
+    
+  </Step>
+  <Step title="Você mostra isso para a IA: “O log diz ‘permission denied when trying to send email.’”">
+    
+  </Step>
+  <Step title="A IA conclui que talvez a chave de API do serviço de email não tenha sido configurada ou que o serviço a tenha bloqueado.">
+    
+  </Step>
+  <Step title="Você então corrige a chave de API nas configurações (fora do Lovable) ou cria um Prompt de IA para ajustar a função e usar um método diferente.">
+    
+  </Step>
+</Steps>
+
+Basicamente, ao descrever o que você esperava (um email) e o que aconteceu (nada, com um trecho do log), a IA conseguiu orientar a investigação.
+
+<div id="the-ui-element-disappeared">
+  ### O “elemento da UI desapareceu.”
+</div>
+
+Você refatorou algo e agora uma seção inteira da UI simplesmente sumiu (um “componente morto”).
+
+_Fluxo:_
+
+<Steps>
+  <Step title="Você diz para a IA: “A seção de lista de projetos não está mais aparecendo de jeito nenhum. Ela estava funcionando antes da última edição.” ">
+    
+  </Step>
+  <Step title="A IA pode verificar se o componente ainda está sendo renderizado ou se está faltando uma instrução de retorno (return). ">
+    Talvez ela perceba que a refatoração removeu o `ProjectList` do JSX do componente pai. Ela sugere reimportar e incluí-lo. Ou talvez mudanças de state no componente pai façam com que a lista agora seja filtrada sem querer.
+  </Step>
+  <Step title="A IA pode explorar algumas possibilidades: “Os dados ainda estão sendo buscados? O componente está recebendo esses dados? Vamos adicionar um console.log na renderização para ver se ele está recebendo as props.” ">
+    
+  </Step>
+  <Step title="Você faz isso (ou a IA faz via prompt), e nada aparece nos logs – o que significa que o componente não está montado. ">
+    Aha\\\\! Então você envia um prompt: \_“Restaure o \_`<ProjectList>`_no JSX da página Dashboard (ele foi removido por engano).”_ Problema resolvido.
+  </Step>
+</Steps>
+
+Nesse fluxo, o ponto-chave foi perceber que o componente tinha sumido completamente e comunicar isso. A IA ajudou a identificar _por que_ (não renderizado vs. renderizado, porém vazio, etc.).
+
+<Note>
+  Usando DevTools e registros de log no console
+
+  ```
+  Meu app parou de funcionar e a tela fica em branco.
+  Aqui está o copiar/colar do console do DevTools, você pode corrigir o problema?
+  
+  Error occurred:
+  TypeError: Q9() is undefined  at https://example.lovable.app/assets/index-DWQbrtrQQj.js
+  : 435 : 39117 index-DWQbrtrQQj.js:435:35112
+  onerror https://example.lovable.app/assets/index-DWQbrtrQQj.js:435
+  ```
+</Note>
+
+Em todos esses casos, _comunicação e passos incrementais_ são seus aliados. Aproveite a capacidade da IA de relembrar detalhes (como o que ela fez antes) e de analisar registros de log ou erros. E use a sua capacidade de conduzir o processo – você entende o objetivo em alto nível e pode decidir quando tentar um caminho diferente.
+
+<div id="root-cause-analysis-rollback-and-progressive-enhancement">
+  ## Análise da causa raiz, rollback e melhoria progressiva
+</div>
+
+Algumas recomendações finais:
+
+<div id="root-cause-vs-symptom">
+  ### Causa raiz vs. sintoma
+</div>
+
+Sempre pergunte “por que isso aconteceu?” e não apenas “o que fazer agora?”. A IA pode ajudar a encontrar a causa raiz para que, quando você corrigir algo, a correção se mantenha. Por exemplo, um ajuste rápido sugerido pela IA pode silenciar um erro, mas não resolver o bug de lógica subjacente. Se você suspeitar disso, aprofunde a análise:
+
+<Info>
+  _Vejo que você corrigiu o erro de ponteiro nulo adicionando uma verificação, mas por que ele estava nulo em primeiro lugar? Podemos tratar essa causa?_
+</Info>
+
+Isso resulta em soluções mais robustas.
+
+<div id="rollback-wisely">
+  ### **Faça rollback com sabedoria:**
+</div>
+
+Lovable permite que você volte a versões anteriores. Não hesite em usar isso se o código tiver ficado muito bagunçado depois de uma série de correções ruins. Muitas vezes é mais rápido voltar atrás e tentar uma abordagem diferente. Se você fizer rollback, avise a IA do que está fazendo (para que ela não fique confusa com um código que de repente está diferente). Por exemplo:
+
+<Info>
+  _Eu reverti o projeto para antes do recurso de notificações. Vamos implementar de novo, mas com mais cuidado desta vez._
+</Info>
+
+Dessa forma, a IA entende que desfizemos algumas alterações e que estamos tentando novamente.
+
+<div id="progressive-enhancement">
+  ### **Melhoria progressiva:**
+</div>
+
+Ao adicionar novos recursos (especialmente os complexos), construa-os em pequenos incrementos testáveis. Isso não é só uma dica de Prompt de IA – é uma filosofia de desenvolvimento que funciona muito bem com IA. Se algo quebrar, você sabe exatamente qual pequeno passo causou o problema. Prompt de IA a Prompt de IA, você aprimora o app, o que também significa que, a cada Prompt de IA, você pode depurar em isolamento. Se em algum momento você se pegar escrevendo um Prompt de IA enorme, com um parágrafo inteiro e várias mudanças de recurso de uma vez só, considere dividir em várias instruções. Você vai agradecer a si mesmo depois, quando for preciso resolver problemas.
+
+<Note>
+  1. Adicione casos de teste que estejam falhando.
+  2. Isole o problema e analise as dependências.
+  3. Documente o que encontrar antes de aplicar correções.
+
+  ```
+  Here's the failing console log. Analyze the test case, investigate the error in auth flow, and suggest a solution after understanding the dependencies.
+  ```
+</Note>
+
+<div id="document-as-you-go">
+  ### **Documente conforme avança:**
+</div>
+
+É útil manter anotações (ou até pedir para a IA resumir o que foi feito após uma sessão). Isso é semelhante ao reverse meta prompting – cria um histórico de correções. Por exemplo, depois de resolver um bug difícil, você pode enviar o seguinte Prompt de IA:
+
+<Info>
+  _Resuma qual era o problema e como o corrigimos._
+</Info>
+
+O resumo da IA pode ser salvo em um `README` ou log. Isso é ótimo para o você do futuro, ou qualquer outra pessoa no Projeto, entender o que aconteceu.
+
+<div id="know-when-to-ask-for-human-help">
+  ### **Saiba quando pedir ajuda humana:**
+</div>
+
+Às vezes, apesar de todos os esforços, você pode esbarrar em um limite (talvez um bug real na plataforma Lovable ou algo fora do seu/da IA controle). A comunidade e o Suporte da Lovable estão aí para te ajudar. Não há motivo para vergonha em pedir ajuda no Discord ou nos fóruns deles com uma dúvida. Muitas vezes, outras pessoas já enfrentaram um problema parecido. Use a IA primeiro para reunir o máximo de informações possível (assim você consegue fornecer detalhes) e, se necessário, peça ajuda para a comunidade.
+
+<div id="community-debugging-guidebook">
+  ## Guia de depuração da comunidade
+</div>
+
+Este guia foi compartilhado no nosso Discord da comunidade — ele pode ser útil para depurar seu projeto:
+
+<AccordionGroup>
+  <Accordion title="Correção de erros">
+    Ao corrigir erros, concentre-se exclusivamente nas seções de código relevantes, sem modificar partes não relacionadas que já estejam funcionando. Analise a mensagem de erro e rastreie-a até sua origem. Implemente correções pontuais que resolvam o problema específico mantendo a compatibilidade com a base de código existente. Antes de confirmar qualquer solução, valide se ela resolve o problema original sem introduzir novos bugs. Sempre preserve as funcionalidades que já estão funcionando e evite reescrever código que não esteja diretamente relacionado ao erro.
+  </Accordion>
+
+  <Accordion title="Abordagem para modificar código">
+    Ao modificar código existente, adote uma abordagem cirúrgica que altere apenas o que for necessário para implementar o recurso ou a correção solicitada. Preserve nomes de variáveis, padrões de codificação e decisões de arquitetura presentes na codebase. Antes de sugerir alterações, analise as dependências para garantir que as modificações não quebrem funcionalidades existentes. Apresente as alterações como diffs mínimos, em vez de reescritas completas. Quando identificar melhorias além da tarefa imediata, sugira-as separadamente, sem implementá-las automaticamente.
+  </Accordion>
+
+  <Accordion title="Integração de banco de dados">
+    Antes de sugerir novas estruturas de banco de dados, examine minuciosamente o esquema existente para identificar tabelas, relacionamentos e campos já presentes. Aproveite as tabelas existentes sempre que possível, em vez de duplicar modelos de dados. Quando modificações no banco de dados forem necessárias, garanta que sejam compatíveis com as consultas existentes e com os padrões de acesso aos dados. Considere estratégias de migração para alterações de esquema que preservem os dados existentes. Sempre verifique os relacionamentos de chave estrangeira e as restrições de integridade dos dados antes de propor mudanças.
+  </Accordion>
+
+  <Accordion title="Análise Aprofundada de Problemas">
+    Aborde cada problema com um processo de diagnóstico abrangente. Comece reunindo todas as informações relevantes por meio de uma análise cuidadosa das mensagens de erro, registros de log e do comportamento do sistema. Forme várias hipóteses sobre possíveis causas em vez de tirar conclusões precipitadas. Teste cada hipótese de forma metódica até identificar a causa raiz. Documente seu processo de análise e suas descobertas antes de propor soluções. Considere possíveis casos extremos e como eles podem afetar o sistema.
+  </Accordion>
+
+  <Accordion title="Verificação da solução">
+    Antes de confirmar qualquer solução, implemente um processo rigoroso de verificação. Teste a solução em relação ao problema original para confirmar que ela realmente resolve o problema. Verifique se não há efeitos colaterais indesejados em funcionalidades relacionadas. Garanta que o desempenho não seja impactado negativamente. Verifique a compatibilidade com diferentes ambientes e configurações. Teste casos de borda para garantir robustez. Só depois de concluir essa verificação você deve apresentar a solução como confirmada.
+  </Accordion>
+
+  <Accordion title="Consistência de código">
+    Mantenha a consistência com a base de código existente em termos de estilo, padrões e abordagens. Analise o código para identificar convenções de nomenclatura, preferências de formatação e padrões arquiteturais. Siga esses padrões estabelecidos ao implementar novas funcionalidades ou correções. Use as mesmas estratégias de tratamento de erros, abordagens de registro de logs e metodologias de teste presentes no projeto. Isso preserva a legibilidade e a manutenibilidade, ao mesmo tempo que reduz a carga cognitiva para os desenvolvedores.
+  </Accordion>
+
+  <Accordion title="Melhoria progressiva">
+    Ao adicionar novos recursos, construa sobre a arquitetura existente em vez de introduzir paradigmas completamente novos. Identifique pontos de extensão no design atual e aproveite-os para novas funcionalidades. Implemente mudanças que estejam alinhadas com os padrões e princípios já estabelecidos na base de código. Priorize a compatibilidade com versões anteriores para garantir que os recursos existentes continuem funcionando como esperado. Documente como as novas adições se integram e estendem o sistema existente.
+  </Accordion>
+
+  <Accordion title="Documentação e explicações">
+    Forneça explicações claras e concisas para todas as mudanças e recomendações. Explique não apenas quais mudanças estão sendo feitas, mas por que elas são necessárias e como funcionam. Documente quaisquer premissas ou dependências envolvidas na solução. Inclua comentários no código ao introduzir lógica complexa ou soluções não óbvias. Ao sugerir mudanças de arquitetura, forneça diagramas ou explicações em alto nível que ajudem a visualizar o impacto.
+  </Accordion>
+
+  <Accordion title="Consciência da dívida técnica">
+    Reconheça quando as soluções podem introduzir dívida técnica e seja transparente sobre esses trade-offs. Quando limitações de tempo exigirem soluções menos ideais, identifique claramente quais aspectos se beneficiariam de uma refatoração futura. Diferencie correções rápidas de soluções adequadas, recomendando a abordagem apropriada com base no contexto. Quando a dívida técnica for inevitável, documente-a claramente para facilitar melhorias futuras.
+  </Accordion>
+
+  <Accordion title="Aprendizado e adaptação">
+    Adapte-se continuamente aos padrões e preferências específicos do Projeto. Preste atenção ao feedback sobre sugestões anteriores e incorpore esses aprendizados em recomendações futuras. Construa um modelo mental da arquitetura da aplicação que se torne cada vez mais preciso ao longo do tempo. Lembre-se de problemas e soluções anteriores para evitar repetir erros. Busque ativamente entender os requisitos de negócios subjacentes que orientam as decisões técnicas.
+  </Accordion>
+
+  <Accordion title="Como evitar componentes duplicados">
+    Antes de criar novas páginas, componentes ou fluxos, faça um inventário completo dos elementos existentes no codebase. Procure funcionalidades semelhantes usando palavras‑chave relevantes e padrões de arquivos. Identifique oportunidades de reutilizar ou estender componentes existentes, em vez de criar duplicatas. Quando houver funcionalidades semelhantes, analise‑as para entender se podem ser parametrizadas ou adaptadas em vez de simplesmente copiadas. Mantenha um modelo mental da estrutura da aplicação para reconhecer quando soluções propostas podem criar elementos redundantes. Quando forem necessárias páginas ou fluxos semelhantes, considere criar componentes mais genéricos que possam ser reutilizados com dados ou configurações diferentes, promovendo os princípios DRY (Don’t Repeat Yourself).
+  </Accordion>
+
+  <Accordion title="Eliminação de código morto">
+    Identifique e remova ativamente código não utilizado em vez de deixá-lo acumular. Ao substituir uma funcionalidade, remova de forma limpa a implementação antiga em vez de simplesmente comentá-la ou deixá-la ao lado do novo código. Antes de excluir código, verifique seu uso em toda a aplicação conferindo imports e referências. Use ferramentas como análise de dependências, quando disponíveis, para confirmar que o código está realmente não utilizado. Ao refatorar, acompanhe métodos obsoletos e garanta que eles sejam devidamente removidos assim que não forem mais referenciados. Faça verificações regulares em busca de componentes órfãos, imports não utilizados, blocos comentados e condições inalcançáveis. Ao sugerir remoção de código, forneça um motivo claro explicando por que ele é considerado código morto e confirme que não há dependências sutis antes da exclusão. Mantenha a limpeza da base de código priorizando a eliminação de caminhos de execução que não são mais utilizados.
+  </Accordion>
+
+  <Accordion title="Preservando funcionalidades existentes">
+    Trate recursos que já estão funcionando como sistemas bloqueados que exigem permissão explícita para serem modificados. Antes de sugerir alterações em qualquer componente em funcionamento, identifique claramente seus limites e dependências. Nunca remova ou altere substancialmente recursos que estão operacionais sem uma orientação explícita. Quando erros ocorrerem em uma área, evite fazer alterações &quot;por via das dúvidas&quot; em componentes que não têm relação e que estão funcionando. Mantenha um entendimento claro de quais partes do aplicativo são estáveis e quais estão em desenvolvimento. Use uma abordagem focada em recursos, em que as alterações sejam isoladas a conjuntos específicos de funcionalidades, sem afetar outros. Ao modificar componentes compartilhados usados por vários recursos, garanta que todos os recursos dependentes continuem funcionando como esperado. Crie salvaguardas documentando minuciosamente as dependências entre recursos antes de fazer modificações que possam afetá-las. Sempre confirme explicitamente a intenção antes de sugerir alterações em partes estabelecidas e funcionais do aplicativo.
+  </Accordion>
+
+  <Accordion title="Abordagem profunda para resolução de problemas">
+    Ao se deparar com erros complexos, resista à tentação de aplicar correções imediatas sem um entendimento mais profundo. Dê, intencionalmente, um passo atrás para examinar o problema a partir de múltiplas perspectivas antes de propor soluções. Considere abordagens fundamentalmente diferentes em vez de pequenas variações da mesma estratégia. Documente pelo menos três soluções potenciais com seus prós e contras antes de recomendar uma abordagem específica. Questione as suposições iniciais sobre a causa dos erros, especialmente quando correções padrão não funcionam. Considere fontes não convencionais de problemas, como configurações de ambiente, dependências externas ou condições de corrida que podem não ser imediatamente óbvias. Tente inverter o seu raciocínio: em vez de perguntar “por que isso não está funcionando?”, pergunte “em quais condições esse comportamento realmente faria sentido?”. Divida problemas complexos em componentes menores que possam ser verificados de forma independente. Implemente estratégias de depuração específicas, como logs, breakpoints ou rastreamento de estado, para reunir mais informações quando a origem de um erro permanecer pouco clara. Esteja disposto a propor correções experimentais como oportunidades de aprendizado, em vez de soluções definitivas, ao lidar com problemas particularmente obscuros.
+  </Accordion>
+
+  <Accordion title="Verificação de consultas ao banco de dados">
+    Antes de sugerir qualquer consulta ao banco de dados ou modificação de schema, sempre verifique primeiro o estado atual do banco. Examine as tabelas, campos e relacionamentos existentes para garantir que você não esteja recomendando a criação de elementos que já existem. Ao sugerir consultas, primeiro verifique se existem consultas semelhantes na codebase que possam ser adaptadas. Revise os modelos de dados existentes, arquivos de migração e definições de schema para construir um entendimento preciso da estrutura do banco de dados. Para qualquer criação de tabela proposta, confirme explicitamente que a tabela ainda não existe e explique por que uma nova tabela é necessária em vez de modificar uma já existente. Ao sugerir a adição de campos, verifique se campos semelhantes não já atendem ao mesmo propósito com nomes diferentes. Considere as implicações de desempenho das consultas sugeridas no banco de dados e forneça alternativas otimizadas quando apropriado. Sempre contextualize as sugestões de consulta dentro da arquitetura de banco de dados existente, em vez de tratá‑las como operações isoladas.
+  </Accordion>
+
+  <Accordion title="Consistência da interface e temas visuais">
+    Mantenha conformidade rigorosa com o sistema de design estabelecido e com a paleta de cores em todo o aplicativo. Antes de criar novos componentes de UI, analise os existentes para entender a linguagem visual, os padrões de espaçamento, os modelos de interação e a abordagem de theming adotada. Ao implementar novas interfaces, reutilize padrões de componentes existentes em vez de criar variações visuais. Extraia valores de cor, tipografia, espaçamento e outros design tokens da base de código existente, em vez de introduzir novos valores. Garanta um tratamento consistente dos estados (hover, active, disabled, error, etc.) em todos os componentes. Respeite os padrões estabelecidos de comportamento responsivo ao implementar novos layouts. Ao sugerir melhorias de UI, certifique-se de que elas aprimorem, em vez de prejudicar, a coesão visual do aplicativo. Mantenha os padrões de acessibilidade de forma consistente em todos os componentes, incluindo taxas de contraste de cor, navegação por teclado e suporte a leitores de tela. Documente quaisquer variações de componentes e seus contextos de uso apropriados para facilitar uma aplicação consistente. Ao introduzir novos elementos visuais, demonstre explicitamente como eles se integram e complementam o sistema de design existente, em vez de se desviarem dele.
+  </Accordion>
+
+  <Accordion title="Abordagem sistemática para depuração">
+    Ao se deparar com erros, adote uma metodologia científica de depuração em vez de fazer alterações aleatórias. Comece reproduzindo exatamente o problema em um ambiente controlado. Reúna dados abrangentes, incluindo registros de log do console, requisições de rede, estado dos componentes e mensagens de erro. Formule múltiplas hipóteses sobre as possíveis causas e teste cada uma de forma sistemática. Isole o problema reduzindo os componentes afetados e identificando as condições que o disparam. Documente seu processo de depuração e suas descobertas para referência futura. Use ferramentas de depuração apropriadas, incluindo as ferramentas de desenvolvedor do navegador, o React DevTools e técnicas de depuração em nível de código. Sempre verifique se sua solução realmente resolve completamente o problema, sem introduzir novos problemas ou regressões em outras partes da aplicação.
+  </Accordion>
+
+  <Accordion title="Tipagem segura e validação de dados">
+    Antes de implementar qualquer funcionalidade, analise minuciosamente as definições de tipos tanto do esquema do banco de dados quanto das interfaces TypeScript. Mantenha uma verificação de tipos estrita em toda a base de código, evitando o tipo &#39;any&#39; como um atalho para escapar da checagem de tipos. Ao trabalhar com transformações de dados, verifique a segurança de tipos em cada etapa do pipeline. Preste atenção especial a incompatibilidades de tipos comuns, como números do banco de dados chegando como strings, requisitos de parsing de datas e tratamento de campos nulos. Implemente convenções de nomenclatura consistentes entre colunas do banco de dados e interfaces TypeScript. Documente relacionamentos de tipos complexos e requisitos de tratamento especial. Teste com estruturas reais de dados e verifique casos limite, particularmente o tratamento de null/undefined. Quando ocorrerem erros, rastreie o pipeline de transformação de dados para identificar exatamente onde os tipos divergem e sugerir correções que mantenham a segurança de tipos.
+  </Accordion>
+
+  <Accordion title="Gerenciamento do fluxo de dados">
+    Encare o fluxo de dados como um pipeline completo, do banco de dados passando pela API e pelo estado até a UI (interface do usuário). Ao implementar funcionalidades, acompanhe com cuidado como os dados são transformados em cada etapa. Implemente padrões adequados de invalidação de consultas para garantir que a UI permaneça sincronizada com o estado do banco de dados. Adicione registros de log no console em pontos críticos para monitorar as transições de dados. Crie modelos mentais claros de quando e como os dados devem ser atualizados em resposta a ações. Preste muita atenção às estratégias de cache e a possíveis problemas de dados obsoletos. Ao depurar problemas de fluxo, siga metodicamente a jornada dos dados da origem até o destino. Verifique problemas de timing, condições de corrida e erros de transformação. Confirme se o formato final dos dados que chegam aos componentes corresponde ao que eles esperam. Implemente limites de erro robustos e um bom gerenciamento de estado de carregamento para manter a estabilidade da UI durante interrupções no fluxo de dados.
+  </Accordion>
+
+  <Accordion title="Otimização de desempenho">
+    Monitore o desempenho da aplicação de forma proativa, em vez de esperar que os problemas se tornem graves. Revise as estratégias de cache de consultas para minimizar chamadas desnecessárias ao banco de dados. Verifique e elimine re-renderizações desnecessárias de componentes por meio de memoização adequada e bom gerenciamento de dependências. Analise os padrões de obtenção de dados em busca de possíveis problemas de consultas N+1, cascatas excessivas ou requisições redundantes. Implemente virtualização para listas longas e pagine conjuntos de dados grandes. Otimize o tamanho do bundle por meio de code splitting e lazy loading. Compacte e otimize recursos estáticos, incluindo imagens. Use ferramentas apropriadas de medição de desempenho para identificar gargalos, incluindo o React DevTools, a aba Performance, o painel Network e o Memory Profiler. Foque os esforços de otimização em métricas que impactam diretamente a experiência do usuário, como tempos de carregamento, tempo até ficar interativo e responsividade da interface. Implemente melhorias de desempenho direcionadas, em vez de otimizar prematuramente.
+  </Accordion>
+
+  <Accordion title="Tratamento de erros e resiliência">
+    Implemente uma estratégia abrangente de tratamento de erros que mantenha a estabilidade da aplicação enquanto fornece feedback significativo. Use blocos try/catch de forma estratégica em torno de trechos de código potencialmente problemáticos. Crie uma hierarquia de limites de erro (error boundaries) para conter falhas em componentes específicos em vez de derrubar toda a aplicação. Defina padrões de degradação suave em que os componentes possam continuar funcionando com dados limitados. Forneça mensagens de erro claras e fáceis de entender, que expliquem o problema sem jargão técnico. Implemente mecanismos de recuperação, incluindo lógica de nova tentativa (retry), alternativas (fallbacks) e redefinições de estado. Mantenha um log de erros robusto que capture contexto suficiente para depuração, respeitando ao mesmo tempo a privacidade. Teste cenários de erro de forma abrangente para garantir que os mecanismos de recuperação funcionem como esperado. Ao sugerir soluções, garanta que elas tratem a causa raiz em vez de apenas suprimir sintomas, e verifique se funcionam em todos os ambientes relevantes e casos extremos.
+  </Accordion>
+
+  <Accordion title="Arquitetura de componentes">
+    Aborde o design de componentes com um entendimento claro da hierarquia e das responsabilidades de cada componente. Visualize os componentes como uma árvore genealógica, com relacionamentos adequados entre pais e filhos. Minimize o *prop drilling* usando estrategicamente *context* ou gerenciamento de estado quando apropriado. Implemente limites claros entre componentes de contêiner (*smart*) e componentes de apresentação (*dumb*). Estabeleça padrões consistentes para comunicação entre componentes, incluindo interações entre pai e filho e entre irmãos. Ao depurar problemas de componentes, analise a árvore completa de componentes, o fluxo de *props*, a localização do estado e as conexões dos *event handlers*. Projete componentes com responsabilidade única e interfaces claras. Documente os relacionamentos e dependências entre componentes para facilitar a manutenção futura. Implemente otimizações de desempenho, incluindo memoização, *lazy loading* e *code splitting* quando forem benéficas. Mantenha um equilíbrio entre reutilização e especialização de componentes para evitar tanto duplicação quanto excesso de abstração.
+  </Accordion>
+
+  <Accordion title="Integração de APIs e gerenciamento de rede">
+    Aborde a integração de APIs com uma estratégia abrangente para requisições, respostas e tratamento de erros. Verifique cabeçalhos de autenticação, parâmetros e o formato do corpo de cada requisição. Implemente um tratamento de erros adequado para todas as operações de rede, com capturas específicas para diferentes tipos de erro. Garanta tipagem consistente entre os payloads de requisição, as respostas esperadas e o estado da aplicação. Configure corretamente as configurações de CORS e verifique se funcionam em todos os ambientes. Implemente mecanismos inteligentes de retry para falhas transitórias com backoff exponencial. Considere as implicações de rate limiting e implemente o throttling apropriado. Adicione caching estratégico de requisições para melhorar a performance e reduzir a carga no servidor. Monitore a performance de rede, incluindo o tempo das requisições e o tamanho dos payloads. Teste as integrações de API tanto nos caminhos de sucesso (happy paths) quanto em vários cenários de falha. Mantenha uma documentação clara de todos os endpoints de API, seus propósitos, parâmetros esperados e formatos de resposta para facilitar o desenvolvimento futuro e a depuração.
+  </Accordion>
+</AccordionGroup>

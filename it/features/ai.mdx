@@ -1,0 +1,106 @@
+---
+title: "Lovable AI"
+description: "Sblocca potenti modelli come Gemini e GPT: niente chiavi API, nessuna configurazione."
+icon: "bolt"
+---
+
+Normalmente, aggiungere l’AI a un’app significa andare a caccia di chiavi API, configurare la fatturazione con i provider e collegare tutto manualmente. Lovable AI semplifica l’aggiunta rapida di potenti funzionalità AI alla tua app, così puoi iniziare subito a creare app più intelligenti e coinvolgenti.
+
+Alcuni esempi includono:
+
+- **Riepiloghi AI** – riduci automaticamente testi lunghi in punti chiave chiari
+- **Chatbot o agenti AI** – integra assistenti conversazionali nella tua app
+- **Analisi del sentiment** – comprendi il feedback degli utenti su larga scala
+- **Q&A sui documenti** – consenti agli utenti di fare domande direttamente sui tuoi contenuti
+- **Generazione creativa** – brainstorming, bozze di testi o espansione di idee
+- **Traduzione multilingue** – servi facilmente utenti in tutto il mondo
+- **Completamento delle attività** – automatizza flussi di lavoro ripetitivi o multi-step (funzionalità di agente)
+- **Analisi di immagini e documenti** – estrai, riassumi e interpreta rapidamente le informazioni chiave da immagini e documenti, trasformando contenuti non strutturati in insight immediatamente utilizzabili
+- **Automazione dei flussi di lavoro** – gestisci attività ripetitive, prendi decisioni e ottimizza i processi per risparmiare tempo e ridurre gli errori.
+
+<div id="enabling-lovable-ai">
+  ## Abilitare Lovable AI
+</div>
+
+<Note>
+  Per un'esperienza ottimale, consigliamo di usare Lovable AI con [Lovable Cloud](https://docs.lovable.dev/features/cloud).
+</Note>
+
+Per impostazione predefinita, Lovable AI è abilitata per la tua area di lavoro e nelle tue preferenze utente. Questo significa che Lovable aggiunge automaticamente funzionalità AI quando necessario. Puoi gestire il comportamento di Lovable AI per i tuoi progetti dalle tue preferenze utente: **Settings → Integrations → Lovable AI → User preferences**.
+
+<div id="default-ai-model">
+  ### Modello IA predefinito
+</div>
+
+Lovable AI utilizza **Gemini 2.5 Flash** come modello predefinito. Se vuoi usare un modello diverso o una combinazione di modelli, puoi specificare la tua scelta direttamente nell'istruzione quando richiedi una funzionalità IA. Per una panoramica dei modelli IA supportati, consulta [Supported AI models](https://docs.lovable.dev/features/ai#supported-ai-models).
+
+<div id="user-preferences">
+  ### Preferenze utente
+</div>
+
+L'impostazione predefinita per l'integrazione con l'AI è **Consenti sempre**, il che significa che Lovable AI verrà usata automaticamente nei tuoi progetti. Puoi modificare le tue preferenze in qualsiasi momento da **Settings → Integrations → Lovable AI → User preferences**.
+
+Scegli tra:
+
+- **Consenti sempre**: Lovable esegue automaticamente l'azione, senza chiederti alcuna revisione o approvazione.
+- **Chiedi ogni volta**: Lovable chiede la tua approvazione ogni volta che deve eseguire l'azione. Ad esempio, se vuoi aggiungere un chatbot, puoi:
+  - **Consenti**: abilita l'integrazione per il progetto corrente.
+  - **Nega**: rifiuta l'integrazione per questa richiesta (potresti ricevere nuovamente la richiesta in seguito).
+  - **Modifica preferenze**: cambia il comportamento predefinito per i progetti futuri (non influisce sul progetto corrente).
+- **Non consentire mai**: Lovable blocca l'azione, ti informa che per procedere è necessaria l'AI e ti indica di abilitare Lovable AI.
+
+<div id="usage-and-pricing">
+  ## Utilizzo e prezzi
+</div>
+
+Lovable AI utilizza un **modello di tariffazione basato sull'utilizzo**. Questo significa che i costi scalano in base a quanto lo usi e non sono coperti dal tuo abbonamento.
+
+Il costo di utilizzo di Lovable AI è esattamente lo stesso che pagheresti andando direttamente al provider LLM. Non ci sono costi nascosti. Per verificare i costi, fai riferimento alle fonti ufficiali collegate nel nostro elenco di modelli AI supportati qui sotto.
+
+Ogni area di lavoro include **1 $ di utilizzo AI gratuito al mese** per iniziare. Successivamente, gli utenti con piani a pagamento possono ricaricare il proprio saldo, con costi che dipendono dal modello sottostante scelto.
+
+<Note>
+  **Offerta temporanea, soggetta a modifiche:** Fino alla fine del 2025, ogni area di lavoro riceve 25 $ di Cloud e 1 $ di AI al mese, anche per gli utenti sul piano Free.
+</Note>
+
+Puoi monitorare e gestire i costi di utilizzo dell'AI in **Settings → Usage.** Per maggiori dettagli ed esempi, vedi [Prezzi Cloud e AI basati sull'utilizzo](https://docs.lovable.dev/features/cloud#usage-based-cloud-and-ai-pricing).
+
+<div id="supported-ai-models">
+  ## Modelli di AI supportati
+</div>
+
+Lovable AI utilizza **Gemini 2.5 Flash** come modello predefinito, ma puoi fornire un'istruzione all'agente per usare un modello diverso o una combinazione di modelli.
+
+| Modello                                                                                                 | Descrizione                                                                                                                                                                              | Ideale per                                                                                                      |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [**Gemini 3 Pro**](https://deepmind.google/models/gemini/pro/)                                         | Il più recente modello di punta Gemini di Google. Maggiore accuratezza nel ragionamento, finestra di contesto più ampia, migliore capacità multimodale e uso degli strumenti più affidabile rispetto a 2.5 Pro. Più lento e con prezzo premium. | Agent avanzati, ricerca complessa, ragionamenti di lungo periodo, analisi multimodale che richiede alta accuratezza |
+| [**Nano Banana Pro**](https://deepmind.google/models/gemini-image/pro/)                                | Modello di generazione e modifica di immagini basato sull'architettura di immagini di Gemini 3 Pro. Visual di qualità da studio, ad alta risoluzione, ottimizzato per testo nelle immagini e composizione multi-immagine.         | Creazione di asset visivi, flussi di lavoro di immagini ad alto volume, infografiche, prototipazione rapida di contenuti di design/creativi. |
+| [**Gemini 2.5 Pro**](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-pro) | Il modello Gemini più intelligente e complesso. Alto livello di ragionamento, ampio contesto, più lento e più costoso.                                                                                                         | Ragionamento profondo, sviluppo avanzato di codice, ricerca, attività multimodali complesse                     |
+| [**Gemini 2.5 Flash (default)**](https://deepmind.google/models/gemini/flash/)                         | Modello bilanciato. Più veloce ed economico rispetto a Pro ma comunque capace di ragionare. Costo medio.                                                                                 | Assistenti, analisi, flussi di lavoro generali in cui è importante un equilibrio tra velocità e intelligenza    |
+| [**Gemini 2.5 Flash Lite**](https://deepmind.google/models/gemini/flash-lite/)                         | Il modello Gemini più veloce ed economico. Gestisce attività semplici su larga scala, con minore profondità di ragionamento.                                                             | Attività leggere ad alto volume come classificazione, riepilogo, traduzione                                    |
+| [**Gemini 2.5 Flash Image**](https://deepmind.google/models/gemini/image/)                             | Ottimizzato per generare immagini. Costo per immagine molto basso, non pensato per il ragionamento testuale.                                                                            | Generazione di immagini, output visivi rapidi                                                                    |
+| [**GPT-5**](https://openai.com/index/introducing-gpt-5/)                                               | Il modello OpenAI più intelligente. Forte capacità di ragionamento, molto accurato, ma il più lento e il più costoso.                                                                    | Ragionamento della massima qualità, app in cui l'accuratezza è critica, decisioni complesse                    |
+| [**GPT-5 Mini**](https://platform.openai.com/docs/models/gpt-5-mini)                                   | Versione bilanciata di GPT-5. Più economica e veloce di GPT-5, meno complessa ma molto versatile per uso generale.                                                                       | Assistenti, ragionamento di media complessità, flussi di lavoro aziendali                                      |
+| [**GPT-5 Nano**](https://platform.openai.com/docs/models/gpt-5-nano)                                   | La versione GPT-5 più economica e veloce. Capacità di ragionamento di base, ideale per risposte rapide o semplici.                                                                       | Riepiloghi, classificazione, estrazione, attività semplici ad alto volume                                      |
+
+<div id="best-and-most-cost-effective-choices">
+  ### Scelte migliori e più convenienti
+</div>
+
+- **Migliore intelligenza complessiva**: Gemini 3 Pro, GPT-5 e Gemini 2.5 Pro (ragionamento profondo, ma sono i più costosi)
+- **Miglior equilibrio (velocità + costo + intelligenza)**: GPT-5 Mini e Gemini 2.5 Flash
+- **Più conveniente per la scalabilità**: GPT-5 Nano e Gemini 2.5 Flash Lite (semplici, veloci, i più economici)
+- **Migliore per le immagini**: Nano Banana Pro e Gemini 2.5 Flash Image
+
+<div id="workspace-rate-limits">
+  ## Limiti di utilizzo dell'Area di lavoro
+</div>
+
+Per garantire prestazioni affidabili e un accesso equo per tutti gli utenti, Lovable AI applica limiti di frequenza delle richieste per ogni area di lavoro. Questi limiti aiutano a mantenere la stabilità del sistema, prevenire gli abusi, controllare i costi e offrire un'esperienza uniforme per tutti.
+
+Se le tue richieste superano il limite consentito, il server restituisce il codice di stato **429 Too Many Requests** e la richiesta non verrà elaborata.
+
+I limiti sono più restrittivi per gli utenti del piano gratuito, mentre i piani a pagamento includono soglie più elevate e una maggiore flessibilità.
+
+- **Utenti del piano gratuito**: puoi eseguire l'upgrade in qualsiasi momento per aumentare i tuoi limiti.
+- **Utenti dei piani a pagamento**: contatta il [Supporto Lovable](https://lovable.dev/support) se hai bisogno di capacità aggiuntiva.

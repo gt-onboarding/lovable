@@ -1,0 +1,117 @@
+---
+title: "在 Lovable 中使用图片"
+description: "了解如何在你的 Lovable 项目中添加图片"
+icon: "frame"
+---
+
+要添加图片，你可以采用以下四种方式之一：
+
+<AccordionGroup>
+  <Accordion title="将图片上传到提示对话中">
+    只需在聊天中上传它们，并向 Lovable 的 Agent 说明你希望它们在项目中出现的位置和方式。例如：
+
+    > 用这张图片替换导航栏中的 Logo
+  </Accordion>
+
+  <Accordion title="在可视化编辑器中替换它">
+    你可以使用[可视化编辑器](https://docs.lovable.dev/features/precision-edit#visual-edits)功能直接替换现有图片：
+
+    <Steps>
+      <Step title="步骤 1">
+        点击“Edit”工具。
+      </Step>
+
+      <Step title="步骤 2">
+        选择你想要更改的图片占位元素。
+
+        ![images/visual-edit-replace.png](/images/visual-edit-replace.png)
+      </Step>
+
+      <Step title="步骤 3">
+        更换图片。
+
+        ![images/visual-edit-image.png](/images/visual-edit-image.png)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="使用外部图片链接">
+    向你的项目添加图片的一种方式是引用外部 URL 的图片。通过这种方式，你可以使用托管在 Unsplash、Imgur 或其他任意图像托管服务上的图片。使用时请留意版权！
+
+    以下是如何通过提示让 Lovable 使用外部图片：
+
+    <Steps>
+      <Step title="Step 1">
+        找到你想要使用的图片。
+
+        例如，你可以访问 Unsplash 之类的网站，选中一张图片，然后复制它的 URL。
+      </Step>
+
+      <Step title="Step 2">
+        在项目的提示中，只需通过指定 URL 告诉 Lovable 使用这张图片。例如：
+
+        ```
+        Use the image from this URL 
+        https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/442px-Pale_Blue_Dot.png 
+        for the hero section image.
+        ```
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="使用 GitHub 公开目录中的图片">
+    向你的 Lovable 项目添加图片的另一种方法，是使用上传到已连接 GitHub 仓库中 `public` 目录里的图片。操作步骤如下：
+
+    <Steps>
+      <Step title="连接你的 GitHub 仓库">
+        确保你的项目已经连接到 GitHub 仓库。[点击查看如何连接你的仓库](https://docs.lovable.dev/integrations/git-integration)。
+      </Step>
+
+      <Step title="找到 public 文件夹">
+        在你的 GitHub 仓库中，进入 `public` 目录。这个文件夹通常用于托管图片等资源文件，你可以在项目中引用这些资源。
+      </Step>
+
+      <Step title="添加文件">
+        点击 **Add file**，然后在下拉菜单中选择 **Upload files** 选项。<img src="/assets/using-images-github-upload.png" alt="选择要上传的文件" />
+      </Step>
+
+      <Step title="上传图片">
+        接下来需要把图片上传到你的仓库中：
+
+        * 将图片拖放到 public 文件夹中，或者
+        * 点击 **&quot;choose your files&quot;** 链接，浏览并选择图片文件。<img src="/assets/using-images-github-commiting.png" alt="选择要上传的文件" />
+      </Step>
+
+      <Step title="提交更改">
+        选好图片后，写一个简单的提交信息（例如：&quot;Adding image files to be used in the app&quot;），然后点击 **&quot;Commit changes&quot;** 将文件保存到你的仓库。
+      </Step>
+
+      <Step title="获取图片路径">
+        文件上传完成后，选中该文件，然后点击文件名旁边的复制图标，复制图片路径。这个路径将会在你的 Lovable 提示中使用。<img src="/assets/using-images-github-selecting.png" alt="选择要上传的文件" />
+      </Step>
+
+      <Step title="在 Lovable 中使用图片">
+        现在，你可以在项目中通过类似下面的提示来引用这张图片：
+
+        ```
+        Add an additional image to the hero section. 
+        This time, use this one from my local repo: public/c-64-close-up.jpg.jpeg
+        ```
+
+        请确保使用的是你在上一步复制的图片名称和路径。
+
+        <Warning>
+          将大尺寸图片上传到 GitHub 仓库会导致仓库体积增大，从而影响 Lovable 的性能（例如仓库克隆时间变长、预览/沙盒启动变慢）。
+
+          在将图片上传到 `public` 文件夹之前，尽量先对图片进行优化，例如压缩图片，并使用与你的使用场景相匹配的尺寸。比如，如果图片只会作为小图标显示，就不要使用全高清尺寸的图片。
+        </Warning>
+      </Step>
+    </Steps>
+
+    为了帮助你更好地理解如何使用上述方法集成图片，我们提供了一个可供你探索的项目：[Lovable 项目示例](https://lovable.dev/projects/e823fedf-238d-4313-86a8-1fd4bfc2a9ba)。在这个项目中，你可以看到实际使用的提示，以及每种方法在实践中的具体效果。
+
+    此外，这里还有一个公开的 GitHub 仓库，其中包含提交记录、已上传图片和完整的实现细节。你可以在这里查看该仓库：[GitHub: Adding Images Example](https://github.com/viborc/adding-images-example)。
+
+    欢迎随时浏览该项目和仓库，以加深理解并提升你的实战能力。
+  </Accordion>
+</AccordionGroup>

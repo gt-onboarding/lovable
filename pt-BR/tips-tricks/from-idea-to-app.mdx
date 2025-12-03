@@ -1,0 +1,247 @@
+---
+title: "Da ideia ao app funcional"
+description: "Como transformar sua visão em realidade com a Lovable"
+icon: "screwdriver-wrench"
+---
+
+> **"Não faço a menor ideia do que estou fazendo... mas sei exatamente o que quero construir."**
+
+Se você se identifica com isso, está no lugar certo.
+
+<div id="who-this-is-for">
+  ## Para quem é isto
+</div>
+
+Você tem uma ideia.
+
+Você já experimentou ferramentas de IA, escreveu anotações, talvez até tenha iniciado alguns Projetos.
+
+Mas está preso entre a inspiração e a execução.
+
+**Este guia vai ajudar você a:**
+
+- Transformar um conceito vago em um produto concreto
+- Evitar erros comuns
+- Usar o Lovable do jeito certo — especialmente se você não é desenvolvedor
+
+<div id="the-common-pitfall-building-before-you-plan">
+  ## O erro comum: construir antes de planejar
+</div>
+
+Muitos usuários caem na mesma armadilha: `Eles começam a construir antes de esclarecer exatamente o que estão construindo.`
+
+**O resultado?**
+
+- Erros em cima de erros
+- Agentes de IA confusos e erros gerados por IA
+- Projetos que saem do rumo ou parecem “`difíceis demais de consertar`”
+
+<div id="best-practices-for-turning-ideas-into-real-products">
+  ## Boas práticas para transformar ideias em produtos de verdade
+</div>
+
+<div id="1-start-outside-lovable">
+  ### 1. Comece fora do Lovable
+</div>
+
+Muitos criadores — incluindo MP, convidado da livestream — passam um tempo refinando suas ideias _antes_ de abrir o Lovable.
+
+Experimente o seguinte:
+
+- Grave uma nota de voz explicando sua ideia de forma natural (MP usa Granola para isso)
+- Cole o texto no GPT ou Claude para obter uma versão expandida em termos de produto mais claros
+- Peça para a IA agir como designer, PM ou desenvolvedor e criticar ou co-redigir um PRD (Product Requirements Document)
+
+Use o Lovable quando estiver pronto para passar de uma visão clara para um protótipo funcional.
+
+<div id="2-write-it-out-first">
+  ### 2. **Escreva tudo antes**
+</div>
+
+Antes de criar um Prompt de IA, passe 15 minutos escrevendo:
+
+- O que o seu produto faz?
+- Para quem ele é (mesmo que seja só para você)
+- O que a _versão mais simples e mínima_ deve incluir
+
+<Tip>
+  **Transforme isso em uma lista de funcionalidades ou casos de uso:**
+
+  Escreva como uma lista de user stories ou funcionalidades e envie para o Chat mode ou GPT para gerar um PRD (Product Requirements Document – Documento de Requisitos do Produto).
+</Tip>
+
+<div id="3-choose-your-build-style-wisely">
+  ### 3. Escolha bem o seu estilo de construção
+</div>
+
+Existem duas abordagens válidas para construir com o Lovable:
+
+1. **Front-end primeiro (recomendado para iniciantes)**
+   - Comece com dados fictícios
+   - Construa layouts, fluxos e lógica sem conectar um banco de dados
+   - Quando estiver satisfeito, conecte o Lovable Cloud ou o Supabase e coloque no ar
+2. **De trás para frente**:
+   - Conecte o Lovable Cloud ou o Supabase desde o primeiro dia
+   - Construa e teste cada funcionalidade uma por uma
+   - Melhor para usuários avançados que se sentem à vontade para depurar problemas
+
+Se você está começando, **escolha front-end primeiro.** Você vai:
+
+- Evitar erros complexos de SQL
+- Iterar mais rápido
+- Manter o foco em design + usabilidade
+
+<Tip>
+  MP usou front-end primeiro pela velocidade, clareza e facilidade de depuração. Isso ajudou ele a aprender rápido e entregar mais rápido.
+</Tip>
+
+<div id="4-use-chat-mode-as-a-thought-partner">
+  ### 4. Use o Chat Mode como parceiro para pensar junto
+</div>
+
+Chat Mode não é só um chatbot — é seu assistente que entende o seu Projeto.
+
+Ele conhece seus arquivos, o esquema do seu banco de dados e seus Registros de log.
+
+Use-o para:
+
+- Depurar problemas com contexto
+- Desdobrar ideias vagas em componentes estruturados
+- Fazer brainstorming, planejar e iterar
+- Traduzir ideias vagas em fluxos funcionais
+
+<Tip>
+  Experimente este prompt de IA:
+
+  ```
+  Quero criar um app de gerenciamento de criação de cães. Aqui está o que eu preciso que ele faça: [lista]. Você pode dividir isso em etapas ou componentes para eu construir?
+  
+  Estou criando um app de coaching de carreira. Aqui está o que eu quero que ele faça: [lista]. Qual é a versão mais simples para testar?
+  ```
+</Tip>
+
+<div id="5-break-it-down-into-bricks">
+  ### 5. Divida em blocos
+</div>
+
+Não tente construir tudo de uma vez. Divida sua ideia em **blocos**:
+
+* Cada bloco = uma funcionalidade, componente ou fluxo
+* Construa um por vez
+* Teste, refine e só então siga em frente
+
+Peça ajuda ao Chat Mode para planejar isso usando instruções como:
+
+```
+Aqui está minha ideia de app. Você pode dividi-la em funcionalidades ou etapas que eu devo construir?
+```
+
+```
+Divida esta ideia em funcionalidades construíveis que eu possa testar uma de cada vez.
+```
+
+
+<div id="6-prompt-with-purpose">
+  ### 6. **Use Prompts de IA com propósito**
+</div>
+
+Antes de cada Prompt de IA, pergunte:
+
+```
+O que estou tentando criar agora?
+```
+
+Seja específico. Evite mudar de rumo no meio da conversa — a IA precisa de uma intenção consistente para conseguir ajudar você da melhor forma.
+
+
+<div id="7-avoid-the-infinite-error-loop">
+  ### 7. Evite o loop infinito de erros
+</div>
+
+Travou? Não clique em “Try to Fix” 10 vezes.
+
+Em vez disso:
+
+- Abra as ferramentas de desenvolvedor do navegador (aba Console)
+- Copie o erro real
+- Cole no Chat Mode para investigar
+- Ou remixe o projeto sem o seu banco de dados para simplificar a depuração
+
+<Tip>
+  O Lovable agora lê registros de log do console automaticamente — na maioria dos casos, não é preciso copiar e colar.
+</Tip>
+
+<div id="8-remix-if-things-get-messy">
+  ### 8. Remixe se as coisas ficarem complicadas
+</div>
+
+Projetos evoluem. Se tudo começar a parecer confuso:
+
+- Remixe seu projeto (ele cria um clone do projeto e você mantém o original)
+- Comece do zero com o que você aprendeu
+- Mantenha a nova versão focada e organizada
+- Fique com o que funciona. Elimine o que não funciona.
+
+<div id="9-use-real-validation-fast">
+  ### 9. **Use validação de verdade, e rápido**
+</div>
+
+Um usuário contou para a gente que não construiu para vender. Ele enviou um protótipo simples para 10 usuários por DM. Um deles pediu para pagar na hora. Na sexta-feira, Stripe já estava integrado.
+
+Valide:
+
+- Perguntando a usuários reais: “Isso ajudaria você?”
+- Buscando feedback rápido, não perfeição
+- Deixando o interesse real guiar seus próximos passos
+
+<div id="10-get-better-by-building-bad-ideas">
+  ### 10. Melhore construindo ideias ruins
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/mwHNw8aeYCI?si=wyWWyPnB7DmC8lR3" title="Reprodutor de vídeo do YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+[MP](https://www.youtube.com/watch?v=mwHNw8aeYCI&ab_channel=Lovable) criou mais de 100 projetos descartáveis:
+
+- App de mensagem para desconhecidos
+- Gerador de nostalgia dos anos 90
+- Ferramenta de preparação para entrevistas com IA
+
+Cada um o ajudou a testar uma habilidade:
+
+- Construir UI sem backend
+- Adicionar filtros de palavrões
+- Conectar APIs de IA
+- Gerenciar o fluxo do usuário
+
+<Tip>
+  Lição:
+
+  **Construa coisas que não precisam existir — para estar pronto quando aparecer algo que precise.**
+</Tip>
+
+<div id="builders-checklist">
+  ## Checklist do builder
+</div>
+
+1. Escreva sua ideia em 5–10 tópicos
+2. Liste as funcionalidades principais (em tópicos) de um MVP (produto mínimo viável)
+3. Decida: frontend primeiro ou do backend para o frontend
+4. Use o Chat Mode para co-planejar e depurar
+5. Construa em blocos: 1 funcionalidade por vez
+6. Só conecte o backend quando estiver pronto
+7. Remixe se os erros começarem a se acumular
+8. Peça feedback antes de colocar no ar
+
+<div id="final-tip-youre-the-first-user">
+  ## Dica final: você é o primeiro usuário
+</div>
+
+- Projete para você primeiro.
+- Teste como seus futuros usuários testariam.
+- Pense como um designer de produto.
+
+E lembre-se: você está criando algo que só você poderia imaginar.
+
+> Você não precisa saber programar.\
+> Você só precisa de uma ideia clara, um bom plano e um pouco de paciência.\
+> Lovable vai ajudar com o resto.

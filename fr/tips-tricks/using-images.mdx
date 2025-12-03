@@ -1,0 +1,117 @@
+---
+title: "Utiliser des images dans Lovable"
+description: "Découvrez comment ajouter des images à vos projets Lovable"
+icon: "frame"
+---
+
+Pour ajouter des images, vous pouvez procéder de l’une des quatre manières suivantes :
+
+<AccordionGroup>
+  <Accordion title="Importez l’image dans le chat du Prompt">
+    Il vous suffit de les importer dans le chat et d’expliquer à l’agent Lovable où et comment vous souhaitez qu’ils apparaissent dans votre projet. Par exemple :
+
+    > Remplacez le logo de la barre de navigation par cette image
+  </Accordion>
+
+  <Accordion title="Remplacez-le dans l’éditeur visuel">
+    Vous pouvez remplacer une image existante directement en utilisant la fonctionnalité de [l’éditeur visuel](https://docs.lovable.dev/features/precision-edit#visual-edits) :
+
+    <Steps>
+      <Step title="Étape 1">
+        Cliquez sur l’outil « Edit ».
+      </Step>
+
+      <Step title="Étape 2">
+        Sélectionnez l’emplacement d’image que vous souhaitez modifier.
+
+        ![images/visual-edit-replace.png](/images/visual-edit-replace.png)
+      </Step>
+
+      <Step title="Étape 3">
+        Remplacez l’image.
+
+        ![images/visual-edit-image.png](/images/visual-edit-image.png)
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Utiliser une URL d’image externe">
+    Une façon d’ajouter des images à votre projet consiste à référencer une image à partir d’une URL externe. Cette méthode vous permet d’utiliser des images hébergées sur des plateformes externes comme Unsplash, Imgur ou tout autre service d’hébergement d’images. Faites attention aux droits d’auteur !
+
+    Voici comment créer un prompt pour que Lovable utilise une image externe :
+
+    <Steps>
+      <Step title="Step 1">
+        Trouvez l’image que vous souhaitez utiliser.
+
+        Par exemple, vous pouvez visiter un site comme Unsplash, sélectionner une image et copier son URL.
+      </Step>
+
+      <Step title="Step 2">
+        Dans le prompt de votre projet, indiquez simplement à Lovable d’utiliser cette image en précisant l’URL. Par exemple :
+
+        ```
+        Use the image from this URL 
+        https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Pale_Blue_Dot.png/442px-Pale_Blue_Dot.png 
+        for the hero section image.
+        ```
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Utiliser des images depuis votre répertoire GitHub public">
+    Une autre méthode pour ajouter des images à ton projet Lovable consiste à utiliser des images téléversées dans le répertoire `public` de ton dépôt GitHub connecté. Voici comment procéder :
+
+    <Steps>
+      <Step title="Connecter ton dépôt GitHub">
+        Assure-toi que ton projet est connecté à ton dépôt GitHub. [Voici comment connecter ton dépôt](https://docs.lovable.dev/integrations/git-integration).
+      </Step>
+
+      <Step title="Localiser le dossier public">
+        Dans ton dépôt GitHub, navigue jusqu&#39;au répertoire `public`. Ce dossier est généralement utilisé pour héberger des ressources comme des images qui peuvent être référencées dans ton projet.
+      </Step>
+
+      <Step title="Ajouter un fichier">
+        Clique sur **Add file**, puis dans le menu déroulant, sélectionne l&#39;option **Upload files**. <img src="/assets/using-images-github-upload.png" alt="Sélection des fichiers à téléverser" />
+      </Step>
+
+      <Step title="Téléverser une image">
+        L&#39;étape suivante consiste à transférer ton image dans ton dépôt :
+
+        * Fais glisser l&#39;image dans le dossier `public`, ou
+        * Clique sur le lien **&quot;choose your files&quot;** pour parcourir et sélectionner le fichier image. <img src="/assets/using-images-github-commiting.png" alt="Sélection des fichiers à téléverser" />
+      </Step>
+
+      <Step title="Valider les modifications (commit)">
+        Après avoir sélectionné ton image, écris un message de commit simple (par exemple, &quot;Adding image files to be used in the app&quot;) et clique sur **&quot;Commit changes&quot;** pour enregistrer le fichier dans ton dépôt.
+      </Step>
+
+      <Step title="Récupérer le chemin de l'image">
+        Une fois le fichier téléversé, sélectionne-le puis clique sur l&#39;icône de copie à côté du nom du fichier pour copier le chemin d&#39;accès de l&#39;image. Ce chemin sera utilisé dans ton Prompt Lovable. <img src="/assets/using-images-github-selecting.png" alt="Sélection des fichiers à téléverser" />
+      </Step>
+
+      <Step title="Utiliser l'image dans Lovable">
+        Tu peux maintenant référencer cette image dans ton projet en utilisant un Prompt comme celui-ci :
+
+        ```
+        Add an additional image to the hero section. 
+        This time, use this one from my local repo: public/c-64-close-up.jpg.jpeg
+        ```
+
+        Assure-toi d&#39;utiliser le nom de ton image et le chemin que tu as copiés à l&#39;étape précédente.
+
+        <Warning>
+          Le téléversement d&#39;images volumineuses dans ton dépôt GitHub peut augmenter sa taille, ce qui peut affecter les performances de Lovable (temps de clonage du dépôt plus longs, démarrage plus lent des aperçus/sandbox).
+
+          Essaie d&#39;optimiser tes images avant de les téléverser dans ton dossier `public` en les compressant et en utilisant des dimensions adaptées à ton cas d&#39;usage. Par exemple, n&#39;utilise pas une image en pleine résolution HD si elle ne doit être affichée qu&#39;en petite icône.
+        </Warning>
+      </Step>
+    </Steps>
+
+    Pour t&#39;aider à mieux comprendre comment intégrer des images en utilisant les méthodes décrites ci-dessus, nous avons un projet que tu peux explorer : [Exemple de projet Lovable](https://lovable.dev/projects/e823fedf-238d-4313-86a8-1fd4bfc2a9ba). Dans ce projet, tu peux voir les invites réelles et le fonctionnement concret de chaque méthode.
+
+    De plus, voici un dépôt GitHub public qui inclut les commits, les images téléversées et tous les détails d&#39;implémentation. Tu peux consulter le dépôt ici : [GitHub: Adding Images Example](https://github.com/viborc/adding-images-example).
+
+    N&#39;hésite pas à explorer le projet et le dépôt pour approfondir ta compréhension et améliorer tes compétences d&#39;implémentation.
+  </Accordion>
+</AccordionGroup>

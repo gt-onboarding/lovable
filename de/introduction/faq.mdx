@@ -1,0 +1,328 @@
+---
+title: "FAQ"
+description: "Häufig gestellte Fragen zu Lovable"
+icon: "circle-question"
+---
+
+<div id="getting-started">
+  ## Erste Schritte
+</div>
+
+<AccordionGroup>
+  <Accordion title="Was ist Lovable?">
+    Lovable ist eine KI-gestützte Plattform, mit der Nutzer:innen mit jedem Erfahrungsstand Full-Stack-Websites in natürlicher Sprache erstellen können. Beschreibe einfach, was du möchtest, und Lovable baut es für dich.
+  </Accordion>
+
+  <Accordion title="Was kann ich mit Lovable bauen?">
+    Wenn du es dir vorstellen kannst, kannst du es mit Lovable bauen. Von einfachen Landing Pages bis hin zu leistungsstarken Tools für spezialisierte Anwendungsfälle gibt dir Lovable die Flexibilität, alles zu erstellen, was du brauchst – ohne Grenzen.
+  </Accordion>
+
+  <Accordion title="Brauche ich Programmiererfahrung, um mit Lovable zu bauen?">
+    Nein. Lovable ist für alle Erfahrungsstufen konzipiert. Egal, ob du Entwickler:in oder nicht technisch versiert bist – du kannst mit Lovable Websites erstellen.
+  </Accordion>
+
+  <Accordion title="Wie erstelle ich ein Projekt?">
+    Um ein Projekt zu erstellen, gib einfach eine Nachricht in das Nachrichtenfeld auf dem Dashboard ein. Beschreibe, was du bauen möchtest, und Lovable übernimmt den Rest und generiert einen Ausgangspunkt für dein Projekt. Denk daran, klein anzufangen und schrittweise weiterzubauen!
+  </Accordion>
+
+  <Accordion title="Kann ich ein bestehendes Projekt wiederverwenden?">
+    Ja, du kannst ein bestehendes öffentliches Projekt oder eines deiner eigenen Projekte remixen. Remixen ermöglicht dir, den aktuellen Stand eines Projekts als Ausgangspunkt zu verwenden und darauf aufzubauen. Das ist eine großartige Möglichkeit, neue Ideen zu erkunden, Anpassungen vorzunehmen oder mit verschiedenen Änderungen zu iterieren und dabei die Originalversion zu bewahren.
+  </Accordion>
+</AccordionGroup>
+
+<div id="building-with-lovable">
+  ## Entwickeln mit Lovable
+</div>
+
+<AccordionGroup>
+  <Accordion title="Wie entwickle ich effizient mit Lovable?">
+    Effizient mit Lovable zu entwickeln, bedeutet vor allem, die richtigen Techniken zu nutzen. Mit etwas Übung gelingt das jedem. Um dir den Einstieg zu erleichtern, schau dir unseren [Leitfaden](https://mastering-lovable.lovable.app/) an.
+  </Accordion>
+
+  <Accordion title="Wie sollte ich meine Eingabeaufforderungen strukturieren, um die besten Ergebnisse zu erzielen?">
+    * Sei klar und konkret.
+    * Konzentriere dich jeweils auf eine Funktion.
+    * Baue schrittweise aufeinander auf.
+    * Nutze Schlagwörter, um das Design zu optimieren.
+  </Accordion>
+
+  <Accordion title="Was soll ich tun, wenn ein Fehler auftritt?">
+    <Steps>
+      <Step title="Try-to-fix-Schaltfläche">
+        Verwende die Option **Try-to-fix**. Lovable versucht dann, das Problem automatisch zu lösen. Die Verwendung der Schaltfläche verbraucht keine Credits.
+      </Step>
+
+      <Step title="Untersuchen">
+        Wenn **Try-to-fix** das Problem nicht behebt, bitte den Lovable Agent, die Ursache zu untersuchen. Erkläre, was du siehst und welche konkreten Teile nicht funktionieren.
+      </Step>
+
+      <Step title="Zu einer älteren Version zurückkehren">
+        Wenn das nicht funktioniert, kannst du eine ältere funktionierende Version in der Vorschau ansehen und bei Bedarf zu dieser Version zurückkehren oder zurückkehren und eine frühere Nachricht bearbeiten, um einen anderen Ansatz auszuprobieren. Nichts geht verloren – alle nach diesem Zeitpunkt vorgenommenen Änderungen bleiben im Chat und können jederzeit erneut angewendet werden.
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="Was ist Refactoring und warum ist es wichtig?">
+    Refactoring verbessert die Struktur und Effizienz deines Codes, ohne die Funktionalität zu verändern. Es hilft dabei:
+
+    * Die Performance zu optimieren, indem Redundanzen entfernt werden.
+    * Die Wartbarkeit für zukünftige Updates zu verbessern.
+    * Konflikte zu vermeiden, indem die Logik klarer strukturiert wird.
+  </Accordion>
+
+  <Accordion title="Kann ich mein Projekt mit einem Backend verbinden, um Daten zu speichern?">
+    Wenn du deiner Anwendung Backend-Funktionen hinzufügen möchtest, kannst du:
+
+    * Dich mit dem integrierten Backend von Lovable verbinden –  [Lovable Cloud](https://docs.lovable.dev/features/cloud)
+    * Die native [Supabase-Integration](https://docs.lovable.dev/integrations/supabase) von Lovable verwenden
+  </Accordion>
+
+  <Accordion title="Kann ich meiner Website ein Login hinzufügen?">
+    Ja, du kannst Authentifizierung hinzufügen, indem du [Lovable Cloud](https://docs.lovable.dev/features/cloud) verwendest oder eine Integration mit [Supabase ](https://docs.lovable.dev/integrations/supabase) vornimmst. Bitte die KI einfach, sie hinzuzufügen, und folge den Anweisungen.
+  </Accordion>
+
+  <Accordion title="Kann ich Drittanbieter-APIs zu meinem Projekt hinzufügen?">
+    Ja, du kannst APIs wie OpenAI, Stripe und weitere integrieren, indem du sie in deiner Eingabeaufforderung angibst. Mehr dazu findest du [hier](/de/integrations/introduction).
+  </Accordion>
+
+  <Accordion title="Kann ich sensible API-Schlüssel in Lovable speichern?">
+    Nein! Gib deine API-Schlüssel niemals direkt in Lovable ein. Wenn du eine API integrierst, empfehlen wir dir, Geheimnisse in [Lovable Cloud](https://docs.lovable.dev/features/cloud) oder [Supabase](https://docs.lovable.dev/integrations/supabase) zu verwenden, um deine API-Schlüssel zu speichern – in Kombination mit deren Edge Functions.
+  </Accordion>
+
+  <Accordion title="Wie füge ich Zahlungen zu meiner Website hinzu?">
+    Du kannst Zahlungen hinzufügen, indem du Stripe zu deinem Projekt hinzufügst. Sieh dir die [Stripe-Integration](/de/integrations/stripe) an, um sie einzurichten.
+  </Accordion>
+
+  <Accordion title="Wie kann ich die SEO für mein Projekt verbessern?">
+    Sorge für optimale Ergebnisse, indem du unserem Leitfaden [SEO- und GEO-Best Practices umsetzen](https://docs.lovable.dev/tips-tricks/seo-geo) folgst.
+  </Accordion>
+
+  <Accordion title="Wie lange dauert es, ein Projekt abzuschließen?">
+    Das hängt von der Komplexität ab. Wenn du Aufgaben in kleinere Schritte aufteilst, im Voraus planst und auf Basis von Feedback verfeinerst, kannst du schnell vorankommen und gleichzeitig die Qualität sicherstellen.
+  </Accordion>
+</AccordionGroup>
+
+<div id="features">
+  ## Funktionen
+</div>
+
+<AccordionGroup>
+  <Accordion title="Wo finde ich die Projekteinstellungen?">
+    Du findest die **Projekteinstellungen**, indem du oben links im Editor auf den Namen deines Projekts klickst und anschließend **Einstellungen** auswählst.
+  </Accordion>
+
+  <Accordion title="Kann ich die Sichtbarkeit meines Projekts ändern?">
+    Ja, gehe zu den **Projekteinstellungen**, wo du die Sichtbarkeit ändern kannst. Weitere Informationen findest du unter [Sichtbarkeit von Projekten steuern](/de/features/private-projects).
+  </Accordion>
+
+  <Accordion title="Kann ich Zugriff auf private Projekte beantragen?">
+    Ja. Wenn du ein privates Projekt öffnest, kannst du beim Projekteigentümer Lese- oder Bearbeitungszugriff anfordern. So bleibt deine private Arbeit sicher, während die Zusammenarbeit erleichtert wird.
+  </Accordion>
+
+  <Accordion title="Kann ich das Lovable-Badge ausblenden?">
+    Ja, navigiere zu den **Projekteinstellungen**. Dort findest du die Option, das Badge auszublenden. Nur zahlende Nutzer können das Badge deaktivieren.
+  </Accordion>
+
+  <Accordion title="Kann ich ein Projekt umbenennen?">
+    Ja, navigiere zu den **Projekteinstellungen**, dort findest du die Option, das Projekt umzubenennen.
+  </Accordion>
+
+  <Accordion title="Kann ich ein Projekt duplizieren?">
+    Um eine Kopie eines Projekts zu erstellen, musst du das Projekt remixen. Gehe zu den **Project Settings** und wähle die Option **Remix**. Dadurch wird eine exakte Kopie des Projekts in deinem aktuell ausgewählten Arbeitsbereich erstellt.
+
+    <Note>
+      Du kannst öffentliche Projekte anderer Nutzer nur remixen, wenn das Projekt nicht mit Supabase verbunden ist.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Kann ich ein Projekt löschen?">
+    Ja, navigiere zu den **Projekteinstellungen**; dort findest du die Option, das Projekt zu **löschen**.
+
+    <Note>
+      Das ist endgültig und es gibt keine Möglichkeit, gelöschte Projekte wiederherzustellen.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Was ist ein Remix?">
+    Durch das Remixen eines Projekts wird eine exakte Kopie erstellt, die du separat bearbeiten kannst. Mehr dazu erfährst du [hier](/de/introduction/faq#can-i-make-a-copy-of-a-project).
+  </Accordion>
+
+  <Accordion title="Was ist Chat mode?">
+    Mehr über die verschiedenen Modi von Lovable und den Chat mode erfährst du [hier](/de/features/modes).
+  </Accordion>
+
+  <Accordion title="Kann ich mir den von Lovable generierten Code ansehen und manuell bearbeiten?">
+    Ja. Du kannst dir den Code anzeigen lassen und manuell bearbeiten, indem du den [Code mode](/de/features/code-mode) von Lovable verwendest.
+  </Accordion>
+
+  <Accordion title="Kann ich Texte oder Farben manuell bearbeiten?">
+    Ja, du kannst Texte und Farben mit [Visual Edits](/de/features/visual-edit) bearbeiten.
+  </Accordion>
+
+  <Accordion title="Kann ich an meinen Projekten mit anderen zusammenarbeiten?">
+    Ja, in Lovable kannst du gemeinsam an Projekten arbeiten. Weitere Informationen findest du unter [Zusammenarbeit](/de/features/collaboration).
+  </Accordion>
+
+  <Accordion title="Wie veröffentliche ich mein Projekt?">
+    Sieh dir [Veröffentlichen](/de/features/publish) an und folge den dort beschriebenen Schritten, um dein Projekt zu veröffentlichen.
+  </Accordion>
+
+  <Accordion title="Wie füge ich meinem Projekt eine benutzerdefinierte Domain hinzu?">
+    Unter [Benutzerdefinierte Domain](/de/features/custom-domain) erfährst du, wie du eine benutzerdefinierte Domain zu deinem Projekt hinzufügst.
+  </Accordion>
+
+  <Accordion title="Kann ich Analytics für meine veröffentlichten Projekte einsehen?">
+    Ja. Weitere Informationen findest du unter [Projektanalysen](/de/features/project-analytics).
+  </Accordion>
+
+  <Accordion title="Kann ich einer Eingabeaufforderung in Lovable Bilder hinzufügen?">
+    Ja. Bilder als Design-Inspiration, Skizzen deines gewünschten Layouts oder Screenshots von UI-Problemen sind beim Gestalten deiner Website sehr hilfreich.
+  </Accordion>
+
+  <Accordion title="Kann ich Videos zu einer Eingabeaufforderung in Lovable hinzufügen?">
+    Leider werden Videos noch nicht unterstützt, aber Screenshots erfüllen oft auch ihren Zweck.
+  </Accordion>
+
+  <Accordion title="Kann ich den gesamten Code meines Projekts exportieren?">
+    Ja. Wenn du deinen Code zu GitHub überträgst, kannst du ihn exportieren und anschließend nach Belieben verwenden. Siehe [GitHub-Integration](/de/integrations/github) für weitere Informationen.
+  </Accordion>
+
+  <Accordion title="Kann ich ein neues Projekt erstellen, indem ich Code aus einer externen Quelle wie GitHub importiere?">
+    Nein, derzeit gibt es keine Möglichkeit, ein Lovable Projekt auf Basis bereits bestehenden Codes zu starten, etwa von GitHub.
+  </Accordion>
+
+  <Accordion title="Wie kann ich den Verlauf meines Projekts einsehen?">
+    Du kannst deinen Projektverlauf anzeigen, indem du im Chat einfach nach oben scrollst oder oben im Chat auf das Symbol **Verlauf anzeigen** klickst. Du kannst auch ältere Versionen auswählen, um sie in der Vorschau anzusehen oder dein Projekt auf diese Version wiederherzustellen.
+  </Accordion>
+
+  <Accordion title="Kann ich mein Projekt auf eine frühere Version zurücksetzen?">
+    Ja. Du kannst eine ältere, funktionierende Version in der Vorschau öffnen und bei Bedarf zu dieser Version zurückkehren oder eine frühere Nachricht bearbeiten und zu ihr zurückspringen, um einen anderen Ansatz auszuprobieren. Nichts geht verloren – alle danach vorgenommenen Änderungen bleiben im Chat und können jederzeit erneut angewendet werden.
+
+    * Du findest die Option zum Zurückkehren unter jeder Antwort im Chat oder im Tab „Verlauf“, wenn du die Version auswählst, zu der du zurückkehren möchtest.
+    * Du findest die Option, eine frühere Nachricht zu bearbeiten und zu ihr zurückzukehren, unter jeder früheren Nachricht, die du im Chat gesendet hast.
+  </Accordion>
+</AccordionGroup>
+
+Bei funktionsspezifischen Fragen und für Tipps zur Fehlerbehebung sieh dir die einzelnen [Feature-Seiten](/de/features) an.
+
+<div id="lovable-api">
+  ## Lovable API
+</div>
+
+<AccordionGroup>
+  <Accordion title="Was kann ich mit der Lovable API tun?">
+    Die **Lovable API** ermöglicht es dir, Lovable-Apps programmatisch zu erstellen und zu teilen – und verwandelt Ideen, Eingabeaufforderungen oder sogar Bilder über einen einzigen Link in vollständig generierte Anwendungen. 
+
+    Die erste Version, **Build with URL**, ermöglicht es dir, Apps direkt aus einer teilbaren URL zu generieren. Damit kannst du:
+
+    * Einen **Build with Lovable**-Button auf deiner Website oder in deiner Anwendung einbetten.
+    * Vordefinierte Eingabeaufforderungen per URL mit Freund:innen, Kolleg:innen oder in sozialen Medien teilen.
+    * Die App-Generierung als Teil interner Workflows automatisieren.
+    * Schnell Prototypen von Apps erstellen, indem du URLs mit Eingabeaufforderungen und Referenzbildern verwendest.
+
+    Erfahre mehr über das Feature und Praxisbeispiele in unserem Ankündigungsbeitrag: [Build apps from a link with Lovable Build with URL](https://lovable.dev/blog/introducing-lovable-api-build-with-url).
+
+    Die vollständige technische Dokumentation findest du hier: [Lovable API: Build with URL documentation](https://docs.lovable.dev/integrations/build-with-url).
+  </Accordion>
+</AccordionGroup>
+
+<div id="managing-your-account">
+  ## Verwaltung deines Kontos
+</div>
+
+<AccordionGroup>
+  <Accordion title="Kann ich die E-Mail-Adresse ändern, mit der ich mich anmelde?">
+    Leider ist es derzeit nicht möglich, die E-Mail-Adresse direkt zu ändern. Als Workaround kannst du ein neues Konto mit deiner gewünschten E-Mail-Adresse erstellen und deine Projekte folgendermaßen übertragen:
+
+    1. Mache deine bestehenden Projekte vorübergehend öffentlich und kopiere die URL.
+    2. Rufe die URL auf, während du in deinem neuen Konto angemeldet bist.
+    3. Remixe die Projekte in dein neues Konto. Bitte beachte, dass Projekte, die mit Supabase verbunden sind, zuerst von Supabase getrennt werden müssen, bevor du sie remixen kannst.
+    4. Sobald die Projekte übertragen sind, kannst du sie bei Bedarf wieder privat machen.
+
+    Hinweis: Wenn dein Zielarbeitsbereich einen kostenpflichtigen Tarif hat, kann es erforderlich sein, öffentliche Projekte zu remixen, um darauf zuzugreifen. Remixte Projekte übernehmen keine Funktionen deines bisherigen Abos, es sei denn, der neue Arbeitsbereich verfügt ebenfalls darüber.
+  </Accordion>
+
+  <Accordion title="Kann ich mein Konto löschen?">
+    Um dein Konto zu löschen, gehe zu **Settings → Your Account**, scrolle nach unten und klicke auf **Delete account**. Dadurch werden dein Konto und alle zugehörigen Daten dauerhaft entfernt.
+  </Accordion>
+
+  <Accordion title="Kann ich ein gelöschtes Konto reaktivieren?">
+    Nein, du kannst ein gelöschtes Konto nicht reaktivieren. Nachdem du jedoch den Button zum Löschen des Kontos gedrückt hast, kann dieser Vorgang innerhalb von 48 Stunden abgebrochen werden, um die Löschung zu stoppen.
+  </Accordion>
+
+  <Accordion title="Kann ich den Eigentümer des Arbeitsbereichs ändern?">
+    Ja, ein Eigentümer kann mehrere Eigentümer des Arbeitsbereichs hinzufügen.
+  </Accordion>
+
+  <Accordion title="Wie kann ich den Projektbesitz auf jemand anderen übertragen?">
+    Eine Möglichkeit ist, das Projekt zu remixen. Die Person, die das Projekt remixt, ist dann der Eigentümer dieser Version.
+  </Accordion>
+</AccordionGroup>
+
+Weitere Fragen zu Credits und Problemen mit dem Abonnement findest du unter [Tarife und Credits](/de/introduction/plans-and-credits).
+
+<div id="policies-and-security">
+  ## Richtlinien und Sicherheit
+</div>
+
+<AccordionGroup>
+  <Accordion title="Wie erhalte ich Support?">
+    Rufe [Hilfe &amp; Support](https://lovable.dev/support) auf.
+  </Accordion>
+
+  <Accordion title="Wo finde ich die Datenschutzerklärung von Lovable?">
+    Rufe die [Datenschutzerklärung](https://lovable.dev/privacy) auf.
+  </Accordion>
+
+  <Accordion title="Wo finde ich die Nutzungsbedingungen von Lovable?">
+    Rufe die [Nutzungsbedingungen](https://lovable.dev/terms) auf.
+  </Accordion>
+
+  <Accordion title="Wie lautet die Rückerstattungsrichtlinie von Lovable?">
+    Weitere Informationen zu unserer Rückerstattungsrichtlinie findest du in unseren [Nutzungsbedingungen](https://lovable.dev/terms).
+  </Accordion>
+
+  <Accordion title="Entspricht Lovable gängigen Sicherheitsstandards?">
+    Ja, Lovable entspricht branchenweit anerkannten Sicherheitsstandards und folgt Best Practices für Datenschutz und Risikomanagement. Wir durchlaufen strenge unabhängige Audits durch Dritte und verfügen über Zertifizierungen wie ISO 27001 und SOC 2 Type I, mit Live-Monitoring durch Delve. Du kannst unseren aktuellen Compliance-Status, unsere Unterauftragsverarbeiter und Richtlinien [hier](https://trust.delve.co/lovable) einsehen.
+  </Accordion>
+
+  <Accordion title="Ist Lovable DSGVO-konform?">
+    Ja, Lovable ist vollständig DSGVO-konform. Wir befolgen strenge Datenschutz- und Privatsphäre-Praktiken in Übereinstimmung mit der Datenschutz-Grundverordnung (DSGVO), die für alle Organisationen gilt, die personenbezogene Daten von Personen in der EU verarbeiten. Unsere Systeme werden kontinuierlich überwacht, um die Einhaltung sicherzustellen, und wir setzen uns weltweit für den Schutz von Nutzerdaten ein.
+  </Accordion>
+</AccordionGroup>
+
+<div id="how-lovable-works">
+  ## Wie Lovable funktioniert
+</div>
+
+<AccordionGroup>
+  <Accordion title="Welche Tech-Stacks kennt Lovable?">
+    Lovable baut das Frontend mit React, Tailwind &amp; Vite und kann sich mit OpenAPI-Backends verbinden. Unterstützung für Datenspeicherung und Authentifizierung gibt es über Lovable Cloud oder Supabase.
+  </Accordion>
+
+  <Accordion title="Unterstützt Lovable die Entwicklung von mobilen Apps?">
+    Nein, Lovable ist auf **Webanwendungen** fokussiert, aber du kannst mobilfreundliche Web-Apps entwerfen.
+  </Accordion>
+
+  <Accordion title="Wie merkt sich Lovable den Kontext?">
+    Lovable verarbeitet die jüngsten Nachrichten, um den Kontext beizubehalten. Für die besten Ergebnisse solltest du in jeder Eingabeaufforderung relevante Details angeben, um Klarheit und Genauigkeit sicherzustellen.
+  </Accordion>
+
+  <Accordion title="Wem gehören die Projekte und der Code, den Lovable erstellt?">
+    Dir als Ersteller:in!
+  </Accordion>
+</AccordionGroup>
+
+<div id="about-lovable">
+  ## Über Lovable
+</div>
+
+<AccordionGroup>
+  <Accordion title="Wo ist Lovable ansässig?">
+    Lovable wird **zu 100 % in Europa entwickelt**, mit Hauptsitz in **Stockholm, Schweden.**
+  </Accordion>
+
+  <Accordion title="Stellt Lovable derzeit ein?">
+    Ja! Sieh dir unsere offenen Stellen [hier](https://lovable.dev/careers) an.
+  </Accordion>
+</AccordionGroup>

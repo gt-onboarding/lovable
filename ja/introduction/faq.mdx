@@ -1,0 +1,328 @@
+---
+title: "よくある質問"
+description: "Lovable についてのよくある質問"
+icon: "circle-question"
+---
+
+<div id="getting-started">
+  ## はじめに
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable とは何ですか？">
+    Lovable は、あらゆるスキルレベルのユーザーが自然言語を使ってフルスタックのウェブサイトを作成できる、AI 搭載のプラットフォームです。作りたいものを説明するだけで、Lovable があなたの代わりに構築します。
+  </Accordion>
+
+  <Accordion title="Lovable でどんなものを作れますか？">
+    想像できるものなら、Lovable で作ることができます。シンプルなランディングページから、ニッチなユースケース向けの高機能なツールまで、Lovable には必要なものを制限なく作れる柔軟性があります。
+  </Accordion>
+
+  <Accordion title="Lovable で構築するのにコーディング経験は必要ですか？">
+    いいえ。Lovable は、あらゆるレベルのユーザー向けに設計されています。開発者でも、ノンテクニカルなユーザーでも、Lovable を使ってウェブサイトを作成できます。
+  </Accordion>
+
+  <Accordion title="プロジェクトはどのように作成しますか？">
+    プロジェクトを作成するには、ダッシュボードのメッセージボックスにメッセージを入力するだけです。作りたいものを説明すると、Lovable がそこから引き継いで、プロジェクトの出発点を生成します。まずは小さく始めて、少しずつ積み上げていきましょう！
+  </Accordion>
+
+  <Accordion title="既存のプロジェクトを再利用できますか？">
+    はい、既存の公開プロジェクトや自分のプロジェクトをリミックスできます。リミックスすると、プロジェクトの現在の状態を出発点として再利用し、その上に構築できます。新しいアイデアを試したり、調整を加えたり、元のバージョンを保ったままさまざまな変更を重ねていくのに最適な方法です。
+  </Accordion>
+</AccordionGroup>
+
+<div id="building-with-lovable">
+  ## Lovable での開発
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable で効率よく開発するにはどうすればいいですか？">
+    Lovable で効率よく開発するには、適切なテクニックを使うことが重要です。少し練習すれば、誰でもできるようになります。始める際は、こちらの[ガイド](https://mastering-lovable.lovable.app/)をチェックしてください。
+  </Accordion>
+
+  <Accordion title="最良の結果を得るために、プロンプトはどう構成すればよいですか？">
+    * 明確かつ具体的に書く。
+    * 一度に 1 つの機能にフォーカスする。
+    * 段階的に構築していく。
+    * デザインを整えるときはバズワードを活用する。
+  </Accordion>
+
+  <Accordion title="エラーが発生したときはどうすればいいですか？">
+    <Steps>
+      <Step title="Try-to-fix ボタン">
+        **Try-to-fix** オプションを使ってください。Lovable が自動的に問題の解決を試みます。このボタンを使ってもクレジットは消費されません。
+      </Step>
+
+      <Step title="調査する">
+        **Try-to-fix** で問題が解決しない場合は、Lovable Agent に問題の調査を依頼してください。画面上で何が起きているか、どの部分が動作していないかを具体的に説明しましょう。
+      </Step>
+
+      <Step title="以前のバージョンに戻す">
+        それでもうまくいかない場合は、動作していた以前のバージョンをプレビューして、そのバージョンに戻すことができます。または、戻した上で過去のメッセージを編集し、別のアプローチを試すこともできます。何も失われることはありません — その時点以降に行った変更はすべてチャット内に残り、いつでも再適用できます。
+      </Step>
+    </Steps>
+  </Accordion>
+
+  <Accordion title="リファクタリングとは何ですか？なぜ重要なのですか？">
+    リファクタリングは、機能を変えずにコードの構造と効率を改善することです。これにより、次のような効果があります。
+
+    * 冗長な部分を取り除き、パフォーマンスを最適化できる。
+    * 将来のアップデートに向けて保守性を高められる。
+    * ロジックをより明確に構造化して、コンフリクトを防止できる。
+  </Accordion>
+
+  <Accordion title="データを保存するためにプロジェクトをバックエンドに接続できますか？">
+    アプリケーションにバックエンド機能を追加する必要がある場合は、次のことができます。
+
+    * Lovable に組み込まれたバックエンドである [Lovable Cloud](https://docs.lovable.dev/features/cloud) に接続する
+    * Lovable のネイティブな [Supabase 連携](https://docs.lovable.dev/integrations/supabase)を利用する
+  </Accordion>
+
+  <Accordion title="自分の Web サイトにログイン機能を追加できますか？">
+    はい、[Lovable Cloud](https://docs.lovable.dev/features/cloud) を使うか、[Supabase](https://docs.lovable.dev/integrations/supabase) と連携することで認証機能を追加できます。AI にプロンプトで追加を依頼し、表示される手順に従ってください。
+  </Accordion>
+
+  <Accordion title="プロジェクトにサードパーティ API を追加できますか？">
+    はい、プロンプト内で指定することで、OpenAI や Stripe などの API を統合できます。詳しくは[こちら](/ja/integrations/introduction)をご覧ください。
+  </Accordion>
+
+  <Accordion title="Lovable に機密性の高い APIキー を保存できますか？">
+    いいえ。APIキー を Lovable に直接入力してはいけません。API と連携する場合は、[Lovable Cloud](https://docs.lovable.dev/features/cloud) や [Supabase](https://docs.lovable.dev/integrations/supabase) のシークレット機能と Edge Functions を組み合わせて利用し、APIキー を保存することをおすすめします。
+  </Accordion>
+
+  <Accordion title="Web サイトに決済機能を追加するにはどうすればいいですか？">
+    プロジェクトに Stripe を追加することで、決済機能を組み込めます。設定方法は [Stripe 連携](/ja/integrations/stripe)を参照してください。
+  </Accordion>
+
+  <Accordion title="プロジェクトの SEO を改善するにはどうすればいいですか？">
+    「[Implement SEO and GEO best practices](https://docs.lovable.dev/tips-tricks/seo-geo)」ガイドに従うことで、最良の結果を得られます。
+  </Accordion>
+
+  <Accordion title="プロジェクトを完成させるまでどのくらい時間がかかりますか？">
+    複雑さによって異なります。タスクを小さなステップに分けて計画し、フィードバックに基づいて改善していくことで、品質を保ちながら素早く進められます。
+  </Accordion>
+</AccordionGroup>
+
+<div id="features">
+  ## 機能
+</div>
+
+<AccordionGroup>
+  <Accordion title="プロジェクト設定はどこにありますか？">
+    エディタ左上にあるプロジェクト名をクリックし、**Settings** を選択すると、**Project settings** を開くことができます。
+  </Accordion>
+
+  <Accordion title="プロジェクトの公開範囲は変更できますか？">
+    はい、公開範囲を変更するには **Project settings** に移動してください。詳しくは [プロジェクトの公開範囲を管理する](/ja/features/private-projects) を参照してください。
+  </Accordion>
+
+  <Accordion title="プライベートプロジェクトへのアクセスを申請できますか？">
+    はい。非公開のプロジェクトにアクセスしたとき、プロジェクトの所有者に閲覧者または編集者としてのアクセス権をリクエストできます。これにより、非公開の作業を安全に保ちつつ、共同作業をしやすくできます。
+  </Accordion>
+
+  <Accordion title="Lovable のバッジを非表示にできますか？">
+    はい、**Project settings** に移動すると、バッジを非表示にするオプションが表示されます。バッジをオフにできるのは有料ユーザーのみです。
+  </Accordion>
+
+  <Accordion title="プロジェクト名を変更できますか？">
+    はい、**Project settings** に移動すると、プロジェクト名を変更するオプションがあります。
+  </Accordion>
+
+  <Accordion title="プロジェクトを複製できますか？">
+    プロジェクトのコピーを作成するには、プロジェクトをリミックスする必要があります。**Project Settings** に移動し、**Remix** オプションを選択します。これにより、現在選択しているワークスペース内に、そのプロジェクトとまったく同じコピーが作成されます。
+
+    <Note>
+      他のユーザーの公開プロジェクトは、そのプロジェクトが Supabase に接続されていない場合にのみリミックスできます。
+    </Note>
+  </Accordion>
+
+  <Accordion title="プロジェクトを削除できますか？">
+    はい、**プロジェクト設定** に移動すると、プロジェクトを **削除** できるオプションがあります。
+
+    <Note>
+      この操作は取り消せず、削除したプロジェクトを復元することはできません。
+    </Note>
+  </Accordion>
+
+  <Accordion title="リミックスとは？">
+    プロジェクトをリミックスすると、元のプロジェクトとは別に編集できる、まったく同じコピーが作成されます。詳しくは[こちら](/ja/introduction/faq#can-i-make-a-copy-of-a-project)をご覧ください。
+  </Accordion>
+
+  <Accordion title="Chat mode とは？">
+    Lovable のさまざまなモードと Chat mode については、[こちら](/ja/features/modes)で詳しくご覧いただけます。
+  </Accordion>
+
+  <Accordion title="Lovable が生成したコードを確認して、手動で編集することはできますか？">
+    はい。Lovable の [Code mode](/ja/features/code-mode) を使ってコードを確認し、手動で編集できます。
+  </Accordion>
+
+  <Accordion title="テキストや色を手動で編集できますか？">
+    はい、[Visual Edits](/ja/features/visual-edit) を使ってテキストや色を編集できます。
+  </Accordion>
+
+  <Accordion title="自分のプロジェクトで他の人と共同作業できますか？">
+    はい、Lovable 内のプロジェクトで共同作業を行えます。詳しくは [Collaboration](/ja/features/collaboration) を参照してください。
+  </Accordion>
+
+  <Accordion title="プロジェクトを公開するにはどうすればよいですか？">
+    [公開](/ja/features/publish) を参照し、記載されている手順に従ってプロジェクトを公開してください。
+  </Accordion>
+
+  <Accordion title="プロジェクトに独自ドメインを設定するにはどうすればよいですか？">
+    プロジェクトに独自ドメインを追加する方法については、[カスタムドメイン](/ja/features/custom-domain) を参照してください。
+  </Accordion>
+
+  <Accordion title="公開したプロジェクトのアナリティクスは確認できますか？">
+    はい。詳しくは、[プロジェクト分析](/ja/features/project-analytics) を参照してください。
+  </Accordion>
+
+  <Accordion title="Lovable のプロンプトに画像を含めることはできますか？">
+    はい。デザインの参考になる画像や、ご希望のレイアウトのスケッチ、UI の不具合箇所のスクリーンショットなどは、ウェブサイトをデザインするうえでとても役立ちます。
+  </Accordion>
+
+  <Accordion title="Lovableのプロンプトに動画を追加できますか？">
+    残念ながら、現時点では動画はまだサポートされていませんが、多くの場合はスクリーンショットで十分です。
+  </Accordion>
+
+  <Accordion title="プロジェクトのコードをすべてエクスポートできますか？">
+    はい。コードをGitHubに転送することで、コードをエクスポートして自由に活用できます。詳しくは、[GitHub連携](/ja/integrations/github)をご覧ください。
+  </Accordion>
+
+  <Accordion title="GitHub などの外部サービスからコードをインポートしてプロジェクトを開始できますか？">
+    いいえ、現時点では、たとえば GitHub 上の既存のコードから Lovable プロジェクトを作成することはできません。
+  </Accordion>
+
+  <Accordion title="プロジェクトの履歴はどうやって確認できますか？">
+    チャットを上方向にスクロールするか、チャット上部の **View history** アイコンをクリックすると、プロジェクトの履歴を表示できます。過去のバージョンを選択してプレビューしたり、そのバージョンの状態にプロジェクトを復元したりすることもできます。
+  </Accordion>
+
+  <Accordion title="プロジェクトを以前のバージョンに戻せますか？">
+    はい。以前の正常に動作していたバージョンをプレビューして、必要に応じてそのバージョンに戻すことができます。また、過去のメッセージを編集し、その状態に戻して別のアプローチを試すこともできます。何も失われることはありません。— その時点以降に行ったすべての変更はチャット内に残り、いつでも再適用できます。
+
+    * 「元に戻す」オプションは、チャット内の各レスポンスの下、または履歴タブで戻したいバージョンを選択したときに表示されます。
+    * 過去に送信した各メッセージの下に、「メッセージを編集して元に戻す」オプションがあります。
+  </Accordion>
+</AccordionGroup>
+
+各機能に関する質問やトラブルシューティングのヒントは、各機能の[ページ](/ja/features)を参照してください。
+
+<div id="lovable-api">
+  ## Lovable API
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable API でできることは何ですか？">
+    **Lovable API** を使うと、Lovable アプリをプログラム的に作成・共有できます。アイデアやプロンプト、さらには画像からでも、1 つのリンクだけでフル機能のアプリケーションを生成できます。 
+
+    最初のリリースである **Build with URL** では、共有可能な URL から直接アプリを生成できます。これにより、次のことが可能になります：
+
+    * 自分のウェブサイトやアプリケーションに **Build with Lovable** ボタンを埋め込む。
+    * 事前に用意したプロンプトを、URL 経由で友人や同僚、またはソーシャルメディア上で共有する。
+    * 社内ワークフローの一部として、アプリ生成を自動化する。
+    * プロンプトと参照画像付きの URL を使って、アプリを素早くプロトタイプ作成する。
+
+    この機能の詳細や実際のユースケースについては、アナウンス記事をご覧ください: [Build apps from a link with Lovable Build with URL](https://lovable.dev/blog/introducing-lovable-api-build-with-url)。
+
+    技術的な詳細については、こちらの包括的なガイドを参照してください: [Lovable API: Build with URL documentation](https://docs.lovable.dev/integrations/build-with-url)。
+  </Accordion>
+</AccordionGroup>
+
+<div id="managing-your-account">
+  ## アカウントの管理
+</div>
+
+<AccordionGroup>
+  <Accordion title="ログインに使うメールアドレスは変更できますか？">
+    現在のところ、メールアドレスを直接変更することはできません。回避策として、希望するメールアドレスで新しいアカウントを作成し、次の手順でプロジェクトを移行してください。
+
+    1. 既存のプロジェクトを一時的に公開し、URL をコピーします。
+    2. 新しいアカウントでログインした状態で、その URL にアクセスします。
+    3. プロジェクトをリミックスして新しいアカウントにコピーします。なお、Supabase に接続されているプロジェクトは、リミックスする前に Supabase から切断する必要があります。
+    4. プロジェクトの移行が完了したら、必要に応じて再び非公開にできます。
+
+    注意：移行先のワークスペースが有料プランの場合、公開プロジェクトをリミックスしてアクセスする必要がある場合があります。リミックスしたプロジェクトには、新しいワークスペース側にも同等の機能がない限り、元のサブスクリプションレベルの機能は引き継がれません。
+  </Accordion>
+
+  <Accordion title="アカウントを削除できますか？">
+    アカウントを削除するには、**Settings → Your Account** に移動し、画面を下にスクロールして **Delete account** を押します。これにより、アカウントと関連するすべてのデータが完全に削除されます。
+  </Accordion>
+
+  <Accordion title="削除したアカウントを再有効化できますか？">
+    いいえ、削除されたアカウントを再有効化することはできません。ただし、アカウント削除ボタンを押した後、48 時間以内であれば削除処理をキャンセルして中止できます。
+  </Accordion>
+
+  <Accordion title="ワークスペースのオーナーを変更できますか？">
+    はい、オーナーは複数のワークスペースオーナーを追加できます。
+  </Accordion>
+
+  <Accordion title="プロジェクトの所有権を他の人に移すにはどうすればよいですか？">
+    方法の一つは、そのプロジェクトをリミックスすることです。プロジェクトをリミックスした人が、そのバージョンのオーナーになります。
+  </Accordion>
+</AccordionGroup>
+
+クレジットやサブスクリプションに関する追加の質問については、[プランとクレジット](/ja/introduction/plans-and-credits)を参照してください。
+
+<div id="policies-and-security">
+  ## ポリシーとセキュリティ
+</div>
+
+<AccordionGroup>
+  <Accordion title="サポートを受けるにはどうすればよいですか？">
+    [ヘルプ &amp; サポート](https://lovable.dev/support) にアクセスしてください。
+  </Accordion>
+
+  <Accordion title="Lovable のプライバシーポリシーはどこで確認できますか？">
+    [プライバシーポリシー](https://lovable.dev/privacy) にアクセスしてください。
+  </Accordion>
+
+  <Accordion title="Lovable の利用規約はどこで確認できますか？">
+    [利用規約](https://lovable.dev/terms) にアクセスしてください。
+  </Accordion>
+
+  <Accordion title="Lovable の返金ポリシーはどうなっていますか？">
+    返金ポリシーの詳細については、[利用規約](https://lovable.dev/terms) をご確認ください。
+  </Accordion>
+
+  <Accordion title="Lovable はセキュリティ標準に準拠していますか？">
+    はい、Lovable は業界で広く認められているセキュリティ標準に準拠しており、データ保護とリスク管理におけるベストプラクティスに従っています。厳格な第三者監査を継続的に受けており、Delve によるリアルタイム監視のもと、ISO 27001 や SOC 2 Type I などの認証を維持しています。現在のコンプライアンス状況、サブプロセッサ、ポリシーについては[こちら](https://trust.delve.co/lovable)で確認できます。
+  </Accordion>
+
+  <Accordion title="Lovable は GDPR に準拠していますか？">
+    はい、Lovable は GDPR に完全に準拠しています。EU 域内の個人データを取り扱うすべての組織に適用される一般データ保護規則 (GDPR) に基づき、厳格なデータ保護およびプライバシー運用を行っています。コンプライアンスを確保するためにシステムを継続的に監視しており、世界中のユーザーのデータを保護することに尽力しています。
+  </Accordion>
+</AccordionGroup>
+
+<div id="how-lovable-works">
+  ## Lovable の仕組み
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable はどんな技術スタックに対応していますか？">
+    Lovable はフロントエンドを React、Tailwind、Vite を使って構築し、OpenAPI ベースのバックエンドに接続できます。データの永続化や認証には、Lovable Cloud または Supabase を利用できます。
+  </Accordion>
+
+  <Accordion title="Lovable はモバイルアプリ開発に対応していますか？">
+    いいえ。Lovable は**ウェブアプリケーション**に特化していますが、モバイル向けに最適化されたウェブアプリをデザインすることはできます。
+  </Accordion>
+
+  <Accordion title="Lovable はどのようにコンテキストを記憶しますか？">
+    Lovable は最近のメッセージを処理してコンテキストを維持します。最良の結果を得るには、明確で正確になるように、各プロンプトに関連する情報を含めてください。
+  </Accordion>
+
+  <Accordion title="Lovable が作成したプロジェクトやコードの所有者は誰ですか？">
+    作成者であるあなたです！
+  </Accordion>
+</AccordionGroup>
+
+<div id="about-lovable">
+  ## Lovable について
+</div>
+
+<AccordionGroup>
+  <Accordion title="Lovable の拠点はどこですか？">
+    Lovable は **100% ヨーロッパ発**で、本社は **スウェーデン・ストックホルム**にあります。
+  </Accordion>
+
+  <Accordion title="Lovable は採用活動をしていますか？">
+    はい。現在の募集ポジションは [こちら](https://lovable.dev/careers) をご覧ください。
+  </Accordion>
+</AccordionGroup>

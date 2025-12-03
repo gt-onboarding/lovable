@@ -1,0 +1,181 @@
+---
+title: "Integrazione AI"
+description: "Come integrare servizi di AI nei progetti Lovable"
+icon: "wand-magic-sparkles"
+seo:
+  indexing: false
+---
+
+Lovable semplifica l'integrazione dei servizi di AI nelle tue applicazioni web. Che tu voglia creare una landing page basata sull'AI, uno strumento di generazione di testo o un'app SaaS completa, le integrazioni native di Lovable con servizi come 
+[**OpenAI**](https://platform.openai.com/), [**Groq**](https://console.groq.com/keys), [**Claude**](https://www.anthropic.com/api), [**Deepseek**](https://api-docs.deepseek.com/), e [**Mistral**](https://docs.mistral.ai/api/) lo rendono possibile senza scrivere codice per il backend. Ecco come fare: 
+
+<Steps>
+  <Step title="Scegli la funzionalità di AI di cui hai bisogno">
+    Prima di iniziare a creare, definisci cosa vuoi che faccia l'AI:
+
+    - Generare o migliorare testo (es. assistente per email, generatore di tweet)
+    - Classificare o riassumere contenuti
+    - Analizzare immagini
+    - Personalizzare le risposte
+    - Integrarsi con una specifica API LLM
+  </Step>
+  <Step title="Pianifica prima con le Istruzioni">
+    Usa l'interfaccia chat di Lovable per descrivere la tua funzionalità in termini semplici. Ad esempio:
+
+    ```
+    Build an email enhancement tool. The user should write an email, then click buttons to make it more professional, concise, or friendly using Groq API.
+    ```
+
+    Lovable creerà lo scheletro della UI, suggerirà componenti e ti permetterà di visualizzare rapidamente l'app in anteprima.
+  </Step>
+  <Step title="Collega un backend con Supabase">
+    Le funzionalità di AI spesso hanno bisogno di logica backend. Supabase fornisce:
+
+    - Database per i dati utente
+    - Auth per login/registrazione
+    - Edge Functions per chiamare API esterne in modo sicuro
+
+    <Tip>
+      Configura Supabase all'inizio del tuo progetto per evitare incongruenze tra UI e backend.
+    </Tip>
+  </Step>
+  <Step title="Usa le Edge Functions per le chiamate AI">
+    Per chiamare le API di AI in modo sicuro, crea una Funzione edge dentro Lovable:
+
+    - Aggiungi la tua chiave API a Supabase inviandola tramite il modulo dei Segreti
+    - Lascia che Lovable generi il codice della funzione edge
+    - Assicurati di usare il function calling se la tua API restituisce dati strutturati (es. calorie, macronutrienti, thread di tweet)
+
+    **Esempio di istruzione:**
+
+    ```
+    Use GPT-4 and function calling to extract nutrition info from a meal description. Save the results to the backend.
+    ```
+
+    <Tip>
+      Struttura lo schema di function calling di OpenAI con campi definiti come:
+
+      ```
+      {
+        "name": "extract_nutrition",
+        "parameters": {
+          "calories": "number",
+          "protein": "number",
+          "carbs": "number",
+          "fat": "number"
+        }
+      }
+      ```
+    </Tip>
+  </Step>
+  <Step title="Rendi l'esperienza interattiva">
+    Aggiungi pulsanti o azioni del form per:
+
+    - Inviare testo all'AI
+    - Caricare un'immagine
+    - Passare da una modalità all'altra (tono conciso vs amichevole)
+
+    Con Lovable puoi:
+
+    - Collegare funzioni ai pulsanti
+    - Animare le interazioni
+    - Mostrare risultati in tempo reale con il minimo numero di istruzioni
+
+    <Tip>
+      Usa screenshot e frasi come "rendilo più scorrevole" per guidare il design.
+    </Tip>
+    <Tip>
+      **Suggerimento UX avanzato:** implementa anteprime dal vivo affiancate della risposta dell'AI. Usa layout a colonne sinistra/destra o schede per permettere agli utenti di confrontare i risultati.
+    </Tip>
+  </Step>
+  <Step title="Usa servizi esterni (opzionale)">
+    Alcune integrazioni popolari per i flussi di lavoro con AI:
+
+    - **Resend** – invia email dopo l'invio di un form
+    - **Groq API** – inferenza LLM estremamente veloce
+    - **Stripe** – proteggi l'accesso agli strumenti di AI con un paywall
+    - **Replicate** – genera o trasforma immagini
+
+    **Esempio di istruzione:**
+
+    ```
+    When a user submits the contact form, send an email using Resend and store the message in Supabase.
+    ```
+
+    <Tip>
+      **Suggerimento per i pagamenti:** blocca le funzionalità AI avanzate dietro un abbonamento Stripe. Usa flussi condizionali come:
+
+      ```
+      if (user.isPaid) { showAIFeature(); } else { redirectToCheckout(); }
+      ```
+    </Tip>
+  </Step>
+  <Step title="Testa e perfeziona iterando">
+    - Usa i link di anteprima per testare la responsività su mobile
+    - Controlla le prestazioni con più chiamate API
+    - Condividi il tuo progetto per ricevere feedback
+    - Usa la cronologia della chat per annullare modifiche o fare refactoring
+  </Step>
+  <Step title="Pubblica e promuovi">
+    Quando sei pronto:
+
+    - Distribuisci con un solo clic
+    - Usa [Lovable Launch](https://docs.lovable.dev/features/launched) per ottenere visibilità
+    - Aggiungi tag OG e titolo/descrizione SEO nel pannello meta
+    - Invia la tua app a Product Hunt, community e social media
+  </Step>
+</Steps>
+
+<div id="debug-and-improve-prompts">
+  ## **Eseguire il debug e migliorare i prompt**
+</div>
+
+* Sii specifico con i messaggi di sistema: &quot;Sei un nutrizionista disponibile e competente.&quot;
+* Verifica la chiamata di funzioni usando input di test (mock).
+* Usa `console.log()` all&#39;interno delle funzioni edge per tracciare la logica.
+* Usa screenshot quando chiedi a Lovable di eseguire il debug di un layout.
+
+**Suggerimento per il prompt:** Se l&#39;AI non riesce a usare il tuo contesto (ad es. i pasti dell&#39;utente), dì:
+
+```
+Assicurati che tutti i pasti dell'utente siano inclusi nell'istruzione per GPT-4.
+```
+
+
+<div id="troubleshooting">
+  ### Risoluzione dei problemi
+</div>
+
+<AccordionGroup>
+  <Accordion title="Dati mancanti nelle istruzioni AI?">
+    Assicurati di includere il contesto, ad esempio la cronologia utente o le voci precedenti.
+  </Accordion>
+  <Accordion title="L'interfaccia utente non si aggiorna?">
+    Usa la modalità solo chat per eseguire il debug un passaggio alla volta.
+  </Accordion>
+  <Accordion title="Problemi di streaming con Groq/OpenAI?">
+    Verifica che `stream: true` sia supportato.
+  </Accordion>
+  <Accordion title="Il caricamento delle immagini non funziona?">
+    Usa campi file e converti in base64 oppure carica tramite Supabase Storage.
+  </Accordion>
+  <Accordion title="La Funzione edge non restituisce errori?">
+    Visualizza i registri della Funzione edge nell'editor di funzioni di Lovable o nella dashboard di Supabase.
+  </Accordion>
+</AccordionGroup>
+
+<div id="example-projects-built-with-ai-integration">
+  ## Esempi di progetti creati con integrazione AI
+</div>
+
+- [**Nexus Smart Email** ](https://smart-email-nexus.lovable.app/) – Landing page con anteprima email in tempo reale potenziata da Groq
+- [**TweetMixer Pro**](https://www.youtube.com/watch?v=fT_dq_hyQAA&vl=de) – Incolla post del blog e ottieni thread di tweet usando GPT-4
+- [**AI Calorie Tracker**](https://www.youtube.com/watch?v=c0zhLzcVJRI&ab_channel=Lovable) – Analizza i pasti con GPT-4 a partire da immagini caricate
+- [**Robot Arena Shooter** ](https://www.youtube.com/watch?v=zmK36lkAb6I) – Gioco basato su Claude con logiche potenziate dall'AI
+- [**Reindeer Quiz**](https://www.youtube.com/watch?v=XdZtpP3QpzQ) – Genera risultati personalizzati con Claude e una logica di punteggio personalizzata
+
+<div id="final-thoughts">
+  ## Considerazioni finali
+</div>
+
+Lovable è il tuo frontend, database, backend e pipeline di distribuzione con tecnologia IA, tutto in uno. L'integrazione dell'IA è solo istruzioni \+ contesto \+ test. Procedi passo dopo passo e ricorda: non devi essere uno sviluppatore backend per creare con l'IA.

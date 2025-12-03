@@ -1,0 +1,288 @@
+---
+title: "Mieux utiliser les Prompts dans Lovable"
+description: "Transformez plus rapidement vos idées en interfaces utilisateur de haute qualité. Utilisez ces astuces de Prompt pour réfléchir plus clairement, aller plus vite et créer de meilleures apps avec Lovable."
+icon: "graduation-cap"
+---
+
+![Couverture de Mastering Lovable](../images/mastering-hero.png)
+
+<div id="make-lovable-ask-clarifying-questions">
+  ### Demander à Lovable de poser des questions de clarification
+</div>
+
+L’une des façons les plus efficaces d’obtenir de meilleurs résultats avec Lovable est de le laisser combler les zones d’ombre avant d’écrire du code. Après avoir indiqué la fonctionnalité ou la modification que vous souhaitez, ajoutez une ligne à la fin de votre Prompt, par exemple :
+
+> « Pose-moi toutes les questions dont tu as besoin pour bien comprendre ce que j’attends de cette fonctionnalité et la façon dont je l’imagine. »
+
+Il est recommandé d’utiliser Chat Mode pour cette approche.
+
+Lovable répondra avec des questions de suivi ciblées, souvent très pertinentes, parfois même auxquelles vous n’auriez pas pensé. Ce processus permet de clarifier vos besoins dès le départ et évite les malentendus ou les efforts inutiles par la suite.
+
+Si vous n’avez pas encore essayé de rédiger vos Prompts de cette façon, lancez-vous : vous verrez probablement que les nouvelles fonctionnalités correspondent davantage à votre véritable intention, avec moins d’allers-retours.
+
+<div id="further-prompting-knowledge-your-practical-playbook-for-consistent-highquality-results-in-lovable">
+  ## Connaissances avancées sur les Prompts : votre guide pratique pour des résultats cohérents et de haute qualité dans Lovable
+</div>
+
+Bienvenue dans votre guide complet pour des Prompts à fort impact dans Lovable !  
+Ce playbook rassemble les techniques, stratégies et principes les plus efficaces pour obtenir les meilleurs résultats possibles avec l'IA de Lovable. Que vous découvriez les Prompts ou que vous cherchiez à affiner vos compétences, vous trouverez ici des conseils concrets et des exemples clairs pour transformer rapidement et de manière régulière vos idées en interfaces soignées.  
+
+<div id="phase-1-lay-the-foundation">
+  ## Phase 1 : Établir les bases
+</div>
+
+<div id="1-plan-before-you-prompt">
+  ### 1. Planifie avant de créer ton Prompt
+</div>
+
+Avant d’utiliser Lovable, définis ce que tu veux construire. Sauter cette étape, c’est comme commencer une peinture sans savoir ce que tu peins. Prends quelques minutes pour planifier — stylo et papier, notes vocales, ChatGPT, peu importe — et répondre à ces quatre questions :
+
+* Quel est ce produit ou cette fonctionnalité ?
+* Pour qui est‑il conçu ?
+* Pourquoi l’utiliseront‑ils ?
+* Quelle est l’unique action clé que l’utilisateur doit effectuer ?
+
+Tu n’es pas en train d’écrire un document de spécifications. Tu es en train de fixer une direction. Plus ta réflexion est alignée, plus tes invites seront précises. Des idées vagues produisent des résultats vagues. Une pensée claire conduit à des résultats clairs.
+
+**Exemple de Prompt**
+
+```text
+Créez un site d'une page pour une application de budget destinée aux freelances de la génération Z. Le CTA principal doit être « Commencez à économiser plus intelligemment ». Privilégiez une esthétique audacieuse et expressive avec de gros textes et des couleurs vives.
+```
+
+
+<div id="2-map-the-user-journey-visually">
+  ### 2. Cartographier visuellement le parcours utilisateur
+</div>
+
+Le design ne se résume pas à des écrans isolés — il concerne tout ce qui se passe entre eux. Les meilleurs résultats dans Lovable viennent d’un flux clair et logique. Cartographie le parcours que ton utilisateur emprunte, de son arrivée sur la page jusqu’à l’accomplissement d’une action clé.
+
+Pense en termes de transitions :
+
+- Que voit l’utilisateur en premier ?
+- Qu’est‑ce qui instaure la confiance ?
+- Qu’est‑ce qui lui donne la confiance nécessaire pour passer à l’action ?
+- Où cette action mène‑t‑elle ?
+
+<Info>
+  Même un simple schéma en trois étapes — Hero → Fonctionnalités → CTA — peut rendre tes invites 10× plus efficaces.
+</Info>
+
+> "Tu n’empiles pas des blocs, tu guides un comportement. Chaque section doit avoir une raison d’exister — et une raison de mener à la suivante."
+
+<div id="3-get-the-design-right-first">
+  ### 3. Bien réussir le design d’abord
+</div>
+
+Votre langage visuel est une base, pas une couche de finition. Lovable doit comprendre le look &amp; feel que vous voulez — le plus tôt possible. Sinon, votre interface fonctionnera peut‑être, mais semblera complètement à côté de la plaque. Ne corrigez pas les problèmes de design plus tard. Décidez‑en dès le départ.
+
+Choisissez une direction, par exemple :
+
+* Calme et élégant
+* Audacieux et disruptif
+* Premium et épuré
+
+Ensuite, intégrez directement ce style dans votre prompt en utilisant des mots‑clés, des descripteurs de ton et des patterns d’UI. Vous pouvez même créer un « prompt de style de base » et le réutiliser dans toutes les sections pour garder de la cohérence.
+
+> « On n’obtient pas un bon design en se contentant de prompts. On part d’un bon design pour créer ses prompts. »
+
+**Exemple de prompt**
+
+```text
+Utilisez un design calme inspiré du bien-être. Dégradés doux, tons terreux atténués, coins arrondis et espacement généreux. La police est « Inter ». Le ton général doit être doux et rassurant.
+```
+
+
+<div id="phase-2-think-in-systems">
+  ## Phase 2 : Penser en termes de systèmes
+</div>
+
+<div id="4-prompt-by-component-not-page">
+  ### 4. Crée des invites par composant, pas par page
+</div>
+
+Lovable fonctionne mieux quand tu construis ton interface en blocs modulaires — pas des pages complètes d’un coup. Lui demander de générer une landing page entière, c’est comme mettre une recette complète dans un mixeur. Tu obtiendras quelque chose, mais ce ne sera pas vraiment utilisable.
+
+À la place, aborde tes invites comme si tu construisais avec des briques Lego. Chaque bloc doit avoir un objectif et une structure clairs : une section hero, une grille de fonctionnalités, un slider de témoignages, un tableau de prix. Construis-en un, vérifie-le, affine-le, puis passe au suivant.
+
+Quand tu crées des invites par composant, tu gagnes en clarté, en contrôle et en flexibilité. Si quelque chose ne semble pas correct, tu peux corriger uniquement ce bloc au lieu de relancer une invite pour toute la page. Ça t’aide aussi à faire évoluer ta réflexion en design sur plusieurs pages — les composants peuvent être réutilisés et adaptés sans tout réécrire depuis zéro.
+
+> &quot;Une invite sur page complète te donne du bruit. Une invite basée sur des sections te donne du signal.&quot;
+
+**Exemple de Prompt**
+
+```text
+Créez une barre de menu flottante avec un effet glassmorphism. Incluez les icônes Accueil, Recherche, Musique, Favoris, Ajouter, Profil et Paramètres. Ajoutez une animation flottante subtile et des interactions de survol fluides.
+```
+
+
+<div id="5-design-with-real-content">
+  ### 5. Concevoir avec du contenu réel
+</div>
+
+Lovable ne fonctionne pas bien avec du contenu factice comme « lorem ipsum » ou « feature 1 / feature 2 ». Le modèle est entraîné pour répondre à la structure et à l’intention — et la façon la plus rapide de montrer votre intention est d’utiliser de vrais mots.
+
+Même si votre texte final n’est pas prêt, utilisez un texte qui reflète votre message. Si vous créez une page pour une application de méditation, écrivez ce qu’un utilisateur lirait réellement. Ne le simulez pas.
+
+Cela n’aide pas seulement Lovable à générer de meilleures mises en page et de meilleurs espacements — cela vous aide aussi à prendre de meilleures décisions de design. Un vrai titre pourrait avoir besoin de deux lignes au lieu d’une. Un CTA pourrait mieux fonctionner s’il est formulé comme un verbe plutôt qu’un nom. Le texte factice masque ces problèmes. Le contenu réel les révèle tôt.
+
+> « Le design adore les contraintes. Le contenu réel crée les bonnes. »
+
+**Exemple de prompt**
+
+```text
+Section hero avec titre : « Concevez sereinement. » Sous-titre : « Transformez le stress en structure avec Lovable. » CTA : « Commencez gratuitement. » Utilisez une mise en page centrée sur le contenu textuel avec un espacement vertical généreux.
+```
+
+
+<div id="6-speak-atomic-buttons-cards-modals">
+  ### 6. Adoptez un langage atomique : boutons, cartes, modales
+</div>
+
+Lovable pense en atomes. Plus votre langage d’interface est granulaire et spécifique, plus il est performant. Au lieu de demander « une section avec une inscription », dites : « Ajoute un formulaire avec un champ de saisie pour l’email et un bouton d’appel à l’action arrondi. » Ces instructions atomiques sont interprétées comme des modèles natifs.
+
+Pensez comme un système. Décrivez des cartes, badges, bascules, chips, champs de formulaire, listes déroulantes, etc. Ne dites pas « une interface utilisateur » quand vous pouvez dire « une modale avec une notification de succès (toast) après l’envoi ».
+
+Ce vocabulaire atomique vous permet aussi de superposer la complexité progressivement. Commencez avec une carte. Puis ajoutez un badge. Puis ajoutez des états au survol. Chaque couche se construit naturellement sur la précédente. Cela vous donne plus de contrôle et un rendu plus fidèle — sans réécrire vos invites.
+
+> « Plus l’élément est petit, plus la réponse est intelligente. »
+
+**Exemple de Prompt**
+
+```text
+Créez une carte avec une photo de profil utilisateur, un nom et un bouton de suivi. Ajoutez un badge pour les utilisateurs vérifiés et affichez une info-bulle au survol du badge.
+```
+
+
+<div id="7-use-buzzwords-to-dial-in-aesthetic">
+  ### 7. Utiliser des mots‑clés pour ajuster l’esthétique
+</div>
+
+Le style visuel est l’une des parties les plus importantes — et les plus mal comprises — de la création de prompts dans Lovable. Décrire la mise en page ne suffit pas. Tu dois guider l’outil sur l’ambiance. Les mots‑clés sont le moyen le plus rapide d’y parvenir.
+
+Lovable comprend des termes comme « minimal », « expressif », « cinématique », « ludique », « premium » et « orienté développeurs ». Ce ne sont pas des fioritures — ce sont des paramètres que tu peux utiliser dans un prompt et qui influencent la typographie, les espacements, les ombres, le rayon des bordures et la palette de couleurs.
+
+Utilise ces mots tôt dans tes invites. Mieux encore, inclus‑les dans chaque section. Tu obtiendras des designs cohérents partout et éviteras le redouté look « UI par défaut ».
+
+Tu peux aussi combiner et faire varier les mots‑clés pour faire évoluer ton ton. Une page peut commencer « audacieuse et disruptive » dans le hero et devenir « calme et rassurante » dans la section de tarification. Tu n’es pas bloqué avec un seul style — tu conçois de façon intentionnelle.
+
+> « Le design n’est pas qu’une structure. C’est un ton. Les mots‑clés le définissent. »
+
+**Exemple de prompt**
+
+```text
+Concevez une section hero de page d'accueil qui dégage une impression premium et cinématographique. Utilisez une profondeur en couches, des surfaces translucides, un flou de mouvement léger et un contraste marqué entre le titre et l'arrière-plan.
+```
+
+
+<div id="phase-3-build-with-precision">
+  ## Phase 3 : Créez avec précision
+</div>
+
+<div id="8-use-prompt-patterns-for-layouts">
+  ### 8. Utiliser des modèles de prompts pour les mises en page
+</div>
+
+Les prompts sont plus faciles à écrire — et bien plus efficaces — lorsque tu utilises des modèles structurés et réutilisables. Considère‑les comme des recettes de mise en page. Plutôt que d’essayer d’expliquer ta mise en page depuis zéro à chaque fois, décris‑la avec un schéma régulier.
+
+Un bon prompt de mise en page découpe la section en parties visuelles, clarifie leur ordre et définit leur style. La plupart des modèles suivent une structure « header → content → action », mais tu peux adapter ce flux selon ce que tu conçois.
+
+Commence à te construire une bibliothèque personnelle de prompts. Par exemple, écris une structure type pour une grille de fonctionnalités, un carrousel de témoignages ou une grille tarifaire. Réutilise et remixe ces modèles avec de légères variantes pour les adapter à différentes pages.
+
+Il ne s’agit pas d’être rigide. Il s’agit d’être efficace. Lovable réagit mieux à un langage de prompt structuré, ciblé et prévisible. Les modèles de prompts te font gagner du temps et rendent tes résultats plus cohérents d’un écran à l’autre.
+
+**Exemple de prompt**
+
+```text
+Créez une section de fonctionnalités avec un titre centré, suivi de trois cartes alignées horizontalement. Chaque carte comprend une icône en haut, un titre et une brève description. Les cartes doivent avoir des ombres légères et s'élever au survol.
+```
+
+
+<div id="9-add-visuals-via-url">
+  ### 9. Ajouter des éléments visuels via URL
+</div>
+
+Vous voulez que votre mise en page paraisse plus réelle ? Ajoutez des démos produit, des clips générés avec Midjourney ou des tutoriels vidéo à l’aide d’URL. Lovable prend en charge l’intégration de vidéos quand le Prompt est formulé clairement.
+
+Indiquez dans le Prompt le placement (par exemple, sous le hero ou dans une carte de fonctionnalité), le style (par exemple, bords arrondis, lecture automatique, en sourdine) et le contexte (pourquoi il se trouve là).
+
+**Exemple de Prompt**
+
+```text
+Intégrez une vidéo de démonstration du produit depuis Midjourney. Utilisez cette URL : https://cdn.midjourney.com/video/cb84f296-92a0-4a37-a0e3-1c9c95299488/0.mp4. Placez-la sous la section des fonctionnalités dans une carte pleine largeur avec une ombre légère.
+```
+
+
+<div id="10-layer-context-with-the-edit-button">
+  ### 10. Gère le contexte par couches avec le bouton Edit
+</div>
+
+Le bouton Edit est l’une des fonctionnalités les plus puissantes de Lovable — mais seulement si tu l’utilises correctement. Au lieu de réécrire des Prompts entiers quand quelque chose doit changer, utilise la fonction d’édition pour te concentrer sur des couches ou éléments spécifiques. Cela te permet d’itérer rapidement sans perturber ce qui fonctionne déjà.
+
+Pense aux modifications comme à des overrides de design. Ce ne sont pas des remplacements — ce sont des ajustements. Par exemple, tu peux sélectionner un bouton d’appel à l’action (CTA) et changer uniquement le texte, ou ajuster la mise en page d’une carte sans affecter la typographie de toute la section.
+
+Cela garde ton projet propre et modulaire. Tu évites le « prompt bloat », tu avances plus vite et tu réduis le risque de casser quelque chose qui fonctionnait déjà bien. Le mode d’édition te donne aussi plus de confiance pour expérimenter — puisque tu ne repars pas de zéro à chaque fois.
+
+Lors de l’édition, sois précis dans ta formulation. Dis exactement ce que tu veux changer et ce qui doit rester identique. Utilise des indications comme « remplacer », « mettre à jour » ou « ajuster » au lieu de formulations générales comme « améliore ça ».
+
+**Exemple de Prompt (en mode édition)**
+
+```text
+Modifiez le texte du bouton CTA en « Commencer » et augmentez l'espacement horizontal à 24 px. Conservez la couleur de fond et la police actuelles.
+```
+
+
+<div id="phase-4-iterate-and-ship">
+  ## Phase 4 : itérer et déployer
+</div>
+
+<div id="11-build-with-lovable-cloud-in-mind">
+  ### 11. Concevoir en pensant à Lovable Cloud
+</div>
+
+Concevoir une mise en page n’est qu’une partie de la création d’un produit. Si vous voulez que vos projets Lovable fassent plus que simplement être beaux, vous devez réfléchir à la façon dont ils vont réellement fonctionner — et notre Cloud intégré est un excellent point de départ.
+
+Cloud gère l’authentification des utilisateurs, les bases de données, le stockage, et même les Edge Functions — le tout d’une manière qui s’accorde bien avec les frontends modernes. Et Lovable vous permet de façonner votre UI pour qu’elle corresponde à ces comportements réels directement à partir du Prompt.
+
+Quand vous concevez en pensant à Cloud, commencez par anticiper :
+
+* **Logique d’auth** — Que doit afficher l’UI si l’utilisateur est connecté ou déconnecté ?
+* **Contenu dynamique** — Est‑ce que vous récupérez des données utilisateur, des publications, des éléments ou des indicateurs à partir d’une table ?
+* **États** — Que se passe‑t‑il si les données sont vides, encore en cours de chargement ou en erreur ?
+
+Cette réflexion en amont vous aide à formuler des Prompts plus pertinents pour vos sections et rend le développement plus fluide par la suite.
+
+**Exemple de Prompt**
+
+```text
+Si l'utilisateur est connecté via Cloud, affichez son image de profil et son nom en haut à droite. Sinon, affichez un bouton « Se connecter » et redirigez-le vers l'écran d'authentification.
+```
+
+> Astuce : vous n’avez pas besoin d’un backend fonctionnel pendant la phase de conception — mais structurer votre interface comme s’il existait déjà est la meilleure façon de pérenniser votre mise en page.
+
+
+<div id="12-version-control-is-your-friend">
+  ### 12. Le contrôle de version est votre allié
+</div>
+
+Lovable enregistre automatiquement vos modifications, mais cela ne veut pas dire que vous devez avancer vite sans réfléchir. Si vous ne gardez pas une trace de ce que vous avez changé et pourquoi, vous ne faites que du bruit — et vous perdrez vite le contrôle.
+
+Une bonne gestion de versions ne consiste pas à nommer des fichiers. Il s’agit de penser par itérations. Apportez un changement significatif à la fois. Mettez à jour le texte de votre section hero. Ajoutez une grille de fonctionnalités. Ajustez la mise en page. Vérifiez le résultat. Puis avancez.
+
+C’est ainsi que les vrais systèmes de design sont construits — couche par couche, avec intention.
+
+Même si Lovable gère les versions en arrière-plan, adoptez votre propre système :
+
+* Pensez en jalons (par ex. : mise en page figée, contenu ajouté, logique configurée)
+* Utilisez des notes dans vos prompts (par ex. : « Changement du texte de l’appel à l’action et ajustement de l’espacement des cartes »)
+* Utilisez l’Aperçu avant les changements majeurs, et dupliquez si vous êtes sur le point de faire un saut risqué
+
+> « L’enregistrement automatique ne veut pas dire auto‑organisation. Construisez avec intention. Itérez en pleine conscience. »
+
+**Habitude de prompt**
+
+```text
+Avant d'effectuer une modification majeure, dupliquez la version actuelle et nommez-la. Coût minimal, sécurité maximale.
+```
+
+***

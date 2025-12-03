@@ -1,0 +1,342 @@
+---
+title: "Resend-Integration"
+description: "Lerne, wie du Resend in deine Lovable-App integrierst"
+icon: "envelope"
+---
+
+<div id="what-is-resend">
+  ## Was ist Resend?
+</div>
+
+[Resend](https://resend.com/emails) ist eine E-Mail-API, die speziell für Entwickler entwickelt wurde. Der Fokus liegt auf hoher Zustellbarkeit, einfacher Integration und einem klaren Developer-Erlebnis für den Versand von Transaktions- und Marketing-E-Mails.
+
+<div id="step-by-step-tutorial">
+  ## Schritt-für-Schritt-Tutorial
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/5ZL744_Wxjo?si=qrKlOL_1fAnz7rgc" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+In diesem Tutorial baust du in weniger als einer Stunde ein voll funktionsfähiges CRM – einschließlich Lead-Erfassung, E-Mail-Bestätigung, Newsletter-Anmeldung und einem internen Admin-Dashboard. Du wirst Folgendes verwenden:
+
+- **Lovable**: zum Generieren des Frontends und der Backend-Logik.
+- **Supabase**: für sichere Datenspeicherung und Authentifizierung.
+- **Resend**: um transaktionale \+ Marketing-E-Mails zu automatisieren und nachzuverfolgen.
+
+Legen wir los.
+
+<Steps>
+  <Step title="Erstelle eine Landingpage mit einem Kontaktformular">
+    Nutze die KI von Lovable, um schnell eine Landingpage für dein Produkt oder deine Dienstleistung zu erstellen.
+
+    **Anleitung:**
+
+    <Steps>
+      <Step title="Neues Lovable-Projekt">
+        Erstelle ein neues Lovable-Projekt.
+      </Step>
+
+      <Step title="Eingabeaufforderung:">
+        <Info>
+          Erstelle eine SaaS-Landingpage mit einem Kontaktformular, das Name, E-Mail-Adresse und Nachricht abfragt.
+        </Info>
+
+        ![Landingpage-Lovable-Projekt Pn](/images/landing-page-lovable-project.png)
+      </Step>
+
+      <Step title="Generierten Code überprüfen">
+        Überprüfe den generierten Code oder nutze das Auswahl-Tool, um Elemente anzupassen.
+      </Step>
+
+      <Step title="Eingabevalidierung hinzufügen">
+        Füge eine Validierung der Eingaben und ein `message`-Feld für eine bessere User Experience hinzu.
+
+        ![E-Mail-Resend-Formular Pn](/images/email-resend-form.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Formulareinsendungen in Supabase speichern">
+    Supabase fungiert als deine sichere Backend-Datenbank.
+
+    <Steps>
+      <Step title="Supabase-Konto">
+        Erstelle ein kostenloses Supabase-Konto und ein neues Projekt.
+      </Step>
+
+      <Step title="API-Schlüssel">
+        Verbinde in Lovable dein Supabase-Projekt mit dem API-Schlüssel.
+
+        ![Supabase Resend E-Mail Pn](/images/supabase-resend-email.png)
+      </Step>
+
+      <Step title="Erstelle eine `contacts`-Tabelle mit:">
+        * `id`: UUID, Primärschlüssel
+        * `name`: text
+        * `email`: text
+        * `message`: text
+        * `created_at`: timestamp
+      </Step>
+
+      <Step title="Logik für die Formularübermittlung">
+        Passe die Logik für die Formularübermittlung an, um Daten in Supabase einzufügen.
+      </Step>
+
+      <Step title="RLS">
+        Wende Supabase Row-Level Security (RLS) an, um den Zugriff nur auf authentifizierte Benutzer zu beschränken.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Bestätigungs-E-Mails über Resend versenden">
+    Richte [Resend]() ein, um jedes Mal, wenn ein Lead das Formular absendet, automatisch Bestätigungs-E-Mails zu versenden.
+
+    <Steps>
+      <Step title="Bei Resend registrieren">
+        Registriere dich bei [Resend](https://resend.com) und verifiziere deine benutzerdefinierte Domain.
+
+        * Du wirst aufgefordert, deine DNS-Einträge (TXT, MX) zu aktualisieren.
+        * Verwende Subdomains wie `updates.domain.com`, um deine E-Mail-Reputation besser zu verwalten.
+      </Step>
+
+      <Step title="API-Schlüssel">
+        Integriere den API-Schlüssel in Lovable über Umgebungsvariablen oder eine Backend-Funktion.
+      </Step>
+
+      <Step title="SDK">
+        Verwende das SDK von Resend, um beim Absenden des Formulars eine Bestätigungs-E-Mail zu senden.
+
+        ![Bestätigungs-E-Mail beim Absenden mit Resend](/images/confirmation-email-submission-resend.png)
+      </Step>
+
+      <Step title="Optional: React Email">
+        Verwende [React Email](https://react.email) (ebenfalls von Resend), um das Design und Erscheinungsbild deiner E-Mails mit wiederverwendbaren Komponenten anzupassen.
+
+        ![E-Mails anpassen mit Resend](/images/customize-email-resend.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Erstelle ein sicheres Admin-Dashboard">
+    Ermögliche nur authentifizierten Benutzern, Leads anzusehen und zu verwalten.
+
+    <Steps>
+      <Step title="Admin-Route">
+        Erstelle in Lovable eine `/admin`-Route.
+      </Step>
+
+      <Step title="Supabase-Authentifizierung">
+        Aktiviere die Supabase-Authentifizierung mit E-Mail-/Passwort-Anmeldung.
+      </Step>
+
+      <Step title="Kontakte">
+        Zeige die `contacts`-Tabelle mit folgenden Spalten an:
+
+        * Name
+        * E-Mail
+        * Nachrichtenvorschau
+        * Eingangsdatum
+      </Step>
+
+      <Step title="Vollständige Kontaktdaten">
+        Füge einen Detailbereich (z. B. ein einfahrendes Panel) hinzu, der bei Klick auf eine Zeile die vollständigen Kontaktdaten anzeigt.
+
+        ![Crm Resend Email Pn](/images/crm-resend-email.png)
+      </Step>
+
+      <Step title="Weiterleitungslogik">
+        Füge eine Weiterleitungslogik hinzu, damit nicht authentifizierte Benutzer auf `/login` umgeleitet werden.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Benutzerdefinierte E-Mail-Antworten des Administrators aktivieren">
+    Ermögliche deinem Team, personalisierte Follow-ups zu versenden.
+
+    <Steps>
+      <Step title="Contact detail pane">
+        Füge in der Kontakt-Detailansicht ein **Textfeld** und **vordefinierte Textvorlagen** hinzu (z. B. „Thanks for signing up!“).
+      </Step>
+
+      <Step title="Add send button">
+        Füge einen **Senden-Button** hinzu, der mit Resend verknüpft ist.
+      </Step>
+
+      <Step title="Store sent messages">
+        Speichere jede gesendete Nachricht in einer `sent_emails`-Tabelle in Supabase:
+
+        * `contact_id`
+        * `subject`
+        * `body`
+        * `sent_at`
+
+        So erhältst du ein durchsuchbares Protokoll aller Follow-ups.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Newsletter-Anmeldeformular hinzufügen">
+    Verwende die **Audiences** von Resend, um Abonnenten zu verwalten und Broadcast-E-Mails zu versenden.
+
+    ![Subscription Newsletter Resend Pn](/images/subscription-newsletter-resend.png)
+
+    <Steps>
+      <Step title="Neues Formular hinzufügen">
+        Füge auf deiner Landingpage ein neues Formular für die Newsletter-Anmeldung hinzu.
+      </Step>
+
+      <Step title="Resend-Kontakt">
+        Beim Absenden des Formulars:
+
+        * Erstelle über die API einen Resend-Kontakt
+        * (Optional) Speichere den Kontakt zusätzlich lokal in Supabase
+      </Step>
+
+      <Step title="Design">
+        Verwende die Broadcast-E-Mail-Oberfläche von Resend, um Newsletter zu gestalten und zu versenden.
+
+        * Integrierte Abmelde-Logik
+        * Leistungskennzahlen (Öffnungsraten, Zustellstatus)
+      </Step>
+
+      <Step title="Compliance-Check!">
+        Für die Einhaltung rechtlicher Vorgaben (z. B. DSGVO) solltest du einen **Double-Opt-in**-Prozess implementieren.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="BONUS: Resend mit Supabase Auth verknüpfen">
+    ![Batch-E-Mails senden GDPR Resend Pn](/images/send-batch-emails-gdpr-resend.png)
+    Möchtest du die standardmäßige E-Mail-Authentifizierung von Supabase verbessern (die auf 4 E-Mails pro Stunde begrenzt ist)?
+
+    <Steps>
+      <Step title="Resend-Supabase-Integration">
+        Gehe zur [Supabase-Integration von Resend](https://resend.com/integrations/supabase).
+      </Step>
+
+      <Step title="Authentifizierung">
+        Authentifiziere dich bei deinem Supabase-Projekt.
+      </Step>
+
+      <Step title="Domain-Einrichtung">
+        Wähle deine Domain sowie deinen Absendernamen und deine Absender-E-Mail-Adresse.
+      </Step>
+
+      <Step title="SMTP">
+        Resend richtet SMTP automatisch ein und ersetzt das standardmäßige E-Mail-System von Supabase.
+      </Step>
+
+      <Step title="Anpassung">
+        Du kannst nun die E-Mail-Vorlagen für die Authentifizierung im Supabase-Dashboard anpassen.
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Feinschliff & Best Practices">
+    ![Audience Resend Pn](/images/audience-resend.png)
+
+    * **Fehlerbehandlung**: Lovable kann Build-Fehler anzeigen, die Fehlalarme sind. Teste deine Funktionalität immer live.
+    * **Zurücksetzen mit Supabase**: Wenn du Code in Lovable zurücksetzt, denke daran, zugehörige Supabase-Policies oder -Migrationen manuell zu löschen – sie werden nicht automatisch rückgängig gemacht.
+    * **Tipps zur Zustellbarkeit**:
+      * Verwende Subdomains, um deine Absenderreputation zu isolieren.
+      * Füge immer eine reine Textversion deiner E-Mail hinzu.
+      * Überwache die E-Mail-Performance mit dem Insights-Dashboard von Resend.
+  </Step>
+
+  <Step title="Geschafft! 🎉">
+    In weniger als einer Stunde hast du ein modernes CRM erstellt mit:
+
+    * einer Landingpage und einem Kontaktformular
+    * datenbankgestützter Speicherung deiner Leads
+    * automatischen E-Mail-Bestätigungen
+    * einem Admin-Dashboard für das Lead-Management
+    * individuellen E-Mail-Antworten
+    * Newsletter-Versand
+    * Authentifizierung und E-Mail-Verifizierung
+  </Step>
+</Steps>
+
+<div id="want-to-go-further">
+  ## Willst du noch mehr machen?
+</div>
+
+- Füge **geplante E-Mails** über Supabase-Cronjobs hinzu
+- Baue **Automatisierungsflows**, um E-Mails basierend auf Lead-Status auszulösen
+- Gestalte dein UI für mehr Markenvertrauen und Conversion
+
+<div id="resend-integration-faq">
+  ## FAQ zur Resend-Integration
+</div>
+
+<AccordionGroup>
+  <Accordion title="Was ist Resend?">
+    Resend ist eine E-Mail-API, die für Entwickler entwickelt wurde. Der Fokus liegt auf hoher Zustellrate, einfacher Integration und einer klaren Developer Experience für den Versand von transaktionalen und Marketing-E-Mails.
+  </Accordion>
+  <Accordion title="Brauche ich einen bezahlten Resend-Tarif, um dieses Tutorial durchzugehen?">
+    Nein. Du kannst das gesamte CRM-Setup mit dem **kostenlosen Resend-Tarif** abschließen, der das Senden von E-Mails von einer verifizierten Domain und bis zu 3.000 Kontakten für Marketing-E-Mails unterstützt.
+  </Accordion>
+  <Accordion title="Wie verifiziere ich eine Domain in Resend?">
+    Gehe zu Resend → **Domains** → füge deine Domain hinzu. Du erhältst DNS-Einträge (TXT, MX), die du bei deinem DNS-Provider (z. B. Cloudflare, Namecheap) eintragen musst. Sobald sie hinzugefügt wurden, klicke auf **Verify**.
+
+    <Tip>
+      Verwende eine Subdomain wie `updates.yourdomain.com`, um deine E-Mail-Reputation zu isolieren.
+    </Tip>
+  </Accordion>
+  <Accordion title="Warum landen meine Resend-E-Mails im Spam?">
+    Es gibt einige häufige Gründe:
+
+    - Du hast deine Domain nicht verifiziert
+    - Deine E-Mail hat keine Plain-Text-Version
+    - Du sendest von einem generischen Absender wie `onboarding@resend.dev`
+    - Du befolgst keine Best Practices (z. B. fehlen Abmeldelinks in Marketing-E-Mails)
+
+    Verwende das **Deliverability Insights**-Panel von Resend, um umsetzbare Tipps zu erhalten.
+  </Accordion>
+  <Accordion title="Kann ich das Design der E-Mails, die ich sende, anpassen?">
+    Ja. Verwende [React Email](https://react.email/) – eine Open-Source-Bibliothek vom Resend-Team –, um gestaltete, responsive E-Mails mit React-Komponenten zu entwerfen.
+  </Accordion>
+  <Accordion title="Unterstützt Resend Marketing-E-Mails oder nur transaktionale E-Mails?">
+    Resend unterstützt **beides**:
+
+    - **Transaktionale E-Mails** (Bestätigung, Zurücksetzen, Benachrichtigungen) über die API oder das SDK.
+    - **Marketing-E-Mails** über das **Broadcast**-Feature und **Audiences**.
+
+    Du kannst Kampagnen im Dashboard erstellen, in der Vorschau ansehen und nachverfolgen.
+  </Accordion>
+  <Accordion title="Wie verwalte ich Newsletter-Abonnenten in Resend?">
+    Verwende **Audiences**:
+
+    - Füge Kontakte manuell, per CSV oder programmatisch über die API hinzu.
+    - Jede Audience hat eine eindeutige ID, die du verwenden kannst, um Abonnements zuzuordnen.
+    - Benutzer können sich automatisch über den integrierten Abmeldelink von Resend abmelden.
+  </Accordion>
+  <Accordion title="Kann ich Double-Opt-in für Newsletter einrichten?">
+    Nicht standardmäßig, aber du kannst es manuell implementieren:
+
+    1. Sende beim Absenden des Formulars eine erste Bestätigungs-E-Mail.
+    2. Bitte Benutzer, auf einen Link zu klicken.
+    3. Bestätige beim Klick ihr Abonnement und füge sie zu deiner Resend-Audience hinzu.
+  </Accordion>
+  <Accordion title="Kann ich E-Mail-Flows in Resend planen oder automatisieren?">
+    Noch nicht. Resend unterstützt derzeit keine Drip-Kampagnen oder automatisierten Sequenzen.
+
+    <Tip>
+      Workaround:
+
+      Verwende **Supabase Cron Jobs**, um Aufgaben zu planen, die Resend-E-Mails in festen Intervallen auslösen.
+    </Tip>
+  </Accordion>
+  <Accordion title="Wie verbinde ich Resend mit Supabase Auth?">
+    Verwende die offizielle Supabase-Integration von Resend:
+
+    1. Authentifiziere dich mit deinem Supabase-Projekt.
+    2. Gib eine Domain und einen Absendernamen an.
+    3. Resend konfiguriert deine Supabase-Auth-E-Mails automatisch so, dass sie dein Resend-Konto verwenden.
+  </Accordion>
+  <Accordion title="Wie geht Resend mit Abmeldungen um?">
+    Resend verarbeitet Abmeldungen automatisch:
+
+    - Du musst einen Abmeldelink in Broadcast-E-Mails einfügen.
+    - Wenn sich ein Benutzer abmeldet, wird er aus der ausgewählten Audience entfernt.
+    - Dies ist für die E-Mail-Compliance erforderlich (z. B. CAN-SPAM, DSGVO).
+  </Accordion>
+</AccordionGroup>

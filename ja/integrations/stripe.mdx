@@ -1,0 +1,229 @@
+---
+title: "Stripe 連携"
+description: "Lovable の Stripe 連携を使ってアプリに決済を設定する方法"
+icon: "credit-card"
+---
+
+![Integrate Stripe in Lovable](/images/lovable-stripe.webp)
+
+Lovable では、**チャット**だけで Stripe のセットアップができるようになりました。
+
+**チャットベースの自動セットアップ（推奨）**\
+**Supabase** を接続し、**Add API Key** から **Stripe Secret Key** を保存したら、やりたいことをチャットで説明してください：
+
+- 「サブスクリプションプランを 3 つ追加して…」
+- 「e‑book 用に \$29 の単発のチェックアウトを作成して」\
+  Lovable がチェックアウト／ポータル用のエッジ関数、RLS 対応のデータベーステーブル、UI ボタンを自動生成します。あなたが明示的に依頼しない限り、手動でのコーディングや webhook の設定は不要です。
+
+<Note>
+  - **単発販売** の場合は、カートまたは商品ページがすでに動作していることを確認してください。
+  - **サブスクリプション** の場合は、Supabase Auth が設定済みで、Lovable が Stripe の顧客を各ユーザーの **id** にリンクできるようになっていることを確認してください。
+</Note>
+
+<div id="key-takeaways">
+  ### 重要なポイント
+</div>
+
+- サブスクリプションと単発支払いの両方で、**チャットベースのフロー**を使用してください。
+- **Stripe Secret Key をチャットに貼り付けないでください。** チャット内の **Add API Key** フォームから設定します。
+- **Webhook の利用はオプトインです。** リクエストしない限り、Lovable はエッジ関数によるポーリングに依存します。
+- デバッグは **Browser Console → Network/Errors**、**Supabase → Edge Functions → ログ**、**Stripe Dashboard → ログ** で行います。
+- 必ず **Stripe Test Mode** でテストしてからデプロイしてください。
+
+<div id="requirements">
+  ## 必要条件
+</div>
+
+Stripe と連携する前に、次の前提条件が満たされていることを確認してください：
+
+- プロジェクトが **Supabase に接続されている必要があります**。[Supabase について詳しく見る](https://docs.lovable.dev/integrations/supabase)
+- 商品が適切に設定された **Stripe アカウント**。
+- 正常に動作している **フロントエンドとバックエンド**：
+  - 単体商品の販売の場合、ショッピングカートとチェックアウトページが機能していること。
+  - サブスクリプションの場合、ログイン機能と複数の料金プランが設定されていること。
+
+<Note>
+  **注意**
+  Stripe 連携はプレビューでは動作しません。連携をテストするには、必ずデプロイしてください。また、機能を試す際は Stripe をテストモードにしていることも確認してください。支払いテスト時は、カード番号: 4242 4242 4242 4242、CVC は任意の 3 桁、有効期限は将来の日付であればどれでもテストカードとして利用できます。
+</Note>
+
+<div id="stripe-payment-setup-nocode-chat-flow">
+  ## Stripe 決済のセットアップ（ノーコード チャットフロー）
+</div>
+
+Lovable が Stripe の決済ロジックをすべて自動生成してくれます。チャット内の **Add API Key** フォームで **Stripe Secret Key** を設定し、プロジェクトが **Supabase に接続されていれば**、あとはチャットで Lovable にやりたいことを伝えるだけで完了です。手動で Payment Links を作成する必要はありません。
+
+<Steps>
+  <Step title="Step 1">
+    **プロジェクトの準備**
+
+    - Supabase 接続済み
+    - チャット内の **Add API Key** フォームから Stripe Secret Key を追加済み
+    - （オプション）価格または商品 ID を用意
+  </Step>
+  <Step title="Step 2">
+    例:
+
+    - 「Digital Course」の 1 回限りのチェックアウトを \$29 で作成
+    - 年額 \$99 の Premium プランをセットアップし、各ユーザーの id に関連付ける
+  </Step>
+  <Step title="Step 3">
+    **確認して適用**
+    Lovable が Edge Functions、データベーステーブル、UI コンポーネントを自動でスキャフォールドします（いずれも Supabase 上のユーザーの id にひも付けられます）。プレビューを確認し、問題なければ **Apply** をクリックしてデプロイします。
+  </Step>
+</Steps>
+
+<Note>
+  - サブスクリプションは、常に Supabase 内の認証済みユーザーの `id` にひも付けて、ロールベースで安全にアクセスできるようにしておく必要があります。
+</Note>
+
+<div id="advanced-integration-webhooks-supabase">
+  ## 高度な連携: Webhooks と Supabase
+</div>
+
+**サブスクリプションやロールベースのアクセス**など、複雑な決済フローには、Stripe 連携を安全に処理するために **Supabase** を使用することを Lovable は推奨しています。これにより、支払いプランに基づく適切な webhook 処理、サブスクリプション管理、ロールベースのアクセス制御が可能になります。
+
+<Note>
+  ユーザーアカウントに必要な変更を処理するエッジ関数は、AI によって自動的にセットアップされます。
+</Note>
+
+<Steps>
+  <Step title="Supabase をプロジェクトに接続する">
+    はじめ方はとてもシンプルです。Lovable には Supabase と簡単に接続できるネイティブ連携機能が組み込まれています。
+
+    1. Lovable 右上の **Supabase ボタン** をクリックします。
+    2. 手順に従ってプロジェクトをリンクします。
+    3. 接続が完了すると、Supabase によって安全な決済処理、サブスクリプション管理、webhook 処理、顧客データの保存、エラー処理が可能になります。
+  </Step>
+  <Step title="安全な決済処理">
+    まずは Lovable へのプロンプトから始めます。
+
+    <Note>
+      Stripe をプロジェクトに接続しましょう。まずは安全な決済処理から始めます。
+    </Note>
+    Lovable は決済処理に必要な SQL スキーマを生成します。これにはユーザー、サブスクリプション、支払い用のデータベーステーブルが含まれます。変更を適用する前に、これらのテーブルを確認し、自分のプロダクトの要件に合わせてカスタマイズできます。
+  </Step>
+  <Step title="Webhooks 用のエッジ関数を実装する">
+    Supabase の **Edge Functions** は、小さく高性能なサーバーレス関数としてユーザーに近い場所で実行され、高速な応答を実現します。これらは支払い確認などの webhook イベントを処理し、その後データベースを更新します。
+
+    <Steps>
+      <Step title="Step 1">
+        Supabase のエッジ関数から **エンドポイント URL を取得** します。
+      </Step>
+      <Step title="Step 2">
+        **Stripe ダッシュボード** \> Developers \> Webhooks \> Create an Event Destination に移動します。
+
+        ![Stripe API キー](https://lovable.dev/content/news/stripe-api.png)
+      </Step>
+      <Step title="Step 3">
+        プロジェクトの要件に合うように **Webhook イベントを選択** します。
+
+        - `payment_intent.succeeded`
+        - `payment_intent.payment_failed`
+        - `customer.subscription.created`
+        - `customer.subscription.updated`
+        - `customer.subscription.deleted`
+      </Step>
+      <Step title="Step 4">
+        Supabase の **エンドポイント URL を入力** します。
+      </Step>
+      <Step title="Step 5">
+        **Webhook Secret をコピー** し、**Supabase → Edge Functions → Manage Secrets → Add New Secret** に安全に保存します。
+
+        <Info>
+          シークレット名に迷った場合は、**chat mode** で Lovable に相談してください。
+        </Info>
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="APIキーを安全に追加する">
+    Stripe を安全に連携するには、APIキーをチャットで直接共有しないでください。代わりに次の手順を行います。
+
+    ![](/images/ConnectLovabletoStripe\(1\).png)
+
+    <Steps>
+      <Step title="Step 1">
+        **Stripe ダッシュボード** \> Developers \> API Keys に移動します。
+      </Step>
+      <Step title="Step 2">
+        **Secret Key をコピー** します（Lovable のチャットに直接貼り付けないでください）。
+      </Step>
+      <Step title="Step 3">
+        **Lovable の「Add API Key」機能** を使って、安全に保存します。
+
+        <Warning>
+          **重要なセキュリティ警告**
+
+          **Secret Key** を Lovable のチャットに直接貼り付けないでください。自宅の鍵と同じように扱ってください。漏えいすると、Stripe アカウントに不正アクセスされる可能性があります。代わりに、Lovable の APIキー機能を使って安全に保存してください。
+        </Warning>
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="連携をテストする">
+    - **Stripe のテストモード** を使って、安全に決済をテストします。
+    - **テスト用カード情報**:
+      - カード番号: `4242 4242 4242 4242`
+      - 有効期限は将来の日付なら任意
+      - 3桁の任意の CVC
+    - **アプリをデプロイ** します—Stripe 連携はプレビューモードでは動作しません。
+  </Step>
+</Steps>
+
+<div id="debugging-troubleshooting">
+  ## デバッグとトラブルシューティング
+</div>
+
+<AccordionGroup>
+  <Accordion title="コンソールログを確認する">
+    <Steps>
+      <Step title="ステップ 1">
+        **Developer Tools** を開きます（Chrome で右クリック \> 検証 \> Console）。
+      </Step>
+      <Step title="ステップ 2">
+        エラーを探し、Webhook イベントのログを確認します。
+      </Step>
+      <Step title="ステップ 3">
+        エラーメッセージをコピーして、Lovable にデバッグの相談をします。
+      </Step>
+    </Steps>
+  </Accordion>
+  <Accordion title="Supabase のログを確認する">
+    <Steps>
+      <Step title="ステップ 1">
+        **Supabase Dashboard** に移動します。
+      </Step>
+      <Step title="ステップ 2">
+        Edge Functions を開きます。
+      </Step>
+      <Step title="ステップ 3">
+        Webhook エラーを確認するためにログをチェックします。
+      </Step>
+    </Steps>
+  </Accordion>
+  <Accordion title="Stripe で Webhook イベントを検証する">
+    <Steps>
+      <Step title="ステップ 1">
+        **Stripe Dashboard** に移動します。
+      </Step>
+      <Step title="ステップ 2">
+        Webhook ログを開きます。
+      </Step>
+      <Step title="ステップ 3">
+        Stripe がデータを正しく送信していることを確認します。
+      </Step>
+    </Steps>
+  </Accordion>
+  <Accordion title="Lovable の Chat Mode を使う">
+    <Steps>
+      <Step title="ステップ 1">
+        **chat mode** に切り替えます。
+      </Step>
+      <Step title="ステップ 2">
+        Lovable に追加の質問をします。
+      </Step>
+      <Step title="ステップ 3">
+        **Rubber Duck Method**（ラバーダック・メソッド）を使い、問題を明確にするために、課題を一つずつ説明します。
+      </Step>
+    </Steps>
+  </Accordion>
+</AccordionGroup>

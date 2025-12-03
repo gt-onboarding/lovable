@@ -1,0 +1,342 @@
+---
+title: "Resend 連携"
+description: "Lovable アプリケーションと Resend を連携する方法を学ぶ"
+icon: "envelope"
+---
+
+<div id="what-is-resend">
+  ## Resend とは？
+</div>
+
+[Resend](https://resend.com/emails) は、開発者向けに設計されたメール API です。トランザクションメールやマーケティングメールを送信するために、高い到達率、統合の容易さ、そしてクリーンな開発者体験に重点を置いています。
+
+<div id="step-by-step-tutorial">
+  ## ステップバイステップのチュートリアル
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/5ZL744_Wxjo?si=qrKlOL_1fAnz7rgc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+このチュートリアルでは、1時間以内に、リード収集、メール確認、ニュースレター購読、社内向け管理ダッシュボードまで備えたフル機能のCRMを構築する手順を、ステップごとに解説します。次のツールを使います。
+
+- **Lovable**: フロントエンドとバックエンドロジックを生成するために使います。
+- **Supabase**: セキュアなデータ保存と認証に使います。
+- **Resend**: トランザクションメールおよびマーケティングメールの自動送信とトラッキングに使います。
+
+さっそく始めましょう。
+
+<Steps>
+  <Step title="お問い合わせフォーム付きのランディングページを作成する">
+    Lovable の AI を使って、プロダクトやサービス向けのランディングページを素早く作成しましょう。
+
+    **手順:**
+
+    <Steps>
+      <Step title="新しい Lovable プロジェクト">
+        新しい Lovable プロジェクトを作成します。
+      </Step>
+
+      <Step title="プロンプト:">
+        <Info>
+          名前、メールアドレス、メッセージを収集するお問い合わせフォーム付きの SaaS ランディングページを作成してください。
+        </Info>
+
+        ![Landing Page Lovable Project Pn](/images/landing-page-lovable-project.png)
+      </Step>
+
+      <Step title="生成されたコードを確認する">
+        生成されたコードを確認するか、選択ツールを使って要素を微調整します。
+      </Step>
+
+      <Step title="入力バリデーションを追加する">
+        入力バリデーションを追加し、より良いユーザー体験のために `message` フィールドも用意します。
+
+        ![Email Resend Form Pn](/images/email-resend-form.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="フォームからの送信内容をSupabaseに保存する">
+    Supabase は、安全なバックエンドデータベースとして機能します。
+
+    <Steps>
+      <Step title="Supabase アカウント">
+        無料の Supabase アカウントを登録し、新しいプロジェクトを作成します。
+      </Step>
+
+      <Step title="APIキー">
+        Lovable で、APIキーを使って Supabase プロジェクトに接続します。
+
+        ![Supabase Resend Email Pn](/images/supabase-resend-email.png)
+      </Step>
+
+      <Step title="`contacts` テーブルを次のカラムで作成します:">
+        * `id`: UUID, primary key
+        * `name`: text
+        * `email`: text
+        * `message`: text
+        * `created_at`: timestamp
+      </Step>
+
+      <Step title="送信ロジック">
+        フォームの送信ロジックを変更して、データを Supabase に挿入するようにします。
+      </Step>
+
+      <Step title="RLS">
+        Supabase の Row-Level Security (RLS) を適用して、認証済みユーザーのみがアクセスできるようにします。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="Resend を使った確認メールの送信">
+    Set up [Resend]() を設定して、リードがフォームを送信するたびに自動確認メールを送信します。
+
+    <Steps>
+      <Step title="Resend にサインアップする">
+        [Resend](https://resend.com) にサインアップし、独自ドメインを認証します。
+
+        * DNSレコード（TXT、MX）を更新するよう求められます。
+        * メールのレピュテーションをより良く管理するために、`updates.domain.com` のようなサブドメインを使用しましょう。
+      </Step>
+
+      <Step title="APIキー">
+        Lovable の環境設定またはバックエンド関数を使って APIキー を連携します。
+      </Step>
+
+      <Step title="SDK">
+        Resend の SDK を使用して、フォーム送信時に確認メールを送信します。
+
+        ![確認メール送信 Resend Pn](/images/confirmation-email-submission-resend.png)
+      </Step>
+
+      <Step title="オプション: React Email">
+        [React Email](https://react.email)（Resend 提供）を使って、再利用可能なコンポーネントでメールの見た目や雰囲気をカスタマイズします。
+
+        ![メールのカスタマイズ Resend Pn](/images/customize-email-resend.png)
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="安全な管理ダッシュボードを構築する">
+    認証済みユーザーだけがリードを閲覧・管理できるようにします。
+
+    <Steps>
+      <Step title="Admin route">
+        Lovable で `/admin` ルートを作成します。
+      </Step>
+
+      <Step title="Supabase Authentication">
+        メールアドレスとパスワードによるログインを許可する Supabase 認証を有効化します。
+      </Step>
+
+      <Step title="Contacts">
+        次のカラムを持つ `contacts` テーブルを表示します：
+
+        * 名前
+        * メールアドレス
+        * メッセージのプレビュー
+        * 送信日時
+      </Step>
+
+      <Step title="Full contact detail">
+        行がクリックされたときに連絡先の詳細をすべて表示する詳細ペイン（例：スライドパネル）を追加します。
+
+        ![Crm Resend Email Pn](/images/crm-resend-email.png)
+      </Step>
+
+      <Step title="Redirect logic">
+        未認証ユーザーを `/login` にリダイレクトするロジックを追加します。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="管理者からのカスタムメール返信を有効化">
+    チームがパーソナライズされたフォローアップを送信できるようにしましょう。
+
+    <Steps>
+      <Step title="Contact detail pane">
+        連絡先詳細ペインで、**テキストフィールド**と**テンプレート**（例：「Thanks for signing up!」）を追加します。
+      </Step>
+
+      <Step title="Add send button">
+        Resend と連携した**送信ボタン**を追加します。
+      </Step>
+
+      <Step title="Store sent messages">
+        送信された各メッセージを Supabase の `sent_emails` テーブルに保存します:
+
+        * `contact_id`
+        * `subject`
+        * `body`
+        * `sent_at`
+
+        これにより、すべてのフォローアップを検索可能なログとして管理できます。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="ニュースレター登録フォームを追加">
+    Resend の **Audiences** を使って購読者を管理し、一斉メールを送信します。
+
+    ![サブスクリプションニュースレター Resend](/images/subscription-newsletter-resend.png)
+
+    <Steps>
+      <Step title="新しいフォームを追加">
+        ランディングページにニュースレター登録用の新しいフォームを追加します。
+      </Step>
+
+      <Step title="Resend のコンタクト">
+        フォーム送信時に次を実行します:
+
+        * API を使って Resend のコンタクトを作成する
+        * （任意）コンタクト情報を Supabase にもローカル保存する
+      </Step>
+
+      <Step title="デザイン">
+        Resend の一斉メール用 UI を使ってニュースレターをデザインし、送信します。
+
+        * 購読解除（退会）ロジックが組み込み済み
+        * パフォーマンスインサイト（開封率、配信ステータス）
+      </Step>
+
+      <Step title="コンプライアンスチェック！">
+        コンプライアンス（例: GDPR）のために、**ダブルオプトイン** フローの実装を検討してください。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="おまけ: Resend を Supabase Auth に接続する">
+    ![Send Batch Emails Gdpr Resend Pn](/images/send-batch-emails-gdpr-resend.png)
+    Supabase のデフォルトのメール認証（1時間あたり 4 通までしか送信できない制限あり）を強化したいですか？
+
+    <Steps>
+      <Step title="Resend と Supabase の連携">
+        [Resend の Supabase 連携](https://resend.com/integrations/supabase)にアクセスします。
+      </Step>
+
+      <Step title="認証">
+        Supabase プロジェクトで認証します。
+      </Step>
+
+      <Step title="ドメイン設定">
+        使用するドメインと送信者名／メールアドレスを選択します。
+      </Step>
+
+      <Step title="SMTP">
+        Resend が自動で SMTP をセットアップし、Supabase のデフォルトのメールシステムを置き換えます。
+      </Step>
+
+      <Step title="カスタマイズ">
+        これで Supabase のダッシュボードから認証メールのテンプレートをカスタマイズできるようになります。
+      </Step>
+    </Steps>
+  </Step>
+
+  <Step title="最終調整とベストプラクティス">
+    ![Audience Resend Pn](/images/audience-resend.png)
+
+    * **エラー処理**: Lovable でビルドエラーが表示されても、誤検知の可能性があります。必ず実際のアプリ上で動作をテストしてください。
+    * **Supabase のロールバックについて**: Lovable でコードをロールバックしても、関連する Supabase のポリシーやマイグレーションは自動ではロールバックされません。必要に応じて手動で削除してください。
+    * **メール到達率向上のヒント**:
+      * レピュテーションを分離するためにサブドメインを使用しましょう。
+      * メールには必ずプレーンテキスト版も含めましょう。
+      * Resend のインサイトダッシュボードでメールのパフォーマンスをモニタリングしましょう。
+  </Step>
+
+  <Step title="完了です！🎉">
+    1時間もかからずに、次の機能を備えたモダンなCRMを作成できました:
+
+    * ランディングページとお問い合わせフォーム
+    * データベースを利用したリードの保存
+    * 自動メール確認
+    * リード管理用の管理ダッシュボード
+    * カスタムメール返信
+    * ニュースレター配信
+    * 認証とメールアドレスの確認
+  </Step>
+</Steps>
+
+<div id="want-to-go-further">
+  ## さらに発展させるには？
+</div>
+
+- Supabase の cron ジョブを使って **メールの予約送信** に対応する
+- リードステージに応じてメールを送信する **自動化フロー** を構築する
+- UI を改善してブランドへの信頼感とコンバージョンを高める
+
+<div id="resend-integration-faq">
+  ## Resend 連携に関するよくある質問
+</div>
+
+<AccordionGroup>
+  <Accordion title="Resend とは何ですか？">
+    Resend は、開発者向けに作られたメール API です。高い到達率、連携のしやすさ、そしてトランザクションメールやマーケティングメール送信のためのクリーンな開発体験に重点を置いています。
+  </Accordion>
+  <Accordion title="このチュートリアルを実施するのに有料の Resend プランは必要ですか？">
+    いいえ。**Resend の無料プラン**だけで、CRM のセットアップ全体を完了できます。この無料プランでは、認証済みドメインからのメール送信と、マーケティングメール用のコンタクトを最大 3,000 件までサポートします。
+  </Accordion>
+  <Accordion title="Resend でドメインを認証するにはどうすればよいですか？">
+    Resend で **Domains** に移動し、ドメインを追加します。DNS プロバイダー（例：Cloudflare、Namecheap）で追加するための DNS レコード（TXT、MX）が表示されます。追加後、**Verify** をクリックします。
+
+    <Tip>
+      送信ドメインの評価を分離するために、`updates.yourdomain.com` のようなサブドメインを使用することをおすすめします。
+    </Tip>
+  </Accordion>
+  <Accordion title="Resend から送ったメールが迷惑メールに入ってしまうのはなぜですか？">
+    よくある原因がいくつか考えられます：
+
+    - ドメインを認証していない
+    - プレーンテキスト版のメールがない
+    - `onboarding@resend.dev` のような汎用的な送信元を使っている
+    - ベストプラクティスに従っていない（例：マーケティングメールに配信停止リンクがない）
+
+    Resend の **Deliverability Insights** パネルを使って、具体的な改善提案を確認してください。
+  </Accordion>
+  <Accordion title="送信するメールのデザインはカスタマイズできますか？">
+    はい。[React Email](https://react.email/)（Resend チームが提供するオープンソースライブラリ）を使うことで、React コンポーネントを利用したスタイル付き・レスポンシブなメールをデザインできます。
+  </Accordion>
+  <Accordion title="Resend はマーケティングメールにも対応していますか？それともトランザクションメールだけですか？">
+    Resend は **両方** に対応しています：
+
+    - API または SDK を利用した **トランザクションメール**（確認、リセット、通知など）
+    - **Broadcast** 機能と **Audiences** を利用した **マーケティングメール**
+
+    ダッシュボードからキャンペーンの作成、プレビュー、トラッキングができます。
+  </Accordion>
+  <Accordion title="Resend でニュースレターの購読者を管理するにはどうすればよいですか？">
+    **Audiences** を利用します：
+
+    - コンタクトを手動で追加するか、CSV でインポートするか、API を使ってプログラムから追加します。
+    - 各 Audience には固有の ID があり、それを使って購読情報を紐付けられます。
+    - ユーザーは Resend に組み込まれた配信停止リンクを通じて、自動的に配信停止できます。
+  </Accordion>
+  <Accordion title="ニュースレターでダブルオプトインを設定できますか？">
+    デフォルトではできませんが、手動で実装することは可能です：
+
+    1. フォーム送信時に、最初の確認メールを送信します。
+    2. ユーザーにリンクをクリックしてもらいます。
+    3. クリック時に購読を確定し、そのユーザーを Resend の Audience に追加します。
+  </Accordion>
+  <Accordion title="Resend でメールフローのスケジュールや自動化はできますか？">
+    現時点ではできません。Resend は、まだドリップキャンペーンや自動シーケンスをサポートしていません。
+
+    <Tip>
+      回避策：
+
+      **Supabase Cron Jobs** を利用して、一定間隔で Resend のメールをトリガーするタスクをスケジュールしてください。
+    </Tip>
+  </Accordion>
+  <Accordion title="Resend を Supabase Auth と接続するにはどうすればよいですか？">
+    Resend が提供する公式の Supabase Integration を利用します：
+
+    1. Supabase プロジェクトに対して認証を行います。
+    2. ドメインと送信者名を指定します。
+    3. Resend が Supabase の認証メールを自動的に設定し、あなたの Resend アカウント経由で送信されるようにします。
+  </Accordion>
+  <Accordion title="Resend は配信停止をどのように処理しますか？">
+    Resend は配信停止処理を自動で行います：
+
+    - Broadcast メールには、配信停止リンクを必ず含める必要があります。
+    - ユーザーが配信停止すると、そのユーザーは対象の Audience から削除されます。
+    - これはメールのコンプライアンス要件（例：CAN-SPAM、GDPR）です。
+  </Accordion>
+</AccordionGroup>

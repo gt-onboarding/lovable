@@ -1,0 +1,264 @@
+---
+title: "Supabase-Integration"
+description: "Integriere ein vollwertiges Backend in deine Lovable-Anwendung mit Supabase."
+icon: "database"
+---
+
+Die **native** [Supabase](https://supabase.com/)‑**Integration** von Lovable ermöglicht es dir, sowohl dein Frontend‑UI als auch deine Backend‑Datenbank über eine einzige, benutzerfreundliche Chat‑Oberfläche zu verwalten. Das bedeutet: Du kannst die Screens deiner App entwerfen _und_ eine Cloud‑PostgreSQL‑Datenbank einrichten, ohne Lovable zu verlassen. Dieser einheitliche Ansatz macht leistungsstarke App‑Entwicklung für alle zugänglich – nicht‑technische Nutzer können sich auf die Anleitung von Lovable verlassen, während erfahrene Entwickler bei Bedarf auf erweiterte Supabase‑Funktionen zugreifen können.
+
+<div id="overview">
+  ## Übersicht
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/-sSOyO0FiPE?si=WljVA-E0YU4LObMY" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Supabase ist eine Open-Source-Alternative zu Firebase und stellt eine gehostete PostgreSQL-Datenbank mit Echtzeitfunktionen, Benutzerauthentifizierung, Dateispeicher und serverlosen Funktionen bereit. Wenn du Supabase mit deiner Lovable-App verbindest, erhältst du sofort ein produktionsreifes Backend, ohne eine Zeile Boilerplate-Code zu schreiben oder Server manuell zu konfigurieren. Das intuitive Web-Dashboard von Supabase macht es dir leicht, deine Daten und Benutzer zu verwalten, und die robuste SQL-Grundlage stellt sicher, dass du die volle Leistungsfähigkeit und Skalierbarkeit einer PostgreSQL-Datenbank nutzen kannst.
+
+<div id="key-features-unlocked-by-supabase-integration">
+  ### **Wichtige Funktionen, die durch die Supabase-Integration freigeschaltet werden:**
+</div>
+
+- **Datenbank (PostgreSQL)** – Speichere und frage deine App-Daten mit voller SQL-Unterstützung ab. Lovable kann basierend auf deinen Eingabeaufforderungen automatisch die benötigten Tabellen und das Schema erstellen.
+- **Benutzerauthentifizierung** – Verwalte Benutzerregistrierungen, Anmeldungen und Zugriffskontrolle sicher. Lovable kann mit einer einfachen Eingabeaufforderung vorkonfigurierte Authentifizierungsabläufe (E-Mail/Passwort usw.) zu deiner App hinzufügen.
+- **Dateispeicher** – Lade Bilder oder andere Dateien über Supabase Storage hoch und stelle sie bereit. Ideal für Benutzerprofilfotos, Uploads oder beliebige statische Medien, die deine App verarbeiten muss.
+- **Echtzeit-Updates** – Supabase kann Live-Datenänderungen an deine App streamen. Dadurch werden Funktionen wie Live-Chat, Aktivitätsfeeds oder kollaborative Dashboards möglich, die für alle Benutzer sofort aktualisiert werden.
+- **Edge Functions (Serverless)** – Führe benutzerdefinierte Backend-Logik (in JavaScript/TypeScript) auf der Infrastruktur von Supabase aus. Lovable erstellt und stellt diese Funktionen für Aufgaben wie das Versenden von E-Mails, das Verarbeiten von Zahlungen oder die Integration mit externen APIs bereit.
+
+<div id="why-use-lovables-supabase-integration">
+  ### **Warum die Supabase-Integration von Lovable verwenden?**
+</div>
+
+Mit Lovable musst du nicht mehr mit getrennten Tools für Frontend-Design und Backend-Setup jonglieren. Indem du einfach mit der KI von Lovable sprichst, kannst du dein UI erstellen _und_ die zugrunde liegende Datenbank sowie Serverfunktionen automatisch für dich anlegen lassen. Das bedeutet schnellere Entwicklung und weniger Integrationsprobleme. Wenn du Lovable zum Beispiel mit der Eingabeaufforderung „Add a user feedback form and save responses to the database“ anstößt, generiert Lovable das Formular-UI **und** richtet eine Supabase-Tabelle zum Speichern des Feedbacks ein – alles in einem Rutsch. Diese nahtlose End-to-End-Generierung ist eine einzigartige Stärke von Lovable: Sie befähigt Einsteiger, komplexe Apps zu bauen, und ermöglicht Power-Usern, deutlich schneller voranzukommen.
+
+<div id="getting-started-connecting-supabase-to-lovable">
+  ## Erste Schritte: Supabase mit Lovable verbinden
+</div>
+
+Das Verbinden eines Supabase-Backends mit deinem Lovable-Projekt ist unkompliziert. Du benötigst ein Supabase-Konto (der kostenlose Tarif reicht aus) und ein fertiges Lovable-Projekt. Falls du noch kein Supabase-Konto hast, kannst du dich auf der Supabase-Website registrieren – für den kostenlosen Tarif ist keine Kreditkarte erforderlich.
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/V_2aZCjrTJo" title="YouTube-Videoplayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<Steps>
+  <Step title="Ein Supabase-Konto erstellen">
+    Registriere ein neues Supabase-Konto [hier](https://app.supabase.com/sign-up) oder [melde dich an](https://app.supabase.com/sign-in), wenn du bereits eines hast.
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/g8CvOq3b-sg" title="YouTube-Videoplayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+  </Step>
+  <Step title="Ein neues Projekt in Supabase erstellen.">
+    Klicke auf **+ New Project**, fülle die erforderlichen Felder aus und warte ein paar Minuten, bis die Einrichtung abgeschlossen ist.
+
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/z6eDOn1613U?si=OhuL1AdNObVYFkbY" title="YouTube-Videoplayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+  </Step>
+  <Step title="Supabase mit Lovable verbinden">
+    <Steps>
+      <Step title="Die Supabase-Verbindung in Lovable starten.">
+        Geh im Projekt-Editor zu den Projekteinstellungen. Suche den Supabase-Tab unter **Integrations**. Klicke auf **Connect Supabase**. Lovable fordert dich auf, dich bei deinem Supabase-Konto anzumelden. Melde dich bei deinem Supabase-Konto an und autorisiere Lovable.
+      </Step>
+      <Step title="Autorisieren und ein Projekt auswählen oder erstellen.">
+        Als Nächstes wirst du aufgefordert, eine Supabase-**Organization** und ein **Project** auszuwählen, die mit deiner Lovable-App verknüpft werden sollen. Du kannst ein bestehendes Projekt auswählen oder direkt ein neues erstellen (der Lovable-Chat führt dich bei Bedarf durch das Anlegen eines neuen Supabase-Projekts).
+      </Step>
+      <Step title="Warten, bis die Konfiguration abgeschlossen ist.">
+        Nachdem du das Projekt ausgewählt hast, konfiguriert Lovable die Verbindung automatisch. Innerhalb weniger Sekunden solltest du eine Bestätigungsnachricht im Chat sehen (z. B. „✅ Supabase connected“). Ab diesem Zeitpunkt ist deine Lovable-App mit der Supabase-Datenbank verknüpft – bereit für die Nutzung von Authentifizierung, Datenspeicherung und weiteren Backend-Funktionen.
+      </Step>
+    </Steps>
+    <Tip>
+      Sowohl Lovable als auch Supabase bieten großzügige kostenlose Tarife für die Entwicklung. Wenn deine App wächst oder erweiterte Funktionen benötigt, brauchst du möglicherweise irgendwann kostenpflichtige Pläne für beide Dienste. Für den Moment kannst du jedoch ohne Kosten experimentieren.
+    </Tip>
+  </Step>
+</Steps>
+
+<div id="adding-user-authentication">
+  ## Hinzufügen einer Benutzerauthentifizierung
+</div>
+
+Eines der ersten Dinge, die du wahrscheinlich einrichten möchtest, ist eine Benutzerauthentifizierung (damit sich Nutzer in deiner App registrieren und anmelden können). Die Supabase-Integration von Lovable macht das Einrichten im Chat zum Kinderspiel.
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/LHpMUj-Jf_k" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<div id="email-and-password-basic-setup">
+  ### E-Mail und Passwort (Basis-Setup)
+</div>
+
+Sobald dein Projekt mit Supabase verbunden ist, kann Lovable Authentifizierungsseiten für dich generieren. Du kannst zum Beispiel einfach den Prompt **„Add login“** verwenden. Das erstellt in der Regel eine einfache Login-Seite (und den zugehörigen Registrierungsablauf) in deiner App, die mit dem Authentifizierungssystem von Supabase verknüpft ist.
+
+Nachdem Lovable die Login-UI hinzugefügt hat, hast du mehrere Möglichkeiten, Benutzer zu Testzwecken anzulegen:
+
+<Note>
+  Beispiel-Prompt:
+
+  ```
+  Add login
+  ```
+</Note>
+
+- **Über das Signup-Formular deiner App:** Verwende die neu hinzugefügte Oberfläche in deiner App, um einen Benutzer zu registrieren (dies kommuniziert mit Supabase, um das Konto zu erstellen).
+- **Über das Supabase-Dashboard:** Gehe zum Dashboard deines Supabase-Projekts, navigiere zu **Authentication \> Users** und füge manuell einen neuen Benutzer hinzu (E-Mail und Passwort). Das ist praktisch, um schnell ein Testkonto einzurichten.
+
+<Tip>
+  Für eine bequemere Entwicklung empfehlen wir, die E-Mail-Bestätigung in Supabase während deiner Tests zu deaktivieren. So können sich Benutzer sofort einloggen, ohne eine E-Mail verifizieren zu müssen. Öffne dazu dein Supabase-Dashboard und gehe zu **Authentication \> Settings (oder Providers) \> Email**, dann **deaktiviere die Anforderung „Confirm email“**. In deiner Produktionsumgebung kannst du die Bestätigungen später aus Sicherheitsgründen wieder aktivieren.
+</Tip>
+
+Lovable hat deine Lovable-App bereits so konfiguriert, dass authentifizierte Benutzer erkannt werden (zum Beispiel, um bestimmte Seiten nur für eingeloggte Benutzer zugänglich zu machen, falls sinnvoll). Du kannst das Aussehen und Verhalten der Login-/Signup-Seiten weiter mit dem Editor von Lovable oder mit Prompts anpassen. Die Supabase Integration 2.0 ermöglicht es dir sogar, zusätzliche Felder zu deinem Signup-Formular hinzuzufügen oder das Formular so zu gestalten, dass es zu deiner Marke passt.
+
+<div id="social-logins-eg-google">
+  ### Soziale Logins (z. B. Google)
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/W6-_0-Eekio?si=8WkxiJn0oe4wfSbe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
+Supabase unterstützt OAuth‑Anmeldungen wie Google, GitHub, Twitter und mehr. Du kannst diese auch in deine Lovable‑App integrieren:
+
+1. **Provider in Supabase aktivieren:** Navigiere in deinem Supabase‑Dashboard zu **Authentication \> Providers**. Du siehst eine Liste externer Login‑Provider. Aktiviere **Google** (zum Beispiel) und folge den Anweisungen, um die erforderliche OAuth Client ID und das Secret von Google bereitzustellen. _(Supabase führt dich durch den Prozess, diese Zugangsdaten in der Google Developer‑Konsole zu erhalten.)_ Speichere die Einstellungen – dein Supabase‑Projekt weiß nun, wie es Google‑Logins handhaben soll.
+2. **Das UI deiner Lovable‑App aktualisieren:** Als Nächstes kannst du Lovable per Eingabeaufforderung anweisen, eine Social‑Login‑Option hinzuzufügen. Zum Beispiel: **„Füge der Login‑Seite einen ‚Mit Google anmelden‘‑Button hinzu.“** Lovable passt dann die Authentifizierungsseite an, fügt einen Google‑Anmeldebutton hinzu und ergänzt den notwendigen Code, um den OAuth‑Flow über Supabase zu starten.
+
+Sobald das erledigt ist, können Nutzer deiner App auf „Mit Google anmelden“ klicken, werden zur Authentifizierung zu Google weitergeleitet und anschließend als angemeldete Nutzer zu deiner App zurückgeführt. Du kannst andere Provider (GitHub, Facebook usw.) auf ähnliche Weise aktivieren – denke nur daran, jeden einzelnen in Supabase zu konfigurieren und anschließend dein Lovable‑UI entsprechend anzupassen.
+
+<div id="managing-data-with-supabase">
+  ## Verwalten von Daten mit Supabase
+</div>
+
+Über die Authentifizierung hinaus besteht der Kern der meisten Apps darin, Daten zu lesen und zu schreiben. Mit Lovable und Supabase kannst du Datenbanktabellen erstellen und sie mit deinem UI verbinden, ohne die Chat‑Eingabeaufforderung zu verlassen.
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/V5LdDEuCli4" title="YouTube-Video-Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+<div id="creating-database-tables-via-lovable">
+  ### Erstellen von Datenbanktabellen über Lovable
+</div>
+
+Sobald du Supabase verbunden hast und Daten dauerhaft speichern möchtest, kannst du Lovable entsprechend anweisen, und Lovable koordiniert die Datenbankeinrichtung für dich. Der Ablauf sieht typischerweise so aus:
+
+<Steps>
+  <Step title="Beschreibe das Feature und die benötigten Daten">
+    Bitte im Lovable-Chat um ein Feature, das Datenspeicherung beinhaltet. Du könntest zum Beispiel sagen: **„Füge ein Feedback-Formular hinzu und speichere Antworten in einer Datenbanktabelle.“** Sei so klar wie möglich, welche Daten du speichern möchtest (z.&nbsp;B. Benutzerfeedback mit Nachricht und Bewertung oder einen Inventarartikel mit Name, Preis usw.). Lovable verwendet diese Informationen, um zu bestimmen, welche Datenbankstruktur erforderlich ist.
+  </Step>
+  <Step title="Überprüfe das generierte SQL-Snippet">
+    Die KI von Lovable schlägt Aktualisierungen deiner App vor. Da deine Anfrage die Speicherung von Daten beinhaltet, erzeugt Lovable außerdem ein SQL-Schema-Snippet – im Wesentlichen die Befehle zum Erstellen der benötigten Tabelle(n) oder Spalten in Supabase. Es könnte zum Beispiel etwas sagen wie: _„Ich erstelle eine Tabelle `feedback` mit den Spalten `id`, `message` und `rating`“_ und dir den entsprechenden SQL-Code zur Verfügung stellen. Dieses Snippet erscheint im Chat oder in der Seitenleiste, damit du es kopieren kannst.
+  </Step>
+  <Step title="Führe das SQL in Supabase aus">
+    Öffne dein Supabase-Dashboard und gehe zum **SQL Editor**. Füge das SQL-Snippet von Lovable ein und führe es aus; dadurch wird die neue Tabelle (oder eine bestehende Tabelle) in deiner Datenbank erstellt bzw. geändert. Du kannst im Supabase **Table Editor** überprüfen, dass die Tabelle nun mit den angegebenen Spalten existiert.
+  </Step>
+  <Step title="Bestätige und lass Lovable die Integration abschließen">
+    Zurück in Lovable bestätigst du, dass du das SQL ausgeführt hast (der Chat fragt möglicherweise nach einer Bestätigung, oder du kannst Lovable einfach „fertig“ sagen oder auf eine bereitgestellte Bestätigung klicken). Lovable schließt dann die Integration ab: Es aktualisiert das UI deiner App, um Formulareingaben, Listen oder andere Komponenten mit der neuen Supabase-Tabelle zu verknüpfen. In unserem Beispiel ist das Feedback-Formular in deiner App jetzt verbunden – wenn ein Benutzer Feedback sendet, wird es in der `feedback`-Tabelle gespeichert, und du kannst diese Einträge auch abrufen und anzeigen.
+  </Step>
+</Steps>
+
+Das war’s\! Du musstest kein Datenbankschema manuell entwerfen oder Backend-Code schreiben – Lovable und Supabase haben alles anhand deiner Beschreibung übernommen. Du kannst diesen Prozess für jedes neue Daten-Feature wiederholen (Blogposts, Kommentare, Produkte usw.).
+
+Wenn du zum Beispiel möchtest, dass Benutzer in deiner App Artikel veröffentlichen können, könntest du eine Eingabeaufforderung verwenden wie: **„Ermögliche es Benutzern, Beiträge mit einem Titel und Inhalt zu erstellen und speichere diese in der Datenbank.“** Lovable würde eine `posts`-Tabelle generieren (mit Feldern für Titel, Inhalt, Autor, Zeitstempel usw.), dir das SQL geben, um sie zu Supabase hinzuzufügen, und anschließend die Frontend-Formulare und -Seiten mit dieser Tabelle verbinden.
+
+<Note>
+  Das Dashboard von Supabase bietet eine umfangreiche Oberfläche zur Verwaltung deiner Daten. Du kannst Tabellenzeilen in einer tabellenkalkulationsähnlichen UI anzeigen und bearbeiten, Beziehungen zwischen Tabellen definieren und sogar Daten aus CSV oder Excel importieren. Unter der Haube ist alles PostgreSQL – das bedeutet, du kannst komplexe Abfragen ausführen oder bei Bedarf SQL-Funktionen nutzen. Supabase stellt in seinem SQL-Editor sogar einen **AI SQL Assistant** bereit, der dir beim Schreiben von Abfragen hilft, wenn du nicht mit SQL vertraut bist. Das kann für erweiterte Analysen oder Fehlersuche sehr hilfreich sein.
+</Note>
+
+<div id="file-storage-images-media">
+  ### Dateispeicher (Bilder & Medien)
+</div>
+
+Wenn deine Lovable-App Dateiuploads verarbeiten muss (zum Beispiel Profilbilder von Nutzern, Anhänge oder andere Medien), bist du mit der Supabase-Integration bestens ausgestattet. Supabase bietet einen **Storage**-Dienst, um Dateien (Bilder, Videos, PDFs etc.) bequem direkt neben deiner Datenbank zu hosten.
+
+Wenn du in deiner Lovable-App eine **Upload**-Komponente oder eine Bild-Upload-Funktion hinzufügst, nutzt Lovable im Hintergrund Supabase Storage. Hochgeladene Dateien werden in einem Storage-Bucket in deinem Supabase-Projekt gespeichert, und du erhältst eine URL oder Referenz, um die Datei später anzuzeigen oder herunterzuladen.
+
+Standardmäßig erlaubt der kostenlose Tarif von Supabase Uploads von Dateien bis zu **50 MB**. Das reicht für die meisten Bilder oder kurzen Videos aus. Wenn deine App größere Dateien verarbeiten muss, unterstützen die kostenpflichtigen Pläne von Supabase größere Uploads (einschließlich **wiederaufnehmbarer Uploads** für sehr große Dateien). Du kannst Dateien in Ordnern (Buckets) organisieren und Zugriffsberechtigungen bei Bedarf über das Supabase-Dashboard verwalten.
+
+<Note>
+  Angenommen, deine App hat Nutzerprofile und du möchtest, dass Nutzer ein Profilbild hinzufügen können. Du könntest Lovable mit folgender Eingabeaufforderung steuern: _„Add a profile picture upload to the account settings page.“_ Lovable erstellt dann die UI zum Hochladen eines Bildes. Dank der Supabase-Integration wird die Datei, die ein Nutzer hochlädt, in deinem Supabase Storage gespeichert (in einem Bucket, z. B. `public/avatar-images`), und Lovable kümmert sich darum, diese Bild-URL abzurufen, um das Profilbild in deiner App anzuzeigen. All das geschieht, ohne dass du irgendeinen Code für die Speicherverwaltung schreiben musst.
+</Note>
+
+<div id="storing-secrets-api-keys-config">
+  ## Geheimnisse speichern (API-Schlüssel & Konfiguration)
+</div>
+
+Viele Anwendungen benötigen geheime Schlüssel oder API-Zugangsdaten, um sich mit Diensten von Drittanbietern zu verbinden – zum Beispiel Stripe für Zahlungen oder OpenAI für KI-Funktionen. Wenn Supabase mit deinem Projekt verbunden ist, bietet Lovable eine sichere Möglichkeit, diese Geheimnisse zu verwalten und zu verwenden.
+
+Lovable erkennt automatisch, wenn ein Feature ein Geheimnis benötigt, und zeigt dir eine UI an, in der du die erforderlichen Werte eingeben kannst.
+
+Diese Geheimnisse werden sicher im Secret-Manager für Supabase Edge Functions für dein Projekt gespeichert. Sie werden verschlüsselt und sicher im Backend aufbewahrt. Wenn du Edge Functions bereitstellst (siehe nächster Abschnitt), können sie auf diese Geheimnisse zugreifen, um sich mit externen Diensten zu verbinden.
+
+<Tip>
+  Wenn du zum Beispiel Stripe für Zahlungen integrierst, würdest du deinen Stripe Secret Key als Geheimnis speichern. Wenn Lovable eine Zahlungsabwicklungsfunktion in Supabase bereitstellt, wird dieser Schlüssel automatisch aus dem Secret Store eingebunden, damit die Funktion sich bei Stripe authentifizieren kann. So musst du niemals Geheimnisse hart im Code in deiner App hinterlegen und verhinderst, dass sie öffentlich offengelegt werden.
+</Tip>
+
+<div id="backend-logic-with-edge-functions">
+  ## Backend-Logik mit Edge Functions
+</div>
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/p_hKIDlxXp0" title="YouTube-Videoplayer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+
+Manchmal braucht deine App benutzerdefinierte Backend-Logik, die über grundlegende Daten-CRUD (Create, Read, Update, Delete) hinausgeht. **Supabase Edge Functions** sind serverlose Funktionen (ähnlich wie AWS Lambda), mit denen du Code im Backend ausführen kannst, der durch Ereignisse oder Anfragen ausgelöst wird. Durch die Integration von Lovable kannst du das gewünschte Backend-Verhalten in natürlicher Sprache beschreiben, und Lovable schreibt und stellt den notwendigen Code für eine Edge-Funktion für dich in Supabase bereit.
+
+Typische Anwendungsfälle für Edge Functions in Lovable sind:
+
+- **Verwendung von KI-Services:** z. B. Verarbeitung einer Eingabe mit OpenAI- oder Anthropic-APIs (wobei der API-Schlüssel wie oben beschrieben als Secret gespeichert wird).
+- **Versand von E-Mails oder Benachrichtigungen:** z. B. Versand einer Willkommens-E-Mail, wenn sich ein Nutzer registriert, über eine E-Mail-API wie Resend.
+- **Zahlungsabwicklung:** z. B. Erstellen einer Checkout-Session oder Abwickeln einer Bestellung mit der API von Stripe.
+- **Geplante Aufgaben:** z. B. stündliche/tägliche Bereinigungs- oder Zusammenfassungsjobs (Supabase Edge Functions können zeitgesteuert ausgelöst werden).
+- **Komplexe Berechnungen oder Integrationen von Drittanbietern:** jeglicher Code, den du nicht clientseitig ausführen möchtest, kann in einer Edge Function laufen.
+
+Um eine Backend-Funktion hinzuzufügen, beschreibe einfach im Lovable-Chat, was du brauchst. Zum Beispiel: _„Wenn ein Nutzer das Feedback-Formular abschickt, analysiere den Text mit OpenAI und speichere einen Sentiment-Score.“_ Lovable generiert dann den Code für diese Logik als Supabase Edge Function (in diesem Fall mit Aufruf der OpenAI-API) und stellt sie in deinem Supabase-Projekt bereit. Außerdem aktualisiert Lovable deine App so, dass diese Funktion zum richtigen Zeitpunkt aufgerufen wird (z. B. beim Absenden des Formulars) und die Antwort verarbeitet wird.
+
+Du kannst deine Edge Functions im Supabase-Dashboard unter **Functions** finden und überwachen. Jede Funktion hat Protokolle, die jüngste Ausführungen und alle Ausgaben oder Fehler anzeigen. Die Supabase-Integration 2.0 von Lovable verbessert diese Erfahrung, indem sie diese Protokolle bei Problemen automatisch ausliest – wenn deine Funktion einen Fehler ausgibt, zeigt dir Lovable die Fehlermeldung im Chat an, um dir bei der Fehlerbehebung zu helfen. Natürlich kannst du die Supabase-Protokolle jederzeit selbst prüfen, um mehr Details zu erhalten oder einfach zur Kontrolle.
+
+<Warning>
+  **Bevor du live gehst:** Die standardmäßigen Sicherheitsregeln von Supabase sind für die Entwicklung relativ großzügig, du solltest jedoch **Row Level Security (RLS)**-Richtlinien einrichten, um deine Daten in der Produktion zu schützen. Mit RLS kannst du definieren, wer jede einzelne Zeile in deinen Datenbanktabellen lesen oder schreiben darf (zum Beispiel sicherstellen, dass Nutzer nur auf ihre eigenen Daten zugreifen können). Lovable kann dir helfen, grundlegende RLS-Richtlinien zu generieren, wenn du es entsprechend aufforderst (zum Beispiel: „Wende Sicherheitsrichtlinien an, damit Nutzer nur ihr eigenes Feedback bearbeiten können“). Überprüfe und teste diese Richtlinien aber immer im Supabase-Dashboard unter **Auth \> Policies**. Eine saubere Sicherheitskonfiguration ist entscheidend, bevor du echte Nutzer in deine App einlädst.
+</Warning>
+
+<div id="faq">
+  ### Häufig gestellte Fragen
+</div>
+
+<AccordionGroup>
+  <Accordion title="Was genau bringt mir die Supabase-Integration?">
+    Es gibt deiner Lovable-App ein vollständig verwaltetes Backend. Ohne dieses Backend kann Lovable zwar weiterhin dein UI erstellen, aber du hättest keinen Ort, um Daten zu speichern oder Benutzer direkt out-of-the-box zu verwalten. Wenn Supabase verbunden ist, kann Lovable Benutzerkonten (Authentifizierung) anlegen, Daten in einer Datenbank speichern und abrufen, Dateien hochladen, serverseitigen Code ausführen und mehr – alles automatisch. Im Grunde stellt Supabase die Datenbanken und Server hinter deiner App bereit, und Lovable steuert sie über Eingabeaufforderungen.
+  </Accordion>
+
+  <Accordion title="Brauche ich separate Accounts für Lovable und Supabase?">
+    Ja. Lovable und Supabase sind zwei separate Plattformen. Du benötigst zusätzlich zu deinem Lovable-Account einen Account bei Supabase (um deine Datenbank zu hosten). Die gute Nachricht ist, dass beide kostenlose Tarife haben, sodass du kostenlos starten kannst. Denk nur daran, dass, wenn du später für mehr Nutzung oder Features ein Upgrade vornimmst, die Abrechnung für jeden Dienst getrennt erfolgt.
+  </Accordion>
+
+  <Accordion title="Wie kann ich Lovable mit Supabase verbinden?">
+    1. Wechsle im Lovable-Editor zum Bereich **Integrations**.
+    2. Klicke auf **Connect to Supabase** und folge den Authentifizierungsschritten.
+    3. Erstelle bei Bedarf ein neues Supabase-Projekt in Lovable.
+    4. Lovable generiert automatisch das erforderliche Datenbankschema und verbindet es mit deinem Projekt.
+  </Accordion>
+
+  <Accordion title="Kann ich meine mit Supabase verbundene Lovable App in externe Automatisierungstools integrieren?">
+    Auf jeden Fall. Wenn du Lovable + Supabase verwendest, liegen deine Daten in der Datenbank von Supabase, und Supabase stellt außerdem automatisch generierte RESTful APIs für deine Tabellen (sowie eine Client‑Bibliothek) bereit. Das bedeutet, du kannst Tools wie Zapier, [Make.com](http://Make.com) oder jeden anderen Dienst nutzen, um über HTTP‑Anfragen mit den Backend‑Daten deiner App zu interagieren. Zapier könnte zum Beispiel Datensätze in einer Supabase‑Tabelle deiner App abrufen oder hinzufügen. Zusätzlich kannst du benutzerdefinierte API‑Endpunkte mit Supabase Edge Functions erstellen (wobei dich Lovable bei der Erstellung unterstützen kann), um komplexere Workflows auszulösen. Kurz gesagt: Die Integration mit Automatisierungsdiensten von Drittanbietern ist problemlos möglich – sie erfordert möglicherweise nur etwas Konfiguration mit den API‑Schlüsseln oder Webhooks von Supabase.
+  </Accordion>
+
+  <Accordion title="Wie gut lässt sich Supabase skalieren, wenn meine App wächst?">
+    Supabase basiert auf **PostgreSQL**, das große Datenmengen und hohen Traffic verarbeiten kann. Von Haus aus kann deine kostenlose Datenbank eine ordentliche Last bewältigen (Millionen von Zeilen, mehrere Verbindungen). Wenn deine Anforderungen wachsen, kannst du deinen Supabase‑Plan für mehr Speicher, Durchsatz und Funktionen upgraden. Viele Produktiv‑Apps laufen vollständig auf Supabase – du bist also in guten Händen. Achte nur auf die Nutzungslimits der kostenlosen Tarifstufe (die Supabase auf ihrer Website dokumentiert) und plane ein Upgrade ein, wenn du dich diesen Limits näherst.
+  </Accordion>
+
+  <Accordion title="Wie kann ich Echtzeitfunktionen wie Chat oder Live‑Feed in meine App einbauen?">
+    Supabase bietet integrierte Echtzeit-Abonnements für deine Datenbank. Das bedeutet, dass deine App auf Änderungen (Einfügen, Aktualisieren, Löschen) in bestimmten Tabellen reagieren kann, sobald sie auftreten. Um das zu nutzen, entwirfst du die Funktion deiner Lovable-App wie gewohnt (z. B. einen Chatraum, der Nachrichten in eine `messages`-Tabelle schreibt). Lovable kennt die Echtzeit-Funktionen von Supabase und kann daher das Frontend so einrichten, dass es die Änderungen dieser Tabelle abonniert. In der Praxis heißt das: Nachdem du eine Tabelle für beispielsweise Chatnachrichten erstellt hast, kannst du Lovable mit der Eingabeaufforderung **„enable real-time updates for the chat“** anweisen, und es wird dabei die Echtzeit-API von Supabase im Hintergrund verwenden. Nutzer:innen sehen dann neue Nachrichten in Echtzeit erscheinen, ohne die Seite aktualisieren zu müssen. Das funktioniert für jedes Szenario, in dem Live-Updates nützlich sind (Kommentare, Benachrichtigungen, Dashboards usw.).
+  </Accordion>
+
+  <Accordion title="Gibt es ein Limit für Dateiuploads in Supabase Storage?">
+    Im kostenlosen Tarif begrenzt Supabase die Größe einzelner Datei-Uploads auf **50 MB**. Das deckt die meisten Anwendungsfälle wie Bilder, Audio oder kurze Videos ab. Wenn du größere Dateien verarbeiten musst (z. B. lange Videos oder große Datensätze), ermöglicht ein Upgrade auf einen kostenpflichtigen Tarif größere und sogar wiederaufnehmbare Uploads. Beachte außerdem, dass es ein gesamtes Speicherlimit pro Projekt gibt (z. B. wie viele GB Speicher du insgesamt nutzen kannst), das sich mit höheren Tarifen erhöht.
+  </Accordion>
+
+  <Accordion title="Wie konfiguriere ich die Authentifizierung in Supabase?">
+    Lovable richtet die Authentifizierung automatisch ein, aber du musst möglicherweise Folgendes tun:
+
+    * Gehe zu **Supabase-Dashboard &gt; Authentication**.
+    * Aktiviere **Email Sign-in/Sign-up**.
+    * Deaktiviere die E-Mail-Bestätigung für einfacheres lokales Testen.
+  </Accordion>
+
+  <Accordion title="Kann ich eine Supabase-Datenbank für mehrere Lovable‑Projekte verwenden?">
+    Ja, das kannst du. Du kannst in Lovable mehrere Frontend-Apps erstellen, die alle mit demselben Supabase-Projekt verbunden sind (und somit dieselbe Datenbank und Authentifizierung nutzen). Das ist ein fortgeschrittener Anwendungsfall, aber möglich – zum Beispiel eine Haupt-App und ein Admin-Dashboard als separate Lovable-Projekte, die eine gemeinsame Datenbank verwenden. Wenn du Supabase in jedem Projekt verbindest, wähle einfach dasselbe Supabase-Projekt aus. Denk daran, dass all diese Apps dieselben Daten lesen und schreiben, also berücksichtige das in deinem Design.
+  </Accordion>
+
+  <Accordion title="Wie kann ich Änderungen an meiner Datenbank testen, ohne die Live-App zu beeinträchtigen?">
+    Im Moment verbindet sich jedes Lovable-Projekt mit genau einem Supabase-Projekt, und Lovable hat keinen integrierten Staging-Modus. Wenn du eine sichere Testumgebung zum Experimentieren möchtest, bietet Supabase ein Feature namens **Branching**, mit dem du eine temporäre Kopie deiner Datenbank (ähnlich wie ein Git-Branch) erstellen kannst, um Änderungen zu testen. Du kannst ein separates Lovable-Projekt mit einem Branch oder einem Duplikat deiner Datenbank zum Testen verbinden. Allgemein solltest du bei ernsthaften Projekten vorsichtig sein, wenn du Schemaänderungen an einer Live-App vornimmst – erstelle zum Beispiel ein Backup oder nutze Branching und führe die Änderungen dann zusammen, wenn sie bereit sind. Die Integration von Lovable entwickelt sich weiter, daher könnten zukünftige Updates noch nahtlosere Staging-Workflows einführen.
+  </Accordion>
+
+  <Accordion title="Unterstützt mich Supabase oder Lovable dabei, benutzerdefiniertes SQL oder eigene Datenbanklogik zu schreiben?">
+    Ja. Die Weboberfläche von Supabase enthält einen **AI SQL Assistant**, der SQL-Abfragen aus natürlicher Sprache generieren kann. Wenn du also eine komplexe Abfrage benötigst oder dich mit dem Schreiben von SQL nicht wohlfühlst, kannst du dieses Tool im Supabase-SQL-Editor verwenden. Auf der Lovable-Seite musst du in der Regel überhaupt kein SQL von Hand schreiben – die KI übernimmt den Großteil der Schemaerstellung und Abfragen für dich. Wenn du aber ein fortgeschrittener Nutzer bist und etwas Individuelles umsetzen möchtest, kannst du jederzeit die GitHub-Integration von Lovable nutzen, um den Code zu prüfen oder zu bearbeiten oder bei Bedarf rohes SQL direkt auf der Datenbank auszuführen.
+  </Accordion>
+
+  <Accordion title="Wie verwalte ich Zahlungen in meiner Lovable-App?">
+    Zahlungen werden über Integrationen wie Stripe abgewickelt, die du in Verbindung mit Supabase Edge Functions verwenden kannst. Du könntest Lovable zum Beispiel mit der Eingabeaufforderung „Füge einen Checkout-Button hinzu und verarbeite Zahlungen mit Stripe.“ anweisen. Lovable würde dann eine Edge-Funktion erstellen, die mit der Stripe-API kommuniziert (unter Verwendung deines als Secret gespeicherten Stripe-Secret-Keys) und möglicherweise die Transaktionsdetails in deiner Supabase-Datenbank speichert. Die Benutzeroberfläche würde aktualisiert, um den Checkout-/Zahlungs-Button aufzunehmen. Im Wesentlichen stellt Supabase die Umgebung (Edge Functions, Datenbank) zur Implementierung von Zahlungen bereit, und Lovable kann das Grundgerüst des Codes für dich erstellen. Weitere Details findest du auch im Stripe &amp; Payments Integration Guide in der Lovable-Dokumentation, der die Einrichtung von Stripe im Speziellen abdeckt.
+  </Accordion>
+</AccordionGroup>

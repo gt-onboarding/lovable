@@ -1,0 +1,56 @@
+---
+title: 'Uso de paquetes npm'
+description: 'Aprende cómo aprovechar los paquetes npm para ampliar tus aplicaciones de Lovable con funciones avanzadas'
+icon: 'box'
+---
+
+Aunque Lovable es potente por sí solo y permite a los usuarios crear aplicaciones web sofisticadas, puedes aprovechar los paquetes npm para incorporar funciones aún más avanzadas. Estos paquetes te ayudan a crear aplicaciones aún más complejas y ricas en funcionalidades con facilidad.
+
+<Info>
+  **¿Qué es npm?**
+
+  npm (Node Package Manager) es un gestor de paquetes para JavaScript que permite a los desarrolladores compartir y reutilizar código. Aloja miles de paquetes, es decir, fragmentos de código reutilizables que puedes integrar fácilmente en tus proyectos para ampliar su funcionalidad.
+
+  Puedes acceder a él en [npmjs.com](https://www.npmjs.com/).
+</Info>
+
+<div id="using-npm-packages-for-advanced-features">
+  ## Uso de paquetes npm para funciones avanzadas
+</div>
+
+Supongamos que quieres crear una herramienta que te permita organizar tus tareas en diferentes tableros Kanban, similar a muchas herramientas populares de gestión de proyectos. Puedes dar una instrucción a Lovable para que cree esta herramienta desde cero, pero podría resultar más lento y más difícil alcanzar la funcionalidad que buscas.
+
+En cambio, puedes usar paquetes npm para simplificar y acelerar el proceso. Por ejemplo, el paquete [@hello-pangea/dnd](https://www.npmjs.com/package/@hello-pangea/dnd) proporciona una sólida funcionalidad de arrastrar y soltar. Al usar este paquete, puedes crear fácilmente un tablero Kanban donde los usuarios puedan añadir nuevas tarjetas, moverlas dentro de las columnas y reordenarlas.
+
+<CodeGroup>
+  ```bash Example prompt
+  Use the hello-pangea/dnd npm package to add drag-and-drop functionality to my Kanban board app. 
+  Ensure users can add new cards, move them within columns, and reorder them.
+  ```
+</CodeGroup>
+
+Esta instrucción indica a Lovable que integre el paquete en tu proyecto, lo que facilita lograr la funcionalidad deseada. Dependiendo de otros requisitos, el resultado podría verse algo así.
+
+<Frame>
+  <img src="/assets/npm-example-using-pangea-dnd.png" alt="Lovable con funcionalidad Kanban de arrastrar y soltar implementada" />
+</Frame>
+
+<div id="quality-and-responsibility">
+  ## Calidad y responsabilidad
+</div>
+
+Es importante tener en cuenta que, si bien los paquetes de npm pueden mejorar significativamente tus proyectos, Lovable no puede garantizar la calidad ni la fiabilidad de estos paquetes de terceros.
+
+La funcionalidad y el rendimiento de los paquetes de npm son responsabilidad del usuario final, y es esencial probarlos y validarlos exhaustivamente dentro de tu aplicación.
+
+<div id="increasing-your-chances-of-success">
+  ### Aumentar tus probabilidades de éxito
+</div>
+
+Aquí tienes algunas estrategias que te ayudarán a evaluar la legitimidad y la calidad de los paquetes de npm antes de integrarlos en tus proyectos.
+
+* **Número de descargas** - Revisa el número de descargas en la página de npm del paquete. Un número alto de descargas normalmente indica que el paquete es ampliamente utilizado y cuenta con la confianza de la comunidad.
+
+* **Estado de mantenimiento y actualizaciones recientes** - Consulta el repositorio del paquete para ver si se mantiene de forma activa. Commits frecuentes, actualizaciones recientes y una buena respuesta a los issues son buenos indicadores de un paquete activamente mantenido. Asegúrate de que el paquete reciba actualizaciones recientes. Un paquete que se actualiza con regularidad es más probable que sea compatible con las últimas versiones de las dependencias y con las prácticas de seguridad actuales.
+
+* **Reseñas y comentarios de la comunidad** - Muchos paquetes de npm se alojan en GitHub o en repositorios de código similares. Lee también las reseñas, discusiones y comentarios de otros desarrolladores en esos sitios. Además, foros específicos para desarrolladores pueden ofrecer información sobre la fiabilidad del paquete y posibles problemas.

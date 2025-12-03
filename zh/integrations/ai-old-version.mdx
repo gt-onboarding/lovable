@@ -1,0 +1,181 @@
+---
+title: "AI 集成"
+description: "如何将 AI 服务集成到 Lovable 项目中"
+icon: "wand-magic-sparkles"
+seo:
+  indexing: false
+---
+
+Lovable 让你可以轻松将 AI 服务集成到你的 Web 应用中。无论你是想构建一个 AI 驱动的落地页、文本生成工具，还是一个完整的 SaaS 应用，Lovable 提供与 
+[**OpenAI**](https://platform.openai.com/)、[**Groq**](https://console.groq.com/keys)、[**Claude**](https://www.anthropic.com/api)、[**Deepseek**](https://api-docs.deepseek.com/) 和 [**Mistral**](https://docs.mistral.ai/api/) 等服务的内置集成，使你无需编写后端代码即可实现。下面是具体操作方法： 
+
+<Steps>
+  <Step title="选择你需要的 AI 功能">
+    在开始构建之前，先明确你希望 AI 完成什么任务：
+
+    - 生成或增强文本（例如邮件写作、推文生成器）
+    - 对内容进行分类或总结
+    - 分析图片
+    - 个性化回复
+    - 集成到特定的 LLM API 中
+  </Step>
+  <Step title="先用提示来规划">
+    使用 Lovable 的聊天界面，用简单的语言描述你想要的功能。例如：
+
+    ```
+    Build an email enhancement tool. The user should write an email, then click buttons to make it more professional, concise, or friendly using Groq API.
+    ```
+
+    Lovable 会搭好 UI 框架、推荐组件，并让你快速预览应用。
+  </Step>
+  <Step title="使用 Supabase 连接后端">
+    AI 功能通常需要后端逻辑。Supabase 提供：
+
+    - 用于存储用户数据的数据库
+    - 用于登录/注册的身份验证
+    - 用于安全调用外部 API 的 Edge Functions
+
+    <Tip>
+      在项目早期就设置好 Supabase，避免 UI 和后端不匹配。
+    </Tip>
+  </Step>
+  <Step title="使用 Edge Functions 进行 AI 调用">
+    为了安全地调用 AI API，在 Lovable 中创建一个 Edge Function：
+
+    - 通过机密信息表单将你的 API 密钥添加到 Supabase
+    - 让 Lovable 生成 Edge Function 代码
+    - 如果你的 API 返回结构化数据（例如卡路里、营养构成、推文串），请确保使用 function calling
+
+    **提示示例：**
+
+    ```
+    Use GPT-4 and function calling to extract nutrition info from a meal description. Save the results to the backend.
+    ```
+
+    <Tip>
+      使用类似下面、包含已定义字段的结构来设计你的 OpenAI function calling schema：
+
+      ```
+      {
+        "name": "extract_nutrition",
+        "parameters": {
+          "calories": "number",
+          "protein": "number",
+          "carbs": "number",
+          "fat": "number"
+        }
+      }
+      ```
+    </Tip>
+  </Step>
+  <Step title="让它变得可交互">
+    添加按钮或表单动作，用于：
+
+    - 将文本提交给 AI
+    - 上传图片
+    - 在不同模式之间切换（简洁风格 vs 友好语气）
+
+    Lovable 允许你：
+
+    - 将函数绑定到按钮
+    - 为交互添加动画效果
+    - 通过最少的提示展示实时结果
+
+    <Tip>
+      使用截图，以及类似“make this smoother”这样的短语来引导设计。
+    </Tip>
+    <Tip>
+      **高级体验设计提示：** 实现 AI 回复的并排实时预览。使用左右布局块或选项卡，让用户可以对比不同输出。
+    </Tip>
+  </Step>
+  <Step title="使用外部服务（可选）">
+    一些常见的 AI 工作流集成包括：
+
+    - **Resend** – 在表单提交后发送邮件
+    - **Groq API** – 极快的 LLM 推理
+    - **Stripe** – 为 AI 工具添加付费访问门槛
+    - **Replicate** – 生成或转换图片
+
+    **提示示例：**
+
+    ```
+    When a user submits the contact form, send an email using Resend and store the message in Supabase.
+    ```
+
+    <Tip>
+      **支付提示：** 使用 Stripe 订阅锁定高级 AI 功能。使用类似下面的条件流程：
+
+      ```
+      if (user.isPaid) { showAIFeature(); } else { redirectToCheckout(); }
+      ```
+    </Tip>
+  </Step>
+  <Step title="测试并迭代">
+    - 使用预览链接测试移动端响应式效果
+    - 在多次 API 调用场景下检查性能
+    - 分享你的项目以获取反馈
+    - 使用聊天记录来回滚更改或重构
+  </Step>
+  <Step title="发布并推广">
+    当你准备就绪时：
+
+    - 一键部署
+    - 使用 [Lovable Launch](https://docs.lovable.dev/features/launched) 获取曝光
+    - 在 meta 面板中添加 OG 标签和 SEO 标题/描述
+    - 将你的应用提交到 Product Hunt、各类社区和社交媒体
+  </Step>
+</Steps>
+
+<div id="debug-and-improve-prompts">
+  ## **调试并改进提示**
+</div>
+
+* 在系统消息中尽可能具体：&quot;You are a helpful nutritionist.&quot;
+* 通过模拟输入来测试函数调用。
+* 在边缘函数中使用 `console.log()` 来跟踪逻辑。
+* 当你让 Lovable 帮你调试布局时，使用截图。
+
+**提示技巧：** 如果 AI 无法利用你的上下文（例如用户的餐食），可以这样说：
+
+```
+确保将用户的所有餐食信息都包含在发送给 GPT-4 的提示中。
+```
+
+
+<div id="troubleshooting">
+  ### 疑难解答
+</div>
+
+<AccordionGroup>
+  <Accordion title="AI 提示中缺少数据？">
+    确保你包含了例如用户历史或之前输入等上下文。
+  </Accordion>
+  <Accordion title="UI 没有更新？">
+    使用仅聊天模式，一次调试一个步骤。
+  </Accordion>
+  <Accordion title="Groq/OpenAI 流式传输有问题？">
+    确保所用接口支持 `stream: true`。
+  </Accordion>
+  <Accordion title="图片上传不起作用？">
+    使用文件输入并转换为 base64，或者通过 Supabase Storage 上传。
+  </Accordion>
+  <Accordion title="边缘函数静默失败？">
+    在 Lovable 的函数编辑器或 Supabase 控制面板中查看边缘函数日志。
+  </Accordion>
+</AccordionGroup>
+
+<div id="example-projects-built-with-ai-integration">
+  ## 使用 AI 集成构建的示例项目
+</div>
+
+- [**Nexus Smart Email** ](https://smart-email-nexus.lovable.app/)– 带有 Groq 实时增强邮件预览的落地页
+- [**TweetMixer Pro**](https://www.youtube.com/watch?v=fT_dq_hyQAA&vl=de) – 粘贴博客文章，使用 GPT-4 生成推文串
+- [**AI Calorie Tracker**](https://www.youtube.com/watch?v=c0zhLzcVJRI&ab_channel=Lovable) – 通过上传图片，让 GPT-4 分析餐食
+- [**Robot Arena Shooter** ](https://www.youtube.com/watch?v=zmK36lkAb6I)– 由 Claude 驱动、具备 AI 增强逻辑的游戏
+- [**Reindeer Quiz**](https://www.youtube.com/watch?v=XdZtpP3QpzQ) – 通过 Claude 和自定义评分逻辑生成个性化结果
+
+<div id="final-thoughts">
+  ## 总结
+</div>
+
+Lovable 是一个将前端、数据库、后端和部署流水线集于一身的 AI 驱动平台。AI 集成的核心就是提示 \+ 上下文 \+ 测试。一步一步来，记住：你并不需要是后端工程师，也一样可以用 AI 构建应用。
